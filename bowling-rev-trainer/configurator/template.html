@@ -1,0 +1,276 @@
+<title>Rev Trainer Configurator</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a pro-shop drill sheet on the left, the print bench (3D view + readout) on the right; stacks on phones. */
+:root {
+  --bg: #e9edf0;
+  --surface: #f8fafb;
+  --surface-2: #eef2f5;
+  --fg: #15202b;
+  --muted: #5b6b7a;
+  --line: #c9d2da;
+  --accent: #1f5f8b;
+  --accent-ink: #ffffff;
+  --ok: #2f7d4f;
+  --warn: #9a6a12;
+  --bad: #b3261e;
+  --model: #a9bccb;
+  --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  --body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11161a; --surface: #1a2127; --surface-2: #212a31; --fg: #e7ebee; --muted: #97a4ae; --line: #2d3741;
+    --accent: #5fa8dc; --accent-ink: #0d1a24; --ok: #63b584; --warn: #e0a84a; --bad: #ef6b5f; --model: #7d94a6;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11161a; --surface: #1a2127; --surface-2: #212a31; --fg: #e7ebee; --muted: #97a4ae; --line: #2d3741;
+  --accent: #5fa8dc; --accent-ink: #0d1a24; --ok: #63b584; --warn: #e0a84a; --bad: #ef6b5f; --model: #7d94a6;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--fg); font: 15px/1.45 var(--body); min-height: 100%; margin: 0; }
+.wrap {
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 14px 32px;
+  max-width: 1280px; margin: 0 auto;
+}
+header.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; padding-bottom: 12px; border-bottom: 2px solid var(--fg); }
+.brand h1 { font: 700 34px/1 var(--display); letter-spacing: .01em; margin: 0; text-transform: uppercase; }
+.brand p { margin: 4px 0 0; color: var(--muted); max-width: 60ch; }
+.switches { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: var(--surface); }
+.seg button { font: 600 13px/1 var(--body); letter-spacing: .04em; text-transform: uppercase; padding: 9px 14px; border: 0; background: transparent; color: var(--fg); cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.seg button:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+main.layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px; padding-top: 18px; align-items: start; }
+@media (max-width: 900px) { main.layout { grid-template-columns: 1fr; } .bench { order: -1; } }
+
+/* ---- drill sheet ---- */
+.sheet { min-width: 0; display: grid; gap: 18px; }
+fieldset { border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px 14px; margin: 0; background: var(--surface); min-width: 0; }
+legend { font: 700 15px/1 var(--display); text-transform: uppercase; letter-spacing: .08em; padding: 0 6px; color: var(--muted); }
+.row { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: end; }
+.field { display: grid; gap: 4px; min-width: 0; }
+.field > span { font-size: 12px; color: var(--muted); letter-spacing: .02em; }
+.field small, .hint { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+input[type=text], select, textarea { font: 500 15px/1.3 var(--mono); color: var(--fg); background: var(--surface-2); border: 1px solid var(--line); border-radius: 4px; padding: 7px 8px; min-width: 0; }
+input[type=text] { width: 7.5em; font-variant-numeric: tabular-nums; }
+input.bad { border-color: var(--bad); box-shadow: inset 0 0 0 1px var(--bad); }
+.unit { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.check { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; }
+.check input { width: 17px; height: 17px; accent-color: var(--accent); }
+
+table.drill { width: 100%; border-collapse: collapse; }
+table.drill th, table.drill td { text-align: left; padding: 8px 6px; vertical-align: top; border-top: 1px solid var(--line); }
+table.drill thead th { border-top: 0; font: 600 11.5px/1 var(--body); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding-bottom: 4px; }
+table.drill tbody th { font: 700 17px/1 var(--display); text-transform: uppercase; letter-spacing: .04em; padding-top: 12px; white-space: nowrap; }
+table.drill input[type=text] { width: 6.6em; }
+table.drill .hint { display: block; margin-top: 3px; }
+.dash { color: var(--muted); font-family: var(--mono); padding-top: 8px; display: inline-block; }
+@media (max-width: 560px) {
+  table.drill, table.drill tbody, table.drill tr, table.drill td, table.drill th { display: block; }
+  table.drill thead { display: none; }
+  table.drill tr { border-top: 2px solid var(--line); padding: 8px 0 4px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; }
+  table.drill tbody th { grid-column: 1 / -1; border: 0; padding: 0 0 4px; }
+  table.drill td { border: 0; padding: 0; }
+  table.drill td::before { content: attr(data-col); display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 3px; }
+  table.drill input[type=text] { width: 100%; }
+}
+
+/* ---- bench ---- */
+.bench { min-width: 0; display: grid; gap: 14px; position: sticky; top: env(safe-area-inset-top, 0px); }
+@media (max-width: 900px) { .bench { position: static; } }
+#viewport { position: relative; width: 100%; aspect-ratio: 4 / 3; max-height: 62vh; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; touch-action: none; }
+#viewport canvas { display: block; width: 100%; height: 100%; }
+.status { font: 500 12.5px/1.2 var(--mono); color: var(--muted); display: flex; align-items: center; gap: 8px; min-height: 18px; }
+.status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--line); flex: none; }
+.status[data-kind="ok"]::before { background: var(--ok); }
+.status[data-kind="busy"]::before { background: var(--accent); }
+.status[data-kind="warn"]::before { background: var(--warn); }
+.status[data-kind="error"]::before { background: var(--bad); }
+.status[data-kind="error"] { color: var(--bad); }
+.readout { border: 1px solid var(--line); border-radius: 6px; background: var(--surface); padding: 12px 14px; display: grid; gap: 12px; min-width: 0; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px 16px; }
+.stat b { display: block; font: 700 22px/1.1 var(--display); letter-spacing: .01em; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 12px; color: var(--muted); display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.stat select { font-size: 12px; padding: 2px 4px; }
+table.bores { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+table.bores th { text-align: left; font: 600 11px/1.2 var(--body); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding: 4px 6px 4px 0; }
+table.bores td { padding: 4px 6px 4px 0; border-top: 1px solid var(--line); }
+table.bores td small { color: var(--muted); }
+.bores-wrap { overflow-x: auto; }
+.note { font-size: 12.5px; color: var(--muted); margin: 0; }
+.warnings { margin: 0; padding: 10px 12px 10px 28px; border-left: 3px solid var(--warn); background: var(--surface-2); border-radius: 0 4px 4px 0; font-size: 13.5px; }
+.warnings li + li { margin-top: 6px; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.btn { font: 600 14px/1 var(--body); letter-spacing: .02em; padding: 11px 16px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface-2); color: var(--fg); cursor: pointer; }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-size: 15px; }
+.btn.small { padding: 7px 10px; font-size: 13px; }
+textarea { width: 100%; min-height: 170px; font-size: 12px; line-height: 1.35; resize: vertical; }
+details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.howto { font-size: 13.5px; color: var(--muted); margin: 0; }
+.howto b { color: var(--fg); font-weight: 600; }
+@media (prefers-reduced-motion: no-preference) { .seg button, .btn { transition: background .15s, color .15s; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <h1>Rev Trainer Configurator</h1>
+      <p>Enter the numbers from your pro-shop drill sheet. The model is rebuilt with those exact holes and you download a print-ready file.</p>
+    </div>
+    <div class="switches">
+      <div class="seg" role="group" aria-label="Part">
+        <button type="button" data-part="puck" aria-pressed="true">Puck</button>
+        <button type="button" data-part="spinner" aria-pressed="false">Spinner</button>
+        <button type="button" data-part="sizer" aria-pressed="false">Sizer</button>
+      </div>
+      <div class="seg" role="group" aria-label="Units">
+        <button type="button" data-unit="mm" aria-pressed="true">mm</button>
+        <button type="button" data-unit="in" aria-pressed="false">inches</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="sheet" aria-label="Drill sheet">
+      <fieldset>
+        <legend>Grip</legend>
+        <div class="row">
+          <label class="field"><span>Bowling hand</span>
+            <select id="hand"><option value="right">Right</option><option value="left">Left</option></select></label>
+          <label class="field"><span>Hole sizes come from</span>
+            <select id="size_source">
+              <option value="drill_sheet">My pro-shop drill sheet</option>
+              <option value="sizer_plate">The printed sizer plate</option>
+            </select></label>
+          <label class="field"><span>Print allowance</span>
+            <span class="row" style="gap:6px"><input type="text" id="print_allowance" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+            <small>Added to every bore. Printed holes come out small.</small></label>
+        </div>
+      </fieldset>
+
+      <fieldset data-only-part="puck spinner">
+        <legend>Drill sheet</legend>
+        <div class="bores-wrap">
+        <table class="drill">
+          <thead><tr><th>Hole</th><th>Size</th><th>Span</th><th>Pitch F / R</th><th>Pitch lateral</th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row">Thumb</th>
+              <td data-col="Size"><input type="text" id="thumb_d" inputmode="decimal" aria-label="Thumb hole size"><span class="hint" id="thumb_d_hint"></span></td>
+              <td data-col="Span"><span class="dash">—</span></td>
+              <td data-col="Pitch F/R"><input type="text" id="thumb_fwd" list="pitch_options" aria-label="Thumb forward or reverse pitch, inches"><span class="hint" id="thumb_fwd_hint"></span></td>
+              <td data-col="Pitch lateral"><input type="text" id="thumb_lat" list="pitch_options" aria-label="Thumb lateral pitch, inches"><span class="hint" id="thumb_lat_hint"></span></td>
+            </tr>
+            <tr>
+              <th scope="row">Middle</th>
+              <td data-col="Size"><input type="text" id="middle_d" inputmode="decimal" aria-label="Middle finger hole size"><span class="hint" id="middle_d_hint"></span></td>
+              <td data-col="Span"><input type="text" id="span_middle" inputmode="decimal" aria-label="Middle finger span"><span class="hint" id="span_middle_hint"></span></td>
+              <td data-col="Pitch F/R"><input type="text" id="middle_fwd" list="pitch_options" aria-label="Middle finger forward or reverse pitch, inches"><span class="hint" id="middle_fwd_hint"></span></td>
+              <td data-col="Pitch lateral"><input type="text" id="middle_lat" list="pitch_options" aria-label="Middle finger lateral pitch, inches"><span class="hint" id="middle_lat_hint"></span></td>
+            </tr>
+            <tr>
+              <th scope="row">Ring</th>
+              <td data-col="Size"><input type="text" id="ring_d" inputmode="decimal" aria-label="Ring finger hole size"><span class="hint" id="ring_d_hint"></span></td>
+              <td data-col="Span"><input type="text" id="span_ring" inputmode="decimal" aria-label="Ring finger span"><span class="hint" id="span_ring_hint"></span></td>
+              <td data-col="Pitch F/R"><input type="text" id="ring_fwd" list="pitch_options" aria-label="Ring finger forward or reverse pitch, inches"><span class="hint" id="ring_fwd_hint"></span></td>
+              <td data-col="Pitch lateral"><input type="text" id="ring_lat" list="pitch_options" aria-label="Ring finger lateral pitch, inches"><span class="hint" id="ring_lat_hint"></span></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+        <datalist id="pitch_options">
+          <option value="-1/2"><option value="-3/8"><option value="-1/4"><option value="-3/16"><option value="-1/8"><option value="-1/16">
+          <option value="0"><option value="1/16"><option value="1/8"><option value="3/16"><option value="1/4"><option value="5/16"><option value="3/8"><option value="1/2">
+        </datalist>
+        <p class="howto" style="margin-top:10px">Sizes and spans take the drill sheet's own notation: <b>55/64</b>, <b>1 1/32</b>, <b>4-1/2</b> or decimals. Span is the near edge of the thumb hole to the near edge of each finger hole. Pitch is in inches, as drilled: <b>+</b> forward, <b>−</b> reverse; lateral <b>+</b> is toward your bowling-hand side. Zero pitch aims the hole at the ball's center.</p>
+      </fieldset>
+
+      <fieldset data-only-part="puck spinner">
+        <legend>Depths &amp; bridge</legend>
+        <div class="row">
+          <label class="field"><span>Finger depth</span>
+            <span class="row" style="gap:6px"><input type="text" id="finger_depth" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+            <small>Fingertip grip: to the first joint</small></label>
+          <label class="field"><span>Bridge</span>
+            <span class="row" style="gap:6px"><input type="text" id="bridge" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+            <small>Web between the finger holes</small></label>
+          <label class="check" data-only-part="puck"><input type="checkbox" id="thumb_through"> Thumb hole goes through</label>
+          <label class="field" id="thumb_depth_row" data-only-part="puck"><span>Thumb depth</span>
+            <span class="row" style="gap:6px"><input type="text" id="thumb_depth" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span></label>
+        </div>
+      </fieldset>
+
+      <fieldset data-only-part="puck spinner">
+        <legend>Options</legend>
+        <div class="row">
+          <label class="check" data-only-part="puck"><input type="checkbox" id="weight_pocket"> Weight pocket in the base</label>
+          <label class="check"><input type="checkbox" id="lanyard"> Wrist-cord tunnel</label>
+        </div>
+      </fieldset>
+
+      <fieldset data-only-part="sizer">
+        <legend>Sizer plate</legend>
+        <p class="howto" style="margin:0 0 10px">A quick flat print with labeled test bores. Try each bore to the first joint; the one that is snug all around with no squeeze needed to hang on is your size on this printer. Then set “Hole sizes come from” to the sizer plate.</p>
+        <div class="row">
+          <label class="field"><span>Thumb row centered on</span>
+            <span class="row" style="gap:6px"><input type="text" id="sizer_thumb_center" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span></label>
+          <label class="field"><span>Finger row centered on</span>
+            <span class="row" style="gap:6px"><input type="text" id="sizer_finger_center" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span></label>
+          <label class="field"><span>Step between bores</span>
+            <span class="row" style="gap:6px"><input type="text" id="sizer_step" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+            <small>1/64" = 0.397 mm, a pro-shop half size</small></label>
+        </div>
+      </fieldset>
+
+      <details>
+        <summary>Fit sheet (JSON)</summary>
+        <p class="howto" style="margin:8px 0">Every setting, plus the modeled bore sizes. Save it with the order so the part can be reprinted or adjusted later.</p>
+        <textarea id="fit_json" spellcheck="false" aria-label="Fit sheet JSON"></textarea>
+        <div class="actions" style="margin-top:8px">
+          <button type="button" class="btn small" id="copy_json">Copy</button>
+          <button type="button" class="btn small" id="load_json">Load from text</button>
+          <button type="button" class="btn small" id="reset">Reset to defaults</button>
+        </div>
+      </details>
+    </section>
+
+    <section class="bench" aria-label="Model">
+      <div id="viewport" aria-label="3D preview; drag to rotate, scroll to zoom"></div>
+      <div class="status" id="status" role="status"></div>
+      <div class="readout">
+        <div class="stats">
+          <div class="stat"><b id="stat_size">—</b><span>Footprint × height</span></div>
+          <div class="stat"><b id="stat_weight">—</b><span>PETG at <select id="infill" aria-label="Infill"><option value="0.2">20%</option><option value="0.4">40%</option><option value="1">100%</option></select> infill</span></div>
+          <div class="stat"><b id="stat_volume">—</b><span>Model volume</span></div>
+        </div>
+        <div class="bores-wrap"><table class="bores" id="bores"></table></div>
+        <p class="note" id="bores_note"></p>
+        <div hidden><ul class="warnings" id="warnings"></ul></div>
+        <div class="actions">
+          <button type="button" class="btn primary" id="save_stl">Download STL</button>
+          <button type="button" class="btn" id="save_bundle">Download bundle (.zip: STL + fit sheet)</button>
+        </div>
+        <p class="note" id="save_hint">Print flat side down, PETG or PLA+, 4 walls, 20–30% infill, no supports.</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>/*__THREE__*/</script>
+<script type="module">
+/*__MANIFOLD_GLUE__*/
+const WASM_B64 = "__WASM_B64__";
+/*__APP__*/
+</script>
