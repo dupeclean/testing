@@ -1,0 +1,18 @@
+{
+  "name": "jordan",
+  "hand": "right",
+  "span_middle": 112,
+  "span_ring": 109,
+  "thumb_d": 26.5,
+  "middle_d": 22,
+  "ring_d": 21.5,
+  "thumb_fwd": -0.125,
+  "thumb_lat": 0.125,
+  "middle_fwd": 0.375,
+  "middle_lat": 0,
+  "ring_fwd": 0.3125,
+  "ring_lat": 0.125,
+  "weight_pocket": true,
+  "lanyard": true,
+  "parts": ["puck", "spinner"]
+}

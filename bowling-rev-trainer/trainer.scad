@@ -12,24 +12,43 @@
 // =====================================================================
 
 /* [Part] */
-// Which part to render
-part = "puck"; // [puck, spinner, both]
+// Which part to render ("sizer" is a quick test plate for finding your hole sizes)
+part = "puck"; // [puck, spinner, sizer, both]
 
 /* [Fit — copy from your ball] */
-// Span: NEAR edge of thumb hole to NEAR edge of finger holes (cut-to-cut), measured over the ball surface. Typical fingertip span 105–125.
-span = 110;
-// Thumb hole diameter. Real holes run 22–28.5 (7/8"–1 1/8"). Includes ~0.6 print allowance; sand/tape to final fit.
+// Bowling hand (mirrors the finger-hole layout)
+hand = "right"; // [right, left]
+// Middle-finger span: NEAR edge of thumb hole to NEAR edge of middle-finger hole (straight line). Typical fingertip span 105–125.
+span_middle = 110;
+// Ring-finger span. Usually 2–4 shorter than the middle span.
+span_ring = 110;
+// Thumb hole diameter. Real holes run 22–28.5 (7/8"–1 1/8"). Add ~0.5 print allowance; sand/tape to final fit.
 thumb_d = 26;
-// Finger hole diameter. Real holes run 19–22 (3/4"–7/8").
-finger_d = 21.5;
+// Middle-finger hole diameter. Real holes run 19–23 (3/4"–29/32").
+middle_d = 21.5;
+// Ring-finger hole diameter. Often a half size (0.4) smaller than the middle.
+ring_d = 21.5;
 // Web of plastic between the two finger holes
 bridge = 7;
 // Finger hole depth — fingertip grip inserts to the first joint
 finger_depth = 24;
-// Finger forward pitch, degrees (+ tilts holes toward the thumb). 2–5 helps the fingertip "hook" feel.
-finger_pitch = 4;
-// Thumb reverse pitch, degrees (+ tilts away from fingers). A little reverse promotes a quick, clean thumb exit.
-thumb_pitch = 3;
+
+/* [Pitches — copy your drill sheet, in inches] */
+// Pitch here works exactly like a pro-shop drill sheet: 0 means the
+// bore aims at the ball's center; forward/reverse and lateral are the
+// usual inch offsets (1/8 = 0.125, 1/4 = 0.25, 3/8 = 0.375 ...).
+// Thumb forward(+) / reverse(−) pitch. A touch of reverse helps the quick, clean exit.
+thumb_fwd = -0.125;
+// Thumb lateral pitch. + = toward your bowling-hand side (right lateral for a righty).
+thumb_lat = 0;
+// Middle finger forward(+) / reverse(−) pitch. Fingertip grips typically run 1/4–3/8 forward.
+middle_fwd = 0.3125;
+// Middle finger lateral pitch (+ = toward bowling-hand side)
+middle_lat = 0;
+// Ring finger forward(+) / reverse(−) pitch
+ring_fwd = 0.3125;
+// Ring finger lateral pitch (+ = toward bowling-hand side)
+ring_lat = 0;
 
 /* [Body] */
 // Regulation ball radius (8.5" dia = 108). Don't change unless you want a different surface curvature.
@@ -64,22 +83,34 @@ $fa = 2;
 $fs = 0.6;
 eps = 0.01;
 
-// Center-to-center distance, thumb hole to finger-hole pair
-cc = span + thumb_d/2 + finger_d/2;
-// Puck length auto-sizes to the span
-puck_len = cc + thumb_d/2 + finger_d/2 + 2*end_wall;
-// Finger hole lateral offsets
-fx = (finger_d + bridge)/2;
+// Looking at the grip from outside (thumb hole at the bottom), a right
+// hander's middle finger sits on the right, ring on the left.
+mir = (hand == "right") ? 1 : -1;
+// Finger hole lateral offsets (inner edges stay `bridge` apart)
+x_m =  mir*(middle_d + bridge)/2;
+x_r = -mir*(ring_d  + bridge)/2;
+// Center-to-center distances from the thumb hole, per finger
+cc_m = span_middle + thumb_d/2 + middle_d/2;
+cc_r = span_ring   + thumb_d/2 + ring_d/2;
+// Thumb sits centered below the origin
+ty = (cc_m + cc_r)/4;
+// Finger hole positions honoring each finger's own span
+y_m = -ty + sqrt(cc_m*cc_m - x_m*x_m);
+y_r = -ty + sqrt(cc_r*cc_r - x_r*x_r);
+// Puck footprint extents auto-size to the grip
+ext_s = ty + thumb_d/2 + end_wall;
+ext_n = max(y_m + middle_d/2, y_r + ring_d/2) + end_wall;
 
 // ---------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------
 
-// Stadium (oval) footprint, long axis along Y
-module stadium(l, w) {
-    hull()
-        for (sy = [-1, 1])
-            translate([0, sy*(l - w)/2]) circle(d = w);
+// Rounded footprint stretched to the grip's (possibly asymmetric) extents
+module footprint(w) {
+    hull() {
+        translate([0, -(ext_s - w/2)]) circle(d = w);
+        translate([0,   ext_n - w/2]) circle(d = w);
+    }
 }
 
 // Height of the ball surface above z=0 at radius r from the part axis,
@@ -87,18 +118,24 @@ module stadium(l, w) {
 function surf_z(h, x, y) = h - ball_R + sqrt(ball_R*ball_R - x*x - y*y);
 
 // Drill a gripping hole into a ball-surface body of center height body_h.
-// The bore is aimed at the sphere's center — exactly how a zero-pitch
-// hole is drilled on a real ball — so thumb and fingers oppose each
-// other around the curvature. pitch > 0 is FORWARD pitch (tilts the
-// bore toward the grip center); negative is reverse. Depth is measured
-// along the bore axis from the surface.
-module drill(x, y, d, depth, pitch, body_h, through = false) {
+// A zero-pitch bore is aimed at the sphere's center — exactly how a
+// zero-pitch hole is drilled on a real ball — so thumb and fingers
+// oppose each other around the curvature. Pitches are drill-sheet inch
+// offsets, converted to bore-axis angles against the ball radius:
+// fwd_in > 0 is forward (leans toward the grip center), lat_in > 0 is
+// lateral toward the bowling-hand side (auto-mirrored for lefties).
+// Depth is measured along the bore axis from the surface.
+module drill(x, y, d, depth, fwd_in, lat_in, body_h, through = false) {
     r      = sqrt(x*x + y*y);
     zs     = surf_z(body_h, x, y);
-    az     = atan2(y, x);            // azimuth of this hole
-    tilt   = asin(r/ball_R);         // radial tilt from vertical
-    teff   = tilt - pitch;           // forward pitch leans toward center
-    translate([x, y, zs]) rotate([0, 0, az]) rotate([0, teff, 0]) {
+    az     = atan2(y, x);                    // azimuth of this hole
+    tilt   = asin(r/ball_R);                 // radial tilt from vertical
+    fwd    = atan(fwd_in*25.4/ball_R);       // inch pitch -> degrees
+    lat    = atan(lat_in*25.4/ball_R) * mir; // mirrored for left hand
+    // decompose the lateral lean into this hole's local frame
+    teff   = tilt - fwd + lat*cos(az);
+    tlat   = lat*sin(az);
+    translate([x, y, zs]) rotate([0, 0, az]) rotate([tlat, teff, 0]) {
         // bore (local -Z is into the body)
         translate([0, 0, through ? -130 : -depth])
             cylinder(d = d, h = through ? 165 : depth + 35);
@@ -133,19 +170,18 @@ module pocket(x, y) {
 // ---------------------------------------------------------------------
 module rev_puck() {
     difference() {
-        // slice of the ball: sphere top, flat bottom, stadium outline
+        // slice of the ball: sphere top, flat bottom, rounded outline
         intersection() {
             translate([0, 0, puck_h - ball_R]) sphere(r = ball_R);
-            linear_extrude(puck_h + 1) stadium(puck_len, puck_w);
+            linear_extrude(puck_h + 1) footprint(puck_w);
         }
 
-        // thumb: through bore (thumb seats fully, tip may peek out the
-        // bottom). Reverse pitch = negative forward pitch.
-        drill(0, -cc/2, thumb_d, 0, -thumb_pitch, puck_h, through = true);
+        // thumb: through bore (thumb seats fully, tip may peek out the bottom)
+        drill(0, -ty, thumb_d, 0, thumb_fwd, thumb_lat, puck_h, through = true);
 
-        // fingers: blind fingertip holes
-        for (sx = [-1, 1])
-            drill(sx*fx, cc/2, finger_d, finger_depth, finger_pitch, puck_h);
+        // fingers: blind fingertip holes, each at its own span, size, pitch
+        drill(x_m, y_m, middle_d, finger_depth, middle_fwd, middle_lat, puck_h);
+        drill(x_r, y_r, ring_d,   finger_depth, ring_fwd,   ring_lat,   puck_h);
 
         if (lanyard)
             xtunnel(44, 10, lanyard_d, puck_w + 20);
@@ -166,8 +202,8 @@ module rev_spinner() {
         }
 
         // finger holes, drilled radially (zero pitch)
-        for (sx = [-1, 1])
-            drill(sx*fx, 0, finger_d, min(finger_depth, 20), 0, spin_h);
+        drill(x_m, 0, middle_d, min(finger_depth, 20), 0, 0, spin_h);
+        drill(x_r, 0, ring_d,   min(finger_depth, 20), 0, 0, spin_h);
 
         if (lanyard)
             xtunnel(-spin_d/2 + 18, 8, lanyard_d, spin_d + 20);
@@ -182,8 +218,42 @@ module rev_spinner() {
 }
 
 // ---------------------------------------------------------------------
+// Hole sizer — fast test plate to find your exact hole sizes before
+// printing the big parts. Insert each digit to the first joint; the
+// right hole is snug all around with zero squeeze needed to hang on.
+// ---------------------------------------------------------------------
+sizer_finger = [20, 20.5, 21, 21.5, 22, 22.5];  // finger test bores
+sizer_thumb  = [25, 25.5, 26, 26.5, 27];        // thumb test bores
+sizer_t = 15;                                    // plate thickness
+
+module sizer_row(sizes, y, pitch) {
+    n = len(sizes);
+    for (i = [0:n-1]) {
+        x = (i - (n-1)/2) * pitch;
+        translate([x, y, -1]) cylinder(d = sizes[i], h = sizer_t + 2);
+        translate([x, y, sizer_t - 1.5])                     // rim chamfer
+            cylinder(d1 = sizes[i], d2 = sizes[i] + 5, h = 1.6);
+        translate([x, y + sizes[i]/2 + 3, sizer_t - 0.8])    // label
+            linear_extrude(1)
+                text(str(sizes[i]), size = 4.5, halign = "center",
+                     font = "Liberation Sans:style=Bold");
+    }
+}
+
+module hole_sizer() {
+    pw = 175; ph = 92; r = 8;
+    difference() {
+        linear_extrude(sizer_t)
+            offset(r) offset(-r) square([pw, ph], center = true);
+        sizer_row(sizer_finger,  23, 27.5);
+        sizer_row(sizer_thumb,  -23, 33);
+    }
+}
+
+// ---------------------------------------------------------------------
 if (part == "puck")    rev_puck();
 if (part == "spinner") rev_spinner();
+if (part == "sizer")   hole_sizer();
 if (part == "both") {
     rev_puck();
     translate([puck_w/2 + spin_d/2 + 15, 0, 0]) rev_spinner();

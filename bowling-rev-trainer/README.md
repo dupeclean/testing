@@ -8,6 +8,7 @@ surface, so the curvature, hole angles, and hand position match a real ball.
 |---|---|---|---|
 | **Rev Puck** (`stl/rev_puck.stl`) | Fingertip grip strength, relaxed-thumb hold, thumb-exit timing | 140 × 178 × 60 mm | ~350–450 g |
 | **Rev Spinner** (`stl/rev_spinner.stl`) | Finger lift / "flick" at release, rev counting | 100 × 100 × 38 mm | ~110–130 g |
+| **Hole Sizer** (`stl/hole_sizer.stl`) | Finding your exact hole diameters before printing the big parts | 175 × 92 × 15 mm | ~90 g |
 
 Holes are drilled toward the sphere's center (how a zero-pitch hole is drilled on
 a real ball), plus adjustable forward/reverse pitch — so your thumb and fingers
@@ -15,22 +16,49 @@ oppose each other around the curvature exactly as on your ball.
 
 ## Fit it to your hand first
 
-The STLs here use average-male defaults (110 mm fingertip span, 26 mm thumb,
-21.5 mm fingers). **Open `trainer.scad` in [OpenSCAD](https://openscad.org) (free)
-and set the `Fit` parameters to match your ball before printing:**
+The STLs here use average-male defaults (110 mm spans, 26 mm thumb, 21.5 mm
+fingers, stock pitches). Every number a pro-shop drill sheet carries is a
+parameter, so **copy your drill sheet** — in OpenSCAD's customizer
+(Window → Customizer) or via `generate.py` below:
 
-- `span` — straight-line distance from the near edge of your thumb hole to the
-  near edge of your finger holes (your fingertip span). Copy it from your drilled
-  ball, or have a pro shop measure you.
-- `thumb_d`, `finger_d` — copy your ball's hole sizes, then **add ~0.5 mm**:
-  printed holes come out slightly small, and it's easy to sand out or build back
-  up with bowler's tape (use tape for final fit, same as a real ball).
-- `finger_pitch` / `thumb_pitch` — defaults (4° forward fingers, 3° reverse thumb)
-  suit a rev-focused fingertip grip. The reverse thumb pitch encourages the quick,
-  clean thumb exit that RPM depends on.
+- `hand` — `right` or `left`; mirrors the layout and lateral pitches.
+- `span_middle` / `span_ring` — near edge of thumb hole to near edge of each
+  finger hole (your middle span is usually 2–4 mm longer than your ring span).
+- `thumb_d`, `middle_d`, `ring_d` — per-hole diameters. **Add ~0.5 mm** to your
+  real sizes: printed holes come out slightly small; sand out or build back with
+  bowler's tape for final fit, same as a real ball.
+- Pitches, **in drill-sheet inches** (`0.125` = 1/8, `0.375` = 3/8): per hole,
+  forward(+)/reverse(−) (`*_fwd`) and lateral (`*_lat`, + = toward your
+  bowling-hand side). Zero pitch aims the bore at the ball's center, exactly
+  like a real drilling. Defaults: fingers 5/16 forward, thumb 1/8 reverse —
+  a rev-friendly fingertip setup that favors a quick, clean thumb exit.
 
-The puck's length auto-sizes to the span. Everything else (depths, bridge,
-lanyard, weight pocket) is parametric too.
+Don't know your sizes? **Print `stl/hole_sizer.stl` first** (fast, flat plate
+with labeled test bores, 20–22.5 mm fingers and 25–27 mm thumb in half-mm
+steps). The right bore is snug all around at the first joint with zero
+squeeze needed to hang on. Index and pinky don't get holes — they spread flat
+on the surface, which is what the puck's width is for.
+
+The puck's footprint auto-sizes to the spans. Depths, bridge, lanyard, and
+weight pocket are parametric too.
+
+## Generating custom STLs (`generate.py`)
+
+`trainer.scad` + OpenSCAD is the whole CAD pipeline; `generate.py` drives it
+from a fit sheet so one command produces a customer's files:
+
+```sh
+# one person: JSON fit sheet (see fit_sheet.example.json)
+python3 generate.py fit_sheet.example.json -o out/
+#   -> out/rev_puck_jordan.stl, out/rev_spinner_jordan.stl
+
+# a batch of orders: CSV, one row per customer, columns = fit-sheet keys
+python3 generate.py orders.csv -o out/
+```
+
+Inputs are validated against sane ranges before OpenSCAD runs, and output
+files are named after the order, so this slots straight into a
+made-to-order workflow (fit sheet at checkout → generate → print → ship).
 
 ## Printing
 
@@ -92,11 +120,12 @@ speed and try to maximize hook. Speed hides rev flaws; slow shots expose them.
 full speed — a half-kilo of PLA is not a bowling ball, and neither your wall nor
 the plastic will enjoy it.
 
-## Regenerating STLs
+## Regenerating the default STLs
 
 ```sh
 openscad --export-format binstl -o stl/rev_puck.stl    -D 'part="puck"'    trainer.scad
 openscad --export-format binstl -o stl/rev_spinner.stl -D 'part="spinner"' trainer.scad
+openscad --export-format binstl -o stl/hole_sizer.stl  -D 'part="sizer"'   trainer.scad
 ```
 
 Or use OpenSCAD's GUI customizer (Window → Customizer) and F6 + export.
