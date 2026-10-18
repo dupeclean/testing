@@ -1,0 +1,305 @@
+<title>FitSlice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single long page in the order a visitor meets it; hero, proof strip, three steps, the two parts, honest "what you practice", guarantee, FAQ, waitlist, footer. */
+:root {
+  --bg: #e9edf0; --surface: #f8fafb; --surface-2: #eef2f5; --fg: #15202b; --muted: #5b6b7a; --line: #c9d2da;
+  --accent: #1f5f8b; --accent-ink: #ffffff; --ok: #2f7d4f; --warn: #9a6a12; --bad: #b3261e;
+  --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  --body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #11161a; --surface: #1a2127; --surface-2: #212a31; --fg: #e7ebee; --muted: #97a4ae; --line: #2d3741; --accent: #5fa8dc; --accent-ink: #0d1a24; --ok: #63b584; --warn: #e0a84a; --bad: #ef6b5f; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #11161a; --surface: #1a2127; --surface-2: #212a31; --fg: #e7ebee; --muted: #97a4ae; --line: #2d3741; --accent: #5fa8dc; --accent-ink: #0d1a24; --ok: #63b584; --warn: #e0a84a; --bad: #ef6b5f; color-scheme: dark; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--fg); font: 16px/1.55 var(--body); }
+.wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); max-width: 1100px; margin: 0 auto; }
+a { color: var(--accent); }
+img { max-width: 100%; display: block; }
+.btn { display: inline-block; font: 600 15px/1 var(--body); letter-spacing: .02em; padding: 13px 18px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface-2); color: var(--fg); text-decoration: none; cursor: pointer; }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--display); text-transform: uppercase; letter-spacing: .015em; line-height: 1.02; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(30px, 4.5vw, 44px); font-weight: 700; }
+h3 { font-size: 22px; font-weight: 700; }
+p { margin: 0; }
+.lede { font-size: 19px; color: var(--muted); max-width: 58ch; }
+section { padding-block: 56px; }
+section + section { border-top: 1px solid var(--line); }
+
+nav.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; border-bottom: 2px solid var(--fg); }
+nav.top .logo { font: 700 26px/1 var(--display); text-transform: uppercase; letter-spacing: .04em; color: var(--fg); text-decoration: none; }
+nav.top ul { display: flex; gap: 18px; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
+nav.top ul a { color: var(--fg); text-decoration: none; font-weight: 500; font-size: 14.5px; }
+@media (max-width: 760px) { nav.top ul { display: none; } }
+
+.hero { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 36px; align-items: center; padding-block: 48px 40px; }
+.hero h1 { font-size: clamp(44px, 7.5vw, 86px); font-weight: 700; }
+.hero .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.hero .sub { margin-top: 18px; font-size: 20px; color: var(--muted); max-width: 52ch; }
+.hero .fine { margin-top: 12px; font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+.hero figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+.hero figcaption { font-family: var(--mono); font-size: 12px; color: var(--muted); padding: 8px 4px 2px; }
+@media (max-width: 860px) { .hero { grid-template-columns: 1fr; } }
+
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; padding-block: 0 48px; }
+.facts div { border-top: 3px solid var(--accent); padding-top: 10px; font-weight: 600; }
+.facts span { display: block; font-family: var(--mono); font-size: 12px; color: var(--muted); font-weight: 400; margin-top: 4px; }
+
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 28px; }
+.step { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px 22px; }
+.step .n { font: 700 40px/1 var(--display); color: var(--accent); }
+.step h3 { margin: 8px 0 10px; }
+.step p { color: var(--muted); }
+.media { margin-top: 14px; border: 1px dashed var(--line); border-radius: 6px; padding: 10px 12px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+.who ul { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+.who li { padding-left: 18px; border-left: 3px solid var(--line); }
+.who li b { font-weight: 600; }
+
+.parts { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; margin-top: 28px; }
+.part { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
+.part img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; background: #f6f6f6; }
+.part .body { padding: 18px 20px 22px; display: grid; gap: 10px; align-content: start; }
+.part .price { font: 700 28px/1 var(--display); font-variant-numeric: tabular-nums; }
+.part .drills { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+.pair { margin-top: 18px; padding: 16px 20px; border: 1px solid var(--accent); border-radius: 8px; display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; }
+.pair b { font: 700 24px/1 var(--display); text-transform: uppercase; }
+
+.practice .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 26px; }
+.practice .grid div { border-top: 3px solid var(--line); padding-top: 12px; }
+.practice .grid b { display: block; font: 700 20px/1.1 var(--display); text-transform: uppercase; margin-bottom: 8px; }
+.honest { margin-top: 28px; padding: 16px 18px; background: var(--surface); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; color: var(--muted); max-width: 72ch; }
+
+.faq dl { margin: 26px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px 32px; }
+.faq dt { font: 700 20px/1.1 var(--display); text-transform: uppercase; margin-bottom: 6px; }
+.faq dd { margin: 0; color: var(--muted); }
+
+.wait { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 26px 24px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; margin-top: 28px; }
+@media (max-width: 860px) { .wait { grid-template-columns: 1fr; } }
+.wait ul { margin: 14px 0 0; padding-left: 18px; color: var(--muted); }
+form.list { display: grid; gap: 12px; }
+form.list label { display: grid; gap: 5px; font-size: 13px; color: var(--muted); }
+form.list input, form.list select { font: 500 15px/1.3 var(--body); color: var(--fg); background: var(--surface-2); border: 1px solid var(--line); border-radius: 5px; padding: 10px 11px; width: 100%; }
+form.list .check { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--fg); }
+form.list .check input { width: 17px; height: 17px; accent-color: var(--accent); }
+form.list .fine { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.confirm { background: var(--surface-2); border-radius: 6px; padding: 16px; }
+.confirm b { font: 700 22px/1 var(--display); text-transform: uppercase; display: block; margin-bottom: 8px; }
+.preview-note { font-family: var(--mono); font-size: 12px; color: var(--warn); margin-top: 8px; }
+
+footer { border-top: 2px solid var(--fg); padding-block: 28px 40px; font-size: 14px; }
+footer .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px; }
+footer h4 { font: 700 14px/1 var(--display); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 0 0 8px; }
+footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+footer a { color: var(--fg); text-decoration: none; }
+footer .legal { margin-top: 22px; color: var(--muted); font-size: 13px; max-width: 90ch; }
+footer .warn { margin-top: 10px; padding: 10px 12px; border-left: 3px solid var(--warn); background: var(--surface); font-size: 13px; }
+@media (prefers-reduced-motion: no-preference) { .btn { transition: background .15s, color .15s; } }
+</style>
+<div class="wrap">
+  <nav class="top" aria-label="Main">
+    <a class="logo" href="#top">FitSlice</a>
+    <ul>
+      <li><a href="#configurator">Configurator</a></li>
+      <li><a href="#parts">Rev Puck</a></li>
+      <li><a href="#parts">Rev Spinner</a></li>
+      <li><a href="#fitkit">Fit Kit</a></li>
+      <li><a href="#faq">Help</a></li>
+      <li><a href="#proshops">Pro Shops</a></li>
+    </ul>
+    <a class="btn primary" href="https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p" id="configurator">Print my fit</a>
+  </nav>
+
+  <header class="hero" id="top">
+    <div>
+      <h1>Your drill sheet, off the ball.</h1>
+      <p class="sub">It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p">Open the configurator</a>
+        <a class="btn" href="#waitlist">Start with the $24 Fit Kit</a>
+      </div>
+      <p class="fine">The configurator is free. Type in your drill sheet and watch your own grip appear in 3D.</p>
+    </div>
+    <figure>
+      <img src="assets/puck.png" alt="Rev Puck: a slice of bowling-ball surface with a thumb hole and two finger holes, the holes angled toward where the ball's center would be" width="1600" height="1200">
+      <figcaption>Rev Puck, rendered from a real drill sheet. Product photography to follow.</figcaption>
+    </figure>
+  </header>
+
+  <div class="facts" aria-label="Facts">
+    <div>Hole sizes in 1/64" steps<span>thumb, middle, ring</span></div>
+    <div>Both spans, every pitch<span>forward, reverse and lateral, per hole</span></div>
+    <div>Cut from a regulation 8.5" ball surface<span>holes aimed at the ball's center</span></div>
+    <div>About 300 g in PETG<span>at 20% infill; weight pocket for more</span></div>
+  </div>
+
+  <section id="how">
+    <h2>Three steps from your drill sheet to your hand.</h2>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Type in your drill sheet.</h3>
+        <p>Open the configurator and enter what your pro shop wrote down: hand, thumb and finger hole sizes, both spans, and the pitch on each hole. Fractions work as written, so 55/64 and 4-13/32 go in exactly as they appear on the sheet. The model rebuilds in about a tenth of a second and the 3D preview draws every hole axis, so you can see your pitches before anything is printed.</p>
+        <div class="media">Video: a drill sheet's numbers typed into the configurator, the model rebuilding after each field, hole axes visible.</div></div>
+      <div class="step"><div class="n">2</div><h3>We print your fit.</h3>
+        <p>Your sheet becomes a print file and a fit sheet that stays attached to your order. We print in PETG, flat side down, four walls, 20% infill, then smooth the bores and check each one against your sheet before it ships. Prefer your own printer? Buy the Digital Files and print it yourself.</p>
+        <div class="media">Photo: a Rev Puck coming off the printer bed, the thumb bore in focus, calipers beside it.</div></div>
+      <div class="step"><div class="n">3</div><h3>Practice anywhere.</h3>
+        <p>Six drills, ten to fifteen minutes. Fingertip carries, thumb pops, swing sync and cupped-wrist holds on the Rev Puck. Carpet spins and axis control on the Rev Spinner. Short daily sessions help keep the feel between league nights.</p>
+        <div class="media">Video, 15 s: a thumb pop. The puck dangling from a relaxed hand, the thumb sliding out, the puck dropping a few millimeters onto the fingers and holding.</div></div>
+    </div>
+  </section>
+
+  <section class="who" id="who">
+    <h2>Built for one-handed, thumb-in bowlers who already have a fitted ball.</h2>
+    <p class="lede" style="margin-top:14px">If a pro shop has measured your hand and drilled a ball to it, you have a drill sheet. FitSlice reproduces it. That is the whole product.</p>
+    <ul>
+      <li><b>League and tournament bowlers.</b> You paid for a fit measured to a 64th of an inch. Right now it exists in one place: the ball. Carry it in a bag instead.</li>
+      <li><b>Two-handed and thumbless bowlers.</b> The Rev Puck needs a thumb hole. The Rev Spinner does not. It takes your finger sizes and pitches and trains the finger lift.</li>
+      <li><b>Bowlers between fits.</b> Your sheet is stored. When the shop changes your pitch or opens the thumb a 64th, a reprint uses the new numbers.</li>
+      <li><b>Coaches and pro shops.</b> Enter a bowler's sheet at the counter and we print and ship it. <a href="#proshops">Details for pro shops.</a></li>
+    </ul>
+    <p style="margin-top:18px;color:var(--muted)">Not sure of your sizes? Start with the Fit Kit. It is printed on the same printer that will print your trainer, so the bore that fits your finger is the bore we print.</p>
+  </section>
+
+  <section id="parts">
+    <h2>One fit sheet. Two tools.</h2>
+    <div class="parts">
+      <article class="part">
+        <img src="assets/puck.png" alt="Rev Puck render" width="1600" height="1200">
+        <div class="body">
+          <h3>Rev Puck. The part you hold.</h3>
+          <p>A slice of ball surface the size of your hand, with your thumb, middle and ring holes drilled toward the ball's center with your pitches applied, exactly as a pro shop aims them. Your index and pinky rest on the curved surface, as they do on your ball. About 300 g at 20% infill: light enough to hold for thirty seconds at a time, heavy enough that your fingertips have to carry it. A weight pocket underneath takes coins or washers when you want more. A wrist-cord tunnel keeps it on your arm during swing drills.</p>
+          <p class="drills">Drills: fingertip carries · thumb pops · swing sync · cupped-wrist isometrics</p>
+          <p class="price">$89</p>
+        </div>
+      </article>
+      <article class="part">
+        <img src="assets/spinner.png" alt="Rev Spinner render" width="1600" height="1200">
+        <div class="body">
+          <h3>Rev Spinner. The part you release.</h3>
+          <p>A fingers-only disc cut from the same ball surface, with your middle and ring holes and pitches. Swing it on a short pendulum, lift with the fingers at the bottom, and let it go onto carpet. It spins in place and the engraved bars on the base flicker while it turns, so you can count the seconds. It spins longer when the fingers lift more. It gives you feedback. It does not measure anything.</p>
+          <p class="drills">Drills: carpet spins · rotation axis control</p>
+          <p class="price">$45</p>
+        </div>
+      </article>
+    </div>
+    <div class="pair"><b>Pair. Both parts, one sheet, $119.</b><span style="color:var(--muted)">Saves $15 against buying them separately. Digital Files: $29 puck, $39 pair.</span><a class="btn primary" href="https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p">Print my fit</a></div>
+  </section>
+
+  <section class="practice" id="practice">
+    <h2>Coaches agree on where revs come from. FitSlice lets you practice it with your real fit.</h2>
+    <p class="lede" style="margin-top:14px">Coaches agree the thumb must leave first, and a relaxed hand creates more revs. Oversized holes make you squeeze; squeezing limits hook. Those are coaching views, and they are the reason a thumb-in bowler's fit matters so much: the pro-shop trade body puts hole size at about 20% of a fit, with span and pitch at 40% each. We copy all three.</p>
+    <div class="grid">
+      <div><b>A relaxed grip under load</b><p>Hanging the Rev Puck on your fingertips with the thumb loose is designed for fingertip holds in the exact position you bowl in; hang a weight from the cord when you want strength work. If your thumb knuckle whitens, you are squeezing. Reset and go again.</p></div>
+      <div><b>A clean, early thumb exit</b><p>Practice a clean, early thumb exit with the thumb-pop drill: relax the thumb, let it slide out, and let the fingers catch the weight. If the puck falls, the fingers were not carrying it. You cannot drill that safely with a fifteen-pound ball in your living room.</p></div>
+      <div><b>Finger lift you can count</b><p>Release the Rev Spinner onto carpet and count how long it spins. Try to beat your count.</p></div>
+    </div>
+    <p class="honest">What FitSlice does not do: it does not teach footwork, timing or targeting, and it copies whatever fit you give it. Nobody has measured whether any off-lane trainer changes a bowler's results on the lane, and that includes us. We tell you what it is, and your hand tells you whether it feels like your ball.</p>
+  </section>
+
+  <section id="why">
+    <h2>Unlike generic one-size trainers and S/M/L wrist braces, it is built from your fit.</h2>
+    <p class="lede" style="margin-top:14px">Soft practice balls come with one set of holes. Wrist supports come in small, medium and large. Your ball came with three holes placed to a 64th of an inch at your spans and your pitches. To our knowledge, FitSlice is the first trainer that uses your actual drill sheet.</p>
+    <p style="margin-top:18px;font:700 26px/1.1 var(--display);text-transform:uppercase">Same holes. Same pitch. No lane fee.</p>
+    <h3 style="margin-top:34px">30-day fit guarantee.</h3>
+    <p style="margin-top:8px;color:var(--muted);max-width:70ch">Your fit sheet is stored with your order. If the part we ship does not match it, we reprint it free. Finish the fit with bowler's tape, exactly as you would on a ball.</p>
+  </section>
+
+  <section class="faq" id="faq">
+    <h2>Questions bowlers ask first.</h2>
+    <dl>
+      <div><dt>Does it feel like my ball?</dt><dd>The holes are your sizes, at your spans, with your pitches, on the same 8.5" radius, drilled toward the same center. Your index and pinky rest on the curve. The first thing most people do is check the thumb. Check the thumb.</dd></div>
+      <div><dt>Does it add revs?</dt><dd>We do not know, and nobody else does either, because no study has measured any off-lane trainer. What it does is let you practice, with your real fit, the two things coaches agree the release depends on: a relaxed hand and an early, clean thumb exit.</dd></div>
+      <div><dt>I bowl two-handed.</dt><dd>The Rev Spinner is your tool. It needs only your finger sizes and pitches.</dd></div>
+      <div><dt>My fit changes.</dt><dd>So does your file. Your sheet is stored with your order. A reprint with the new sheet costs less than a re-drill.</dd></div>
+      <div><dt>Do I need a 3D printer?</dt><dd>No. We print and ship. If you have a printer, the Digital Files are $29 for the puck and $39 for the pair.</dd></div>
+      <div><dt>What if I type a number wrong?</dt><dd>The 3D preview draws every hole axis so a reversed pitch is visible before you order. The Fit Kit confirms hole sizes on the actual printer. And if the part does not match your sheet, we reprint it.</dd></div>
+    </dl>
+  </section>
+
+  <section id="waitlist">
+    <h2>Printing soon. Put your name down.</h2>
+    <div class="wait">
+      <div id="fitkit">
+        <p class="lede">We are printing the first orders now. Waitlist members get the order link a week before anyone else, and the Fit Kit at $24 credited toward the trainer.</p>
+        <ul>
+          <li><b>Built from your own drill sheet.</b> Hole sizes in 1/64" steps, both spans, forward, reverse and lateral pitch on every hole, right or left hand, on a regulation 8.5" ball surface.</li>
+          <li><b>Try the configurator today, free.</b> Type in your sheet and see your grip in 3D now. When we open orders, your saved sheet is one click from a print.</li>
+          <li><b>First on the list, first on the printer.</b> We print in order.</li>
+        </ul>
+      </div>
+      <form class="list" id="waitlist-form" data-endpoint="" novalidate>
+        <label>Email address <input type="email" name="email" id="wl-email" required autocomplete="email" inputmode="email"></label>
+        <label>First name (optional) <input type="text" name="first_name" id="wl-name" autocomplete="given-name"></label>
+        <label>Bowling hand <select name="hand" id="wl-hand"><option value="right">Right</option><option value="left">Left</option></select></label>
+        <label>Do you have a drill sheet? <select name="has_sheet" id="wl-sheet"><option>Yes</option><option>No</option><option>Not sure</option></select></label>
+        <label>Interested in <select name="interest" id="wl-interest"><option>Rev Puck</option><option>Rev Spinner</option><option>Pair</option><option>Digital Files</option><option>Not sure yet</option></select></label>
+        <label class="check"><input type="checkbox" name="trade" id="wl-trade"> I am a coach or pro shop</label>
+        <button class="btn primary" type="submit" id="wl-submit">Put me on the list</button>
+        <p class="fine">One email when orders open, and at most two before then. Unsubscribe any time. Your email is used only for this.</p>
+        <p class="fine" id="wl-error" role="alert" hidden style="color:var(--bad)"></p>
+      </form>
+      <div class="confirm" id="wl-confirm" hidden>
+        <b>You're on the list.</b>
+        <p>Check your inbox for a confirmation. In the meantime, two things you can do today: find your drill sheet (your pro shop has it if you don't), and type it into the free configurator to see your grip in 3D. Your saved sheet will be waiting when orders open.</p>
+        <p style="margin-top:12px"><a class="btn" href="https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p">Open the configurator</a></p>
+        <p class="preview-note" id="wl-preview" hidden>Preview mode: no form endpoint is connected yet, so nothing was sent. Set data-endpoint on the form (Formspree, Mailchimp, Shopify or your own) to make this live.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="proshops">
+    <h2>Pro shops: your fitting, their practice.</h2>
+    <p class="lede" style="margin-top:14px">You already hold the customer's exact specs. Enter the drill sheet at the counter in the free configurator, add your shop code, and we print and drop-ship. You earn 25% on every order, and your fitting is what the bowler practices with. It does not replace a drilling; it copies the fit you sold.</p>
+    <p style="margin-top:16px"><a class="btn" href="mailto:proshops@fitslice.com">Ask about the pro-shop program</a> <span style="font-family:var(--mono);font-size:12.5px;color:var(--muted);margin-left:8px">proshops@fitslice.com</span></p>
+  </section>
+
+  <footer>
+    <div class="cols">
+      <div><h4>Shop</h4><ul><li><a href="#parts">Rev Puck</a></li><li><a href="#parts">Rev Spinner</a></li><li><a href="#parts">Pair</a></li><li><a href="#fitkit">Fit Kit</a></li><li><a href="#parts">Digital Files</a></li></ul></div>
+      <div><h4>Help</h4><ul><li><a href="#faq">How to read your drill sheet</a></li><li><a href="#why">Fit guarantee and returns</a></li><li><a href="#faq">Shipping</a></li><li><a href="#faq">Privacy and your fit sheet</a></li></ul></div>
+      <div><h4>Partners</h4><ul><li><a href="#proshops">Pro shops</a></li><li><a href="#proshops">Coaches and creators</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><span style="font-family:var(--mono);font-size:13px">support@fitslice.com</span></li></ul></div>
+    </div>
+    <p class="legal">© 2026 FitSlice. All rights reserved. FitSlice trainers are training aids for use off the lane. They are not bowling balls and are not equipment for sanctioned competition. FitSlice is not affiliated with any ball manufacturer or bowling governing body.</p>
+    <p class="warn">Use warning: FitSlice trainers are for swing-and-hold and carpet-release drills only. Never throw a trainer. Keep the wrist cord on your wrist for every swing drill. Not for children under 12 without adult supervision. Stop any drill that hurts.</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var form = document.getElementById('waitlist-form');
+  var confirmBox = document.getElementById('wl-confirm');
+  var err = document.getElementById('wl-error');
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    err.hidden = true;
+    var email = document.getElementById('wl-email');
+    if (!email.value || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)) {
+      err.textContent = 'Check that the email address is complete and try again.'; err.hidden = false; email.focus(); return;
+    }
+    var data = Object.fromEntries(new FormData(form).entries());
+    data.trade = document.getElementById('wl-trade').checked;
+    var endpoint = form.getAttribute('data-endpoint');
+    var btn = document.getElementById('wl-submit');
+    btn.disabled = true; btn.textContent = 'Adding you…';
+    try {
+      if (endpoint) {
+        var res = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) });
+        if (!res.ok) throw new Error('bad status ' + res.status);
+      } else {
+        document.getElementById('wl-preview').hidden = false;
+      }
+      form.hidden = true; confirmBox.hidden = false;
+    } catch (_) {
+      err.textContent = 'We could not add you to the list just now. Check the address and try again, or email support@fitslice.com with "waitlist" in the subject.';
+      err.hidden = false; btn.disabled = false; btn.textContent = 'Put me on the list';
+    }
+  });
+})();
+</script>
