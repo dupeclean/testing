@@ -1,0 +1,15 @@
+; perimeters extrusion width = 0.45mm
+; filament used [mm] = 32044.36
+; filament used [cm3] = 77.08
+; filament used [g] = 97.89
+; total filament cost = 2.45
+; estimated printing time (normal mode) = 3h 37m 55s
+; estimated printing time (silent mode) = 5h 32m 31s
+; external_perimeter_speed = 120
+; filament_max_volumetric_speed = 20
+; fill_density = 20%
+; fill_pattern = gyroid
+; infill_speed = 270
+; layer_height = 0.2
+; perimeter_speed = 170
+; perimeters = 4

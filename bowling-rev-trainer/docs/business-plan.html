@@ -1,0 +1,1072 @@
+
+<title>FitSlice Business Plan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a long-form plan read top to bottom; one measure of text, numbered parts as running heads, evidence tables scroll inside their own frames. */
+:root {
+  --bg: #e9edf0; --surface: #f8fafb; --surface-2: #eef2f5; --fg: #15202b; --muted: #5b6b7a; --line: #c9d2da;
+  --accent: #1f5f8b; --accent-ink: #ffffff; --ok: #2f7d4f; --warn: #9a6a12; --bad: #b3261e;
+  --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  --body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11161a; --surface: #1a2127; --surface-2: #212a31; --fg: #e7ebee; --muted: #97a4ae; --line: #2d3741;
+    --accent: #5fa8dc; --accent-ink: #0d1a24; --ok: #63b584; --warn: #e0a84a; --bad: #ef6b5f; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11161a; --surface: #1a2127; --surface-2: #212a31; --fg: #e7ebee; --muted: #97a4ae; --line: #2d3741;
+  --accent: #5fa8dc; --accent-ink: #0d1a24; --ok: #63b584; --warn: #e0a84a; --bad: #ef6b5f; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--fg); font: 16px/1.55 var(--body); margin: 0; }
+.wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 56px; max-width: 1040px; margin: 0 auto; }
+header.title { border-bottom: 2px solid var(--fg); padding-bottom: 16px; margin-bottom: 8px; }
+header.title .eyebrow { font: 600 12px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+header.title h1 { font: 700 clamp(38px, 7vw, 64px)/0.95 var(--display); letter-spacing: .005em; text-transform: uppercase; margin: 0; text-wrap: balance; }
+header.title .sub { font-size: 18px; color: var(--muted); margin: 10px 0 0; max-width: 60ch; text-wrap: balance; }
+header.title .date { font-family: var(--mono); font-size: 12.5px; color: var(--muted); margin-top: 8px; }
+nav.toc { margin: 18px 0 30px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+nav.toc p { margin: 0 0 8px; font: 700 13px/1 var(--display); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+nav.toc ol { margin: 0; padding-left: 0; list-style: none; columns: 2; column-gap: 24px; }
+nav.toc li { break-inside: avoid; padding: 3px 0; font-size: 14.5px; }
+nav.toc a { color: var(--fg); text-decoration: none; border-bottom: 1px solid var(--line); }
+nav.toc a:hover { border-color: var(--accent); color: var(--accent); }
+@media (max-width: 600px) { nav.toc ol { columns: 1; } }
+article { max-width: 72ch; }
+article h1 { font: 700 30px/1.05 var(--display); text-transform: uppercase; letter-spacing: .02em; margin: 44px 0 12px; padding-top: 18px; border-top: 1px solid var(--line); text-wrap: balance; }
+article h1:first-of-type { border-top: 0; padding-top: 0; }
+article h2 { font: 700 20px/1.15 var(--display); letter-spacing: .02em; margin: 28px 0 8px; text-wrap: balance; }
+article p { margin: 0 0 14px; }
+article li { margin: 4px 0; }
+article li p { margin: 0; }
+article strong { font-weight: 600; }
+article em { font-style: italic; }
+article a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); word-break: break-word; }
+article blockquote { margin: 0 0 20px; padding: 12px 16px; border-left: 3px solid var(--accent); background: var(--surface); border-radius: 0 6px 6px 0; font-size: 15px; color: var(--muted); }
+article blockquote p { margin: 0; }
+.tablewrap { overflow-x: auto; margin: 10px 0 20px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); max-width: min(100%, 1040px); }
+article table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+article thead th { text-align: left; font: 600 11.5px/1.2 var(--body); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding: 10px 10px 8px; border-bottom: 1px solid var(--line); background: var(--surface-2); white-space: nowrap; }
+article td { padding: 8px 10px; border-top: 1px solid var(--line); vertical-align: top; min-width: 7ch; }
+article td:first-child { font-family: var(--mono); font-size: 12.5px; white-space: nowrap; color: var(--muted); }
+article tr:nth-child(even) td { background: color-mix(in srgb, var(--surface-2) 55%, transparent); }
+article table a { word-break: break-all; font-family: var(--mono); font-size: 12px; }
+article code { font-family: var(--mono); font-size: 0.92em; background: var(--surface-2); padding: 1px 4px; border-radius: 3px; }
+.cite { font-family: var(--mono); font-size: 0.78em; color: var(--accent); vertical-align: 0.12em; }
+.band { margin: 32px 0; padding: 18px 20px; border-radius: 6px; background: var(--surface); border: 1px solid var(--line); }
+.band .q { font: 700 clamp(22px, 3.4vw, 32px)/1.1 var(--display); text-transform: uppercase; letter-spacing: .02em; margin: 0; }
+.band .a { color: var(--muted); margin: 8px 0 0; font-size: 15px; }
+footer.end { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+@media (max-width: 700px) { article h1 { font-size: 26px; } body { font-size: 15.5px; } }
+</style>
+<div class="wrap">
+<header class="title"><p class="eyebrow">Business plan · working draft</p><h1>FitSlice Business Plan</h1><p class="sub">A custom-fit, 3D-printed rev trainer for one-handed, thumb-in bowlers</p><p class="date">October 2026 — working draft v1</p></header>
+<nav class="toc"><p>Contents</p><ol><li><a href="#the-idea-in-one-paragraph">1. The idea in one paragraph</a></li><li><a href="#how-it-actually-helps-the-honest-version">2. How it actually helps (the honest version)</a></li><li><a href="#who-buys-it">3. Who buys it</a></li><li><a href="#the-market-gap-and-the-competition">4. The market gap and the competition</a></li><li><a href="#product-pricing-and-operations">5. Product, pricing and operations</a></li><li><a href="#claims-we-can-make">6. Claims we can make</a></li><li><a href="#earning-the-performance-claims-the-pilot">7. Earning the performance claims: the pilot</a></li><li><a href="#selling-it-to-people-who-do-not-know-what-it-is">8. Selling it to people who do not know what it is</a></li><li><a href="#legal-ip-and-liability">9. Legal, IP and liability</a></li><li><a href="#risks-plainly">10. Risks, plainly</a></li><li><a href="#evidence-tables">11. Evidence tables</a></li><li><a href="#what-we-still-need-to-find-out">12. What we still need to find out</a></li><li><a href="#first-90-days">13. First 90 days</a></li></ol></nav>
+
+<div class="band"><p class="q">Your drill sheet, off the ball.</p>
+<p class="a">The part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.</p></div>
+
+<article>
+<blockquote>
+<p><strong>How to read this.</strong> Every number with a source behind it is marked with a bracketed citation like <a class="cite" href="#evidence-tables">M1</a> that points to the evidence tables in Part 11. Numbers without a citation are our own estimates and say so. The market, competitor, channel and performance-evidence research was gathered by automated web research in October 2026, and most figures were read from search-engine excerpts of the cited pages rather than the pages themselves (the research sandbox could not open them), so spot-check any figure against its URL before it goes on a website, a package or an ad. Two angles, legal and unit costs, could not be web-sourced in that pass at all; Part 5.2 uses our own slicer measurements instead, and Part 9 is written from general knowledge with the exact documents still to pull.</p>
+</blockquote>
+<h1 id="the-idea-in-one-paragraph">1. The idea in one paragraph</h1>
+<p>Serious bowlers already pay a pro shop to measure their hand to a 64th of an inch and drill three holes into a $200 ball at specific spans and pitches. That fit exists in exactly one place: the ball. <strong>FitSlice</strong> prints the patch of ball surface the hand actually touches, with the bowler’s own drill sheet reproduced in it, so the release can be practiced anywhere: fingertip grip holds, thumb-exit timing reps and finger-lift drills on a 320-gram part instead of a 15-pound ball on a lane. A free web configurator turns the drill sheet into the model in about a tenth of a second; we print and ship, or sell the file. No product we could find does this: the closest things on the market are soft practice balls with generic one-size holes and wrist braces sized small/medium/large <a class="cite" href="#evidence-tables">C4</a><a class="cite" href="#evidence-tables">C6</a>.</p>
+<h1 id="how-it-actually-helps-the-honest-version">2. How it actually helps (the honest version)</h1>
+<p>You asked for this plainly, so here it is without marketing.</p>
+<p><strong>What creates revs for a thumb-in bowler.</strong> Coaches agree on the sequence: the thumb leaves the ball first and cleanly, and in the fraction of a second before the fingers leave, the fingers travel up and around the ball, driven by the wrist. The longer and faster that finger action, the more revolutions <a class="cite" href="#evidence-tables">E7</a><a class="cite" href="#evidence-tables">E8</a><a class="cite" href="#evidence-tables">E9</a>. Three things wreck it: a thumb that hangs in the hole too long, a hand that is squeezing, and fingers that are not in a position to lift <a class="cite" href="#evidence-tables">E10</a><a class="cite" href="#evidence-tables">E11</a><a class="cite" href="#evidence-tables">E12</a>.</p>
+<p><strong>Where fit comes in.</strong> Squeezing is mostly a fit problem. The pro-shop trade body’s own rule of thumb is that hole size is only about 20% of a fit; span and pitch are 40% each <a class="cite" href="#evidence-tables">E13</a>. Oversized holes make the hand squeeze, which limits hook; too much tape makes the thumb hang <a class="cite" href="#evidence-tables">E12</a>. That is why serious bowlers tier tape inside the thumb hole in 64ths of an inch <a class="cite" href="#evidence-tables">E14</a>: the geometry of three holes decides whether the hand can stay relaxed.</p>
+<p><strong>What the trainer does.</strong> It gives the bowler their exact geometry away from the lane, so three things can be practiced that are hard or impossible to practice with a real ball:</p>
+<ol type="1">
+<li><strong>Hanging the weight on relaxed fingertips.</strong> Holding the puck at your side with the thumb loose trains the specific finger-pad strength that lets you <em>stop squeezing</em> on real shots. Strength training transfers best to the exact position and task that was trained: a 2025 meta-analysis found roughly half the effect when strength is tested in a different mode than it was trained in <a class="cite" href="#evidence-tables">E15</a>, and sport-specific finger loading (hangboards for climbers) raises finger strength measurably in 4–8 weeks <a class="cite" href="#evidence-tables">E16</a><a class="cite" href="#evidence-tables">E17</a>. A generic hand gripper is the wrong shape; the trainer is the right shape by definition.</li>
+<li><strong>Thumb-exit timing.</strong> Dangle the puck, relax the thumb and let it slide out while the fingers catch the weight. That is the exact “thumb leaves, fingers stay” moment of a high-rev release, rehearsed in isolation with instant feedback (if the puck falls, the fingers were not carrying it). You cannot safely drill this with a 15-pound ball in your living room.</li>
+<li><strong>Finger lift.</strong> The fingers-only spinner disc is released onto carpet; it spins in place and the engraved bars let you count how long it spins. More lift, longer spin. It is a feedback device, not a measuring instrument.</li>
+</ol>
+<p><strong>What it does not do, and we must not say it does.</strong> No study shows that any off-lane trainer raises rev rate or average <a class="cite" href="#evidence-tables">E18</a>. More revs is not automatically better: coaches stress matching revs to speed, and a 270-RPM Hall of Famer out-struck crankers by getting the ball into a roll at the pins <a class="cite" href="#evidence-tables">E19</a><a class="cite" href="#evidence-tables">E20</a>. The trainer does not teach footwork, timing or targeting, and it will not fix a bad fit; it copies whatever fit you give it. The claim we can stand behind today is narrower and still worth money: <em>it is the only way to practice your real grip and release off the lane, and it trains the two things every coach says the release depends on, a relaxed hand and an early, clean thumb exit.</em> Part 6 lays out which claims are safe.</p>
+<p><strong>Why a slice and not a ball.</strong> A regulation ball is 8.5 inches across and 12–16 pounds <a class="cite" href="#evidence-tables">C12</a>. Holes drilled at zero pitch aim at the ball’s center; that convergence is what makes thumb and fingers oppose each other around the curvature. The trainer keeps the real 108 mm radius and drills the holes toward the same center with the bowler’s pitches applied, so the hand sits exactly as it sits on the ball. It weighs about 300 g at 20% infill <a class="cite" href="#evidence-tables">X6</a>, which is light enough for long holds and heavy enough to need real fingertip pressure; a weight pocket in the base takes coins or washers for progressive loading.</p>
+<h1 id="who-buys-it">3. Who buys it</h1>
+<p><strong>Core customer: the certified league bowler with a fitted ball.</strong> There were 1,075,194 USBC members in 2024–25, roughly flat into 2025–26 after falling from 1.70 million in 2013–14 <a class="cite" href="#evidence-tables">M1</a><a class="cite" href="#evidence-tables">M2</a><a class="cite" href="#evidence-tables">M3</a>. These are the people who have a drill sheet to type in. They are 65% male <a class="cite" href="#evidence-tables">M6</a>; the tournament-traveling subset is 87% male and 70% aged 50 and over <a class="cite" href="#evidence-tables">M7</a>, which is squarely the one-handed, thumb-in generation. About 58,000 of them travel to the USBC Open Championships every year <a class="cite" href="#evidence-tables">M8</a>, so they spend on the sport.</p>
+<p><strong>The funnel above them is huge but casual.</strong> USBC says 67 million Americans bowl at least once a year <a class="cite" href="#evidence-tables">M4</a>; survey-based counts put it near 45 million <a class="cite" href="#evidence-tables">M5</a>; an older analysis found 93% of bowlers bowl four times a year or fewer and only about 21% are “serious” <a class="cite" href="#evidence-tables">M9</a>. Casuals do not have drill sheets. They are not customers for the custom product, though they are for a stock-size sizer plate and a “find your fit” story.</p>
+<p><strong>Youth is the hedge, not the core.</strong> USBC Youth has over 102,000 members and Junior Gold drew more than 3,500 competitors in 2025 <a class="cite" href="#evidence-tables">M10</a><a class="cite" href="#evidence-tables">M11</a>, but the elite youth game has gone two-handed (no thumb): the only published estimate says upwards of 20% of youth bowl two-handed, and the 2025 Junior Gold U18 boys stepladder was all two-handed <a class="cite" href="#evidence-tables">M12</a><a class="cite" href="#evidence-tables">M13</a>. The fingers-only spinner is the product for them; the puck is for the adult thumb-in majority.</p>
+<p><strong>Secondary markets.</strong> Japan is large but shrinking fast (16.9 million participants in 2011 to 9.3 million in 2019) <a class="cite" href="#evidence-tables">M14</a>; Korea’s centers are growing <a class="cite" href="#evidence-tables">M15</a>. Both are STL-download markets, not shipping markets, at first.</p>
+<p><strong>Realistic sizing.</strong> We did not find any survey of what a league bowler spends per year on equipment or coaching, so any such figure is ours: a new high-performance ball runs roughly $150–$250 plus $40–$150 to drill <a class="cite" href="#evidence-tables">M16</a><a class="cite" href="#evidence-tables">C11</a>, and a bowler who buys two balls a year is spending $400–$800 before shoes, bags and league fees. If 1% of USBC members bought a $119 pair over three years, that is about 10,700 units and $1.3 million in revenue. That is a niche business, not a venture-scale one, and the plan is written for that: a profitable one-to-three-printer operation first.</p>
+<h1 id="the-market-gap-and-the-competition">4. The market gap and the competition</h1>
+<p>Nobody sells a bowler’s own fit off the ball. Forty-five targeted searches across retailers, Etsy, Thingiverse/MakerWorld, patents and coaching sites found four kinds of adjacent product, none of which reproduce a drill sheet <a class="cite" href="#evidence-tables">C13</a>:</p>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Category</th>
+<th>Examples and prices</th>
+<th>What it does</th>
+<th>What it lacks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Roller “rev trainers”</td>
+<td>Only Pros $40–48 <a class="cite" href="#evidence-tables">C1</a>; generic benches $38–146 <a class="cite" href="#evidence-tables">C2</a>; Eileen’s Rev Trainer CA$411 <a class="cite" href="#evidence-tables">C3</a></td>
+<td>Hold your real ball on rollers so it can spin in place</td>
+<td>Nothing about fit; needs your ball; 5–111 reviews</td>
+</tr>
+<tr class="even">
+<td>Handheld practice balls with holes</td>
+<td>Eileen’s Feel Trainer CA$99, 4”/5” silicone <a class="cite" href="#evidence-tables">C4</a>; mini practice balls</td>
+<td>Hand-position feel</td>
+<td>One-size generic holes; buyers report adults cannot position fingers normally <a class="cite" href="#evidence-tables">C5</a></td>
+</tr>
+<tr class="odd">
+<td>Wrist positioners and supports</td>
+<td>Robby’s Revs $60–63; Mongoose Lifter $56; Storm Xtra-Hook $40 to C4 $100; Brunswick Bionic $49 <a class="cite" href="#evidence-tables">C6</a><a class="cite" href="#evidence-tables">C7</a></td>
+<td>Hold the wrist for you during the shot</td>
+<td>Sized S/M/L by hand length; 3.0–4.4 star ratings; heavy closeout discounting</td>
+</tr>
+<tr class="even">
+<td>Rev measurement</td>
+<td>Specto $495/yr or $10/session at centers <a class="cite" href="#evidence-tables">C8</a>; in-ball sensors <a class="cite" href="#evidence-tables">C9</a>; Tenpin Toolkit app, free, 4.9★ from 727 reviews <a class="cite" href="#evidence-tables">C10</a></td>
+<td>Count revs from video or sensors</td>
+<td>Measure, do not train; the spinner cannot compete on counting and does not try to</td>
+</tr>
+</tbody>
+</table></div>
+<p>Two facts from the fit world matter most for the pitch. First, bowlers already pay to clone one hole: custom silicone thumb molds cost $15 for a master and $20 per copy, and interchangeable-thumb systems (Turbo Switch Grip, JoPo Twist, Vise IT) reduce the thumb to a standard slug the pro shop custom-drills <a class="cite" href="#evidence-tables">C11</a>. Second, the pro-shop measuring tools that hold a bowler’s fit cost about CA$1,342 and live in the shop <a class="cite" href="#evidence-tables">C12</a>. The fit is valuable, portable as data (shops accept uploaded drill sheets <a class="cite" href="#evidence-tables">C11</a>) and has no at-home physical form. That is the gap.</p>
+<p>Prior art to respect: a 2007 US patent on a foam “bowling practice device with finger holes for personalizing the fit” (US7261638) is still in force until roughly 2027 and needs a freedom-to-operate review before launch; the 1987 grip-exerciser patent and the thumb-exit-aid patents are expired <a class="cite" href="#evidence-tables">C14</a>. We are not aware of any active patent on generating per-bowler hole geometry from a drill sheet, which is the core of what we do.</p>
+<h1 id="product-pricing-and-operations">5. Product, pricing and operations</h1>
+<h2 id="the-line">5.1 The line</h2>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Product</th>
+<th>What ships</th>
+<th>Price (proposed)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Fit Kit</strong></td>
+<td>Sizer plate printed around the customer’s expected sizes in 1/64” steps, roll of bowler’s tape, fitting card</td>
+<td>$24, credited toward a trainer</td>
+</tr>
+<tr class="even">
+<td><strong>Rev Puck</strong></td>
+<td>Drill-sheet-exact grip slice (hole sizes, both spans, six pitches, right/left, blind or through thumb), weight pocket, wrist cord</td>
+<td>$89</td>
+</tr>
+<tr class="odd">
+<td><strong>Rev Spinner</strong></td>
+<td>Fingers-only release disc with spin-count bars</td>
+<td>$45</td>
+</tr>
+<tr class="even">
+<td><strong>Pair</strong></td>
+<td>Puck + spinner, one fit sheet</td>
+<td>$119</td>
+</tr>
+<tr class="odd">
+<td><strong>Digital</strong></td>
+<td>The customer’s STL files and fit sheet for their own printer, generated by the configurator</td>
+<td>$29 (puck) / $39 (pair)</td>
+</tr>
+<tr class="even">
+<td><strong>Pro-shop program</strong></td>
+<td>Shop enters the drill sheet at the counter; we drop-ship; shop earns 25%</td>
+<td>wholesale</td>
+</tr>
+</tbody>
+</table></div>
+<p>Prices are ours, set from three anchors: the wrist-brace band ($40–100) where a comparable “release aid” purchase already happens <a class="cite" href="#evidence-tables">C6</a><a class="cite" href="#evidence-tables">C7</a>; what bowlers pay for fit services ($40–150 drilling, $15–20 thumb molds) <a class="cite" href="#evidence-tables">M16</a><a class="cite" href="#evidence-tables">C11</a>; and unit cost (below). The configurator stays free: it is the sales demo.</p>
+<h2 id="unit-economics-measured-on-the-real-models">5.2 Unit economics (measured on the real models)</h2>
+<p>We sliced the actual production files (PrusaSlicer 2.7, 0.2 mm layers, 4 walls, 20% gyroid infill, PETG at 1.27 g/cm³) with two speed profiles: a conventional bed-slinger and a modern CoreXY (the Bambu/Prusa Core One class). Filament mass does not depend on the printer; time does <a class="cite" href="#evidence-tables">X6</a>.</p>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Part</th>
+<th>Filament</th>
+<th>Filament cost at $25/kg</th>
+<th>Print time, CoreXY profile</th>
+<th>Print time, conventional</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Rev Puck</td>
+<td>297 g</td>
+<td>$7.43</td>
+<td>11 h 20 m</td>
+<td>19 h 24 m</td>
+</tr>
+<tr class="even">
+<td>Rev Spinner</td>
+<td>98 g</td>
+<td>$2.45</td>
+<td>3 h 38 m</td>
+<td>6 h 21 m</td>
+</tr>
+<tr class="odd">
+<td>Sizer plate</td>
+<td>97 g</td>
+<td>$2.42</td>
+<td>3 h 24 m</td>
+<td>6 h 12 m</td>
+</tr>
+</tbody>
+</table></div>
+<p>Slicer time estimates run conservative for the fastest printers, but the planning assumption is <strong>one puck per printer per day</strong>, not two. Cost stack for a puck:</p>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Item</th>
+<th>Cost</th>
+<th>Basis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PETG filament, 297 g</td>
+<td>$7.50</td>
+<td>$25/kg; bulk spools lower <a class="cite" href="#evidence-tables">X1</a><a class="cite" href="#evidence-tables">X6</a></td>
+</tr>
+<tr class="even">
+<td>Machine time, ~11 h</td>
+<td>$2.50</td>
+<td>~1.7 kWh of electricity plus depreciation of a ~$600 printer over ~300 parts (our assumption) <a class="cite" href="#evidence-tables">X2</a></td>
+</tr>
+<tr class="odd">
+<td>Labor (start, remove, deburr bores, pack)</td>
+<td>$5</td>
+<td>~15 min at $20/h</td>
+</tr>
+<tr class="even">
+<td>Packaging and cord</td>
+<td>$3</td>
+<td>box, paracord, tape, fitting card</td>
+</tr>
+<tr class="odd">
+<td>Payment and marketplace fees</td>
+<td>$9–12</td>
+<td>3% + $0.25 processing; Etsy adds 6.5% and 12–15% on ad-attributed sales <a class="cite" href="#evidence-tables">X3</a></td>
+</tr>
+<tr class="even">
+<td><strong>Landed cost before shipping</strong></td>
+<td><strong>$27–30</strong></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>Gross margin at $89</strong></td>
+<td><strong>~66–70%</strong></td>
+<td>shipping charged separately or built into a $99 price</td>
+</tr>
+</tbody>
+</table></div>
+<p>Institutional print shops charge $0.07–0.10 per gram, which puts a 300 g part at $21–30 before any margin <a class="cite" href="#evidence-tables">X4</a>, roughly our in-house landed cost, so outsourcing to a print farm only makes sense for overflow. Capacity is the real constraint: one printer yields about 25–30 pucks a month (roughly $2,500–3,000 of revenue at the single price, more with pairs); three printers running pucks and spinners is a real part-time business at about $8,000–10,000 a month of revenue, and the printers pay for themselves within their first month of sold output.</p>
+<p>Prices we could not source in this pass and have taken as placeholders: shipping (a 600–900 g box domestically is in the $8–12 range in our experience), Shopify or Etsy plan fees, and Stripe’s exact rate card. See Part 12.</p>
+<h2 id="operations">5.3 Operations</h2>
+<p>The pipeline already exists and is in the repository:</p>
+<ol type="1">
+<li>Customer enters the drill sheet in the configurator (fractions accepted: 55/64, 1 1/32, 4-1/2; mm or inches; pitches in drill-sheet inches).</li>
+<li>The configurator rebuilds the model in ~100 ms, checks for bores that would collide, and produces the STL plus a fit-sheet JSON that is stored with the order.</li>
+<li>We print flat-side down in PETG, 4 walls, 20% infill, no supports. Bores get a wipe of fine sandpaper. Customer finishes fit with tape, exactly as on a ball.</li>
+<li>Fit guarantee: the sheet is on file; if the printed bores miss the sheet, we reprint. Returns on custom goods are otherwise limited, which is standard for personalized products.</li>
+</ol>
+<p>Print tolerance is the one technical risk in the chain: printed holes come out 0.2–0.4 mm small, which is why the configurator adds a print allowance and why the Fit Kit sizer exists (it is printed on the same printer and material as the order, so the bore that fits is the bore we print). Selling the Fit Kit first cuts refit risk to near zero.</p>
+<h1 id="claims-we-can-make">6. Claims we can make</h1>
+<p>Think of this as the copy deck’s legal spine. Green claims are supportable today with the sources in Part 8. Yellow claims need the qualifier shown. Red claims are not available until we have run the pilot in Part 7.</p>
+<p><strong>Green — make freely, cite when challenged</strong></p>
+<ul>
+<li>“Reproduces your drill sheet: hole sizes in 1/64” steps, both spans, forward/reverse and lateral pitch for every hole, on a regulation 8.5” ball radius.” (Product fact; verified against the CAD source to 0.1 mm.)</li>
+<li>“Holes are aimed at the ball’s center, the way a zero-pitch hole is drilled, so your thumb and fingers oppose each other exactly as on your ball.” (Product fact.)</li>
+<li>“Coaches agree the thumb must leave first, and a relaxed hand creates more revs.” (Attributed coaching consensus <a class="cite" href="#evidence-tables">E7</a><a class="cite" href="#evidence-tables">E8</a><a class="cite" href="#evidence-tables">E11</a>.)</li>
+<li>“The pro-shop trade body puts hole size at about 20% of a fit; span and pitch are 40% each. We copy all three.” (Attributed <a class="cite" href="#evidence-tables">E13</a>.)</li>
+<li>“Oversized holes make you squeeze; squeezing limits hook.” (Attributed to coaching sources <a class="cite" href="#evidence-tables">E12</a>.)</li>
+<li>“Weighs about 300 g, light enough for long holds, heavy enough to need real fingertip pressure.” (Product fact; state the infill.)</li>
+<li>“Unlike generic one-size trainers and S/M/L wrist braces, it is built from your fit.” (Comparative, factual, with the examples in Part 4 available as substantiation.)</li>
+</ul>
+<p><strong>Yellow — make with the qualifier</strong></p>
+<ul>
+<li>“<em>Designed to</em> build fingertip grip strength in the exact position you bowl in” (not “builds”); back it with the specificity literature <a class="cite" href="#evidence-tables">E15</a><a class="cite" href="#evidence-tables">E16</a> when asked, and never imply a measured result for bowlers.</li>
+<li>“<em>Practice</em> a clean, early thumb exit” (not “fixes your thumb exit”).</li>
+<li>“<em>To our knowledge</em>, the first trainer that uses your actual drill sheet” (we searched; absence of evidence is not proof).</li>
+<li>“Short daily sessions help keep the feel between league nights” (spacing and skill-decay research supports frequent practice in general <a class="cite" href="#evidence-tables">E21</a><a class="cite" href="#evidence-tables">E22</a>, but the effect is task-dependent <a class="cite" href="#evidence-tables">E23</a>; do not claim “science proves 10 minutes a day”).</li>
+</ul>
+<p><strong>Red — do not claim until the pilot supports it</strong></p>
+<ul>
+<li>Any number for rev-rate gain, hook gain or average gain (“adds 50 RPM”, “adds 10 pins”).</li>
+<li>“Prevents injury” or “prevents bowler’s thumb.” (Bowler’s thumb is a documented fit-related injury <a class="cite" href="#evidence-tables">E24</a>, and a fit check is standard advice, but no study links a trainer to prevention.)</li>
+<li>“Recommended by pro shops / coaches / USBC / PBA” until a named one has said so in writing.</li>
+<li>Any use of a ball brand’s name or trade dress (“Storm-style”, “fits like a Hammer”).</li>
+<li>Testimonials that quote results (“went from 300 to 380 RPM”) unless we can show they are typical or clearly disclose they are not; the FTC’s endorsement rules treat atypical results shown without disclosure as deceptive.</li>
+</ul>
+<p><strong>Mottos and taglines</strong></p>
+<p>Primary, for the product and the site: <strong>“Your drill sheet, off the ball.”</strong></p>
+<p>Supporting lines, each tied to a true property:</p>
+<ul>
+<li>“Train the hand that bowls.” (It is the hand’s contribution, not the ball’s.)</li>
+<li>“Same holes. Same pitch. No lane fee.”</li>
+<li>“Relax the thumb. Let the fingers work.” (The coaching idea in six words.)</li>
+<li>“Fit you can practice.”</li>
+<li>“Revs start where the thumb leaves.”</li>
+<li>For the Fit Kit: “Find your size before you print your fit.”</li>
+<li>For the spinner: “Lift it, spin it, count it.”</li>
+</ul>
+<p>Avoid anything that promises a number, uses “pro” as an endorsement, or borrows a brand’s vocabulary (no “Hook Monster”, no “Belmo-style”).</p>
+<h1 id="earning-the-performance-claims-the-pilot">7. Earning the performance claims: the pilot</h1>
+<p>Everything the market wants to hear (“it adds revs”) is a red claim today. The cheapest honest way to turn it yellow or green:</p>
+<ul>
+<li><strong>Design:</strong> 24 one-handed league bowlers, randomized to trainer (10 min/day, the six drills in the user guide) plus normal league play, or league play only, for 6 weeks.</li>
+<li><strong>Measures:</strong> rev rate from phone slow-motion video using a free rev-counting app <a class="cite" href="#evidence-tables">C10</a> (three sessions baseline, three at week 6, same house, same ball); frames between thumb exit and finger exit; grip-pressure proxy (thumb skin marks and self-rated squeeze); league average for the season.</li>
+<li><strong>Pre-register</strong> the outcome measures and publish the result whatever it says. A null result still leaves every green claim intact; a positive one is the whole marketing budget.</li>
+<li><strong>Cost:</strong> about 24 pairs of trainers and a coach’s time; under $3,000.</li>
+</ul>
+<p>Until then, performance is communicated as “practice what coaches say matters” and the 30-day fit guarantee carries the risk.</p>
+<h1 id="selling-it-to-people-who-do-not-know-what-it-is">8. Selling it to people who do not know what it is</h1>
+<p><strong>The problem with the product</strong> is that it needs a sentence of explanation before anyone wants it. The sales plan is built around removing that sentence.</p>
+<p><strong>The ten-second explanation.</strong> “It’s the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.” Use it everywhere, verbatim. Then show, do not tell: a 15-second clip of a thumb pop (puck drops onto the fingers) says more than a paragraph.</p>
+<p><strong>Let them type in their own numbers.</strong> The configurator is the hook. A bowler who enters <em>their</em> spans and pitches and watches <em>their</em> grip appear in 3D is already imagining holding it. The call to action after the model appears is “Print my fit” and, for the hesitant, “Start with the $24 Fit Kit.”</p>
+<p><strong>Lead with fit, not revs.</strong> Revs is a promise we cannot quantify; fit is a fact we can show. “Does it feel like your ball?” is a question we win every time, and it is the question a skeptic will test first.</p>
+<p><strong>Objections and answers.</strong></p>
+<ul>
+<li><em>“I can just hold my ball.”</em> Your ball is 15 pounds and drilled to be thrown, not held for 30 seconds at your desk, and you cannot drop-catch it to drill thumb exit. The trainer is a third of a kilo and goes in a bag.</li>
+<li><em>“Does it actually add revs?”</em> Honest answer: it trains the two things every coach says the release depends on, a relaxed hand and an early thumb exit, with your real fit. Nobody has measured off-lane trainers, including us, which is why we are running a pilot and why there is a 30-day fit guarantee.</li>
+<li><em>“My fit changes.”</em> So does the file. Your sheet is stored; a reprint with the new sheet costs less than a re-drill.</li>
+<li><em>“Why not a wrist brace?”</em> A brace holds your wrist for you during the shot. This trains your hand to do it without one.</li>
+<li><em>“I’m two-handed.”</em> Then the spinner is your product; the puck is for thumb-in bowlers.</li>
+</ul>
+<p><strong>Channels, in order of expected return.</strong></p>
+<ol type="1">
+<li><strong>Instruction YouTube.</strong> Bowling’s teaching creators are exactly our audience: Darren Tang (~265K subscribers; his top video, “4 Ways To Hook A Bowling Ball”, has over 4 million views), Brad and Kyle (~229K), and coach JR Raymond (~82K, already reviews products) <a class="cite" href="#evidence-tables">H1</a><a class="cite" href="#evidence-tables">H2</a><a class="cite" href="#evidence-tables">H3</a>. Send a trainer printed from the creator’s own drill sheet; the unboxing writes itself. Coach affiliate code at 15%.</li>
+<li><strong>The configurator as content.</strong> Short videos of real drill sheets becoming models; a “paste your drill sheet” post in r/Bowling (57K–111K members) <a class="cite" href="#evidence-tables">H4</a>.</li>
+<li><strong>Tournaments with vendor areas.</strong> The USBC Open Championships runs about 150 days with more than 58,000 adult bowlers passing through one building <a class="cite" href="#evidence-tables">M8</a>; Junior Gold’s trade show is described as drawing over 9,000 attendees <a class="cite" href="#evidence-tables">H5</a>; PBA and PWBA regionals are small, frequent and local <a class="cite" href="#evidence-tables">H6</a>. A booth with a sizer plate and a 3D printer running is a demo that explains itself.</li>
+<li><strong>Pro shops as drill-sheet capture, not shelf space.</strong> No source gives a pro-shop count newer than 458 certified operators in 2017 <a class="cite" href="#evidence-tables">M17</a> or any evidence that shops stock training aids <a class="cite" href="#evidence-tables">H7</a>. Shops matter because they hold the customer’s exact specs and the customer’s trust: a counter card and a 25% margin for entering the sheet costs nothing and makes the shop the hero.</li>
+<li><strong>Marketplaces for discovery.</strong> Etsy’s 6.5% transaction fee covers personalization charges, plus $0.20 listing and 3% + $0.25 processing, with 12–15% on ad-attributed sales <a class="cite" href="#evidence-tables">X3</a>; its single free-text personalization box is a poor fit for a ten-field drill sheet, so Etsy listings link out to the configurator and the fit sheet comes back as the personalization text. Shopify variants cap at 100 combinations, and off-the-shelf parametric configurators cost $199/month and up <a class="cite" href="#evidence-tables">H8</a>, which is why the configurator is our own.</li>
+</ol>
+<p><strong>Launch sequence.</strong> Month 1: 20 seeded trainers to coaches and creators printed from their real sheets, feedback round, fix list. Month 2: Fit Kit and Pair on sale from the configurator; two creator videos live. Month 3: pilot study starts; first pro shop onboarded; Open Championships booth application. Month 6: pilot results published; pricing and claims updated.</p>
+<h1 id="legal-ip-and-liability">9. Legal, IP and liability</h1>
+<p><strong>Status: written from general knowledge, not from sources opened in this research pass.</strong> The legal researcher could not reach ftc.gov, ecfr.gov, uspto.gov, patents.google.com, bowl.com or the insurers’ sites, so nothing below is cited. Treat it as the agenda for a one-hour conversation with counsel, and pull the documents listed at the end before quoting any of it.</p>
+<ul>
+<li><strong>Advertising claims.</strong> US advertising law requires a reasonable basis for objective claims before they are made; for performance and health-adjacent claims the FTC expects competent and reliable evidence, which in practice means tests or studies, not coaching consensus. That is why Part 6 splits claims into green (product facts and attributed opinions), yellow (qualified) and red (performance numbers we do not have). Endorsements must reflect the endorser’s honest experience, results shown in testimonials must be typical or the typical result must be disclosed, and any material connection (a free trainer, an affiliate code, a sponsored video) must be disclosed clearly. A 2024 FTC rule on consumer reviews and testimonials carries civil penalties for fake or purchased reviews and for suppressing negative ones; the review program must be hands-off.</li>
+<li><strong>Governing body.</strong> The product is a training aid used off the lane. It is not a bowling ball, is not used in sanctioned competition, and to our knowledge no USBC approval applies to it. We say that plainly and never call it a ball, a “mini ball” or “regulation”.</li>
+<li><strong>Patents.</strong> Freedom-to-operate review of US7261638 (2007, “bowling practice device” with personalized finger holes) before launch; it should expire around 2027 but the claims need reading. The 1987 grip-exerciser patent and the thumb-exit-aid patents from the 1980s–90s are expired <a class="cite" href="#evidence-tables">C14</a>. Our own method (per-bowler hole geometry generated from a drill sheet, bores aimed at the regulation ball center with drill-sheet pitches, on a printed ball-radius slice) is documented with dated repository history; whether to file a provisional is a cost question for counsel.</li>
+<li><strong>Trademark.</strong> “Rev trainer” is descriptive and almost certainly unregistrable; the brand name is what we protect. Clear it against the USPTO register and common-law use before printing packaging. Never use a ball manufacturer’s name or trade dress in copy, photos or comparisons beyond plain factual references.</li>
+<li><strong>Product safety and liability.</strong> A hand-held sporting good for adults is generally not subject to a specific federal safety rule, but a product-liability claim needs no rule, so: operate through an LLC, carry general liability with product coverage (small e-commerce sellers typically see quotes in the low hundreds to about a thousand dollars a year; get real quotes), print the use warning on the card and the site (swing-and-hold and carpet-release drills only; never throw it; not for children under 12 without supervision), and ship PETG rather than PLA (tougher at the thumb bore). Check whether the chosen filament needs a California Proposition 65 notice.</li>
+<li><strong>Data.</strong> A fit sheet is personal data tied to a hand; store it with the order, state the retention period, and delete on request.</li>
+</ul>
+<p><strong>Documents to pull before launch:</strong> FTC Endorsement Guides, 16 CFR Part 255 (2023 revision) and the FTC’s “Endorsement Guides: What People Are Asking”; FTC Policy Statement Regarding Advertising Substantiation; FTC “Advertising FAQs: A Guide for Small Business”; the FTC Rule on the Use of Consumer Reviews and Testimonials (2024); USBC Playing Rules on ball specifications and the equipment specifications page, to confirm nothing applies; Google Patents results for “bowling release trainer”, “bowling grip trainer”, “bowling practice device finger holes” with legal status; a USPTO register search for the brand name and for REV / REV TRAINER; CPSC guidance on General Certificates of Conformity for non-children’s products; SBA guidance on LLC formation in your state; two insurer quotes for general plus product liability.</p>
+<h1 id="risks-plainly">10. Risks, plainly</h1>
+<ol type="1">
+<li><strong>It is a small market.</strong> Roughly a million serious thumb-in candidates in the US, shrinking slowly for a decade <a class="cite" href="#evidence-tables">M2</a>; the growth segment (youth) is going two-handed <a class="cite" href="#evidence-tables">M12</a><a class="cite" href="#evidence-tables">M13</a>. The business is sized for that: low fixed cost, printers that pay back in weeks, digital files for the rest of the world.</li>
+<li><strong>The benefit is unproven.</strong> Every coach agrees on the mechanism and nobody has measured a trainer. The pilot is the answer; honest copy is the hedge.</li>
+<li><strong>Fit transcription errors.</strong> A bowler mistypes a pitch sign and gets a trainer that feels wrong. Mitigations: the configurator shows the hole axes and warns on collisions, the Fit Kit calibrates size on the actual printer, pro shops can enter the sheet, and reprints are cheap.</li>
+<li><strong>Copying.</strong> The design is simple to copy once seen. The moat is the configurator’s fit logic, the fit-sheet database and the relationships with coaches, not the shape.</li>
+<li><strong>Data quality in this plan.</strong> Figures were gathered from search excerpts; a few (the 9,000-attendee trade show figure, the two-handed share, the online retail size) are single-source or estimates and are marked as such in Part 11.</li>
+</ol>
+<h1 id="evidence-tables">11. Evidence tables</h1>
+<p>Each row is a claim this plan relies on, the value as the source states it, and where it came from. Confidence reflects both the source and the fact that most pages were read as search excerpts. A second, skeptical pass was run over every claim to confirm it against its page; that pass was blocked by the same network policy and returned “unverifiable” for all of them, so <strong>no figure in these tables has yet been independently confirmed</strong>. Its notes did flag a few things that are reflected here: the Vise insert chart shows 1/32” steps, not 1/64”; the Specto fee is from a 2020 flyer; the Statista participant count is nine years old; and the wrist-brace star ratings rest on 4–28 reviews each. Before any of this goes public, confirm by hand, in this order: USBC membership and Open Championships figures (bowl.com), creator subscriber counts (YouTube itself), competitor prices (the makers’ own sites), and the 2020 PBA rev-rate numbers.</p>
+<h2 id="market-m">Market [M]</h2>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Claim</th>
+<th>Value</th>
+<th>Source</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>M1</td>
+<td>USBC certified membership, 2024–25 season</td>
+<td>1,075,194 members; 29,026 leagues; 10,280 tournaments</td>
+<td>USBC 2025 annual report, https://images.bowl.com/bowl/media/assets/usbc/about/051826_2025-annual-report_final_1.pdf</td>
+<td>high</td>
+</tr>
+<tr class="even">
+<td>M2</td>
+<td>Membership trend</td>
+<td>1,698,911 (2013–14) → 850,699 (2020–21) → ~1.05–1.09M since 2021–22</td>
+<td>USBC “2026 State of the Association”, https://bowl.com/a-future-for-the-sport/2026-state-of-the-association</td>
+<td>high</td>
+</tr>
+<tr class="odd">
+<td>M3</td>
+<td>2025–26 membership</td>
+<td>“remains flat” (Jan 2026 statement)</td>
+<td>same as M2</td>
+<td>medium</td>
+</tr>
+<tr class="even">
+<td>M4</td>
+<td>Americans who bowl at least once a year</td>
+<td>67 million (USBC boilerplate, undated)</td>
+<td>https://bowl.com/press-room</td>
+<td>medium</td>
+</tr>
+<tr class="odd">
+<td>M5</td>
+<td>Survey-based participant count</td>
+<td>~45.5 million (2017, last year of series)</td>
+<td>Statista, https://statista.com/statistics/191898/participants-in-bowling-in-the-us-since-2006</td>
+<td>medium</td>
+</tr>
+<tr class="even">
+<td>M6</td>
+<td>USBC member gender split</td>
+<td>65% male / 35% female (2018–19)</td>
+<td>USBC 2020 member survey PDF</td>
+<td>medium</td>
+</tr>
+<tr class="odd">
+<td>M7</td>
+<td>Tournament bowler profile</td>
+<td>70% aged 50+; 87% male (2022 Open Championships survey, n=4,641)</td>
+<td>https://bowl.com/getmedia/727ee479-3140-4636-bb3c-89a79d31f1fb/2022oc_surveyresults.pdf</td>
+<td>medium</td>
+</tr>
+<tr class="even">
+<td>M8</td>
+<td>2025 Open Championships</td>
+<td>11,684 teams; &gt;58,000 bowlers; 150 days</td>
+<td>https://bowl.com/news/2025-usbc-open-championships-closes-150-day-run-in-baton-rouge</td>
+<td>medium</td>
+</tr>
+<tr class="odd">
+<td>M9</td>
+<td>Bowling frequency</td>
+<td>93% bowl ≤4×/yr; 21% “serious” (13+/yr), 2018 analysis</td>
+<td>White Hutchinson, https://whitehutchinson.com/news/lenews/2018/august/article107.shtml</td>
+<td>low (dated)</td>
+</tr>
+<tr class="even">
+<td>M10</td>
+<td>USBC Youth</td>
+<td>&gt;102,000 members; 5,962 Junior Gold members (2023–24)</td>
+<td>2024 IBC Youth Annual Report PDF</td>
+<td>medium</td>
+</tr>
+<tr class="odd">
+<td>M11</td>
+<td>2025 Junior Gold Championships</td>
+<td>&gt;3,500 competitors</td>
+<td>https://bowl.com/news/champions-determined-at-2025-junior-gold-championships</td>
+<td>medium</td>
+</tr>
+<tr class="even">
+<td>M12</td>
+<td>Two-handed share of youth</td>
+<td>“upwards of 20 percent” (author’s estimate, c. 2019)</td>
+<td>FloBowling, https://flobowling.com/articles/6818469-the-myth-of-two-handed-bowling</td>
+<td>low</td>
+</tr>
+<tr class="odd">
+<td>M13</td>
+<td>Elite youth style</td>
+<td>2025 Junior Gold U18 boys stepladder “all two-handed”</td>
+<td>https://bowl.com/news/2025-junior-gold-u18-division</td>
+<td>low (anecdotal)</td>
+</tr>
+<tr class="even">
+<td>M14</td>
+<td>Japan participants</td>
+<td>16.9M (2011) → 9.3M (2019) → 5.1M (2020)</td>
+<td>Hokkaido Shimbun citing Leisure White Paper, https://www.hokkaido-np.co.jp/article/695821/</td>
+<td>medium</td>
+</tr>
+<tr class="odd">
+<td>M15</td>
+<td>Korea centers</td>
+<td>“increased recently” (BPAA, May 2024)</td>
+<td>https://bpaa.com/Portals/0/FlipBooks/BCM/2024/May/files/basic-html/page46.html</td>
+<td>low</td>
+</tr>
+<tr class="even">
+<td>M16</td>
+<td>Ball and drilling prices</td>
+<td>balls ~$150–250; drilling $40–75 basic, $50–70 fingertip</td>
+<td>content-site cost guides, https://www.thepricer.org/bowling-ball-drilling-cost/</td>
+<td>low</td>
+</tr>
+<tr class="odd">
+<td>M17</td>
+<td>Pro-shop count</td>
+<td>458 IBPSIA-certified operators (2017 survey population); no newer count found</td>
+<td>USBC technology study surveys PDF</td>
+<td>low (dated)</td>
+</tr>
+<tr class="even">
+<td>M18</td>
+<td>US bowling centers</td>
+<td>2,541 businesses (IBISWorld 2025, −2.1%); 2,849 establishments (Census 2022)</td>
+<td>https://www.ibisworld.com/united-states/number-of-businesses/bowling-centers/1656 ; Statista</td>
+<td>medium</td>
+</tr>
+<tr class="odd">
+<td>M19</td>
+<td>Largest operator</td>
+<td>Lucky Strike Entertainment 370 locations (Aug 2025), ~13% of US centers</td>
+<td>SEC 8-K, https://www.sec.gov/Archives/edgar/data/1840572/000184057225000011/pressreleaseq4fy-25.htm</td>
+<td>medium</td>
+</tr>
+<tr class="even">
+<td>M20</td>
+<td>Global equipment market</td>
+<td>estimates ~$1.0–1.6B; North America 39–43%</td>
+<td>Verified Market Research, Fact.MR, Technavio</td>
+<td>low (paid-report estimates)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="competitors-and-fit-industry-c">Competitors and fit industry [C]</h2>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Claim</th>
+<th>Value</th>
+<th>Source</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>C1</td>
+<td>Only Pros Rev/Release Trainer</td>
+<td>$39.99–$48 (marketplace listings, 2025)</td>
+<td>https://www.ebay.de/itm/297689084595</td>
+<td>medium</td>
+</tr>
+<tr class="even">
+<td>C2</td>
+<td>Generic roller trainers</td>
+<td>$38–$146; 5–111 ratings</td>
+<td>marketplace mirrors</td>
+<td>low</td>
+</tr>
+<tr class="odd">
+<td>C3</td>
+<td>Eileen’s Rev/Ball Motion Trainer</td>
+<td>CA$410.95, sold out</td>
+<td>BowlerX / distributor listing</td>
+<td>low</td>
+</tr>
+<tr class="even">
+<td>C4</td>
+<td>Eileen’s Feel Trainer (silicone ball, generic holes)</td>
+<td>CA$98.95; 4” 1.5 lb, 5” 3 lb</td>
+<td>https://www.bowlerx.com/?p=23575</td>
+<td>medium</td>
+</tr>
+<tr class="odd">
+<td>C5</td>
+<td>Generic-hole practice ball complaint</td>
+<td>“shallow, tightly spaced holes did not allow normal finger positioning for most adults”</td>
+<td>customer review, https://www.desertcart.com.cy/products/7791948</td>
+<td>low (single review)</td>
+</tr>
+<tr class="even">
+<td>C6</td>
+<td>Robby’s Revs wrist positioners</td>
+<td>$59.99–$62.99 (list $89.95); sized by hand length S–XL</td>
+<td>https://bowling.com/products/robbys-revs-1-right-hand.htm</td>
+<td>medium</td>
+</tr>
+<tr class="odd">
+<td>C7</td>
+<td>Other wrist aids</td>
+<td>Mongoose Lifter $55.99 (4.4★/28); Storm Xtra-Hook $39.95, C4 $99.95; Brunswick Bionic $48.99 (3.9★/7)</td>
+<td>stormbowling.com; bowling.com</td>
+<td>medium–high</td>
+</tr>
+<tr class="even">
+<td>C8</td>
+<td>Specto rev tracking</td>
+<td>$495/yr software (Specto Go, 2020 flyer); $10/session or $120/yr at centers (undated center pages)</td>
+<td>https://www.spectobowling.com/spectogo</td>
+<td>medium</td>
+</tr>
+<tr class="odd">
+<td>C9</td>
+<td>In-ball sensors</td>
+<td>Storm F5, BowlSense, Witsee report rev rate; no prices published</td>
+<td>https://www.stormbowling.com/f5-bowling-sensor</td>
+<td>medium</td>
+</tr>
+<tr class="even">
+<td>C10</td>
+<td>Tenpin Toolkit app</td>
+<td>free with IAP; 4.9★ from 727 reviews; counts revs from video</td>
+<td>https://apps.apple.com/app/id1390556454</td>
+<td>medium</td>
+</tr>
+<tr class="odd">
+<td>C11</td>
+<td>Fit replication inside the ball</td>
+<td>thumb molds $15 master + $20/copy; Turbo Switch Grip inner $13.99; JoPo Twist inner $25.99–29.95; Vise inserts $4.99 per size (chart shows 1/32” steps: 23/32, 3/4, 25/32); shops accept uploaded drill sheets</td>
+<td>Virtue Bowling; bowling.com; BowlerX</td>
+<td>medium</td>
+</tr>
+<tr class="even">
+<td>C12</td>
+<td>Pro-shop fitting hardware; ball spec</td>
+<td>Innovative Measuring Ball CA$1,341.95, 40 sizes in 1/64” steps; ball Ø 8.500–8.595”, ≤16 lb</td>
+<td>https://www.bowlerx.com/innovative-bowling-measuring-ball/ ; Wikipedia / USBC spec</td>
+<td>medium</td>
+</tr>
+<tr class="odd">
+<td>C13</td>
+<td>Gap</td>
+<td>0 off-ball drill-sheet-replicating trainers found after ~45 searches (Oct 2026)</td>
+<td>research finding</td>
+<td>medium (absence of evidence)</td>
+</tr>
+<tr class="even">
+<td>C14</td>
+<td>Patents</td>
+<td>US7261638 (2007, personalized-fit practice device) in force to ~2027; US4709916 (1987) and thumb-exit aids US5906546/US5688181 expired</td>
+<td>Google Patents</td>
+<td>medium</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="evidence-on-performance-and-training-e">Evidence on performance and training [E]</h2>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Claim</th>
+<th>Value</th>
+<th>Source</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>E1</td>
+<td>“Average” league rev rate</td>
+<td>~325 RPM; 300–350 band; 17–18 mph</td>
+<td>Motiv blog, https://www.motivbowling.com/blog/am-i-rev-or-speed-dominant.html</td>
+<td>convention</td>
+</tr>
+<tr class="even">
+<td>E2</td>
+<td>Style bands</td>
+<td>strokers 200–300; tweeners 300–400; crankers 400–600+; two-handers 500–700+ RPM</td>
+<td>https://www.bowling.com/knowledge-hub/bowling-balls/bowler-types/all</td>
+<td>convention</td>
+</tr>
+<tr class="odd">
+<td>E3</td>
+<td>Pro rev rates (measured)</td>
+<td>2020 PBA League telecast: men avg 436 RPM, women 297; Svensson 570, Belmonte 518</td>
+<td>Albany Times Union via PressReader</td>
+<td>measured, small sample</td>
+</tr>
+<tr class="even">
+<td>E4</td>
+<td>Entry angle research</td>
+<td>USBC Bowlscore device 0–10°; 2009 pin-carry study → ~6° optimum, board 17.5</td>
+<td>USBC PDFs; Wikipedia summary</td>
+<td>measured (secondhand)</td>
+</tr>
+<tr class="odd">
+<td>E5</td>
+<td>Entry angles by level</td>
+<td>league 180–200 avg ≈ 3–4°; elite 5–7°</td>
+<td>bowl.com equipment page (unconfirmed wording); NBA summary</td>
+<td>low</td>
+</tr>
+<tr class="even">
+<td>E6</td>
+<td>Physics confirmation</td>
+<td>ideal strike ≈ 6 cm off headpin at 4–6°; AIP Advances 2025 uses 6° standard</td>
+<td>Physics Today Oct 2025; arXiv 2210.06753</td>
+<td>modelling</td>
+</tr>
+<tr class="odd">
+<td>E7</td>
+<td>Thumb exits first</td>
+<td>“a solid release depends on the thumb leaving the ball before the fingers add rotation”</td>
+<td>Bowling This Month quick tip (2021)</td>
+<td>expert opinion</td>
+</tr>
+<tr class="even">
+<td>E8</td>
+<td>Maximize thumb-exit-to-finger-exit interval</td>
+<td>Tyrel Rose, BTM April 2022</td>
+<td>https://bowlingthismonth.com/bowling-tips/coach-ive-got-a-question-april-2022/print</td>
+<td>expert opinion</td>
+</tr>
+<tr class="odd">
+<td>E9</td>
+<td>Revs come from finger speed driven by the wrist</td>
+<td>Tyrel Rose, BTM Dec 2024</td>
+<td>https://bowlingthismonth.com/bowling-tips/coach-ive-got-a-question-december-2024</td>
+<td>expert opinion</td>
+</tr>
+<tr class="even">
+<td>E10</td>
+<td>Thumb exit near 12 o’clock; 30–45° rotation normal</td>
+<td>National Bowling Academy (Scott Pohl)</td>
+<td>https://nationalbowlingacademy.com/video/thumb-timing-aka-release-timing-021865</td>
+<td>expert opinion</td>
+</tr>
+<tr class="odd">
+<td>E11</td>
+<td>Relaxed hand → faster hand → more revs</td>
+<td>BTM “Keys to the Release” (2020)</td>
+<td>https://bowlingthismonth.com/quick-tips/keys-to-the-release</td>
+<td>expert opinion</td>
+</tr>
+<tr class="even">
+<td>E12</td>
+<td>Oversized holes → grip pressure → less hook; over-taping → late thumb exit</td>
+<td>National Bowling Academy fit videos</td>
+<td>https://www.nationalbowlingacademy.com/video/bowling-ball-fit-grip-pressure-017152</td>
+<td>expert opinion</td>
+</tr>
+<tr class="odd">
+<td>E13</td>
+<td>Fit weighting</td>
+<td>hole size ~20%, pitch 40%, span 40% (IBPSIA view via former president)</td>
+<td>BTM “Pitching a Fit”, https://www.bowlingthismonth.com/bowling-tips/pitching-a-fit/print/</td>
+<td>expert opinion</td>
+</tr>
+<tr class="even">
+<td>E14</td>
+<td>Tiered taping to the 64th</td>
+<td>5-3-2 tape layouts to stop knuckling and delayed exit</td>
+<td>BTM “Tiered Taping”</td>
+<td>expert opinion</td>
+</tr>
+<tr class="odd">
+<td>E15</td>
+<td>Training specificity</td>
+<td>SMD 0.98 trained mode vs 0.42 untrained mode (meta-analysis, 2025)</td>
+<td>Saeterbakken et al., Sports Medicine, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12296774/</td>
+<td>measured</td>
+</tr>
+<tr class="even">
+<td>E16</td>
+<td>Finger-strength training works in weeks</td>
+<td>8-week hangboard RCT, n=30, improved grip strength vs control</td>
+<td>Mundry et al. 2021, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8241953/</td>
+<td>measured</td>
+</tr>
+<tr class="odd">
+<td>E17</td>
+<td>Intensity matters</td>
+<td>4 weeks, n=54: max finger strength up at 80–100% loads, not 60%</td>
+<td>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9039162/</td>
+<td>measured</td>
+</tr>
+<tr class="even">
+<td>E18</td>
+<td>Off-lane trainers and rev rate</td>
+<td>no controlled study found</td>
+<td>research finding</td>
+<td>gap</td>
+</tr>
+<tr class="odd">
+<td>E19</td>
+<td>More revs is not automatically better</td>
+<td>Walter Ray Williams Jr. ~270 RPM, top strike percentage</td>
+<td>BTM rev-rate article</td>
+<td>expert opinion</td>
+</tr>
+<tr class="even">
+<td>E20</td>
+<td>Rev/speed matchup heuristic</td>
+<td>RPM ÷ mph: &gt;25 rev-dominant, &lt;20 speed-dominant</td>
+<td>BTM</td>
+<td>expert opinion</td>
+</tr>
+<tr class="odd">
+<td>E21</td>
+<td>Spaced beats massed practice</td>
+<td>d = 0.46 (63 studies)</td>
+<td>Donovan &amp; Radosevich 1999</td>
+<td>measured</td>
+</tr>
+<tr class="even">
+<td>E22</td>
+<td>Skill decay</td>
+<td>half of accuracy gains lost in ~6.5 months (2025 meta-analysis); d = −1.4 after a year of non-use (1998)</td>
+<td>Psychological Bulletin 2025; Arthur et al. 1998</td>
+<td>measured</td>
+</tr>
+<tr class="odd">
+<td>E23</td>
+<td>Spacing is task-dependent</td>
+<td>null effect in piano study; massed better for a child motor-sequence task (2025)</td>
+<td>https://pubmed.ncbi.nlm.nih.gov/40778584/</td>
+<td>measured</td>
+</tr>
+<tr class="even">
+<td>E24</td>
+<td>Bowler’s thumb</td>
+<td>perineural fibrosis from repetitive impaction against the thumbhole</td>
+<td>https://pmc.ncbi.nlm.nih.gov/articles/PMC4901029</td>
+<td>clinical</td>
+</tr>
+<tr class="odd">
+<td>E25</td>
+<td>Hand is the main injury site</td>
+<td>375,468 est. US ED bowling injuries 1990–2008; fingers 19% most common</td>
+<td>Kerr et al., Clinical Pediatrics 2011</td>
+<td>measured</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="channels-h">Channels [H]</h2>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Claim</th>
+<th>Value</th>
+<th>Source</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>H1</td>
+<td>Darren Tang</td>
+<td>~265K subscribers; top video &gt;4M views</td>
+<td>SponsorRadar; Bowling TV release June 2026</td>
+<td>medium</td>
+</tr>
+<tr class="even">
+<td>H2</td>
+<td>Brad and Kyle</td>
+<td>~229K subscribers</td>
+<td>https://socialcounts.org/youtube-live-subscriber-count/UCUf8pyBxiCWZXVeGf4eVn3g</td>
+<td>medium</td>
+</tr>
+<tr class="odd">
+<td>H3</td>
+<td>JR Raymond / Tenpin Doctors</td>
+<td>~82K subscribers; reviews products for BowlerX</td>
+<td>https://sponsorradar.com/channels/tenpindoctors</td>
+<td>medium</td>
+</tr>
+<tr class="even">
+<td>H4</td>
+<td>r/Bowling</td>
+<td>57K–111K members depending on source</td>
+<td>GummySearch; Pain on Social</td>
+<td>low</td>
+</tr>
+<tr class="odd">
+<td>H5</td>
+<td>Junior Gold trade show</td>
+<td>“over 9,000 attendees” (attribution unconfirmed)</td>
+<td>2025 Junior Gold FAQ PDF</td>
+<td>low</td>
+</tr>
+<tr class="even">
+<td>H6</td>
+<td>Regional tours</td>
+<td>PWBA 10 regionals in 2025; PBA East 4 fall events; super regionals 240 bowlers</td>
+<td>pba.com; bowl.com</td>
+<td>medium</td>
+</tr>
+<tr class="odd">
+<td>H7</td>
+<td>Pro shops and training aids</td>
+<td>no source on stocking or margins</td>
+<td>research gap</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>H8</td>
+<td>Configurator tooling</td>
+<td>Shopify variants cap 100; ShapeDiver app $199/mo + subscription</td>
+<td>https://apps.shopify.com/shapediver-3d-configurators</td>
+<td>medium</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="costs-and-platforms-x">Costs and platforms [X]</h2>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Claim</th>
+<th>Value</th>
+<th>Source</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>X1</td>
+<td>Filament price</td>
+<td>PETG/PLA $20–60/kg retail</td>
+<td>https://www.3dsourced.com/guides/3d-printing-materials-cost/</td>
+<td>medium</td>
+</tr>
+<tr class="even">
+<td>X2</td>
+<td>Printer and print time</td>
+<td>our assumption: ~$600 CoreXY, ~7 h for a 330 g PETG puck at 0.2 mm layers</td>
+<td>internal estimate; to be replaced with measured print logs</td>
+<td>estimate</td>
+</tr>
+<tr class="odd">
+<td>X3</td>
+<td>Etsy fees</td>
+<td>6.5% transaction (incl. personalization); $0.20 listing; 3% + $0.25 processing; Offsite Ads 12–15%</td>
+<td>https://blog.marmalead.com/etsy-fees-explained-2025/ (third-party guide)</td>
+<td>medium</td>
+</tr>
+<tr class="even">
+<td>X4</td>
+<td>Institutional print pricing</td>
+<td>PETG $0.07–0.10/g (Waterloo RPC, BYU); $0.15–0.40/g for outside users (UTSA)</td>
+<td>https://uwaterloo.ca/rapid-prototyping-centre/3d-printing/fdm-materials-and-cost</td>
+<td>medium</td>
+</tr>
+<tr class="odd">
+<td>X5</td>
+<td>Online bowling retail size</td>
+<td>tracked retailers ~$68M (2025 est.); bowlersmart.com ~$2.9M, bowling.com ~$1.9M</td>
+<td>Grips Intelligence</td>
+<td>low (tracker estimate)</td>
+</tr>
+<tr class="even">
+<td>X6</td>
+<td>Print mass and time of the production files</td>
+<td>Puck 297 g / 11 h 20 m (CoreXY profile) / 19 h 24 m (conventional); Spinner 98 g / 3 h 38 m / 6 h 21 m; Sizer 97 g / 3 h 24 m / 6 h 12 m; 0.2 mm, 4 walls, 20% gyroid, PETG</td>
+<td>measured here with PrusaSlicer 2.7 on <code>stl/*.stl</code> (G-code in the project’s slice logs)</td>
+<td>high (slicer estimate; real times vary by printer)</td>
+</tr>
+</tbody>
+</table></div>
+<p>The legal and unit-cost research angles returned no sourced findings in this pass (blocked sources, exhausted search budget). Everything in Part 9 and the shipping and platform-fee lines of Part 5.2 is unsourced until the documents listed there are pulled.</p>
+<h1 id="what-we-still-need-to-find-out">12. What we still need to find out</h1>
+<ul>
+<li>Current pro-shop count and whether shops stock training aids (no data newer than 2017).</li>
+<li>Any survey of per-bowler annual equipment spend (none found; our $400–800 is an estimate).</li>
+<li>A measured distribution of league rev rates (the 300–350 “average” is convention).</li>
+<li>Real print-time and material logs for the puck and spinner on the production printer.</li>
+<li>Commercial print-farm quotes for overflow (Craftcloud, JLC3DP, Xometry).</li>
+<li>The adult one-handed vs two-handed split (only a youth estimate exists).</li>
+<li>Freedom-to-operate opinion on US7261638.</li>
+<li>Primary-source legal texts and quotes (FTC guides and rules, USBC rules, USPTO) — see the list at the end of Part 9.</li>
+<li>Shipping rates for a 600–900 g box (USPS Ground Advantage, international), Stripe and Shopify or Etsy plan fees, filament bulk pricing, and a measured electricity draw for the production printer.</li>
+<li>Real print times on the production printer, to replace the slicer estimates in <a class="cite" href="#evidence-tables">X6</a>.</li>
+</ul>
+<h1 id="first-90-days">13. First 90 days</h1>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>When</th>
+<th>What</th>
+<th>Done when</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Week 1–2</td>
+<td>Print 10 pucks and 10 spinners from real drill sheets (friends, league, a coach); log print time and material; measure printed bores vs sheet</td>
+<td>print log and tolerance table in the repo</td>
+</tr>
+<tr class="even">
+<td>Week 2–4</td>
+<td>Pick the brand name and clear it; LLC; insurance quote; counsel review of Part 6 and the patent</td>
+<td>name, entity, FTO note</td>
+</tr>
+<tr class="odd">
+<td>Week 3–6</td>
+<td>Seed 20 trainers to coaches and creators (their own sheets); collect feedback</td>
+<td>fix list; two creator videos scheduled</td>
+</tr>
+<tr class="even">
+<td>Week 6–8</td>
+<td>Shop live: configurator → Fit Kit / Puck / Spinner / Pair / Digital; Etsy listing linking to the configurator</td>
+<td>first paid orders</td>
+</tr>
+<tr class="odd">
+<td>Week 8–12</td>
+<td>Start the 6-week pilot; first pro shop onboarded; apply for an Open Championships vendor spot</td>
+<td>pilot enrolled; one shop entering sheets</td>
+</tr>
+<tr class="even">
+<td>Month 6</td>
+<td>Publish pilot results; update the claims list and pricing</td>
+<td>updated Part 6</td>
+</tr>
+</tbody>
+</table></div>
+
+</article>
+<footer class="end">Source: docs/business-plan.md in the project repository. Figures were collected from search-engine excerpts of the cited pages in October 2026; verify against the URL before external use.</footer>
+</div>
