@@ -61,7 +61,7 @@ Combined: 30% x one third gives a fit sheet from 10.0% of visits. From each fit 
 | Visits | 10,000 | |
 | Configurator sessions | 3,000 | |
 | Fit sheets completed | 1,000 | |
-| Fit Kits sold | 150 | 75 convert to a Pair within 45 days (the $24 is credited, so it is inside the Pair revenue); 75 do not, and keep the sizer: $1,800 |
+| Fit Kits sold | 150 | $1,800 from the 75 that stop at the sizer. The other 75 convert to a Pair within 45 days, and their $24 is credited, so it sits inside the Pair revenue |
 | Pairs from Fit Kits | 75 | |
 | Pairs direct | 30 | |
 | **Pairs total** | **105** | **$12,495** |
@@ -79,7 +79,7 @@ Two simplifications, both conservative in the same direction. All printed traine
 | Item | Cost | Basis |
 |---|---|---|
 | Filament, 395 g PETG | $9.88 | Puck 297 g plus Spinner 98 g at $25 a kilo (business-plan Part 5.2) |
-| Machine time | $3.30 | About 15 printer-hours at the plan's $2.50 per 11 hours of electricity and depreciation |
+| Machine time | $3.30 | Puck $2.50 (business-plan Part 5.2) plus about $0.80 for the Spinner's 3 h 38 m, on the same electricity and depreciation basis |
 | Labor | $8.50 | Start, remove, deburr, pack two parts at $20 an hour |
 | Packaging, cord, fitting card | $3.50 | Box, paracord, tape, card |
 | Payment fees | $3.82 | 3% + $0.25 on $119 |
@@ -92,10 +92,10 @@ Gross profit per Pair is $119 less $45, **$74** (62%). That is the most a Pair c
 
 **What it means for paid.**
 
-- At 1.07 per paid visit and 1.05% visit-to-Pair, a paid Pair costs **$102**. That is above the $74 ceiling. A paid visit costs 1.07 and returns $0.92 of gross profit, so each paid dollar returns 0.86 on first orders.
-- For the **$74 ceiling**, cost per visit must be $0.78 or less, or visit-to-Pair must reach 1.44% at 1.07 per visit.
-- For a **$50 target** (leaving $24 per Pair for overhead and profit), cost per visit must be $0.52 or less, or visit-to-Pair must reach 2.14% at 1.07 per visit.
-- Cost per fit sheet is the early proxy, readable in week 2. A Pair needs 9.52 fit sheets, so the $74 ceiling is $7.77 per sheet, the $50 target is $5.25, and the model's own 1.07 per visit gives $10.68.
+- At $1.07 per paid visit and 1.05% visit-to-Pair, a paid Pair costs **$102**. That is above the $74 ceiling. A paid visit costs $1.07 and returns $0.92 of gross profit, so each paid dollar returns $0.86 on first orders.
+- For the **$74 ceiling**, cost per visit must be $0.78 or less, or visit-to-Pair must reach 1.44% at $1.07 per visit.
+- For a **$50 target** (leaving $24 per Pair for overhead and profit), cost per visit must be $0.52 or less, or visit-to-Pair must reach 2.14% at $1.07 per visit.
+- Cost per fit sheet is the early proxy, readable in week 2. A Pair needs 9.52 fit sheets, so the $74 ceiling is $7.77 per sheet, the $50 target is $5.25, and the model's own $1.07 per visit gives $10.68.
 - The stop line in Section 11 is $110 per Pair ($11.55 per sheet). It sits just above the model's own $102, so ordinary variance does not end the test. A result worse than that means the assumptions in this document are wrong.
 
 The funnel is an average across all traffic. Search and retargeting reach people who already know the product and should convert above it. Cold prospecting should convert below it. That is why the starter budget leans toward intent and keeps prospecting to a measured test (Section 4). It is also why Fit Kit to Pair conversion and the no-sheet path decide whether paid ever scales.
@@ -134,7 +134,7 @@ The printer rows are for an average month. Volume that grows into $1M ends the p
 1. **$1M in twelve months needs 30 to 39 printers.** The plan is written for a one-to-three printer launch, so a twelve-month path to $1M depends on a print partner. Twenty-four months needs 15 to 20 printers and a part-time operator. Thirty-six months needs 10 to 13, which matches the business plan's own sizing: about 0.8% of the 1,075,194 certified league members counted in business-plan Part 3 buying one Pair each, against the plan's 1%-over-three-years case of about 10,700 units.
 2. **Digital cuts traffic and printing by 8%.** Its larger value is that it needs no printer and almost no cost of goods, and international visitors can buy it. If Digital runs above 3% of fit sheets, lean into it: it is the one line that grows without a machine.
 3. **Pro shops replace ad spend, and they pay better than paid traffic.** Mix C needs 200,000 fewer visits than Mix A (25% less) and prints the same number of Pairs. A shop Pair nets $89.25 and leaves $44.25 of gross profit before any acquisition cost. A direct Pair bought with paid traffic at the $50 target leaves $24, and at the $110 stop line it leaves -$36. The shop also brings the drill sheet, which is the scarce input. Mix C needs 59 active shops at 3 Pairs a month or 88 at 2, a three-year relationship-building number. The year-one model in Section 3 reaches 22.
-4. **Traffic is the other wall.** 600,000 to 800,000 visits over twelve months is 50,000 to 66,698 a month, and over thirty-six months 16,667 to 22,233 a month. Year one in Section 3 averages 6,729 a month. Buying all of Mix A's visits at 1.07 would cost $855,000, which is more than the gross profit the $1M produces. Most of the traffic has to come from creators, community, search demand and shops, the plan's first four channels. Paid fills the gap only where Section 11 allows.
+4. **Traffic is the other wall.** 600,000 to 800,000 visits over twelve months is 50,000 to 66,698 a month, and over thirty-six months 16,667 to 22,233 a month. Year one in Section 3 averages 6,729 a month. Buying all of Mix A's visits at $1.07 would cost $855,000, which is more than the gross profit the $1M produces. Most of the traffic has to come from creators, community, search demand and shops, the plan's first four channels. Paid fills the gap only where Section 11 allows.
 
 ### 2.3 When to add printers, and when to add a print partner
 
@@ -146,7 +146,7 @@ A CoreXY printer costs about $600 and pays for itself within its first month of 
 | Open orders at or above 1.5 weeks of installed weekly capacity | Order a printer and show the current ship date at checkout |
 | A single week of orders above 2 times installed weekly capacity (a creator video, a tournament) | Do not buy for a spike. Send the overflow to the print partner and show the ship date before the customer pays |
 | Backlog above 3 weeks for two consecutive weeks | Printer order and partner overflow, both, the same day |
-| In-house labor above 80 hours a month (15 minutes per part is about 160 Pairs, 6 to 7 printers) | Hire a part-time operator or move a standing share of volume to the partner. The founder's time goes to sheets, shops and creators |
+| In-house labor above 80 hours a month (at 15 minutes a part that is 320 parts, or 160 Pairs, on 6 to 7 printers) | Hire a part-time operator or move a standing share of volume to the partner. The founder's time goes to sheets, shops and creators |
 | A forecastable seasonal peak (league season starts in September; summer is quiet) | Pre-build Fit Kits and Spinners in July and August; they hold. Pucks are made to order and are never pre-built |
 | Utilization below 50% for eight weeks | Buy nothing. Put the idle printers on Fit Kits and shop counter kits |
 
@@ -162,17 +162,17 @@ Print-partner facts and constraints:
 
 ### 3.1 Assumptions
 
-- **Calendar.** Month 1 is November 2026: seeding (20 trainers to coaches and creators), Study 1, waitlist and configurator live, shop closed. The shop opens in Month 2, December 2026, in line with the launch sequence in business-plan Part 8 and the calendar in `marketing/06-content-and-launch.md`, where launch week 1 is configurator-only and the shop opens in week 2. December orders are therefore modeled at three-quarters of a month. Month 12 is October 2027.
+- **Calendar.** Month 1 is November 2026: seeding (20 trainers to coaches and creators, each shipped with the disclosure terms in `marketing/05-creators-and-coaches.md`), Study 1, waitlist and configurator live, shop closed. The shop opens in Month 2, December 2026, in line with the launch sequence in business-plan Part 8 and the calendar in `marketing/06-content-and-launch.md`, where launch week 1 is configurator-only and the shop opens in week 2. December orders are therefore modeled at three-quarters of a month. Month 12 is October 2027.
 - **Funnel rates** as in Section 1.2. Every count is rounded to a whole unit at each step so the tables reconcile by hand. Fit Kits bought in one month convert to Pairs at 50% in the following month.
 - **Seasonality** multiplies the visit-to-sheet rate: 0.85 in May, 0.70 in June and July, 0.90 in August, 1.10 in September and October, 1.00 otherwise. League season runs roughly September to April and summer demand is unknown (business-plan Part 12), so this is a cautious guess.
-- **Paid traffic.** $1,500 a month in Months 2 to 12 at 1.07 per visit, which buys 1,404 visits a month (Section 4 builds this from four lines). The base case holds the budget flat. Section 11 sets the rules for stepping up, and Section 3.5 shows what each step is worth.
+- **Paid traffic.** $1,500 a month in Months 2 to 12 at $1.07 per visit, which buys 1,404 visits a month (Section 4 builds this from four lines). The base case holds the budget flat. Section 11 sets the rules for stepping up, and Section 3.5 shows what each step is worth.
 - **Creator and community traffic.** The first two creator videos go live in Months 2 and 3 (4,000 and 5,000 visits), with a tail of 1,500 to 2,500 a month and a new wave at season start (3,000 in August, 4,000 in September and October). Every creator video, post and clip carries the matching disclosure line.
 - **Organic** (search, community posts, word of mouth, returning visitors) grows from 800 a month to 5,000 by Month 12. April includes an earned-media bump from the pilot-results post in plan Month 6, whatever the result says.
 - **Pro shops.** First shop in Month 3, 22 active by Month 12, two Pairs per active shop per month at $89.25 net. New shops produce less than mature ones, and two is an average. Each new shop gets a counter kit (a sizer plate and 25 cards) at $14 and a quarter printer-day.
 - **Digital.** 3% of fit sheets at a $35 blend.
 - **Costs.** Pair $45 landed (Section 1.4). Fit Kit $9 landed: $2.42 filament, $0.75 machine, $3.00 labor, $2.00 tape, card and mailer, $0.97 payment fees. Fit Kit shipping is a flat rate shown at checkout and treated as pass-through. Digital $1.50 in payment fees and delivery.
 - **Printers.** Three bought in Month 1 at $600 each. After that the model buys printers whenever printer-days exceed 80% of installed capacity at 25 Pairs per printer per month.
-- **One-off launch costs, all in Month 1:** three printers $1,800, 20 seeded Pairs $1,000 (`marketing/05-creators-and-coaches.md` costs a box at about $50), and Study 1 $500. Together $3,300. Study 1 uses 30 printer-days and the seeded Pairs 20, so Month 1 shows 50 printer-days.
+- **One-off launch costs, all in Month 1:** three printers $1,800, 20 seeded Pairs $1,000 (`marketing/05-creators-and-coaches.md` costs a box at about $50, and every recipient agrees to the seeded-unit disclosure line), and Study 1 $500. Together $3,300. Study 1 uses 30 printer-days and the seeded Pairs 20, so Month 1 shows 50 printer-days.
 - **Contribution** is gross profit less paid media, printer purchases and the one-off launch costs. It excludes founder time beyond the $8.50 of labor in the cost stack, hosting and software, insurance, legal and counsel review, pilot studies 2 and 3 ($450 and $1,500 to $3,000), and tournament booths.
 - **Not modeled:** Puck-only and Spinner-only orders, marketplace listings, tournament booth sales, revenue from reprints on new sheets, international shipping, any price change after the pilot.
 
@@ -237,7 +237,7 @@ Each row changes one thing against the base case.
 | Visit-to-sheet rate 30% higher, all traffic | $157,578 | 1,116 | 13 | $16,500 | $67,578 |
 | No pro-shop orders | $107,822 | 709 | 8 | $16,500 | $42,582 |
 
-- **Cost per visit matters more than spend.** The same $1,500 at the double-down line ($50 per Pair) buys twice the traffic and brings year-one revenue to $146,110, against the base case's $125,315. Doubling spend at the base-case rates raises revenue and lowers contribution (fourth row), because each paid dollar returns only 0.86 of first-order gross profit. Scaling waits for the rules.
+- **Cost per visit matters more than spend.** The same $1,500 at the double-down line ($50 per Pair) buys twice the traffic and brings year-one revenue to $146,110, against the base case's $125,315. Doubling spend at the base-case rates raises revenue and lowers contribution (fourth row), because each paid dollar returns only $0.86 of first-order gross profit. Scaling waits for the rules.
 - **The funnel is the biggest lever.** A 30% shortfall in visit-to-sheet rate cuts revenue to $92,919 and still leaves a positive contribution. A 30% beat lifts it to $157,578.
 - **Pro shops carry real weight.** Without them revenue falls by about $17,500 and contribution by about $6,600, and the model needs three fewer printers. The shop line is the cheapest growth in the plan.
 - **The no-paid row is the benchmark.** If paid never reaches the double-down line, the plan still works on creators, community and shops, and the test has cost a few thousand dollars.
@@ -402,13 +402,13 @@ Headline under 40 characters. The first sentence of the primary text sits under 
 | 2 | Same holes. Same pitch. No lane fee. | 36 | Your pro-shop drill sheet, built as a part you can hold. Hole sizes in 1/64" steps, both spans, every pitch, right or left hand, on a regulation 8.5-inch ball surface. About 300 g at 20% infill, so it fits in a bag. Practice fingertip holds and a clean thumb exit at your desk. | 56 | Learn more | Green: built from your drill sheet; weight with infill. Yellow: practice a clean thumb exit |
 | 3 | Train the hand that bowls. | 26 | Coaches agree the thumb must leave first, and a relaxed hand creates more revs. FitSlice gives you your own grip to practice both, away from the lane. Built from your drill sheet. Start with the $24 Fit Kit, credited toward your trainer. | 79 | Shop now | Green: attributed coaching consensus |
 | 4 | Fit you can practice. | 21 | Unlike generic one-size trainers and S/M/L wrist braces, FitSlice is built from your fit. Type in your drill sheet and the configurator rebuilds your grip in about a tenth of a second. Free to try. | 89 | Learn more | Green: category comparison |
-| 5 | Relax the thumb. Let the fingers work. | 38 | Thumb pops. Fingertip carries. Carpet spins you can count. Six drills in your own hole geometry. Short daily sessions help keep the feel between league nights. Made to order, with a 30-day fit guarantee. | 11 | Shop now | Yellow: short daily sessions help keep the feel |
+| 5 | Relax the thumb. Let the fingers work. | 38 | Thumb pops, fingertip carries and carpet spins you can count. Six drills in your own hole geometry. Short daily sessions help keep the feel between league nights. Made to order, with a 30-day fit guarantee. | 61 | Shop now | Yellow: short daily sessions help keep the feel |
 
 Held variant, not to run until filled: headline "Train the hand that bowls." with primary text beginning with the coach's disclosure line as its first sentence ("FitSlice sent me this trainer, printed from my own drill sheet, free of charge." and, if the coach holds a code, "I earn a commission when you order with my code."), followed by `[QUOTE PLACEHOLDER — name]`. When the ad runs from the coach's handle, "Paid partnership with FitSlice." is set on the post itself.
 
 ### 7.2 Google Search: responsive search ads
 
-Headlines are at or under 30 characters and descriptions at or under 90. A responsive search ad takes up to 15 headlines and 4 descriptions, so the five variants load as two ads per ad group. Pin headline 1 to position 1 in Group 3 and 4 ad groups and let the system rotate elsewhere.
+Headlines are at or under 30 characters and descriptions at or under 90. A responsive search ad takes up to 15 headlines and 4 descriptions, so the five variants load as two ads per ad group. Pin G1 to position 1 in the Group 3 and brand-term ad groups and let the system rotate elsewhere.
 
 | Pair | Headline (30 or fewer) | Chars | Description (90 or fewer) | Chars | Claim used |
 |---|---|---|---|---|---|
@@ -423,14 +423,15 @@ Headlines are at or under 30 characters and descriptions at or under 90. A respo
 | R4 (rotation) | Fit You Can Practice | 20 | | | |
 | R5 (rotation) | Made to Order in PETG | 21 | | | |
 | D6 (extra) | | | Enter your drill sheet and see your grip rebuilt in 3D in about a tenth of a second. Free. | 90 | Product fact: configurator speed |
-| D7 (extra) | | | To our knowledge, the first trainer built from your drill sheet. 30-day fit guarantee. | 86 | Yellow: "to our knowledge" |
+| D7 (extra) | | | To our knowledge, the first trainer that uses your actual drill sheet. Made to order. | 85 | Yellow: "to our knowledge" |
 
 - **Ad 1 (Groups 1 and 2):** headlines G1 to G5 plus rotation headlines R1 to R5; descriptions D1 to D4.
-- **Ad 2 (Groups 3 and 4):** headlines G1, G2, G4, G5 plus R1, R3, R4; descriptions D5, D6, D7 and D2.
+- **Ad 2 (Group 3 and the brand term, term 28):** headlines G1, G2, G4, G5 plus R1, R3, R4; descriptions D5, D6, D7 and D2.
+- **Digital ad group (terms 29 and 30)** runs its own ad, below.
 
 Sitelinks: Configurator; Fit Kit $24; Rev Puck $89; The six drills. Callouts (25 characters or fewer): Made to order; Right or left hand; 1/64" steps; Digital files available. A fifth callout slot reads `[PATENT STATUS]` and stays empty in every live account. Structured snippet, Types: Rev Puck, Rev Spinner, Fit Kit, Digital files.
 
-**Digital ad group** (terms 29 and 30). Headline: "Print Your Own Trainer" (22 characters). Description: "Your drill sheet becomes print-ready STL files. $29 puck, $39 pair. Free 3D preview first." (90 characters).
+**Digital ad group.** Headline: "Print Your Own Trainer" (22 characters). Description: "Your drill sheet becomes print-ready STL files. $29 puck, $39 pair. Free 3D preview first." (90 characters).
 
 ### 7.3 YouTube: the 15-second thumb-pop clip
 
@@ -498,7 +499,7 @@ Reviewed every Monday for the trailing seven days and the trailing four weeks. W
 
 | # | Metric | Formula | Launch | Build | Season 2 | Why it is on the board |
 |---|---|---|---|---|---|---|
-| 1 | Visits | Sessions on the FitSlice domain, all sources | 1,500 a week | 1,400 a week | 2,200 a week | Top of the funnel and the model's traffic line |
+| 1 | Visits | Sessions on the FitSlice domain, all sources | 1,550 a week | 1,450 a week | 2,150 a week | Top of the funnel and the model's traffic line |
 | 2 | Configurator session rate | `configurator_session` ÷ visits | 30% or more | 30% or more | 32% or more | Whether the page gets people to type |
 | 3 | Fit-sheet completion rate | `fit_sheet_complete` ÷ `configurator_session`, also shown ÷ visits | 33% (10% of visits) or more | 33% or more | 35% (11% of visits) or more | The Risk 7 number. The whole business turns on it |
 | 4 | Sheet-to-order rate (30 days) | Orders of any product within 30 days ÷ `fit_sheet_complete` | 21% or more | 21% or more | 23% or more | Sum of the Fit Kit (15%), direct Pair (3%) and Digital (3%) assumptions |
@@ -506,7 +507,7 @@ Reviewed every Monday for the trailing seven days and the trailing four weeks. W
 | 6 | Visit to web Pair | Web Pairs ÷ visits, trailing 45 days | 0.75% or more | 0.95% or more | 0.90% or more | The one-number funnel health check. The design rate is 1.05%; the lag and August's 0.90 multiplier hold Season 2 lower |
 | 7 | Paid cost per Pair | Paid spend ÷ paid-attributed Pairs (45-day click window) | $110 or less | $74 or less | $50 or less | Ceiling $74; scaling needs $50 |
 | 8 | Paid cost per fit sheet | Paid spend ÷ paid-attributed `fit_sheet_complete` | $11.50 or less | $7.75 or less | $5.25 or less | Early proxy for metric 7, readable in week 2 |
-| 9 | Web revenue per visit | Revenue from web orders (excluding pro-shop) ÷ visits, trailing four weeks | $1.21 or more | $1.38 or more | $1.41 or more | Compared with the blended cost per paid visit (1.07) to see whether paid can ever pay |
+| 9 | Web revenue per visit | Revenue from web orders (excluding pro-shop) ÷ visits, trailing four weeks | $1.21 or more | $1.38 or more | $1.41 or more | Compared with the blended cost per paid visit ($1.07) to see whether paid can ever pay |
 | 10 | Gross margin per Pair | (Pair price − measured landed cost) ÷ Pair price, from the print log and fee statements | 62% or more | 63% or more | 65% or more | The $45 landed cost is an assumption until the log replaces it |
 | 11 | Printer utilization and backlog | Printer-days used ÷ (printers x 25); open orders ÷ weekly capacity, in weeks | 50% to 80%; backlog 1.5 weeks or less | 50% to 80%; 1.5 weeks or less | 50% to 80%; 1.5 weeks or less | Above 80% for two weeks fires the printer rule in Section 2.3 |
 | 12 | Fit remake and refund rate | (Reprints under the fit guarantee + refunds) ÷ Pairs shipped | 8% or less | 5% or less | 4% or less | The product's promise is the fit. Above 15% stops marketing until Study 1 is rerun |
@@ -515,9 +516,9 @@ Weekly volume targets that sit behind the rates, from the same model:
 
 | Phase | Visits | Fit sheets | Fit Kits | Web Pairs | Pro-shop Pairs | Revenue |
 |---|---|---|---|---|---|---|
-| Launch | 1,500 | 150 | 21 | 12 | 0.5 | $1,900 |
-| Build | 1,400 | 130 | 19 | 14 | 3.7 | $2,300 |
-| Season 2 | 2,200 | 230 | 34 | 19 | 8.4 | $3,800 |
+| Launch | 1,550 | 150 | 21 | 12 | 0.5 | $1,900 |
+| Build | 1,450 | 130 | 19 | 14 | 3.7 | $2,300 |
+| Season 2 | 2,150 | 230 | 34 | 19 | 8.4 | $3,800 |
 
 Also tracked weekly, without targets until the data exists: active pro shops and sheets entered per shop; Digital share of fit sheets; Puck-only and Spinner-only share of orders; search-terms report additions to the negative list; median order-to-ship days.
 
@@ -545,12 +546,12 @@ One page. Read at weeks 8, 16 and 26 after the shop opens, and on any Monday a s
 | Fit-sheet completion below 5% of visits once tests 2 and 3 have reported | Tests 2 and 3 complete (week 12) | Stop all prospecting. The page is losing people before the sheet, so fund test 5 and the pro-shop program |
 | Fit remake and refund rate above 15% | 40 Pairs shipped | Stop all paid spend and all creator seeding until Study 1 is rerun and passes, with a bore standard deviation under 0.1 mm and a per-printer offset applied. The fit promise is the product |
 | Study 1 not passed | Before the shop opens | No paid spend of any kind |
-| Fit Kit to Pair below 30% on the first 40-kit cohort | 40 kits aged 45 days | Pause Fit Kit-led ads (Meta variant 3, Google variant 5). Rework the Fit Kit email sequence and the credit presentation; re-read on the next 40 |
+| Fit Kit to Pair below 30% on the first 40-kit cohort | 40 kits aged 45 days | Pause Fit Kit-led ads (Meta variant 3, Google variant 5, YouTube cut 4). Rework the Fit Kit email sequence and the credit presentation; re-read on the next 40 |
 | A complaint, platform rejection or counsel note that an ad implies a rev, hook, average or injury result | One instance | Pull the ad the same day. Check every live asset against Part 6 before anything resumes |
 
 ### 11.2 Hold
 
-Anything between the lines. Specifically: paid cost per Pair between $50 and $110; fit-sheet completion between 5% and 10% of visits; Fit Kit to Pair between 30% and 50%; printer utilization between 50% and 80%. In a hold the budget stays at the current step, the next A/B test starts, and the search-terms report is worked weekly. A hold that lasts past week 26 ends prospecting, with the budget redirected to creator seeding and tournament booths, which the business plan ranks above paid in any case.
+Anything between the lines. Specifically: paid cost per Pair between $50 and $110; fit-sheet completion between 5% and 10% of visits; Fit Kit to Pair between 30% and 50%; printer utilization between 50% and 80%. In a hold the budget stays at the current step, the next A/B test starts, and the search-terms report is worked weekly. A hold that lasts past week 26 is judged under 11.4.
 
 ### 11.3 Double down
 
@@ -558,7 +559,7 @@ Anything between the lines. Specifically: paid cost per Pair between $50 and $11
 |---|---|---|
 | Paid cost per Pair at or under $50 for four consecutive weeks | 20 paid-attributed Pairs in the window | Raise the budget one step ($1,500 to $3,000, then to $5,000). One step a month at most; conversion lags spend by two to five weeks |
 | Paid cost per fit sheet at or under $5.25 on a line for four weeks | 300 clicks on that line | Raise that line's share by 50% within the current step |
-| Fit Kit to Pair at or above 50% on a 40-kit cohort | 40 kits aged 45 days | Lead with the Fit Kit everywhere: retargeting, Google variant 5, the product-card default. The credit is doing its job |
+| Fit Kit to Pair at or above 50% on a 40-kit cohort | 40 kits aged 45 days | Lead with the Fit Kit everywhere: retargeting, Google variant 5, YouTube cut 4, the product-card default. The credit is doing its job |
 | Fit-sheet completion at or above 12% of visits | Trailing four weeks, 4,000 visits | Shift prospecting from A1 (interests) to A2 (lookalike of completers). The seed is large enough and the trait is proven |
 | Printer utilization above 80% for two weeks, or backlog at or above 1.5 weeks | Two consecutive weekly reads | Buy a printer the same day. Payback is inside a month |
 | Referrals, reprints on new sheets and pro shops at or above 25% of Pairs | Trailing eight weeks | Hold paid flat and put the next increment into the pro-shop program and creator seeding |
@@ -566,7 +567,7 @@ Anything between the lines. Specifically: paid cost per Pair between $50 and $11
 
 ### 11.4 Ending the paid program
 
-If, at week 26, prospecting has never held a cost per Pair under $74 for four consecutive weeks on at least $4,500 of prospecting spend, and creators, community, search and pro shops are delivering 80% or more of Pairs, paid prospecting ends. Search and retargeting continue at $650 a month because they harvest demand the other channels create. The freed $850 a month goes to seeded units and a tournament booth. That result confirms the channel ranking in business-plan Part 8.
+If, at week 26, prospecting has never held a cost per Pair under $74 for four consecutive weeks on at least $4,500 of prospecting spend, and creators, community, search and pro shops are delivering 80% or more of Pairs, paid prospecting ends. Search and retargeting continue at $650 a month because they harvest demand the other channels create. The freed $850 a month goes to seeded units (each disclosed as a free unit) and a tournament booth. That result confirms the channel ranking in business-plan Part 8.
 
 ---
 
@@ -579,7 +580,7 @@ Every assumption in this document, where it came from, and what replaces it.
 | Prices | Fit Kit $24 credited, Puck $89, Spinner $45, Pair $119, Digital $29/$39, pro-shop margin 25% | Business plan Part 5.1 | Pricing decision after the pilot and the willingness-to-pay test in Part 12 |
 | Digital blend | $35 (60% pair files, 40% puck files) | Our guess | Measured mix after 50 Digital orders |
 | Funnel rates | 30% / one third / 15% / 50% / 3% / 3% | Section 1.2 reasoning | Trailing four weeks once each stage has 200 entries |
-| Paid cost per visit | 1.07 blended: Search $1.15, YouTube $2.00, Meta $0.90, retargeting $0.75 | Niche hobby audience; YouTube at $0.04 a view and 2% click-through | Two weeks of platform data |
+| Paid cost per visit | $1.07 blended: Search $1.15, YouTube $2.00, Meta $0.90, retargeting $0.75 | Niche hobby audience; YouTube at $0.04 a view and 2% click-through | Two weeks of platform data |
 | Pair landed cost | $45: $39.00 itemized plus $6.00 allowance, shipping included | Business plan 5.2 cost stack; shipping at the $8 to $12 placeholder; free-shipping policy in `marketing/03` and `marketing/05` | Print log, fee statements and carrier invoices |
 | Fit Kit landed cost | $9, shipping passed through | 97 g filament, tape, card, mailer, machine, labor, fees | Print log |
 | Printer output | 25 Pairs per printer per month (planning), 30 (best case); Pair = 1 printer-day; Fit Kit = 0.25 printer-day | Business plan 5.2 (one puck per printer per day, 25 to 30 a month); slicer times in X6 | Real print logs on the production printer |
@@ -599,7 +600,7 @@ Every assumption in this document, where it came from, and what replaces it.
 ## 13. What the founder must decide or supply
 
 1. **Study 1 result.** Thirty pucks measured, standard deviation per bore, per-printer offset. No paid spend before this passes. Date it.
-2. **Shipping.** This document follows the policy in `marketing/03` and `marketing/05`: Pairs ship free, so $10 of shipping sits inside the $45 landed cost. If shipping moves to the buyer, landed cost falls to $35, gross profit per Pair rises to $84, and each line in Section 11 rises by $10 (ceiling $84, target $60, stop $120).
+2. **Shipping.** This document follows the policy in `marketing/03` and `marketing/05`: Pairs ship free, so $10 of shipping sits inside the $45 landed cost. The shipping page in `marketing/02-website-copy.md` says only that a flat rate is shown at checkout; align it with this policy before launch. If shipping moves to the buyer, landed cost falls to $35, gross profit per Pair rises to $84, and each line in Section 11 rises by $10 (ceiling $84, target $60, stop $120).
 3. **Launch date.** The model assumes launch week 1 starts on December 1, 2026 and the shop opens in week 2. A later date moves every row in Section 3.
 4. **Brand-name clearance.** FitSlice must clear the register and common-law use before it goes into an ad account, a domain or a package. Every asset here assumes the name holds.
 5. **Hosting.** The configurator and landing page on the FitSlice domain, with the five events firing, before the first ad. Ads cannot run to the claude.ai preview.
