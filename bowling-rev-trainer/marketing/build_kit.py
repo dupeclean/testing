@@ -20,7 +20,8 @@ from build_plan import CSS  # noqa: E402  (shared design tokens)
 def md_to_html(md: str) -> str:
     out = subprocess.run(["pandoc", "-f", "markdown", "-t", "html5", "--wrap=none", "--no-highlight"],
                          input=md, text=True, capture_output=True, check=True).stdout
-    return out.replace("<table>", '<div class="tablewrap"><table>').replace("</table>", "</table></div>")
+    out = re.sub(r"<table(\s[^>]*)?>", lambda m: '<div class="tablewrap"><table>', out)
+    return out.replace("</table>", "</table></div>")
 
 
 def main():

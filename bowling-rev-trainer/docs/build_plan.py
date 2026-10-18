@@ -74,7 +74,11 @@ article td { padding: 8px 10px; border-top: 1px solid var(--line); vertical-alig
 article td:first-child { font-family: var(--mono); font-size: 12.5px; white-space: nowrap; color: var(--muted); }
 article tr:nth-child(even) td { background: color-mix(in srgb, var(--surface-2) 55%, transparent); }
 article table a { word-break: break-all; font-family: var(--mono); font-size: 12px; }
-article code { font-family: var(--mono); font-size: 0.92em; background: var(--surface-2); padding: 1px 4px; border-radius: 3px; }
+article code { font-family: var(--mono); font-size: 0.92em; background: var(--surface-2); padding: 1px 4px; border-radius: 3px; overflow-wrap: anywhere; }
+article pre { overflow-x: auto; max-width: 100%; margin: 10px 0 20px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; font-size: 12.5px; line-height: 1.45; }
+article pre code { background: none; padding: 0; overflow-wrap: normal; white-space: pre; }
+article p, article li, article td, article th { overflow-wrap: anywhere; }
+article img, article figure { max-width: 100%; }
 .cite { font-family: var(--mono); font-size: 0.78em; color: var(--accent); vertical-align: 0.12em; }
 .band { margin: 32px 0; padding: 18px 20px; border-radius: 6px; background: var(--surface); border: 1px solid var(--line); }
 .band .q { font: 700 clamp(22px, 3.4vw, 32px)/1.1 var(--display); text-transform: uppercase; letter-spacing: .02em; margin: 0; }
