@@ -17,8 +17,8 @@ surface, so the curvature, hole angles, and hand position match a real ball.
 
 | Part | What it trains | Size | Weight (4 walls, 20% infill) |
 |---|---|---|---|
-| **Rev Puck** (`stl/rev_puck.stl`) | Fingertip grip strength, relaxed-thumb hold, thumb-exit timing | 140 × 178 × 60 mm | ~350–450 g |
-| **Rev Spinner** (`stl/rev_spinner.stl`) | Finger lift / "flick" at release, rev counting | 100 × 100 × 38 mm | ~110–130 g |
+| **Rev Puck** (`stl/rev_puck.stl`) | Fingertip holds, relaxed-thumb carries, thumb-exit timing (add weight on the cord for strength work) | 140 × 177 × 60 mm | ~300 g (297 g sliced, PETG, 20% gyroid) |
+| **Rev Spinner** (`stl/rev_spinner.stl`) | Finger lift / "flick" at release, spin counting | 100 × 100 × 38 mm | ~100 g (98 g sliced) |
 | **Hole Sizer** (`stl/hole_sizer.stl`) | Finding your exact hole diameters before printing the big parts | 175 × 92 × 15 mm | ~90 g |
 
 Holes are drilled toward the sphere's center (how a zero-pitch hole is drilled on
