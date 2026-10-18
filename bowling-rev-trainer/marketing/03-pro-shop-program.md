@@ -82,7 +82,7 @@ Approved lines a shop may use in any medium:
 - "Unlike generic one-size trainers and S/M/L wrist braces, it is built from your fit."
 - "This shop earns a margin on FitSlice orders entered here."
 
-Lines a shop may not use on our behalf: any number for revs, hook, pins or average; "improves", "increases", "fixes", "prevents", "adds"; any ball company's name in a comparison; "approved", "endorsed" or "recommended" by any governing body or association; "patented" or "patent pending"; "exact fit" about the printed part; "the first" or "the only" without "to our knowledge"; "builds strength" or "fixes" anything about the bowler's hand or thumb.
+Lines a shop may not use on our behalf: any number for revs, hook, pins or average; "improves", "increases", "fixes", "prevents", "adds"; any ball company's name in a comparison; "approved", "endorsed" or "recommended" by any governing body or association; "patented" or "patent pending"; "exact fit" about the printed part; "the first" or "the only" without "to our knowledge"; "builds strength".
 
 ---
 

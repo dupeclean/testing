@@ -25,7 +25,7 @@ Square brackets mark the only things left to fill in. Two are the legal placehol
 
 These are legal constraints from business-plan Part 6 and Part 9. They are restated here so the person scheduling a post does not need to open the plan.
 
-**Claims we make freely (green):** built from your drill sheet, with hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch per hole, right or left hand, on a regulation 8.5-inch ball radius; holes aimed at the ball's center the way a zero-pitch hole is drilled, so thumb and fingers oppose each other as on your ball; about 300 g in PETG at 20% infill, light enough for long holds, heavy enough to need real fingertip pressure; coaches agree the thumb must leave first and a relaxed hand creates more revs (always attributed to coaches); the pro-shop trade body puts hole size at about 20% of a fit and span and pitch at 40% each (always attributed); oversized holes make you squeeze and squeezing limits hook (always attributed to coaching sources); unlike generic one-size trainers and S/M/L wrist braces, it is built from your fit.
+**Claims we make freely (green):** built from your drill sheet, with hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch per hole, right or left hand, on the radius of a regulation 8.5-inch ball; holes aimed at the ball's center the way a zero-pitch hole is drilled, so thumb and fingers oppose each other as on your ball; about 300 g in PETG at 20% infill, light enough for long holds, heavy enough to need real fingertip pressure; coaches agree the thumb must leave first and a relaxed hand creates more revs (always attributed to coaches); the pro-shop trade body puts hole size at about 20% of a fit and span and pitch at 40% each (always attributed); oversized holes make you squeeze and squeezing limits hook (always attributed to coaching sources); unlike generic one-size trainers and S/M/L wrist braces, it is built from your fit.
 
 **Claims we make only with the qualifier shown (yellow):** "designed for fingertip grip holds in the exact position you bowl in; add weight on the cord for strength work" (at 300 g alone it is a feel-and-habit tool, so say so when weight comes up); "practice a clean, early thumb exit"; "to our knowledge, the first trainer that uses your actual drill sheet"; "short daily sessions help keep the feel between league nights" (practice advice, never "science proves").
 
@@ -57,7 +57,8 @@ Where a platform has a branded-content or paid-partnership label, switch it on a
 
 - Primary line: Your drill sheet, off the ball.
 - Ten-second explanation: It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.
-- Honest answer to "will it change my rev rate": We do not know. We have found no study of off-lane trainers and rev rate, and we have not measured it ourselves. It trains the two things coaches say the release depends on, a relaxed hand and an early, clean thumb exit, in your own fit. That is why we are running a pilot and why there is a 30-day fit guarantee.
+- Honest answer to "will it change my rev rate": We do not know. We have found no study of off-lane trainers and rev rate, and we have not measured it ourselves. It is designed for practicing the two things coaches say the release depends on, a relaxed hand and an early, clean thumb exit, in your own fit. That is why we are running a pilot and why there is a 30-day fit guarantee.
+- Pilot wording: say "we are running a pilot" only once the protocol is dated and recruitment is open. Until then, every line in this file that says "running a pilot" reads "setting up a pilot".
 
 **Prices:** Fit Kit $24 (credited toward a trainer), Rev Puck $89, Rev Spinner $45, Pair $119, digital files $29 (puck) and $39 (pair). Pro shops earn 25% on orders they enter.
 
@@ -133,12 +134,12 @@ Day 1 is the Monday of launch Week 1, so Days 1 to 28 are Weeks 1 to 4 and Days 
 | 4 Thu | Instagram | Carousel, 6 slides | "Read your drill sheet in six slides." | Slide 1: hole sizes, in 1/64-inch steps. Slide 2: spans, thumb edge to finger edge. Slide 3: forward and reverse pitch. Slide 4: lateral pitch. Slide 5: right or left hand. Slide 6: your shop wrote this; we print it. The pro-shop trade body puts hole size at about 20% of a fit and span and pitch at 40% each. | Save this for your next fitting. |
 | 5 Fri | Facebook group A (admin permission first) | Text post with one photo (drill sheet beside the puck) | "Quick question for the thumb-in bowlers here." | Do you have a copy of your own drill sheet? I suspect many bowlers have never seen theirs and the shop holds the only copy, and I would like to know if that is true. Disclosure: I make a trainer that prints from the sheet, so I have an interest in the answer. No link in this post; ask if you want one and I will check with the admins first. | Comment yes or no, and whether you know your pitches. |
 | 6 Sat | Instagram Stories | 3 frames, printer time-lapse | "11 hours. 297 grams. One bowler." | Frame 1: every puck is printed to order from one sheet. Frame 2: flat side down, PETG, four walls, 20% infill, no supports. Frame 3: bores get a wipe of fine sandpaper, then you finish the fit with tape, same as on a ball. | Link sticker: see yours in the configurator. |
-| 7 Sun | TikTok; cross-post to Instagram | Screen recording, 20 s (Script 9) | "Left-handers: same sheet, mirrored." | Flip one switch in the configurator and the layout and the lateral pitches mirror. Sizes, spans and forward/reverse pitch stay exactly what you typed. | Lefties, type yours in. Link in bio. |
+| 7 Sun | TikTok; cross-post to Instagram | Screen recording, 20 s (Script 9) | "Left-handers: same sheet, mirrored." | Flip one switch in the configurator and the layout and the lateral pitches mirror. Sizes, spans and forward/reverse pitch stay as you typed them. | Lefties, type yours in. Link in bio. |
 | **Week 2: Find your size before you print your fit** | | | | | |
 | 8 Mon | YouTube Shorts; cross-post | Reel, 30 s (Script 2) | "Find your size before you print your fit." | The shop is open today. The Fit Kit sizer plate is printed on the same printer and material as your trainer, with bores around your expected sizes in 1/64-inch steps. The bore that fits is the bore we print. $24, credited toward your trainer. | Order the Fit Kit. Link in description. |
-| 9 Tue | Instagram; cross-post | Reel, 20 s (Script 6) | "A 15-pound ball. A 300-gram puck." | Your ball is drilled to be thrown. The puck is built to be held: about 300 g in PETG at 20% infill, light enough for long holds, heavy enough to need real fingertip pressure. On its own it trains feel and habit. About 100 g of quarters fit in the pocket when you want more. | Print your fit, or start with the $24 Fit Kit. Link in bio. |
+| 9 Tue | Instagram; cross-post | Reel, 20 s (Script 6) | "A 15-pound ball. A 300-gram puck." | Your ball is drilled to be thrown. The puck is built to be held: about 300 g in PETG at 20% infill, light enough for long holds, heavy enough to need real fingertip pressure. On its own it is a feel-and-habit tool. About 100 g of quarters fit in the pocket when you want more weight. | Print your fit, or start with the $24 Fit Kit. Link in bio. |
 | 10 Wed | TikTok; cross-post | Screen recording, 20 s | "Type 55/64. Type 1 1/32. Type 4-1/2." | The configurator reads fractions the way pro shops write them, in inches or millimeters, right or left hand. It warns when two holes would break into each other before anything prints. | Try your sheet. Free. Link in bio. |
-| 11 Thu | Instagram | Static photo (puck, drill sheet, calipers on a bench) | On the image: "Hole size is about 20% of a fit. Span and pitch are 40% each." | That is the pro-shop trade body's rule of thumb. We copy all three from your sheet, in 1/64-inch steps, on the curvature of a regulation 8.5-inch ball. | Your drill sheet, off the ball. Link in bio. |
+| 11 Thu | Instagram | Static photo (puck, drill sheet, calipers on a bench) | On the image: "The pro-shop trade body: hole size is about 20% of a fit. Span and pitch are 40% each." | That is the pro-shop trade body's rule of thumb. We copy all three from your sheet, in 1/64-inch steps, on the curvature of a regulation 8.5-inch ball. | Your drill sheet, off the ball. Link in bio. |
 | 12 Fri | Facebook group B (admin permission first) | The Section 5 post, with one photo | "Posting with the admins' okay. I am the maker of what I am about to describe." | The full post is in Section 5.2, or 5.3 where the group bans links. | Tell me whether you have your sheet or the shop does. |
 | 13 Sat | Instagram; cross-post to TikTok | Reel, 25 s | "What $24 gets you." | Fit Kit unboxing: a sizer plate printed around your expected sizes in 1/64-inch steps with the labels engraved, a roll of bowler's tape and a fitting card. The $24 comes off your trainer. | Start with the Fit Kit. Link in bio. |
 | 14 Sun | Instagram Stories | Q&A sticker, 24 hours | "Ask us anything about fit." | We answer what we know and say when we do not. Fit questions that belong to your shop go back to your shop. | Reply in the sticker. |
@@ -152,14 +153,14 @@ Day 1 is the Monday of launch Week 1, so Days 1 to 28 are Weeks 1 to 4 and Days 
 | 21 Sun | TikTok; cross-post to Instagram | Explainer, 30 s | "Why a slice instead of a whole ball?" | A regulation ball is 8.5 inches across and 12 to 16 pounds. Holes drilled at zero pitch aim at its center. We keep that radius and that center, print only the patch your hand touches, and apply your pitches. | Link in bio. |
 | **Week 4: Lift it, spin it, count it** | | | | | |
 | 22 Mon | YouTube Shorts; cross-post | Reel, 30 s (Script 8) | "Lift it, spin it, count it." | The Rev Spinner is fingers only. Short pendulum swing, lift with the fingers at the bottom, release onto carpet. The engraved bars flicker as it spins; count the seconds until it stops. It gives you feedback. It does not measure. | $45 alone or $119 in the Pair. Link in description. |
-| 23 Tue | Instagram | Carousel, 7 slides | "Six drills. Ten to fifteen minutes." | One slide per drill: fingertip carries, thumb pops, swing sync, cupped-wrist holds, carpet spins, rotation-axis control. Slide 7: short daily sessions help keep the feel between league nights. | Save it. Link in bio for the full guide. |
+| 23 Tue | Instagram | Carousel, 7 slides | "Six drills. Ten to fifteen minutes." | One slide per drill: fingertip carries, thumb pops, swing sync, cupped-wrist holds, carpet spins, rotation-axis control. Slide 7: practice advice from us, with no measurement behind it: short daily sessions help keep the feel between league nights. | Save it. Link in bio for the full guide. |
 | 24 Wed | Instagram; cross-post | Reel, 30 s, a creator's clip reposted with written permission | First line, before anything else: "FitSlice sent [CREATOR NAME] this trainer, printed from their own drill sheet, free of charge. [CREATOR NAME] earns a commission on orders with their code." | `[QUOTE PLACEHOLDER — creator name]` Use only words the creator has already published, unedited for meaning. Delete this line if there is no quote. | Watch the full video on the creator's channel. |
 | 25 Thu | TikTok; cross-post | Reel, 20 s | "Two-handed? Start here." | The Rev Spinner is a fingers-only disc with no thumb hole. Lift it onto carpet, it spins in place, count how long. The Rev Puck is for thumb-in bowlers. Swing-and-hold and carpet-release only. Never thrown. | $45. Link in bio. |
 | 26 Fri | Facebook group D, a two-handed or youth group (admin permission first) | Text post with one photo (spinner on carpet) | "For the two-handers and the parents here." | The fingers-only disc: lift it onto carpet, it spins in place, count how long. About 100 g. No thumb hole. Swing-and-hold and carpet-release only, never thrown, supervision under 12. Disclosure: I make it. | What do your bowlers practice off the lane? |
 | 27 Sat | YouTube Shorts; cross-post | Screen recording, 20 s | "The configurator just stopped a bad print." | Enter a span too short and the bores would break into each other. The preview warns you before anything prints. | Try it. Link in description. |
 | 28 Sun | Instagram Stories | 3 frames | "Your fit changed. So did the file." | Your sheet is stored with your order. New sheet from your shop, new print. A reprint costs less than a re-drill. | Link sticker: update your sheet. |
 | **Week 5: Ask your pro shop** | | | | | |
-| 29 Mon | Instagram; cross-post to TikTok and YouTube Shorts | Talking head, 25 s | "Your shop has your drill sheet. It is yours." | Your shop wrote it down when it drilled your ball. Ask for: thumb, middle and ring sizes; middle and ring spans; forward or reverse pitch and lateral pitch for each hole; which hand. Then type it in. | Ask at your next visit. Link in bio. |
+| 29 Mon | Instagram; cross-post to TikTok and YouTube Shorts | Talking head, 25 s | "Your shop has your drill sheet. Ask for a copy." | Your shop wrote it down when it drilled your ball. Ask for: thumb, middle and ring sizes; middle and ring spans; forward or reverse pitch and lateral pitch for each hole; which hand. Then type it in. | Ask at your next visit. Link in bio. |
 | 30 Tue | Instagram | Carousel, 5 slides | "Thirty days in. Here is what we know and what we do not." | Slide 1: sheets typed in, the real count. Slide 2: the field people get wrong most often, and what we changed. Slide 3: reprints under the guarantee, the real count. Slide 4: the pilot, who it is for, what we measure, when we publish. Slide 5: thank you. No results claims on any slide. If a figure is not available, drop that slide. | Type in your sheet. Link in bio. |
 
 Days 31 to 42 follow the Week 5 and Week 6 rows of Section 1.3: the Day 35 Facebook post, Script 10 on Day 36, the pilot page, and a repeat of the two earlier Reels that produced the most completed sheets.
@@ -202,7 +203,7 @@ Purpose: the configurator is the sales demo. Screen recording with a hand-held p
 
 | Shot | Visual | On-screen text | Spoken line | Sec |
 |---|---|---|---|---|
-| 1 | Phone shot: a real drill sheet on the bench, used with its owner's permission, name blurred. | A real drill sheet. | "Here's a drill sheet from a pro shop." | 0 to 3 |
+| 1 | Phone shot: a real drill sheet on the bench, used with its owner's permission, name blurred. The numbers typed in shots 2 to 4 are the ones on that sheet; if they differ, change the spoken lines and the Day 1 caption to match. | A real drill sheet. | "Here's a drill sheet from a pro shop." | 0 to 3 |
 | 2 | Screen recording: configurator open, empty. Cursor in the thumb field. Type "1 1/32". The model rebuilds instantly. | Type it the way your shop writes it. | "Thumb, one and one thirty-second. Type it the way the shop wrote it." | 3 to 9 |
 | 3 | Type middle span "4 1/2", ring span "4 3/8". The footprint widens on screen. | Both spans. | "Middle span. Ring span. The slice resizes to fit them." | 9 to 15 |
 | 4 | Type pitch fields. Rotate the 3D preview; the bore axes are drawn as lines. | Every pitch, drawn. | "Forward, reverse and lateral pitch on every hole. The axes are drawn so you can see yours." | 15 to 22 |
@@ -241,10 +242,10 @@ Purpose: answer "I can just hold my ball" before anyone asks it.
 
 | Shot | Visual | On-screen text | Spoken line | Sec |
 |---|---|---|---|---|
-| 1 | A fifteen-pound ball on the bench, logo taped over, then the puck set on a kitchen scale reading 297 g. | A 15-pound ball. A 297-gram puck. | "Fifteen pounds, built to be thrown. Three hundred grams, built to be held." | 0 to 6 |
+| 1 | A fifteen-pound ball on the bench, logo taped over, then the puck set on a kitchen scale reading 297 g. | A 15-pound ball. A 297-gram puck (PETG, 20% infill). | "Fifteen pounds, built to be thrown. Three hundred grams, built to be held." | 0 to 6 |
 | 2 | Hand holds the puck at the side in a fingertip grip, thumb visibly loose, for a long count. | Light enough for long holds. | "Light enough to hold for thirty seconds at your desk." | 6 to 11 |
 | 3 | Close on fingertips bearing the weight. | Heavy enough to need real fingertip pressure. | "Heavy enough that the fingertips have to carry it." | 11 to 15 |
-| 4 | Flip the puck, drop quarters into the pocket, tape over it. | Alone: feel and habit. Add weight for strength work. | "Alone, it trains feel and habit. Add coins for strength work." | 15 to 20 |
+| 4 | Flip the puck, drop quarters into the pocket, tape over it. | Alone: a feel-and-habit tool. Designed for strength work with added weight. | "Alone, it's a feel-and-habit tool. With coins added, it's designed for strength work." | 15 to 20 |
 
 ### Script 7. The knuckle test (30 s)
 
@@ -267,7 +268,7 @@ Purpose: the spinner's drill, the one that works for two-handed bowlers too.
 | 1 | Kneeling on carpet, spinner in hand, fingers in, palm up. | Lift it, spin it, count it. | "The Rev Spinner. Fingers only, no thumb hole." | 0 to 4 |
 | 2 | Short pendulum swing, slow motion at the bottom: the wrist un-cups and the fingers lift as the disc leaves. | Lift with the fingers at the bottom. | "Short swing. At the bottom, lift with the fingers and let it go onto the floor." | 4 to 11 |
 | 3 | The disc spins in place like a top. Close on the engraved bars flickering. | Count the seconds. | "It spins in place. The bars flicker. Count until it stops." | 11 to 18 |
-| 4 | Founder counting aloud over the spinning disc. | The longer it spins, the more lift you put on it. | "One, two, three, four... the longer it spins, the more lift you put on it." | 18 to 25 |
+| 4 | Founder counting aloud over the spinning disc. | Count it. Spin it again. | "One, two, three, four... Count it, then spin it again and compare." | 18 to 25 |
 | 5 | Disc stops. Founder to camera. | It gives feedback. It does not measure. | "It gives you feedback. It does not measure. Log your best." | 25 to 30 |
 
 ### Script 9. Left hand, same sheet (20 s)
@@ -278,7 +279,7 @@ Purpose: a product fact that left-handers notice and share.
 |---|---|---|---|---|
 | 1 | Screen recording: a right-hand model in the configurator, axes drawn. | Right hand. | "Here's a right-hand sheet in the configurator." | 0 to 4 |
 | 2 | Click the hand toggle. The model mirrors. The lateral pitch signs flip in the fields. | Left hand: layout and lateral pitch mirror. | "Switch to left and the layout mirrors, and so do the lateral pitches." | 4 to 11 |
-| 3 | Rotate the preview to show the finger holes now on the other side. | Everything else stays yours. | "Sizes, spans, forward and reverse pitch stay exactly what you typed." | 11 to 16 |
+| 3 | Rotate the preview to show the finger holes now on the other side. | Everything else stays yours. | "Sizes, spans, forward and reverse pitch stay as you typed them." | 11 to 16 |
 | 4 | Phone shot: a left-hand puck beside a right-hand puck. | Same sheet. Your side. | "Same sheet. Your side." | 16 to 20 |
 
 ### Script 10. Will it change your rev rate? The honest answer (40 s)
@@ -289,7 +290,7 @@ Purpose: say the thing every skeptic is thinking, in our own words, before they 
 |---|---|---|---|---|
 | 1 | Founder to camera, puck in hand. | Will it change your rev rate? We don't know. | "The question I get most: will this change my rev rate? Honest answer: we don't know." | 0 to 6 |
 | 2 | Same shot, no cut. | We've found no study. We haven't measured it. | "We've found no study of off-lane trainers and rev rate, and we haven't measured it ourselves." | 6 to 13 |
-| 3 | B-roll: thumb pop in slow motion, then a fingertip carry. | A relaxed hand. An early, clean thumb exit. | "What it does is train the two things coaches say the release depends on: a relaxed hand, and an early, clean thumb exit. In your own fit." | 13 to 23 |
+| 3 | B-roll: thumb pop in slow motion, then a fingertip carry. | A relaxed hand. An early, clean thumb exit. | "It's designed for practicing the two things coaches say the release depends on: a relaxed hand, and an early, clean thumb exit. In your own fit." | 13 to 23 |
 | 4 | B-roll: the configurator, then a printed puck beside its sheet. | Built from your drill sheet. | "That part we can show you. Your sizes, your spans, your pitches." | 23 to 29 |
 | 5 | Founder to camera. | Pilot study: results published, whatever they are. | "We're running a pilot with league bowlers and we'll publish what comes out, good or bad." | 29 to 36 |
 | 6 | Same shot. | 30-day fit guarantee. | "Until then, our thirty-day fit guarantee covers the fit." | 36 to 40 |
@@ -329,7 +330,7 @@ Maker disclosure up front: I built this and I sell it. I messaged the mods befor
 
 - Printed holes come out 0.2 to 0.4 mm small. I add a print allowance and I sell a $24 sizer plate printed on the same printer, credited toward the trainer. I have not yet published a tolerance study across 30 prints. Until I do, the claim is that the model is built from your sheet, and I will report how close the printed bores land when the numbers are in.
 - A lot of bowlers may never have seen their own drill sheet. If the shop is the only one who has it, the shop is the gate, and I need to know how many of you that applies to.
-- At 300 g it trains feel and habit. Loaded through the cord or the pocket it becomes a strength tool, and I will not pretend the puck alone is one.
+- At 300 g it is a feel-and-habit tool. It is designed for strength work when you load it through the cord or the pocket, and I will not pretend the puck alone is one.
 - PETG softens around 80 °C. A car trunk in July is a real question. The tolerance study includes a heat test.
 - It is a niche product for thumb-in bowlers who have a fitted ball. If you bowl two-handed, the fingers-only disc is the part for you.
 
@@ -341,15 +342,15 @@ Use these as a starting shape, then write to the person. Never paste one unchang
 
 **A. The skeptic ("I can just hold my ball" / "this is a gimmick")**
 
-> Fair. Here is the difference as I see it, and you can tell me if it holds up. Your ball is 15 pounds and drilled to be thrown, which makes it the wrong tool for a 30-second fingertip hold at your desk, and you cannot safely drop-catch it in your living room to rehearse the thumb leaving first. The puck is a third of a kilo in your holes, so you can. Whether that rehearsal carries to the lane is the thing I have not measured, which is why I am running a pilot and making no claim. If you would hold your ball anyway, you are not my customer and that is fine.
+> Fair. Here is the difference as I see it, and you can tell me if it holds up. Your ball is 15 pounds and drilled to be thrown, which makes it the wrong tool for a 30-second fingertip hold at your desk, and you cannot safely drop-catch it in your living room to rehearse the thumb leaving first. The puck is about 300 g (PETG, 20% infill) in your holes, so you can. Whether that rehearsal carries to the lane is the thing I have not measured, which is why I am running a pilot and making no claim. If you would hold your ball anyway, you are not my customer and that is fine.
 
 **B. The evidence question ("show me data" / "will this change my revs?")**
 
-> You are right that I have no rev-rate data, and I will not post any until a pilot produces some. What I can show you today is fit: your sizes, spans and pitches reproduced on an 8.5-inch radius with the holes aimed at the ball center, which you can check with calipers and your own sheet. What I can cite is coaching consensus that the thumb must leave first and a relaxed hand creates more revs; the drills practice those two things. The pilot is 20 to 24 league bowlers, randomized, six weeks, with rev rate read from high-frame-rate video by someone blind to group, and I will publish it whatever it says. If you want to be in it, the waitlist is on the site. If you think the design of the pilot is wrong, I would honestly rather hear that now.
+> You are right that I have no rev-rate data, and I will not post any until a pilot produces some. What I can show you today is fit: your sizes, spans and pitches reproduced on the curvature of a regulation 8.5-inch ball with the holes aimed at the ball center, which you can check with calipers and your own sheet. What I can cite is coaching consensus that the thumb must leave first and a relaxed hand creates more revs; the drills practice those two things. The pilot is 20 to 24 league bowlers, randomized, six weeks, with rev rate read from high-frame-rate video by someone blind to group, and I will publish it whatever it says. If you want to be in it, the waitlist is on the site. If you think the design of the pilot is wrong, I would honestly rather hear that now.
 
 **C. The practical question ("I don't have my drill sheet" / "my fit changes" / "I'm two-handed" / "can I print it myself")**
 
-> Each of these has a plain answer. No sheet: your shop wrote one when it drilled your ball and it is yours; ask for thumb, middle and ring sizes, both spans, forward/reverse and lateral pitch per hole, and which hand. If the shop prefers, it can enter the sheet for you and it earns 25% on the order. Fit changes: the sheet is stored with your order, and a reprint from a new sheet costs less than a re-drill. Two-handed: the puck is for thumb-in bowlers; the fingers-only spinner is the part for you. Print it yourself: yes, the digital files are $29 for the puck and $39 for the pair, generated from your sheet by the same configurator. Print the sizer plate first on your printer; printed bores run a bit small and the plate finds the size on the machine that will make the part.
+> Each of these has a plain answer. No sheet: your shop wrote one when it drilled your ball, so ask them for a copy. You want thumb, middle and ring sizes, both spans, forward/reverse and lateral pitch per hole, and which hand. If the shop prefers, it can enter the sheet for you and it earns 25% on the order. Fit changes: the sheet is stored with your order, and a reprint from a new sheet costs less than a re-drill. Two-handed: the puck is for thumb-in bowlers; the fingers-only spinner is the part for you. Print it yourself: yes, the digital files are $29 for the puck and $39 for the pair, generated from your sheet by the same configurator. Print the sizer plate first on your printer; printed bores run a bit small and the plate finds the size on the machine that will make the part.
 
 ---
 
@@ -363,9 +364,9 @@ Facebook bowling groups range from a few hundred members to tens of thousands, a
 
 Posting with the admins' okay. I am the maker of what I am about to describe, so read it knowing that.
 
-If you bowl one-handed, thumb in, your shop measured your hand to a sixty-fourth of an inch and drilled your spans and pitches into your ball. That fit lives in exactly one place: the ball.
+If you bowl one-handed, thumb in, your shop measured your hand to a sixty-fourth of an inch and drilled your spans and pitches into your ball. That fit lives in one place: the ball.
 
-So I built a trainer that takes the fit off the ball. It is a 3D-printed slice of a regulation 8.5-inch ball surface with your drill sheet reproduced in it: hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch on every hole, right or left hand. The holes are aimed at the ball's center the way a zero-pitch hole is drilled, so your thumb and fingers oppose each other the way they do on your ball. About 300 g in PETG. You hold it, you practice thumb pops on a wrist cord, you do fingertip carries at your desk. There is a fingers-only disc too, for lift, that spins on carpet so you can count it.
+So I built a trainer that takes the fit off the ball. It is a 3D-printed slice of a regulation 8.5-inch ball surface with your drill sheet reproduced in it: hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch on every hole, right or left hand. The holes are aimed at the ball's center the way a zero-pitch hole is drilled, so your thumb and fingers oppose each other the way they do on your ball. About 300 g in PETG at 20% infill. You hold it, you practice thumb pops on a wrist cord, you do fingertip carries at your desk. There is a fingers-only disc too, for lift, that spins on carpet so you can count it.
 
 It copies the sheet you give it. It does not change your fit. I have found no study showing an off-lane trainer changes rev rate, and I have not measured it myself, so I am running a pilot and making no claim. What I can show you is that it is built from your sheet.
 
@@ -391,7 +392,7 @@ I am building a company that prints a bowler's drill sheet.
 
 Here is the idea. Serious one-handed bowlers pay a pro shop to measure their hand to a sixty-fourth of an inch and drill three holes into a ball at specific spans and pitches. That fit exists in one place: a fifteen-pound ball drilled to be thrown. You cannot hold it at your desk for thirty seconds, and you cannot drop-catch it in your living room to rehearse the thumb leaving first.
 
-FitSlice prints the patch of ball surface the hand actually touches, with the bowler's own drill sheet reproduced in it. Hole sizes in 1/64-inch steps, both spans, every pitch, right or left hand, on a regulation 8.5-inch radius. About 300 grams. A free web configurator turns the sheet into the model in about 100 milliseconds and generates the print file. We print to order and ship, or sell the files. [PATENT STATUS]
+FitSlice prints the patch of ball surface the hand actually touches, with the bowler's own drill sheet reproduced in it. Hole sizes in 1/64-inch steps, both spans, every pitch, right or left hand, on the curvature of a regulation 8.5-inch ball. About 300 grams in PETG at 20% infill. A free web configurator turns the sheet into the model in about 100 milliseconds and generates the print file. We print to order and ship, or sell the files. [PATENT STATUS]
 
 Three things I have learned building it:
 
@@ -431,7 +432,7 @@ The part weighs about 300 grams in PETG at 20% infill, with a pocket in the base
 
 A free web configurator rebuilds the model from the drill sheet in about 100 milliseconds, shows a 3D preview, warns when holes would intersect and generates the print file. Bowlers can order a printed trainer or buy files for their own printer at https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p.
 
-Coaches agree the release depends on the thumb leaving first and a relaxed hand. A six-drill guide ships with each trainer and practices both in the bowler's own hole geometry. The company makes no claim about rev rate, hook or average, is running a pilot study with league bowlers and will publish the results, whatever they show. Orders carry a 30-day fit guarantee.
+Coaches agree the release depends on the thumb leaving first and a relaxed hand. Each trainer ships with a six-drill guide for practicing both in the bowler's own hole geometry. The company makes no claim about rev rate, hook or average, is running a pilot study with league bowlers and will publish the results, whatever they show. Orders carry a 30-day fit guarantee.
 
 "[QUOTE PLACEHOLDER — coach or pro-shop operator name]," said [NAME], [TITLE].
 
@@ -445,7 +446,7 @@ FitSlice makes made-to-order training aids for one-handed, thumb-in bowlers, bui
 
 ###
 
-*Release notes (these sit outside the release text). If the second speaker received a free unit, earns a commission or is paid, add the matching disclosure line from Section 0 directly after the quote. If no third party has spoken by the release date, delete that paragraph and trim the count back to 450 from the pricing paragraph. The fact sheet carries only green-list claims.*
+*Release notes (these sit outside the release text). If the second speaker received a free unit, earns a commission or is paid, add the matching disclosure line from Section 0 directly after the quote. Do not send the release until that line is added or the speaker confirms in writing that there is no connection. If no third party has spoken by the release date, delete that paragraph and trim the count back to 450 from the pricing paragraph. The fact sheet carries only green-list claims.*
 
 ### 7.2 Media list by outlet type
 
@@ -454,7 +455,7 @@ This list is for internal use. Send the release with three images (the puck besi
 | Outlet type | Targets (verify before sending) | Angle to pitch | Asset to lead with | Notes |
 |---|---|---|---|---|
 | Bowling trade and enthusiast press | Bowlers Journal International; Bowling This Month; 11thFrame.com; Bowling TV; FloBowling; Bowling Center Management (the BPAA trade magazine, for the pro-shop program) | "A bowler's drill sheet, printed." Fit as data leaving the ball. For the trade title: the 25% pro-shop program with no inventory. | Thumb pop clip, configurator demo | Offer a review unit printed from the writer's own sheet. Say in the pitch that the unit is free and ask that the piece says so. The writer decides how. |
-| Pro-shop and fitting community | IBPSIA member communications; regional pro-shop associations | The product copies the shop's work and sends fit questions back to the shop. | Sizer plate photo, counter card | Peer to peer. Never tell a fitter how to fit. |
+| Pro-shop and fitting community | IBPSIA member communications; regional pro-shop associations | The product copies the shop's work and sends fit questions back to the shop. | Sizer plate photo, counter card | Peer to peer. Never tell a fitter how to fit. Say in the pitch that participating shops earn 25% on orders they enter, and ask that any coverage says so. |
 | 3D printing and maker press | All3DP; 3DPrint.com; 3D Printing Industry; Hackaday; Make: | A made-to-order consumer product from a parametric configurator; the 100 ms rebuild; print tolerance and the sizer-plate calibration method. | Configurator screen recording, print time-lapse | These readers will ask about PETG tolerances and slicer settings. Have the Study 1 table and the settings ready (0.2 mm layers, 4 walls, 20% gyroid infill). |
 | Sports technology and coaching | Sports-technology newsletters and coaching newsletters; collegiate bowling program communications (identify the current titles) | Off-lane practice of a release skill in the athlete's own geometry, with the evidence gap and the pilot stated up front. | Script 10, pilot one-pager | Lead with what is not yet known. That is the story for this audience. |
 | Small business and e-commerce | Local business journal in [CITY, STATE]; e-commerce trade newsletters; Shopify and Etsy community blogs | One founder, one to three printers, personalization at 1/64-inch resolution, and a configurator that writes the fit sheet into the order. | Founder photo at the printer | Give ranges for unit economics, never exact margins. |
@@ -479,7 +480,7 @@ Hi,
 
 Thanks for signing up. Here is what FitSlice is in ten seconds: it's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.
 
-Your pro shop measured your hand to a sixty-fourth of an inch and drilled your spans and pitches into your ball. We print that patch of ball surface, at the real 8.5-inch radius, with your drill sheet reproduced in it: thumb, middle and ring sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch on every hole, right or left hand. The holes aim at the ball's center the way a zero-pitch hole is drilled, so your thumb and fingers oppose each other the way they do on your ball. It weighs about 300 g in PETG at 20% infill.
+Your pro shop measured your hand to a sixty-fourth of an inch and drilled your spans and pitches into your ball. We print that patch of ball surface, at the real curvature of an 8.5-inch ball, with your drill sheet reproduced in it: thumb, middle and ring sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch on every hole, right or left hand. The holes aim at the ball's center the way a zero-pitch hole is drilled, so your thumb and fingers oppose each other the way they do on your ball. It weighs about 300 g in PETG at 20% infill.
 
 The fastest way to understand it is to type in your own sheet and watch your grip appear in 3D. It takes about a minute and the model rebuilds while you type:
 
@@ -548,7 +549,7 @@ With the Rev Spinner:
 5. Carpet spins. Kneel on carpet, fingers in, short pendulum swing, lift with the fingers at the bottom and release onto the floor. It spins in place. The engraved bars flicker; count the seconds until it stops. It gives feedback. It does not measure.
 6. Rotation-axis control. Same drill, fingers starting at 4 to 5 o'clock and rotating to 1 to 2 o'clock through the release (right-handers; mirror for left).
 
-Coaches agree the thumb must leave first and a relaxed hand creates more revs. The drills practice exactly that, in your own hole geometry. Short daily sessions help keep the feel between league nights. That is practice advice, and we have no measurement behind it.
+Coaches agree the thumb must leave first and a relaxed hand creates more revs. The drills are designed to practice both, in your own hole geometry. Short daily sessions help keep the feel between league nights. That is practice advice, and we have no measurement behind it.
 
 Safety: swing-and-hold and carpet-release only. Never throw it. Cord on the wrist for every swing drill.
 
@@ -582,7 +583,7 @@ If you want to be considered for the pilot, the waitlist is here: https://claude
 
 Hi,
 
-Some bowlers have never seen their own drill sheet. The shop wrote it down when it drilled the ball. It is yours; ask for a copy. Here is exactly what to ask for:
+Some bowlers have never seen their own drill sheet. The shop wrote it down when it drilled the ball. Ask for a copy. Here is what to ask for:
 
 - Thumb, middle and ring hole sizes (they will be in 64ths of an inch)
 - Middle span and ring span
@@ -633,7 +634,7 @@ Said in the booth's voice: plain, specific, candid. Adjust to the person.
 2. **The sentence (10 s).** "It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere. It's built from your drill sheet."
 3. **The plate (20 s).** Hand them a sizer plate. "Put your thumb in one. Find the bore that's snug at the first joint with no squeeze. That's the size we'd print. These step in sixty-fourths, same as your sheet." Let them find it. Say the size out loud.
 4. **The puck (25 s).** Hand them the nearest default puck, cord on the wrist. "Fingers in, thumb loose. Feel how the thumb and fingers oppose each other around the curve? The holes aim at the center of an 8.5-inch ball, the way a zero-pitch hole is drilled. Yours would have your spans and your pitches." Then: "Now relax the thumb and let it slide out. Fingers catch it." Watch the drop.
-5. **The honest line (15 s).** "People ask if it changes revs. We don't know. We've found no study of off-lane trainers and rev rate, and we haven't measured it ourselves. It trains a relaxed hand and an early thumb exit in your own holes, and we're running a pilot. Thirty-day fit guarantee either way."
+5. **The honest line (15 s).** "People ask if it changes revs. We don't know. We've found no study of off-lane trainers and rev rate, and we haven't measured it ourselves. It's designed for practicing a relaxed hand and an early thumb exit in your own holes, and we're running a pilot. Thirty-day fit guarantee either way."
 6. **The ask (15 s).** "Do you have your drill sheet, or does your shop? Either way, fill in this card or type it on the tablet, and tick the box if you want your model emailed tonight. Anyone who fills in a card is in today's drawing."
 
 ### 9.4 Lead capture
@@ -704,13 +705,13 @@ Description, first line: It's the part of your ball your hand touches, printed w
 |---|---|---|---|---|
 | 0:00 to 0:15 | Cold open | Slow-motion thumb pop, no music, bench sound only. Cut to black. Title card. | "Thumb out. Fingers stay. That's the whole product in one motion. Here's where it comes from." | Script 1 footage. |
 | 0:15 to 0:45 | The sentence | Founder at the bench, puck in hand, drill sheet beside it. | "It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere. Over the next eight minutes: what a fit is, how we copy it, how we print it, what you do with it, and the one thing we have not proven yet." | Say the ten-second line verbatim. |
-| 0:45 to 1:30 | The fit lives in the ball | B-roll at a pro shop (with the shop's permission) or a drill sheet and measuring tools. | "Your shop measured your hand to a sixty-fourth and drilled your spans and pitches into a ball you throw. That fit exists in exactly one place. You can't hold a fifteen-pound ball at your desk for thirty seconds, and you can't drop-catch it in your living room." | No shop named unless they are a program partner with their disclosure line on screen. |
+| 0:45 to 1:30 | The fit lives in the ball | B-roll at a pro shop (with the shop's permission) or a drill sheet and measuring tools. | "Your shop measured your hand to a sixty-fourth and drilled your spans and pitches into a ball you throw. That fit exists in one place. You can't hold a fifteen-pound ball at your desk for thirty seconds, and you can't drop-catch it in your living room." | No shop named unless they are a program partner with their disclosure line on screen. |
 | 1:30 to 2:30 | What a drill sheet contains | Animated drill sheet: sizes, spans, pitch fields light up in turn. Cut to the Script 4 animation for pitch. | "Three hole sizes in sixty-fourths. Two spans. Forward or reverse pitch and lateral pitch per hole. The pro-shop trade body puts hole size at about 20% of a fit, span and pitch at 40% each. We copy all three." | Attribute the 20/40/40 line to the trade body on screen. |
 | 2:30 to 3:45 | The configurator | Full screen recording. Type a real sheet (fractions as written). Rotate the preview. Show the axes. Trigger a collision warning and fix it. Toggle left hand. Export. | "Type it the way the shop wrote it. The model rebuilds in about 100 milliseconds. The axes are drawn so pitch is visible. If two holes would break into each other, it tells you before anything prints. Right or left. Then it writes the print file and a fit sheet that's stored with your order." | Mention it is free and needs no account. |
 | 3:45 to 4:30 | Printing | Time-lapse of a puck printing, flat side down. Spool label (PETG, no brand). Slicer screen: 0.2 mm, four walls, 20% infill. Scale: 297 g. | "PETG, four walls, 20% infill, no supports. About eleven hours on this printer. 297 grams. Light enough for long holds, heavy enough to need real fingertip pressure. Weight pocket underneath for coins. Tunnel for the cord." | Say the infill when stating the weight. |
 | 4:30 to 5:15 | The Fit Kit and the one thing printers get wrong | Sizer plate in hand. Calipers on a printed bore reading under nominal. Thumb finding the right bore. | "Printed holes come out a fraction of a millimeter small, typically 0.2 to 0.4. We add an allowance, and we sell a $24 sizer plate printed on the same printer as your trainer. The bore that fits is the bore we print. The $24 comes off the order. We printed thirty pucks and measured every bore. Here is the table." | Candid. This is the credibility segment. Show the Study 1 table on screen and read its mean and spread aloud. Study 1 is a launch gate (Section 1.2), so do not record this segment without the numbers. |
 | 5:15 to 6:45 | The six drills | Each drill demonstrated for about fifteen seconds with its name on screen: fingertip carries (knuckle test), thumb pops, swing sync, cupped-wrist holds, carpet spins (counting the bars aloud), rotation-axis control. | "Coaches agree the thumb must leave first and a relaxed hand creates more revs. Each drill practices one piece of that, in your own holes. Ten to fifteen minutes a day. Cord on the wrist for every swing drill. Nothing here is thrown." | Use Script 7, 1 and 8 footage. |
-| 6:45 to 7:30 | What it does not do, and the pilot | Founder to camera. Text list on screen. | "It doesn't change your fit; it copies the sheet you give it. It doesn't teach footwork, timing or targeting. We've found no study of off-lane trainers and rev rate, and we haven't measured it ourselves. So we don't claim it. We're running a six-week randomized pilot with league bowlers and we'll publish the result whatever it is. Until then the thirty-day fit guarantee carries the risk." | No numbers, no hedged hints at results. |
+| 6:45 to 7:30 | What it does not do, and the pilot | Founder to camera. Text list on screen. | "It copies the sheet you give it and doesn't change your fit. It doesn't teach footwork, timing or targeting. We've found no study of off-lane trainers and rev rate, and we haven't measured it ourselves. So we don't claim it. We're running a six-week randomized pilot with league bowlers and we'll publish the result whatever it is. Until then the thirty-day fit guarantee carries the risk." | No numbers, no hedged hints at results. |
 | 7:30 to 7:50 | Prices and how to order | Price card: Fit Kit $24 credited, Rev Puck $89, Rev Spinner $45, Pair $119, Digital $29 and $39. Pro-shop line. | "Type in your sheet, print your fit, or start with the Fit Kit. If your shop has your sheet, they can enter it and they earn 25%." | Plain. |
 | 7:50 to 8:00 | End card | Puck beside the sheet. Primary line. Configurator URL. | "Your drill sheet, off the ball." | No "like and subscribe" plea. One line: "The configurator link is below." |
 
@@ -731,7 +732,7 @@ Run on every asset in this file and every asset derived from it. Two minutes.
 9. The trainer is called a trainer, puck, slice, disc or plate.
 10. Weight is stated with the infill. "Exact" appears only inside the ten-second line, and only after Study 1 has passed.
 11. Wherever the product is shown in use, the safety line is present: swing-and-hold and carpet-release only, never thrown, cord on the wrist for swing drills.
-12. Every statement about evidence says we have found no study and have not measured it ourselves. None says that nobody has measured it.
+12. Every statement about evidence says we have found no study and have not measured it ourselves. None says that nobody has measured it. Pilot wording (setting up, recruiting, running) matches the pilot's real state that day.
 13. Any comparison is by category (generic one-size trainers, S/M/L wrist braces), never by named product.
 14. Plain sentences. No em-dash asides, no contrast turns, no hype words.
 
@@ -751,7 +752,7 @@ These are decisions and facts only the founder can supply. They are repeated in 
 8. **Open Championships.** Two 10-day stints at about $12,750 before the booth fee, a shared booth with a pro-shop vendor, or regional events only in the first year. Get real booth-fee quotes from each vendor office to replace the assumptions in Section 9.7.
 9. **r/Bowling permission and posting day,** obtained from the moderators before Week 3.
 10. **Facebook groups.** Four groups (A to D) with admin permission in writing: three adult bowling groups (A, B and C) and one two-handed or youth group (D). Group A is used again on Day 35.
-11. **Pilot pre-registration.** Email 4 says the measures are written down before the first bowler starts. Register them (a public, dated document is enough) before Email 4 is enabled, or change the sentence.
+11. **Pilot pre-registration.** Email 4 says the measures are written down before the first bowler starts. Register them (a public, dated document is enough) before Email 4 is enabled, or change the sentence. Also say whether the pilot is being set up, recruiting or running, so the wording matches (Section 0).
 12. **Privacy and giveaway paperwork.** A privacy page with a retention period for fit sheets and leads (business-plan Part 9), and official rules for the booth drawing, both checked by counsel.
 13. **Thumb pop video link** for Email 3 (`[VIDEO LINK]`), once the clip is hosted.
 14. **Counsel review** of this file against FTC endorsement and substantiation rules, together with business-plan Part 6, before anything in it is published.

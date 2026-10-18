@@ -5,7 +5,7 @@ Everything needed to take an order from fit sheet to delivered box, and to answe
 How to use this file:
 
 - Product facts come from `docs/business-plan.md` (Parts 2, 4, 5, 6 and 8) and `README.md`. Prices, guarantee terms, lead times and privacy terms match `marketing/02-website-copy.md` (Fit guarantee and returns, Shipping, Privacy and your fit sheet) and `marketing/03-pro-shop-program.md` section 3. The review-email rules match `marketing/05-creators-and-coaches.md` section 6.
-- Text set inside a quote block is written for the customer and can be sent or posted as it stands. Everything outside a quote block is internal.
+- Text set inside a quote block is written for the customer and can be sent or posted as it stands, once any bracketed placeholder in it is resolved or removed. Everything outside a quote block is internal.
 - `{{field}}` is a merge field. The list is in section 0.2.
 - `[PATENT STATUS]` marks the one place a legal status line may go once counsel supplies the wording. Leave it out until then.
 - The QC limits in section 1.6 are working limits. Study 1 in business-plan Part 7 replaces them with measured values.
@@ -18,8 +18,8 @@ These come from business-plan Part 6 and Part 9. They apply to every reply, macr
 2. Never name a ball company or compare to one. Compare by category only: generic one-size practice balls, S/M/L wrist braces, roller trainers.
 3. Never claim that any governing body or association has backed FitSlice in any way. If a customer asks, the answer is the practice-tool line in macro 8.
 4. Never state or imply any patent status. Write `[PATENT STATUS]` where such a line would go.
-5. Never invent a testimonial, a review, a star rating or a customer name. Quote a coach or creator only after they have said it. Until then, leave the quote-placeholder marker from `marketing/01-brand-platform.md` in the layout.
-6. Any mention of a creator, coach, affiliate code, seeded unit or pro-shop margin carries a plain disclosure in the same message.
+5. Never invent a testimonial, a review, a star rating or a customer name. Quote a coach or creator only after they have said it and agreed to the use, and run the quote with the matching disclosure line beside it. Until then, leave the quote-placeholder marker from `marketing/01-brand-platform.md` in the layout.
+6. Any mention of a creator, coach, affiliate code, seeded unit or pro-shop margin carries a plain disclosure in the same message. Use the standard disclosure lines in `marketing/01-brand-platform.md` section 3 word for word.
 7. A drill sheet is personal data tied to a hand. Handle it as section 9 says.
 
 ---
@@ -84,7 +84,7 @@ Tags: `fit-tight`, `fit-loose`, `depth`, `hand`, `no-sheet`, `copy-ball`, `left-
 
 Marketplace orders: the message arrives through the marketplace inbox. Use the same macros. Refunds go through the marketplace's refund tool. Do not ask a marketplace customer for a review. The marketplace sends its own request.
 
-Orders entered by a pro shop: write to the bowler and copy the shop. Under Counter Sale the shop is the seller of record. Reduced-price reprints for a wrong sheet are billed to the shop at the reprint prices.
+Orders entered by a pro shop: write to the bowler and copy the shop. Under Counter Sale the shop is the seller of record. Reduced-price reprints for a wrong sheet are billed to the shop at the reprint prices. The shop earns a margin on these orders, so every message to the bowler on an order that carries a shop code includes the line "This shop earns a margin on FitSlice orders entered here."
 
 ---
 
@@ -113,7 +113,7 @@ The sheet arrives one of four ways.
 
 1. **Web order.** The configurator writes the fit sheet into the order as line-item properties and the confirmation email carries a JSON file. In the configurator, paste the JSON into the fit-sheet box and press Load.
 2. **Marketplace order.** The sheet comes back as the personalization text. Type it into the configurator and save the JSON. Send the confirmation email with the sheet as entered. Hold the print for a written yes.
-3. **Pro-shop order.** The shop's order form. Send the confirmation with the ship date and the sheet as entered within one business day. Attach the shop code to the fit sheet record for twelve months.
+3. **Pro-shop order.** The shop's order form. Send the confirmation with the ship date and the sheet as entered within one business day. The confirmation carries the line "This shop earns a margin on FitSlice orders entered here." Attach the shop code to the fit sheet record for twelve months.
 4. **Photo or email.** A customer sends a picture of the sheet. Type it into the configurator, reply with the values (macro 5), and hold the print for a written yes.
 
 Rules for all four:
@@ -131,7 +131,7 @@ Do these in order, against the original document where there is one. Thresholds 
 | 1 | **Hand** | R or L on the sheet matches the Hand setting. Right-hander: with the thumb hole at the bottom as you look at the grip from outside, the middle finger hole sits on the right and the ring on the left | Sheet and order disagree. Notes say "lefty" and the order says Right. Lateral pitches look mirrored |
 | 2 | **Forward and reverse signs** | Finger holes forward (positive). Thumb zero or reverse (negative) | Any finger hole at reverse. Any thumb forward. A pitch typed without a direction word |
 | 3 | **Thumb size** | 7/8" to 1 1/8" (22 to 28.5 mm). Larger than both finger holes | Outside the range. Smaller than either finger hole, which usually means the numbers were swapped. Hard limit is 21 to 31 mm |
-| 4 | **Finger sizes** | 3/4" to 29/32" (19 to 23 mm) is typical. Ring often a half size under the middle | Outside 19 to 24 mm. 31/32" or 1" on a finger line, which is usually the drilled size for an insert and not the size the finger feels. Hard limit is 17 to 26 mm |
+| 4 | **Finger sizes** | 3/4" to 29/32" (19 to 23 mm) is typical. Ring often a half size under the middle | Outside 19 to 24 mm. 31/32" or 1" on a finger line, which is usually the size drilled for an insert, so it overstates what the finger feels. Hard limit is 17 to 26 mm |
 | 5 | **Units and typing** | The same size reads the same in fractions and mm. 55/64" is 21.83 mm. 27/32" is 21.43 mm | An mm number in an inch field or the reverse. A decimal that rounds to a different 64th than the fraction. 5/64 where 55/64 was meant |
 | 6 | **Spans** | 105 to 125 mm (about 4 1/8" to 4 7/8"), cut to cut | Under 100 or over 128 mm. Both spans over about 130 mm, which suggests center-to-center numbers. Hard limit is 85 to 135 mm |
 | 7 | **Middle against ring span** | Middle equal to or 2 to 4 mm longer than ring | Ring longer than middle. A gap over 6 mm |
@@ -188,9 +188,9 @@ If a batch of orders is ready together, `generate.py` with a CSV of fit sheets p
 
 1. Start the print. Log the printer ID, filament lot and start time.
 2. Send the "Your part is printing" email (website copy, Email 2). The platform sends it when the order status changes to Printing.
-3. Check the first layers. A lifted corner on a puck is a scrap, not a rework.
+3. Check the first layers. A lifted corner on a puck is a scrap. Do not rework it.
 4. When it finishes, log the end time and the printer's own message if any. Remove the part. Let it cool fully before measuring.
-5. Finish the bores: wipe with a little isopropyl and one pass of fine sandpaper around a dowel. The aim is smooth, not larger. Measure after sanding, never before.
+5. Finish the bores: wipe with a little isopropyl and one pass of fine sandpaper around a dowel. The aim is a smooth bore. Do not enlarge it. Measure after sanding, never before.
 
 ### 1.6 Step 5: Finish and QC
 
@@ -256,7 +256,7 @@ Steps:
 2. Put the printed fit sheet on top so it is the first thing the customer sees.
 3. Tick the pack list against the table above.
 4. Weigh the sealed box. A puck box is about 600 to 900 g.
-5. Print the label from the order. Check the address against the order, not against memory.
+5. Print the label from the order. Check the address against the order.
 
 ### 1.8 Step 7: Ship
 
@@ -356,7 +356,7 @@ When the QC row says pass and the customer's measurement says miss by more than 
 
 Cause codes, logged on every reprint: `P1` printer or material, `P2` our data entry, `P3` customer data entry, `P4` pro shop entry, `P5` damage in transit, `P6` carrier loss, `P7` fit by feel, `P8` other. Review the counts monthly. Any code above 5% of parts shipped gets a root-cause note.
 
-If a second reprint also misses the sheet, offer a full refund. Two misses in a row is our problem, not the customer's.
+If a second reprint also misses the sheet, offer a full refund. Two misses in a row are our problem.
 
 ### 2.7 Turnaround
 
@@ -489,11 +489,11 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 >
 > Hi {{first_name}},
 >
-> That is common, and it is easy to sort out. The numbers exist, and the pro shop that drilled your ball almost always still has them.
+> That is common, and it is easy to sort out. The numbers exist, and the pro shop that drilled your ball usually still has them.
 >
-> 1. **Ask the shop that drilled your ball.** Ask for a copy or a photo of your drill sheet. Shops do this all the time. If they keep your sheet in software, a printout works.
+> 1. **Ask the shop that drilled your ball.** Ask for a copy or a photo of your drill sheet. If they keep your sheet in software, a printout works.
 > 2. **No record, or the shop has closed?** Take your ball to any pro shop and ask whether they can read the sizes, spans and pitches off it and write them down. Some will do it at the counter, some charge a small fee, and some will not. Ask before you go.
-> 3. **Let the shop enter it for you.** Pro shops can enter your sheet on the Pro Shops page and we print and ship. The shop earns 25% of the order for doing it.
+> 3. **Let the shop enter it for you.** Pro shops in our program can enter your sheet and we print and ship. Disclosure: FitSlice pays the shop 25% of the order for entering the sheet, so the shop earns money when you order this way. Shops in the program say so at the counter: "This shop earns a margin on FitSlice orders entered here." You can also enter the sheet yourself in the configurator.
 > 4. **Find your hole sizes at home.** The $24 Fit Kit is a plate with bores in 1/64" steps, printed on the same printer as your trainer. The $24 is credited toward your order. Say "no sheet" in the notes and we print a wider range of sizes.
 >
 > We do not estimate spans or pitches from a photo of a hand, because spans and pitches make up about 80% of a fit by the pro-shop trade body's own rule of thumb. A pro-shop fitting is better than any measurement you take at home. Our guide for what you can measure yourself, and what to bring to a fitter, is here: {{help_measure_url}}
@@ -571,7 +571,7 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 > {{agent_first_name}}
 > FitSlice
 
-**After:** tag `two-handed`. Point the customer to the Spinner, not the Pair, unless their ball has a thumb hole.
+**After:** tag `two-handed`. Point the customer to the Spinner. Suggest the Pair only if their ball has a thumb hole.
 
 ### Macro 9. International shipping
 
@@ -617,7 +617,7 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 > {{agent_first_name}}
 > FitSlice
 
-**After:** tag `digital`. Resend the link if asked. Do not refund a downloaded file that opens and matches the sheet.
+**After:** tag `digital`. Resend the link if asked. Do not refund a downloaded file that opens and matches the sheet. Delete `[PATENT STATUS]` before sending until counsel supplies the wording.
 
 ### Macro 11. Printer settings for digital buyers
 
@@ -636,11 +636,11 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 > - **Orientation:** flat base on the bed, as the STL opens. No supports. The cord tunnel and weight pocket are shaped so they print without them.
 > - **Scale:** 100%. Do not resize the file.
 > - **Bed:** at least 180 × 180 mm.
-> - **Time:** the puck takes roughly 11 to 20 hours depending on your printer. The spinner and sizer take about 3 to 6 hours each.
+> - **Time:** the puck takes roughly 11 to 20 hours depending on your printer. The spinner and sizer take about 3.5 to 6.5 hours each.
 >
 > **Print the sizer plate first.** Every printer makes holes a little smaller than the model. The configurator allows 0.4 mm for that. The sizer plate shows what your printer actually makes: find the bore that is snug at the first joint with no squeeze, then go back to the configurator, choose "The printed sizer plate" as your size source, and enter the engraved size. Your puck then prints at the size that fit your hand on your printer.
 >
-> **Finish.** Lightly sand the hole rims and bores with fine sandpaper, with a wipe of isopropyl first. Smooth bores matter for a clean thumb exit. Finish the fit with bowler's tape, as you would on your ball.
+> **Finish.** Lightly sand the hole rims and bores with fine sandpaper, with a wipe of isopropyl first. A smooth bore is easier on the thumb when you practice the thumb exit. Finish the fit with bowler's tape, as you would on your ball.
 >
 > **Heat.** PETG softens in heat. Keep the part out of hot cars and direct sun.
 >
@@ -713,7 +713,7 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 >
 > **Confirmed, not printing yet.** We print in the order received. The queue is {{queue_days}} business days before printing starts, then the part prints in 1 to 4 business days depending on the product, and ships. Domestic transit takes 2 to 5 business days after that. You will get an email when it starts printing and another with tracking.
 >
-> **Printing.** It started on {{print_start_date}}. A Rev Puck takes about 11 to 19 hours on the printer, and then we smooth the bores and check each one against your sheet. Tracking follows within {{days_to_ship}} business days.
+> **Printing.** It started on {{print_start_date}}. A Rev Puck takes about 11 to 20 hours on the printer, and then we smooth the bores and check each one against your sheet. Tracking follows within {{days_to_ship}} business days.
 >
 > **Shipped.** It left on {{ship_date}} with {{carrier}}. Tracking: {{tracking_url}}. The estimate is {{delivery_estimate}}.
 >
@@ -744,7 +744,7 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 >
 > **Already delivered.** Same as above. A reprint from a new sheet is {{reprint_price}}, shipping included. Within 30 days of delivery, the part in your hands is also covered by the fit guarantee if it does not match the sheet on your order.
 >
-> The quickest way to avoid a reprint: look at the sheet in your confirmation email before printing starts. It shows the numbers exactly as we will print them.
+> The quickest way to avoid a reprint: look at the sheet in your confirmation email before printing starts. It shows the numbers we will use to build your part.
 >
 > {{agent_first_name}}
 > FitSlice
@@ -778,11 +778,11 @@ Trigger: delivery scan.
 >
 > **1. Check it against your sheet.** Your printed fit sheet is in the box. Hold the part next to your ball. The hand, the three hole sizes, and the lean of the holes should be the ones on the sheet.
 >
-> **2. Try your thumb, then your fingers.** The thumb should feel like your ball. If it is a touch loose, press in one piece of the bowler's tape from the roll, the same way you would on your ball. A layer or two is normal fit. The finger pads sit at the first joint, with no squeeze needed to hang on.
+> **2. Try your thumb, then your fingers.** The thumb should feel like your ball. If it is a touch loose, press in one piece of the bowler's tape from the roll, the same way you would on your ball. A layer or two is normal fit. With a good fit, the finger pads sit at the first joint and you do not need to squeeze to hang on.
 >
 > **3. Put the cord on.** Thread the wrist cord over your wrist before any swing drill. It is already through the tunnel.
 >
-> **4. Run drill one.** Fingertip carries. Hold the puck at your side in a fingertip grip, thumb loose, fingers carrying the weight. Five holds of 30 seconds. If your thumb knuckle whitens, you are squeezing. Reset and start the hold again.
+> **4. Run drill one.** Fingertip carries. Hold the puck at your side in a fingertip grip, thumb loose, fingers carrying the weight. Five holds of 30 seconds. If your thumb knuckle whitens, you are likely squeezing. Reset and start the hold again.
 >
 > **Weight.** The puck weighs about 300 g at 20% infill. The pocket in the base takes quarters or washers, about 100 g of quarters. Add weight only when the current load feels easy. Seal the pocket with tape every time.
 >
@@ -807,16 +807,16 @@ Trigger: 3 days after the delivery scan.
 >
 > Hi {{first_name}},
 >
-> Drill one is done. Here are the next three. Ten to fifteen minutes covers the set. Short daily sessions help keep the feel between league nights.
+> Drill one is done. Here are the next three. Ten to fifteen minutes covers the set. Short daily sessions can help keep the feel between league nights.
 >
-> **Drill 2: Thumb pops.** Lanyard on your wrist. Dangle the puck, then relax your thumb and let it slide out while your fingers catch and hold the weight. The puck should drop a few millimeters onto your fingers without the grip failing. Three sets of ten. If the puck falls, the fingers were not carrying it. This practices the "thumb leaves, fingers stay" moment.
+> **Drill 2: Thumb pops.** Cord on your wrist. Dangle the puck, then relax your thumb and let it slide out while your fingers catch and hold the weight. The puck should drop a few millimeters onto your fingers without the grip failing. Three sets of ten. If the puck falls, the fingers were not carrying it. This practices the "thumb leaves, fingers stay" moment.
 >
-> **Drill 3: Swing sync.** Slow shadow swings with the puck. Release the thumb at the bottom of the swing and catch with the fingers. Do not let go of the puck. This practices the timing: the thumb out before the lift, not during it.
+> **Drill 3: Swing sync.** Slow shadow swings with the puck. Release the thumb at the bottom of the swing and catch with the fingers. Do not let go of the puck. This practices the timing: the thumb leaves before the fingers lift.
 >
 > **Drill 4: Cupped-wrist holds.** Hold the puck in front of you, wrist cupped, palm toward you. Five holds of 20 seconds.
 >
 > {{if_pair_or_spinner}}
-> **Drill 5: Carpet spins.** Kneel on carpet, fingers in the spinner, palm up. Swing a short pendulum. At the bottom, lift with the fingers, un-cup the wrist, and let the spinner come off onto the floor so it spins in place. The engraved bars on the base flicker as it spins, so you can count seconds until it stops. It spins longer when the fingers lift more at release. It gives feedback. It does not measure anything. Log your best time.
+> **Drill 5: Carpet spins.** Kneel on carpet, fingers in the spinner, palm up. Swing a short pendulum. At the bottom, lift with the fingers, un-cup the wrist, and let the spinner come off onto the floor so it spins in place. The engraved bars on the base flicker as it spins, so you can count seconds until it stops. It is designed so that more finger lift at release tends to give a longer spin. It gives feedback. It does not measure anything. Log your best time.
 >
 > **Drill 6: Axis control.** Same drill. Start with your fingers at 4 to 5 o'clock on the spinner if you are a right-hander, and rotate to 1 to 2 o'clock through the release.
 > {{/if_pair_or_spinner}}
@@ -861,7 +861,7 @@ Trigger: 30 days after the latest delivery scan on the order. This follows the r
 Rules this email follows:
 
 - **No incentive.** No discount, credit, entry, gift, free reprint or anything else is offered for a review, here or anywhere.
-- **Everyone gets it.** The email goes to every customer whose order was delivered, in the same words. It is not skipped or delayed because of a complaint, a reprint, a refund, a low opinion in a support thread, or a customer's spend. The only date that moves is the delivery date a reprint sets.
+- **Everyone gets it.** The email goes to every customer whose order was delivered, except the groups excluded below, in the same words. It is not skipped or delayed because of a complaint, a reprint, a refund, a low opinion in a support thread, or a customer's spend. The only date that moves is the delivery date a reprint sets.
 - **No gating.** The review link and the support link are in the same email, in that order, for every customer. Unhappy customers are not sent to support instead of the review page.
 - **Material connections excluded.** Seeded recipients, affiliates, coaches with codes and pro-shop staff are not sent this email.
 - **Nothing asked for beyond the experience.** No rating, no result, no before-and-after.
@@ -883,7 +883,7 @@ Rules this email follows:
 >
 > There is no reward for reviewing, and we would not want one to color what you say.
 >
-> Thank you for bowling with your thumb in.
+> Thank you for trying it.
 >
 > {{founder_name}}
 > FitSlice
@@ -1041,7 +1041,7 @@ This is the text for the help page `{{help_measure_url}}`.
 >
 > **Read this first.** A pro-shop fitting is better than anything you can measure at home. A fitter works with your hand on a fitting ball, watches how your fingers and thumb sit, and sets the spans and pitches. By the pro-shop trade body's own rule of thumb, hole size is about 20% of a fit, and span and pitch are 40% each. Home measurements can get you the hole sizes. They cannot reliably give you the other 80%. We will not guess your spans or your pitches, and we do not estimate them from a photo of a hand.
 >
-> **Route 1: get the sheet you already have.** The shop that drilled your ball almost always keeps your numbers. Ask for a copy or a photo. This takes five minutes and is the best route by a long way.
+> **Route 1: get the sheet you already have.** The shop that drilled your ball usually keeps your numbers. Ask for a copy or a photo. This is usually quick and is the best route by a long way.
 >
 > **Route 2: ask a shop to read your ball.** Take the ball to any pro shop and ask whether they can read the sizes, spans and pitches off it and write them down. Some will do it at the counter, some charge a small fee, and some will not. Ask before you go.
 >
@@ -1049,11 +1049,11 @@ This is the text for the help page `{{help_measure_url}}`.
 >
 > **Step 1. Hand.** Write down which hand throws the ball. If the ball is drilled for two-handed use, write down the hand whose fingers go in the holes.
 >
-> **Step 2. Remove any tape and inserts you can.** Bare holes give you the true size. If the ball has finger inserts or a thumb slug, measure what your finger or thumb touches, not the larger hole drilled for the insert.
+> **Step 2. Remove any tape and inserts you can.** Bare holes give you the true size. If the ball has finger inserts or a thumb slug, measure what your finger or thumb touches. Skip the larger hole drilled for the insert.
 >
-> **Step 3. Hole sizes (reliable to about ±0.2 mm).** With the inside jaws of the calipers, measure each hole across the narrow way of the oval, about 5 mm below the edge of the bevel. Read twice and average. Enter the numbers in millimeters in the configurator. It accepts mm. Write down thumb, middle and ring.
+> **Step 3. Hole sizes (about ±0.2 mm in our estimate, with careful reading).** With the inside jaws of the calipers, measure each hole across the narrow way of the oval, about 5 mm below the edge of the bevel. Read twice and average. Enter the numbers in millimeters in the configurator. It accepts mm. Write down thumb, middle and ring.
 >
-> **Step 4. Spans (rough, ±1 to 2 mm).** A span is measured in a straight line from the near edge of the thumb hole to the near edge of the finger hole, cut to cut, and the center-to-center distance is a different number. Hold a short, stiff ruler level across the two holes, look straight down at the near edges, and read the distance between them. Measure the middle span and the ring span. The middle span is normally 2 to 4 mm longer than the ring span. A 1 to 2 mm error is a few 64ths. If this number matters to you, ask a shop to check it.
+> **Step 4. Spans (rough, about ±1 to 2 mm in our estimate).** A span is measured in a straight line from the near edge of the thumb hole to the near edge of the finger hole, cut to cut, and the center-to-center distance is a different number. Hold a short, stiff ruler level across the two holes, look straight down at the near edges, and read the distance between them. Measure the middle span and the ring span. The middle span is normally 2 to 4 mm longer than the ring span. A 1 to 2 mm error is a few 64ths. If this number matters to you, ask a shop to check it.
 >
 > **Step 5. Pitches (leave these to a shop).** You cannot read pitch without a pitch gauge, and a wrong sign gives you a part that feels wrong. Ask a shop for all six numbers: forward or reverse, and lateral, for each of the three holes.
 >
@@ -1136,6 +1136,6 @@ For the privacy page, under "How long". It matches the Privacy and your fit shee
 ### 9.4 Rules in the shop
 
 - Never use a customer's name in a file name, a slicer project, or a QC row. Use the order number.
-- Do not put a photo of a drill sheet in a shared channel or a social post. If a sheet is shown in a video or an article, it is the creator's or the coach's own, with their consent.
+- Do not put a photo of a drill sheet in a shared channel or a social post. If a sheet is shown in a video or an article, it is the creator's or the coach's own, with their consent, and the video or article opens with the matching disclosure line from `marketing/01-brand-platform.md` section 3 for any free unit, affiliate code or payment.
 - Pro shops that enter a sheet confirm they have the bowler's consent. This is in the shop terms.
 - Youth bowlers: a parent or guardian is the customer and receives the order emails.

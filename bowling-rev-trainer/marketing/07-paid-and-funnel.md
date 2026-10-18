@@ -9,7 +9,7 @@ Where paid media sits in the plan: business-plan Part 8 ranks channels by expect
 ### Three rules that apply to every asset below
 
 1. **Claims.** Every ad, page variant and message uses one claim from the green list of business-plan Part 6, or a yellow claim with its exact qualifier. Nothing states or implies a rev-rate, hook, average or injury result, and no number of RPM appears anywhere. The verbs are "designed to", "practice", "train" and "rehearse".
-2. **Disclosure.** Every mention of a creator, coach, affiliate, seeded unit or pro shop carries the matching line below, first, in words a phone screen shows without expanding. The lines are verbatim from `marketing/05-creators-and-coaches.md`.
+2. **Disclosure.** Every mention of a creator, coach, affiliate, seeded unit or pro shop in an ad, page, video or message carries the matching line below, first, in words a phone screen shows without expanding. The lines are verbatim from `marketing/05-creators-and-coaches.md`.
 3. **Gate.** No paid dollar is spent before Study 1 (business-plan Part 7: 30 pucks measured, bore standard deviation under 0.1 mm) has passed. The word "exact" is a claim about the printed part, and Study 1 is what supports it.
 
 | Relationship | Disclosure line |
@@ -162,7 +162,7 @@ Print-partner facts and constraints:
 
 ### 3.1 Assumptions
 
-- **Calendar.** Month 1 is November 2026: seeding (20 trainers to coaches and creators, each shipped with the disclosure terms in `marketing/05-creators-and-coaches.md`), Study 1, waitlist and configurator live, shop closed. The shop opens in Month 2, December 2026, in line with the launch sequence in business-plan Part 8 and the calendar in `marketing/06-content-and-launch.md`, where launch week 1 is configurator-only and the shop opens in week 2. December orders are therefore modeled at three-quarters of a month. Month 12 is October 2027.
+- **Calendar.** Month 1 is November 2026: seeding (20 trainers to coaches and creators, each shipped with the disclosure terms in `marketing/05-creators-and-coaches.md`, so every recipient who shows the unit says "FitSlice sent me this trainer, printed from my own drill sheet, free of charge."), Study 1, waitlist and configurator live, shop closed. The shop opens in Month 2, December 2026, in line with the launch sequence in business-plan Part 8 and the calendar in `marketing/06-content-and-launch.md`, where launch week 1 is configurator-only and the shop opens in week 2. December orders are therefore modeled at three-quarters of a month. Month 12 is October 2027.
 - **Funnel rates** as in Section 1.2. Every count is rounded to a whole unit at each step so the tables reconcile by hand. Fit Kits bought in one month convert to Pairs at 50% in the following month.
 - **Seasonality** multiplies the visit-to-sheet rate: 0.85 in May, 0.70 in June and July, 0.90 in August, 1.10 in September and October, 1.00 otherwise. League season runs roughly September to April and summer demand is unknown (business-plan Part 12), so this is a cautious guess.
 - **Paid traffic.** $1,500 a month in Months 2 to 12 at $1.07 per visit, which buys 1,404 visits a month (Section 4 builds this from four lines). The base case holds the budget flat. Section 11 sets the rules for stepping up, and Section 3.5 shows what each step is worth.
@@ -303,7 +303,7 @@ One-handed or two-handed style cannot be targeted, and none is attempted. Copy s
 
 ## 6. Keywords
 
-Thirty terms in four intent groups. A keyword is something a person typed and carries no claim from us. The ad shown on "bowling rev rate drills" describes what the trainer is and what it practices, and promises no revs. Phrase and exact match only.
+Thirty terms in four intent groups. A keyword is something a person typed and carries no claim from us. The ad shown on "bowling rev rate drills" describes what the trainer is and what it practices, and promises no revs. Keyword insertion is off in every ad, so a typed term such as term 15 is never repeated back as a description of the product. Phrase and exact match only.
 
 ### 6.1 Group 1: mechanics and problem intent (10)
 
@@ -376,7 +376,7 @@ Ad job for 29 and 30: Digital files at $29 and $39, generated from your sheet, w
 Applied account-wide on Search and reviewed weekly from the search-terms report.
 
 - **Other equipment shopping:** ball for sale, bowling ball prices, bowling ball reviews, bowling ball cleaner, bowling shoes, bowling bag, bowling ball drill bits, drill press, how to drill a bowling ball, bowling ball drilling near me, used bowling ball
-- **A different product:** wrist brace, wrist support, wrist guard (revisit after week 8; these searchers are adjacent and may deserve a dedicated ad set with the answer "a brace holds your wrist for you; this trains your hand")
+- **A different product:** wrist brace, wrist support, wrist guard (revisit after week 8; these searchers are adjacent and may deserve a dedicated ad set built on the green comparison "unlike generic one-size trainers and S/M/L wrist braces, it is built from your fit")
 - **A different sport or style:** two handed, cricket bowling, lawn bowling, candlepin, duckpin, five pin
 - **Spectating and venues:** tv schedule, tour schedule, tournament results, scores, rules, bowling alley near me, bowling league near me, bowling jobs, bowling party
 - **Games and novelties:** wii bowling, video game, bowling pin, bowling costume
@@ -388,7 +388,7 @@ Applied account-wide on Search and reviewed weekly from the search-terms report.
 
 ## 7. Ad copy
 
-Every ad is one claim from the green or yellow list in business-plan Part 6, the ten-second explanation or one of its parts, and one call to action. No ad names a rev rate, a hook, an average, an injury, a governing body, a ball company or a patent. Ads carry the brand name only. Where a later version might mention patent status, the slot reads `[PATENT STATUS]` and stays out of every live ad. An ad that uses a coach's words runs only after the coach has said them, and carries the coach's disclosure line.
+Every ad is one claim from the green or yellow list in business-plan Part 6, the ten-second explanation or one of its parts, and one call to action. No ad names a rev rate, a hook, an average, an injury, a governing body, a ball company or a patent. Ads carry the brand name only. Where a later version might mention patent status, the slot reads `[PATENT STATUS]` and stays out of every live ad. An ad that uses a coach's words runs only after the coach has said them, and carries the coach's disclosure line. The ten-second line contains the word "exact" (Meta variant 1, description D1, YouTube cut 2 and its companion text), so those assets run only after Study 1 has passed.
 
 All character counts below were measured. Platform limits change, so check them in the ad interface before upload.
 
@@ -414,7 +414,7 @@ Headlines are at or under 30 characters and descriptions at or under 90. A respo
 |---|---|---|---|---|---|
 | G1 / D1 | Your Drill Sheet, Off the Ball | 30 | The part of your ball your hand touches, printed with your exact holes. Practice anywhere. | 90 | The primary line and the ten-second explanation |
 | G2 / D2 | Custom-Fit Release Trainer | 26 | Built from your drill sheet: 1/64" hole steps, both spans, every pitch. Free 3D preview. | 88 | Green: built from your drill sheet |
-| G3 / D3 | Practice Your Thumb Exit | 24 | About 300 g at 20% infill, built to your sheet. Thumb pops and fingertip holds at home. | 87 | Yellow: practice a clean thumb exit. Green: weight with infill |
+| G3 / D3 | Practice Your Thumb Exit | 24 | About 300 g at 20% infill, built to your sheet. Practice thumb pops and fingertip holds. | 88 | Yellow: practice a clean thumb exit. Green: weight with infill |
 | G4 / D4 | Same Holes. Same Pitch. | 23 | Holes aimed at the ball's center, like a zero-pitch drilling. Your grip, off the lane. | 86 | Green: holes aimed at the ball's center |
 | G5 / D5 | Start With the $24 Fit Kit | 26 | Find your hole sizes on the printer that makes your part. Credited to your trainer. | 83 | Product fact: the Fit Kit and its credit |
 | R1 (rotation) | Built From Your Drill Sheet | 27 | | | |
@@ -443,7 +443,7 @@ Five hook variants for the first three seconds, cut onto the same footage. The a
 | 2 | "It's the part of your ball your hand touches." | Same footage. Voice: "printed with your exact holes, so you can practice your release anywhere." | "See your grip in 3D." FitSlice. |
 | 3 | "Thumb out first. Fingers stay." | Thumb pop in slow motion, three repetitions. Voice: "Coaches agree the thumb must leave first. Practice it with your own fit." | "Built from your drill sheet." FitSlice. |
 | 4 | "Same holes. Same pitch. No lane fee." | Drill sheet on the table, numbers typed into the configurator, the model rebuilds, a print comes off the bed, a hand goes in. | "Start with the $24 Fit Kit." FitSlice. |
-| 5 | "Count your spin." | Rev Spinner released onto carpet, the bars flicker, a hand counts seconds on its fingers. Voice: "Lift it, spin it, count it. Fingers-only release practice." | "Rev Spinner, $45. Pair, $119." FitSlice. |
+| 5 | "Lift it, spin it, count it." | Rev Spinner released onto carpet, the bars flicker, a hand counts seconds on its fingers. Voice: "Fingers-only release practice, on carpet." | "Rev Spinner, $45. Pair, $119." FitSlice. |
 
 Companion text for each cut:
 
@@ -489,7 +489,7 @@ Each test names its decision metric before it starts, and that metric alone deci
 
 Order: tests 1, 2 and 3 run one after another in the Launch phase, so each has the full traffic. Tests 4 and 5 start in week 14 and run together, because test 4 measures sheet completers and test 5 measures people who did not complete a sheet, and the two groups do not overlap. Test 2 is fast and sets the page shape the others run on. Test 5 answers the business plan's Risk 7 (can the customer produce a drill sheet) with observed behavior, and its result feeds the pro-shop program directly. Test 4 is the slowest and the first to drop if traffic runs below plan.
 
-Every variant uses only green and yellow claims, and a variant may not win by making a claim the control may not make. Test 3's variant B puts the word "exact" in a headline, which the business plan allows only after Study 1 has passed. Study 1 has already passed by then, since it gates all paid spend.
+Every variant uses only green and yellow claims, and a variant may not win by making a claim the control may not make. Test 3's variant B puts the word "exact" in a headline, which the business plan allows only after Study 1 has passed. Study 1 has already passed by then, since it gates all paid spend. The test 5 block names no shop. If it ever lists a shop from the program, that entry carries "This shop earns a margin on FitSlice orders entered here."
 
 ---
 
@@ -562,7 +562,7 @@ Anything between the lines. Specifically: paid cost per Pair between $50 and $11
 | Fit Kit to Pair at or above 50% on a 40-kit cohort | 40 kits aged 45 days | Lead with the Fit Kit everywhere: retargeting, Google variant 5, YouTube cut 4, the product-card default. The credit is doing its job |
 | Fit-sheet completion at or above 12% of visits | Trailing four weeks, 4,000 visits | Shift prospecting from A1 (interests) to A2 (lookalike of completers). The seed is large enough and the trait is proven |
 | Printer utilization above 80% for two weeks, or backlog at or above 1.5 weeks | Two consecutive weekly reads | Buy a printer the same day. Payback is inside a month |
-| Referrals, reprints on new sheets and pro shops at or above 25% of Pairs | Trailing eight weeks | Hold paid flat and put the next increment into the pro-shop program and creator seeding |
+| Referrals, reprints on new sheets and pro shops at or above 25% of Pairs | Trailing eight weeks | Hold paid flat and put the next increment into the pro-shop program and creator seeding, with every seeded unit disclosed |
 | Digital above 5% of fit sheets | Trailing four weeks | Add Group 4 search budget and an international landing page for Digital; it grows without a printer |
 
 ### 11.4 Ending the paid program

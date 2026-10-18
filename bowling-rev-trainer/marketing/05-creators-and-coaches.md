@@ -4,7 +4,7 @@ Working draft, October 2026. Everything we send to, ask of, or pay a creator, co
 
 How to use this file:
 
-- Source of truth for every claim is `docs/business-plan.md` (Part 6, claims) and `README.md` (parts, drills). Language follows `marketing/01-brand-platform.md`. Prices, guarantee terms, reprint prices and lead times match `marketing/02-website-copy.md`. Pro-shop codes and shop margins are in `marketing/03-pro-shop-program.md` and are referenced here only where the two programs touch.
+- Source of truth for every claim is `docs/business-plan.md` (Part 6, claims) and `README.md` (parts). Drill wording comes from `marketing/01-brand-platform.md`, because the README training guide uses rev-rate language that this file does not. Language follows `marketing/01-brand-platform.md`. Prices, guarantee terms, reprint prices and lead times match `marketing/02-website-copy.md`. Pro-shop codes and shop margins are in `marketing/03-pro-shop-program.md` and are referenced here only where the two programs touch.
 - `[PATENT STATUS]` marks the one place a legal status line may go once counsel supplies the wording. Leave it out until then.
 - `[QUOTE PLACEHOLDER — name]` marks where a coach or creator quote goes once that person has actually said it, on recording or in writing, and agreed to its use. Ship the asset without the block until then. We do not write quotes for people.
 - `{{field}}` is a merge field filled from the contact record.
@@ -87,7 +87,7 @@ Every recipient meets all of the following:
 - Roll of bowler's tape.
 - Paracord wrist cord, pre-threaded.
 - Fitting card: their fit sheet as printed, the tape-up instructions, the safety line (swing-and-hold and carpet-release drills only; never throw it; bowlers under 12 with an adult present).
-- Drill guide: the six drills from the README, one page.
+- Drill guide: the six drills on one page, worded as in `marketing/01-brand-platform.md` (the README training guide is not reused here, because it makes rev-rate claims).
 - A printed note from the founder, four sentences: thanks, nothing is owed, the disclosure line if they ever show it, and the email address for feedback.
 
 Nothing in the box asks for a post.
@@ -128,7 +128,7 @@ You teach the release to more one-handed bowlers than I can reach, and I would l
 
 I am asking for nothing back. No video, no post, no review, no script approval. If it falls short, tell me where.
 
-If you do show it, one thing is required, by law and by your audience. Say this first, on camera and in the description: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge."
+If you do show it, one thing is required, by the FTC Endorsement Guides and by your audience. Say this first, on camera and in the description: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge."
 
 {{founder_name}}
 FitSlice
@@ -160,7 +160,7 @@ I make FitSlice. It's the part of your ball your hand touches, printed with your
 
 Before I ask you to put it near a student, hold your own first. Send your drill sheet and I will print a Rev Puck and Rev Spinner to it, free. Tell me where it falls short. I am not asking for a post, a quote or a referral.
 
-If you later want it for students, the coach program adds a roster seat in the configurator, team pricing at ten or more and a 15% code. Any mention then carries: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge. I earn a commission when you order with my code."
+If you later want it for students, the coach program adds a student roster (we keep it for you at launch, in the configurator later), team pricing at ten or more and a 15% code. Any mention then carries: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge. I earn a commission when you order with my code."
 
 {{founder_name}}
 FitSlice
@@ -345,24 +345,24 @@ You received this free, printed from your own drill sheet. If you show it, say s
 | 2 | Your drill sheet | Close-up of your pro shop's sheet or your fitting card | Read off your thumb size, your two spans and one pitch. "This is my fit. This is what they printed." |
 | 3 | The configurator | Screen capture: type your sheet in, the grip appears in about a tenth of a second, rotate the preview, point at the drawn hole axes | "It rebuilds as you type. The lines are the hole axes, so you can see your pitch. It is free, and nothing prints until you order." |
 | 4 | Box open | Puck, spinner, sizer plate, tape, cord, card laid out | Weight in hand: "about 300 grams, roughly two percent of my ball." Name each item. |
-| 5 | Puck on the ball | Set the puck on top of your ball, curved side to curved side | "Same 8.5-inch radius. The curves match." Rotate so the viewer sees the contact. |
+| 5 | Puck on the ball | Set the puck on top of your ball, curved side to curved side | "Same curvature as an 8.5-inch ball. Here is how the two sit together." Rotate so the viewer sees the contact. |
 | 6 | Thumb check | Close-up: thumb into your ball, then thumb into the puck, same angle | Say exactly what you feel. Tight, loose, same. Say how many layers of tape you added. This is the shot the comments will argue about. |
 | 7 | Fingers and span | Middle and ring into the ball, then into the puck. Index and pinky resting on the curve | "Fingertip depth, my spans. The index and pinky lie on the surface, same as on the ball." |
-| 8 | Drill 1: fingertip carry | Puck at your side, thumb visibly loose, 30-second hold. Close-up on the thumb knuckle | "Fingers carry it, thumb balances. If the knuckle goes white, I am squeezing." |
+| 8 | Drill 1: fingertip carry | Puck at your side, thumb visibly loose, 30-second hold. Close-up on the thumb knuckle | "Fingers carry it, thumb stays loose. If the knuckle goes white, I am squeezing." |
 | 9 | Drill 2: thumb pop | Wrist cord on. Dangle, relax the thumb, let it slide out, fingers catch. Slow motion at 120 or 240 fps | "Thumb leaves, fingers stay. If it falls, the fingers were not carrying it." |
 | 10 | Weight pocket | Flip the puck, drop quarters or washers into the pocket, tape over it, hold again | "There is a pocket for coins or washers when you want more weight on the cord drills." |
-| 11 | Rev Spinner on carpet | Kneel, fingers in, short pendulum, lift at the bottom, release onto carpet. The spinner spins in place; the engraved bars flicker | Count out loud until it stops. "Longer spin, more lift. It gives feedback. It does not measure." |
+| 11 | Rev Spinner on carpet | Kneel, fingers in, short pendulum, lift at the bottom, release onto carpet. The spinner spins in place; the engraved bars flicker | Count out loud until it stops. "It is designed to give a cue on finger lift. A longer spin is a rough cue, nothing more. It does not measure revs." |
 | 12 | Verdict and close | You, the puck in hand | Your honest opinion, including what fell short. Your code if you hold one, with both disclosure lines spoken again. End with: "Never throw it. Swing-and-hold and carpet drills only." |
 
 Optional B-roll we would like to see if it is convenient: the sizer plate with your thumb in two neighboring bores, the fit sheet next to the printed part, the drill guide page.
 
 ### 4.5 Talking points
 
-Every talking point below is a green claim or a yellow claim with its qualifier from business plan Part 6. Use any of them in your own words. Please do not go beyond them on our behalf; what you say about your own experience is yours.
+Every talking point below is a green claim or a yellow claim with its qualifier from business plan Part 6. Use any of them in your own words, after the disclosure in 4.2. Please do not go beyond them on our behalf; what you say about your own experience is yours.
 
 **Product facts (green)**
 
-- It is built from your drill sheet: hole sizes in 1/64" steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand, on a regulation 8.5" ball radius.
+- It is built from your drill sheet: hole sizes in 1/64" steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand, on the curvature of a regulation 8.5" ball.
 - The holes are aimed at the ball's center, the way a zero-pitch hole is drilled, so your thumb and fingers oppose each other exactly as on your ball.
 - It weighs about 300 g in PETG at 20% infill, light enough for long holds and heavy enough to need real fingertip pressure. The weight pocket takes coins or washers.
 - Unlike generic one-size trainers and S/M/L wrist braces, it is built from your fit.
@@ -407,13 +407,13 @@ None are required. If you publish, we would appreciate the link at creators@fits
 
 ## 5. Coach program
 
-For private instructors, center coaches, high-school and college coaches, and youth-program directors. The program has four parts: a free configurator seat with a student roster, a trainer printed from the coach's own drill sheet at no charge, team pricing at ten or more units, and a 15% code for students who order alone.
+For private instructors, center coaches, high-school and college coaches, and youth-program directors. The program has four parts: a free configurator seat with a student roster (we keep the roster for the coach at launch, see 5.2), a trainer printed from the coach's own drill sheet at no charge, team pricing at ten or more units, and a 15% code for students who order alone.
 
 ### 5.1 What a coach gets
 
 | Part | What it is | Cost to the coach |
 |---|---|---|
-| Configurator seat | The configurator is free to everyone. A coach seat adds a student roster: named fit sheets saved under the coach's login, team export, the team order form and the team link | Free |
+| Configurator seat | The configurator is free to everyone. A coach seat adds a student roster: named fit sheets saved under the coach's login, team export, the team order form and the team link. At launch we keep the roster for the coach (5.2) | Free |
 | Own trainer | A Rev Puck and Rev Spinner printed from the coach's drill sheet, with sizer plate, tape, cord, card and drill guide, so the coach holds it before putting a name near it | Free. Disclosed as a seeded unit |
 | Team pricing | Reduced prices on orders of ten or more trainers shipped together to the coach or center (5.4) | Per the table |
 | Student code | A `FIT-` code at 15% for students who order on their own at list price (Section 3) | Free |
@@ -513,7 +513,7 @@ If the part does not match your fit sheet, that is a guarantee claim. Email supp
 
 There is no reward for reviewing, and we would not want one to color what you say.
 
-Thank you for bowling with your thumb in.
+Thank you for trying it.
 
 {{founder_name}}
 FitSlice
@@ -553,29 +553,29 @@ Hi {{first_name}},
 
 I make FitSlice, a release trainer printed from a bowler's own drill sheet. It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.
 
-I think it makes a good twenty-minute segment for {{podcast_name}}, for one reason. Your listeners already pay a pro shop to measure their hand to a sixty-fourth of an inch, and most of them have never thought about the fact that the fit exists in exactly one place. Pulling it off the ball raises questions your audience will argue about: what a 1/64" step feels like, why pitch matters more than hole size, and whether an off-lane tool can teach anything at all. I will say plainly what has not been measured.
+I think it makes a good twenty-minute segment for {{podcast_name}}, for one reason. Your listeners already pay a pro shop to measure their hand to a sixty-fourth of an inch, and that fit exists in exactly one place, the ball. Pulling it off the ball raises questions your audience will argue about: what a 1/64" step feels like, why the pro-shop trade body weights pitch at 40% of a fit and hole size at 20%, and whether an off-lane tool can teach anything at all. I will say plainly what has not been measured.
 
-I can bring the part, a sizer plate and the configurator, or send yours ahead so you have held it. Any date after {{available_from}} works.
+I can bring the part, a sizer plate and the configurator, or send you one ahead, printed from your drill sheet and free of charge, so you have held it. If you mention it on air, please say first: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge." Any date after {{available_from}} works.
 
 {{founder_name}}
 FitSlice
 
 ### 7.2 Five talking points
 
-1. **The fit lives in one place.** A pro shop measures the hand to 1/64", chooses two spans and six pitches, and drills them into a ball the bowler can only use on a lane. Bowlers already pay to clone one hole with thumb molds and interchangeable thumb systems. FitSlice prints the whole patch the hand touches, at the real 8.5" radius, with the sheet reproduced in it. To our knowledge it is the first trainer that uses the bowler's actual drill sheet.
+1. **The fit lives in one place.** A pro shop measures the hand to 1/64", chooses two spans and six pitches, and drills them into a ball the bowler can only use on a lane. Bowlers already pay to clone one hole with thumb molds and interchangeable thumb systems. FitSlice prints the whole patch the hand touches, on the curvature of a regulation 8.5" ball, with the sheet reproduced in it. To our knowledge it is the first trainer that uses the bowler's actual drill sheet.
 
-2. **What a fit is made of.** The pro-shop trade body puts hole size at about 20% of a fit; span and pitch are 40% each. Generic practice balls copy none of them. S/M/L wrist braces copy none of them. FitSlice copies all three, and the configurator draws the hole axes so a bowler sees their pitch for the first time.
+2. **What a fit is made of.** The pro-shop trade body puts hole size at about 20% of a fit; span and pitch are 40% each. Generic one-size practice balls use the same holes for every hand. S/M/L wrist braces are sized by hand length. FitSlice copies all three from the bowler's own sheet, and the configurator draws the hole axes so a bowler can see their pitch.
 
-3. **Why a slice works.** A zero-pitch hole is drilled toward the ball's center. On the slice, every hole is aimed at that same center with the bowler's pitches applied, so thumb and fingers oppose each other around the curvature exactly as on the ball. The puck weighs about 300 g, about two percent of a 15-pound ball, which is why it trains feel and habit on its own and takes a weight on the cord for strength work.
+3. **Why a slice works.** A zero-pitch hole is drilled toward the ball's center. On the slice, every hole is aimed at that same center with the bowler's pitches applied, so thumb and fingers oppose each other around the curvature exactly as on the ball. The puck weighs about 300 g, about two percent of a 15-pound ball, which is why, on its own, it is a feel-and-habit tool, and why it takes a weight on the cord for strength work.
 
-4. **What coaches agree on, and what nobody has measured.** Coaches agree the thumb must leave first and a relaxed hand creates more revs, and that oversized holes make you squeeze, which limits hook. The drills practice exactly that: fingertip carries, thumb pops, a spinner you lift onto carpet and count. And here is the honest part: no study has measured whether any off-lane trainer changes rev rate or average. We are running three studies, in order. Thirty pucks measured bore by bore to see if the printer reproduces the sheet. Fifteen bowlers picking their own fit blind from two decoys. Then a six-week randomized pilot with league bowlers, pre-registered, published whatever it finds. Until then the 30-day fit guarantee carries the risk and we quote no numbers.
+4. **What coaches agree on, and what nobody has measured.** Coaches agree the thumb must leave first and a relaxed hand creates more revs, and that oversized holes make you squeeze, which limits hook. The drills are designed to practice that: fingertip carries, thumb pops, a spinner you lift onto carpet and count. And here is the honest part: no study has measured whether any off-lane trainer changes rev rate or average. We are running three studies, in order. Thirty pucks measured bore by bore to see if the printer reproduces the sheet. Fifteen bowlers picking their own fit blind from two decoys. Then a six-week randomized pilot with league bowlers, pre-registered, published whatever it finds. Until then the 30-day fit guarantee carries the risk and we quote no numbers.
 
 5. **The maker story.** A free web configurator rebuilds the model in about a tenth of a second from a typed drill sheet. One printer makes about 25 to 30 pucks a month. A pro shop enters the sheet at the counter and earns 25% without stocking anything, and the bowler's fit stays with the shop that drilled it. A Rev Puck is $89, a Rev Spinner $45, the pair $119, and the files are $29 or $39 for people with their own printer.
 
 ### 7.3 On-air disclosure
 
 - If the host received a seeded pair, the host says at the top of the segment: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge." If the host holds a code: "I earn a commission when you order with my code." Both go in the episode description, first line.
-- The founder says on air that he makes and sells the product. That is obvious and we say it anyway.
+- The founder says on air that FitSlice is the founder's own company and that it sells the product. That is obvious and we say it anyway.
 - If the appearance is paid or the episode is sponsored, the host says "Paid partnership with FitSlice." at the top, and it appears in the description.
 - No host is asked to quote a number, read our copy, or cut a question.
 

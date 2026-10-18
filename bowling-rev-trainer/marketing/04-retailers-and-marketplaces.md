@@ -30,16 +30,16 @@ Hi [Buyer first name],
 
 You already collect drill sheets to drill the balls you ship. FitSlice is a training aid made from that same sheet.
 
-It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere. Each Rev Puck is a slice of regulation 8.5-inch ball surface with the customer's own drill sheet reproduced in it: hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand. The holes are aimed at the ball's center the way a zero-pitch hole is drilled, so the thumb and fingers oppose each other exactly as on the ball. It weighs about 300 g in PETG, with a weight pocket and a wrist-cord tunnel. Coaches agree the thumb must leave first and a relaxed hand creates more revs. The drills practice exactly that, in the bowler's own holes. To our knowledge, it is the first trainer that uses the bowler's actual drill sheet.
+It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere. Each Rev Puck is a slice of regulation 8.5-inch ball surface with the customer's drill sheet reproduced in it: hole sizes in 1/64-inch steps, both spans, every pitch, right or left hand. The holes are aimed at the ball's center the way a zero-pitch hole is drilled, so the thumb and fingers oppose each other exactly as on the ball. Coaches agree the thumb must leave first and a relaxed hand creates more revs. The drills are designed to practice a relaxed hold and a clean, early thumb exit in the bowler's own holes. To our knowledge, it is the first trainer that uses the bowler's actual drill sheet.
 
-The program is built for a retailer that does not want to hold custom inventory:
+How it works for you:
 
-- Five SKUs, $24 to $119 MSRP. You earn 25% at MSRP. MAP is MSRP.
-- We dropship to your customer in 3 to 5 business days from a complete fit sheet, with your packing slip.
-- The customer builds their model in our free configurator through a link that carries your referral code, and the fit sheet attaches to the order.
+- Five products, $24 to $119 MSRP. You earn 25% at MSRP. MAP is MSRP.
+- We dropship in 3 to 5 business days from a complete fit sheet, with your packing slip.
+- Customers use our free configurator through a link with your referral code. Their fit sheet attaches to the order.
 - We carry the 30-day fit guarantee. If the printed holes miss the sheet, we reprint.
 
-I would like 20 minutes to walk you through the configurator and the line sheet. If you send me your own drill sheet, I will print your trainer first and ship it to you at no charge as an evaluation sample. It is not for resale, and if you or your team ever post about it, please say we sent it free.
+I would like 20 minutes to walk you through the configurator and the line sheet. Send me your own drill sheet and I will print your trainer and ship it free as an evaluation sample. It is not for resale and no post or review is expected. If you or your team post about it, please say we sent it free.
 
 Configurator: https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p
 
@@ -61,7 +61,7 @@ Format for each slide: title, on-slide bullets, speaker note. Slide copy is fina
 - A dropship program for online pro shops: 25% margin, no inventory
 - [Photo: Rev Puck beside a drill sheet, hand resting in the holes]
 
-**Speaker note:** Open with the ten-second line, verbatim: "It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere." Then hand the sample across the table. The sample was printed from the buyer's own sheet, so the next question answers itself. Ask it anyway: "Does it feel like your ball?"
+**Speaker note:** Open with the ten-second line, verbatim: "It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere." Then hand the sample across the table. It was printed from the buyer's own sheet and sent free, not for resale. If anyone on the buyer's team posts about it, ask them to say FitSlice sent it free. The sample answers the next question by itself. Ask it anyway: "Does it feel like your ball?"
 
 ### Slide 2. What it is
 
@@ -77,14 +77,14 @@ Format for each slide: title, on-slide bullets, speaker note. Slide copy is fina
 
 ### Slide 3. Why your customer wants it
 
-- Your customers already have a drill sheet. You already collect it to drill the balls you ship.
+- Customers who send you a drill sheet to have a ball drilled already have what FitSlice needs.
 - Coaches agree the thumb must leave first and a relaxed hand creates more revs.
 - The pro-shop trade body puts hole size at about 20% of a fit; span and pitch are 40% each. We copy all three.
 - Coaching sources say oversized holes make you squeeze, and squeezing limits hook.
 - Six drills, 10 to 15 minutes a day: fingertip carries, thumb pops, swing sync, cupped-wrist isometrics, carpet spins, rotation-axis control
 - Designed to practice a relaxed fingertip hold and a clean, early thumb exit, in the bowler's real fit
 
-**Speaker note:** Lead with fit. Fit is a fact we can show on a bench. The coaching statements are attributed consensus, and we present them that way: "coaches agree", "the trade body puts". If the buyer asks whether it raises rev rate, give the honest answer: nobody has measured any off-lane trainer, including us, which is why we are running a pilot and why there is a 30-day fit guarantee. Never quote a number. A retailer who hears us refuse to guess will trust the rest of the deck.
+**Speaker note:** Lead with fit. Fit is a fact we can show on a bench. The coaching statements are attributed consensus, and we present them that way: "coaches agree", "the trade body puts". If the buyer asks whether it raises rev rate, give the honest answer: to our knowledge nobody has measured any off-lane trainer, and we have not measured ours. That is why we are running a pilot and why there is a 30-day fit guarantee. Never quote a number. A retailer who hears us refuse to guess will trust the rest of the deck.
 
 ### Slide 4. Where it sits in your training-aid category
 
@@ -94,19 +94,19 @@ Format for each slide: title, on-slide bullets, speaker note. Slide copy is fina
 | Practice balls with holes | Hand-position feel | Generic one-size holes |
 | Wrist positioners and braces | Hold the wrist during the shot | Sized S/M/L by hand length |
 | Rev-counting apps and sensors | Measure revs from video or sensors | Measure, do not train |
-| **FitSlice** | **Reproduces the bowler's drill sheet off the ball** | **Built from the fit** |
+| **FitSlice** | **Built from the bowler's drill sheet, used off the ball** | **Does not teach footwork, timing or targeting. It copies the fit it is given.** |
 
 - Unlike generic one-size trainers and S/M/L wrist braces, it is built from the bowler's fit.
 - To our knowledge, the first trainer that uses the bowler's actual drill sheet.
 
-**Speaker note:** Compare by category, never by brand. If the buyer names a brand they stock, answer about the category: "A brace holds the wrist for you during the shot. This trains the hand to do it without one." The point of the slide is that FitSlice does not displace anything on their shelf. It is a new line in a category their customers already shop.
+**Speaker note:** Compare by category, never by brand. If the buyer names a brand they stock, answer about the category: "A brace holds the wrist for you during the shot. This is designed for practicing the same hold with the hand alone." The point of the slide is that FitSlice does not displace anything on their shelf. It is a new line in a category their customers already shop.
 
 ### Slide 5. The line and the prices
 
 | SKU | Product | What ships | MSRP | Wholesale | Your margin |
 |---|---|---|---|---|---|
 | FS-KIT | Fit Kit | Sizer plate in 1/64-inch steps, bowler's tape, fitting card. $24 credited toward a trainer. | $24 | $18.00 | 25% |
-| FS-PUCK-R/L | Rev Puck | Drill-sheet-exact grip slice, weight pocket, wrist cord, drill card | $89 | $66.75 | 25% |
+| FS-PUCK-R/L | Rev Puck | Grip slice built from the drill sheet, weight pocket, wrist cord, drill card | $89 | $66.75 | 25% |
 | FS-SPIN-R/L | Rev Spinner | Fingers-only release disc with spin-count bars | $45 | $33.75 | 25% |
 | FS-PAIR-R/L | Pair | Rev Puck and Rev Spinner from one fit sheet | $119 | $89.25 | 25% |
 | FS-DIG-PUCK / FS-DIG-PAIR | Digital Files | STL files and fit sheet for the customer's own printer | $29 / $39 | $21.75 / $29.25 | 25% |
@@ -134,7 +134,7 @@ Format for each slide: title, on-slide bullets, speaker note. Slide copy is fina
 - 25% margin on every SKU, at MSRP, no inventory, no minimums, no case packs
 - No returns to process: custom goods are covered by our 30-day fit guarantee, and we handle reprints directly
 - Weekly invoice for shipped orders, Net 15, ACH or card
-- Flat $9 domestic shipping per parcel billed at cost with the wholesale; Digital Files ship free by email
+- Flat $9 domestic shipping per parcel, billed with the wholesale; Digital Files ship free by email
 - MAP at MSRP across every channel, including our own site and pro shops
 - The Fit Kit is a $24 add-on to a ball order. Its credit code is good on a trainer from the same retailer.
 
@@ -147,7 +147,7 @@ Format for each slide: title, on-slide bullets, speaker note. Slide copy is fina
 - Tournament vendor booths with a sizer plate and a printer running
 - Launch kit for you: product photos, a 15-second thumb-pop clip, the approved copy deck, an email template and the Shopify CSV
 - Available to a launch partner: your referral link in one creator video during your launch quarter, disclosed as above
-- [QUOTE PLACEHOLDER — creator name, channel]
+- [QUOTE PLACEHOLDER — creator name, channel], with the matching disclosure line beside it
 
 **Speaker note:** Be clear about what the creator mentions are. Seeded trainers and affiliate codes are material connections, and we disclose every one in the first line, in plain words, because the FTC Endorsement Guides require it and because it is the right way to treat a retailer's customers. The quote block stays empty until a creator has said something on the record and agreed to its use. We do not write quotes for people.
 
@@ -155,7 +155,7 @@ Format for each slide: title, on-slide bullets, speaker note. Slide copy is fina
 
 **We say**
 
-- Reproduces the drill sheet: 1/64-inch sizes, both spans, every pitch, right or left hand, on a regulation 8.5-inch ball radius
+- Built from the drill sheet: 1/64-inch sizes, both spans, every pitch, right or left hand, on the curvature of a regulation 8.5-inch ball
 - Holes aimed at the ball's center, the way a zero-pitch hole is drilled
 - Coaches agree the thumb must leave first and a relaxed hand creates more revs
 - Designed to practice a relaxed fingertip hold and a clean, early thumb exit
@@ -168,15 +168,15 @@ Format for each slide: title, on-slide bullets, speaker note. Slide copy is fina
 - "Prevents injury" or anything like it
 - Approved, endorsed or recommended by any governing body, tour or coach who has not said so in writing
 - Any ball company's name, or "fits like" anything
-- [PATENT STATUS]
+- Anything about patents until counsel approves the wording: [PATENT STATUS]
 
 **Speaker note:** This slide protects the retailer. Advertising law requires a reasonable basis for objective claims before they are made, and we do not yet have measured results, so we do not make performance claims and we ask partners not to either. The approved copy deck in the launch kit is the whole list. If a partner's copywriter wants a sentence that is not in it, they send it to us first. It is a training aid for use off the lane. It is not a ball, and it is never called one.
 
 ### Slide 10. Next step: a 90-day pilot
 
-- List four SKUs: Fit Kit, Rev Puck, Rev Spinner, Pair. Digital Files optional.
+- List four products: Fit Kit, Rev Puck, Rev Spinner, Pair. Digital Files optional.
 - We deliver the launch kit within 5 business days of a signed dropship agreement
-- Your buyer's sample trainer ships first, printed from their own sheet, at no charge, not for resale
+- Your buyer's sample trainer ships first, printed from their own sheet, at no charge, not for resale. Anyone who posts about it should say FitSlice sent it free.
 - Check-ins at day 45 and day 90: units, sheet-completeness rate, fit-guarantee rate, time to ship
 - Either side may end the pilot on 30 days' notice. Open orders are finished.
 
@@ -262,7 +262,7 @@ For counsel to draft from. Each heading lists the terms the business has decided
 9. **Fit guarantee, reprints and returns.** FitSlice honors the 30-day fit guarantee directly with the customer and keeps the retailer informed. Customer-error reprints at the price in Schedule A. Personalized goods are not returnable for refund; Fit Kits and Digital Files follow Schedule A. The retailer's customer-facing policy for FitSlice products reflects these terms and FitSlice supplies the policy text.
 10. **Payment.** Weekly invoice for orders shipped, Net 15, ACH or card. Fit Kit credits and any guarantee adjustments appear as line items on the next invoice. Late payment interest at a rate counsel sets. FitSlice may pause acceptance of new orders while an invoice is more than 30 days past due.
 11. **MAP policy.** Retailer advertises FitSlice products at no less than MAP in Schedule A. Permitted exceptions: the Fit Kit credit and the Pair bundle price. Two written notices, then FitSlice may suspend the program. Counsel confirms the policy is drafted as a unilateral policy where that matters.
-12. **Marketing, copy and claims.** Retailer uses copy, images and video supplied in Schedule B, or copy approved by FitSlice in writing. Retailer does not make or publish any statement about rev rate, hook, average, injury prevention, or governing-body approval or endorsement, and does not compare FitSlice to any named ball company or its products (Schedule C). Retailer corrects or removes non-conforming copy within two business days of notice. Any creator, affiliate or seeded-product content either party publishes carries a clear material-connection disclosure in the first line. Neither party solicits, writes, buys or suppresses customer reviews; review collection, if any, is hands-off and invites all customers equally.
+12. **Marketing, copy and claims.** Retailer uses copy, images and video supplied in Schedule B, or copy approved by FitSlice in writing. Retailer does not make or publish any statement about rev rate, hook, average, injury prevention, or governing-body approval or endorsement, and does not compare FitSlice to any named ball company or its products (Schedule C). Retailer corrects or removes non-conforming copy within two business days of notice. Any creator, affiliate or seeded-product content either party publishes carries a clear material-connection disclosure in the first line. Neither party writes, buys or suppresses customer reviews, or pays or rewards anyone for a positive one. Review requests, if any, go to all customers equally. Any review or testimonial from a person with a material connection (employee, creator, affiliate, coach) carries the matching disclosure.
 13. **Intellectual property.** FitSlice grants a limited, non-exclusive, revocable license to use the FitSlice name, logos and supplied images solely to sell the products during the term. All designs, the configurator, the fit-sheet format and the generated files remain FitSlice's. The retailer acquires no rights in fit-sheet data beyond its own customer records. [PATENT STATUS]
 14. **Confidentiality.** Wholesale prices, order volumes, capacity figures and this agreement are confidential. Customer data is handled under clause 5.
 15. **Warranties, liability and insurance.** FitSlice warrants products conform to the fit sheet on the order and are free from manufacturing defects, remedied by reprint or refund of wholesale. Products are training aids for use off the lane and are not bowling balls or competition equipment; use instructions and safety warnings are printed on the card and supplied to the retailer for its page. FitSlice carries general and product liability insurance and provides a certificate on request. FitSlice indemnifies the retailer for product defect claims; the retailer indemnifies FitSlice for claims arising from copy or statements the retailer published that were not supplied or approved by FitSlice. Mutual cap at amounts paid under the agreement in the prior 12 months, with exclusions counsel sets.
@@ -292,11 +292,11 @@ FitSlice Rev Puck Custom-Fit Bowling Release Trainer, Printed from Your Drill Sh
 
 It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.
 
-Your pro shop measured your hand to a sixty-fourth of an inch and drilled that fit into a ball you cannot hold at your desk or carry in a backpack. The FitSlice Rev Puck is a 3D-printed slice of regulation 8.5-inch ball surface with your own drill sheet reproduced in it: thumb, middle and ring hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand, through or blind thumb. The holes are aimed at the ball's center the way a zero-pitch hole is drilled, with your pitches applied, so your hand sits exactly as it sits on your ball.
+Your pro shop measured your hand to a sixty-fourth of an inch and drilled that fit into a ball you cannot hold at your desk or carry in a backpack. The FitSlice Rev Puck is a 3D-printed slice of regulation 8.5-inch ball surface with your own drill sheet reproduced in it: thumb, middle and ring hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand, through or blind thumb. The holes are aimed at the ball's center the way a zero-pitch hole is drilled, with your pitches applied, so your thumb and fingers oppose each other exactly as on your ball.
 
 It weighs about 300 g in PETG at 20% infill. A weight pocket in the base takes coins or washers when you want more. A wrist-cord tunnel keeps it on your arm for swing drills.
 
-Coaches agree the thumb must leave first and a relaxed hand creates more revs. The four drills on the card practice exactly that: fingertip carries for a relaxed hold, thumb pops for a clean, early thumb exit, swing sync for timing, and cupped-wrist isometrics. Ten to fifteen minutes a day.
+Coaches agree the thumb must leave first and a relaxed hand creates more revs. The four drills on the card are designed to practice a relaxed hold and a clean, early thumb exit: fingertip carries, thumb pops, slow swing sync to rehearse the release point, and cupped-wrist isometrics. Ten to fifteen minutes a day.
 
 How it is made: every Rev Puck is printed to order from your fit sheet. Enter your drill sheet in the customization fields, or use the link we send after purchase to build your model in the free configurator and return the sheet. Fractions are fine. Printing starts when your sheet is complete and your order ships within 5 business days after that. Finish the fit with bowler's tape, exactly as on a ball.
 
@@ -308,7 +308,7 @@ This is a training aid for use off the lane. It is not a bowling ball and is not
 
 ### Backend search terms (one line, under 250 bytes, no brand names, no repeats)
 
-bowling training aid release trainer thumb exit practice fingertip grip hold custom fit drill sheet one handed league bowler finger lift puck off lane hand strength equipment gift for bowlers
+bowling training aid release trainer thumb exit practice fingertip grip hold custom fit drill sheet one handed league bowler finger lift puck off lane bowling accessory gift for bowlers
 
 ### A+ content module outline
 
@@ -317,7 +317,7 @@ bowling training aid release trainer thumb exit practice fingertip grip hold cus
 3. **Standard Single Image & Sidebar.** Headline: "Built from your fit." Body: the 1/64-inch sizes, both spans, every pitch, right or left hand, holes aimed at the ball's center. Sidebar: "Weighs about 300 g in PETG at 20% infill. Weight pocket. Wrist-cord tunnel." Image: configurator screenshot with bore axes drawn.
 4. **Standard Four Image & Text.** The four Rev Puck drills, one per panel: Fingertip carries. Thumb pops. Swing sync. Cupped-wrist isometrics. Each panel is two sentences from the drill card and names what the drill practices. No results language.
 5. **Standard Comparison Chart.** FitSlice products only: Fit Kit, Rev Puck, Rev Spinner, Pair. Rows: what ships, weight, what it practices, needs a drill sheet, price. No competitor columns.
-6. **Standard Technical Specifications.** Material PETG; infill 20%; weight about 300 g; ball radius reproduced 8.5-inch diameter; hole size steps 1/64 inch; pitches forward/reverse and lateral per hole; hand right or left; thumb through or blind; made to order; ships within 5 business days of a complete fit sheet.
+6. **Standard Technical Specifications.** Material PETG; infill 20%; weight about 300 g; curvature of a regulation 8.5-inch diameter ball; hole size steps 1/64 inch; pitches forward/reverse and lateral per hole; hand right or left; thumb through or blind; made to order; ships within 5 business days of a complete fit sheet.
 7. **Standard Text.** "How your fit sheet reaches us" (customization fields or post-purchase link), the fit guarantee, and the safety paragraph. Legal line: "FitSlice trainers are training aids for use off the lane. They are not bowling balls and are not equipment for sanctioned competition. FitSlice is not affiliated with any ball manufacturer or bowling governing body."
 
 ### Note on collecting the fit sheet on Amazon
@@ -418,7 +418,7 @@ The FitSlice Rev Puck is a 3D-printed slice of regulation 8.5-inch ball surface 
 
 It weighs about 300 g in PETG at 20% infill, light enough for long holds and heavy enough to need real fingertip pressure. A weight pocket in the base takes coins or washers when you want more. A wrist-cord tunnel and a paracord loop keep it on your arm for swing drills.
 
-Coaches agree the thumb must leave first and a relaxed hand creates more revs. The drill card practices exactly that, in your own holes: fingertip carries for a relaxed hold, thumb pops for a clean, early thumb exit, swing sync for timing, and cupped-wrist isometrics. Ten to fifteen minutes a day.
+Coaches agree the thumb must leave first and a relaxed hand creates more revs. The drill card is designed to practice a relaxed hold and a clean, early thumb exit in your own holes: fingertip carries, thumb pops, slow swing sync to rehearse the release point, and cupped-wrist isometrics. Ten to fifteen minutes a day.
 
 How to order: choose your hand, then paste your drill sheet into the personalization box using the template below. Fractions are fine (55/64, 1 1/32, 4-1/2). Or build your model in the free FitSlice configurator, watch your grip appear in 3D, export the fit sheet and paste that instead. I check every sheet before printing and message you if anything is missing. Printing starts when the sheet is complete and your order ships within 5 business days after that. Finish the fit with bowler's tape, exactly as on a ball.
 
@@ -459,9 +459,9 @@ Buyer limit is 1,024 characters. The template uses about 260, and a pasted confi
 
 *Does it feel like my ball?* It is printed from your drill sheet at the real ball curvature, with the holes aimed at the ball's center and your pitches applied. That is the test, and the 30-day fit guarantee covers it.
 
-*Does it add revs?* I do not know, and nobody else does either. No study has measured what an off-lane trainer does to rev rate, and I will not quote a number. Coaches agree the thumb must leave first and a relaxed hand creates more revs. The drills practice exactly those two things, in your real fit.
+*Does it add revs?* I do not know. To my knowledge, no study has measured what an off-lane trainer does to rev rate, and I will not quote a number. Coaches agree the thumb must leave first and a relaxed hand creates more revs. The drills are designed to practice those two things in your real fit.
 
-*Can I just hold my ball instead?* Your ball is 15 pounds and drilled to be thrown. You cannot drop-catch it to practice thumb exit at your desk. This is a third of a kilo and goes in a bag.
+*Can I just hold my ball instead?* Your ball weighs 12 to 16 pounds and is drilled to be thrown. You cannot drop-catch it to practice thumb exit at your desk. This weighs about 300 g and goes in a bag.
 
 *My fit changes.* So does the file. Your sheet is on file, and a reprint from a new sheet is half the price of a new puck.
 
@@ -488,13 +488,13 @@ Column notes:
 ```csv
 Handle,Title,Body (HTML),Vendor,Type,Tags,Published,Option1 Name,Option1 Value,Variant SKU,Variant Price,Variant Inventory Policy,Variant Requires Shipping,Variant Grams
 fitslice-fit-kit,FitSlice Fit Kit,"<p>Find your size before you print your fit. The Fit Kit is a sizer plate printed around the hole sizes you expect, in 1/64-inch steps, with a roll of bowler's tape and a fitting card.</p><ul><li>Printed on the same printer and material as your trainer, so the bore that fits is the bore we print.</li><li>Size engraved beside each bore. The right bore is snug all around at the first joint with no squeeze needed to hang on.</li><li>The $24 is credited toward a Rev Puck, Rev Spinner or Pair with the code in the box.</li></ul><p>Enter your expected thumb, middle and ring sizes in the fields below, or build your plate in the free configurator and paste the fit sheet. Ships in 3 business days. A fitting tool for use off the lane. Not a bowling ball.</p>",FitSlice,Bowling Training Aid,"fitslice, fitslice-fit-kit, bowling, sizer plate, fit kit",TRUE,Title,Default Title,FS-KIT,24.00,continue,TRUE,150
-fitslice-rev-puck,FitSlice Rev Puck,"<p>Your drill sheet, off the ball. It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.</p><ul><li>Reproduces your drill sheet: hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand, through or blind thumb, on the curvature of a regulation 8.5-inch ball.</li><li>Holes are aimed at the ball's center the way a zero-pitch hole is drilled, so your thumb and fingers oppose each other exactly as on your ball.</li><li>About 300 g in PETG at 20% infill. Weight pocket for coins or washers. Wrist-cord tunnel and paracord loop for swing drills.</li><li>Designed to practice a relaxed fingertip hold and a clean, early thumb exit. Four drills on the card. Coaches agree the thumb must leave first and a relaxed hand creates more revs.</li></ul><p>Made to order from the fit sheet you enter below. Ships within 5 business days of a complete sheet. 30-day fit guarantee: if the printed holes do not match your sheet, we reprint free. A training aid for use off the lane. Not a bowling ball. Swing-and-hold drills only; never throw it.</p>",FitSlice,Bowling Training Aid,"fitslice, fitslice-puck, bowling, release trainer, custom fit",TRUE,Hand,Right,FS-PUCK-R,89.00,continue,TRUE,300
+fitslice-rev-puck,FitSlice Rev Puck,"<p>Your drill sheet, off the ball. It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.</p><ul><li>Built from your drill sheet: hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand, through or blind thumb, on the curvature of a regulation 8.5-inch ball.</li><li>Holes are aimed at the ball's center the way a zero-pitch hole is drilled, so your thumb and fingers oppose each other exactly as on your ball.</li><li>About 300 g in PETG at 20% infill. Weight pocket for coins or washers. Wrist-cord tunnel and paracord loop for swing drills.</li><li>Designed to practice a relaxed fingertip hold and a clean, early thumb exit. Four drills on the card. Coaches agree the thumb must leave first and a relaxed hand creates more revs.</li></ul><p>Made to order from the fit sheet you enter below. Ships within 5 business days of a complete sheet. 30-day fit guarantee: if the printed holes do not match your sheet, we reprint free. A training aid for use off the lane. Not a bowling ball. Swing-and-hold drills only; never throw it.</p>",FitSlice,Bowling Training Aid,"fitslice, fitslice-puck, bowling, release trainer, custom fit",TRUE,Hand,Right,FS-PUCK-R,89.00,continue,TRUE,300
 fitslice-rev-puck,,,,,,,,Left,FS-PUCK-L,89.00,continue,TRUE,300
-fitslice-rev-spinner,FitSlice Rev Spinner,"<p>Lift it, spin it, count it. The Rev Spinner is a fingers-only release disc printed from your drill sheet: middle and ring hole sizes in 1/64-inch steps, your finger pitches, right or left hand, on the curvature of a regulation 8.5-inch ball.</p><ul><li>Release it onto carpet from a short pendulum swing and it spins in place. The engraved bars on the base flicker as it spins; count the seconds until it stops. More finger lift, longer spin. It is a feedback device, not a measuring instrument.</li><li>Two drills on the card: carpet spins and rotation-axis control.</li><li>About 100 g in PETG. The product for two-handed bowlers and for anyone working on finger lift.</li></ul><p>Made to order from the fit sheet you enter below. Ships within 3 business days of a complete sheet. 30-day fit guarantee. A training aid for use off the lane. Not a bowling ball. Carpet-release drills only; never throw it.</p>",FitSlice,Bowling Training Aid,"fitslice, fitslice-spinner, bowling, release trainer, finger lift",TRUE,Hand,Right,FS-SPIN-R,45.00,continue,TRUE,100
+fitslice-rev-spinner,FitSlice Rev Spinner,"<p>Lift it, spin it, count it. The Rev Spinner is a fingers-only release disc printed from your drill sheet: middle and ring hole sizes in 1/64-inch steps, your finger pitches, right or left hand, on the curvature of a regulation 8.5-inch ball.</p><ul><li>Release it onto carpet from a short pendulum swing and it spins in place. The engraved bars on the base flicker as it spins; count the seconds until it stops. Designed to give you a cue on finger lift through how long it spins. It is a feedback device. It is not a measuring instrument.</li><li>Two drills on the card: carpet spins and rotation-axis control.</li><li>About 100 g in PETG. The product for two-handed bowlers and for anyone working on finger lift.</li></ul><p>Made to order from the fit sheet you enter below. Ships within 3 business days of a complete sheet. 30-day fit guarantee. A training aid for use off the lane. Not a bowling ball. Carpet-release drills only; never throw it.</p>",FitSlice,Bowling Training Aid,"fitslice, fitslice-spinner, bowling, release trainer, finger lift",TRUE,Hand,Right,FS-SPIN-R,45.00,continue,TRUE,100
 fitslice-rev-spinner,,,,,,,,Left,FS-SPIN-L,45.00,continue,TRUE,100
-fitslice-pair,FitSlice Pair: Rev Puck and Rev Spinner,"<p>Both trainers from one fit sheet. The Rev Puck is the part of your ball your hand touches, printed with your exact holes, for grip holds, thumb pops, swing sync and cupped-wrist isometrics. The Rev Spinner is the fingers-only disc for carpet spins and rotation-axis control.</p><ul><li>Both reproduce your drill sheet: hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand, on the curvature of a regulation 8.5-inch ball.</li><li>Rev Puck about 300 g with weight pocket and wrist cord. Rev Spinner about 100 g with spin-count bars. Both in PETG at 20% infill.</li><li>Six drills across two cards, 10 to 15 minutes a day. Designed to practice a relaxed fingertip hold, a clean, early thumb exit and finger lift.</li></ul><p>Made to order. Ships within 5 business days of a complete fit sheet. 30-day fit guarantee on both parts. Training aids for use off the lane. Not bowling balls. Never throw them.</p>",FitSlice,Bowling Training Aid,"fitslice, fitslice-pair, bowling, release trainer, custom fit",TRUE,Hand,Right,FS-PAIR-R,119.00,continue,TRUE,400
+fitslice-pair,FitSlice Pair: Rev Puck and Rev Spinner,"<p>Both trainers from one fit sheet. The Rev Puck is the part of your ball your hand touches, printed with your exact holes, for grip holds, thumb pops, swing sync and cupped-wrist isometrics. The Rev Spinner is the fingers-only disc for carpet spins and rotation-axis control.</p><ul><li>Both are built from your drill sheet: hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand, on the curvature of a regulation 8.5-inch ball.</li><li>Rev Puck about 300 g with weight pocket and wrist cord. Rev Spinner about 100 g with spin-count bars. Both in PETG at 20% infill.</li><li>Six drills across two cards, 10 to 15 minutes a day. Designed to practice a relaxed fingertip hold, a clean, early thumb exit and finger lift.</li></ul><p>Made to order. Ships within 5 business days of a complete fit sheet. 30-day fit guarantee on both parts. Training aids for use off the lane. Not bowling balls. Never throw them.</p>",FitSlice,Bowling Training Aid,"fitslice, fitslice-pair, bowling, release trainer, custom fit",TRUE,Hand,Right,FS-PAIR-R,119.00,continue,TRUE,400
 fitslice-pair,,,,,,,,Left,FS-PAIR-L,119.00,continue,TRUE,400
-fitslice-digital-files,FitSlice Digital Files,"<p>Your fit, as files for your own printer. We generate the STL for your Rev Puck, or for your Rev Puck and Rev Spinner, from the fit sheet you enter, plus a sizer-plate STL centered on your sizes and your fit sheet as a JSON file.</p><ul><li>Same geometry as the parts we print, built from your drill sheet.</li><li>Print settings included: PETG or PLA+, 4 walls, 20% gyroid infill, flat side down, no supports.</li><li>Print the sizer plate first. Printed holes come out 0.2 to 0.4 mm small, and the plate calibrates your printer before you print the big part.</li></ul><p>Delivered by email within one business day of a complete fit sheet. If the files do not match your sheet, we regenerate them free. Because we do not control your printer or filament, the fit guarantee on printed dimensions does not apply to digital files. Digital goods are not refundable except where the files are defective.</p>",FitSlice,Digital Download,"fitslice, fitslice-digital, bowling, stl, digital files",TRUE,Set,Rev Puck files,FS-DIG-PUCK,29.00,continue,FALSE,0
+fitslice-digital-files,FitSlice Digital Files,"<p>Your fit, as files for your own printer. We generate the STL for your Rev Puck, or for your Rev Puck and Rev Spinner, from the fit sheet you enter, plus a sizer-plate STL centered on your sizes and your fit sheet as a JSON file.</p><ul><li>Same geometry as the parts we print, built from your drill sheet.</li><li>Print settings included: PETG or PLA+, 4 walls, 20% gyroid infill, flat side down, no supports.</li><li>Print the sizer plate first. Printed holes come out 0.2 to 0.4 mm small, and the plate calibrates your printer before you print the big part.</li></ul><p>Delivered by email within one business day of a complete fit sheet. If the files do not match your sheet, we regenerate them free. Because we do not control your printer or filament, the fit guarantee on printed dimensions does not apply to digital files. Digital goods are not refundable except where the files are defective. Training aids for use off the lane. Not bowling balls. Never throw them.</p>",FitSlice,Digital Download,"fitslice, fitslice-digital, bowling, stl, digital files",TRUE,Set,Rev Puck files,FS-DIG-PUCK,29.00,continue,FALSE,0
 fitslice-digital-files,,,,,,,,Rev Puck and Rev Spinner files,FS-DIG-PAIR,39.00,continue,FALSE,0
 ```
 
