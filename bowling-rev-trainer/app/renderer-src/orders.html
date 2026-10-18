@@ -1,0 +1,67 @@
+<div id="ob" hidden>
+  <div class="obar" id="ob-bar" role="toolbar" aria-label="Order tools">
+    <button type="button" class="btn small" id="ob-orders">Orders <span class="pill" id="ob-count">0</span></button>
+    <button type="button" class="btn small" id="ob-new">New order</button>
+    <button type="button" class="btn small primary" id="ob-save">Save order</button>
+    <button type="button" class="btn small primary" id="ob-export">Export print files</button>
+    <div class="ocur" id="ob-cur">No order open. Enter a drill sheet, then start a new order.</div>
+  </div>
+
+  <aside class="odrawer" id="ob-drawer" aria-label="Orders" hidden>
+    <div class="odh">
+      <div><strong>Orders</strong><div class="ostats" id="ob-stats"></div></div>
+      <button type="button" class="btn small" id="ob-close" aria-label="Close orders">Close</button>
+    </div>
+
+    <p class="onote" id="ob-recovered" hidden></p>
+
+    <form id="ob-form" class="oform" autocomplete="off" novalidate>
+      <div class="onum" id="ob-num">New order</div>
+      <label class="ofield"><span>Customer name</span><input type="text" id="ob-name" maxlength="120"></label>
+      <div class="orow2">
+        <label class="ofield"><span>Email</span><input type="text" id="ob-email" maxlength="200" inputmode="email"></label>
+        <label class="ofield"><span>Phone</span><input type="text" id="ob-phone" maxlength="60" inputmode="tel"></label>
+      </div>
+      <label class="ofield"><span>Ship-to address</span><textarea id="ob-address" rows="2" maxlength="400"></textarea></label>
+      <div class="orow2">
+        <label class="ofield"><span>Product</span><select id="ob-product"></select></label>
+        <label class="ofield"><span>Price ($)</span><input type="text" id="ob-price" inputmode="decimal"></label>
+      </div>
+      <label class="ofield"><span>Status</span>
+        <select id="ob-status">
+          <option value="new">New</option><option value="printing">Printing</option><option value="shipped">Shipped</option>
+          <option value="done">Done</option><option value="hold">On hold</option>
+        </select></label>
+      <label class="ofield"><span>Notes (not printed on any file)</span><textarea id="ob-notes" rows="3" maxlength="4000"></textarea></label>
+      <p class="onote">The drill sheet values come from the form on the main screen and are saved with the order.</p>
+      <div class="oactions">
+        <button type="submit" class="btn small primary" id="ob-form-save">Save order</button>
+        <button type="button" class="btn small primary" id="ob-form-export">Save and export print files</button>
+        <button type="button" class="btn small" id="ob-open-folder">Open files folder</button>
+        <button type="button" class="btn small" id="ob-delete">Delete</button>
+      </div>
+      <p class="oerr" id="ob-err" role="alert" hidden></p>
+    </form>
+
+    <div class="olisthead">
+      <input type="text" id="ob-search" placeholder="Search name, order number, notes" aria-label="Search orders">
+      <select id="ob-filter" aria-label="Filter by status">
+        <option value="">All</option><option value="new">New</option><option value="printing">Printing</option>
+        <option value="shipped">Shipped</option><option value="done">Done</option><option value="hold">On hold</option>
+      </select>
+    </div>
+    <div class="olist" id="ob-list" role="list"></div>
+    <div class="oactions">
+      <button type="button" class="btn small" id="ob-csv">Export orders to spreadsheet</button>
+      <button type="button" class="btn small" id="ob-folder">Open orders folder</button>
+      <button type="button" class="btn small" id="ob-choose">Change orders folder</button>
+    </div>
+    <p class="onote" id="ob-where"></p>
+  </aside>
+
+  <div class="otoast" id="ob-toast" role="status" aria-live="polite" hidden>
+    <span id="ob-toast-text"></span>
+    <button type="button" class="btn small" id="ob-toast-open" hidden>Open folder</button>
+    <button type="button" class="btn small" id="ob-toast-x" aria-label="Dismiss">OK</button>
+  </div>
+</div>

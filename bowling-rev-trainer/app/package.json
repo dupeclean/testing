@@ -1,0 +1,55 @@
+{
+  "name": "fitslice",
+  "productName": "FitSlice",
+  "version": "1.0.0",
+  "description": "Drill sheet in, print-ready STL out, with a local order book. Runs entirely on this computer.",
+  "main": "main.js",
+  "private": true,
+  "license": "UNLICENSED",
+  "author": "FitSlice",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test test/*.test.js",
+    "test:e2e": "node test/e2e.mjs",
+    "build:renderer": "python3 ../configurator/build.py",
+    "dist:win": "electron-builder --win zip --x64 --publish never",
+    "dist:mac": "electron-builder --mac zip --publish never",
+    "dist:linux": "electron-builder --linux AppImage --publish never"
+  },
+  "build": {
+    "appId": "com.fitslice.app",
+    "productName": "FitSlice",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "lib/**",
+      "renderer/**",
+      "package.json"
+    ],
+    "win": {
+      "signAndEditExecutable": false,
+      "extraFiles": [
+        {
+          "from": "docs/START-HERE.txt",
+          "to": "START-HERE.txt"
+        }
+      ]
+    },
+    "artifactName": "FitSlice-${version}-${os}-${arch}.${ext}",
+    "linux": {
+      "extraFiles": [
+        {
+          "from": "docs/START-HERE.txt",
+          "to": "START-HERE.txt"
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "electron": "44.9.0",
+    "electron-builder": "26.15.3"
+  }
+}

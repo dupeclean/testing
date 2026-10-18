@@ -118,28 +118,27 @@ module footprint(w) {
 function surf_z(h, x, y) = h - ball_R + sqrt(ball_R*ball_R - x*x - y*y);
 
 // Drill a gripping hole into a ball-surface body of center height body_h.
-// A zero-pitch bore is aimed at the sphere's center — exactly how a
-// zero-pitch hole is drilled on a real ball — so thumb and fingers
-// oppose each other around the curvature. Pitches are drill-sheet inch
-// offsets, converted to bore-axis angles against the ball radius:
-// fwd_in > 0 is forward (leans toward the grip center), lat_in > 0 is
-// lateral toward the bowling-hand side (auto-mirrored for lefties).
+// The bore axis runs from the surface point above (x, y) through an AIM POINT
+// near the ball's center C. A zero-pitch bore aims exactly at C (how a real
+// ball is drilled), so thumb and fingers oppose each other around the
+// curvature. Pitch is the drill sheet's inch offset of the aim point from C:
+//   fwd_in > 0  forward: toward the grip center. The inner end of the hole
+//               leans toward the fingers for the thumb and toward the thumb
+//               for the fingers; negative is reverse.
+//   lat_in > 0  lateral toward the bowling-hand side (mirrored for lefties).
+// fdir is +1 for the thumb and -1 for the fingers.
 // Depth is measured along the bore axis from the surface.
-module drill(x, y, d, depth, fwd_in, lat_in, body_h, through = false) {
-    r      = sqrt(x*x + y*y);
+module drill(x, y, d, depth, fwd_in, lat_in, body_h, fdir, through = false) {
     zs     = surf_z(body_h, x, y);
-    az     = atan2(y, x);                    // azimuth of this hole
-    tilt   = asin(r/ball_R);                 // radial tilt from vertical
-    fwd    = atan(fwd_in*25.4/ball_R);       // inch pitch -> degrees
-    lat    = atan(lat_in*25.4/ball_R) * mir; // mirrored for left hand
-    // decompose the lateral lean into this hole's local frame
-    teff   = tilt - fwd + lat*cos(az);
-    tlat   = lat*sin(az);
-    translate([x, y, zs]) rotate([0, 0, az]) rotate([tlat, teff, 0]) {
+    aim    = [lat_in*25.4*mir, fwd_in*25.4*fdir, body_h - ball_R];
+    inward = aim - [x, y, zs];
+    out    = -inward / norm(inward);                       // outward unit vector
+    translate([x, y, zs])
+    rotate([0, acos(out[2]), atan2(out[1], out[0])]) {     // maps +Z onto `out`
         // bore (local -Z is into the body)
         translate([0, 0, through ? -130 : -depth])
             cylinder(d = d, h = through ? 165 : depth + 35);
-        // rim chamfer — axis is near the surface normal, so this cuts
+        // rim chamfer: the axis is near the surface normal, so this cuts
         // an even, comfortable ring
         translate([0, 0, -rim_chamfer])
             cylinder(d1 = d, d2 = d + 2*rim_chamfer + 8, h = rim_chamfer + 6);
@@ -177,11 +176,11 @@ module rev_puck() {
         }
 
         // thumb: through bore (thumb seats fully, tip may peek out the bottom)
-        drill(0, -ty, thumb_d, 0, thumb_fwd, thumb_lat, puck_h, through = true);
+        drill(0, -ty, thumb_d, 0, thumb_fwd, thumb_lat, puck_h, +1, through = true);
 
         // fingers: blind fingertip holes, each at its own span, size, pitch
-        drill(x_m, y_m, middle_d, finger_depth, middle_fwd, middle_lat, puck_h);
-        drill(x_r, y_r, ring_d,   finger_depth, ring_fwd,   ring_lat,   puck_h);
+        drill(x_m, y_m, middle_d, finger_depth, middle_fwd, middle_lat, puck_h, -1);
+        drill(x_r, y_r, ring_d,   finger_depth, ring_fwd,   ring_lat,   puck_h, -1);
 
         if (lanyard)
             xtunnel(44, 10, lanyard_d, puck_w + 20);
@@ -202,8 +201,8 @@ module rev_spinner() {
         }
 
         // finger holes, drilled radially (zero pitch)
-        drill(x_m, 0, middle_d, min(finger_depth, 20), 0, 0, spin_h);
-        drill(x_r, 0, ring_d,   min(finger_depth, 20), 0, 0, spin_h);
+        drill(x_m, 0, middle_d, min(finger_depth, 20), 0, 0, spin_h, -1);
+        drill(x_r, 0, ring_d,   min(finger_depth, 20), 0, 0, spin_h, -1);
 
         if (lanyard)
             xtunnel(-spin_d/2 + 18, 8, lanyard_d, spin_d + 20);

@@ -128,6 +128,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
 .howto { font-size: 13.5px; color: var(--muted); margin: 0; }
 .howto b { color: var(--fg); font-weight: 600; }
 @media (prefers-reduced-motion: no-preference) { .seg button, .btn { transition: background .15s, color .15s; } }
+
 </style>
 
 <div class="wrap">
@@ -275,6 +276,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
   </main>
 </div>
 
+
 <script>console.warn( 'Scripts "build/three.js" and "build/three.min.js" are deprecated with r150+, and will be removed with r160. Please use ES Modules or alternatives: https://threejs.org/docs/index.html#manual/en/introduction/Installation' );
 /**
  * @license
@@ -395,24 +397,24 @@ function derive(p) {
 
 const surfZ = (h, x, y) => h - G.R + Math.sqrt(G.R * G.R - x * x - y * y);
 
-// Bore axis for a hole: entry point on the surface and outward unit direction.
-// Pitches are drill-sheet inch offsets against the ball radius; a zero-pitch
-// bore aims at the sphere's center. fwd > 0 forward (toward grip center);
-// lat > 0 toward the bowling-hand side.
-function holeAxis(x, y, fwdIn, latIn, bodyH, mir) {
-  const r = Math.hypot(x, y);
-  const zs = surfZ(bodyH, x, y);
-  const az = Math.atan2(y, x) / DEG;
-  const tilt = Math.asin(Math.min(1, r / G.R)) / DEG;
-  const fwd = Math.atan(fwdIn * IN / G.R) / DEG;
-  const lat = Math.atan(latIn * IN / G.R) / DEG * mir;
-  const teff = tilt - fwd + lat * Math.cos(az * DEG);
-  const tlat = lat * Math.sin(az * DEG);
-  // direction = Rz(az) · Ry(teff) · Rx(tlat) · ẑ
-  let v = [0, -Math.sin(tlat * DEG), Math.cos(tlat * DEG)];
-  v = [v[0] * Math.cos(teff * DEG) + v[2] * Math.sin(teff * DEG), v[1], -v[0] * Math.sin(teff * DEG) + v[2] * Math.cos(teff * DEG)];
-  v = [v[0] * Math.cos(az * DEG) - v[1] * Math.sin(az * DEG), v[0] * Math.sin(az * DEG) + v[1] * Math.cos(az * DEG), v[2]];
-  return { p: [x, y, zs], dir: v, az, teff, tlat };
+// Bore axis for a hole, defined the way a drill sheet defines it.
+// The axis runs from the surface point above (x, y) through an AIM POINT near the
+// ball's center C. A zero-pitch bore aims exactly at C. Pitch is the offset of the
+// aim point from C, in inches:
+//   forward (+)  toward the grip center: the inner end of the hole leans toward the
+//                fingers for the thumb and toward the thumb for the fingers;
+//                reverse (-) leans the other way.
+//   lateral (+)  toward the bowling-hand side of the sheet (right for a righty).
+// fdir is +1 for the thumb (grip center is toward +y) and -1 for the fingers.
+// Returns the entry point, the outward unit direction, and the Euler rotation that
+// turns +Z into that direction.
+function holeAxis(x, y, fwdIn, latIn, bodyH, mir, fdir) {
+  const P = [x, y, surfZ(bodyH, x, y)];
+  const A = [latIn * IN * mir, fwdIn * IN * fdir, bodyH - G.R];   // aim point
+  const d = [A[0] - P[0], A[1] - P[1], A[2] - P[2]];              // into the body
+  const n = Math.hypot(d[0], d[1], d[2]);
+  const u = [-d[0] / n, -d[1] / n, -d[2] / n];                    // outward
+  return { p: P, dir: u, rot: [0, Math.acos(Math.max(-1, Math.min(1, u[2]))) / DEG, Math.atan2(u[1], u[0]) / DEG] };
 }
 
 // ---------------------------------------------------------------------------
@@ -424,14 +426,14 @@ function makeBuilder(W) {
   const T = (m) => { trash.push(m); return m; };
   const flush = () => { for (const m of trash) { try { m.delete(); } catch (_) { /* already freed */ } } trash.length = 0; };
 
-  function drill(x, y, d, depth, fwdIn, latIn, bodyH, through, mir) {
-    const ax = holeAxis(x, y, fwdIn, latIn, bodyH, mir);
+  function drill(x, y, d, depth, fwdIn, latIn, bodyH, through, mir, fdir) {
+    const ax = holeAxis(x, y, fwdIn, latIn, bodyH, mir, fdir);
     const bore = through
       ? T(T(Manifold.cylinder(165, d / 2, d / 2, G.seg_hole)).translate([0, 0, -130]))
       : T(T(Manifold.cylinder(depth + 35, d / 2, d / 2, G.seg_hole)).translate([0, 0, -depth]));
     const cham = T(T(Manifold.cylinder(G.rim_chamfer + 6, d / 2, d / 2 + G.rim_chamfer + 4, G.seg_hole))
       .translate([0, 0, -G.rim_chamfer]));
-    const place = (m) => T(T(T(m.rotate([ax.tlat, ax.teff, 0])).rotate([0, 0, ax.az])).translate(ax.p));
+    const place = (m) => T(T(m.rotate(ax.rot)).translate(ax.p));
     // `bore` alone is used for collision checks: chamfers are allowed to merge
     // at the bridge, exactly like the bevel on a real ball
     return { cut: place(T(bore.add(cham))), bore: place(bore), axis: ax };
@@ -466,9 +468,9 @@ function makeBuilder(W) {
     const prism = T(Manifold.extrude(fp, G.puck_h + 1)); fp.delete();
     const body = T(sph.intersect(prism));
 
-    const thumb = drill(0, -D.ty, D.td, p.thumb_depth, p.thumb_fwd, p.thumb_lat, G.puck_h, p.thumb_through, D.mir);
-    const mid = drill(D.x_m, D.y_m, D.md, p.finger_depth, p.middle_fwd, p.middle_lat, G.puck_h, false, D.mir);
-    const ring = drill(D.x_r, D.y_r, D.rd, p.finger_depth, p.ring_fwd, p.ring_lat, G.puck_h, false, D.mir);
+    const thumb = drill(0, -D.ty, D.td, p.thumb_depth, p.thumb_fwd, p.thumb_lat, G.puck_h, p.thumb_through, D.mir, +1);
+    const mid = drill(D.x_m, D.y_m, D.md, p.finger_depth, p.middle_fwd, p.middle_lat, G.puck_h, false, D.mir, -1);
+    const ring = drill(D.x_r, D.y_r, D.rd, p.finger_depth, p.ring_fwd, p.ring_lat, G.puck_h, false, D.mir, -1);
     axes.push({ name: 'thumb', ...thumb.axis }, { name: 'middle', ...mid.axis }, { name: 'ring', ...ring.axis });
     const cuts = [thumb.cut, mid.cut, ring.cut];
     let tunnel = null, pock = null;
@@ -484,7 +486,7 @@ function makeBuilder(W) {
       warnings.push('The thumb bore breaks into the weight pocket at this span. Turn the pocket off or use a blind thumb hole.');
     if (tunnel && (overlap(mid.bore, tunnel) || overlap(ring.bore, tunnel)))
       warnings.push('A finger bore breaks into the lanyard tunnel. Reduce finger depth or turn the lanyard off.');
-    if (!p.thumb_through && surfZ(G.puck_h, 0, -D.ty) - p.thumb_depth * Math.cos(thumb.axis.teff * DEG) < 3)
+    if (!p.thumb_through && surfZ(G.puck_h, 0, -D.ty) - p.thumb_depth * thumb.axis.dir[2] < 3)
       warnings.push('Blind thumb hole leaves under 3 mm of floor. Shorten the depth or switch to a through bore.');
     const chord = Math.sqrt(G.R * G.R - (G.R - G.puck_h) ** 2);
     if (D.ext_n > chord || D.ext_s > chord)
@@ -497,8 +499,8 @@ function makeBuilder(W) {
     const cyl = T(Manifold.cylinder(G.spin_h + 1, G.spin_d / 2, G.spin_d / 2, 128));
     const body = T(sph.intersect(cyl));
     const depth = Math.min(p.finger_depth, 20);
-    const mid = drill(D.x_m, 0, D.md, depth, 0, 0, G.spin_h, false, D.mir);
-    const ring = drill(D.x_r, 0, D.rd, depth, 0, 0, G.spin_h, false, D.mir);
+    const mid = drill(D.x_m, 0, D.md, depth, 0, 0, G.spin_h, false, D.mir, -1);
+    const ring = drill(D.x_r, 0, D.rd, depth, 0, 0, G.spin_h, false, D.mir, -1);
     const cuts = [mid.cut, ring.cut];
     if (p.lanyard) cuts.push(xtunnel(-G.spin_d / 2 + 18, 8, G.lanyard_d, G.spin_d + 20));
     for (const a of [0, 90])
@@ -1019,9 +1021,40 @@ async function main() {
       return { stl_b64: btoa(b), volume_cm3: data.volume / 1000, bbox: data.bbox, tris: data.tris, warnings: data.warnings };
     },
   };
+
+  // programmatic API used by the desktop app's order book (and tests)
+  window.__cfgApp = {
+    ready: true,
+    getState: () => JSON.parse(JSON.stringify(state)),
+    defaults: () => JSON.parse(JSON.stringify(DEFAULTS)),
+    setState(obj) {
+      for (const k of Object.keys(DEFAULTS)) if (obj && k in obj) state[k] = obj[k];
+      showAll(); schedule();
+    },
+    // Build print files for the given parts from the current form values.
+    // Nothing in the visible form changes.
+    buildFiles(parts, overrides = {}) {
+      const files = [], warnings = [], stats = [], axes = {};
+      let sheet = null;
+      for (const part of parts) {
+        const p = { ...state, ...overrides, part };
+        const data = builder.build(p);
+        const base = fileBase(p, data.derived);
+        files.push({ name: `${base}.stl`, data: toSTL(data.mesh, `${base} - FitSlice ${APP_VERSION}`), part });
+        data.warnings.forEach(w => warnings.push(`${part}: ${w}`));
+        axes[part] = data.axes.map(a => ({ name: a.name, p: a.p, dir: a.dir }));
+        const shell = Math.min(data.volume, data.area * 1.6);
+        stats.push({ part, volume_cm3: +(data.volume / 1000).toFixed(1), bbox_mm: data.bbox.map(v => +v.toFixed(1)),
+          grams_20pct: Math.round(((shell + (data.volume - shell) * 0.2) * 1.27 / 1000) / 5) * 5 });
+        if (!sheet) sheet = fitSheet(p, data.derived, data);
+      }
+      return { files, warnings, stats, axes, fitSheet: sheet };
+    },
+  };
 }
 
 main().catch(e => { console.error(e); const s = document.getElementById('status'); if (s) { s.textContent = 'The geometry engine failed to start: ' + e.message; s.dataset.kind = 'error'; } });
+
 
 </script>
 

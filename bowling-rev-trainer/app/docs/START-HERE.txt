@@ -1,0 +1,79 @@
+FITSLICE 1.0.0
+Drill sheet in, print-ready STL out. Everything stays on this computer.
+No account, no internet connection and no other software are needed.
+
+------------------------------------------------------------------
+1. START THE APP (first time)
+------------------------------------------------------------------
+a. Right-click the zip file and choose "Extract All".
+   Put the folder somewhere you will keep it, for example C:\FitSlice
+   (do not run the app from inside the zip).
+b. Open the folder and double-click  FitSlice.exe
+c. Windows may show a blue box, "Windows protected your PC". That is
+   because the app is not signed with a paid publisher certificate.
+   Click "More info", then "Run anyway". You only do this once.
+d. Tip: right-click FitSlice.exe, "Show more options", "Send to",
+   "Desktop (create shortcut)".
+
+------------------------------------------------------------------
+2. MAKE A CUSTOMER'S PARTS
+------------------------------------------------------------------
+a. Switch the units to INCHES (top right) so you can type the sheet
+   exactly as written: 55/64, 1 1/32, 4-1/2, -1/8.
+b. Fill in the drill sheet: hand, the three hole sizes, both spans,
+   forward/reverse and lateral pitch for each hole, bridge.
+   Check the 3D preview. The blue lines are the hole directions: compare
+   them with the customer's ball.
+c. Click "New order". Type the customer's name (required), pick the
+   product, and click "Save and export print files".
+d. A folder is created for the order, for example
+      Documents\FitSlice Orders\FS-0001 Jordan Lee\
+   It holds the STL file(s), fit_sheet.json and job_sheet.txt.
+   Open the STL in your slicer (PrusaSlicer, Bambu Studio, Cura).
+   Print settings are on the job sheet: PETG, 0.2 mm layers, 4 walls,
+   20% gyroid infill, flat side down, no supports.
+
+------------------------------------------------------------------
+3. RUN YOUR ORDERS
+------------------------------------------------------------------
+Click "Orders" to see every order, search by name or number, change
+the status (New, Printing, Shipped, Done, On hold), and reopen an order
+to see its saved drill sheet again. "Export orders to spreadsheet" makes
+orders.csv you can open in Excel.
+
+Order numbers are never reused, even if you delete an order. Deleting
+an order does not delete its exported files.
+
+------------------------------------------------------------------
+4. WHERE EVERYTHING IS SAVED (and how to back it up)
+------------------------------------------------------------------
+Print files:  Documents\FitSlice Orders\
+              (change it any time: File > Choose orders folder)
+Order book:   %APPDATA%\FitSlice\orders.json
+              (paste %APPDATA%\FitSlice into the File Explorer address bar)
+
+BACK UP the folder %APPDATA%\FitSlice regularly (copy it to a USB stick
+or a cloud folder). It holds your customers' names, contact details
+and drill sheets. The app also keeps one automatic previous copy
+(orders.json.bak) and restores it if the file is ever damaged.
+
+To move to a new computer: copy that folder and your FitSlice Orders
+folder, then install the app the same way.
+
+------------------------------------------------------------------
+5. GOOD TO KNOW
+------------------------------------------------------------------
+- Holes are ROUND. If a sheet lists oval holes, enter the round size
+  that fits (the Fit Kit sizer plate helps you find it) and finish the
+  fit with bowler's tape.
+- Printed holes come out a few tenths of a millimeter small. The app
+  adds a print allowance (0.4 mm by default). Print a sizer plate on your
+  own printer to see what it needs: use product "Fit Kit", then set
+  "Hole sizes come from" to the sizer plate.
+- The model warns you in orange when holes would run into each other.
+  The same warnings are repeated on the job sheet.
+- The training parts are for swing-and-hold and carpet-release drills
+  only. Never throw them.
+
+Questions or problems: write down what you clicked and what the screen
+said, and keep the job_sheet.txt for the order.
