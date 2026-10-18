@@ -20,7 +20,7 @@ You asked for this plainly, so here it is without marketing.
 
 **What the trainer does.** It gives the bowler their exact geometry away from the lane, so three things can be practiced that are hard or impossible to practice with a real ball:
 
-1. **Hanging the weight on relaxed fingertips.** Holding the puck at your side with the thumb loose trains the specific finger-pad strength that lets you *stop squeezing* on real shots. Strength training transfers best to the exact position and task that was trained: a 2025 meta-analysis found roughly half the effect when strength is tested in a different mode than it was trained in [E15], and sport-specific finger loading (hangboards for climbers) raises finger strength measurably in 4–8 weeks [E16][E17]. A generic hand gripper is the wrong shape; the trainer is the right shape by definition.
+1. **Hanging the weight on relaxed fingertips.** Holding the puck at your side with the thumb loose rehearses carrying weight on the finger pads with the thumb doing nothing, which is the habit that lets you *stop squeezing* on real shots. Be clear-eyed about load: a 300 g puck is about 2% of a 15-lb ball, so on its own it trains the feel and the habit, not strength. For strength, hang a weight from the wrist cord (1–3 kg) or fill the pocket; strength training transfers best to the exact position and task that was trained (a 2025 meta-analysis found roughly half the effect when strength is tested in a different mode than it was trained in [E15]), and sport-specific finger loading raises finger strength measurably in 4–8 weeks [E16][E17]. A generic hand gripper is the wrong shape; the loaded trainer is the right shape by definition.
 2. **Thumb-exit timing.** Dangle the puck, relax the thumb and let it slide out while the fingers catch the weight. That is the exact "thumb leaves, fingers stay" moment of a high-rev release, rehearsed in isolation with instant feedback (if the puck falls, the fingers were not carrying it). You cannot safely drill this with a 15-pound ball in your living room.
 3. **Finger lift.** The fingers-only spinner disc is released onto carpet; it spins in place and the engraved bars let you count how long it spins. More lift, longer spin. It is a feedback device, not a measuring instrument.
 
@@ -107,13 +107,17 @@ The pipeline already exists and is in the repository:
 
 Print tolerance is the one technical risk in the chain: printed holes come out 0.2–0.4 mm small, which is why the configurator adds a print allowance and why the Fit Kit sizer exists (it is printed on the same printer and material as the order, so the bore that fits is the bore we print). Selling the Fit Kit first cuts refit risk to near zero.
 
+## 5.4 Product roadmap
+
+Five configurator features are planned that address print tolerance, fit intake for bowlers without a drill sheet, printer calibration and strength loading. They are described in the provisional patent application (kept outside the public repository until it is filed) and are deliberately not detailed here, so that they keep their novelty in jurisdictions without a grace period. See the IP folder.
+
 # 6. Claims we can make
 
 Think of this as the copy deck's legal spine. Green claims are supportable today with the sources in Part 8. Yellow claims need the qualifier shown. Red claims are not available until we have run the pilot in Part 7.
 
 **Green — make freely, cite when challenged**
 
-- "Reproduces your drill sheet: hole sizes in 1/64" steps, both spans, forward/reverse and lateral pitch for every hole, on a regulation 8.5" ball radius." (Product fact; verified against the CAD source to 0.1 mm.)
+- "Built from your drill sheet: hole sizes in 1/64" steps, both spans, forward/reverse and lateral pitch for every hole, on a regulation 8.5" ball radius." (Product fact about the *model*, verified against the CAD source to 0.1 mm. Say "exact" about the printed part only after the dimensional study in Part 7 shows printed bores land within a tape layer of nominal.)
 - "Holes are aimed at the ball's center, the way a zero-pitch hole is drilled, so your thumb and fingers oppose each other exactly as on your ball." (Product fact.)
 - "Coaches agree the thumb must leave first, and a relaxed hand creates more revs." (Attributed coaching consensus [E7][E8][E11].)
 - "The pro-shop trade body puts hole size at about 20% of a fit; span and pitch are 40% each. We copy all three." (Attributed [E13].)
@@ -123,7 +127,7 @@ Think of this as the copy deck's legal spine. Green claims are supportable today
 
 **Yellow — make with the qualifier**
 
-- "*Designed to* build fingertip grip strength in the exact position you bowl in" (not "builds"); back it with the specificity literature [E15][E16] when asked, and never imply a measured result for bowlers.
+- "*Designed for* fingertip grip holds in the exact position you bowl in; add weight on the cord for strength work" (not "builds strength": at 300 g the puck alone is a feel-and-habit tool); back the loaded version with the specificity literature [E15][E16] when asked, and never imply a measured result for bowlers.
 - "*Practice* a clean, early thumb exit" (not "fixes your thumb exit").
 - "*To our knowledge*, the first trainer that uses your actual drill sheet" (we searched; absence of evidence is not proof).
 - "Short daily sessions help keep the feel between league nights" (spacing and skill-decay research supports frequent practice in general [E21][E22], but the effect is task-dependent [E23]; do not claim "science proves 10 minutes a day").
@@ -154,14 +158,15 @@ Avoid anything that promises a number, uses "pro" as an endorsement, or borrows 
 
 # 7. Earning the performance claims: the pilot
 
-Everything the market wants to hear ("it adds revs") is a red claim today. The cheapest honest way to turn it yellow or green:
+Everything the market wants to hear ("it adds revs") is a red claim today, and even "exact fit" is a claim about printed parts that nobody has measured yet. Three cheap studies, in this order:
 
-- **Design:** 24 one-handed league bowlers, randomized to trainer (10 min/day, the six drills in the user guide) plus normal league play, or league play only, for 6 weeks.
-- **Measures:** rev rate from phone slow-motion video using a free rev-counting app [C10] (three sessions baseline, three at week 6, same house, same ball); frames between thumb exit and finger exit; grip-pressure proxy (thumb skin marks and self-rated squeeze); league average for the season.
-- **Pre-register** the outcome measures and publish the result whatever it says. A null result still leaves every green claim intact; a positive one is the whole marketing budget.
-- **Cost:** about 24 pairs of trainers and a coach's time; under $3,000.
+**Study 1, before any marketing spend: does the printer reproduce the sheet?** Print 30 pucks from one specification, measure every bore with pin gauges or a digital caliper (about $100 of tools), and report mean error and standard deviation per hole and per pitch direction. Target: standard deviation under 0.1 mm, with a per-printer compensation offset derived from the data. Drill sheets step in 1/64" (0.4 mm) and bowlers feel one layer of tape, so this is the number the whole product rests on. Also run a heat test (two hours at 65 °C with a weight on the part, then re-measure the bores; PETG softens near 80 °C and parts live in car trunks) and a 10,000-cycle insert/release test with a thumb-sized dowel. Cost under $500.
 
-Until then, performance is communicated as "practice what coaches say matters" and the 30-day fit guarantee carries the risk.
+**Study 2: can bowlers feel their own fit?** For 15 bowlers, print the true specification plus two decoys (thumb hole 1/64" larger and 1/64" smaller) and ask each to pick theirs blind. Nine or more of fifteen correct beats chance (one in three). About 45 prints, roughly $450 of filament. If bowlers cannot pick their own, "exact fit" becomes "built from your drill sheet" and the insert-ready option (bores sized for the bowler's own inserts and thumb slug, Part 5) moves up the roadmap.
+
+**Study 3: the performance pilot.** 20–24 one-handed league bowlers, randomized to trainer (10 min/day, the six drills) plus league play, or league play only, for 6 weeks. Measures: rev rate from 240 fps phone video with a tape stripe on the ball (or two sessions per bowler at a center with Specto, about $10 each [C8]), counted blind to group; frames between thumb clear and finger clear from a side view (consistency of that interval is the more defensible outcome); a hand dynamometer ($30–60) before and after; league sheets for game-1 versus game-3 scores (first-game rust is the observable for "keeps the feel"); comfort ratings, reported as comfort, never as injury. Pre-register the measures and publish whatever comes out. Be honest about power: with n≈20 and roughly ±20 RPM measurement noise this detects a shift of about 30 RPM or more; it is a go/no-go signal, not proof. Cost: 24 pairs plus small gift cards, $1,500–3,000.
+
+Until Study 1 passes, "exact" stays out of headlines; until Study 3 reports, performance is communicated as "practice what coaches say matters" and the 30-day fit guarantee carries the risk.
 
 # 8. Selling it to people who do not know what it is
 
@@ -211,6 +216,10 @@ Until then, performance is communicated as "practice what coaches say matters" a
 3. **Fit transcription errors.** A bowler mistypes a pitch sign and gets a trainer that feels wrong. Mitigations: the configurator shows the hole axes and warns on collisions, the Fit Kit calibrates size on the actual printer, pro shops can enter the sheet, and reprints are cheap.
 4. **Copying.** The design is simple to copy once seen. The moat is the configurator's fit logic, the fit-sheet database and the relationships with coaches, not the shape.
 5. **Data quality in this plan.** Figures were gathered from search excerpts; a few (the 9,000-attendee trade show figure, the two-handed share, the online retail size) are single-source or estimates and are marked as such in Part 11.
+6. **"Exact fit" is a manufacturing claim we have not measured.** The model is exact; the printed bore is whatever the printer makes of it, and bowlers feel one layer of tape. Study 1 in Part 7 is the gate before marketing spend. The insert-ready option (bores that take the bowler's own inserts and thumb slug) is the design answer if printed bores cannot hold the tolerance.
+7. **Can the customer produce a drill sheet?** Many league bowlers never see theirs; the pro shop has it. If most buyers cannot type in a sheet, the pro shop is a gate, not just a channel, and the "copy my ball" service (ship or photograph the ball) becomes the main intake. Cheapest test: a 300-response poll in r/Bowling and the large Facebook groups.
+8. **Heat and durability.** PETG softens near 80 °C and sporting goods live in car trunks; a warped bore destroys the only feature that matters. Test it (Part 7), say so on the card, and offer ASA or polycarbonate blends for hot climates.
+9. **The name sells revs; the evidence sells fit.** "Rev trainer" promises the one thing we cannot yet show. Lead the brand with fit and release practice; treat rev gains as the pilot's hypothesis.
 
 # 11. Evidence tables
 
@@ -328,6 +337,11 @@ The legal and unit-cost research angles returned no sourced findings in this pas
 - Primary-source legal texts and quotes (FTC guides and rules, USBC rules, USPTO) — see the list at the end of Part 9.
 - Shipping rates for a 600–900 g box (USPS Ground Advantage, international), Stripe and Shopify or Etsy plan fees, filament bulk pricing, and a measured electricity draw for the production printer.
 - Real print times on the production printer, to replace the slicer estimates in [X6].
+- What share of league bowlers can produce their drill sheet, and in what form (poll, n≈300).
+- Willingness to pay at $60 / $90 / $120 printed and $10–25 digital (Van Westendorp survey or a three-price landing-page test).
+- Seasonality: league season runs roughly September to April; summer demand is unknown. Launch timing in-season (now) helps the first read.
+- Creator sponsorship rates and conversion for the instruction channels in Part 8, so CAC can be estimated.
+- Whether pro shops will enter a customer's sheet into a third-party tool (call 20 shops).
 
 # 13. First 90 days
 
