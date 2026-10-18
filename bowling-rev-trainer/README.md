@@ -14,6 +14,32 @@ Holes are drilled toward the sphere's center (how a zero-pitch hole is drilled o
 a real ball), plus adjustable forward/reverse pitch — so your thumb and fingers
 oppose each other around the curvature exactly as on your ball.
 
+## The configurator (no software to install)
+
+`configurator/index.html` is a single-file web app: open it in any browser
+(double-click, host it on your site, or use the hosted copy at
+https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p). Type in a pro-shop drill
+sheet and it rebuilds the model in about 100 ms and lets you download the STL
+(the claude.ai copy saves a zip holding the STL and a fit sheet).
+
+- Per-hole **sizes** (thumb, middle, ring), **spans** (middle, ring), and
+  **pitches** — forward/reverse and lateral, per hole, in drill-sheet inches.
+  Fractions are accepted everywhere: `55/64`, `1 1/32`, `4-1/2`.
+- mm or inches, right or left hand, finger depth, through or blind thumb,
+  bridge, weight pocket, lanyard, print allowance.
+- Live 3D preview with the bore axes drawn, so pitch is visible.
+- Geometry checks: it warns when bores would break into each other, the
+  pocket, or the lanyard tunnel, and when a blind thumb floor gets thin.
+- A **sizer plate** generator with bores centered on your expected sizes in
+  1/64" steps (labels engraved), for calibrating a specific printer.
+- Fit-sheet JSON export/import so every order is reproducible.
+
+The browser build and the OpenSCAD source produce the same geometry (checked
+to 0.1 mm in every dimension and 0.12 % in volume across right/left-hand,
+blind/through and custom-pitch cases; `configurator/test/run.mjs`).
+Rebuild after editing `configurator/app.js` or `template.html` with
+`python3 configurator/build.py`.
+
 ## Fit it to your hand first
 
 The STLs here use average-male defaults (110 mm spans, 26 mm thumb, 21.5 mm
