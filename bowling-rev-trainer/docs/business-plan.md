@@ -187,7 +187,7 @@ Until then, performance is communicated as "practice what coaches say matters" a
 2. **The configurator as content.** Short videos of real drill sheets becoming models; a "paste your drill sheet" post in r/Bowling (57K–111K members) [H4].
 3. **Tournaments with vendor areas.** The USBC Open Championships runs about 150 days with more than 58,000 adult bowlers passing through one building [M8]; Junior Gold's trade show is described as drawing over 9,000 attendees [H5]; PBA and PWBA regionals are small, frequent and local [H6]. A booth with a sizer plate and a 3D printer running is a demo that explains itself.
 4. **Pro shops as drill-sheet capture, not shelf space.** No source gives a pro-shop count newer than 458 certified operators in 2017 [M17] or any evidence that shops stock training aids [H7]. Shops matter because they hold the customer's exact specs and the customer's trust: a counter card and a 25% margin for entering the sheet costs nothing and makes the shop the hero.
-5. **Marketplaces for discovery.** Etsy's 6.5% transaction fee covers personalization charges, plus $0.20 listing and 3% + $0.25 processing, with 12–15% on ad-attributed sales [X3]; its single free-text personalization box is a poor fit for a ten-field drill sheet, so Etsy listings link out to the configurator and the fit sheet comes back as the personalization text. Shopify variants cap at 100 combinations, and off-the-shelf parametric configurators cost $199/month and up [H8], which is why the configurator is our own.
+5. **Marketplaces for discovery.** Etsy's 6.5% transaction fee covers personalization charges, plus $0.20 listing and 3% + $0.25 processing, with 12–15% on ad-attributed sales [X3]; its single free-text personalization box is a poor fit for a ten-field drill sheet, so Etsy listings link out to the configurator and the fit sheet comes back as the personalization text. Shopify's variant system is the wrong tool regardless of its limit (the old 100-variant cap was raised to 2,048 in 2024–25; variants still cannot carry a ten-field drill sheet or generate geometry), and off-the-shelf parametric configurators cost $199/month and up [H8], which is why the configurator is our own and writes the fit sheet into the order as line-item properties.
 
 **Launch sequence.** Month 1: 20 seeded trainers to coaches and creators printed from their real sheets, feedback round, fix list. Month 2: Fit Kit and Pair on sale from the configurator; two creator videos live. Month 3: pilot study starts; first pro shop onboarded; Open Championships booth application. Month 6: pilot results published; pricing and claims updated.
 
@@ -301,7 +301,7 @@ Each row is a claim this plan relies on, the value as the source states it, and 
 | H5 | Junior Gold trade show | "over 9,000 attendees" (attribution unconfirmed) | 2025 Junior Gold FAQ PDF | low |
 | H6 | Regional tours | PWBA 10 regionals in 2025; PBA East 4 fall events; super regionals 240 bowlers | pba.com; bowl.com | medium |
 | H7 | Pro shops and training aids | no source on stocking or margins | research gap | — |
-| H8 | Configurator tooling | Shopify variants cap 100; ShapeDiver app $199/mo + subscription | https://apps.shopify.com/shapediver-3d-configurators | medium |
+| H8 | Configurator tooling | ShapeDiver Shopify app $199/mo plus its own subscription, 0 reviews; Shopify's historic 100-variant cap was raised to 2,048 (confirm on Shopify's help center) | https://apps.shopify.com/shapediver-3d-configurators | medium |
 
 ## Costs and platforms [X]
 
