@@ -6,7 +6,7 @@ How to use this file:
 
 - Headings marked `PAGE:` are one page each. Headings marked `BLOCK:` are sections within a page, top to bottom.
 - `[IMAGE: ...]` marks where a photo, render or video goes. The text in the brackets is the brief for whoever shoots or renders it.
-- `[QUOTE PLACEHOLDER — name]` marks where a coach or creator quote goes once that person has actually said it. Ship the page without the block until then.
+- `[QUOTE PLACEHOLDER — name]` marks where a coach or creator quote goes once that person has actually said it and agreed to its use. A quote may describe fit and feel. A quote that states a rev, hook, average or injury result does not go on the site. Ship the page without the block until then.
 - `[PATENT STATUS]` marks the one place a legal status line may go once counsel supplies the wording. Leave it out until then.
 - `{{field}}` in emails is a merge field filled by the shop platform.
 - Claims in this copy are limited to product facts and attributed coaching views. Do not add numbers for revs, hook or average anywhere on the site. Do not name any ball company. The reasons are in the business plan, Part 6 and Part 9.
@@ -70,12 +70,12 @@ Six drills, ten to fifteen minutes. Fingertip carries, thumb pops, swing sync an
 
 **Built for one-handed, thumb-in bowlers who already have a fitted ball.**
 
-If a pro shop has measured your hand and drilled a ball to it, you have a drill sheet. FitSlice reproduces it. That is the whole product.
+If a pro shop has measured your hand and drilled a ball to it, you have a drill sheet. FitSlice builds your trainer from it. That is the whole product.
 
 - **League and tournament bowlers.** You paid for a fit measured to a 64th of an inch. Right now it exists in one place: the ball. Carry it in a bag instead.
-- **Two-handed and thumbless bowlers.** The Rev Puck needs a thumb hole. The Rev Spinner does not. It takes your finger sizes and pitches and trains the finger lift.
+- **Two-handed and thumbless bowlers.** The Rev Puck needs a thumb hole. The Rev Spinner does not. It takes your finger sizes and pitches so you can practice finger lift.
 - **Bowlers between fits.** Your sheet is stored. When the shop changes your pitch or opens the thumb a 64th, a reprint uses the new numbers.
-- **Coaches and pro shops.** Enter a bowler's sheet at the counter and we print and ship it. Details on the Pro Shops page.
+- **Coaches and pro shops.** Enter a bowler's sheet at the counter and we print and ship it. Shops earn 25% on the orders they enter. Details on the Pro Shops page.
 
 Not sure of your sizes? Start with the Fit Kit. It is printed on the same printer that will print your trainer, so the bore that fits your finger is the bore we print.
 
@@ -93,7 +93,7 @@ Drills: fingertip carries, thumb pops, swing sync, cupped-wrist isometrics.
 $89 · See the Rev Puck
 
 **Rev Spinner. The part you release.**
-A fingers-only disc cut from the same ball surface, with your middle and ring holes and pitches. Swing it on a short pendulum, lift with the fingers at the bottom, and let it go onto carpet. It spins in place and the engraved bars on the base flicker while it turns, so you can count the seconds. It spins longer when the fingers lift more. It gives you feedback. It does not measure anything.
+A fingers-only disc cut from the same ball surface, with your middle and ring holes and pitches. Swing it on a short pendulum, lift with the fingers at the bottom, and let it go onto carpet. It spins in place and the engraved bars on the base flicker while it turns, so you can count the seconds. It is designed to spin longer when the fingers lift more. It gives you feedback. It does not measure anything.
 
 Drills: carpet spins, rotation axis control.
 
@@ -109,17 +109,17 @@ Coaches agree the thumb must leave first, and a relaxed hand creates more revs. 
 
 What that means in your hands:
 
-- **A relaxed grip under load.** Hanging the Rev Puck on your fingertips with the thumb loose is designed to build fingertip grip strength in the exact position you bowl in. If your thumb knuckle whitens, you are squeezing. Reset and go again.
+- **A relaxed grip under load.** The Rev Puck is designed for fingertip grip holds in the exact position you bowl in, with the thumb loose and the fingers carrying the weight. At about 300 g it is a feel-and-habit tool. Add weight to the pocket when you want more load. If your thumb knuckle whitens, you are probably squeezing. Reset and go again.
 - **A clean, early thumb exit.** Practice a clean, early thumb exit with the thumb-pop drill: relax the thumb, let it slide out, and let the fingers catch the weight. If the puck falls, the fingers were not carrying it. You cannot drill that safely with a fifteen-pound ball in your living room.
 - **Finger lift you can count.** Release the Rev Spinner onto carpet and count how long it spins. Try to beat your count.
 
-What FitSlice does not do: it does not teach footwork, timing or targeting, and it copies whatever fit you give it. Nobody has measured whether any off-lane trainer changes a bowler's results on the lane, and that includes us. We tell you what it is, and your hand tells you whether it feels like your ball.
+What FitSlice does not do: it does not teach footwork, timing or targeting, and it copies whatever fit you give it. To our knowledge, no study has measured whether any off-lane trainer changes a bowler's results on the lane, and that includes us. We tell you what it is, and your hand tells you whether it feels like your ball.
 
 ### BLOCK: Why it starts from your fit
 
 **Unlike generic one-size trainers and S/M/L wrist braces, it is built from your fit.**
 
-Soft practice balls come with one set of holes. Wrist supports come in small, medium and large. Your ball came with three holes placed to a 64th of an inch at your spans and your pitches. To our knowledge, FitSlice is the first trainer that uses your actual drill sheet.
+Most soft practice balls come with one set of generic holes. Most wrist supports come in small, medium and large. Your ball came with three holes placed to a 64th of an inch at your spans and your pitches. To our knowledge, FitSlice is the first trainer that uses your actual drill sheet.
 
 Same holes. Same pitch. No lane fee.
 
@@ -146,16 +146,16 @@ Disclosure, shown directly under the quotes in the same type size: The coaches a
 **Questions bowlers ask first.**
 
 **Does it feel like my ball?**
-The holes are your sizes, at your spans, with your pitches, on the same 8.5" radius, drilled toward the same center. Your index and pinky rest on the curve. The first thing most people do is check the thumb. Check the thumb.
+The holes are your sizes, at your spans, with your pitches, on the same 8.5" ball surface, drilled toward the same center. Your index and pinky rest on the curve. Check the thumb first.
 
 **Does it add revs?**
-We do not know, and nobody else does either, because no study has measured any off-lane trainer. What it does is let you practice, with your real fit, the two things coaches agree the release depends on: a relaxed hand and an early, clean thumb exit.
+We do not know. To our knowledge, no study has measured any off-lane trainer, ours included. What it does is let you practice, with your real fit, the two things coaches agree the release depends on: a relaxed hand and an early, clean thumb exit.
 
 **I bowl two-handed.**
 The Rev Spinner is your tool. It needs only your finger sizes and pitches.
 
 **My fit changes.**
-So does your file. Your sheet is stored with your order. A reprint with the new sheet costs less than a re-drill.
+So does your file. Your sheet is stored with your order. A reprint with the new sheet typically costs less than a re-drill.
 
 **Do I need a 3D printer?**
 No. We print and ship. If you have a printer, the Digital Files are $29 for the puck and $39 for the pair.
@@ -169,7 +169,7 @@ Link: All questions
 
 **Type in your sheet. See your grip.**
 
-The configurator is free and takes two minutes. Nothing is printed until you say so.
+The configurator is free. Nothing is printed until you say so.
 
 Button: Open the configurator
 Button: Start with the $24 Fit Kit
@@ -200,7 +200,7 @@ Use warning: FitSlice trainers are for swing-and-hold and carpet-release drills 
 
 **Fit Kit**
 
-$24, credited toward any trainer
+$24, credited toward any trainer ordered within 90 days
 
 Tagline: Find your size before you print your fit.
 
@@ -208,12 +208,12 @@ Tagline: Find your size before you print your fit.
 
 **Description**
 
-The Fit Kit is a sizer plate printed on the same printer and material as your trainer, with labeled bores at your expected thumb and finger sizes in 1/64" increments. Find the bore that is snug at the first joint with no squeeze and write the numbers on the fitting card. The $24 is credited toward any trainer you order.
+The Fit Kit is a sizer plate printed on the same printer and material as your trainer, with labeled bores at your expected thumb and finger sizes in 1/64" increments. Find the bore that is snug at the first joint with no squeeze and write the numbers on the fitting card. The $24 is credited toward any trainer you order within 90 days.
 
 **Why start here**
 
 - Printed holes come out a few tenths of a millimeter small. The configurator allows for that, and the Fit Kit confirms the result on the exact printer and filament that will make your part.
-- Bores are centered on the sizes you expect and step up and down in 1/64" increments, so the right size is on the plate even if your guess is off.
+- Bores are centered on the sizes you expect and step up and down in 1/64" increments, so the right size is likely on the plate even if your guess is a little off.
 - Labels are engraved, so the number you read is the number you order.
 - Includes a roll of bowler's tape so you can test a half-size with one layer, the same way you tune your ball.
 - The $24 comes off the price of a Rev Puck, Rev Spinner, Pair or Digital Files order placed within 90 days.
@@ -257,19 +257,19 @@ Tagline: Train the hand that bowls.
 
 **Description**
 
-The Rev Puck is the patch of ball surface your hand touches, printed from your drill sheet: thumb, middle and ring hole sizes in 1/64" steps, both spans, forward or reverse and lateral pitch on every hole, right or left hand, on a regulation 8.5" ball radius. About 300 g in PETG, with a weight pocket and a wrist-cord tunnel.
+The Rev Puck is the patch of ball surface your hand touches, printed from your drill sheet: thumb, middle and ring hole sizes in 1/64" steps, both spans, forward or reverse and lateral pitch on every hole, right or left hand, on a regulation 8.5" ball surface. About 300 g in PETG, with a weight pocket and a wrist-cord tunnel.
 
 **Details**
 
 - Holes are aimed at the ball's center, the way a zero-pitch hole is drilled, so your thumb and fingers oppose each other exactly as on your ball. Your pitches are applied on top of that.
-- Reproduces your drill sheet: hole sizes in 1/64" steps, both spans, forward/reverse and lateral pitch for every hole.
+- Built from your drill sheet: hole sizes in 1/64" steps, both spans, forward/reverse and lateral pitch for every hole.
 - Through thumb or blind thumb, your choice. Fingertip depth is adjustable.
 - Weighs about 300 g at 20% infill. Light enough for long holds, heavy enough to need real fingertip pressure.
 - Weight pocket in the base holds about 100 g of quarters, or washers, for progressive loading. Seal with tape.
 - Wrist-cord tunnel with paracord included. Loop it on for every swing drill.
 - Bores are smoothed by hand before shipping. Finish the fit with bowler's tape, as on your ball.
 - Four drills in the included guide: fingertip carries, thumb pops, swing sync, cupped-wrist isometrics.
-- Designed to build fingertip grip strength in the exact position you bowl in. Practice a clean, early thumb exit without a fifteen-pound ball in the room.
+- Designed for fingertip grip holds in the exact position you bowl in. At about 300 g it is a feel-and-habit tool; add weight to the pocket for more load. Practice a clean, early thumb exit without a fifteen-pound ball in the room.
 
 **What you need to order**
 
@@ -282,7 +282,7 @@ Your drill sheet. Specifically:
 - Lateral pitch on each of the three holes
 - Through or blind thumb
 
-Enter it in the configurator and the 3D preview shows your holes and axes before you order. If you completed a Fit Kit, enter the sizes from your fitting card. If you do not have your sheet, your pro shop has it on file. Ask for a copy, or ask them to enter it for you.
+Enter it in the configurator and the 3D preview shows your holes and axes before you order. If you completed a Fit Kit, enter the sizes from your fitting card. If you do not have your sheet, your pro shop usually has it on file. Ask for a copy, or ask them to enter it for you.
 
 Help: How to read your drill sheet
 
@@ -328,9 +328,9 @@ The Rev Spinner is a fingers-only release disc cut from the same 8.5" ball surfa
 - Your middle and ring hole sizes in 1/64" steps, your forward and lateral pitches, your bridge, right or left hand.
 - Holes aimed at the ball's center with your pitches applied, so your fingers sit as they sit on your ball.
 - Engraved bars on the base flicker as it spins, so you can count seconds until it stops.
-- It spins longer when the fingers lift more at release. It gives feedback. It does not measure anything.
+- It is designed to spin longer when the fingers lift more at release. It gives feedback. It does not measure anything.
 - No thumb hole, so it works for thumb-in, thumbless and two-handed bowlers.
-- About 100 g at 20% infill. Light enough to release onto carpet hundreds of times.
+- About 100 g at 20% infill. Light enough for repeated carpet releases.
 - Two drills in the included guide: carpet spins and rotation axis control.
 
 **What you need to order**
@@ -374,7 +374,7 @@ Tagline: Fit you can practice.
 
 **Description**
 
-The Pair is the Rev Puck and Rev Spinner printed from one fit sheet, so the holes in both parts match each other and your ball. The puck covers the grip and the thumb exit. The spinner covers finger lift. Together they cover six drills in the training guide. One sheet, one order, one box, $15 less than buying separately.
+The Pair is the Rev Puck and Rev Spinner printed from one fit sheet, so the holes in both parts match each other and your drill sheet. The puck covers the grip and the thumb exit. The spinner covers finger lift. Together they cover six drills in the training guide. One sheet, one order, one box, $15 less than buying separately.
 
 **Details**
 
@@ -430,7 +430,7 @@ Digital Files are the same models we print, generated from your drill sheet by t
 - STL files for the Rev Puck, or the Rev Puck and Rev Spinner, built from your sheet. Same geometry we print, checked against the CAD source to 0.1 mm.
 - A sizer plate STL centered on your sizes in 1/64" steps, so you can calibrate your own printer before the big print.
 - Your fit sheet as a printable PDF and as a JSON file the configurator can reload.
-- Our print settings: PETG, 0.2 mm layers, 4 walls, 20% gyroid infill, flat side down, no supports. The puck takes roughly 11 to 20 hours on most printers; the spinner and sizer about 3 to 6 hours each.
+- Our print settings: PETG, 0.2 mm layers, 4 walls, 20% gyroid infill, flat side down, no supports. Slicer estimates are roughly 11 to 20 hours for the puck, depending on your printer, and about 3 to 6 hours each for the spinner and sizer.
 - Personal use license: print as many copies for yourself as you like. Not for resale.
 
 **What you need to order**
@@ -476,12 +476,12 @@ Most sheets have a drawing of a hand or three circles. Around the drawing you wi
 3. **Spans.** Two measurements, usually written along lines from the thumb hole to each finger hole. The middle span is normally a little longer than the ring span. Most shops measure "cut to cut": from the near edge of the thumb hole to the near edge of the finger hole. That is what the configurator uses.
 4. **Forward or reverse pitch.** One fraction with a direction next to each hole: "3/8 fwd", "1/8 rev", "0". Fingers are usually forward. The thumb is often zero or reverse.
 5. **Lateral pitch.** One fraction with "left" or "right" next to each hole, or "0". Often blank, which means zero.
-6. **Grip type.** Fingertip or conventional. FitSlice is built around fingertip grips, which is the standard for a fitted ball.
+6. **Grip type.** Fingertip or conventional. FitSlice is built around fingertip grips.
 7. **Inserts and slugs.** If you use finger inserts, the sheet may list the drilled hole (often 31/32 or 1") and the insert's inner size separately. If you use a thumb slug or interchangeable thumb, the sheet lists the size drilled into the slug.
 8. **Bridge.** The distance between the finger holes. Usually 1/4". Only some sheets list it.
 9. **Date and tape.** How much tape was in the thumb at fitting. Useful to know, but not entered. You finish the fit with tape on the trainer, as on your ball.
 
-If your shop keeps your sheet in software, ask for a printout or a photo. Shops do this routinely.
+If your shop keeps your sheet in software, ask for a printout or a photo.
 
 ### An example sheet
 
@@ -529,7 +529,7 @@ The configurator accepts fractions typed any of these ways: `55/64`, `1 3/64`, `
 
 **Lateral pitch depends on your hand.** The configurator treats pitch toward your bowling-hand side as positive. For a right-handed bowler, "right" is positive and "left" is negative. For a left-handed bowler, "left" is positive and "right" is negative. The preview draws the hole axes, so compare them with your ball before you order.
 
-**Inserts: enter the size your finger feels.** If you use finger inserts, enter the inner size of the insert, the size listed for your finger. The larger hole drilled to accept the insert is a different number. The trainer reproduces what your fingers touch.
+**Inserts: enter the size your finger feels.** If you use finger inserts, enter the inner size of the insert, the size listed for your finger. The larger hole drilled to accept the insert is a different number. The trainer is built around what your fingers touch.
 
 **Spans are cut to cut.** If your shop lists center-to-center spans, say so in the order notes and we will convert them, or ask the shop for the cut-to-cut numbers. The difference is half a thumb hole plus half a finger hole, which is far too much to ignore.
 
@@ -538,7 +538,7 @@ The configurator accepts fractions typed any of these ways: `55/64`, `1 3/64`, `
 - Lateral pitch blank: enter 0.
 - Bridge blank: leave the default 1/4".
 - Finger pitch blank: ask the shop. Do not guess forward pitch.
-- Span blank: ask the shop. The spans are 40% of your fit, by the trade body's own rule of thumb. Do not estimate them.
+- Span blank: ask the shop. Spans are about 40% of a fit, by the pro-shop trade body's rule of thumb. Do not estimate them.
 
 ### Still unsure
 
@@ -681,13 +681,13 @@ support@fitslice.com. This note covers fit-sheet data specifically; our full pri
 
 **Your drill sheet, off the ball. Printing soon.**
 
-It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere. We are printing the first orders now. Put your name down and you will be among the first to order.
+It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere. Orders open soon. Put your name down and you will be among the first to order.
 
 [IMAGE: the Rev Puck held at a bowler's side in a fingertip grip, thumb relaxed, cord on wrist. Same setup as the home hero, tighter crop on the hand.]
 
 - **Built from your own drill sheet.** Hole sizes in 1/64" steps, both spans, forward, reverse and lateral pitch on every hole, right or left hand, on a regulation 8.5" ball surface.
 - **Try the configurator today, free.** Type in your sheet and see your grip in 3D now. When we open orders, your saved sheet is one click from a print.
-- **First on the list, first on the printer.** We print in order. Waitlist members get the order link a week before anyone else, and the Fit Kit at $24 credited toward the trainer.
+- **First on the list, first on the printer.** We print in order. Waitlist members get the order link a week before anyone else. The Fit Kit is $24, credited toward a trainer ordered within 90 days.
 
 ### Form
 
@@ -707,7 +707,7 @@ Under the button: One email when orders open, and at most two before then. Unsub
 
 **You're on the list.**
 
-Check your inbox for a confirmation. In the meantime, two things you can do today: find your drill sheet (your pro shop has it if you don't), and type it into the free configurator to see your grip in 3D. Your saved sheet will be waiting when orders open.
+Check your inbox for a confirmation. In the meantime, two things you can do today: find your drill sheet (your pro shop usually has it if you don't), and type it into the free configurator to see your grip in 3D. Your saved sheet will be waiting when orders open.
 
 Button: Open the configurator
 Link: How to read your drill sheet
@@ -726,7 +726,7 @@ FitSlice is the part of your ball your hand touches, printed with your exact hol
 
 Two things to do before then:
 
-1. **Find your drill sheet.** Your pro shop has it on file. Ask for a copy or a photo. If you are not sure how to read it, this page walks through one line by line: {{help_drill_sheet_url}}
+1. **Find your drill sheet.** Your pro shop usually has it on file. Ask for a copy or a photo. If you are not sure how to read it, this page walks through one line by line: {{help_drill_sheet_url}}
 2. **See your grip.** The configurator is free and runs in your browser: {{configurator_url}}. Type in your sheet and watch the model rebuild. Save the fit sheet it makes; it is what you will order from.
 
 If you have a question about your sheet, reply to this email with a photo of it and we will send back the values.
@@ -747,11 +747,11 @@ Three emails, sent automatically. Merge fields in double braces. Every email end
 
 Subject: Order {{order_number}} confirmed. Check your fit sheet.
 
-Preheader: Your numbers, as we will print them. Reply within 24 hours to change anything.
+Preheader: Your numbers, as we will print them. Reply before printing starts to change anything.
 
 Hi {{first_name}},
 
-Thanks for your order. Here is what we will print, from the fit sheet you entered. Please read it against your drill sheet now. You can change anything free until printing starts, which is usually within 24 hours.
+Thanks for your order. Here is what we will print, from the fit sheet you entered. Please read it against your drill sheet now. You can change anything free until printing starts.
 
 **Order {{order_number}}**
 
@@ -798,7 +798,7 @@ Your {{product_name}} started printing today. It is on the printer for about {{p
 
 Your fit sheet is now locked to this print. After it comes off the bed we smooth the thumb and finger bores and check each one against your sheet before it ships.
 
-**While you wait, the drills.** Your training guide is here: {{training_guide_url}}. The six drills take ten to fifteen minutes. Read the first one, fingertip carries, now: hold the puck at your side in a fingertip grip, thumb loose, fingers carrying the weight, five holds of thirty seconds. If your thumb knuckle whitens, you are squeezing. Reset.
+**While you wait, the drills.** Your training guide is here: {{training_guide_url}}. The six drills take ten to fifteen minutes. Read the first one, fingertip carries, now: hold the puck at your side in a fingertip grip, thumb loose, fingers carrying the weight, five holds of thirty seconds. If your thumb knuckle whitens, you are probably squeezing. Reset.
 
 [IMAGE: a Rev Puck part way through printing, layer lines visible, the three bores forming.]
 
@@ -890,7 +890,7 @@ A hole at this depth and pitch would break into the {{feature}}. Reduce the fing
 
 ### Configurator: blind thumb floor too thin
 
-A blind thumb at this depth leaves too little material under the hole. Reduce the thumb depth, or switch to a through thumb. A through thumb feels the same on your hand and prints with no floor to worry about.
+A blind thumb at this depth leaves too little material under the hole. Reduce the thumb depth, or switch to a through thumb. A through thumb has the same size and pitch and prints with no floor to worry about.
 
 ### Configurator: preview could not load
 
@@ -938,4 +938,4 @@ Your session timed out. Anything you entered in the configurator is saved in thi
 
 **Back shortly.**
 
-We are updating the site. The configurator still works at {{configurator_url}} and your saved fit sheets are safe. Orders reopen within the hour.
+We are updating the site. The configurator still works at {{configurator_url}} and your saved fit sheets are safe. Orders reopen as soon as the update is done.

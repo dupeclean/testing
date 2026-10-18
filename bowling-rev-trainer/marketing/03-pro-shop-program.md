@@ -6,7 +6,7 @@ How to use this file:
 
 - Source of truth for every claim is `docs/business-plan.md` (Part 6, claims) and `README.md` (parts, drills). Language follows `marketing/01-brand-platform.md`. Prices, guarantee terms and reprint prices match `marketing/02-website-copy.md`.
 - `[PATENT STATUS]` marks the one place a legal status line may go once counsel supplies the wording. Leave it out until then.
-- `[QUOTE PLACEHOLDER — name]` marks where an operator quote goes once that operator has actually said it and agreed to its use. Ship the asset without the block until then.
+- `[QUOTE PLACEHOLDER — name]` marks where an operator quote goes once that operator has actually said it and agreed to its use. Ship the asset without the block until then. A quote from an operator who has a free unit, a code or a margin runs with the matching disclosure line beside it.
 - `{{field}}` is a merge field filled from the shop record.
 - The configurator lives at https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p until it is hosted on the site. Every link labeled "configurator" below points there.
 - Shops talk to us at shops@fitslice.com. Bowlers talk to us at support@fitslice.com.
@@ -29,7 +29,7 @@ A pro shop already holds the two things FitSlice needs: the bowler's drill sheet
 4. **Submit the order.** On the Pro Shops order form, the operator enters the shop code, the product (Rev Puck, Rev Spinner, Pair, Fit Kit or Digital Files), the bowler's name and email, the ship-to (shop pickup or bowler's address) and attaches the fit sheet. Under Counter Sale the shop rings the sale at the counter; under Referral the bowler pays FitSlice on the form. Section 3 explains both.
 5. **We confirm.** Within one business day we send the shop and the bowler an order confirmation with the ship date and a copy of the fit sheet as entered. Any correction is free before printing starts.
 6. **We print, check and ship.** PETG, four walls, 20% infill, flat side down. Bores are smoothed and measured against the sheet before packing. Tracking goes to the shop and the bowler.
-7. **The shop stays the fit authority.** Fit questions, re-fits and new sheets go back to the shop. A reprint from a new sheet is cheaper than a re-drill, and it starts with a visit to the counter.
+7. **The shop stays the fit authority.** Fit questions, re-fits and new sheets go back to the shop. By our estimate a reprint from a new sheet costs less than a re-drill, and it starts with a visit to the counter.
 
 Time at the counter: about two minutes to enter and preview a sheet the operator can read at a glance, three to four with a bowler who wants to look at the preview. No part of the flow requires the operator to measure anything they have not already measured.
 
@@ -47,7 +47,7 @@ Either way the shop code is on the order and the shop is credited.
 
 ### 1.4 The shop code stays with the bowler
 
-The shop code is attached to the bowler's fit sheet on our side. For twelve months from the first order, every reorder or reprint from that fit sheet earns the shop its 25%, even when the bowler orders from home. The shop entered the fit; the shop earns on the fit.
+The shop code is attached to the bowler's fit sheet on our side. For twelve months from the first order, every reorder or reprint from that fit sheet earns the shop its 25%, even when the bowler orders from home. The shop entered the fit; the shop earns on the fit. Because the shop is credited for orders placed with its code, the order form and the confirmation email tell the bowler: "This shop earns a margin on FitSlice orders entered here."
 
 ### 1.5 The optional in-store sizer plate demo
 
@@ -56,7 +56,7 @@ Every onboarded shop receives one counter kit at no cost: a printed sizer plate,
 What the plate does for the shop:
 
 - It starts a fit conversation in thirty seconds. A bowler at the counter trying bores is a bowler asking about their grip.
-- It demonstrates the one thing a bowler will test first, which is whether the printed bore feels like their hole. The plate is printed on the same printer and material as the trainer, so the bore that fits is the bore we print.
+- It lets a bowler test the thing they will check first, which is whether a printed bore feels like their hole. The plate is printed on the same printer and in the same material as the trainer, so it shows how each bore size feels in the part we print.
 - It gives the shop a reason to pull the sheet.
 
 What the plate does not do: it does not measure spans or pitches and it does not replace the shop's fitting tools. It calibrates hole size on a printed part. Spans and pitches come from the shop's sheet.
@@ -74,15 +74,15 @@ Approved lines a shop may use in any medium:
 - "Your drill sheet, off the ball."
 - "It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere."
 - "Printed to your pro shop's numbers."
-- "Built from your sheet, to the 64th."
+- "Built from your sheet, in 64ths."
 - "Reproduces your drill sheet: hole sizes in 1/64" steps, both spans, forward/reverse and lateral pitch for every hole, on a regulation 8.5" ball radius."
 - "Coaches agree the thumb must leave first, and a relaxed hand creates more revs."
-- "Designed to build fingertip grip strength in the exact position you bowl in."
+- "Designed for fingertip grip holds in the exact position you bowl in. Add weight on the cord for strength work."
 - "Practice a clean, early thumb exit."
 - "Unlike generic one-size trainers and S/M/L wrist braces, it is built from your fit."
 - "This shop earns a margin on FitSlice orders entered here."
 
-Lines a shop may not use on our behalf: any number for revs, hook, pins or average; "improves", "increases", "fixes", "prevents", "adds"; any ball company's name in a comparison; "approved", "endorsed" or "recommended" by any governing body or association; "patented" or "patent pending".
+Lines a shop may not use on our behalf: any number for revs, hook, pins or average; "improves", "increases", "fixes", "prevents", "adds"; any ball company's name in a comparison; "approved", "endorsed" or "recommended" by any governing body or association; "patented" or "patent pending"; "exact fit" about the printed part; "the first" or "the only" without "to our knowledge"; "builds strength" or "fixes" anything about the bowler's hand or thumb.
 
 ---
 
@@ -105,12 +105,12 @@ WHAT IT IS
 It's the part of your ball your hand touches, printed with your exact holes,
 so you can practice your release anywhere.
 
-A slice of regulation 8.5" ball surface with the bowler's own drill sheet in
-it: hole sizes in 1/64" steps, both spans, forward/reverse and lateral pitch
-on every hole, right or left hand, through or blind thumb. Holes are aimed at
-the ball's center the way a zero-pitch hole is drilled, so thumb and fingers
-oppose each other exactly as on the ball. About 300 g in PETG at 20% infill,
-with a weight pocket and a wrist-cord tunnel.
+A slice with the curvature of a regulation 8.5" ball, built from the bowler's
+own drill sheet: hole sizes in 1/64" steps, both spans, forward/reverse and
+lateral pitch on every hole, right or left hand, through or blind thumb.
+Holes are aimed at the ball's center the way a zero-pitch hole is drilled,
+so thumb and fingers oppose each other exactly as on the ball. About 300 g
+in PETG at 20% infill, with a weight pocket and a wrist-cord tunnel.
 
 Rev Puck      The part the bowler holds. Fingertip carries, thumb pops,
               swing sync, cupped-wrist holds.
@@ -152,12 +152,16 @@ are 40% each. We copy all three from your numbers. When the fit changes, the
 bowler needs a new sheet from you before we print again. Fit questions come
 back to your counter.
 
-What we do not claim: any rev-rate, hook or average result. Nobody has
-measured off-lane trainers, including us. A 30-day fit guarantee carries
-the risk instead: if the part misses the sheet, we reprint free.
+What we do not claim: any rev-rate, hook or average result, or a measured
+printed fit. Nobody has measured off-lane trainers, including us, and we
+have not yet published measurements of printed holes. A 30-day fit
+guarantee carries the risk instead: if the part misses the sheet, we
+reprint free.
 
 --------------------------------------------------------------------------------
 [QUOTE PLACEHOLDER — operator name, shop, city]
+[Beside any quote: the operator's free unit, code or margin, in the standard
+disclosure line.]
 --------------------------------------------------------------------------------
 
 THE COUNTER KIT, FREE WITH ONBOARDING
@@ -226,14 +230,15 @@ None. FitSlice sells direct through its own site and the configurator, through o
 ### 3.7 Co-op and support
 
 - **Counter kit**, free at onboarding: one sizer plate, 25 counter cards, one shelf talker, the shop code. Card refills free on request. A replacement sizer plate free once a year, or sooner if the shop reaches 15 units in a quarter.
-- **Co-op advertising.** FitSlice reimburses 50% of a shop's approved local advertising of FitSlice products, up to 5% of the shop's prior-quarter FitSlice order value at retail. Pre-approval by email is required and the copy must come from Section 1.7 or from `marketing/01-brand-platform.md`. Proof of placement and the invoice are due within 30 days.
-- **Event support.** For a shop's open house, league night or clinic, FitSlice lends two additional sizer plates and sends 50 extra cards, and supplies approved social templates.
+- **Co-op advertising.** FitSlice reimburses 50% of a shop's approved local advertising of FitSlice products, up to 5% of the shop's prior-quarter FitSlice order value at retail. Pre-approval by email is required and the copy must come from Section 1.7 or from `marketing/01-brand-platform.md` and must carry the disclosure line from 3.8. Proof of placement and the invoice are due within 30 days.
+- **Event support.** For a shop's open house, league night or clinic, FitSlice lends two additional sizer plates and sends 50 extra cards, and supplies approved social templates that carry the disclosure line.
 - **Onboarding call.** Fifteen minutes, by video. We enter the first sheet together.
 
 ### 3.8 Conduct
 
 - Claims: shops use the approved lines in Section 1.7 and make no rev-rate, hook, average or injury claims, name no ball company in a comparison, and claim no approval, endorsement or recommendation by any governing body or association.
-- Disclosure: every shop display, post or mention carries "This shop earns a margin on FitSlice orders entered here."
+- Disclosure: every shop display, post or mention carries "This shop earns a margin on FitSlice orders entered here." In a post or video it is the first line, and in a video it is also spoken aloud. A shop that received a free unit also uses: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge."
+- Safe use: shops tell bowlers to use the parts for swing-and-hold and carpet-release drills only, never to throw them, and to supervise children under 12.
 - Data: a drill sheet is personal data tied to a bowler's hand. The shop obtains the bowler's consent before entering it, and FitSlice stores it with the order, states its retention period, and deletes it on the bowler's request.
 - Not a ball: shops do not describe the product as a ball, a mini ball or regulation equipment, and do not suggest it is used in competition.
 
@@ -245,7 +250,7 @@ Either party may end the program with 30 days' written notice. Orders confirmed 
 
 ## 4. Outreach sequence to pro-shop owners
 
-Three emails, each under 150 words in the body. Send from the founder's own address. Day 0, day 7, day 21. Stop the sequence the moment a shop replies.
+Three emails, each under 150 words in the body. Send from the founder's own address. Day 0, day 7, day 21. Stop the sequence the moment a shop replies. Each email ends with an opt-out line and the postal address (commercial email rules apply to emails to businesses too). A "stop" reply ends all contact at once.
 
 ### Email 1 (day 0, cold)
 
@@ -253,9 +258,9 @@ Subject: The drill sheet in your drawer
 
 Hi {{first_name}},
 
-I'm {{founder_name}} from FitSlice. We print a bowler's training aid from their drill sheet: a slice of regulation 8.5" ball surface with their hole sizes to 1/64", both spans and every pitch, so they can practice the grip and thumb exit off the lane.
+I'm {{founder_name}} from FitSlice. We print a bowler's training aid from their drill sheet: a slice with the curvature of a regulation 8.5" ball, with their hole sizes in 1/64" steps, both spans and every pitch, so they can practice the grip and thumb exit off the lane.
 
-Here is the pro-shop part. You enter the sheet at the counter in our free configurator, we print and drop-ship, and you earn 25%. No stock, no sizes to carry, no returns to shelve. It copies the fit you sold. It does not change it, and fit questions come back to you.
+Here is the pro-shop part. You enter the sheet at the counter in our free configurator, we print and drop-ship, and you earn 25%. No stock, no sizes, no returns to shelve. It copies the fit you sold. It does not change it, and fit questions come back to you.
 
 The configurator is at https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p. Type in any sheet and the grip appears in 3D in about a tenth of a second.
 
@@ -263,6 +268,7 @@ Can I send you the one-page sell sheet and terms?
 
 {{founder_name}}
 FitSlice
+Reply "stop" and I will not write again. {{postal_address}}
 
 ### Email 2 (day 7, follow-up with the counter-demo offer)
 
@@ -272,14 +278,15 @@ Hi {{first_name}},
 
 Following up on FitSlice. I'd like to put a demo on your counter at no cost: one printed sizer plate with test bores in 1/64" steps, a stack of counter cards and your shop code.
 
-The plate does two things. Bowlers put their fingers in it and find their size in thirty seconds, which starts a fit conversation at your counter. And it is printed on the same printer and material as the trainer, so the bore that fits is the bore we print.
+The plate does two things. Bowlers put their fingers in it and find their size in thirty seconds, which starts a fit conversation at your counter. And it is printed on the same printer and material as the trainer, so it shows how each bore size feels in the part we print.
 
-If you want, I will enter the first sheet with you over a fifteen-minute call and you can watch the model build. From then on it is a two-minute counter task that pays you 25% of the order.
+I will enter the first sheet with you over a fifteen-minute call and you can watch the model build. From then on it is a two-minute counter task that pays you 25% of the order.
 
 Which afternoon this week or next works for a call?
 
 {{founder_name}}
 FitSlice
+Reply "stop" and I will not write again. {{postal_address}}
 
 ### Email 3 (day 21, break-up)
 
@@ -297,6 +304,7 @@ Thanks for reading, and good luck with league season.
 
 {{founder_name}}
 FitSlice
+Reply "stop" and I will not write again. {{postal_address}}
 
 ---
 
@@ -310,7 +318,7 @@ Use the same script on the phone and in person. On the phone, ask for the operat
 **Qualifying question 1.**
 "How many fingertip drillings for one-handed, thumb-in bowlers do you do in a typical month?"
 
-What it tells you: whether the shop has the customers. Ten or more a month means a steady stream of bowlers with a sheet worth entering. Fewer than five means the shop is mostly house-ball and conventional work, and the spinner is the only product with a market there.
+What it tells you: whether the shop has the customers. Ten or more a month means a steady stream of bowlers with a sheet worth entering. Fewer than five means the shop is mostly house-ball and conventional work, and the Rev Spinner is the product to offer there.
 
 **Qualifying question 2.**
 "When one of those bowlers comes back, can you pull their drill sheet at the counter?"
@@ -320,7 +328,7 @@ What it tells you: whether the shop has the data. A shop that keeps sheets on pa
 **If yes to both: the ask.**
 "Then here is the program. You enter the sheet at the counter in our free configurator, we print it and drop-ship it to you or to the bowler, and you earn 25% of the order. You stock nothing. I'd like to send you a free counter kit, a sizer plate and cards with your shop code, and do a fifteen-minute call where we enter the first sheet together. Can I put you down for {{day}} or {{day}}?"
 
-Hand over the puck. Let them put their hand in it. If they ask whose sheet it is, tell them, and tell them the operator who drilled it. Then hand over the sizer plate and the sell sheet.
+Hand over the puck. Let them put their hand in it. If they ask whose sheet it is, name the bowler or the operator who drilled it only if that person has agreed. Otherwise say it is a real sheet shared with permission. Then hand over the sizer plate and the sell sheet.
 
 **If yes to one.**
 Customers but no sheets on file: "Then start with the next bowler you fit. Enter the sheet while it is in front of you." Sheets but few thumb-in fingertip bowlers: "Then the Rev Spinner is your product. It is fingers only, so it serves your two-handers and your youth bowlers too."
@@ -331,10 +339,10 @@ Customers but no sheets on file: "Then start with the next bowler you fit. Enter
 **Objections you will hear.**
 
 - *"I don't have time at the counter."* "Two minutes with the sheet in front of you. Or the bowler scans the card, enters it themselves at home with your shop code, and you still earn the 25%."
-- *"Does this take drilling away from me?"* "No. It copies the fit you sold. It does not change it. When the bowler's fit changes they need a new sheet from you, and a reprint starts with a visit to your counter."
+- *"Does this take drilling away from me?"* "It is built not to. It copies the fit you sold. It does not change it. When the bowler's fit changes they need a new sheet from you, and a reprint starts with a visit to your counter."
 - *"Who handles problems?"* "We do. Thirty-day fit guarantee: if the part misses the sheet, we reprint free. Fit questions come to you, because you are the fit authority."
 - *"Does it actually add revs?"* "Honest answer: nobody has measured off-lane trainers, including us. It lets a bowler practice the two things coaches say the release depends on, a relaxed hand and an early, clean thumb exit, in their own holes. We do not put a number on it, and we ask you not to either."
-- *"What does it feel like?"* "Put your hand in this one. It is printed PETG, not coverstock, and the bores are smoothed. The bowler finishes the fit with tape, exactly as on a ball."
+- *"What does it feel like?"* "Put your hand in this one. It is printed PETG, not coverstock, and the bores are smoothed. The bowler finishes the fit with tape, as on a ball."
 
 **Close.** Confirm the call time, confirm the email address for the kit, and send Email 2's content as the confirmation within the hour.
 
@@ -350,19 +358,19 @@ FitSlice prints the part of your ball your hand touches, with your exact holes, 
 
 This shop earns a margin on FitSlice orders entered here.
 
-### Counter card, back (39 words)
+### Counter card, back (40 words, plus the disclosure line beside the shop code)
 
-We enter your sheet at the counter: hole sizes to 1/64", both spans, every pitch. Printed to order, shipped to you or held here. 30-day fit guarantee.
+We enter your sheet at the counter: hole sizes in 1/64" steps, both spans, every pitch. Printed to order, shipped to you or held here. 30-day fit guarantee.
 
 Rev Puck $89. Rev Spinner $45. Pair $119. Fit Kit $24, credited.
 
-Design notes for the card: 4" x 6", heavy stock. Front shows the Rev Puck from above, the ball-surface curve obvious, three holes visible. Back carries a QR code to the configurator and a blank line for the shop code so a bowler who orders from home is still credited to the shop. The disclosure line is set in the same size as the body text, not smaller.
+Design notes for the card: 4" x 6", heavy stock. Front shows the Rev Puck from above, the ball-surface curve obvious, three holes visible. Back carries a QR code to the configurator and a blank line for the shop code so a bowler who orders from home is still credited to the shop. The disclosure line, "This shop earns a margin on FitSlice orders entered here.", sits on the front and again next to the shop-code line on the back, because the shop earns on home orders placed with its code. It is set in the same size as the body text, never smaller.
 
 ### Shelf talker (sits beside the sizer plate)
 
 **Find your size before you print your fit.**
 
-Put a finger in the plate. The right bore is snug at the first joint with no squeeze needed to hang on. That is the size we print. Spans and pitches come from your drill sheet, which this shop keeps on file. Ask us to enter it.
+Put a finger in the plate. The right bore is snug at the first joint with no squeeze needed to hang on. Note the label on that bore and tell us. Spans and pitches come from your drill sheet, which this shop keeps on file. Ask us to enter it.
 
 This shop earns a margin on FitSlice orders entered here.
 
@@ -373,10 +381,10 @@ Design notes: 3" x 7" tent card or clip strip. The plate it sits beside is label
 ## 7. Operator FAQ
 
 **1. What am I actually selling?**
-A made-to-order training aid. It is a slice of regulation 8.5" ball surface with your customer's drill sheet reproduced in it: hole sizes in 1/64" steps, both spans, forward/reverse and lateral pitch on every hole, right or left hand, through or blind thumb. The Rev Puck is the part they hold, about 300 g in PETG at 20% infill, with a weight pocket and a wrist cord. The Rev Spinner is a fingers-only disc from the same surface that spins on carpet. The Fit Kit is a sizer plate for finding hole sizes on our printer. It is a trainer. It is not a ball and is not used in competition.
+A made-to-order training aid. It is a slice with the curvature of a regulation 8.5" ball, built from your customer's drill sheet: hole sizes in 1/64" steps, both spans, forward/reverse and lateral pitch on every hole, right or left hand, through or blind thumb. The Rev Puck is the part they hold, about 300 g in PETG at 20% infill, with a weight pocket and a wrist cord. The Rev Spinner is a fingers-only disc from the same surface that spins on carpet. The Fit Kit is a sizer plate for finding hole sizes on our printer. It is a trainer. It is not a ball and is not used in competition.
 
 **2. Does this cannibalize my drilling?**
-No. It copies the fit you sold. It does not change it, and it cannot: the configurator takes your numbers and reproduces them. The pro-shop trade body puts hole size at about 20% of a fit and span and pitch at 40% each, and all three come from your sheet. When a bowler's fit changes, they need a new sheet from you before we print again, so a reprint begins with a visit to your counter. The sizer plate finds the size a printed bore needs to be on our printer; it does not measure spans or pitches and does not replace your fitting tools. If anything, a bowler who practices in their own holes every day has more reason to come back and talk about their fit.
+It is built not to. It copies the fit you sold. It does not change it: the configurator takes your numbers and reproduces them. The pro-shop trade body puts hole size at about 20% of a fit and span and pitch at 40% each, and all three come from your sheet. When a bowler's fit changes, they need a new sheet from you before we print again, so a reprint begins with a visit to your counter. The sizer plate finds the size a printed bore needs to be on our printer; it does not measure spans or pitches and does not replace your fitting tools. We expect a bowler who practices in their own holes to have more reason to come back and talk about their fit. We have no shop data on that yet.
 
 **3. How long does it take at the counter?**
 About two minutes to enter a sheet you can read at a glance and preview it. Three to four if the bowler wants to look at the 3D preview and the hole axes. Fractions go in as written. The configurator warns if two holes would break into each other, so you see a mis-keyed pitch before you submit.
@@ -394,10 +402,10 @@ We do, from our printer. You choose on each order: to your shop for pickup or to
 First, you will usually catch it: the 3D preview draws the hole axes, and we send a confirmation with the sheet as entered within one business day, before printing starts. Corrections at that stage are free. If a wrong sheet gets printed, we reprint at the reduced reprint price ($25 Rev Puck, $15 Rev Spinner, $35 Pair, shipping included). If the part misses the sheet you entered, that is on us and the reprint is free under the 30-day fit guarantee.
 
 **8. What happens when the bowler's fit changes?**
-So does the file. Their fit sheet is stored with their order. You write the new sheet, enter it, and we reprint from it at the reduced reprint price. You earn 25% on the reprint. A reprint costs less than a re-drill, and it keeps the bowler in your shop.
+The file changes with it. Their fit sheet is stored with their order. You write the new sheet, enter it, and we reprint from it at the reduced reprint price. You earn 25% on the reprint. By our estimate a reprint costs less than a re-drill, and it keeps the bowler in your shop.
 
 **9. What can I tell a bowler it does?**
-Say what it is: their drill sheet reproduced on a slice of ball surface, so they can practice their grip and release anywhere. Say what coaches say: the thumb must leave first, and a relaxed hand creates more revs. Say what it is designed for: building fingertip grip strength in the exact position they bowl in, and practicing a clean, early thumb exit. Do not say it adds revs, hook or pins, and do not quote a number. Nobody has measured off-lane trainers, including us, and we would rather you say that plainly than promise something we cannot show.
+Say what it is: their drill sheet reproduced on a slice of ball surface, so they can practice their grip and release anywhere. Say what coaches say: the thumb must leave first, and a relaxed hand creates more revs. Say what it is designed for: fingertip grip holds in the exact position they bowl in, with weight added on the cord for strength work, and practice of a clean, early thumb exit. Say how to use it safely: swing-and-hold and carpet-release drills only, never thrown, and children under 12 only with supervision. Do not say it adds revs, hook or pins, and do not quote a number. Nobody has measured off-lane trainers, including us, and we would rather you say that plainly than promise something we cannot show.
 
 **10. Can I advertise it and sell it online?**
 Yes, at or above MAP (the retail prices on the terms sheet), using the approved lines, with the disclosure line on every post or page: "This shop earns a margin on FitSlice orders entered here." We reimburse half of approved local advertising up to 5% of your prior-quarter FitSlice order value. Send the copy first.
@@ -416,30 +424,31 @@ Written for operators who hold a pro-shop certification. Use as a letter, a talk
 
 ### 8.1 The pitch
 
-You spent the time to get certified because fit is a discipline. You measure to a sixty-fourth. You choose spans and pitches for a hand, not for a size chart. The trade body's own weighting says hole size is about 20% of a fit and span and pitch are 40% each, and your customers pay you because you get all three right.
+You spent the time to get certified because fit is a discipline. You measure to a sixty-fourth. You choose spans and pitches to suit one hand, and no size chart is involved. The trade body's own weighting says hole size is about 20% of a fit and span and pitch are 40% each, and your customers pay you because you get all three right.
 
 Then that fit goes into one place: a fifteen-pound ball the bowler throws a few nights a week. Everything they practice off the lane, they practice in somebody else's holes. The soft practice balls come with one set. The wrist supports come in small, medium and large.
 
-FitSlice puts your fit in their hand. We print the patch of ball surface the hand touches, at the real 8.5" radius, with your sheet in it: their sizes, both spans, every pitch, aimed at the ball's center the way a zero-pitch hole is drilled. About 300 g. It goes in a bag. They can hang it on their fingertips with a loose thumb, pop the thumb and catch the weight, and spin the fingers-only disc on the carpet. Coaches agree the thumb must leave first and a relaxed hand creates more revs. Those are hand skills, and now the hand can practice them in its own geometry.
+FitSlice puts your fit in their hand. We print the patch of ball surface the hand touches, at the real 8.5" radius, with your sheet in it: their sizes, both spans, every pitch, aimed at the ball's center the way a zero-pitch hole is drilled. About 300 g. It goes in a bag. They can hang it on their fingertips with a loose thumb, pop the thumb and catch the weight, and spin the fingers-only disc on the carpet. Coaches agree the thumb must leave first and a relaxed hand creates more revs. Those are hand skills. The puck is designed to let the hand practice them in its own geometry.
 
 We are asking certified operators first because you are the people who can tell whether the bore feels right. Put your hand in one printed from your own sheet. If it does not feel like your ball, tell us, and we will show you where the numbers went.
 
 What the program asks of you is two minutes at the counter and the sheet you already wrote. What it pays is 25% of every order, with no stock. What it leaves alone is your fitting. It copies the fit. It does not change it, and when the fit changes the bowler needs a new sheet from you.
 
-What we do not say, and ask you not to say: any number for revs, hook or average. Nobody has measured off-lane trainers, including us. We are running a pilot and we will publish the result whatever it says. Until then the 30-day fit guarantee carries the risk.
+What we do not say, and ask you not to say: any number for revs, hook or average. Nobody has measured off-lane trainers, including us. We plan a pilot and will publish the result whatever it says. We have also not yet published measurements of printed holes. Until then the 30-day fit guarantee carries the risk.
 
 [QUOTE PLACEHOLDER — certified operator name, shop, city]
+[Beside any quote: the operator's free unit, code or margin, in the standard disclosure line.]
 
 ### 8.2 The certified-operator cohort offer
 
 For the first ten certified operators who onboard:
 
-- A Rev Puck printed from the operator's own drill sheet, free. If the operator posts about it, the post opens with "FitSlice sent me this trainer, printed from my own drill sheet, free of charge."
+- A Rev Puck printed from the operator's own drill sheet, free. If the operator posts about it, the post opens with two lines: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge." and "This shop earns a margin on FitSlice orders entered here."
 - Two sizer plates instead of one, so one can travel to league nights.
 - A named listing at the top of "Where to get your sheet entered" on the Pro Shops page for the first year.
 - A standing invitation to the fit review: before any change to the configurator's hole geometry or print allowance ships, cohort operators see it first and their notes are answered in writing.
 
-In return we ask for one thing: a measured comparison of a printed bore against the bore on the bowler's ball, done with the operator's own gauges, that we may publish with the operator's name. If the numbers are off, we publish that too.
+In return we ask for one thing: a measured comparison of a printed bore against the bore on the bowler's ball, done with the operator's own gauges, that we may publish with the operator's name. If the numbers are off, we publish that too. Wherever we publish it, the free unit and the shop's margin are stated next to the operator's name.
 
 ---
 
@@ -455,10 +464,10 @@ Forty qualified pro-shop conversations (yes to both questions in Section 5) and 
 
 A 10 ft by 10 ft inline booth. Four things on it, nothing else:
 
-1. **A printer, running.** One CoreXY printer printing a Rev Puck from a real sheet, for the whole show. A puck takes most of a day, so the print is always in progress and always visible. Nothing explains "made to order" like watching the thumb bore being laid down.
+1. **A printer, running.** One CoreXY printer printing a Rev Puck from a real sheet, for the whole show. A puck takes most of a day, so the print is always in progress and always visible. Watching the thumb bore being laid down shows what made to order means.
 2. **A counter with three sizer plates.** Attendees try bores. The person at the counter asks, "What do you drill your thumb at?" and hands them the plate. Thirty seconds later there is a fit conversation.
 3. **A tablet with the configurator.** The ninety-second demo (9.3). A stand so the attendee can type their own sheet.
-4. **A rack of finished parts.** Six Rev Pucks and four Rev Spinners printed from real sheets: right and left hand, through and blind thumb, a long span and a short span, one with heavy reverse pitch so the axes look obviously different. Each tagged with its sheet, operator's name withheld unless the operator has agreed.
+4. **A rack of finished parts.** Six Rev Pucks and four Rev Spinners printed from real sheets: right and left hand, through and blind thumb, a long span and a short span, one with heavy reverse pitch so the axes look obviously different. Each tagged with its sheet, operator's name withheld unless the operator has agreed. A tag that names an operator who received the part free says so.
 
 Signage: the primary line, "Your drill sheet, off the ball." The ten-second explanation under it. The product and price table from the sell sheet. The disclosure that seeded units carry. Nothing about revs.
 
@@ -466,7 +475,7 @@ Signage: the primary line, "Your drill sheet, off the ball." The ten-second expl
 
 1. "Tell me your thumb hole size, your spans and your thumb pitch." Type them as they are said. (30 seconds.)
 2. Turn the tablet. The grip is on screen with the axes drawn. "That is your thumb pitch, that is your middle finger. Zero pitch aims at the ball's center, like a real drilling." (20 seconds.)
-3. Hand them the finished puck nearest their numbers from the rack. "That is somebody else's. Yours ships in five business days." (20 seconds.)
+3. Hand them the finished puck nearest their numbers from the rack. "That is somebody else's. Yours ships about five business days after we confirm the order." (20 seconds.)
 4. The two qualifying questions. Write the answers on the lead card. (20 seconds.)
 
 ### 9.4 Staffing
@@ -475,11 +484,11 @@ Two people at all times: one on the counter and the plates, one on the tablet an
 
 ### 9.5 Lead capture
 
-A printed lead card, filled in by us, not the attendee: shop name, operator name, email, phone, the two qualifying answers, Counter Sale or Referral preference, and a checkbox for "print my own sheet." The "print my own sheet" box is the show giveaway: we print a Rev Spinner from the operator's own drill sheet and ship it after the show at no cost. The lead card carries the disclosure in print: "If you post about it, say FitSlice sent it free of charge."
+A printed lead card, filled in by us, not the attendee: shop name, operator name, email, phone, the two qualifying answers, Counter Sale or Referral preference, and a checkbox for "print my own sheet." The "print my own sheet" box is the show giveaway: we print a Rev Spinner from the operator's own drill sheet and ship it after the show at no cost. The lead card carries the disclosure in print: "If you post about it, start with: FitSlice sent me this trainer, printed from my own drill sheet, free of charge. If your shop is in the program, add: This shop earns a margin on FitSlice orders entered here."
 
 ### 9.6 Follow-up cadence
 
-- Day 1 after the show: thank-you email to every lead, with the sell sheet and terms attached and the onboarding call link. Leads who checked "print my own sheet" get the confirmation of their sheet as entered.
+- Day 1 after the show: thank-you email to every lead, with the sell sheet and terms attached, the onboarding call link and the opt-out line from Section 4. Leads who checked "print my own sheet" get the confirmation of their sheet as entered.
 - Day 7: Email 2 from Section 4, adapted to mention the booth conversation.
 - Day 21: Email 3 to anyone who has not replied.
 - Spinners ship within three weeks of the show.
@@ -520,13 +529,15 @@ Copy this into the shop record and tick each line.
 - [ ] Call the operator: orders entered, time per entry, questions bowlers asked, anything the configurator should accept that it does not.
 - [ ] Confirm the first statement or payout arrived and matched the orders.
 - [ ] Card refill offered. Co-op pre-approval offered if the shop advertises locally.
-- [ ] Ask for a quote only if the operator volunteers one; record it verbatim and get written agreement before it replaces a `[QUOTE PLACEHOLDER — name]`.
+- [ ] Ask for a quote only if the operator volunteers one; record it verbatim and get written agreement before it replaces a `[QUOTE PLACEHOLDER — name]`. Run it with the matching disclosure line beside it, and do not use a quote that states a result.
 
 ---
 
 ## 11. Quarterly incentive math
 
-What a shop earns at 2, 5 and 10 units a month, shown two ways: every unit a Rev Puck ($89), and every unit a Pair ($119). A real shop's mix lands between them; Fit Kits and Spinners pull the average down, Pairs pull it up. Base margin is 25% of retail. The volume bonus is 2.5% of the quarter's retail value at 15 to 29 units and 5% at 30 or more.
+What a shop earns at 2, 5 and 10 units a month, shown two ways: every unit a Rev Puck ($89), and every unit a Pair ($119). A shop's mix would land between them; Fit Kits and Spinners pull the average down, Pairs pull it up. Base margin is 25% of retail. The volume bonus is 2.5% of the quarter's retail value at 15 to 29 units and 5% at 30 or more.
+
+These are arithmetic examples at stated volumes. They are not a forecast or a typical result, and FitSlice does not promise any volume. What a shop earns depends on how many sheets it enters and which products its bowlers order.
 
 ### 11.1 Per unit
 
@@ -556,10 +567,10 @@ What a shop earns at 2, 5 and 10 units a month, shown two ways: every unit a Rev
 
 ### 11.4 What the shop puts in
 
-At three minutes of counter time per order, 10 units a month is 30 minutes a month. On Rev Pucks that is $222.50 of base margin a month before the bonus, about $7.40 per counter minute. On Pairs it is $297.50, about $9.90 per counter minute. No shelf space, no inventory dollars, no markdowns.
+At three minutes of counter time per order, 10 units a month is 30 minutes a month. On Rev Pucks that is $222.50 of base margin a month before the bonus and before the shop's own costs, about $7.40 per counter minute. On Pairs it is $297.50, about $9.90 per counter minute. No shelf space, no inventory dollars, no markdowns.
 
 ### 11.5 What comes after the quarter
 
-- The shop code stays on each bowler's fit sheet for twelve months. A shop that enters 30 sheets in a quarter has 30 bowlers whose reprints and reorders earn it 25% for the next year without another counter minute.
-- At 15 units in a quarter the shop also earns a free replacement sizer plate, and its co-op pool for the next quarter is 5% of the quarter's retail value: $66.75 on 15 Rev Pucks, $133.50 on 30, $178.50 on 30 Pairs.
-- Capacity is the ceiling, not demand. One printer makes 25 to 30 pucks a month, so ten shops at 10 units a month need four printers. Shops are onboarded in cohorts matched to that, and a shop that outgrows the cohort's capacity is told so before it happens.
+- The shop code stays on each bowler's fit sheet for twelve months. A shop that enters 30 sheets in a quarter has 30 bowlers whose reprints and reorders earn it 25% for the next year, if they reorder. We have no reorder data yet.
+- At 15 units in a quarter the shop also earns a free replacement sizer plate. At any volume, its co-op reimbursement cap for the next quarter is 5% of the quarter's retail value: $66.75 on 15 Rev Pucks, $133.50 on 30, $178.50 on 30 Pairs.
+- Capacity is a ceiling on volume. One printer makes 25 to 30 pucks a month, so ten shops at 10 units a month need four printers. Shops are onboarded in cohorts matched to that, and a shop that outgrows the cohort's capacity is told so before it happens.
