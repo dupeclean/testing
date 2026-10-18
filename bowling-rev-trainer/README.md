@@ -1,5 +1,16 @@
 # Bowling Rev Trainer (one-handed, thumb-in)
 
+**Project map**
+
+| Where | What |
+|---|---|
+| `trainer.scad`, `stl/`, `generate.py` | Parametric CAD source, default STLs, fit-sheet → STL command-line generator |
+| `configurator/` | Browser configurator (drill sheet in, STL out); hosted copy: https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p |
+| `docs/business-plan.md` | Business plan with evidence tables and claims guide; rendered page: https://claude.ai/artifact/PvBxUpQbEZaXPGcshtbyf2 |
+| `site/` | Deployable landing page with waitlist form; preview: https://claude.ai/artifact/Jj4K6pxdrvyJicbzsicqEj |
+| `marketing/` | Go-to-market kit: brand platform, website copy, pro-shop program, retailer and marketplace pitches, creator program, content and launch calendar, paid funnel, support runbook, target list |
+| `ip/` (local only, not in the public repo) | IP strategy, provisional patent application draft, prior-art memo, filing checklist, figures |
+
 Two 3D-printable training tools for building rev rate (RPM) with a conventional
 one-handed, thumb-in release. Both are slices of a regulation 8.5"-diameter ball
 surface, so the curvature, hole angles, and hand position match a real ball.
