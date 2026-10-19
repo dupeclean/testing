@@ -128,7 +128,7 @@ Do these in order, against the original document where there is one. Thresholds 
 
 | # | Look at | Normal | Hold and ask when |
 |---|---|---|---|
-| 1 | **Hand** | R or L on the sheet matches the Hand setting. Right-hander: with the thumb hole at the bottom as you look at the grip from outside, the middle finger hole sits on the right and the ring on the left | Sheet and order disagree. Notes say "lefty" and the order says Right. Lateral pitches look mirrored |
+| 1 | **Hand** | R or L on the sheet matches the Hand setting. Right-hander: with the thumb hole at the bottom as you look at the grip from outside, the middle finger hole sits on the left and the ring on the right | Sheet and order disagree. Notes say "lefty" and the order says Right. Lateral pitches look mirrored |
 | 2 | **Forward and reverse signs** | Finger holes forward (positive). Thumb zero or reverse (negative) | Any finger hole at reverse. Any thumb forward. A pitch typed without a direction word |
 | 3 | **Thumb size** | 7/8" to 1 1/8" (22 to 28.5 mm). Larger than both finger holes | Outside the range. Smaller than either finger hole, which usually means the numbers were swapped. Hard limit is 21 to 31 mm |
 | 4 | **Finger sizes** | 3/4" to 29/32" (19 to 23 mm) is typical. Ring often a half size under the middle | Outside 19 to 24 mm. 31/32" or 1" on a finger line, which is usually the size drilled for an insert, so it overstates what the finger feels. Hard limit is 17 to 26 mm |
@@ -221,7 +221,7 @@ Two methods. Use the calipers to record the number and the pins for a quick go/n
 | Q7 | Thumb style and depth | Through bore passes a pin to the base. Blind bore depth within ±1 mm of the fit sheet and a floor of at least 3 mm. Finger depth within ±1 mm | Scrap and reprint |
 | Q8 | Spans (puck) | Seat a pin in the thumb bore and one in the finger bore. With the inside jaws, measure the gap between the pins where they leave the surface. Reading within ±0.5 mm of the ordered span, for both fingers | Re-seat and read again. If still outside, hold the part and check the printer's scale with a calibration cube |
 | Q9 | Pitch (puck) | The pins lean the way the preview shows. Second read: the six pitches and their directions on the original document match the JSON | Wrong lean or mismatch: scrap, correct the sheet if the error was ours, reprint |
-| Q10 | Hand | With the thumb hole at the bottom as you look at the grip from outside, a right-hander's middle finger hole is on the right. Mirror for left | Scrap and reprint |
+| Q10 | Hand | With the thumb hole at the bottom as you look at the grip from outside, a right-hander's middle finger hole is on the left and the ring finger hole on the right. Mirror for left | Scrap and reprint |
 | Q11 | Cord (puck) | Paracord threaded through the tunnel. Knots larger than the tunnel opening. A firm hand tug does not move them | Re-thread and re-tie |
 | Q12 | Weight pocket (puck) | Open, empty, no hanging strands | Clear it |
 | Q13 | Bore finish | Smooth with no ridges. No dust left | Wipe and re-check |
@@ -470,7 +470,7 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 >
 > Choose the hand whose fingers go in the holes on your ball. For most bowlers that is the hand they throw with. If you bowl two-handed or switch hands, pick the hand your drill sheet was written for.
 >
-> The Hand setting mirrors the layout. Looking at the grip from outside with the thumb hole at the bottom, a right-hander's middle finger hole is on the right and the ring on the left. Left is the reverse. It also mirrors the lateral pitches, which count as positive toward your bowling-hand side. For a right-hander, "right" is positive and "left" is negative. For a left-hander, "left" is positive and "right" is negative.
+> The Hand setting mirrors the layout. Looking at the grip from outside with the thumb hole at the bottom, a right-hander's middle finger hole is on the left and the ring on the right. Left is the reverse. It also mirrors the lateral pitches, which count as positive toward your bowling-hand side. For a right-hander, "right" is positive and "left" is negative. For a left-hander, "left" is positive and "right" is negative.
 >
 > The 3D preview in the configurator draws every hole axis, so you can compare the lean with your ball before you order: {{configurator_url}}
 >
@@ -952,7 +952,7 @@ Q6  Ring         ____________       ____________    ____________            [ ]
 Q7  Thumb style: through / blind    Depth ordered ____  measured ____   Finger depth ____  [ ]
 Q8  Span middle ordered ____  measured ____     Span ring ordered ____  measured ____   [ ]
 Q9  Pitch lean matches preview [ ]     Second read of original sheet done by: ____ [ ]
-Q10 Hand layout correct (right-hander: middle finger hole on the right) ........ [ ]
+Q10 Hand layout correct (right-hander: middle finger hole on the left) ........ [ ]
 Q11 Cord threaded, knots hold the tug (puck) ...................................... [ ]
 Q12 Weight pocket open and clear (puck) ........................................... [ ]
 Q13 Bore finish smooth, dust removed ............................................... [ ]

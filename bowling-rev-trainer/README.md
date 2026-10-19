@@ -6,6 +6,7 @@
 |---|---|
 | `trainer.scad`, `stl/`, `generate.py` | Parametric CAD source, default STLs, fit-sheet → STL command-line generator |
 | `configurator/` | Browser configurator (drill sheet in, STL out); hosted copy: https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p |
+| `app/` | **FitSlice desktop app** (Electron): the configurator plus a local order book, fully offline; builds a Windows zip. See `app/README.md` and `app/docs/START-HERE.txt` |
 | `docs/business-plan.md` | Business plan with evidence tables and claims guide; rendered page: https://claude.ai/artifact/PvBxUpQbEZaXPGcshtbyf2 |
 | `site/` | Deployable landing page with waitlist form; preview: https://claude.ai/artifact/Jj4K6pxdrvyJicbzsicqEj |
 | `marketing/` | Go-to-market kit: brand platform, website copy, pro-shop program, retailer and marketplace pitches, creator program, content and launch calendar, paid funnel, support runbook, 72-row target list; rendered page: https://claude.ai/artifact/6e7gbT4rCUBekwZ4mezmyV |
@@ -58,11 +59,11 @@ fingers, stock pitches). Every number a pro-shop drill sheet carries is a
 parameter, so **copy your drill sheet** — in OpenSCAD's customizer
 (Window → Customizer) or via `generate.py` below:
 
-- `hand` — `right` or `left`; mirrors the layout and lateral pitches.
+- `hand` — `right` or `left`; mirrors the layout and lateral pitches. Seen from outside the grip with the thumb hole at the bottom (as a drill sheet is drawn), a right hand's **middle finger is the left hole** and its ring finger the right hole; a left hand is the mirror image.
 - `span_middle` / `span_ring` — near edge of thumb hole to near edge of each
   finger hole (your middle span is usually 2–4 mm longer than your ring span).
-- `thumb_d`, `middle_d`, `ring_d` — per-hole diameters. **Add ~0.5 mm** to your
-  real sizes: printed holes come out slightly small; sand out or build back with
+- `thumb_d`, `middle_d`, `ring_d` — per-hole diameters. **Add 0.4 mm** to your
+  real sizes (the app's default allowance): printed holes come out slightly small; sand out or build back with
   bowler's tape for final fit, same as a real ball.
 - Pitches, **in drill-sheet inches** (`0.125` = 1/8, `0.375` = 3/8): per hole,
   forward(+)/reverse(−) (`*_fwd`) and lateral (`*_lat`, + = toward your

@@ -22,7 +22,7 @@ hand = "right"; // [right, left]
 span_middle = 110;
 // Ring-finger span. Usually 2–4 shorter than the middle span.
 span_ring = 110;
-// Thumb hole diameter. Real holes run 22–28.5 (7/8"–1 1/8"). Add ~0.5 print allowance; sand/tape to final fit.
+// Thumb hole diameter. Real holes run 22–28.5 (7/8"–1 1/8"). Add ~0.4 mm print allowance; sand/tape to final fit.
 thumb_d = 26;
 // Middle-finger hole diameter. Real holes run 19–23 (3/4"–29/32").
 middle_d = 21.5;
@@ -83,12 +83,14 @@ $fa = 2;
 $fs = 0.6;
 eps = 0.01;
 
-// Looking at the grip from outside (thumb hole at the bottom), a right
-// hander's middle finger sits on the right, ring on the left.
+// Looking at the grip from outside (thumb hole at the bottom, as a drill
+// sheet is drawn), a right hander's fingers run index, middle, ring from the
+// thumb side outward: the middle finger is the LEFT hole, the ring the RIGHT
+// hole. A left hander is the mirror image. (+x is the viewer's right.)
 mir = (hand == "right") ? 1 : -1;
 // Finger hole lateral offsets (inner edges stay `bridge` apart)
-x_m =  mir*(middle_d + bridge)/2;
-x_r = -mir*(ring_d  + bridge)/2;
+x_m = -mir*(middle_d + bridge)/2;
+x_r =  mir*(ring_d  + bridge)/2;
 // Center-to-center distances from the thumb hole, per finger
 cc_m = span_middle + thumb_d/2 + middle_d/2;
 cc_r = span_ring   + thumb_d/2 + ring_d/2;

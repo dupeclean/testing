@@ -25,15 +25,15 @@
       <label class="ofield"><span>Ship-to address</span><textarea id="ob-address" rows="2" maxlength="400"></textarea></label>
       <div class="orow2">
         <label class="ofield"><span>Product</span><select id="ob-product"></select></label>
-        <label class="ofield"><span>Price ($)</span><input type="text" id="ob-price" inputmode="decimal"></label>
+        <label class="ofield"><span>Price ($), blank = list price</span><input type="text" id="ob-price" inputmode="decimal"></label>
       </div>
       <label class="ofield"><span>Status</span>
         <select id="ob-status">
           <option value="new">New</option><option value="printing">Printing</option><option value="shipped">Shipped</option>
           <option value="done">Done</option><option value="hold">On hold</option>
         </select></label>
-      <label class="ofield"><span>Notes (not printed on any file)</span><textarea id="ob-notes" rows="3" maxlength="4000"></textarea></label>
-      <p class="onote">The drill sheet values come from the form on the main screen and are saved with the order.</p>
+      <label class="ofield"><span>Notes (kept in the order book and the spreadsheet, not on any print file)</span><textarea id="ob-notes" rows="3" maxlength="4000"></textarea></label>
+      <p class="onote">The drill sheet on the main screen goes with this order, including values left over from the last customer: check it before saving. Changes to the status or any field only count once you choose Save order.</p>
       <div class="oactions">
         <button type="submit" class="btn small primary" id="ob-form-save">Save order</button>
         <button type="button" class="btn small primary" id="ob-form-export">Save and export print files</button>

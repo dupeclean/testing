@@ -21,19 +21,23 @@
   let orders = [];
   let cur = null;        // the open order, or null for a new one
   let priceTouched = false;
-  let deleteArmed = null;
+  let busy = false;      // a save or delete is running: further clicks are ignored
+  let exporting = false; // an export is running
+  let savedSnap = '';    // what the screen looked like when it was last saved or opened
   let toastTimer = null;
   let toastFolder = null;
+  let toastOrder = null;
 
   const money = (n) => '$' + Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const STATUS_LABEL = { new: 'New', printing: 'Printing', shipped: 'Shipped', done: 'Done', hold: 'On hold' };
 
   function message(e) { return (e && e.message ? e.message : String(e)).replace(/^Error invoking remote method '[^']+': (Error: )?/, ''); }
 
-  function toast(text, folder, ms = 9000) {
+  function toast(text, folder, ms = 9000, orderId = null) {
     clearTimeout(toastTimer);
     el.toastText.textContent = text;
     toastFolder = folder || null;
+    toastOrder = orderId;
     el.toastOpen.hidden = !folder;
     el.toast.hidden = false;
     toastTimer = setTimeout(() => { el.toast.hidden = true; }, ms);
@@ -109,6 +113,30 @@
     el.cur.append(small);
   }
 
+  // ---- unsaved changes ----
+  const r5 = (v) => (typeof v === 'number' ? Math.round(v * 1e5) / 1e5 : v);
+  function fitSnap(fit) {
+    const out = {};
+    for (const k of Object.keys(fit).sort()) if (k !== 'part') out[k] = r5(fit[k]);
+    return out;
+  }
+  function snapshot() {
+    return JSON.stringify({
+      customer: [el.name.value, el.email.value, el.phone.value, el.address.value].map(v => v.trim()),
+      product: el.product.value, price: el.price.value.trim(), status: el.status.value, notes: el.notes.value.trim(),
+      // a new, unsaved order's sheet is not "unsaved work" until an order exists
+      fit: cur ? fitSnap(window.__cfgApp.getState()) : null,
+    });
+  }
+  const markSaved = () => { savedSnap = snapshot(); };
+  const isDirty = () => snapshot() !== savedSnap;
+  const sheetEdited = () => JSON.stringify(fitSnap(window.__cfgApp.getState())) !== JSON.stringify(fitSnap(window.__cfgApp.defaults()));
+  function okToLeave() {
+    if (cur && isDirty()) return window.confirm(`${cur.number} has changes that are not saved. Leave without saving them?`);
+    if (!cur && isDirty()) return window.confirm('The customer details you typed are not saved. Leave without saving them?');
+    return true;
+  }
+
   function fillForm(o) {
     el.num.textContent = o ? `${o.number}` : 'New order';
     el.name.value = o ? o.customer.name : '';
@@ -121,18 +149,23 @@
     el.notes.value = o ? o.notes : '';
     priceTouched = !!o;
     el.del.hidden = !o; el.openFolder.hidden = !o;
-    deleteArmed = null; el.del.textContent = 'Delete';
+    el.del.textContent = 'Delete';
     showError('');
+    markSaved();
   }
 
   function openOrder(o) {
+    if (cur && cur.id === o.id && !isDirty()) { renderList(); return; }
+    if (!okToLeave()) return;
+    if (!cur && sheetEdited() && !window.confirm('The drill sheet on screen has not been saved with an order. Opening another order replaces it. Continue?')) return;
     cur = o;
-    fillForm(o);
     window.__cfgApp.setState(o.fit);
+    fillForm(o);
     setBar(); renderList();
   }
 
   function newOrder() {
+    if (!okToLeave()) return;
     cur = null;
     fillForm(null);
     setBar(); renderList();
@@ -144,16 +177,26 @@
   function closeDrawer() { el.drawer.hidden = true; }
 
   function parsePrice(s) {
-    const t = String(s).replace(/[$,\s]/g, '');
-    if (t === '') return null;
-    const n = Number(t);
-    return Number.isFinite(n) ? n : NaN;
+    let t = String(s).replace(/[$\s]/g, '');
+    if (t === '') return null;                       // blank = the list price
+    // "119,50" is a decimal comma; "1,119" or "1,119.50" are thousands separators
+    t = /^\d+,\d{1,2}$/.test(t) ? t.replace(',', '.') : t.replace(/,/g, '');
+    return /^\d+(\.\d+)?$/.test(t) ? Number(t) : NaN;
   }
 
   function collect() {
     const product = el.product.value;
+    const stuck = window.__cfgApp.problems();
+    if (stuck.length) throw new Error('Fix the drill sheet first. ' + stuck[0]);
     const fit = window.__cfgApp.getState();
     fit.part = info.products[product].parts[0];
+    // a Fit Kit's sizer plate is centred on this customer's sizes; keep that in the saved order too
+    if (info.products[product].parts.includes('sizer')) {
+      fit.sizer_thumb_center = Math.round(fit.thumb_d * 1000) / 1000;
+      fit.sizer_finger_center = Math.round(((fit.middle_d + fit.ring_d) / 2) * 1000) / 1000;
+    }
+    const bad = window.__cfgApp.validate(fit);
+    if (bad.length) throw new Error(bad[0]);
     const price = parsePrice(el.price.value);
     if (Number.isNaN(price)) throw new Error('The price must be a number, like 119 or 119.00.');
     return {
@@ -164,6 +207,8 @@
   }
 
   async function saveOrder() {
+    if (busy) return null;
+    busy = true;
     showError('');
     try {
       if (!el.name.value.trim()) { openDrawer(); el.name.classList.add('bad'); el.name.focus(); throw new Error('Enter the customer\'s name before saving the order.'); }
@@ -173,41 +218,66 @@
       el.num.textContent = cur.number;
       el.del.hidden = false; el.openFolder.hidden = false;
       setBar();
+      markSaved();
       await refresh();
       toast(`Saved ${cur.number} for ${cur.customer.name}.`);
       return cur;
     } catch (e) {
       showError(message(e)); openDrawer();
       return null;
+    } finally {
+      busy = false;
     }
   }
 
   // ---- print files ----
   function jobSheet(order, built, fileNames) {
     const f = built.fitSheet, m = f.modeled;
+    const parts = info.products[order.product].parts;
+    const hasPuck = parts.includes('puck'), hasSpin = parts.includes('spinner'), hasSizer = parts.includes('sizer');
     const r2 = (x) => Math.round(Number(x) * 100) / 100;
     const both = (mm) => `${fraction64(mm / IN)}" (${r2(mm)} mm)`;
     const pad = (s, n) => String(s).padEnd(n);
     const side = f.hand === 'right' ? 'Right' : 'Left';
-    const rows = [
-      ['Thumb',  both(f.thumb_d),  `${m.thumb_bore_in}" (${r2(m.thumb_bore_mm)} mm)`,   '-',                  describePitch(f.thumb_fwd, 'fr', f.hand),  describePitch(f.thumb_lat, 'lat', f.hand)],
-      ['Middle', both(f.middle_d), `${m.middle_bore_in}" (${r2(m.middle_bore_mm)} mm)`, both(f.span_middle), describePitch(f.middle_fwd, 'fr', f.hand), describePitch(f.middle_lat, 'lat', f.hand)],
-      ['Ring',   both(f.ring_d),   `${m.ring_bore_in}" (${r2(m.ring_bore_mm)} mm)`,     both(f.span_ring),   describePitch(f.ring_fwd, 'fr', f.hand),   describePitch(f.ring_lat, 'lat', f.hand)],
-    ];
-    const W = [8, 22, 22, 22, 16];
+    const midSide = f.hand === 'right' ? 'left' : 'right', ringSide = f.hand === 'right' ? 'right' : 'left';
+    const d = new Date(), p2 = (n) => String(n).padStart(2, '0');
+    const today = `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}`;   // the shop's own calendar day
     const L = [];
     L.push('FITSLICE JOB SHEET', '==================', '');
-    L.push(`Order      ${order.number}`, `Date       ${new Date().toISOString().slice(0, 10)}`, `Customer   ${order.customer.name}`);
+    L.push(`Order      ${order.number}`, `Date       ${today}`, `Customer   ${order.customer.name}`);
     L.push(`Product    ${(info.products[order.product] || {}).label || order.product}   ${money(order.price)}`, `Hand       ${side}-handed`, '');
-    L.push('DRILL SHEET AS ENTERED, AND THE BORE SIZE THE MODEL USES (sheet size + print allowance)');
-    L.push(['', 'Sheet size', 'Modeled bore', 'Span (cut to cut)', 'Forward/reverse', 'Lateral'].map((h, i) => i < 5 ? pad(h, W[i]) : h).join(''));
-    for (const r of rows) L.push(r.map((c, i) => i < 5 ? pad(c, W[i]) : c).join(''));
-    L.push('', `Bridge ${both(f.bridge)}   Finger depth ${f.finger_depth} mm   Thumb ${f.thumb_through ? 'through' : 'blind, ' + f.thumb_depth + ' mm deep'}`);
-    L.push(`Print allowance ${m.print_allowance_mm} mm   Weight pocket ${f.weight_pocket ? 'yes' : 'no'}   Wrist-cord tunnel ${f.lanyard ? 'yes' : 'no'}`, '');
+
+    if (hasPuck || hasSpin) {
+      const rows = [];
+      if (hasPuck) rows.push(['Thumb', both(f.thumb_d), `${m.thumb_bore_in}" (${r2(m.thumb_bore_mm)} mm)`, '-', describePitch(f.thumb_fwd, 'fr', f.hand), describePitch(f.thumb_lat, 'lat', f.hand)]);
+      rows.push([`Middle (${midSide} hole)`, both(f.middle_d), `${m.middle_bore_in}" (${r2(m.middle_bore_mm)} mm)`, hasPuck ? both(f.span_middle) : '-',
+        hasPuck ? describePitch(f.middle_fwd, 'fr', f.hand) : 'zero', hasPuck ? describePitch(f.middle_lat, 'lat', f.hand) : 'zero']);
+      rows.push([`Ring (${ringSide} hole)`, both(f.ring_d), `${m.ring_bore_in}" (${r2(m.ring_bore_mm)} mm)`, hasPuck ? both(f.span_ring) : '-',
+        hasPuck ? describePitch(f.ring_fwd, 'fr', f.hand) : 'zero', hasPuck ? describePitch(f.ring_lat, 'lat', f.hand) : 'zero']);
+      const W = [20, 22, 22, 22, 16];
+      L.push('DRILL SHEET AS ENTERED, AND THE BORE SIZE THE MODEL USES (sheet size + print allowance)');
+      L.push(['', 'Sheet size', 'Modeled bore', 'Span (cut to cut)', 'Forward/reverse', 'Lateral'].map((h, i) => i < 5 ? pad(h, W[i]) : h).join(''));
+      for (const r of rows) L.push(r.map((c, i) => i < 5 ? pad(c, W[i]) : c).join(''));
+      L.push('');
+      if (hasPuck) {
+        L.push(`Bridge ${both(f.bridge)}   Finger depth ${f.finger_depth} mm   Thumb ${f.thumb_through ? 'through' : 'blind, ' + f.thumb_depth + ' mm deep'}`);
+        L.push(`Print allowance ${m.print_allowance_mm} mm   Weight pocket ${f.weight_pocket ? 'yes' : 'no'}   Wrist-cord tunnel ${f.lanyard ? 'yes' : 'no'}`);
+      }
+      if (hasSpin) {
+        L.push(`${hasPuck ? 'Rev Spinner: ' : ''}two finger holes only, no thumb hole. Spans and pitches above do not apply to the spinner: its holes are drilled straight at the ball's center (zero pitch). Hole spacing uses the bridge ${both(f.bridge)}; finger depth ${Math.min(f.finger_depth, 20)} mm; wrist-cord tunnel ${f.lanyard ? 'yes' : 'no'}; print allowance ${m.print_allowance_mm} mm.`);
+      }
+      L.push('');
+    }
+    if (hasSizer) {
+      L.push('SIZER PLATE', `Finger row centred on ${both(f.sizer_finger_center)}, thumb row centred on ${both(f.sizer_thumb_center)}, steps of ${r2(f.sizer_step)} mm. Each bore is engraved with its diameter in mm. No print allowance is added: the bores are exactly the engraved size.`, '');
+    }
+
     L.push('PRINT');
     L.push('PETG, 0.2 mm layers, 4 walls, 20% gyroid infill, flat side down, no supports.');
     for (const s of built.stats) L.push(`  ${s.part}: about ${s.grams_20pct} g of filament at 20% infill, ${s.bbox_mm.join(' x ')} mm`);
-    L.push('After printing: smooth the bores with fine sandpaper and check each bore against the sizes above before packing.', '');
+    if (hasPuck || hasSpin) L.push('After printing: smooth the bores with fine sandpaper and check each bore against the sizes above before packing.');
+    if (hasSizer) L.push('Do not sand the sizer plate: its holes are the test. The bore that fits the finger snugly is that finger\'s size.');
+    L.push('');
     if (built.warnings.length) {
       L.push('WARNINGS FROM THE MODEL (resolve before printing)');
       for (const w of built.warnings) L.push('  - ' + w);
@@ -215,23 +285,21 @@
     }
     L.push('FILES');
     for (const n of fileNames) L.push('  ' + n);
-    L.push('', 'Round bores only: if the sheet lists oval holes, the model uses the round size that was entered. Finish the fit with bowler\'s tape.');
+    if (hasPuck || hasSpin) L.push('', 'Round bores only: if the sheet lists oval holes, the model uses the round size that was entered. Finish the fit with bowler\'s tape.');
     return L.join('\r\n') + '\r\n';
   }
 
   async function exportFiles() {
-    const order = await saveOrder();
-    if (!order) return;
+    if (exporting) return;
+    exporting = true;
     try {
+      const order = await saveOrder();
+      if (!order) return;
       const parts = info.products[order.product].parts;
-      const overrides = {};
-      if (parts.includes('sizer')) {
-        overrides.sizer_thumb_center = order.fit.thumb_d;
-        overrides.sizer_finger_center = (order.fit.middle_d + order.fit.ring_d) / 2;
-      }
       toast('Building print files…', null, 60000);
       await new Promise(r => setTimeout(r, 30));
-      const built = window.__cfgApp.buildFiles(parts, overrides);
+      // built from the order exactly as it was just saved, not from whatever the form shows now
+      const built = window.__cfgApp.buildFiles(parts, order.fit);
       const names = built.files.map(f => f.name).concat(['fit_sheet.json', 'job_sheet.txt']);
       const sheet = { order: order.number, ...built.fitSheet };
       const files = built.files.map(f => ({ name: f.name, data: f.data }));
@@ -239,25 +307,27 @@
       files.push({ name: 'job_sheet.txt', data: jobSheet(order, built, names) });
       const r = await bridge.exportOrder({ orderId: order.id, files });
       const warn = built.warnings.length ? ` ${built.warnings.length} warning${built.warnings.length === 1 ? '' : 's'}: see job_sheet.txt.` : '';
-      toast(`Saved ${r.files.length} files for ${order.number} to ${r.dir}.${warn}`, r.dir, 15000);
+      const old = r.superseded && r.superseded.length ? ` Older files for this order were moved to its "superseded" folder.` : '';
+      toast(`Saved ${r.files.length} files for ${order.number} to ${r.dir}.${warn}${old}`, r.dir, 15000, order.id);
+      cur = (await bridge.listOrders()).orders.find(o => o.id === order.id) || cur;
     } catch (e) {
       el.toast.hidden = true;
       showError(message(e)); openDrawer();
+    } finally {
+      exporting = false;
     }
   }
 
   async function deleteOrder() {
-    if (!cur) return;
-    if (deleteArmed !== cur.id) {
-      deleteArmed = cur.id; el.del.textContent = 'Click again to delete';
-      setTimeout(() => { if (deleteArmed === cur?.id) { deleteArmed = null; el.del.textContent = 'Delete'; } }, 4000);
-      return;
-    }
+    if (!cur || busy) return;
+    busy = true;
     try {
-      await bridge.deleteOrder(cur.id);
-      toast(`Deleted ${cur.number}. Its exported files were not touched.`);
+      const gone = cur;
+      const r = await bridge.deleteOrder(gone.id);   // asks for confirmation in a native dialog
+      if (!r.deleted) return;
+      toast(`Deleted ${gone.number}. Its exported files were not touched.`);
       cur = null; fillForm(null); setBar(); await refresh();
-    } catch (e) { showError(message(e)); }
+    } catch (e) { showError(message(e)); } finally { busy = false; }
   }
 
   async function menuAction(name) {
@@ -272,7 +342,7 @@
   }
 
   function showWhere() {
-    el.where.textContent = `Print files: ${info.ordersFolder}. Order book: ${info.dataFolder}. Both stay on this computer. Back up the order book folder to keep your customers safe.`;
+    el.where.textContent = `Print files: ${info.ordersFolder}. Order book: ${info.dataFolder}. FitSlice never sends them anywhere, but if Windows backs up your Documents folder to OneDrive, the print files and orders.csv (which holds customer contact details) go with it. Back up the order book folder to keep your customers safe.`;
   }
 
   async function init() {
@@ -305,9 +375,10 @@
     byId('ob-folder').addEventListener('click', () => menuAction('open-folder'));
     byId('ob-choose').addEventListener('click', () => menuAction('choose-folder'));
     byId('ob-toast-x').addEventListener('click', () => { el.toast.hidden = true; });
-    el.toastOpen.addEventListener('click', async () => { if (toastFolder) { try { await bridge.openOrdersFolder(); } catch (_) { /* ignore */ } } });
+    el.toastOpen.addEventListener('click', async () => { if (!toastFolder) return; try { if (toastOrder) await bridge.openOrderFolder(toastOrder); else await bridge.openOrdersFolder(); } catch (e) { showError(message(e)); } });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !el.drawer.hidden) closeDrawer(); });
     bridge.onMenu(menuAction);
+    window.addEventListener('beforeunload', (e) => { if (isDirty()) { e.preventDefault(); e.returnValue = ''; } });
     window.__orders = { ready: true, newOrder, openOrder, saveOrder, exportFiles, list: () => orders.slice() };
   }
 

@@ -39,7 +39,7 @@ Twenty people who teach, review or talk about the one-handed release get a Rev P
 | B | Mid-size coach-creators who review equipment with their own hands and publish verdicts | 6 | Same |
 | C | Certified local coaches with an active roster of ten or more students, in markets where we can also onboard a pro shop | 6 | Same, plus the coach program packet (Section 5) |
 | D | Hosts of bowling podcasts with a regular release-and-equipment segment | 2 | Same, one per host |
-| Reserve | Held for a two-handed creator (Rev Spinner only, finger sizes and pitches) and for one reprint if a seeded unit misses its sheet | 2 | As needed |
+| Reserve | Held for a two-handed creator (Rev Spinner only, finger sizes) and for one reprint if a seeded unit misses its sheet | 2 | As needed |
 
 Pro-shop operators are seeded separately with a counter kit and sizer plate under the pro-shop program. They do not come out of these twenty.
 
@@ -47,7 +47,7 @@ Pro-shop operators are seeded separately with a counter kit and sizer plate unde
 
 Every recipient meets all of the following:
 
-1. Bowls one-handed with the thumb in the ball and has a current drill sheet, or bowls two-handed and has finger sizes and pitches (Rev Spinner only).
+1. Bowls one-handed with the thumb in the ball and has a current drill sheet, or bowls two-handed and has finger sizes (Rev Spinner only).
 2. Has published or coached in the last 90 days. A dormant channel teaches nobody.
 3. Reaches league bowlers, adult or youth. Trick-shot and entertainment channels are a different audience and are not seeded in this round.
 4. Agrees in advance to the disclosure line if they ever mention the product. A person who will not disclose does not receive a unit, however large the audience.

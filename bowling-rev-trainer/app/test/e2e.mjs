@@ -136,10 +136,54 @@ try {
   assert.match(csv, /FS-0001/); assert.match(csv, /119\.00/);
   ok('orders.csv written');
 
+  // millimetres typed while the switch is on inches: refused plainly, no crash, no save
+  await fill(page, 'span_middle', '110');
+  assert.match(await page.textContent('#status'), /outside the usable range.*millimetres typed while the switch is on inches/s);
+  assert.equal(await page.evaluate(() => document.getElementById('span_middle').classList.contains('bad')), true);
+  assert.equal((await page.evaluate(() => window.__cfgApp.getState())).span_middle > 100 && (await page.evaluate(() => window.__cfgApp.getState())).span_middle < 120, true, 'the old good value is kept');
+  await page.click('#ob-save');
+  assert.match(await page.textContent('#ob-err'), /Fix the drill sheet first/);
+  await fill(page, 'span_middle', '4 5/16');
+  await page.waitForFunction(() => /Built in/.test(document.getElementById('status').textContent));
+  assert.equal(await page.evaluate(() => document.getElementById('span_middle').classList.contains('bad')), false);
+  ok('a wrong-unit span is refused with a plain message, blocks saving, and the app keeps running');
+
+  // nothing in the app reaches the network
+  assert.equal(await page.evaluate(() => fetch('https://example.com/').then(() => 'loaded', () => 'blocked')), 'blocked');
+  assert.equal(await app.evaluate(({ session }) => session.defaultSession.isSpellCheckerEnabled()), false);
+  const reqs = await app.evaluate(async ({ net }) => {
+    // a request made from the main process side is also refused (the session filter)
+    try { await net.fetch('https://example.com/', { bypassCustomProtocolHandlers: true }); return ['loaded']; } catch (_) { return ['blocked']; }
+  });
+  assert.deepEqual(reqs, ['blocked']);
+  ok('network requests are refused (page and session), spell-check downloads are off');
+
+  // re-export after a change: same folder, only the current files, the old ones set aside
+  await page.evaluate(() => { document.getElementById('ob-toast-text').textContent = ''; });
+  await fill(page, 'middle_d', '11/16');
+  await page.click('#ob-export');
+  await page.waitForFunction(() => /Saved \d+ files for FS-0001/.test(document.getElementById('ob-toast-text').textContent), null, { timeout: 60000 });
+  const dirsIn = () => readdirSync(ordersDir, { withFileTypes: true }).filter(d => d.isDirectory()).map(d => d.name);
+  assert.equal(dirsIn().length, 1, 'still one folder');
+  const nowFiles = readdirSync(folder).filter(f => f !== 'superseded');
+  assert.equal(nowFiles.filter(f => f.endsWith('.stl')).length, 2, 'only the two current STLs: ' + nowFiles.join(', '));
+  assert.ok(readdirSync(join(folder, 'superseded')).filter(f => f.endsWith('.stl')).length >= 1, 'old STLs moved aside');
+  ok('re-export keeps one folder with only the current STLs; the old ones are in "superseded"');
+
+  // fixing the customer's name later does not strand the files
+  if (!(await page.isVisible('#ob-name'))) await page.click('#ob-orders');
+  await page.fill('#ob-name', 'Jordan Leigh');
+  await page.evaluate(() => { document.getElementById('ob-toast-text').textContent = ''; });
+  await page.click('#ob-form-export');
+  await page.waitForFunction(() => /Saved \d+ files for FS-0001/.test(document.getElementById('ob-toast-text').textContent), null, { timeout: 60000 });
+  assert.deepEqual(dirsIn(), [folders[0]], 'the same folder is reused after a rename');
+  ok('renaming the customer reuses the same files folder');
+  await page.click('#ob-close');
+
   await page.screenshot({ path: join(shotDir, 'app-main.png') });
   await page.click('#ob-orders');
   await page.screenshot({ path: join(shotDir, 'app-drawer.png') });
-  const bad = problems.filter(p => !/GPU|WebGL|swiftshader|GL Driver|ContextResult/i.test(p));
+  const bad = problems.filter(p => !/GPU|WebGL|swiftshader|GL Driver|ContextResult|example\.com/i.test(p));
   assert.deepEqual(bad, [], 'no page errors or CSP violations');
   ok('no page errors or content-policy violations');
   await app.close();
@@ -154,7 +198,20 @@ try {
   const re = await page.evaluate(() => window.__cfgApp.getState());
   assert.ok(Math.abs(re.thumb_d - 23.0) < 0.05 && re.middle_fwd === 0.75 && re.hand === 'right');
   assert.equal(await page.inputValue('#ob-email'), 'jordan@example.com');
+  assert.equal(await page.inputValue('#ob-name'), 'Jordan Leigh');
   ok('after restart the order is still there and restores its drill sheet');
+
+  // unsaved changes are not thrown away silently
+  await page.fill('#ob-notes', 'changed but not saved');
+  const dialogs = [];
+  page.once('dialog', (d) => { dialogs.push(d.message()); d.dismiss(); });
+  await page.click('#ob-new');
+  assert.equal(await page.textContent('#ob-num'), 'FS-0001', 'declining stays on the order');
+  assert.match(dialogs[0], /FS-0001 has changes that are not saved/);
+  page.once('dialog', (d) => d.accept());
+  await page.click('#ob-new');
+  assert.equal(await page.textContent('#ob-num'), 'New order');
+  ok('leaving an order with unsaved changes asks first');
 
   // second order gets the next number; status change persists
   await page.click('#ob-new');
@@ -166,7 +223,25 @@ try {
   await page.waitForFunction(() => /Saved \d+ files for FS-0002/.test(document.getElementById('ob-toast-text').textContent), null, { timeout: 60000 });
   const f2 = readdirSync(ordersDir).find(n => n.startsWith('FS-0002'));
   assert.ok(readdirSync(join(ordersDir, f2)).some(n => /hole_sizer/.test(n)), 'fit kit exports a sizer plate');
+  const kitJob = readFileSync(join(ordersDir, f2, 'job_sheet.txt'), 'utf8');
+  assert.match(kitJob, /SIZER PLATE/); assert.match(kitJob, /Do not sand the sizer plate/);
+  assert.equal(/DRILL SHEET AS ENTERED|Bridge |Wrist-cord/.test(kitJob), false, 'a Fit Kit job sheet must not describe puck features');
   ok('second order is FS-0002; Fit Kit exports a sizer plate');
+
+  // delete: a native confirmation, and the number is never reused
+  await app.evaluate(({ dialog }) => { dialog.showMessageBox = async () => ({ response: 1 }); });
+  await page.click('#ob-delete');
+  await page.waitForTimeout(300);
+  assert.equal(await page.evaluate(() => document.querySelectorAll('.orow').length), 2, 'declining keeps the order');
+  await app.evaluate(({ dialog }) => { dialog.showMessageBox = async () => ({ response: 0 }); });
+  await page.click('#ob-delete');
+  await page.waitForFunction(() => document.querySelectorAll('.orow').length === 1);
+  await page.click('#ob-new');
+  await page.fill('#ob-name', 'Third Customer');
+  await page.click('#ob-form-save');
+  await page.waitForFunction(() => document.querySelectorAll('.orow').length === 2);
+  assert.equal(await page.evaluate(() => [...document.querySelectorAll('.orow .n')].map(n => n.textContent).sort().join()), 'FS-0001,FS-0003');
+  ok('delete asks first; after a delete the next order is FS-0003, not a reused FS-0002');
   await app.close();
   session = null;
   console.log(`\nALL ${results.length} CHECKS PASSED`);

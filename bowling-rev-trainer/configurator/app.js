@@ -9,6 +9,7 @@
 const IN = 25.4;
 const DEG = Math.PI / 180;
 const APP_VERSION = '1.0';
+const APP_NAME = (typeof window !== 'undefined' && window.fitslice) ? 'FitSlice' : 'Rev Trainer Configurator';
 
 // ---------------------------------------------------------------------------
 // Geometry constants — keep in sync with trainer.scad
@@ -45,6 +46,55 @@ const LENGTH_KEYS = ['span_middle', 'span_ring', 'thumb_d', 'middle_d', 'ring_d'
 const PITCH_KEYS = ['thumb_fwd', 'thumb_lat', 'middle_fwd', 'middle_lat', 'ring_fwd', 'ring_lat'];
 const BOOL_KEYS = ['thumb_through', 'weight_pocket', 'lanyard'];
 
+// Sensible ranges (mm). Anything outside is almost always a typo or the wrong unit
+// (110 typed while the switch is on inches, or 4 5/16 typed while it is on mm), and values
+// far outside make the geometry engine fail, so they are refused instead of built.
+const LIMITS = {
+  span_middle: [60, 150], span_ring: [60, 150],
+  thumb_d: [15, 38], middle_d: [10, 30], ring_d: [10, 30],
+  print_allowance: [0, 2], bridge: [2, 30], finger_depth: [8, 50], thumb_depth: [10, 80],
+  sizer_thumb_center: [15, 38], sizer_finger_center: [10, 30], sizer_step: [0.1, 2],
+};
+const LABELS = {
+  span_middle: 'Middle finger span', span_ring: 'Ring finger span',
+  thumb_d: 'Thumb hole size', middle_d: 'Middle finger hole size', ring_d: 'Ring finger hole size',
+  print_allowance: 'Print allowance', bridge: 'Bridge', finger_depth: 'Finger depth', thumb_depth: 'Thumb depth',
+  sizer_thumb_center: 'Sizer thumb centre', sizer_finger_center: 'Sizer finger centre', sizer_step: 'Sizer step',
+};
+const PITCH_LIMIT = 1;   // inches
+
+// A problem the owner can fix by changing a value; shown as plain text, never a stack trace.
+class FitError extends Error {}
+
+function rangeText(key) {
+  const [lo, hi] = LIMITS[key];
+  return `${fmtMm(lo)}–${fmtMm(hi)} mm (${fraction64(lo / IN)}"–${fraction64(hi / IN)}")`;
+}
+// Returns '' when fine, else a plain-language sentence.
+function checkLength(key, mm, unit) {
+  if (!Number.isFinite(mm)) return `${LABELS[key]}: that is not a number. Type it like 55/64, 4 1/2 or 21.5.`;
+  const [lo, hi] = LIMITS[key];
+  if (mm >= lo && mm <= hi) return '';
+  const typed = unit === 'in' ? `${fraction64(mm / IN)}"` : `${fmtMm(mm)} mm`;
+  let hint = '';
+  // the same digits would have been fine in the other unit: say so
+  if (unit === 'in' && mm / IN >= lo && mm / IN <= hi) hint = ' This looks like millimetres typed while the switch is on inches.';
+  else if (unit === 'mm' && mm * IN >= lo && mm * IN <= hi) hint = ' This looks like inches typed while the switch is on mm.';
+  return `${LABELS[key]}: ${typed} is outside the usable range ${rangeText(key)}.${hint}`;
+}
+// Every problem in a parameter set (used before any build, so a bad saved order cannot crash the engine).
+function validateParams(p) {
+  const out = [];
+  const keys = p.part === 'sizer' ? ['sizer_thumb_center', 'sizer_finger_center', 'sizer_step']
+    : ['span_middle', 'span_ring', 'thumb_d', 'middle_d', 'ring_d', 'print_allowance', 'bridge', 'finger_depth', ...(p.thumb_through ? [] : ['thumb_depth'])];
+  if (p.part === 'spinner') keys.splice(keys.indexOf('span_middle'), 2);
+  for (const k of keys) { const m = checkLength(k, p[k], 'mm'); if (m) out.push({ key: k, message: m }); }
+  if (p.part !== 'sizer') for (const k of PITCH_KEYS) {
+    if (!Number.isFinite(p[k]) || Math.abs(p[k]) > PITCH_LIMIT) out.push({ key: k, message: `Pitch (${k.replace('_', ' ')}) must be between -1" and 1".` });
+  }
+  return out;
+}
+
 // ---------------------------------------------------------------------------
 // Units: pro shops talk in 64ths of an inch; printers talk in mm
 // ---------------------------------------------------------------------------
@@ -62,7 +112,7 @@ function parseNumber(str) {
 }
 function parseLength(str, unit) {
   const v = parseNumber(str);
-  return unit === 'in' ? v * IN : v;
+  return unit === 'in' ? Math.round(v * IN * 1000) / 1000 : v;
 }
 function fmtMm(mm, places = 2) { return (Math.round(mm * 10 ** places) / 10 ** places).toString(); }
 function fmtLength(mm, unit) { return unit === 'in' ? (mm / IN).toFixed(3) : fmtMm(mm); }
@@ -91,8 +141,12 @@ function derive(p) {
   const a = p.part === 'sizer' ? 0 : p.print_allowance;
   const mir = p.hand === 'right' ? 1 : -1;
   const td = p.thumb_d + a, md = p.middle_d + a, rd = p.ring_d + a;
-  const x_m = mir * (md + p.bridge) / 2;
-  const x_r = -mir * (rd + p.bridge) / 2;
+  // Seen from outside the grip with the thumb hole at the bottom (the way a drill sheet is
+  // drawn), a right hand's fingers run index, middle, ring from the thumb side to the pinky
+  // side, so the middle finger is the LEFT hole and the ring finger the RIGHT hole. Left
+  // hand mirrors that. (+x is the viewer's right.)
+  const x_m = -mir * (md + p.bridge) / 2;
+  const x_r = mir * (rd + p.bridge) / 2;
   const cc_m = p.span_middle + td / 2 + md / 2;
   const cc_r = p.span_ring + td / 2 + rd / 2;
   const ty = (cc_m + cc_r) / 4;
@@ -116,6 +170,23 @@ const surfZ = (h, x, y) => h - G.R + Math.sqrt(G.R * G.R - x * x - y * y);
 // fdir is +1 for the thumb (grip center is toward +y) and -1 for the fingers.
 // Returns the entry point, the outward unit direction, and the Euler rotation that
 // turns +Z into that direction.
+// Smallest distance between two hole axes over the first `len` mm of each (segment to segment).
+function minAxisGap(a, b, len) {
+  const sub = (u, v) => [u[0] - v[0], u[1] - v[1], u[2] - v[2]];
+  const dot = (u, v) => u[0] * v[0] + u[1] * v[1] + u[2] * v[2];
+  const p1 = a.p, d1 = a.dir.map(v => -v * len);
+  const p2 = b.p, d2 = b.dir.map(v => -v * len);
+  const r = sub(p1, p2);
+  const A = dot(d1, d1), E = dot(d2, d2), B = dot(d1, d2), C = dot(d1, r), F = dot(d2, r);
+  const den = A * E - B * B;
+  const clamp = (v) => Math.max(0, Math.min(1, v));
+  let s = den > 1e-9 ? clamp((B * F - C * E) / den) : 0;
+  let t = (B * s + F) / E;
+  if (t < 0) { t = 0; s = clamp(-C / A); } else if (t > 1) { t = 1; s = clamp((B - C) / A); }
+  const q = [r[0] + d1[0] * s - d2[0] * t, r[1] + d1[1] * s - d2[1] * t, r[2] + d1[2] * s - d2[2] * t];
+  return Math.hypot(q[0], q[1], q[2]);
+}
+
 function holeAxis(x, y, fwdIn, latIn, bodyH, mir, fdir) {
   const P = [x, y, surfZ(bodyH, x, y)];
   const A = [latIn * IN * mir, fwdIn * IN * fdir, bodyH - G.R];   // aim point
@@ -190,6 +261,16 @@ function makeBuilder(W) {
       warnings.push('Thumb and finger bores run into each other: the spans are too short for these hole sizes.');
     if (overlap(mid.bore, ring.bore))
       warnings.push('The two finger bores intersect below the surface. Increase the bridge or reduce the lateral pitches.');
+    // the two finger bores converge as they go deeper (they aim at the ball's center), so the
+    // web between them is thinnest at the bottom of the holes
+    const web = minAxisGap(mid.axis, ring.axis, p.finger_depth) - (D.md + D.rd) / 2;
+    if (web > 0 && web < 2.5 && !overlap(mid.bore, ring.bore))
+      warnings.push(`The web between the finger holes narrows to ${web.toFixed(1)} mm deep inside. That is a fragile hairline when printed. Increase the bridge or reduce the finger depth.`);
+    for (const [name, h] of [['middle', mid], ['ring', ring]]) {
+      const endZ = h.axis.p[2] - p.finger_depth * h.axis.dir[2];
+      if (endZ < 1.5) warnings.push(`The ${name} finger bore would break through the base of the puck. Reduce the finger depth.`);
+      if (pock && overlap(h.bore, pock)) warnings.push(`The ${name} finger bore breaks into the weight pocket. Turn the pocket off or reduce the finger depth.`);
+    }
     if (pock && overlap(thumb.bore, pock))
       warnings.push('The thumb bore breaks into the weight pocket at this span. Turn the pocket off or use a blind thumb hole.');
     if (tunnel && (overlap(mid.bore, tunnel) || overlap(ring.bore, tunnel)))
@@ -297,10 +378,18 @@ function makeBuilder(W) {
   }
 
   function build(p) {
+    const bad = validateParams(p);
+    if (bad.length) throw new FitError(bad[0].message);
     const D = derive(p);
+    if (p.part === 'puck') {
+      // holes must sit on the part: a hole centre beyond ~92 mm from the axis is off the ball section
+      const r = Math.max(Math.hypot(0, D.ty), Math.hypot(D.x_m, D.y_m), Math.hypot(D.x_r, D.y_r));
+      if (r > 92) throw new FitError('These spans do not fit on the 8.5-inch ball section: a hole would sit off its edge. Check both spans, and that they are in the right units.');
+    }
     try {
       const out = p.part === 'puck' ? puck(p, D) : p.part === 'spinner' ? spinner(p, D) : sizer(p);
       const m = out.result;
+      if (!(m.volume() > 1000)) throw new FitError('The model came out empty. Check the hole sizes and spans.');
       const bb = m.boundingBox();
       return {
         mesh: meshOf(m),
@@ -517,7 +606,7 @@ function fileBase(p, D) {
 }
 
 function fitSheet(p, D, data) {
-  const sheet = { app: 'Rev Trainer Configurator', version: APP_VERSION, units: { lengths: 'mm', pitches: 'inches' } };
+  const sheet = { app: APP_NAME, version: APP_VERSION, units: { lengths: 'mm', pitches: 'inches' } };
   for (const k of Object.keys(DEFAULTS)) sheet[k] = p[k];
   sheet.modeled = {
     thumb_bore_mm: +D.td.toFixed(3), middle_bore_mm: +D.md.toFixed(3), ring_bore_mm: +D.rd.toFixed(3),
@@ -567,7 +656,15 @@ async function main() {
       if (h) h.textContent = describePitch(state[k], k.endsWith('_fwd') ? 'fr' : 'lat', state.hand);
     }
   }
+  function rowLabels() {
+    const left = state.hand === 'right';
+    $('row_middle').textContent = `Middle · ${left ? 'left' : 'right'} hole`;
+    $('row_ring').textContent = `Ring · ${left ? 'right' : 'left'} hole`;
+  }
   function showAll() {
+    invalid.clear();
+    document.querySelectorAll('.bad').forEach(e => { e.classList.remove('bad'); e.removeAttribute('title'); });
+    rowLabels();
     showLengths();
     for (const k of PITCH_KEYS) { const el = $(k); if (el) el.value = state[k] === 0 ? '0' : fraction64(state[k]); }
     for (const k of BOOL_KEYS) { const el = $(k); if (el) el.checked = !!state[k]; }
@@ -583,11 +680,19 @@ async function main() {
   let timer = null;
   const schedule = () => { clearTimeout(timer); timer = setTimeout(rebuild, 250); };
 
+  // Fields whose typed text was refused. The model keeps the last good value for them, so
+  // saving or exporting is blocked until each is fixed (never silently using stale numbers).
+  const invalid = new Map();   // field id -> message
+  const markBad = (el, msg) => { el.classList.add('bad'); el.title = msg; invalid.set(el.id, msg); setStatus(msg, 'error'); };
+  const markGood = (el) => { el.classList.remove('bad'); el.removeAttribute('title'); invalid.delete(el.id); };
+  const invalidMessage = () => (invalid.size ? [...invalid.values()][0] + (invalid.size > 1 ? ` (+${invalid.size - 1} more field${invalid.size > 2 ? 's' : ''} marked red)` : '') : '');
+
   for (const el of lengthInputs) {
     el.addEventListener('change', () => {
       const v = parseLength(el.value, unit);
-      if (Number.isFinite(v) && v >= 0) { state[el.id] = v; el.classList.remove('bad'); schedule(); }
-      else el.classList.add('bad');
+      const msg = LIMITS[el.id] ? checkLength(el.id, v, unit) : (Number.isFinite(v) && v >= 0 ? '' : 'That is not a number.');
+      if (!msg) { state[el.id] = v; markGood(el); schedule(); }
+      else markBad(el, msg);
       refreshHints();
     });
   }
@@ -595,15 +700,15 @@ async function main() {
     const el = $(k);
     el.addEventListener('change', () => {
       const v = parseNumber(el.value);
-      if (Number.isFinite(v) && Math.abs(v) <= 1) { state[k] = v; el.classList.remove('bad'); schedule(); }
-      else el.classList.add('bad');
+      if (Number.isFinite(v) && Math.abs(v) <= PITCH_LIMIT) { state[k] = v; markGood(el); schedule(); }
+      else markBad(el, 'Pitch must be a number between -1" and 1" (for example 3/8, -1/8 or 0).');
       refreshHints();
     });
   }
   for (const k of BOOL_KEYS) {
     $(k).addEventListener('change', (e) => { state[k] = e.target.checked; if (k === 'thumb_through') $('thumb_depth_row').hidden = state.thumb_through; schedule(); });
   }
-  $('hand').addEventListener('change', e => { state.hand = e.target.value; refreshHints(); schedule(); });
+  $('hand').addEventListener('change', e => { state.hand = e.target.value; rowLabels(); refreshHints(); schedule(); });
   $('size_source').addEventListener('change', e => {
     state.size_source = e.target.value;
     state.print_allowance = state.size_source === 'sizer_plate' ? 0 : 0.4;
@@ -626,10 +731,12 @@ async function main() {
       current = builder.build(state);
       viewer.show(current);
       showStats(current);
-      setStatus(`Built in ${Math.round(performance.now() - t0)} ms`, current.warnings.length ? 'warn' : 'ok');
+      const w = current.warnings;
+      setStatus(`Built in ${Math.round(performance.now() - t0)} ms` + (w.length ? ` · ⚠ ${w[0]}${w.length > 1 ? ` (+${w.length - 1} more below)` : ''}` : ''), w.length ? 'warn' : 'ok');
     } catch (e) {
-      console.error(e);
-      setStatus('Could not build this geometry. Check the values marked in red.', 'error');
+      if (!(e instanceof FitError)) console.error(e);
+      current = null;   // never leave an old model that no longer matches the form
+      setStatus(e instanceof FitError ? e.message : 'Could not build this geometry. Check the values marked in red.', 'error');
     }
   }
 
@@ -667,9 +774,10 @@ async function main() {
     setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 2000);
   }
   async function saveSTL(bundle) {
-    if (!current) return;
+    if (invalid.size) { setStatus(`Not saved. ${invalidMessage()}`, 'error'); return; }
+    if (!current) { setStatus('Nothing to save: the model could not be built. Fix the message above first.', 'error'); return; }
     const D = current.derived, base = fileBase(state, D);
-    const stl = toSTL(current.mesh, `${base} - Rev Trainer Configurator ${APP_VERSION}`);
+    const stl = toSTL(current.mesh, `${base} - ${APP_NAME} ${APP_VERSION}`);
     const sheet = new TextEncoder().encode(JSON.stringify(fitSheet(state, D, current), null, 2));
     const dl = await downloads;
     if (dl) {
@@ -734,6 +842,10 @@ async function main() {
   window.__cfgApp = {
     ready: true,
     getState: () => JSON.parse(JSON.stringify(state)),
+    // [] when every field holds a usable value, else the plain-language problems
+    problems: () => [...invalid.values()],
+    // checks any parameter set (e.g. a saved order) without building it
+    validate: (obj) => validateParams({ ...state, ...obj }).map(x => x.message),
     defaults: () => JSON.parse(JSON.stringify(DEFAULTS)),
     setState(obj) {
       for (const k of Object.keys(DEFAULTS)) if (obj && k in obj) state[k] = obj[k];
@@ -748,7 +860,7 @@ async function main() {
         const p = { ...state, ...overrides, part };
         const data = builder.build(p);
         const base = fileBase(p, data.derived);
-        files.push({ name: `${base}.stl`, data: toSTL(data.mesh, `${base} - FitSlice ${APP_VERSION}`), part });
+        files.push({ name: `${base}.stl`, data: toSTL(data.mesh, `${base} - ${APP_NAME} ${APP_VERSION}`), part });
         data.warnings.forEach(w => warnings.push(`${part}: ${w}`));
         axes[part] = data.axes.map(a => ({ name: a.name, p: a.p, dir: a.dir }));
         const shell = Math.min(data.volume, data.area * 1.6);

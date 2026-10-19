@@ -73,7 +73,7 @@ Six drills, ten to fifteen minutes. Fingertip carries, thumb pops, swing sync an
 If a pro shop has measured your hand and drilled a ball to it, you have a drill sheet. FitSlice builds your trainer from it. That is the whole product.
 
 - **League and tournament bowlers.** You paid for a fit measured to a 64th of an inch. Right now it exists in one place: the ball. Carry it in a bag instead.
-- **Two-handed and thumbless bowlers.** The Rev Puck needs a thumb hole. The Rev Spinner does not. It takes your finger sizes and pitches so you can practice finger lift.
+- **Two-handed and thumbless bowlers.** The Rev Puck needs a thumb hole. The Rev Spinner does not. It takes your finger sizes (its holes are drilled straight at the ball's center) so you can practice finger lift.
 - **Bowlers between fits.** Your sheet is stored. When the shop changes your pitch or opens the thumb a 64th, a reprint uses the new numbers.
 - **Coaches and pro shops.** Enter a bowler's sheet at the counter and we print and ship it. Shops earn 25% on the orders they enter. Details on the Pro Shops page.
 
@@ -152,7 +152,7 @@ The holes are your sizes, at your spans, with your pitches, on the same 8.5" bal
 We do not know. To our knowledge, no study has measured any off-lane trainer, ours included. What it does is let you practice, with your real fit, the two things coaches agree the release depends on: a relaxed hand and an early, clean thumb exit.
 
 **I bowl two-handed.**
-The Rev Spinner is your tool. It needs only your finger sizes and pitches.
+The Rev Spinner is your tool. It needs only your finger sizes.
 
 **My fit changes.**
 So does your file. Your sheet is stored with your order. A reprint with the new sheet typically costs less than a re-drill.
@@ -321,7 +321,7 @@ Tagline: Lift it, spin it, count it.
 
 **Description**
 
-The Rev Spinner is a fingers-only release disc cut from the same 8.5" ball surface, with your middle and ring hole sizes and pitches. Swing it on a short pendulum, lift with the fingers at the bottom, release it onto carpet. It spins in place, and the engraved bars on the base let you count how long. Printed in PETG.
+The Rev Spinner is a fingers-only release disc cut from the same 8.5" ball surface, with your middle and ring hole sizes, drilled straight at the ball's center. Swing it on a short pendulum, lift with the fingers at the bottom, release it onto carpet. It spins in place, and the engraved bars on the base let you count how long. Printed in PETG.
 
 **Details**
 
@@ -525,7 +525,7 @@ The configurator accepts fractions typed any of these ways: `55/64`, `1 3/64`, `
 
 ### The four things people get wrong
 
-**Forward is positive, reverse is negative.** "1/8 reverse" goes in as -1/8. "3/8 forward" goes in as 3/8. If your thumb hole in the preview leans the same way as your finger holes and your sheet says reverse, you have the sign wrong.
+**Forward is positive, reverse is negative.** "1/8 reverse" goes in as -1/8. "3/8 forward" goes in as 3/8. A typical sheet (fingers forward, thumb reverse) makes the thumb hole and the finger holes lean the same way, both inner ends toward the thumb side of the grip. The hint under each pitch field spells out what you typed ("3/8 forward", "1/8 reverse"). If a hint says the opposite of your sheet, flip that sign.
 
 **Lateral pitch depends on your hand.** The configurator treats pitch toward your bowling-hand side as positive. For a right-handed bowler, "right" is positive and "left" is negative. For a left-handed bowler, "left" is positive and "right" is negative. The preview draws the hole axes, so compare them with your ball before you order.
 

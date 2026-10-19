@@ -77,6 +77,10 @@ def main():
         desk = re.sub(r'<link rel="preconnect"[^>]*>\n?', "", desk)
         desk = re.sub(r'<link rel="stylesheet" href="https://fonts[^>]*>\n?', "", desk)
         assert "fonts.googleapis.com" not in desk, "web-font link left in the offline app page"
+        # this is the FitSlice app, not the web configurator
+        desk = desk.replace("<title>Rev Trainer Configurator</title>", "<title>FitSlice</title>")
+        desk = desk.replace("<h1>Rev Trainer Configurator</h1>", "<h1>FitSlice</h1>")
+        assert "Rev Trainer Configurator</h1>" not in desk
         csp = f'<meta http-equiv="Content-Security-Policy" content="{APP_CSP}">'
         out = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
                '<meta name="viewport" content="width=device-width, initial-scale=1">\n' + csp + '\n</head>\n<body>\n'

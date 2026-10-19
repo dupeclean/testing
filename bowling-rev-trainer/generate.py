@@ -23,31 +23,36 @@ SCAD = Path(__file__).parent / "trainer.scad"
 PARTS = ["puck", "spinner", "sizer"]
 
 # key: (type, min, max) — ranges are sanity rails, in the SCAD's units
-# (mm for sizes/spans, drill-sheet inches for pitches).
+# (mm for sizes/spans, drill-sheet inches for pitches). Same limits as the app.
 SCHEMA = {
     "hand":        (str,   None,  None),
-    "span_middle": (float, 85,    135),
-    "span_ring":   (float, 85,    135),
-    "thumb_d":     (float, 21,    31),
-    "middle_d":    (float, 17,    26),
-    "ring_d":      (float, 17,    26),
-    "bridge":      (float, 4,     15),
-    "finger_depth":(float, 15,    35),
-    "thumb_fwd":   (float, -0.75, 0.75),
-    "thumb_lat":   (float, -0.75, 0.75),
-    "middle_fwd":  (float, -0.75, 0.75),
-    "middle_lat":  (float, -0.75, 0.75),
-    "ring_fwd":    (float, -0.75, 0.75),
-    "ring_lat":    (float, -0.75, 0.75),
+    "span_middle": (float, 60,    150),
+    "span_ring":   (float, 60,    150),
+    "thumb_d":     (float, 15,    38),
+    "middle_d":    (float, 10,    30),
+    "ring_d":      (float, 10,    30),
+    "bridge":      (float, 2,     30),
+    "finger_depth":(float, 8,     50),
+    "thumb_fwd":   (float, -1,    1),
+    "thumb_lat":   (float, -1,    1),
+    "middle_fwd":  (float, -1,    1),
+    "middle_lat":  (float, -1,    1),
+    "ring_fwd":    (float, -1,    1),
+    "ring_lat":    (float, -1,    1),
     "weight_pocket": (bool, None, None),
     "lanyard":     (bool,  None,  None),
 }
+# Keys the FitSlice app writes into fit_sheet.json that this script does not need
+# (its job sheet / model summary, and options trainer.scad has no switch for).
+IGNORED = {"name", "parts", "app", "version", "units", "modeled", "model", "order", "part",
+           "size_source", "thumb_through", "thumb_depth", "sizer_thumb_center",
+           "sizer_finger_center", "sizer_step", "print_allowance"}
 
 
 def validate(sheet: dict) -> dict:
     out = {}
     for key, raw in sheet.items():
-        if key in ("name", "parts"):
+        if key in IGNORED:
             continue
         if key not in SCHEMA:
             sys.exit(f"error: unknown fit-sheet key {key!r}")
@@ -61,6 +66,18 @@ def validate(sheet: dict) -> dict:
         if lo is not None and not (lo <= val <= hi):
             sys.exit(f"error: {key}={val} outside sane range [{lo}, {hi}]")
         out[key] = val
+    # trainer.scad takes final bore sizes: a fit sheet from the app lists the drill-sheet sizes
+    # plus a print allowance, so add it here the way the app does (the sizer plate is exempt)
+    try:
+        allowance = float(sheet.get("print_allowance", 0) or 0)
+    except (TypeError, ValueError):
+        sys.exit("error: print_allowance must be a number (mm)")
+    if not (0 <= allowance <= 2):
+        sys.exit(f"error: print_allowance={allowance} outside sane range [0, 2]")
+    if allowance:
+        for k in ("thumb_d", "middle_d", "ring_d"):
+            if k in out:
+                out[k] = round(out[k] + allowance, 4)
     return out
 
 

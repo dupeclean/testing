@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; base-uri 'none'; form-action 'none'">
 </head>
 <body>
-<title>Rev Trainer Configurator</title>
+<title>FitSlice</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* Layout: a pro-shop drill sheet on the left, the print bench (3D view + readout) on the right; stacks on phones. */
@@ -170,7 +170,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
 <div class="wrap">
   <header class="top">
     <div class="brand">
-      <h1>Rev Trainer Configurator</h1>
+      <h1>FitSlice</h1>
       <p>Enter the numbers from your pro-shop drill sheet. The model is rebuilt with those exact holes and you download a print-ready file.</p>
     </div>
     <div class="switches">
@@ -218,14 +218,14 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
               <td data-col="Pitch lateral"><input type="text" id="thumb_lat" list="pitch_options" aria-label="Thumb lateral pitch, inches"><span class="hint" id="thumb_lat_hint"></span></td>
             </tr>
             <tr>
-              <th scope="row">Middle</th>
+              <th scope="row" id="row_middle">Middle</th>
               <td data-col="Size"><input type="text" id="middle_d" inputmode="decimal" aria-label="Middle finger hole size"><span class="hint" id="middle_d_hint"></span></td>
               <td data-col="Span"><input type="text" id="span_middle" inputmode="decimal" aria-label="Middle finger span"><span class="hint" id="span_middle_hint"></span></td>
               <td data-col="Pitch F/R"><input type="text" id="middle_fwd" list="pitch_options" aria-label="Middle finger forward or reverse pitch, inches"><span class="hint" id="middle_fwd_hint"></span></td>
               <td data-col="Pitch lateral"><input type="text" id="middle_lat" list="pitch_options" aria-label="Middle finger lateral pitch, inches"><span class="hint" id="middle_lat_hint"></span></td>
             </tr>
             <tr>
-              <th scope="row">Ring</th>
+              <th scope="row" id="row_ring">Ring</th>
               <td data-col="Size"><input type="text" id="ring_d" inputmode="decimal" aria-label="Ring finger hole size"><span class="hint" id="ring_d_hint"></span></td>
               <td data-col="Span"><input type="text" id="span_ring" inputmode="decimal" aria-label="Ring finger span"><span class="hint" id="span_ring_hint"></span></td>
               <td data-col="Pitch F/R"><input type="text" id="ring_fwd" list="pitch_options" aria-label="Ring finger forward or reverse pitch, inches"><span class="hint" id="ring_fwd_hint"></span></td>
@@ -238,7 +238,10 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
           <option value="-1/2"><option value="-3/8"><option value="-1/4"><option value="-3/16"><option value="-1/8"><option value="-1/16">
           <option value="0"><option value="1/16"><option value="1/8"><option value="3/16"><option value="1/4"><option value="5/16"><option value="3/8"><option value="1/2">
         </datalist>
-        <p class="howto" style="margin-top:10px">Sizes and spans take the drill sheet's own notation: <b>55/64</b>, <b>1 1/32</b>, <b>4-1/2</b> or decimals. Span is the near edge of the thumb hole to the near edge of each finger hole. Pitch is in inches, as drilled: <b>+</b> forward, <b>−</b> reverse; lateral <b>+</b> is toward your bowling-hand side. Zero pitch aims the hole at the ball's center.</p>
+        <p class="howto" style="margin-top:10px">Sizes and spans take the drill sheet's own notation: <b>55/64</b>, <b>1 1/32</b>, <b>4-1/2</b> or decimals. Span is the near edge of the thumb hole to the near edge of each finger hole. Zero pitch aims the hole at the ball's center.</p>
+        <p class="howto" data-only-part="spinner" style="margin-top:6px"><b>Spinner:</b> only the two finger hole sizes and the bridge are used. Both holes are drilled straight at the ball's center, so the spans and pitches on this sheet do not apply to the spinner. Switch to Puck to use them.</p>
+        <p class="howto" style="margin-top:6px"><b>Which hole is which:</b> read the sheet with the thumb hole at the bottom, as it is drawn. For a right hand the <b>left</b> finger hole is the middle finger and the <b>right</b> hole is the ring finger (a left hand is the mirror image). Enter each hole's numbers on the row with the matching side, whatever the sheet calls it.</p>
+        <p class="howto" style="margin-top:6px"><b>Pitch</b> is in inches, as drilled. <b>Forward (+)</b>: the inner end of the hole leans toward the middle of the grip: the thumb hole toward the fingers, the finger holes toward the thumb. <b>Reverse (−)</b>: the other way. <b>Lateral (+)</b>: toward the right side of the sheet for a right hand (toward the left for a left hand); <b>−</b> is the other side. The blue lines in the 3D view show where each hole points.</p>
       </fieldset>
 
       <fieldset data-only-part="puck spinner">
@@ -266,7 +269,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
 
       <fieldset data-only-part="sizer">
         <legend>Sizer plate</legend>
-        <p class="howto" style="margin:0 0 10px">A quick flat print with labeled test bores. Try each bore to the first joint; the one that is snug all around with no squeeze needed to hang on is your size on this printer. Then set “Hole sizes come from” to the sizer plate.</p>
+        <p class="howto" style="margin:0 0 10px">A quick flat print with labeled test bores. Try each bore to the first joint; the one that is snug all around with no squeeze needed to hang on is your size <b>on this printer</b>. Each bore is engraved with its diameter in millimetres. To use what you found: switch the units to <b>mm</b>, set “Hole sizes come from” to <b>The printed sizer plate</b> (that sets the print allowance to 0, because the plate already includes the printer's effect), then type the engraved numbers as your hole sizes on the Puck or Spinner.</p>
         <div class="row">
           <label class="field"><span>Thumb row centered on</span>
             <span class="row" style="gap:6px"><input type="text" id="sizer_thumb_center" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span></label>
@@ -339,15 +342,15 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
       <label class="ofield"><span>Ship-to address</span><textarea id="ob-address" rows="2" maxlength="400"></textarea></label>
       <div class="orow2">
         <label class="ofield"><span>Product</span><select id="ob-product"></select></label>
-        <label class="ofield"><span>Price ($)</span><input type="text" id="ob-price" inputmode="decimal"></label>
+        <label class="ofield"><span>Price ($), blank = list price</span><input type="text" id="ob-price" inputmode="decimal"></label>
       </div>
       <label class="ofield"><span>Status</span>
         <select id="ob-status">
           <option value="new">New</option><option value="printing">Printing</option><option value="shipped">Shipped</option>
           <option value="done">Done</option><option value="hold">On hold</option>
         </select></label>
-      <label class="ofield"><span>Notes (not printed on any file)</span><textarea id="ob-notes" rows="3" maxlength="4000"></textarea></label>
-      <p class="onote">The drill sheet values come from the form on the main screen and are saved with the order.</p>
+      <label class="ofield"><span>Notes (kept in the order book and the spreadsheet, not on any print file)</span><textarea id="ob-notes" rows="3" maxlength="4000"></textarea></label>
+      <p class="onote">The drill sheet on the main screen goes with this order, including values left over from the last customer: check it before saving. Changes to the status or any field only count once you choose Save order.</p>
       <div class="oactions">
         <button type="submit" class="btn small primary" id="ob-form-save">Save order</button>
         <button type="button" class="btn small primary" id="ob-form-export">Save and export print files</button>
@@ -404,6 +407,7 @@ const WASM_B64 = "AGFzbQEAAAABlwRFYAF/AGACf38AYAJ/fwF/YAN/f38AYAF/AX9gBH9/f38AYA
 const IN = 25.4;
 const DEG = Math.PI / 180;
 const APP_VERSION = '1.0';
+const APP_NAME = (typeof window !== 'undefined' && window.fitslice) ? 'FitSlice' : 'Rev Trainer Configurator';
 
 // ---------------------------------------------------------------------------
 // Geometry constants — keep in sync with trainer.scad
@@ -440,6 +444,55 @@ const LENGTH_KEYS = ['span_middle', 'span_ring', 'thumb_d', 'middle_d', 'ring_d'
 const PITCH_KEYS = ['thumb_fwd', 'thumb_lat', 'middle_fwd', 'middle_lat', 'ring_fwd', 'ring_lat'];
 const BOOL_KEYS = ['thumb_through', 'weight_pocket', 'lanyard'];
 
+// Sensible ranges (mm). Anything outside is almost always a typo or the wrong unit
+// (110 typed while the switch is on inches, or 4 5/16 typed while it is on mm), and values
+// far outside make the geometry engine fail, so they are refused instead of built.
+const LIMITS = {
+  span_middle: [60, 150], span_ring: [60, 150],
+  thumb_d: [15, 38], middle_d: [10, 30], ring_d: [10, 30],
+  print_allowance: [0, 2], bridge: [2, 30], finger_depth: [8, 50], thumb_depth: [10, 80],
+  sizer_thumb_center: [15, 38], sizer_finger_center: [10, 30], sizer_step: [0.1, 2],
+};
+const LABELS = {
+  span_middle: 'Middle finger span', span_ring: 'Ring finger span',
+  thumb_d: 'Thumb hole size', middle_d: 'Middle finger hole size', ring_d: 'Ring finger hole size',
+  print_allowance: 'Print allowance', bridge: 'Bridge', finger_depth: 'Finger depth', thumb_depth: 'Thumb depth',
+  sizer_thumb_center: 'Sizer thumb centre', sizer_finger_center: 'Sizer finger centre', sizer_step: 'Sizer step',
+};
+const PITCH_LIMIT = 1;   // inches
+
+// A problem the owner can fix by changing a value; shown as plain text, never a stack trace.
+class FitError extends Error {}
+
+function rangeText(key) {
+  const [lo, hi] = LIMITS[key];
+  return `${fmtMm(lo)}–${fmtMm(hi)} mm (${fraction64(lo / IN)}"–${fraction64(hi / IN)}")`;
+}
+// Returns '' when fine, else a plain-language sentence.
+function checkLength(key, mm, unit) {
+  if (!Number.isFinite(mm)) return `${LABELS[key]}: that is not a number. Type it like 55/64, 4 1/2 or 21.5.`;
+  const [lo, hi] = LIMITS[key];
+  if (mm >= lo && mm <= hi) return '';
+  const typed = unit === 'in' ? `${fraction64(mm / IN)}"` : `${fmtMm(mm)} mm`;
+  let hint = '';
+  // the same digits would have been fine in the other unit: say so
+  if (unit === 'in' && mm / IN >= lo && mm / IN <= hi) hint = ' This looks like millimetres typed while the switch is on inches.';
+  else if (unit === 'mm' && mm * IN >= lo && mm * IN <= hi) hint = ' This looks like inches typed while the switch is on mm.';
+  return `${LABELS[key]}: ${typed} is outside the usable range ${rangeText(key)}.${hint}`;
+}
+// Every problem in a parameter set (used before any build, so a bad saved order cannot crash the engine).
+function validateParams(p) {
+  const out = [];
+  const keys = p.part === 'sizer' ? ['sizer_thumb_center', 'sizer_finger_center', 'sizer_step']
+    : ['span_middle', 'span_ring', 'thumb_d', 'middle_d', 'ring_d', 'print_allowance', 'bridge', 'finger_depth', ...(p.thumb_through ? [] : ['thumb_depth'])];
+  if (p.part === 'spinner') keys.splice(keys.indexOf('span_middle'), 2);
+  for (const k of keys) { const m = checkLength(k, p[k], 'mm'); if (m) out.push({ key: k, message: m }); }
+  if (p.part !== 'sizer') for (const k of PITCH_KEYS) {
+    if (!Number.isFinite(p[k]) || Math.abs(p[k]) > PITCH_LIMIT) out.push({ key: k, message: `Pitch (${k.replace('_', ' ')}) must be between -1" and 1".` });
+  }
+  return out;
+}
+
 // ---------------------------------------------------------------------------
 // Units: pro shops talk in 64ths of an inch; printers talk in mm
 // ---------------------------------------------------------------------------
@@ -457,7 +510,7 @@ function parseNumber(str) {
 }
 function parseLength(str, unit) {
   const v = parseNumber(str);
-  return unit === 'in' ? v * IN : v;
+  return unit === 'in' ? Math.round(v * IN * 1000) / 1000 : v;
 }
 function fmtMm(mm, places = 2) { return (Math.round(mm * 10 ** places) / 10 ** places).toString(); }
 function fmtLength(mm, unit) { return unit === 'in' ? (mm / IN).toFixed(3) : fmtMm(mm); }
@@ -486,8 +539,12 @@ function derive(p) {
   const a = p.part === 'sizer' ? 0 : p.print_allowance;
   const mir = p.hand === 'right' ? 1 : -1;
   const td = p.thumb_d + a, md = p.middle_d + a, rd = p.ring_d + a;
-  const x_m = mir * (md + p.bridge) / 2;
-  const x_r = -mir * (rd + p.bridge) / 2;
+  // Seen from outside the grip with the thumb hole at the bottom (the way a drill sheet is
+  // drawn), a right hand's fingers run index, middle, ring from the thumb side to the pinky
+  // side, so the middle finger is the LEFT hole and the ring finger the RIGHT hole. Left
+  // hand mirrors that. (+x is the viewer's right.)
+  const x_m = -mir * (md + p.bridge) / 2;
+  const x_r = mir * (rd + p.bridge) / 2;
   const cc_m = p.span_middle + td / 2 + md / 2;
   const cc_r = p.span_ring + td / 2 + rd / 2;
   const ty = (cc_m + cc_r) / 4;
@@ -511,6 +568,23 @@ const surfZ = (h, x, y) => h - G.R + Math.sqrt(G.R * G.R - x * x - y * y);
 // fdir is +1 for the thumb (grip center is toward +y) and -1 for the fingers.
 // Returns the entry point, the outward unit direction, and the Euler rotation that
 // turns +Z into that direction.
+// Smallest distance between two hole axes over the first `len` mm of each (segment to segment).
+function minAxisGap(a, b, len) {
+  const sub = (u, v) => [u[0] - v[0], u[1] - v[1], u[2] - v[2]];
+  const dot = (u, v) => u[0] * v[0] + u[1] * v[1] + u[2] * v[2];
+  const p1 = a.p, d1 = a.dir.map(v => -v * len);
+  const p2 = b.p, d2 = b.dir.map(v => -v * len);
+  const r = sub(p1, p2);
+  const A = dot(d1, d1), E = dot(d2, d2), B = dot(d1, d2), C = dot(d1, r), F = dot(d2, r);
+  const den = A * E - B * B;
+  const clamp = (v) => Math.max(0, Math.min(1, v));
+  let s = den > 1e-9 ? clamp((B * F - C * E) / den) : 0;
+  let t = (B * s + F) / E;
+  if (t < 0) { t = 0; s = clamp(-C / A); } else if (t > 1) { t = 1; s = clamp((B - C) / A); }
+  const q = [r[0] + d1[0] * s - d2[0] * t, r[1] + d1[1] * s - d2[1] * t, r[2] + d1[2] * s - d2[2] * t];
+  return Math.hypot(q[0], q[1], q[2]);
+}
+
 function holeAxis(x, y, fwdIn, latIn, bodyH, mir, fdir) {
   const P = [x, y, surfZ(bodyH, x, y)];
   const A = [latIn * IN * mir, fwdIn * IN * fdir, bodyH - G.R];   // aim point
@@ -585,6 +659,16 @@ function makeBuilder(W) {
       warnings.push('Thumb and finger bores run into each other: the spans are too short for these hole sizes.');
     if (overlap(mid.bore, ring.bore))
       warnings.push('The two finger bores intersect below the surface. Increase the bridge or reduce the lateral pitches.');
+    // the two finger bores converge as they go deeper (they aim at the ball's center), so the
+    // web between them is thinnest at the bottom of the holes
+    const web = minAxisGap(mid.axis, ring.axis, p.finger_depth) - (D.md + D.rd) / 2;
+    if (web > 0 && web < 2.5 && !overlap(mid.bore, ring.bore))
+      warnings.push(`The web between the finger holes narrows to ${web.toFixed(1)} mm deep inside. That is a fragile hairline when printed. Increase the bridge or reduce the finger depth.`);
+    for (const [name, h] of [['middle', mid], ['ring', ring]]) {
+      const endZ = h.axis.p[2] - p.finger_depth * h.axis.dir[2];
+      if (endZ < 1.5) warnings.push(`The ${name} finger bore would break through the base of the puck. Reduce the finger depth.`);
+      if (pock && overlap(h.bore, pock)) warnings.push(`The ${name} finger bore breaks into the weight pocket. Turn the pocket off or reduce the finger depth.`);
+    }
     if (pock && overlap(thumb.bore, pock))
       warnings.push('The thumb bore breaks into the weight pocket at this span. Turn the pocket off or use a blind thumb hole.');
     if (tunnel && (overlap(mid.bore, tunnel) || overlap(ring.bore, tunnel)))
@@ -692,10 +776,18 @@ function makeBuilder(W) {
   }
 
   function build(p) {
+    const bad = validateParams(p);
+    if (bad.length) throw new FitError(bad[0].message);
     const D = derive(p);
+    if (p.part === 'puck') {
+      // holes must sit on the part: a hole centre beyond ~92 mm from the axis is off the ball section
+      const r = Math.max(Math.hypot(0, D.ty), Math.hypot(D.x_m, D.y_m), Math.hypot(D.x_r, D.y_r));
+      if (r > 92) throw new FitError('These spans do not fit on the 8.5-inch ball section: a hole would sit off its edge. Check both spans, and that they are in the right units.');
+    }
     try {
       const out = p.part === 'puck' ? puck(p, D) : p.part === 'spinner' ? spinner(p, D) : sizer(p);
       const m = out.result;
+      if (!(m.volume() > 1000)) throw new FitError('The model came out empty. Check the hole sizes and spans.');
       const bb = m.boundingBox();
       return {
         mesh: meshOf(m),
@@ -912,7 +1004,7 @@ function fileBase(p, D) {
 }
 
 function fitSheet(p, D, data) {
-  const sheet = { app: 'Rev Trainer Configurator', version: APP_VERSION, units: { lengths: 'mm', pitches: 'inches' } };
+  const sheet = { app: APP_NAME, version: APP_VERSION, units: { lengths: 'mm', pitches: 'inches' } };
   for (const k of Object.keys(DEFAULTS)) sheet[k] = p[k];
   sheet.modeled = {
     thumb_bore_mm: +D.td.toFixed(3), middle_bore_mm: +D.md.toFixed(3), ring_bore_mm: +D.rd.toFixed(3),
@@ -962,7 +1054,15 @@ async function main() {
       if (h) h.textContent = describePitch(state[k], k.endsWith('_fwd') ? 'fr' : 'lat', state.hand);
     }
   }
+  function rowLabels() {
+    const left = state.hand === 'right';
+    $('row_middle').textContent = `Middle · ${left ? 'left' : 'right'} hole`;
+    $('row_ring').textContent = `Ring · ${left ? 'right' : 'left'} hole`;
+  }
   function showAll() {
+    invalid.clear();
+    document.querySelectorAll('.bad').forEach(e => { e.classList.remove('bad'); e.removeAttribute('title'); });
+    rowLabels();
     showLengths();
     for (const k of PITCH_KEYS) { const el = $(k); if (el) el.value = state[k] === 0 ? '0' : fraction64(state[k]); }
     for (const k of BOOL_KEYS) { const el = $(k); if (el) el.checked = !!state[k]; }
@@ -978,11 +1078,19 @@ async function main() {
   let timer = null;
   const schedule = () => { clearTimeout(timer); timer = setTimeout(rebuild, 250); };
 
+  // Fields whose typed text was refused. The model keeps the last good value for them, so
+  // saving or exporting is blocked until each is fixed (never silently using stale numbers).
+  const invalid = new Map();   // field id -> message
+  const markBad = (el, msg) => { el.classList.add('bad'); el.title = msg; invalid.set(el.id, msg); setStatus(msg, 'error'); };
+  const markGood = (el) => { el.classList.remove('bad'); el.removeAttribute('title'); invalid.delete(el.id); };
+  const invalidMessage = () => (invalid.size ? [...invalid.values()][0] + (invalid.size > 1 ? ` (+${invalid.size - 1} more field${invalid.size > 2 ? 's' : ''} marked red)` : '') : '');
+
   for (const el of lengthInputs) {
     el.addEventListener('change', () => {
       const v = parseLength(el.value, unit);
-      if (Number.isFinite(v) && v >= 0) { state[el.id] = v; el.classList.remove('bad'); schedule(); }
-      else el.classList.add('bad');
+      const msg = LIMITS[el.id] ? checkLength(el.id, v, unit) : (Number.isFinite(v) && v >= 0 ? '' : 'That is not a number.');
+      if (!msg) { state[el.id] = v; markGood(el); schedule(); }
+      else markBad(el, msg);
       refreshHints();
     });
   }
@@ -990,15 +1098,15 @@ async function main() {
     const el = $(k);
     el.addEventListener('change', () => {
       const v = parseNumber(el.value);
-      if (Number.isFinite(v) && Math.abs(v) <= 1) { state[k] = v; el.classList.remove('bad'); schedule(); }
-      else el.classList.add('bad');
+      if (Number.isFinite(v) && Math.abs(v) <= PITCH_LIMIT) { state[k] = v; markGood(el); schedule(); }
+      else markBad(el, 'Pitch must be a number between -1" and 1" (for example 3/8, -1/8 or 0).');
       refreshHints();
     });
   }
   for (const k of BOOL_KEYS) {
     $(k).addEventListener('change', (e) => { state[k] = e.target.checked; if (k === 'thumb_through') $('thumb_depth_row').hidden = state.thumb_through; schedule(); });
   }
-  $('hand').addEventListener('change', e => { state.hand = e.target.value; refreshHints(); schedule(); });
+  $('hand').addEventListener('change', e => { state.hand = e.target.value; rowLabels(); refreshHints(); schedule(); });
   $('size_source').addEventListener('change', e => {
     state.size_source = e.target.value;
     state.print_allowance = state.size_source === 'sizer_plate' ? 0 : 0.4;
@@ -1021,10 +1129,12 @@ async function main() {
       current = builder.build(state);
       viewer.show(current);
       showStats(current);
-      setStatus(`Built in ${Math.round(performance.now() - t0)} ms`, current.warnings.length ? 'warn' : 'ok');
+      const w = current.warnings;
+      setStatus(`Built in ${Math.round(performance.now() - t0)} ms` + (w.length ? ` · ⚠ ${w[0]}${w.length > 1 ? ` (+${w.length - 1} more below)` : ''}` : ''), w.length ? 'warn' : 'ok');
     } catch (e) {
-      console.error(e);
-      setStatus('Could not build this geometry. Check the values marked in red.', 'error');
+      if (!(e instanceof FitError)) console.error(e);
+      current = null;   // never leave an old model that no longer matches the form
+      setStatus(e instanceof FitError ? e.message : 'Could not build this geometry. Check the values marked in red.', 'error');
     }
   }
 
@@ -1062,9 +1172,10 @@ async function main() {
     setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 2000);
   }
   async function saveSTL(bundle) {
-    if (!current) return;
+    if (invalid.size) { setStatus(`Not saved. ${invalidMessage()}`, 'error'); return; }
+    if (!current) { setStatus('Nothing to save: the model could not be built. Fix the message above first.', 'error'); return; }
     const D = current.derived, base = fileBase(state, D);
-    const stl = toSTL(current.mesh, `${base} - Rev Trainer Configurator ${APP_VERSION}`);
+    const stl = toSTL(current.mesh, `${base} - ${APP_NAME} ${APP_VERSION}`);
     const sheet = new TextEncoder().encode(JSON.stringify(fitSheet(state, D, current), null, 2));
     const dl = await downloads;
     if (dl) {
@@ -1129,6 +1240,10 @@ async function main() {
   window.__cfgApp = {
     ready: true,
     getState: () => JSON.parse(JSON.stringify(state)),
+    // [] when every field holds a usable value, else the plain-language problems
+    problems: () => [...invalid.values()],
+    // checks any parameter set (e.g. a saved order) without building it
+    validate: (obj) => validateParams({ ...state, ...obj }).map(x => x.message),
     defaults: () => JSON.parse(JSON.stringify(DEFAULTS)),
     setState(obj) {
       for (const k of Object.keys(DEFAULTS)) if (obj && k in obj) state[k] = obj[k];
@@ -1143,7 +1258,7 @@ async function main() {
         const p = { ...state, ...overrides, part };
         const data = builder.build(p);
         const base = fileBase(p, data.derived);
-        files.push({ name: `${base}.stl`, data: toSTL(data.mesh, `${base} - FitSlice ${APP_VERSION}`), part });
+        files.push({ name: `${base}.stl`, data: toSTL(data.mesh, `${base} - ${APP_NAME} ${APP_VERSION}`), part });
         data.warnings.forEach(w => warnings.push(`${part}: ${w}`));
         axes[part] = data.axes.map(a => ({ name: a.name, p: a.p, dir: a.dir }));
         const shell = Math.min(data.volume, data.area * 1.6);
@@ -1181,19 +1296,23 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
   let orders = [];
   let cur = null;        // the open order, or null for a new one
   let priceTouched = false;
-  let deleteArmed = null;
+  let busy = false;      // a save or delete is running: further clicks are ignored
+  let exporting = false; // an export is running
+  let savedSnap = '';    // what the screen looked like when it was last saved or opened
   let toastTimer = null;
   let toastFolder = null;
+  let toastOrder = null;
 
   const money = (n) => '$' + Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const STATUS_LABEL = { new: 'New', printing: 'Printing', shipped: 'Shipped', done: 'Done', hold: 'On hold' };
 
   function message(e) { return (e && e.message ? e.message : String(e)).replace(/^Error invoking remote method '[^']+': (Error: )?/, ''); }
 
-  function toast(text, folder, ms = 9000) {
+  function toast(text, folder, ms = 9000, orderId = null) {
     clearTimeout(toastTimer);
     el.toastText.textContent = text;
     toastFolder = folder || null;
+    toastOrder = orderId;
     el.toastOpen.hidden = !folder;
     el.toast.hidden = false;
     toastTimer = setTimeout(() => { el.toast.hidden = true; }, ms);
@@ -1269,6 +1388,30 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
     el.cur.append(small);
   }
 
+  // ---- unsaved changes ----
+  const r5 = (v) => (typeof v === 'number' ? Math.round(v * 1e5) / 1e5 : v);
+  function fitSnap(fit) {
+    const out = {};
+    for (const k of Object.keys(fit).sort()) if (k !== 'part') out[k] = r5(fit[k]);
+    return out;
+  }
+  function snapshot() {
+    return JSON.stringify({
+      customer: [el.name.value, el.email.value, el.phone.value, el.address.value].map(v => v.trim()),
+      product: el.product.value, price: el.price.value.trim(), status: el.status.value, notes: el.notes.value.trim(),
+      // a new, unsaved order's sheet is not "unsaved work" until an order exists
+      fit: cur ? fitSnap(window.__cfgApp.getState()) : null,
+    });
+  }
+  const markSaved = () => { savedSnap = snapshot(); };
+  const isDirty = () => snapshot() !== savedSnap;
+  const sheetEdited = () => JSON.stringify(fitSnap(window.__cfgApp.getState())) !== JSON.stringify(fitSnap(window.__cfgApp.defaults()));
+  function okToLeave() {
+    if (cur && isDirty()) return window.confirm(`${cur.number} has changes that are not saved. Leave without saving them?`);
+    if (!cur && isDirty()) return window.confirm('The customer details you typed are not saved. Leave without saving them?');
+    return true;
+  }
+
   function fillForm(o) {
     el.num.textContent = o ? `${o.number}` : 'New order';
     el.name.value = o ? o.customer.name : '';
@@ -1281,18 +1424,23 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
     el.notes.value = o ? o.notes : '';
     priceTouched = !!o;
     el.del.hidden = !o; el.openFolder.hidden = !o;
-    deleteArmed = null; el.del.textContent = 'Delete';
+    el.del.textContent = 'Delete';
     showError('');
+    markSaved();
   }
 
   function openOrder(o) {
+    if (cur && cur.id === o.id && !isDirty()) { renderList(); return; }
+    if (!okToLeave()) return;
+    if (!cur && sheetEdited() && !window.confirm('The drill sheet on screen has not been saved with an order. Opening another order replaces it. Continue?')) return;
     cur = o;
-    fillForm(o);
     window.__cfgApp.setState(o.fit);
+    fillForm(o);
     setBar(); renderList();
   }
 
   function newOrder() {
+    if (!okToLeave()) return;
     cur = null;
     fillForm(null);
     setBar(); renderList();
@@ -1304,16 +1452,26 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
   function closeDrawer() { el.drawer.hidden = true; }
 
   function parsePrice(s) {
-    const t = String(s).replace(/[$,\s]/g, '');
-    if (t === '') return null;
-    const n = Number(t);
-    return Number.isFinite(n) ? n : NaN;
+    let t = String(s).replace(/[$\s]/g, '');
+    if (t === '') return null;                       // blank = the list price
+    // "119,50" is a decimal comma; "1,119" or "1,119.50" are thousands separators
+    t = /^\d+,\d{1,2}$/.test(t) ? t.replace(',', '.') : t.replace(/,/g, '');
+    return /^\d+(\.\d+)?$/.test(t) ? Number(t) : NaN;
   }
 
   function collect() {
     const product = el.product.value;
+    const stuck = window.__cfgApp.problems();
+    if (stuck.length) throw new Error('Fix the drill sheet first. ' + stuck[0]);
     const fit = window.__cfgApp.getState();
     fit.part = info.products[product].parts[0];
+    // a Fit Kit's sizer plate is centred on this customer's sizes; keep that in the saved order too
+    if (info.products[product].parts.includes('sizer')) {
+      fit.sizer_thumb_center = Math.round(fit.thumb_d * 1000) / 1000;
+      fit.sizer_finger_center = Math.round(((fit.middle_d + fit.ring_d) / 2) * 1000) / 1000;
+    }
+    const bad = window.__cfgApp.validate(fit);
+    if (bad.length) throw new Error(bad[0]);
     const price = parsePrice(el.price.value);
     if (Number.isNaN(price)) throw new Error('The price must be a number, like 119 or 119.00.');
     return {
@@ -1324,6 +1482,8 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
   }
 
   async function saveOrder() {
+    if (busy) return null;
+    busy = true;
     showError('');
     try {
       if (!el.name.value.trim()) { openDrawer(); el.name.classList.add('bad'); el.name.focus(); throw new Error('Enter the customer\'s name before saving the order.'); }
@@ -1333,41 +1493,66 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
       el.num.textContent = cur.number;
       el.del.hidden = false; el.openFolder.hidden = false;
       setBar();
+      markSaved();
       await refresh();
       toast(`Saved ${cur.number} for ${cur.customer.name}.`);
       return cur;
     } catch (e) {
       showError(message(e)); openDrawer();
       return null;
+    } finally {
+      busy = false;
     }
   }
 
   // ---- print files ----
   function jobSheet(order, built, fileNames) {
     const f = built.fitSheet, m = f.modeled;
+    const parts = info.products[order.product].parts;
+    const hasPuck = parts.includes('puck'), hasSpin = parts.includes('spinner'), hasSizer = parts.includes('sizer');
     const r2 = (x) => Math.round(Number(x) * 100) / 100;
     const both = (mm) => `${fraction64(mm / IN)}" (${r2(mm)} mm)`;
     const pad = (s, n) => String(s).padEnd(n);
     const side = f.hand === 'right' ? 'Right' : 'Left';
-    const rows = [
-      ['Thumb',  both(f.thumb_d),  `${m.thumb_bore_in}" (${r2(m.thumb_bore_mm)} mm)`,   '-',                  describePitch(f.thumb_fwd, 'fr', f.hand),  describePitch(f.thumb_lat, 'lat', f.hand)],
-      ['Middle', both(f.middle_d), `${m.middle_bore_in}" (${r2(m.middle_bore_mm)} mm)`, both(f.span_middle), describePitch(f.middle_fwd, 'fr', f.hand), describePitch(f.middle_lat, 'lat', f.hand)],
-      ['Ring',   both(f.ring_d),   `${m.ring_bore_in}" (${r2(m.ring_bore_mm)} mm)`,     both(f.span_ring),   describePitch(f.ring_fwd, 'fr', f.hand),   describePitch(f.ring_lat, 'lat', f.hand)],
-    ];
-    const W = [8, 22, 22, 22, 16];
+    const midSide = f.hand === 'right' ? 'left' : 'right', ringSide = f.hand === 'right' ? 'right' : 'left';
+    const d = new Date(), p2 = (n) => String(n).padStart(2, '0');
+    const today = `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}`;   // the shop's own calendar day
     const L = [];
     L.push('FITSLICE JOB SHEET', '==================', '');
-    L.push(`Order      ${order.number}`, `Date       ${new Date().toISOString().slice(0, 10)}`, `Customer   ${order.customer.name}`);
+    L.push(`Order      ${order.number}`, `Date       ${today}`, `Customer   ${order.customer.name}`);
     L.push(`Product    ${(info.products[order.product] || {}).label || order.product}   ${money(order.price)}`, `Hand       ${side}-handed`, '');
-    L.push('DRILL SHEET AS ENTERED, AND THE BORE SIZE THE MODEL USES (sheet size + print allowance)');
-    L.push(['', 'Sheet size', 'Modeled bore', 'Span (cut to cut)', 'Forward/reverse', 'Lateral'].map((h, i) => i < 5 ? pad(h, W[i]) : h).join(''));
-    for (const r of rows) L.push(r.map((c, i) => i < 5 ? pad(c, W[i]) : c).join(''));
-    L.push('', `Bridge ${both(f.bridge)}   Finger depth ${f.finger_depth} mm   Thumb ${f.thumb_through ? 'through' : 'blind, ' + f.thumb_depth + ' mm deep'}`);
-    L.push(`Print allowance ${m.print_allowance_mm} mm   Weight pocket ${f.weight_pocket ? 'yes' : 'no'}   Wrist-cord tunnel ${f.lanyard ? 'yes' : 'no'}`, '');
+
+    if (hasPuck || hasSpin) {
+      const rows = [];
+      if (hasPuck) rows.push(['Thumb', both(f.thumb_d), `${m.thumb_bore_in}" (${r2(m.thumb_bore_mm)} mm)`, '-', describePitch(f.thumb_fwd, 'fr', f.hand), describePitch(f.thumb_lat, 'lat', f.hand)]);
+      rows.push([`Middle (${midSide} hole)`, both(f.middle_d), `${m.middle_bore_in}" (${r2(m.middle_bore_mm)} mm)`, hasPuck ? both(f.span_middle) : '-',
+        hasPuck ? describePitch(f.middle_fwd, 'fr', f.hand) : 'zero', hasPuck ? describePitch(f.middle_lat, 'lat', f.hand) : 'zero']);
+      rows.push([`Ring (${ringSide} hole)`, both(f.ring_d), `${m.ring_bore_in}" (${r2(m.ring_bore_mm)} mm)`, hasPuck ? both(f.span_ring) : '-',
+        hasPuck ? describePitch(f.ring_fwd, 'fr', f.hand) : 'zero', hasPuck ? describePitch(f.ring_lat, 'lat', f.hand) : 'zero']);
+      const W = [20, 22, 22, 22, 16];
+      L.push('DRILL SHEET AS ENTERED, AND THE BORE SIZE THE MODEL USES (sheet size + print allowance)');
+      L.push(['', 'Sheet size', 'Modeled bore', 'Span (cut to cut)', 'Forward/reverse', 'Lateral'].map((h, i) => i < 5 ? pad(h, W[i]) : h).join(''));
+      for (const r of rows) L.push(r.map((c, i) => i < 5 ? pad(c, W[i]) : c).join(''));
+      L.push('');
+      if (hasPuck) {
+        L.push(`Bridge ${both(f.bridge)}   Finger depth ${f.finger_depth} mm   Thumb ${f.thumb_through ? 'through' : 'blind, ' + f.thumb_depth + ' mm deep'}`);
+        L.push(`Print allowance ${m.print_allowance_mm} mm   Weight pocket ${f.weight_pocket ? 'yes' : 'no'}   Wrist-cord tunnel ${f.lanyard ? 'yes' : 'no'}`);
+      }
+      if (hasSpin) {
+        L.push(`${hasPuck ? 'Rev Spinner: ' : ''}two finger holes only, no thumb hole. Spans and pitches above do not apply to the spinner: its holes are drilled straight at the ball's center (zero pitch). Hole spacing uses the bridge ${both(f.bridge)}; finger depth ${Math.min(f.finger_depth, 20)} mm; wrist-cord tunnel ${f.lanyard ? 'yes' : 'no'}; print allowance ${m.print_allowance_mm} mm.`);
+      }
+      L.push('');
+    }
+    if (hasSizer) {
+      L.push('SIZER PLATE', `Finger row centred on ${both(f.sizer_finger_center)}, thumb row centred on ${both(f.sizer_thumb_center)}, steps of ${r2(f.sizer_step)} mm. Each bore is engraved with its diameter in mm. No print allowance is added: the bores are exactly the engraved size.`, '');
+    }
+
     L.push('PRINT');
     L.push('PETG, 0.2 mm layers, 4 walls, 20% gyroid infill, flat side down, no supports.');
     for (const s of built.stats) L.push(`  ${s.part}: about ${s.grams_20pct} g of filament at 20% infill, ${s.bbox_mm.join(' x ')} mm`);
-    L.push('After printing: smooth the bores with fine sandpaper and check each bore against the sizes above before packing.', '');
+    if (hasPuck || hasSpin) L.push('After printing: smooth the bores with fine sandpaper and check each bore against the sizes above before packing.');
+    if (hasSizer) L.push('Do not sand the sizer plate: its holes are the test. The bore that fits the finger snugly is that finger\'s size.');
+    L.push('');
     if (built.warnings.length) {
       L.push('WARNINGS FROM THE MODEL (resolve before printing)');
       for (const w of built.warnings) L.push('  - ' + w);
@@ -1375,23 +1560,21 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
     }
     L.push('FILES');
     for (const n of fileNames) L.push('  ' + n);
-    L.push('', 'Round bores only: if the sheet lists oval holes, the model uses the round size that was entered. Finish the fit with bowler\'s tape.');
+    if (hasPuck || hasSpin) L.push('', 'Round bores only: if the sheet lists oval holes, the model uses the round size that was entered. Finish the fit with bowler\'s tape.');
     return L.join('\r\n') + '\r\n';
   }
 
   async function exportFiles() {
-    const order = await saveOrder();
-    if (!order) return;
+    if (exporting) return;
+    exporting = true;
     try {
+      const order = await saveOrder();
+      if (!order) return;
       const parts = info.products[order.product].parts;
-      const overrides = {};
-      if (parts.includes('sizer')) {
-        overrides.sizer_thumb_center = order.fit.thumb_d;
-        overrides.sizer_finger_center = (order.fit.middle_d + order.fit.ring_d) / 2;
-      }
       toast('Building print files…', null, 60000);
       await new Promise(r => setTimeout(r, 30));
-      const built = window.__cfgApp.buildFiles(parts, overrides);
+      // built from the order exactly as it was just saved, not from whatever the form shows now
+      const built = window.__cfgApp.buildFiles(parts, order.fit);
       const names = built.files.map(f => f.name).concat(['fit_sheet.json', 'job_sheet.txt']);
       const sheet = { order: order.number, ...built.fitSheet };
       const files = built.files.map(f => ({ name: f.name, data: f.data }));
@@ -1399,25 +1582,27 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
       files.push({ name: 'job_sheet.txt', data: jobSheet(order, built, names) });
       const r = await bridge.exportOrder({ orderId: order.id, files });
       const warn = built.warnings.length ? ` ${built.warnings.length} warning${built.warnings.length === 1 ? '' : 's'}: see job_sheet.txt.` : '';
-      toast(`Saved ${r.files.length} files for ${order.number} to ${r.dir}.${warn}`, r.dir, 15000);
+      const old = r.superseded && r.superseded.length ? ` Older files for this order were moved to its "superseded" folder.` : '';
+      toast(`Saved ${r.files.length} files for ${order.number} to ${r.dir}.${warn}${old}`, r.dir, 15000, order.id);
+      cur = (await bridge.listOrders()).orders.find(o => o.id === order.id) || cur;
     } catch (e) {
       el.toast.hidden = true;
       showError(message(e)); openDrawer();
+    } finally {
+      exporting = false;
     }
   }
 
   async function deleteOrder() {
-    if (!cur) return;
-    if (deleteArmed !== cur.id) {
-      deleteArmed = cur.id; el.del.textContent = 'Click again to delete';
-      setTimeout(() => { if (deleteArmed === cur?.id) { deleteArmed = null; el.del.textContent = 'Delete'; } }, 4000);
-      return;
-    }
+    if (!cur || busy) return;
+    busy = true;
     try {
-      await bridge.deleteOrder(cur.id);
-      toast(`Deleted ${cur.number}. Its exported files were not touched.`);
+      const gone = cur;
+      const r = await bridge.deleteOrder(gone.id);   // asks for confirmation in a native dialog
+      if (!r.deleted) return;
+      toast(`Deleted ${gone.number}. Its exported files were not touched.`);
       cur = null; fillForm(null); setBar(); await refresh();
-    } catch (e) { showError(message(e)); }
+    } catch (e) { showError(message(e)); } finally { busy = false; }
   }
 
   async function menuAction(name) {
@@ -1432,7 +1617,7 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
   }
 
   function showWhere() {
-    el.where.textContent = `Print files: ${info.ordersFolder}. Order book: ${info.dataFolder}. Both stay on this computer. Back up the order book folder to keep your customers safe.`;
+    el.where.textContent = `Print files: ${info.ordersFolder}. Order book: ${info.dataFolder}. FitSlice never sends them anywhere, but if Windows backs up your Documents folder to OneDrive, the print files and orders.csv (which holds customer contact details) go with it. Back up the order book folder to keep your customers safe.`;
   }
 
   async function init() {
@@ -1465,9 +1650,10 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
     byId('ob-folder').addEventListener('click', () => menuAction('open-folder'));
     byId('ob-choose').addEventListener('click', () => menuAction('choose-folder'));
     byId('ob-toast-x').addEventListener('click', () => { el.toast.hidden = true; });
-    el.toastOpen.addEventListener('click', async () => { if (toastFolder) { try { await bridge.openOrdersFolder(); } catch (_) { /* ignore */ } } });
+    el.toastOpen.addEventListener('click', async () => { if (!toastFolder) return; try { if (toastOrder) await bridge.openOrderFolder(toastOrder); else await bridge.openOrdersFolder(); } catch (e) { showError(message(e)); } });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !el.drawer.hidden) closeDrawer(); });
     bridge.onMenu(menuAction);
+    window.addEventListener('beforeunload', (e) => { if (isDirty()) { e.preventDefault(); e.returnValue = ''; } });
     window.__orders = { ready: true, newOrder, openOrder, saveOrder, exportFiles, list: () => orders.slice() };
   }
 

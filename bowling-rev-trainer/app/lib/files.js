@@ -6,6 +6,7 @@
 const fs = require('fs');
 const path = require('path');
 const { UserError } = require('./store');
+const { retrySync, stage, commit } = require('./atomic');
 
 const ALLOWED_EXT = new Set(['.stl', '.json', '.txt']);
 const MAX_FILES = 12;
@@ -39,20 +40,29 @@ function toBuffer(data) {
   throw new UserError('A file had unreadable contents.');
 }
 
-function writeAtomic(file, buf) {
-  const tmp = file + '.tmp';
-  const fd = fs.openSync(tmp, 'w');
-  try { fs.writeSync(fd, buf); fs.fsyncSync(fd); } finally { fs.closeSync(fd); }
-  fs.renameSync(tmp, file);
+// A name that is already one safe folder name (as produced by sanitizeName) directly inside baseDir.
+function isSafeFolder(baseDir, name) {
+  if (typeof name !== 'string' || !name || sanitizeName(name, '') !== name) return false;
+  return path.dirname(path.resolve(baseDir, name)) === path.resolve(baseDir);
 }
 
-// Returns { dir, files: [names written] }.
+function stamp() { return new Date().toISOString().replace(/[-:]/g, '').replace(/\..*/, ''); }
+
+// Writes an order's files into `<baseDir>/<folder>` and returns { dir, folder, files, superseded }.
+//  - The folder name is chosen once ("FS-0001 Jordan Lee") and then kept (order.exportFolder),
+//    so fixing a typo in the customer's name later never strands the files.
+//  - All files are staged as .tmp first and renamed only once every one was written, so a failure
+//    cannot leave a mix of new and old files.
+//  - Files from an earlier export of this order that are not part of this export are moved to a
+//    "superseded" subfolder, so the folder always holds exactly the current print files.
 function exportOrderFiles(baseDir, order, files) {
   if (!Array.isArray(files) || files.length === 0) throw new UserError('There are no files to export.');
   if (files.length > MAX_FILES) throw new UserError('Too many files in one export.');
-  const folder = sanitizeName(`${order.number} ${order.customer && order.customer.name || ''}`.trim(), order.number);
-  const dir = path.join(baseDir, folder);
   const resolvedBase = path.resolve(baseDir);
+  const folder = isSafeFolder(baseDir, order.exportFolder)
+    ? order.exportFolder
+    : sanitizeName(`${order.number} ${order.customer && order.customer.name || ''}`.trim(), order.number);
+  const dir = path.join(baseDir, folder);
   if (path.dirname(path.resolve(dir)) !== resolvedBase) throw new UserError('Unsafe export folder.');
   const prepared = files.map(f => {
     const buf = toBuffer(f && f.data);
@@ -64,9 +74,29 @@ function exportOrderFiles(baseDir, order, files) {
     if (names.has(p.name.toLowerCase())) throw new UserError('Two files have the same name.');
     names.add(p.name.toLowerCase());
   }
-  fs.mkdirSync(dir, { recursive: true });
-  for (const p of prepared) writeAtomic(path.join(dir, p.name), p.buf);
-  return { dir, files: prepared.map(p => p.name) };
+  retrySync(() => fs.mkdirSync(dir, { recursive: true }));
+
+  const staged = [];
+  try {
+    for (const p of prepared) staged.push({ tmp: stage(path.join(dir, p.name), p.buf), file: path.join(dir, p.name) });
+  } catch (e) {
+    for (const q of prepared) { try { fs.unlinkSync(path.join(dir, q.name + '.tmp')); } catch (_) { /* not created */ } }
+    throw e;
+  }
+  for (const s of staged) commit(s.tmp, s.file);
+
+  const superseded = [];
+  const previous = Array.isArray(order.exportFiles) ? order.exportFiles : [];
+  for (const old of previous) {
+    if (names.has(String(old).toLowerCase()) || path.basename(String(old)) !== old) continue;
+    const from = path.join(dir, old);
+    if (!fs.existsSync(from)) continue;
+    const to = path.join(dir, 'superseded');
+    fs.mkdirSync(to, { recursive: true });
+    retrySync(() => fs.renameSync(from, path.join(to, `${stamp()} ${old}`)));
+    superseded.push(old);
+  }
+  return { dir, folder, files: prepared.map(p => p.name), superseded };
 }
 
-module.exports = { exportOrderFiles, sanitizeName, safeFileName };
+module.exports = { exportOrderFiles, sanitizeName, safeFileName, isSafeFolder };
