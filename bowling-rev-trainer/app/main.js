@@ -43,7 +43,7 @@ function trusted(event) {
 function friendlyFsError(e) {
   const code = e && e.code;
   if (code === 'ENOSPC') return 'The disk is full, so nothing could be saved. Free some space and try again.';
-  if (code === 'EPERM' || code === 'EBUSY' || code === 'EACCES') return 'Windows would not let FitSlice write there. A file may be open in another program (Excel, a slicer, a sync tool), or the folder is protected. Close it and try again, or choose another folder with File > Choose orders folder.';
+  if (code === 'EPERM' || code === 'EBUSY' || code === 'EACCES') return `Windows would not let FitSlice write ${e.path ? '"' + e.path + '"' : 'there'}. A file may be open in another program (Excel, a slicer, a sync or backup tool), or the folder is protected. Close it and try again. If it is the print-files folder, you can choose another with File > Choose orders folder.`;
   if (code === 'ENOENT' || code === 'ENOTDIR') return 'The orders folder could not be found. It may be on a drive that is not connected. Choose another with File > Choose orders folder.';
   if (code === 'EROFS') return 'That folder is read-only. Choose another with File > Choose orders folder.';
   return null;
@@ -118,7 +118,8 @@ function registerIpc() {
     if (!isInside(settings.ordersFolder, dir)) throw new UserError('That order folder is not inside the orders folder.');
     if (!fs.existsSync(dir)) throw new UserError(`The folder for this order (${dir}) is missing. It may have been moved or deleted, or the orders folder was changed. Export the print files again to recreate it.`);
     const err = await shell.openPath(dir);
-    return { ok: !err, folder: dir, error: err || null };
+    if (err) throw new UserError(`Windows could not open the folder ${dir}: ${err}`);
+    return { ok: true, folder: dir, error: null };
   });
   handle('app:chooseOrdersFolder', async () => {
     const res = await dialog.showOpenDialog(win, {
@@ -127,6 +128,7 @@ function registerIpc() {
     });
     if (res.canceled || !res.filePaths[0]) return { changed: false, folder: settings.ordersFolder };
     settings.ordersFolder = res.filePaths[0];
+    settings.ordersFolderProblem = null;
     saveSettings();
     return { changed: true, folder: settings.ordersFolder };
   });

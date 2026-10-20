@@ -165,13 +165,14 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
 .otoast[hidden] { display: none; }
 .otoast .btn { background: var(--bg); color: var(--fg); }
 
+  .drill th small.rowside{display:block;font-weight:400;font-size:11px;opacity:.75;white-space:nowrap}
 </style>
 
 <div class="wrap">
   <header class="top">
     <div class="brand">
       <h1>FitSlice</h1>
-      <p>Enter the numbers from your pro-shop drill sheet. The model is rebuilt with those exact holes and you download a print-ready file.</p>
+      <p>Enter the numbers from your pro-shop drill sheet. The model is rebuilt with those exact holes; the print files are saved with each order.</p>
     </div>
     <div class="switches">
       <div class="seg" role="group" aria-label="Part">
@@ -430,7 +431,7 @@ const DEFAULTS = {
   thumb_d: 25.4, middle_d: 21.03, ring_d: 21.03, // mm, true drill-sheet sizes
   size_source: 'drill_sheet',
   print_allowance: 0.4,                      // mm added to every bore
-  bridge: 7, finger_depth: 24,
+  bridge: 12.7, finger_depth: 24,     // bridge: about 1/2" (printed holes are finger-sized)
   thumb_through: true, thumb_depth: 40,
   thumb_fwd: -0.125, thumb_lat: 0,           // inches, drill-sheet convention
   middle_fwd: 0.3125, middle_lat: 0,
@@ -460,13 +461,14 @@ const LABELS = {
   sizer_thumb_center: 'Sizer thumb centre', sizer_finger_center: 'Sizer finger centre', sizer_step: 'Sizer step',
 };
 const PITCH_LIMIT = 1;   // inches
+const WEB_MIN = 2.0;     // mm: thinner than this between the finger holes warns
 
 // A problem the owner can fix by changing a value; shown as plain text, never a stack trace.
 class FitError extends Error {}
 
 function rangeText(key) {
   const [lo, hi] = LIMITS[key];
-  return `${fmtMm(lo)}–${fmtMm(hi)} mm (${fraction64(lo / IN)}"–${fraction64(hi / IN)}")`;
+  return `${fmtMm(lo)}–${fmtMm(hi)} mm (${(lo / IN).toFixed(2)}"–${(hi / IN).toFixed(2)}")`;
 }
 // Returns '' when fine, else a plain-language sentence.
 function checkLength(key, mm, unit) {
@@ -662,11 +664,12 @@ function makeBuilder(W) {
     // the two finger bores converge as they go deeper (they aim at the ball's center), so the
     // web between them is thinnest at the bottom of the holes
     const web = minAxisGap(mid.axis, ring.axis, p.finger_depth) - (D.md + D.rd) / 2;
-    if (web > 0 && web < 2.5 && !overlap(mid.bore, ring.bore))
-      warnings.push(`The web between the finger holes narrows to ${web.toFixed(1)} mm deep inside. That is a fragile hairline when printed. Increase the bridge or reduce the finger depth.`);
+    if (web < WEB_MIN && !overlap(mid.bore, ring.bore))
+      warnings.push(`The web between the finger holes narrows to ${Math.max(0, web).toFixed(1)} mm deep inside. That is a fragile hairline when printed. Increase the bridge or reduce the finger depth.`);
     for (const [name, h] of [['middle', mid], ['ring', ring]]) {
-      const endZ = h.axis.p[2] - p.finger_depth * h.axis.dir[2];
-      if (endZ < 1.5) warnings.push(`The ${name} finger bore would break through the base of the puck. Reduce the finger depth.`);
+      // lowest point of the bore's bottom rim (the bore is tilted, so its rim dips below the centre)
+      const rimZ = h.axis.p[2] - p.finger_depth * h.axis.dir[2] - (name === 'middle' ? D.md : D.rd) / 2 * Math.hypot(h.axis.dir[0], h.axis.dir[1]);
+      if (rimZ < 1.0) warnings.push(`The ${name} finger bore would break through the base of the puck. Reduce the finger depth.`);
       if (pock && overlap(h.bore, pock)) warnings.push(`The ${name} finger bore breaks into the weight pocket. Turn the pocket off or reduce the finger depth.`);
     }
     if (pock && overlap(thumb.bore, pock))
@@ -695,6 +698,10 @@ function makeBuilder(W) {
     const result = T(body.subtract(T(Manifold.union(cuts))));
     const warnings = [];
     if (overlap(mid.bore, ring.bore)) warnings.push('The two finger bores intersect. Increase the bridge.');
+    else {
+      const web = minAxisGap(mid.axis, ring.axis, depth) - (D.md + D.rd) / 2;
+      if (web < WEB_MIN) warnings.push(`The web between the finger holes narrows to ${Math.max(0, web).toFixed(1)} mm deep inside. That is a fragile hairline when printed. Increase the bridge.`);
+    }
     return { result, warnings, axes: [{ name: 'middle', ...mid.axis }, { name: 'ring', ...ring.axis }] };
   }
 
@@ -893,7 +900,7 @@ function makeViewer(container) {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   } catch (e) {
     container.textContent = '3D preview needs WebGL; the STL still generates.';
-    return { show() {}, setTheme() {} };
+    return { show() {}, clear() {}, setTheme() {} };
   }
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.setClearColor(0x000000, 0);
@@ -956,6 +963,11 @@ function makeViewer(container) {
   el.addEventListener('wheel', e => { e.preventDefault(); dist = Math.min(1500, Math.max(80, dist * (1 + Math.sign(e.deltaY) * 0.1))); redraw(); }, { passive: false });
 
   return {
+    clear() {
+      if (mesh) { scene.remove(mesh); mesh.geometry.dispose(); mesh = null; }
+      if (axes) { scene.remove(axes); axes.geometry.dispose(); axes = null; }
+      redraw();
+    },
     show(data) {
       if (mesh) { scene.remove(mesh); mesh.geometry.dispose(); }
       if (axes) { scene.remove(axes); axes.geometry.dispose(); }
@@ -1040,7 +1052,8 @@ async function main() {
   const unitLabels = document.querySelectorAll('[data-unit-label]');
 
   function showLengths() {
-    for (const k of LENGTH_KEYS) { const el = $(k); if (el) el.value = fmtLength(state[k], unit); }
+    // the fields are rewritten from the last good values, so any red mark on them no longer applies
+    for (const k of LENGTH_KEYS) { const el = $(k); if (el) { el.value = fmtLength(state[k], unit); el.classList.remove('bad'); el.removeAttribute('title'); invalid.delete(k); } }
     unitLabels.forEach(el => el.textContent = unit);
     refreshHints();
   }
@@ -1056,8 +1069,13 @@ async function main() {
   }
   function rowLabels() {
     const left = state.hand === 'right';
-    $('row_middle').textContent = `Middle · ${left ? 'left' : 'right'} hole`;
-    $('row_ring').textContent = `Ring · ${left ? 'right' : 'left'} hole`;
+    const label = (id, name, side) => {
+      const th = $(id); th.textContent = name;
+      const sub = document.createElement('small'); sub.className = 'rowside'; sub.textContent = `${side} hole`;
+      th.append(sub);
+    };
+    label('row_middle', 'Middle', left ? 'left' : 'right');
+    label('row_ring', 'Ring', left ? 'right' : 'left');
   }
   function showAll() {
     invalid.clear();
@@ -1076,7 +1094,9 @@ async function main() {
   }
 
   let timer = null;
-  const schedule = () => { clearTimeout(timer); timer = setTimeout(rebuild, 250); };
+  const schedule = () => { clearTimeout(timer); timer = setTimeout(() => { timer = null; rebuild(); }, 250); };
+  // run a rebuild that is still waiting out its delay, so a save never uses the previous model
+  async function settle() { if (timer) { clearTimeout(timer); timer = null; await rebuild(); } }
 
   // Fields whose typed text was refused. The model keeps the last good value for them, so
   // saving or exporting is blocked until each is fixed (never silently using stale numbers).
@@ -1134,6 +1154,11 @@ async function main() {
     } catch (e) {
       if (!(e instanceof FitError)) console.error(e);
       current = null;   // never leave an old model that no longer matches the form
+      viewer.clear();
+      for (const id of ['stat_size', 'stat_weight', 'stat_volume']) $(id).textContent = '—';
+      $('bores').innerHTML = ''; $('bores_note').textContent = '';
+      $('warnings').innerHTML = ''; $('warnings').parentElement.hidden = true;
+      $('fit_json').value = '';
       setStatus(e instanceof FitError ? e.message : 'Could not build this geometry. Check the values marked in red.', 'error');
     }
   }
@@ -1172,6 +1197,7 @@ async function main() {
     setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 2000);
   }
   async function saveSTL(bundle) {
+    await settle();
     if (invalid.size) { setStatus(`Not saved. ${invalidMessage()}`, 'error'); return; }
     if (!current) { setStatus('Nothing to save: the model could not be built. Fix the message above first.', 'error'); return; }
     const D = current.derived, base = fileBase(state, D);
@@ -1403,9 +1429,11 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
       fit: cur ? fitSnap(window.__cfgApp.getState()) : null,
     });
   }
-  const markSaved = () => { savedSnap = snapshot(); };
+  const sheetNow = () => JSON.stringify(fitSnap(window.__cfgApp.getState()));
+  let sheetBase = null;          // the drill sheet as it was when last saved, opened, or cleared
+  const markSaved = () => { savedSnap = snapshot(); sheetBase = sheetNow(); };
   const isDirty = () => snapshot() !== savedSnap;
-  const sheetEdited = () => JSON.stringify(fitSnap(window.__cfgApp.getState())) !== JSON.stringify(fitSnap(window.__cfgApp.defaults()));
+  const sheetEdited = () => sheetBase !== null && sheetNow() !== sheetBase;
   function okToLeave() {
     if (cur && isDirty()) return window.confirm(`${cur.number} has changes that are not saved. Leave without saving them?`);
     if (!cur && isDirty()) return window.confirm('The customer details you typed are not saved. Leave without saving them?');
@@ -1609,8 +1637,8 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
     try {
       if (name === 'new-order') newOrder();
       else if (name === 'open-orders') { openDrawer(); }
-      else if (name === 'open-folder') { const r = await bridge.openOrdersFolder(); if (!r.ok) toast('Could not open the folder: ' + r.error); }
-      else if (name === 'choose-folder') { const r = await bridge.chooseOrdersFolder(); if (r.changed) { info.ordersFolder = r.folder; showWhere(); toast('New files will be saved to ' + r.folder, r.folder); } }
+      else if (name === 'open-folder') { const r = await bridge.openOrdersFolder(); if (!r.ok) toast('Could not open the folder: ' + (r.error || 'unknown problem')); }
+      else if (name === 'choose-folder') { const r = await bridge.chooseOrdersFolder(); if (r.changed) { info.ordersFolder = r.folder; el.recovered.hidden = true; showWhere(); toast('New files will be saved to ' + r.folder, r.folder); } }
       else if (name === 'export-csv') { const r = await bridge.exportCsv(); toast('Saved the spreadsheet to ' + r.file); }
       else if (name === 'about-data') { openDrawer(); showWhere(); toast(`Your orders are stored in ${info.dataFolder}. Print files are saved in ${info.ordersFolder}.`, info.ordersFolder, 20000); }
     } catch (e) { toast(message(e)); }
@@ -1643,17 +1671,17 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
     el.product.addEventListener('change', () => { if (!priceTouched) el.price.value = info.products[el.product.value].price.toFixed(2); });
     el.price.addEventListener('input', () => { priceTouched = true; });
     el.del.addEventListener('click', deleteOrder);
-    el.openFolder.addEventListener('click', async () => { try { await bridge.openOrderFolder(cur.id); } catch (e) { showError(message(e)); } });
+    el.openFolder.addEventListener('click', async () => { try { await bridge.openOrderFolder(cur.id); } catch (e) { showError(message(e)); toast(message(e), null, 12000); } });
     el.search.addEventListener('input', renderList);
     el.filter.addEventListener('change', renderList);
     byId('ob-csv').addEventListener('click', () => menuAction('export-csv'));
     byId('ob-folder').addEventListener('click', () => menuAction('open-folder'));
     byId('ob-choose').addEventListener('click', () => menuAction('choose-folder'));
     byId('ob-toast-x').addEventListener('click', () => { el.toast.hidden = true; });
-    el.toastOpen.addEventListener('click', async () => { if (!toastFolder) return; try { if (toastOrder) await bridge.openOrderFolder(toastOrder); else await bridge.openOrdersFolder(); } catch (e) { showError(message(e)); } });
+    el.toastOpen.addEventListener('click', async () => { if (!toastFolder) return; try { if (toastOrder) await bridge.openOrderFolder(toastOrder); else await bridge.openOrdersFolder(); } catch (e) { toast(message(e), null, 12000); } });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !el.drawer.hidden) closeDrawer(); });
     bridge.onMenu(menuAction);
-    window.addEventListener('beforeunload', (e) => { if (isDirty()) { e.preventDefault(); e.returnValue = ''; } });
+    window.addEventListener('beforeunload', (e) => { if (isDirty() || (!cur && sheetEdited())) { e.preventDefault(); e.returnValue = ''; } });
     window.__orders = { ready: true, newOrder, openOrder, saveOrder, exportFiles, list: () => orders.slice() };
   }
 

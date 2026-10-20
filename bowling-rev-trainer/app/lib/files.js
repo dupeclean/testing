@@ -83,7 +83,16 @@ function exportOrderFiles(baseDir, order, files) {
     for (const q of prepared) { try { fs.unlinkSync(path.join(dir, q.name + '.tmp')); } catch (_) { /* not created */ } }
     throw e;
   }
-  for (const s of staged) commit(s.tmp, s.file);
+  const done = [];
+  try {
+    for (const s of staged) { commit(s.tmp, s.file); done.push(path.basename(s.file)); }
+  } catch (e) {
+    for (const s of staged) { try { fs.unlinkSync(s.tmp); } catch (_) { /* already renamed or never created */ } }
+    if (e && ['EPERM', 'EBUSY', 'EACCES'].includes(e.code)) {
+      throw new UserError(`Windows would not let FitSlice replace ${e.path ? '"' + path.basename(e.path) + '"' : 'a file'} in the order folder. It is probably open in another program (a slicer, Explorer's preview, a sync tool). ${done.length} of ${staged.length} files had been replaced (${done.join(', ') || 'none'}). Close the other program and export again; nothing needs cleaning up.`);
+    }
+    throw e;
+  }
 
   const superseded = [];
   const previous = Array.isArray(order.exportFiles) ? order.exportFiles : [];

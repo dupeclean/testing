@@ -50,9 +50,10 @@ d. A folder is created for the order, for example
    Open the STL in your slicer (PrusaSlicer, Bambu Studio, Cura).
    Print settings are on the job sheet: PETG, 0.2 mm layers, 4 walls,
    20% gyroid infill, flat side down, no supports.
-   Export again after any change: the same folder is reused and holds
-   only the newest files. Older ones are moved to a "superseded" folder
-   inside it, never deleted.
+   Export again after any change: the same folder is reused. Files with
+   the same name are replaced by the new version. Files from an earlier
+   export that no longer apply (for example an STL named for the old hole
+   sizes) are moved to a "superseded" folder inside it, not deleted.
 
 ------------------------------------------------------------------
 3. RUN YOUR ORDERS
@@ -103,15 +104,21 @@ folder path from the old computer.
   fit with bowler's tape.
 - Printed holes come out a few tenths of a millimeter small. The app
   adds a print allowance (0.4 mm by default). To find out what your own
-  printer needs: choose the part "Sizer", print the plate, and find the
-  bore that fits the finger snugly. Each bore has its size engraved in
-  millimetres. Switch the units to mm, set "Hole sizes come from" to
-  "The printed sizer plate" (this sets the allowance to 0), and type the
-  engraved numbers as the hole sizes. Or sell a "Fit Kit" order, which
-  exports a plate centred on that customer's sizes.
+  printer needs: make a "Fit Kit" order (it exports a sizer plate centred
+  on the sizes entered), or click the "Sizer" button and then "Download
+  STL". Print the plate and find the bore that fits the finger snugly.
+  Each bore has its size engraved in millimetres. Switch the units to mm,
+  set "Hole sizes come from" to "The printed sizer plate" (this sets the
+  allowance to 0, because the plate already includes your printer), and
+  type the engraved numbers as the hole sizes for that customer.
 - The Rev Spinner uses only the two finger hole sizes and the bridge;
   its holes are drilled straight at the ball's center, so spans and
   pitches apply to the Rev Puck only.
+- The bridge (the plastic between the two finger holes) should be
+  about 1/2 inch, as FitSlice's default. A 1/4 inch bridge is only right
+  when the finger holes were cut at 31/32 inch for inserts; with
+  finger-sized holes it leaves a hairline web deep inside and the app
+  warns.
 - The model warns you in the status line (and below the preview) when
   holes would run into each other, the web between the finger holes gets
   thin, or a bore would break through the base. The same warnings are

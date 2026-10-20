@@ -63,9 +63,24 @@ ok('absurd values are refused fast with a plain message (no hang, no crash)');
 r = await build(SHEET); assert.ok(r.ok); ok('engine still healthy after the refusals');
 
 // 4. warnings
-r = await build({ ...SHEET, bridge: 6.35, middle_lat: 0, ring_lat: 0, middle_fwd: 0.3125, ring_fwd: 0.3125, finger_depth: 24 });
+// default-size finger holes with a 1/4" bridge (right for insert-size holes, thin for finger-size ones)
+const THIN = { ...SHEET, middle_d: 21.03, ring_d: 21.03, bridge: 6.35, middle_lat: 0, ring_lat: 0, middle_fwd: 0.3125, ring_fwd: 0.3125, finger_depth: 24 };
+r = await build(THIN);
 assert.ok(r.warnings.some(w => /web between the finger holes narrows/.test(w)), 'thin web warns: ' + JSON.stringify(r.warnings));
-ok('a 1/4" bridge at 24 mm depth warns about the hairline web');
+ok('a 1/4" bridge with finger-size holes at 24 mm depth warns about the hairline web');
+r = await build({ ...THIN, bridge: 12.7 });
+assert.deepEqual(r.warnings, [], 'a 1/2" bridge is clean: ' + JSON.stringify(r.warnings));
+r = await build({ ...THIN, print_allowance: 0.4, bridge: 12.7 });
+assert.deepEqual(r.warnings, []);
+ok('a 1/2" bridge builds clean');
+// grazing bores (bridge so small that the holes just touch) must not slip through silently
+r = await build({ ...THIN, bridge: 5.4 });
+assert.ok(r.warnings.length > 0, 'grazing bores warn: ' + JSON.stringify(r.warnings));
+ok('bores that graze each other still warn');
+// the app's own defaults build with no warnings
+r = await page.evaluate(() => { try { const b = window.__cfgApp.buildFiles(['puck', 'spinner'], {}); return { ok: true, warnings: b.warnings }; } catch (e) { return { ok: false, message: e.message }; } });
+assert.ok(r.ok && r.warnings.length === 0, 'defaults are clean: ' + JSON.stringify(r));
+ok('the default sheet builds with no warnings (puck and spinner)');
 r = await build({ ...SHEET, span_middle: 130, span_ring: 130, finger_depth: 50, lanyard: false, weight_pocket: false });
 assert.ok(r.warnings.some(w => /break through the base/.test(w)), 'base breakout warns: ' + JSON.stringify(r.warnings));
 ok('a long span with deep finger holes warns that a bore would break through the base');

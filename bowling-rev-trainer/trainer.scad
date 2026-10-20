@@ -28,8 +28,8 @@ thumb_d = 26;
 middle_d = 21.5;
 // Ring-finger hole diameter. Often a half size (0.4) smaller than the middle.
 ring_d = 21.5;
-// Web of plastic between the two finger holes
-bridge = 7;
+// Web of plastic between the two finger holes (about 1/2"; printed holes are finger-sized)
+bridge = 12.7;
 // Finger hole depth — fingertip grip inserts to the first joint
 finger_depth = 24;
 

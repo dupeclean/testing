@@ -116,7 +116,7 @@ class OrderStore {
   _readSeq() {
     try { const n = JSON.parse(fs.readFileSync(this.seqFile, 'utf8')).last; return Number.isInteger(n) ? n : 0; } catch (_) { return 0; }
   }
-  _writeSeq(n) { try { writeAtomic(this.seqFile, JSON.stringify({ last: n })); } catch (_) { /* the book itself also carries the number */ } }
+  _writeSeq(n) { writeAtomic(this.seqFile, JSON.stringify({ last: n })); }
   _numberOf(o) { const m = /^FS-(\d+)$/.exec(o && o.number || ''); return m ? parseInt(m[1], 10) : 0; }
   // never lower than any number ever issued, even after a restore from an older backup
   _fixNextNumber() {
@@ -162,9 +162,11 @@ class OrderStore {
   _commit(change) {
     const draft = JSON.parse(JSON.stringify(this.data));
     const result = change(draft);
+    // the counter goes first: if it cannot be written the whole change is refused, so a number
+    // that was handed out is never missing from it
+    this._writeSeq(Math.max(0, ...draft.orders.map(o => this._numberOf(o)), draft.nextNumber - 1));
     this._persist(draft);
     this.data = draft;
-    this._writeSeq(Math.max(0, ...draft.orders.map(o => this._numberOf(o)), draft.nextNumber - 1));
     return result;
   }
 

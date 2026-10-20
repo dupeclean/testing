@@ -128,9 +128,11 @@
       fit: cur ? fitSnap(window.__cfgApp.getState()) : null,
     });
   }
-  const markSaved = () => { savedSnap = snapshot(); };
+  const sheetNow = () => JSON.stringify(fitSnap(window.__cfgApp.getState()));
+  let sheetBase = null;          // the drill sheet as it was when last saved, opened, or cleared
+  const markSaved = () => { savedSnap = snapshot(); sheetBase = sheetNow(); };
   const isDirty = () => snapshot() !== savedSnap;
-  const sheetEdited = () => JSON.stringify(fitSnap(window.__cfgApp.getState())) !== JSON.stringify(fitSnap(window.__cfgApp.defaults()));
+  const sheetEdited = () => sheetBase !== null && sheetNow() !== sheetBase;
   function okToLeave() {
     if (cur && isDirty()) return window.confirm(`${cur.number} has changes that are not saved. Leave without saving them?`);
     if (!cur && isDirty()) return window.confirm('The customer details you typed are not saved. Leave without saving them?');
@@ -334,8 +336,8 @@
     try {
       if (name === 'new-order') newOrder();
       else if (name === 'open-orders') { openDrawer(); }
-      else if (name === 'open-folder') { const r = await bridge.openOrdersFolder(); if (!r.ok) toast('Could not open the folder: ' + r.error); }
-      else if (name === 'choose-folder') { const r = await bridge.chooseOrdersFolder(); if (r.changed) { info.ordersFolder = r.folder; showWhere(); toast('New files will be saved to ' + r.folder, r.folder); } }
+      else if (name === 'open-folder') { const r = await bridge.openOrdersFolder(); if (!r.ok) toast('Could not open the folder: ' + (r.error || 'unknown problem')); }
+      else if (name === 'choose-folder') { const r = await bridge.chooseOrdersFolder(); if (r.changed) { info.ordersFolder = r.folder; el.recovered.hidden = true; showWhere(); toast('New files will be saved to ' + r.folder, r.folder); } }
       else if (name === 'export-csv') { const r = await bridge.exportCsv(); toast('Saved the spreadsheet to ' + r.file); }
       else if (name === 'about-data') { openDrawer(); showWhere(); toast(`Your orders are stored in ${info.dataFolder}. Print files are saved in ${info.ordersFolder}.`, info.ordersFolder, 20000); }
     } catch (e) { toast(message(e)); }
@@ -368,17 +370,17 @@
     el.product.addEventListener('change', () => { if (!priceTouched) el.price.value = info.products[el.product.value].price.toFixed(2); });
     el.price.addEventListener('input', () => { priceTouched = true; });
     el.del.addEventListener('click', deleteOrder);
-    el.openFolder.addEventListener('click', async () => { try { await bridge.openOrderFolder(cur.id); } catch (e) { showError(message(e)); } });
+    el.openFolder.addEventListener('click', async () => { try { await bridge.openOrderFolder(cur.id); } catch (e) { showError(message(e)); toast(message(e), null, 12000); } });
     el.search.addEventListener('input', renderList);
     el.filter.addEventListener('change', renderList);
     byId('ob-csv').addEventListener('click', () => menuAction('export-csv'));
     byId('ob-folder').addEventListener('click', () => menuAction('open-folder'));
     byId('ob-choose').addEventListener('click', () => menuAction('choose-folder'));
     byId('ob-toast-x').addEventListener('click', () => { el.toast.hidden = true; });
-    el.toastOpen.addEventListener('click', async () => { if (!toastFolder) return; try { if (toastOrder) await bridge.openOrderFolder(toastOrder); else await bridge.openOrdersFolder(); } catch (e) { showError(message(e)); } });
+    el.toastOpen.addEventListener('click', async () => { if (!toastFolder) return; try { if (toastOrder) await bridge.openOrderFolder(toastOrder); else await bridge.openOrdersFolder(); } catch (e) { toast(message(e), null, 12000); } });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !el.drawer.hidden) closeDrawer(); });
     bridge.onMenu(menuAction);
-    window.addEventListener('beforeunload', (e) => { if (isDirty()) { e.preventDefault(); e.returnValue = ''; } });
+    window.addEventListener('beforeunload', (e) => { if (isDirty() || (!cur && sheetEdited())) { e.preventDefault(); e.returnValue = ''; } });
     window.__orders = { ready: true, newOrder, openOrder, saveOrder, exportFiles, list: () => orders.slice() };
   }
 

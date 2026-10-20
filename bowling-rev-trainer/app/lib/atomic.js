@@ -30,7 +30,12 @@ function toBuf(data) { return Buffer.isBuffer(data) ? data : Buffer.from(data, '
 function stage(file, data) {
   const tmp = file + '.tmp';
   const fd = retrySync(() => fs.openSync(tmp, 'w'));
-  try { writeAll(fd, toBuf(data)); fs.fsyncSync(fd); } finally { fs.closeSync(fd); }
+  try { writeAll(fd, toBuf(data)); fs.fsyncSync(fd); } catch (e) {
+    try { fs.closeSync(fd); } catch (_) { /* ignore */ }
+    try { fs.unlinkSync(tmp); } catch (_) { /* ignore */ }
+    throw e;
+  }
+  fs.closeSync(fd);
   return tmp;
 }
 

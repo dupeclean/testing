@@ -148,6 +148,15 @@ try {
   assert.equal(await page.evaluate(() => document.getElementById('span_middle').classList.contains('bad')), false);
   ok('a wrong-unit span is refused with a plain message, blocks saving, and the app keeps running');
 
+  // a download right after an edit must use the NEW model, not the previous one
+  await page.evaluate(() => { window.__dl = []; HTMLAnchorElement.prototype.click = function () { window.__dl.push(this.download); }; });   // capture the file name instead of opening a Save dialog
+  await fill(page, 'middle_d', '19/32');
+  await page.click('#save_stl');
+  await page.waitForFunction(() => window.__dl.length === 1, null, { timeout: 20000 });
+  const dlName = await page.evaluate(() => window.__dl[0]);
+  assert.match(dlName, /_M15p5_/, 'download used the old model: ' + dlName);
+  ok('a download straight after an edit uses the edited model, not the previous one');
+
   // nothing in the app reaches the network
   assert.equal(await page.evaluate(() => fetch('https://example.com/').then(() => 'loaded', () => 'blocked')), 'blocked');
   assert.equal(await app.evaluate(({ session }) => session.defaultSession.isSpellCheckerEnabled()), false);
@@ -213,6 +222,20 @@ try {
   assert.equal(await page.textContent('#ob-num'), 'New order');
   ok('leaving an order with unsaved changes asks first');
 
+  // ...but a clean switch (nothing edited since the last save) must not nag
+  let nagged = false;
+  const nag = (d) => { nagged = true; d.dismiss(); };
+  page.on('dialog', nag);
+  await page.click('.orow');
+  await page.waitForFunction(() => /FS-0001/.test(document.getElementById('ob-num').textContent));
+  await page.click('#ob-new');
+  await page.click('.orow');
+  await page.waitForFunction(() => /FS-0001/.test(document.getElementById('ob-num').textContent));
+  page.off('dialog', nag);
+  assert.equal(nagged, false, 'no confirm when nothing was changed');
+  await page.click('#ob-new');
+  ok('switching orders without edits does not ask');
+
   // second order gets the next number; status change persists
   await page.click('#ob-new');
   await page.fill('#ob-name', 'Sam Ortiz'); await page.selectOption('#ob-product', 'fitkit'); await page.selectOption('#ob-status', 'printing');
@@ -248,7 +271,8 @@ try {
 } catch (e) {
   console.error('\nFAILED:', e && e.stack || e);
   try { if (session) await session.page.screenshot({ path: join(shotDir, 'app-failure.png') }); } catch (_) { /* ignore */ }
-  try { if (session) await session.app.close(); } catch (_) { /* ignore */ }
+  // a blocking native dialog could stop a polite close from ever returning: kill the process
+  try { if (session) session.app.process().kill('SIGKILL'); } catch (_) { /* ignore */ }
   process.exitCode = 1;
 } finally {
   rmSync(root, { recursive: true, force: true });

@@ -64,7 +64,8 @@ parameter, so **copy your drill sheet** — in OpenSCAD's customizer
   finger hole (your middle span is usually 2–4 mm longer than your ring span).
 - `thumb_d`, `middle_d`, `ring_d` — per-hole diameters. **Add 0.4 mm** to your
   real sizes (the app's default allowance): printed holes come out slightly small; sand out or build back with
-  bowler's tape for final fit, same as a real ball.
+  bowler's tape for final fit, same as a real ball. If you took a size from a
+  printed sizer plate, use it **as printed** and do not add the 0.4 mm.
 - Pitches, **in drill-sheet inches** (`0.125` = 1/8, `0.375` = 3/8): per hole,
   forward(+)/reverse(−) (`*_fwd`) and lateral (`*_lat`, + = toward your
   bowling-hand side). Zero pitch aims the bore at the ball's center, exactly
@@ -97,6 +98,13 @@ python3 generate.py orders.csv -o out/
 Inputs are validated against sane ranges before OpenSCAD runs, and output
 files are named after the order, so this slots straight into a
 made-to-order workflow (fit sheet at checkout → generate → print → ship).
+
+`generate.py` also reads the `fit_sheet.json` the FitSlice app exports (it adds
+the sheet's `print_allowance` to the three hole sizes for you; a hand-written
+sheet without that key needs the 0.4 mm added by hand). It does not support a
+blind thumb hole or a customer-centred sizer plate: `trainer.scad` always
+drills the thumb through and prints the stock sizer, and `generate.py` warns
+when a sheet asks for something else. Use the app for those.
 
 ## Printing
 

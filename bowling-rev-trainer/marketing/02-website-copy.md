@@ -93,7 +93,7 @@ Drills: fingertip carries, thumb pops, swing sync, cupped-wrist isometrics.
 $89 · See the Rev Puck
 
 **Rev Spinner. The part you release.**
-A fingers-only disc cut from the same ball surface, with your middle and ring holes and pitches. Swing it on a short pendulum, lift with the fingers at the bottom, and let it go onto carpet. It spins in place and the engraved bars on the base flicker while it turns, so you can count the seconds. It is designed to spin longer when the fingers lift more. It gives you feedback. It does not measure anything.
+A fingers-only disc cut from the same ball surface, with your middle and ring hole sizes, drilled straight at the ball's center. Swing it on a short pendulum, lift with the fingers at the bottom, and let it go onto carpet. It spins in place and the engraved bars on the base flicker while it turns, so you can count the seconds. It is designed to spin longer when the fingers lift more. It gives you feedback. It does not measure anything.
 
 Drills: carpet spins, rotation axis control.
 
@@ -325,8 +325,8 @@ The Rev Spinner is a fingers-only release disc cut from the same 8.5" ball surfa
 
 **Details**
 
-- Your middle and ring hole sizes in 1/64" steps, your forward and lateral pitches, your bridge, right or left hand.
-- Holes aimed at the ball's center with your pitches applied, so your fingers sit as they sit on your ball.
+- Your middle and ring hole sizes in 1/64" steps, your bridge, right or left hand.
+- Holes aimed straight at the ball's center, so your fingers sit on the same curvature as on your ball.
 - Engraved bars on the base flicker as it spins, so you can count seconds until it stops.
 - It is designed to spin longer when the fingers lift more at release. It gives feedback. It does not measure anything.
 - No thumb hole, so it works for thumb-in, thumbless and two-handed bowlers.
@@ -338,7 +338,7 @@ The Rev Spinner is a fingers-only release disc cut from the same 8.5" ball surfa
 - Right or left hand
 - Middle and ring hole sizes
 - Forward and lateral pitch on each finger hole
-- Bridge (the distance between the finger holes), if your sheet lists it. If not, we use the standard 1/4" bridge.
+- Bridge (the distance between the finger holes), if your sheet lists it. If not, we use 1/2" (our holes are cut at finger size, so the web needs to be wider than the 1/4" used when a hole is cut for an insert).
 
 Two-handed bowlers: your drill sheet has these numbers even without a thumb hole. Enter them exactly as written.
 
@@ -498,7 +498,7 @@ Middle        55/64         3/8 forward           0
 Ring          27/32         5/16 forward          1/8 right
 ------------------------------------------------------------------------------
 Span (cut to cut)       Middle: 4-13/32          Ring: 4-9/32
-Bridge: 1/4
+Bridge: 1/2
 Tape at fitting: 1 piece white in thumb
 ```
 
@@ -519,7 +519,7 @@ Tape at fitting: 1 piece white in thumb
 | Middle 0 | Beside the middle hole | Middle lateral | 0 |
 | Ring 1/8 right | Beside the ring hole | Ring lateral | 1/8 |
 | Thumb: Slug, through | Top of sheet | Thumb style | Through |
-| Bridge 1/4 | Bottom of sheet | Bridge | 1/4 |
+| Bridge 1/2 | Bottom of sheet | Bridge | 1/2 |
 
 The configurator accepts fractions typed any of these ways: `55/64`, `1 3/64`, `1-3/64`, `4-13/32`. It also accepts decimals and millimeters if you switch units.
 
@@ -882,7 +882,7 @@ We could not read "{{input}}". Enter sizes and spans as fractions like 55/64 or 
 
 ### Configurator: finger bores would collide
 
-At these finger sizes and spans, the middle and ring bores would break into each other. Check both spans and both finger sizes against your sheet, and check that the bridge is not set below 1/4". If every number matches your sheet, email a photo of it to support@fitslice.com and we will work it out with you before you order.
+At these finger sizes and spans, the middle and ring bores would break into each other. Check both spans and both finger sizes against your sheet, and check that the bridge is not set below 7/16". If every number matches your sheet, email a photo of it to support@fitslice.com and we will work it out with you before you order.
 
 ### Configurator: bore breaks into weight pocket or cord tunnel
 

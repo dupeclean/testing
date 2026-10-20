@@ -509,7 +509,7 @@ footer.end { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--li
 <p><strong>Rev Puck. The part you hold.</strong> A slice of ball surface the size of your hand, with your thumb, middle and ring holes drilled toward the ball’s center with your pitches applied, exactly as a pro shop aims them. Your index and pinky rest on the curved surface, as they do on your ball. About 300 g at 20% infill: light enough to hold for thirty seconds at a time, heavy enough that your fingertips have to carry it. A weight pocket underneath takes coins or washers when you want more. A wrist-cord tunnel keeps it on your arm during swing drills.</p>
 <p>Drills: fingertip carries, thumb pops, swing sync, cupped-wrist isometrics.</p>
 <p>$89 · See the Rev Puck</p>
-<p><strong>Rev Spinner. The part you release.</strong> A fingers-only disc cut from the same ball surface, with your middle and ring holes and pitches. Swing it on a short pendulum, lift with the fingers at the bottom, and let it go onto carpet. It spins in place and the engraved bars on the base flicker while it turns, so you can count the seconds. It is designed to spin longer when the fingers lift more. It gives you feedback. It does not measure anything.</p>
+<p><strong>Rev Spinner. The part you release.</strong> A fingers-only disc cut from the same ball surface, with your middle and ring hole sizes, drilled straight at the ball’s center. Swing it on a short pendulum, lift with the fingers at the bottom, and let it go onto carpet. It spins in place and the engraved bars on the base flicker while it turns, so you can count the seconds. It is designed to spin longer when the fingers lift more. It gives you feedback. It does not measure anything.</p>
 <p>Drills: carpet spins, rotation axis control.</p>
 <p>$45 · See the Rev Spinner</p>
 <p><strong>Pair. Both parts, one sheet, $119.</strong></p>
@@ -648,8 +648,8 @@ footer.end { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--li
 <p>The Rev Spinner is a fingers-only release disc cut from the same 8.5” ball surface, with your middle and ring hole sizes, drilled straight at the ball’s center. Swing it on a short pendulum, lift with the fingers at the bottom, release it onto carpet. It spins in place, and the engraved bars on the base let you count how long. Printed in PETG.</p>
 <p><strong>Details</strong></p>
 <ul>
-<li>Your middle and ring hole sizes in 1/64” steps, your forward and lateral pitches, your bridge, right or left hand.</li>
-<li>Holes aimed at the ball’s center with your pitches applied, so your fingers sit as they sit on your ball.</li>
+<li>Your middle and ring hole sizes in 1/64” steps, your bridge, right or left hand.</li>
+<li>Holes aimed straight at the ball’s center, so your fingers sit on the same curvature as on your ball.</li>
 <li>Engraved bars on the base flicker as it spins, so you can count seconds until it stops.</li>
 <li>It is designed to spin longer when the fingers lift more at release. It gives feedback. It does not measure anything.</li>
 <li>No thumb hole, so it works for thumb-in, thumbless and two-handed bowlers.</li>
@@ -661,7 +661,7 @@ footer.end { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--li
 <li>Right or left hand</li>
 <li>Middle and ring hole sizes</li>
 <li>Forward and lateral pitch on each finger hole</li>
-<li>Bridge (the distance between the finger holes), if your sheet lists it. If not, we use the standard 1/4” bridge.</li>
+<li>Bridge (the distance between the finger holes), if your sheet lists it. If not, we use 1/2” (our holes are cut at finger size, so the web needs to be wider than the 1/4” used when a hole is cut for an insert).</li>
 </ul>
 <p>Two-handed bowlers: your drill sheet has these numbers even without a thumb hole. Enter them exactly as written.</p>
 <p>Help: How to read your drill sheet</p>
@@ -773,7 +773,7 @@ Middle        55/64         3/8 forward           0
 Ring          27/32         5/16 forward          1/8 right
 ------------------------------------------------------------------------------
 Span (cut to cut)       Middle: 4-13/32          Ring: 4-9/32
-Bridge: 1/4
+Bridge: 1/2
 Tape at fitting: 1 piece white in thumb</code></pre>
 <h4 id="reading-it-line-by-line">Reading it line by line</h4>
 <div class="tablewrap"><table>
@@ -871,10 +871,10 @@ Tape at fitting: 1 piece white in thumb</code></pre>
 <td>Through</td>
 </tr>
 <tr class="even">
-<td>Bridge 1/4</td>
+<td>Bridge 1/2</td>
 <td>Bottom of sheet</td>
 <td>Bridge</td>
-<td>1/4</td>
+<td>1/2</td>
 </tr>
 </tbody>
 </table></div>
@@ -1163,7 +1163,7 @@ Tape at fitting: 1 piece white in thumb</code></pre>
 <h4 id="configurator-value-out-of-range">Configurator: value out of range</h4>
 <p>{{field_name}} of {{input}} is outside the range we print ({{min}} to {{max}}). Check the number against your sheet. If your sheet really says this, email a photo to support@fitslice.com and we will look at it with you.</p>
 <h4 id="configurator-finger-bores-would-collide">Configurator: finger bores would collide</h4>
-<p>At these finger sizes and spans, the middle and ring bores would break into each other. Check both spans and both finger sizes against your sheet, and check that the bridge is not set below 1/4”. If every number matches your sheet, email a photo of it to support@fitslice.com and we will work it out with you before you order.</p>
+<p>At these finger sizes and spans, the middle and ring bores would break into each other. Check both spans and both finger sizes against your sheet, and check that the bridge is not set below 7/16”. If every number matches your sheet, email a photo of it to support@fitslice.com and we will work it out with you before you order.</p>
 <h4 id="configurator-bore-breaks-into-weight-pocket-or-cord-tunnel">Configurator: bore breaks into weight pocket or cord tunnel</h4>
 <p>A hole at this depth and pitch would break into the {{feature}}. Reduce the finger depth, or turn off the {{feature}} in options. The part is still printable without it.</p>
 <h4 id="configurator-blind-thumb-floor-too-thin">Configurator: blind thumb floor too thin</h4>
@@ -2281,7 +2281,7 @@ FitSlice orders entered here.&quot;
 </tr>
 </tbody>
 </table></div>
-<p>Fractions are accepted in every size and span field: 55/64, 1 1/32, 4-1/2. Lateral pitch may be written as the sheet shows it (left, right, toward palm, away from palm); FitSlice converts using the hand.</p>
+<p>Fractions are accepted in every size and span field: 55/64, 1 1/32, 4-1/2. Lateral pitch is written as the sheet shows it: left or right, as drawn with the thumb hole at the bottom. FitSlice converts it using the hand.</p>
 <hr />
 <h3 id="d.-dropship-operating-agreement-outline">D. Dropship operating agreement: outline</h3>
 <p>For counsel to draft from. Each heading lists the terms the business has decided; counsel supplies the language. Schedule A is the line sheet in Section C. Schedule B is the approved copy deck. Schedule C is the claims list from Slide 9.</p>
@@ -2414,7 +2414,7 @@ RING PITCH: 5/16 forward, 1/8 right
 THUMB HOLE: through
 UNITS: inches
 NOTES: anything else on your sheet</code></pre>
-<p>Buyer limit is 1,024 characters. The template uses about 260, and a pasted configurator fit sheet uses about 350. Write pitches exactly as your sheet shows them (forward or reverse, and left, right, toward or away for lateral). I convert using your hand.</p>
+<p>Buyer limit is 1,024 characters. The template uses about 260, and a pasted configurator fit sheet uses about 350. Write pitches exactly as your sheet shows them (forward or reverse, and left or right for lateral). I convert using your hand.</p>
 <p><strong>FAQ</strong></p>
 <p><em>Does it feel like my ball?</em> It is printed from your drill sheet at the real ball curvature, with the holes aimed at the ball’s center and your pitches applied. That is the test, and the 30-day fit guarantee covers it.</p>
 <p><em>Does it add revs?</em> I do not know. To my knowledge, no study has measured what an off-lane trainer does to rev rate, and I will not quote a number. Coaches agree the thumb must leave first and a relaxed hand creates more revs. The drills are designed to practice those two things in your real fit.</p>
@@ -2438,7 +2438,7 @@ NOTES: anything else on your sheet</code></pre>
 fitslice-fit-kit,FitSlice Fit Kit,&quot;&lt;p&gt;Find your size before you print your fit. The Fit Kit is a sizer plate printed around the hole sizes you expect, in 1/64-inch steps, with a roll of bowler&#39;s tape and a fitting card.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Printed on the same printer and material as your trainer, so the bore that fits is the bore we print.&lt;/li&gt;&lt;li&gt;Size engraved beside each bore. The right bore is snug all around at the first joint with no squeeze needed to hang on.&lt;/li&gt;&lt;li&gt;The $24 is credited toward a Rev Puck, Rev Spinner or Pair with the code in the box.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Enter your expected thumb, middle and ring sizes in the fields below, or build your plate in the free configurator and paste the fit sheet. Ships in 3 business days. A fitting tool for use off the lane. Not a bowling ball.&lt;/p&gt;&quot;,FitSlice,Bowling Training Aid,&quot;fitslice, fitslice-fit-kit, bowling, sizer plate, fit kit&quot;,TRUE,Title,Default Title,FS-KIT,24.00,continue,TRUE,150
 fitslice-rev-puck,FitSlice Rev Puck,&quot;&lt;p&gt;Your drill sheet, off the ball. It&#39;s the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Built from your drill sheet: hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand, through or blind thumb, on the curvature of a regulation 8.5-inch ball.&lt;/li&gt;&lt;li&gt;Holes are aimed at the ball&#39;s center the way a zero-pitch hole is drilled, so your thumb and fingers oppose each other exactly as on your ball.&lt;/li&gt;&lt;li&gt;About 300 g in PETG at 20% infill. Weight pocket for coins or washers. Wrist-cord tunnel and paracord loop for swing drills.&lt;/li&gt;&lt;li&gt;Designed to practice a relaxed fingertip hold and a clean, early thumb exit. Four drills on the card. Coaches agree the thumb must leave first and a relaxed hand creates more revs.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Made to order from the fit sheet you enter below. Ships within 5 business days of a complete sheet. 30-day fit guarantee: if the printed holes do not match your sheet, we reprint free. A training aid for use off the lane. Not a bowling ball. Swing-and-hold drills only; never throw it.&lt;/p&gt;&quot;,FitSlice,Bowling Training Aid,&quot;fitslice, fitslice-puck, bowling, release trainer, custom fit&quot;,TRUE,Hand,Right,FS-PUCK-R,89.00,continue,TRUE,300
 fitslice-rev-puck,,,,,,,,Left,FS-PUCK-L,89.00,continue,TRUE,300
-fitslice-rev-spinner,FitSlice Rev Spinner,&quot;&lt;p&gt;Lift it, spin it, count it. The Rev Spinner is a fingers-only release disc printed from your drill sheet: middle and ring hole sizes in 1/64-inch steps, your finger pitches, right or left hand, on the curvature of a regulation 8.5-inch ball.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Release it onto carpet from a short pendulum swing and it spins in place. The engraved bars on the base flicker as it spins; count the seconds until it stops. Designed to give you a cue on finger lift through how long it spins. It is a feedback device. It is not a measuring instrument.&lt;/li&gt;&lt;li&gt;Two drills on the card: carpet spins and rotation-axis control.&lt;/li&gt;&lt;li&gt;About 100 g in PETG. The product for two-handed bowlers and for anyone working on finger lift.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Made to order from the fit sheet you enter below. Ships within 3 business days of a complete sheet. 30-day fit guarantee. A training aid for use off the lane. Not a bowling ball. Carpet-release drills only; never throw it.&lt;/p&gt;&quot;,FitSlice,Bowling Training Aid,&quot;fitslice, fitslice-spinner, bowling, release trainer, finger lift&quot;,TRUE,Hand,Right,FS-SPIN-R,45.00,continue,TRUE,100
+fitslice-rev-spinner,FitSlice Rev Spinner,&quot;&lt;p&gt;Lift it, spin it, count it. The Rev Spinner is a fingers-only release disc printed from your drill sheet: middle and ring hole sizes in 1/64-inch steps, right or left hand, drilled straight at the ball&#39;s center, on the curvature of a regulation 8.5-inch ball.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Release it onto carpet from a short pendulum swing and it spins in place. The engraved bars on the base flicker as it spins; count the seconds until it stops. Designed to give you a cue on finger lift through how long it spins. It is a feedback device. It is not a measuring instrument.&lt;/li&gt;&lt;li&gt;Two drills on the card: carpet spins and rotation-axis control.&lt;/li&gt;&lt;li&gt;About 100 g in PETG. The product for two-handed bowlers and for anyone working on finger lift.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Made to order from the fit sheet you enter below. Ships within 3 business days of a complete sheet. 30-day fit guarantee. A training aid for use off the lane. Not a bowling ball. Carpet-release drills only; never throw it.&lt;/p&gt;&quot;,FitSlice,Bowling Training Aid,&quot;fitslice, fitslice-spinner, bowling, release trainer, finger lift&quot;,TRUE,Hand,Right,FS-SPIN-R,45.00,continue,TRUE,100
 fitslice-rev-spinner,,,,,,,,Left,FS-SPIN-L,45.00,continue,TRUE,100
 fitslice-pair,FitSlice Pair: Rev Puck and Rev Spinner,&quot;&lt;p&gt;Both trainers from one fit sheet. The Rev Puck is the part of your ball your hand touches, printed with your exact holes, for grip holds, thumb pops, swing sync and cupped-wrist isometrics. The Rev Spinner is the fingers-only disc for carpet spins and rotation-axis control.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Both are built from your drill sheet: hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand, on the curvature of a regulation 8.5-inch ball.&lt;/li&gt;&lt;li&gt;Rev Puck about 300 g with weight pocket and wrist cord. Rev Spinner about 100 g with spin-count bars. Both in PETG at 20% infill.&lt;/li&gt;&lt;li&gt;Six drills across two cards, 10 to 15 minutes a day. Designed to practice a relaxed fingertip hold, a clean, early thumb exit and finger lift.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Made to order. Ships within 5 business days of a complete fit sheet. 30-day fit guarantee on both parts. Training aids for use off the lane. Not bowling balls. Never throw them.&lt;/p&gt;&quot;,FitSlice,Bowling Training Aid,&quot;fitslice, fitslice-pair, bowling, release trainer, custom fit&quot;,TRUE,Hand,Right,FS-PAIR-R,119.00,continue,TRUE,400
 fitslice-pair,,,,,,,,Left,FS-PAIR-L,119.00,continue,TRUE,400
@@ -2520,7 +2520,7 @@ fitslice-digital-files,,,,,,,,Rev Puck and Rev Spinner files,FS-DIG-PAIR,39.00,c
     &lt;input id=&quot;fs-span-r-{{ fs_id }}&quot; name=&quot;properties[Ring span]&quot; type=&quot;text&quot; inputmode=&quot;decimal&quot; placeholder=&quot;4 1/4&quot; required data-fs=&quot;span_ring&quot;&gt;
   &lt;/div&gt;
 
-  &lt;p class=&quot;fitslice-fit__hint&quot;&gt;Pitches: write them as your sheet shows them (for example &quot;1/8 reverse&quot; or &quot;3/8 forward&quot;, and &quot;1/8 left&quot; or &quot;1/8 toward palm&quot;). If a field fills from the configurator it shows decimal inches: positive is forward or toward your bowling-hand side, negative is reverse.&lt;/p&gt;
+  &lt;p class=&quot;fitslice-fit__hint&quot;&gt;Pitches: write them as your sheet shows them (for example &quot;1/8 reverse&quot; or &quot;3/8 forward&quot;, and &quot;1/8 left&quot; or &quot;1/8 right&quot;). If a field fills from the configurator it shows decimal inches: positive is forward or toward your bowling-hand side, negative is reverse.&lt;/p&gt;
   &lt;div class=&quot;fitslice-fit__row&quot;&gt;
     &lt;label for=&quot;fs-t-fwd-{{ fs_id }}&quot;&gt;Thumb pitch, forward/reverse&lt;/label&gt;
     &lt;input id=&quot;fs-t-fwd-{{ fs_id }}&quot; name=&quot;properties[Thumb pitch fwd/rev]&quot; type=&quot;text&quot; placeholder=&quot;1/8 reverse&quot; required data-fs=&quot;thumb_fwd&quot;&gt;
@@ -7703,12 +7703,12 @@ fitslice-digital-files,,,,,,,,Rev Puck and Rev Spinner files,FS-DIG-PAIR,39.00,c
 </ol>
 <p>Rules for all four:</p>
 <ul>
-<li>Set the fit sheet <code>name</code> to the order number. Never put the customer’s name in a file name.</li>
+<li>Set the fit sheet <code>name</code> to the order number. File names carry no customer name (the app names STLs by size). The app’s order folder is named <code>FS-#### Customer Name</code> so staff can find it: keep that folder out of shared drives and public slicer projects.</li>
 <li>Printing may start once the sanity check is PASS. Search the order inbox for the order number immediately before pressing start. A correction that arrived before the print starts is applied.</li>
-<li>Production path: use the configurator. It applies the 0.4 mm print allowance. If you use <code>generate.py</code>, add 0.4 mm to <code>thumb_d</code>, <code>middle_d</code> and <code>ring_d</code> in the JSON or CSV yourself, because the OpenSCAD path does not add it.</li>
+<li>Production path: use the app or the configurator. They apply the 0.4 mm print allowance. <code>generate.py</code> adds the allowance itself when the fit sheet has a <code>print_allowance</code> key (every sheet exported by the app does). A hand-written sheet without that key needs 0.4 mm added to <code>thumb_d</code>, <code>middle_d</code> and <code>ring_d</code> by hand.</li>
 </ul>
 <h4 id="step-2-sanity-check-ten-things-to-eyeball-on-a-sheet">1.3 Step 2: Sanity check, ten things to eyeball on a sheet</h4>
-<p>Do these in order, against the original document where there is one. Thresholds come from the typical ranges in <code>trainer.scad</code> and the hard limits in <code>generate.py</code>.</p>
+<p>Do these in order, against the original document where there is one. Thresholds come from the typical ranges in <code>trainer.scad</code> and the limits the app and <code>generate.py</code> enforce.</p>
 <div class="tablewrap"><table>
 <colgroup>
 <col style="width: 25%" />
@@ -7741,13 +7741,13 @@ fitslice-digital-files,,,,,,,,Rev Puck and Rev Spinner files,FS-DIG-PAIR,39.00,c
 <td>3</td>
 <td><strong>Thumb size</strong></td>
 <td>7/8” to 1 1/8” (22 to 28.5 mm). Larger than both finger holes</td>
-<td>Outside the range. Smaller than either finger hole, which usually means the numbers were swapped. Hard limit is 21 to 31 mm</td>
+<td>Outside the range. Smaller than either finger hole, which usually means the numbers were swapped. The app refuses anything outside 15 to 38 mm</td>
 </tr>
 <tr class="even">
 <td>4</td>
 <td><strong>Finger sizes</strong></td>
 <td>3/4” to 29/32” (19 to 23 mm) is typical. Ring often a half size under the middle</td>
-<td>Outside 19 to 24 mm. 31/32” or 1” on a finger line, which is usually the size drilled for an insert, so it overstates what the finger feels. Hard limit is 17 to 26 mm</td>
+<td>Outside 19 to 24 mm. 31/32” or 1” on a finger line, which is usually the size drilled for an insert, so it overstates what the finger feels. The app refuses anything outside 10 to 30 mm</td>
 </tr>
 <tr class="odd">
 <td>5</td>
@@ -7759,7 +7759,7 @@ fitslice-digital-files,,,,,,,,Rev Puck and Rev Spinner files,FS-DIG-PAIR,39.00,c
 <td>6</td>
 <td><strong>Spans</strong></td>
 <td>105 to 125 mm (about 4 1/8” to 4 7/8”), cut to cut</td>
-<td>Under 100 or over 128 mm. Both spans over about 130 mm, which suggests center-to-center numbers. Hard limit is 85 to 135 mm</td>
+<td>Under 100 or over 128 mm. Both spans over about 130 mm, which suggests center-to-center numbers. The app refuses anything outside 60 to 150 mm</td>
 </tr>
 <tr class="odd">
 <td>7</td>
@@ -7776,8 +7776,8 @@ fitslice-digital-files,,,,,,,,Rev Puck and Rev Spinner files,FS-DIG-PAIR,39.00,c
 <tr class="odd">
 <td>9</td>
 <td><strong>Bridge</strong></td>
-<td>1/4” (6.35 mm), or blank for the default</td>
-<td>Under 1/4”. The two finger bores can run into each other</td>
+<td>7/16” to 1/2” (11 to 12.7 mm) for finger-sized holes, or blank for the default (1/2”). 1/4” is normal only where the finger holes were cut at 31/32” for inserts</td>
+<td>Under 7/16”. The web between the finger holes gets thin deep inside and the app warns</td>
 </tr>
 <tr class="even">
 <td>10</td>

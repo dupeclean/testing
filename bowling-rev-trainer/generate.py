@@ -66,6 +66,10 @@ def validate(sheet: dict) -> dict:
         if lo is not None and not (lo <= val <= hi):
             sys.exit(f"error: {key}={val} outside sane range [{lo}, {hi}]")
         out[key] = val
+    if sheet.get("thumb_through") is False or "thumb_depth" in sheet and sheet.get("thumb_through") is not True:
+        print("warning: trainer.scad always drills the thumb hole all the way through; thumb_through=false / thumb_depth are ignored (use the app for a blind thumb hole)", file=sys.stderr)
+    if any(k in sheet for k in ("sizer_thumb_center", "sizer_finger_center", "sizer_step")):
+        print("warning: the sizer plate in trainer.scad has fixed bore sizes; the sizer_* settings are ignored (use the app for a plate centred on a customer's sizes)", file=sys.stderr)
     # trainer.scad takes final bore sizes: a fit sheet from the app lists the drill-sheet sizes
     # plus a print allowance, so add it here the way the app does (the sizer plate is exempt)
     try:

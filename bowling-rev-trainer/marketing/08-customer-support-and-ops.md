@@ -118,25 +118,25 @@ The sheet arrives one of four ways.
 
 Rules for all four:
 
-- Set the fit sheet `name` to the order number. Never put the customer's name in a file name.
+- Set the fit sheet `name` to the order number. File names carry no customer name (the app names STLs by size). The app's order folder is named `FS-#### Customer Name` so staff can find it: keep that folder out of shared drives and public slicer projects.
 - Printing may start once the sanity check is PASS. Search the order inbox for the order number immediately before pressing start. A correction that arrived before the print starts is applied.
-- Production path: use the configurator. It applies the 0.4 mm print allowance. If you use `generate.py`, add 0.4 mm to `thumb_d`, `middle_d` and `ring_d` in the JSON or CSV yourself, because the OpenSCAD path does not add it.
+- Production path: use the app or the configurator. They apply the 0.4 mm print allowance. `generate.py` adds the allowance itself when the fit sheet has a `print_allowance` key (every sheet exported by the app does). A hand-written sheet without that key needs 0.4 mm added to `thumb_d`, `middle_d` and `ring_d` by hand.
 
 ### 1.3 Step 2: Sanity check, ten things to eyeball on a sheet
 
-Do these in order, against the original document where there is one. Thresholds come from the typical ranges in `trainer.scad` and the hard limits in `generate.py`.
+Do these in order, against the original document where there is one. Thresholds come from the typical ranges in `trainer.scad` and the limits the app and `generate.py` enforce.
 
 | # | Look at | Normal | Hold and ask when |
 |---|---|---|---|
 | 1 | **Hand** | R or L on the sheet matches the Hand setting. Right-hander: with the thumb hole at the bottom as you look at the grip from outside, the middle finger hole sits on the left and the ring on the right | Sheet and order disagree. Notes say "lefty" and the order says Right. Lateral pitches look mirrored |
 | 2 | **Forward and reverse signs** | Finger holes forward (positive). Thumb zero or reverse (negative) | Any finger hole at reverse. Any thumb forward. A pitch typed without a direction word |
-| 3 | **Thumb size** | 7/8" to 1 1/8" (22 to 28.5 mm). Larger than both finger holes | Outside the range. Smaller than either finger hole, which usually means the numbers were swapped. Hard limit is 21 to 31 mm |
-| 4 | **Finger sizes** | 3/4" to 29/32" (19 to 23 mm) is typical. Ring often a half size under the middle | Outside 19 to 24 mm. 31/32" or 1" on a finger line, which is usually the size drilled for an insert, so it overstates what the finger feels. Hard limit is 17 to 26 mm |
+| 3 | **Thumb size** | 7/8" to 1 1/8" (22 to 28.5 mm). Larger than both finger holes | Outside the range. Smaller than either finger hole, which usually means the numbers were swapped. The app refuses anything outside 15 to 38 mm |
+| 4 | **Finger sizes** | 3/4" to 29/32" (19 to 23 mm) is typical. Ring often a half size under the middle | Outside 19 to 24 mm. 31/32" or 1" on a finger line, which is usually the size drilled for an insert, so it overstates what the finger feels. The app refuses anything outside 10 to 30 mm |
 | 5 | **Units and typing** | The same size reads the same in fractions and mm. 55/64" is 21.83 mm. 27/32" is 21.43 mm | An mm number in an inch field or the reverse. A decimal that rounds to a different 64th than the fraction. 5/64 where 55/64 was meant |
-| 6 | **Spans** | 105 to 125 mm (about 4 1/8" to 4 7/8"), cut to cut | Under 100 or over 128 mm. Both spans over about 130 mm, which suggests center-to-center numbers. Hard limit is 85 to 135 mm |
+| 6 | **Spans** | 105 to 125 mm (about 4 1/8" to 4 7/8"), cut to cut | Under 100 or over 128 mm. Both spans over about 130 mm, which suggests center-to-center numbers. The app refuses anything outside 60 to 150 mm |
 | 7 | **Middle against ring span** | Middle equal to or 2 to 4 mm longer than ring | Ring longer than middle. A gap over 6 mm |
 | 8 | **Pitch size** | Each of the six pitches at or under 1/2". Fingertip fingers usually 1/4" to 3/8" forward | Any pitch over 1/2". Any lateral over 3/8". A blank forward or reverse on any hole. Blank lateral means 0 and needs no question. Never guess a forward pitch |
-| 9 | **Bridge** | 1/4" (6.35 mm), or blank for the default | Under 1/4". The two finger bores can run into each other |
+| 9 | **Bridge** | 7/16" to 1/2" (11 to 12.7 mm) for finger-sized holes, or blank for the default (1/2"). 1/4" is normal only where the finger holes were cut at 31/32" for inserts | Under 7/16". The web between the finger holes gets thin deep inside and the app warns |
 | 10 | **Thumb style, options and size source** | Through or blind matches the sheet. Weight pocket and cord ticked as ordered. Size source is the drill sheet (modeled bores are the sheet size plus 0.4 mm) or the printed sizer plate (modeled bores equal the plate label, no allowance) | The size source disagrees with what the customer says. Spinner orders: ignore thumb and span fields, they do not change the part |
 
 After the ten, build the model in the configurator and check three more things:

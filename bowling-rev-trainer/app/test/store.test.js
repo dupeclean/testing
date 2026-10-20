@@ -254,3 +254,37 @@ test('only the app\'s own page is trusted, whatever the install path looks like'
   const win = 'C:\\Users\\Pat\\FitSlice [new]\\resources\\app.asar\\renderer\\index.html';
   assert.equal(isRendererUrl('file:///c:/users/pat/FitSlice%20%5Bnew%5D/resources/app.asar/renderer/index.html', win, 'win32'), true);
 });
+
+test('if the order-number counter cannot be written, the change is refused (no number is handed out unrecorded)', () => {
+  const dir = tmp(); const file = path.join(dir, 'orders.json');
+  const s = new OrderStore(file); s.save(input());
+  fs.mkdirSync(file + '.seq.tmp');
+  assert.throws(() => s.save(input({ customer: { name: 'Second' } })));
+  assert.equal(s.list().length, 1);
+  fs.rmdirSync(file + '.seq.tmp');
+  assert.equal(s.save(input({ customer: { name: 'Second' } })).number, 'FS-0002');
+});
+
+test('a rename that fails part-way through an export is explained, and no temp files are left', () => {
+  const base = tmp();
+  const order = { number: 'FS-0004', customer: { name: 'Lee' } };
+  const files = [{ name: 'a.stl', data: 'a' }, { name: 'b.stl', data: 'b' }, { name: 'job_sheet.txt', data: 'j' }];
+  const real = fs.renameSync;
+  fs.renameSync = (from, to) => { if (String(to).endsWith('b.stl')) { const e = new Error('locked'); e.code = 'EPERM'; e.path = to; throw e; } return real(from, to); };
+  try {
+    assert.throws(() => exportOrderFiles(base, order, files), /would not let FitSlice replace "b\.stl".*1 of 3 files had been replaced \(a\.stl\)/s);
+  } finally { fs.renameSync = real; }
+  const dir = path.join(base, 'FS-0004 Lee');
+  assert.deepEqual(fs.readdirSync(dir).filter(n => n.endsWith('.tmp')), [], 'staged temp files are cleaned up');
+  // exporting again simply works
+  assert.equal(exportOrderFiles(base, order, files).files.length, 3);
+});
+
+test('a write that fails (disk full) leaves no temp file behind', () => {
+  const { writeAtomic } = require('../lib/atomic');
+  const dir = tmp(); const file = path.join(dir, 'orders.csv');
+  const real = fs.fsyncSync;
+  fs.fsyncSync = () => { const e = new Error('full'); e.code = 'ENOSPC'; throw e; };
+  try { assert.throws(() => writeAtomic(file, 'x'), /full/); } finally { fs.fsyncSync = real; }
+  assert.deepEqual(fs.readdirSync(dir), []);
+});

@@ -129,6 +129,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
 .howto b { color: var(--fg); font-weight: 600; }
 @media (prefers-reduced-motion: no-preference) { .seg button, .btn { transition: background .15s, color .15s; } }
 
+  .drill th small.rowside{display:block;font-weight:400;font-size:11px;opacity:.75;white-space:nowrap}
 </style>
 
 <div class="wrap">
@@ -327,7 +328,7 @@ const DEFAULTS = {
   thumb_d: 25.4, middle_d: 21.03, ring_d: 21.03, // mm, true drill-sheet sizes
   size_source: 'drill_sheet',
   print_allowance: 0.4,                      // mm added to every bore
-  bridge: 7, finger_depth: 24,
+  bridge: 12.7, finger_depth: 24,     // bridge: about 1/2" (printed holes are finger-sized)
   thumb_through: true, thumb_depth: 40,
   thumb_fwd: -0.125, thumb_lat: 0,           // inches, drill-sheet convention
   middle_fwd: 0.3125, middle_lat: 0,
@@ -357,13 +358,14 @@ const LABELS = {
   sizer_thumb_center: 'Sizer thumb centre', sizer_finger_center: 'Sizer finger centre', sizer_step: 'Sizer step',
 };
 const PITCH_LIMIT = 1;   // inches
+const WEB_MIN = 2.0;     // mm: thinner than this between the finger holes warns
 
 // A problem the owner can fix by changing a value; shown as plain text, never a stack trace.
 class FitError extends Error {}
 
 function rangeText(key) {
   const [lo, hi] = LIMITS[key];
-  return `${fmtMm(lo)}–${fmtMm(hi)} mm (${fraction64(lo / IN)}"–${fraction64(hi / IN)}")`;
+  return `${fmtMm(lo)}–${fmtMm(hi)} mm (${(lo / IN).toFixed(2)}"–${(hi / IN).toFixed(2)}")`;
 }
 // Returns '' when fine, else a plain-language sentence.
 function checkLength(key, mm, unit) {
@@ -559,11 +561,12 @@ function makeBuilder(W) {
     // the two finger bores converge as they go deeper (they aim at the ball's center), so the
     // web between them is thinnest at the bottom of the holes
     const web = minAxisGap(mid.axis, ring.axis, p.finger_depth) - (D.md + D.rd) / 2;
-    if (web > 0 && web < 2.5 && !overlap(mid.bore, ring.bore))
-      warnings.push(`The web between the finger holes narrows to ${web.toFixed(1)} mm deep inside. That is a fragile hairline when printed. Increase the bridge or reduce the finger depth.`);
+    if (web < WEB_MIN && !overlap(mid.bore, ring.bore))
+      warnings.push(`The web between the finger holes narrows to ${Math.max(0, web).toFixed(1)} mm deep inside. That is a fragile hairline when printed. Increase the bridge or reduce the finger depth.`);
     for (const [name, h] of [['middle', mid], ['ring', ring]]) {
-      const endZ = h.axis.p[2] - p.finger_depth * h.axis.dir[2];
-      if (endZ < 1.5) warnings.push(`The ${name} finger bore would break through the base of the puck. Reduce the finger depth.`);
+      // lowest point of the bore's bottom rim (the bore is tilted, so its rim dips below the centre)
+      const rimZ = h.axis.p[2] - p.finger_depth * h.axis.dir[2] - (name === 'middle' ? D.md : D.rd) / 2 * Math.hypot(h.axis.dir[0], h.axis.dir[1]);
+      if (rimZ < 1.0) warnings.push(`The ${name} finger bore would break through the base of the puck. Reduce the finger depth.`);
       if (pock && overlap(h.bore, pock)) warnings.push(`The ${name} finger bore breaks into the weight pocket. Turn the pocket off or reduce the finger depth.`);
     }
     if (pock && overlap(thumb.bore, pock))
@@ -592,6 +595,10 @@ function makeBuilder(W) {
     const result = T(body.subtract(T(Manifold.union(cuts))));
     const warnings = [];
     if (overlap(mid.bore, ring.bore)) warnings.push('The two finger bores intersect. Increase the bridge.');
+    else {
+      const web = minAxisGap(mid.axis, ring.axis, depth) - (D.md + D.rd) / 2;
+      if (web < WEB_MIN) warnings.push(`The web between the finger holes narrows to ${Math.max(0, web).toFixed(1)} mm deep inside. That is a fragile hairline when printed. Increase the bridge.`);
+    }
     return { result, warnings, axes: [{ name: 'middle', ...mid.axis }, { name: 'ring', ...ring.axis }] };
   }
 
@@ -790,7 +797,7 @@ function makeViewer(container) {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   } catch (e) {
     container.textContent = '3D preview needs WebGL; the STL still generates.';
-    return { show() {}, setTheme() {} };
+    return { show() {}, clear() {}, setTheme() {} };
   }
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.setClearColor(0x000000, 0);
@@ -853,6 +860,11 @@ function makeViewer(container) {
   el.addEventListener('wheel', e => { e.preventDefault(); dist = Math.min(1500, Math.max(80, dist * (1 + Math.sign(e.deltaY) * 0.1))); redraw(); }, { passive: false });
 
   return {
+    clear() {
+      if (mesh) { scene.remove(mesh); mesh.geometry.dispose(); mesh = null; }
+      if (axes) { scene.remove(axes); axes.geometry.dispose(); axes = null; }
+      redraw();
+    },
     show(data) {
       if (mesh) { scene.remove(mesh); mesh.geometry.dispose(); }
       if (axes) { scene.remove(axes); axes.geometry.dispose(); }
@@ -937,7 +949,8 @@ async function main() {
   const unitLabels = document.querySelectorAll('[data-unit-label]');
 
   function showLengths() {
-    for (const k of LENGTH_KEYS) { const el = $(k); if (el) el.value = fmtLength(state[k], unit); }
+    // the fields are rewritten from the last good values, so any red mark on them no longer applies
+    for (const k of LENGTH_KEYS) { const el = $(k); if (el) { el.value = fmtLength(state[k], unit); el.classList.remove('bad'); el.removeAttribute('title'); invalid.delete(k); } }
     unitLabels.forEach(el => el.textContent = unit);
     refreshHints();
   }
@@ -953,8 +966,13 @@ async function main() {
   }
   function rowLabels() {
     const left = state.hand === 'right';
-    $('row_middle').textContent = `Middle · ${left ? 'left' : 'right'} hole`;
-    $('row_ring').textContent = `Ring · ${left ? 'right' : 'left'} hole`;
+    const label = (id, name, side) => {
+      const th = $(id); th.textContent = name;
+      const sub = document.createElement('small'); sub.className = 'rowside'; sub.textContent = `${side} hole`;
+      th.append(sub);
+    };
+    label('row_middle', 'Middle', left ? 'left' : 'right');
+    label('row_ring', 'Ring', left ? 'right' : 'left');
   }
   function showAll() {
     invalid.clear();
@@ -973,7 +991,9 @@ async function main() {
   }
 
   let timer = null;
-  const schedule = () => { clearTimeout(timer); timer = setTimeout(rebuild, 250); };
+  const schedule = () => { clearTimeout(timer); timer = setTimeout(() => { timer = null; rebuild(); }, 250); };
+  // run a rebuild that is still waiting out its delay, so a save never uses the previous model
+  async function settle() { if (timer) { clearTimeout(timer); timer = null; await rebuild(); } }
 
   // Fields whose typed text was refused. The model keeps the last good value for them, so
   // saving or exporting is blocked until each is fixed (never silently using stale numbers).
@@ -1031,6 +1051,11 @@ async function main() {
     } catch (e) {
       if (!(e instanceof FitError)) console.error(e);
       current = null;   // never leave an old model that no longer matches the form
+      viewer.clear();
+      for (const id of ['stat_size', 'stat_weight', 'stat_volume']) $(id).textContent = '—';
+      $('bores').innerHTML = ''; $('bores_note').textContent = '';
+      $('warnings').innerHTML = ''; $('warnings').parentElement.hidden = true;
+      $('fit_json').value = '';
       setStatus(e instanceof FitError ? e.message : 'Could not build this geometry. Check the values marked in red.', 'error');
     }
   }
@@ -1069,6 +1094,7 @@ async function main() {
     setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 2000);
   }
   async function saveSTL(bundle) {
+    await settle();
     if (invalid.size) { setStatus(`Not saved. ${invalidMessage()}`, 'error'); return; }
     if (!current) { setStatus('Nothing to save: the model could not be built. Fix the message above first.', 'error'); return; }
     const D = current.derived, base = fileBase(state, D);

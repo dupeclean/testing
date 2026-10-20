@@ -81,6 +81,8 @@ def main():
         desk = desk.replace("<title>Rev Trainer Configurator</title>", "<title>FitSlice</title>")
         desk = desk.replace("<h1>Rev Trainer Configurator</h1>", "<h1>FitSlice</h1>")
         assert "Rev Trainer Configurator</h1>" not in desk
+        desk = desk.replace("The model is rebuilt with those exact holes and you download a print-ready file.",
+                            "The model is rebuilt with those exact holes; the print files are saved with each order.")
         csp = f'<meta http-equiv="Content-Security-Policy" content="{APP_CSP}">'
         out = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
                '<meta name="viewport" content="width=device-width, initial-scale=1">\n' + csp + '\n</head>\n<body>\n'
