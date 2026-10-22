@@ -7,7 +7,7 @@
 // PLAYWRIGHT_PATH points at a playwright install if it is not in node_modules.
 
 import { createRequire } from 'node:module';
-import { mkdtempSync, readdirSync, readFileSync, existsSync, rmSync, mkdirSync } from 'node:fs';
+import { mkdtempSync, readdirSync, readFileSync, existsSync, rmSync, mkdirSync, copyFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -251,8 +251,15 @@ try {
   assert.equal(/DRILL SHEET AS ENTERED|Bridge |Wrist-cord/.test(kitJob), false, 'a Fit Kit job sheet must not describe puck features');
   ok('second order is FS-0002; Fit Kit exports a sizer plate');
 
-  // a Rev Ball order: the full-sphere part, with its own job-sheet instructions
+  // a Rev Ball order with an oval thumb (as on the owner's sheet): the full-sphere part, with its own job-sheet instructions
+  await page.click('#ob-close');
+  await page.click('[data-unit="in"]');   // a restart comes back in mm
+  await fill(page, 'thumb_d', '25/32'); await fill(page, 'thumb_oval_d', '29/32'); await fill(page, 'thumb_oval_angle', '55');
+  await page.waitForFunction(() => /Built in/.test(document.getElementById('status').textContent));
+  // the edited sheet still belongs to the open order (FS-0002), so "New order" asks before leaving it: accept
+  const leave = (d) => d.accept(); page.on('dialog', leave);
   await page.click('#ob-new');
+  await page.waitForSelector('#ob-name:visible'); page.off('dialog', leave);
   await page.fill('#ob-name', 'Ball Buyer'); await page.selectOption('#ob-product', 'ball');
   await page.evaluate(() => { document.getElementById('ob-toast-text').textContent = ''; });
   await page.click('#ob-form-export');
@@ -263,10 +270,22 @@ try {
   const bs = readStl(join(ordersDir, f3, ballStl));
   assert.ok(bs.volume_cm3 > 4000 && bs.volume_cm3 < 4200 && Math.abs(bs.height_mm - 199.4) < 0.2, `ball ${bs.volume_cm3} cm3, ${bs.height_mm} mm`);
   const ballJob = readFileSync(join(ordersDir, f3, 'job_sheet.txt'), 'utf8');
-  assert.match(ballJob, /Rev Ball: 200 mm ball/); assert.match(ballJob, /tree supports/); assert.match(ballJob, /5% gyroid/); assert.match(ballJob, /Ball drill/);
+  assert.match(ballJob, /Rev Ball: 200 mm ball/); assert.match(ballJob, /Supports: tree, "On build plate only"/); assert.match(ballJob, /seam: random or scarf/); assert.match(ballJob, /5% gyroid/); assert.match(ballJob, /Ball drill/);
+  assert.match(ballJob, /OVAL HOLES[\s\S]*Thumb: 25\/32" \(19\.84 mm\) drilled, 29\/32" \(23\.02 mm\) oval at 55 deg/, 'oval thumb on the job sheet');
+  assert.match(ballJob, /thumb bevel 4 mm, finger bevel 2\.5 mm \(rounded\)/); assert.match(ballJob, /Engraved in the base: FS-0003/);
+  assert.match(ballJob, /FILES[\s\S]*customer_card\.pdf/);
+  const card = readFileSync(join(ordersDir, f3, 'customer_card.pdf'));
+  assert.equal(card.subarray(0, 8).toString('latin1'), '%PDF-1.4'); assert.match(card.toString('latin1'), /%%EOF\n$/);
+  const cardText = card.toString('latin1');
+  assert.ok(/Order FS-0003/.test(cardText) && /Ball Buyer|Hi Ball/.test(cardText) && /oval 29\/32/.test(cardText) && /REV BALL: HOW TO USE IT/.test(cardText), 'customer card carries the order, fit and instructions');
+  assert.equal(/example\.com|@/.test(cardText.replace(/%[^\n]*/g, '')), false, 'no contact details on the card');
+  // keep the card and job sheet for a look (test/tmp is ignored by git)
+  copyFileSync(join(ordersDir, f3, 'customer_card.pdf'), join(shotDir, 'customer_card.pdf')); copyFileSync(join(ordersDir, f3, 'job_sheet.txt'), join(shotDir, 'job_sheet_ball.txt'));
+  const ballSheet = JSON.parse(readFileSync(join(ordersDir, f3, 'fit_sheet.json'), 'utf8'));
+  assert.ok(Math.abs(ballSheet.thumb_oval_d - 23.02) < 0.05 && ballSheet.thumb_oval_angle === 55 && ballSheet.serial === 'FS-0003', 'fit sheet records the oval and the engraved number');
   assert.match(ballJob, /FILAMENT CHANGES[\s\S]*Add color change[\s\S]*at 93\.[3-6] mm: second colour[\s\S]*at 105\.[3-6] mm: base colour[\s\S]*at 1\d\d(\.\d)? mm: second colour/, 'swap heights on the job sheet');
   assert.equal(/Wrist-cord/.test(ballJob), false, 'no puck-only lines on a ball job sheet');
-  ok('Rev Ball order exports a 200 mm ball with its own print and drill instructions');
+  ok('Rev Ball order with an oval thumb exports a 200 mm ball, a job sheet with the oval, bevel, engraving and support settings, and a customer card PDF');
 
   // delete: a native confirmation, and the number is never reused
   await app.evaluate(({ dialog }) => { dialog.showMessageBox = async () => ({ response: 1 }); });

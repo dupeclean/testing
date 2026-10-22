@@ -16,7 +16,7 @@ Any key you leave out falls back to the defaults in trainer.scad.
 Requires: openscad on PATH (https://openscad.org).
 """
 
-import argparse, csv, json, shutil, subprocess, sys
+import argparse, csv, json, re, shutil, subprocess, sys
 from pathlib import Path
 
 SCAD = Path(__file__).parent / "trainer.scad"
@@ -46,6 +46,15 @@ SCHEMA = {
     "ball_flat":   (float, 0,     40),
     "ball_groove": (bool,  None,  None),
     "ball_stripe": (str,   None,  None),
+    "thumb_hole":  (bool,  None,  None),
+    "thumb_oval_d": (float, 0,    45),
+    "thumb_oval_angle": (float, -90, 90),
+    "middle_oval_d": (float, 0,   36),
+    "ring_oval_d": (float, 0,     36),
+    "finger_oval_angle": (float, -90, 90),
+    "thumb_bevel": (float, 0,     8),
+    "finger_bevel": (float, 0,    6),
+    "serial":      (str,   None,  None),
 }
 # Keys the FitSlice app writes into fit_sheet.json that this script does not need
 # (its job sheet / model summary, and options trainer.scad has no switch for).
@@ -70,6 +79,8 @@ def validate(sheet: dict) -> dict:
             sys.exit("error: hand must be 'right' or 'left'")
         if key == "ball_stripe" and val not in ("none", "cap", "cap_band", "bands"):
             sys.exit("error: ball_stripe must be none, cap, cap_band or bands")
+        if key == "serial" and not re.fullmatch(r"[0-9FS-]{0,12}", val.upper()):
+            sys.exit("error: serial may only use digits, F, S and a dash (up to 12 characters)")
         if lo is not None and not (lo <= val <= hi):
             sys.exit(f"error: {key}={val} outside sane range [{lo}, {hi}]")
         out[key] = val
@@ -86,8 +97,8 @@ def validate(sheet: dict) -> dict:
     if not (0 <= allowance <= 2):
         sys.exit(f"error: print_allowance={allowance} outside sane range [0, 2]")
     if allowance:
-        for k in ("thumb_d", "middle_d", "ring_d"):
-            if k in out:
+        for k in ("thumb_d", "middle_d", "ring_d", "thumb_oval_d", "middle_oval_d", "ring_oval_d"):
+            if k in out and out[k] > 0:
                 out[k] = round(out[k] + allowance, 4)
     return out
 

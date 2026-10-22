@@ -26,6 +26,18 @@ a. Switch the units to INCHES (top right) so you can type the sheet
 b. Fill in the drill sheet: hand, the three hole sizes, both spans,
    forward/reverse and lateral pitch for each hole, bridge.
 
+   OVAL HOLES: if the sheet lists an oval (for example thumb 25/32 drilled,
+   29/32 oval at 55 deg), type the DRILLED size as the hole size on the
+   drill-sheet row, then open "Oval holes" below and type the oval size
+   (the long way across) and its angle. 0 deg points the long axis
+   straight up the sheet (thumb-to-fingers line); + turns it toward the
+   bowling-hand side. Leave the oval size at 0 for a round hole. Hold the
+   customer's ball with the finger holes at 12 o'clock and check the
+   long axis of the thumb hole runs the same way as the preview before
+   you print.
+   The hole edges are rounded (thumb 4 mm, fingers 2.5 mm) like a
+   pro-shop bevel; set a bevel to 0 for a sharp edge.
+
    WHICH HOLE IS WHICH: look at the sheet with the thumb hole at the
    bottom, the way it is drawn. For a RIGHT hand the LEFT finger hole is
    the middle finger and the RIGHT hole is the ring finger. A left hand is
@@ -46,10 +58,15 @@ c. Click "New order". Type the customer's name (required), pick the
    numbers left over from the last customer, so check it first.
 d. A folder is created for the order, for example
       Documents\FitSlice Orders\FS-0001 Jordan Lee\
-   It holds the STL file(s), fit_sheet.json and job_sheet.txt.
+   It holds the STL file(s), fit_sheet.json, job_sheet.txt and
+   customer_card.pdf (a one-page sheet for the customer: their fit as
+   printed, how to use the part, safety and care; print it and put it in
+   the box). The order number is engraved 0.5 mm into the base of every
+   part, mirrored so it reads right with the part turned over.
    Open the STL in your slicer (PrusaSlicer, Bambu Studio, Cura).
    Print settings are on the job sheet: PETG, 0.2 mm layers, 4 walls,
-   20% gyroid infill, flat side down, no supports.
+   20% gyroid infill, flat side down, no supports (the Rev Ball is
+   different: see section 5).
    Export again after any change: the same folder is reused. Files with
    the same name are replaced by the new version. Files from an earlier
    export that no longer apply (for example an STL named for the old hole
@@ -99,9 +116,8 @@ folder path from the old computer.
 ------------------------------------------------------------------
 5. GOOD TO KNOW
 ------------------------------------------------------------------
-- Holes are ROUND. If a sheet lists oval holes, enter the round size
-  that fits (the Fit Kit sizer plate helps you find it) and finish the
-  fit with bowler's tape.
+- Oval holes are modeled when you enter them (section 2b). The sizer
+  plate is round only: use it to confirm the drilled (short) size.
 - Printed holes come out a few tenths of a millimeter small. The app
   adds a print allowance (0.4 mm by default). To find out what your own
   printer needs: make a "Fit Kit" order (it exports a sizer plate centred
@@ -113,18 +129,24 @@ folder path from the old computer.
   type the engraved numbers as the hole sizes for that customer.
 - The REV BALL is the release trainer: a full 200 mm ball with the
   customer's grip. Choose the part "Ball" (or product "Rev Ball"). Slice
-  it with 3 walls and 5% infill, grip holes facing up, tree supports
-  under the lower half; snap the supports off and sand the scar smooth.
-  About 475 g and 10 to 14 hours. It prints in TWO colours with no
-  painting: after slicing, right-click the layer slider in Bambu Studio
-  at each height listed on the job sheet and choose "Add color change";
-  the printer pauses there so you can swap the filament (with an AMS it
-  swaps by itself). Start in the base colour. The coloured top cap and
-  the band round the middle make the spin easy to see. To use it: kneel, swing low, let it go along a strip of tape
-  on the floor with a couch or wall 1.5 to 2 m away. Rolls and curves off
-  the line = thumb out first, fingers lifted. Straight and short = dumped.
-  Pops up = thumb hung up. Spins in place = hand on top. The thumb hole
-  is blind (70 mm deep by default) like a real ball.
+  it with 3 walls and 5% infill, grip holes facing up. Supports: tree,
+  "On build plate only" (so nothing grows inside the holes). Seam:
+  random or scarf (a seam down one side would make it wobble). Snap the
+  supports off and sand the scar smooth so it rolls true. About 475 g
+  and 10 to 14 hours. It prints in TWO colours with no painting: after
+  slicing, right-click the layer slider in Bambu Studio at each height
+  listed on the job sheet and choose "Add color change". With your AMS,
+  pick the second filament there and the printer swaps by itself; without
+  one it pauses so you can swap by hand. Start in the base colour. The
+  coloured top cap and the band round the middle make the spin easy to
+  see. To use it: kneel, swing low, let it go along a strip of tape on
+  the floor with a couch or wall 1.5 to 2 m away. Rolls and curves off
+  the line = thumb out first, fingers lifted. Straight but long and
+  lively = strong forward roll (fine). Straight and short = dumped. Pops
+  up = thumb hung up. Spins in place = hand on top. The thumb hole is
+  blind (70 mm deep by default; set it from the customer's thumb length)
+  like a real ball. For a two-handed bowler untick "Thumb hole": the two
+  finger holes are then centred on top and there is no thumb hole.
 - The Rev Spinner uses only the two finger hole sizes and the bridge;
   its holes are drilled straight at the ball's center, so spans and
   pitches apply to the Rev Puck only.

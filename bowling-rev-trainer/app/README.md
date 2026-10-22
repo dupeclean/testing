@@ -13,8 +13,10 @@ file ships next to `FitSlice.exe`.
   file by `../configurator/build.py`).
 - **Order book** (`lib/store.js`, UI in `renderer-src/orders.*`): orders, statuses, saved drill
   sheets, CSV export. Order numbers (`FS-0001`, ...) are never reused.
-- **Exports** (`lib/files.js`): one folder per order with the STLs, `fit_sheet.json` and
-  `job_sheet.txt` (job sheet has no customer contact details).
+- **Exports** (`lib/files.js`): one folder per order with the STLs (order number engraved in
+  the base), `fit_sheet.json`, `job_sheet.txt` (print settings, filament-change heights, no
+  customer contact details) and `customer_card.pdf` (a one-page how-to for the customer,
+  written without a PDF library in `renderer-src/orders.js`).
 
 ## Run from source
 
@@ -43,8 +45,9 @@ PLAYWRIGHT_PATH=/path/to/playwright xvfb-run -a node test/e2e.mjs
 FITSLICE_E2E_BIN=dist/linux-unpacked/fitslice xvfb-run -a node test/e2e.mjs   # same, against a packaged build
 ```
 
-Geometry (pitch direction, bridge, spans, parity with OpenSCAD) is tested from
-`../configurator/test/` (`pitch_check.mjs` + `pitch_check.py`).
+Geometry (pitch direction, bridge, spans, oval holes, bevels, engraving, the Rev Ball, parity
+with OpenSCAD) is tested from `../configurator/test/` (`engine_check.mjs`, `pitch_check.mjs` +
+`pitch_check.py`, `oval_check.mjs` + `oval_check.py --scad`).
 
 ## Where data lives
 

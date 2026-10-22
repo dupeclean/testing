@@ -33,6 +33,23 @@ bridge = 12.7;
 // Finger hole depth — fingertip grip inserts to the first joint
 finger_depth = 24;
 
+/* [Oval holes and bevels] */
+// Thumb oval size: the LONG way across (0 = round). The thumb_d above is the short (drilled) size.
+thumb_oval_d = 0;
+// Where the thumb oval's long axis points: 0 = up the sheet (thumb-to-fingers line), + = toward the hand side
+thumb_oval_angle = 0;
+// Finger oval sizes (long way across, 0 = round) and angle (0 = toward the thumb)
+middle_oval_d = 0;
+ring_oval_d = 0;
+finger_oval_angle = 0;
+// Rounded edge on each hole (mm radius), like a pro-shop bevel
+thumb_bevel = 4;
+finger_bevel = 2.5;
+// Text engraved 0.5 mm into the flat base (e.g. the order number); "" for none
+serial = "";
+// Ball only: false makes a two-handed / no-thumb ball
+thumb_hole = true;
+
 /* [Pitches — copy your drill sheet, in inches] */
 // Pitch here works exactly like a pro-shop drill sheet: 0 means the
 // bore aims at the ball's center; forward/reverse and lateral are the
@@ -100,20 +117,30 @@ eps = 0.01;
 // thumb side outward: the middle finger is the LEFT hole, the ring the RIGHT
 // hole. A left hander is the mirror image. (+x is the viewer's right.)
 mir = (hand == "right") ? 1 : -1;
+// Oval holes reach further along their long axis: extra length per hole, and its share
+// along the grip line (y) and across it (x)
+ov_t = thumb_oval_d  > 0 ? max(0, thumb_oval_d  - thumb_d)  : 0;
+ov_m = middle_oval_d > 0 ? max(0, middle_oval_d - middle_d) : 0;
+ov_r = ring_oval_d   > 0 ? max(0, ring_oval_d   - ring_d)   : 0;
+rt_y = thumb_d/2  + ov_t/2*abs(cos(thumb_oval_angle));
+rm_y = middle_d/2 + ov_m/2*abs(cos(finger_oval_angle));
+rr_y = ring_d/2   + ov_r/2*abs(cos(finger_oval_angle));
+rm_x = middle_d/2 + ov_m/2*abs(sin(finger_oval_angle));
+rr_x = ring_d/2   + ov_r/2*abs(sin(finger_oval_angle));
 // Finger hole lateral offsets (inner edges stay `bridge` apart)
-x_m = -mir*(middle_d + bridge)/2;
-x_r =  mir*(ring_d  + bridge)/2;
+x_m = -mir*(rm_x + bridge/2);
+x_r =  mir*(rr_x + bridge/2);
 // Center-to-center distances from the thumb hole, per finger
-cc_m = span_middle + thumb_d/2 + middle_d/2;
-cc_r = span_ring   + thumb_d/2 + ring_d/2;
+cc_m = span_middle + rt_y + rm_y;
+cc_r = span_ring   + rt_y + rr_y;
 // Thumb sits centered below the origin
 ty = (cc_m + cc_r)/4;
 // Finger hole positions honoring each finger's own span
 y_m = -ty + sqrt(cc_m*cc_m - x_m*x_m);
 y_r = -ty + sqrt(cc_r*cc_r - x_r*x_r);
 // Puck footprint extents auto-size to the grip
-ext_s = ty + thumb_d/2 + end_wall;
-ext_n = max(y_m + middle_d/2, y_r + ring_d/2) + end_wall;
+ext_s = ty + thumb_d/2 + ov_t/2 + end_wall;
+ext_n = max(y_m + middle_d/2 + ov_m/2, y_r + ring_d/2 + ov_r/2) + end_wall;
 
 // ---------------------------------------------------------------------
 // Helpers
@@ -144,21 +171,52 @@ function surf_z(h, x, y, R = ball_R) = h - R + sqrt(R*R - x*x - y*y);
 // Depth is measured along the bore axis from the surface.
 // R is the sphere radius the hole is cut into; the pitch offsets are scaled by R/ball_R so a
 // smaller sphere (the Rev Ball) keeps the same hole angles as the regulation ball.
-module drill(x, y, d, depth, fwd_in, lat_in, body_h, fdir, through = false, R = ball_R) {
+module drill(x, y, d, depth, fwd_in, lat_in, body_h, fdir, through = false, R = ball_R, oval = 0, oval_angle = 0, bevel = rim_chamfer) {
     zs     = surf_z(body_h, x, y, R);
     aim    = [lat_in*25.4*mir*R/ball_R, fwd_in*25.4*fdir*R/ball_R, body_h - R];
     inward = aim - [x, y, zs];
     out    = -inward / norm(inward);                       // outward unit vector
+    b      = acos(out[2]);
+    c      = atan2(out[1], out[0]);
+    // the oval's long axis, as the drill sheet gives it (0 = up the sheet, + = hand side), in the hole's frame
+    v      = [mir*sin(oval_angle), cos(oval_angle)];
+    va     = v[0]*cos(c) + v[1]*sin(c);
+    vb     = -v[0]*sin(c) + v[1]*cos(c);
+    phi    = oval > 0 ? atan2(vb*cos(b), va) : 0;
+    off    = [cos(phi)*oval/2, sin(phi)*oval/2];
     translate([x, y, zs])
-    rotate([0, acos(out[2]), atan2(out[1], out[0])]) {     // maps +Z onto `out`
+    rotate([0, b, c]) {                                    // maps +Z onto `out`
         // bore (local -Z is into the body)
-        translate([0, 0, through ? -130 : -depth])
+        ovalize(off) translate([0, 0, through ? -130 : -depth])
             cylinder(d = d, h = through ? 165 : depth + 35);
-        // rim chamfer: the axis is near the surface normal, so this cuts
-        // an even, comfortable ring
-        translate([0, 0, -rim_chamfer])
-            cylinder(d1 = d, d2 = d + 2*rim_chamfer + 8, h = rim_chamfer + 6);
+        // rounded edge: a quarter circle of radius `bevel` from short frustums, then a shallow cone
+        // above the surface so a surface that rises on one side still gets an edge
+        if (bevel > 0) {
+            N = 6;
+            for (k = [0 : N-1]) {
+                a0 = k*90/N; a1 = (k+1)*90/N;
+                r0 = d/2 + bevel - bevel*cos(a0); r1 = d/2 + bevel - bevel*cos(a1);
+                z0 = -bevel + bevel*sin(a0);      z1 = -bevel + bevel*sin(a1);
+                ovalize(off) translate([0, 0, z0]) cylinder(h = max(z1 - z0, 0.05), r1 = r0, r2 = r1);
+            }
+            ovalize(off) cylinder(h = 6, r1 = d/2 + bevel, r2 = d/2 + bevel + 8);
+        }
     }
+}
+
+// An oval hole is a round one swept sideways: the hull of two copies of each (convex) piece
+module ovalize(off) {
+    hull() {
+        translate([ off[0],  off[1], 0]) children();
+        translate([-off[0], -off[1], 0]) children();
+    }
+}
+
+// Text engraved 0.5 mm into the base at (x, y), mirrored so it reads right with the part turned over
+module serial_cut(x, y, size = 5.5) {
+    if (serial != "")
+        translate([x, y, -1]) mirror([1, 0, 0]) linear_extrude(1.5)
+            text(serial, size = size, halign = "center", valign = "center", font = "Liberation Sans:style=Bold");
 }
 
 // Horizontal through-tunnel along X with a self-supporting teardrop roof
@@ -192,11 +250,12 @@ module rev_puck() {
         }
 
         // thumb: through bore (thumb seats fully, tip may peek out the bottom)
-        drill(0, -ty, thumb_d, 0, thumb_fwd, thumb_lat, puck_h, +1, through = true);
+        drill(0, -ty, thumb_d, 0, thumb_fwd, thumb_lat, puck_h, +1, true, ball_R, ov_t, thumb_oval_angle, thumb_bevel);
 
         // fingers: blind fingertip holes, each at its own span, size, pitch
-        drill(x_m, y_m, middle_d, finger_depth, middle_fwd, middle_lat, puck_h, -1);
-        drill(x_r, y_r, ring_d,   finger_depth, ring_fwd,   ring_lat,   puck_h, -1);
+        drill(x_m, y_m, middle_d, finger_depth, middle_fwd, middle_lat, puck_h, -1, false, ball_R, ov_m, finger_oval_angle, finger_bevel);
+        drill(x_r, y_r, ring_d,   finger_depth, ring_fwd,   ring_lat,   puck_h, -1, false, ball_R, ov_r, finger_oval_angle, finger_bevel);
+        serial_cut(0, ext_n - 15);   // finger end of the base (the thumb bore exits the base well in from its entry)
 
         if (lanyard)
             xtunnel(44, 10, lanyard_d, puck_w + 20);
@@ -219,9 +278,11 @@ module rev_ball() {
             translate([0, 0, R - s]) sphere(r = R);
             translate([-R - 1, -R - 1, 0]) cube([2*R + 2, 2*R + 2, H + 1]);
         }
-        drill(0, -ty, thumb_d, ball_thumb_depth, thumb_fwd, thumb_lat, H, +1, false, R);
-        drill(x_m, y_m, middle_d, finger_depth, middle_fwd, middle_lat, H, -1, false, R);
-        drill(x_r, y_r, ring_d,   finger_depth, ring_fwd,   ring_lat,   H, -1, false, R);
+        if (thumb_hole)
+            drill(0, -ty, thumb_d, ball_thumb_depth, thumb_fwd, thumb_lat, H, +1, false, R, ov_t, thumb_oval_angle, thumb_bevel);
+        drill(x_m, thumb_hole ? y_m : 0, middle_d, finger_depth, middle_fwd, middle_lat, H, -1, false, R, ov_m, finger_oval_angle, finger_bevel);
+        drill(x_r, thumb_hole ? y_r : 0, ring_d,   finger_depth, ring_fwd,   ring_lat,   H, -1, false, R, ov_r, finger_oval_angle, finger_bevel);
+        serial_cut(0, 0, 4.4);
         if (ball_groove) ball_ring(R, s, R - s, 2, 0.8);
         // a fine groove at every colour boundary (the slicer swaps filament at these heights)
         for (z = ball_swaps(R, s)) ball_ring(R, s, z, 0.6, 0.3);
@@ -237,8 +298,10 @@ module ball_ring(R, s, z, w, deep) {
     }
 }
 // Lowest point of a hole's chamfer rim on the ball surface
-function ball_edge_z(R, s, x, y, d) = R - s + sqrt(max(0, R*R - pow(sqrt(x*x + y*y) + d/2 + rim_chamfer, 2)));
-function ball_cap_z(R, s) = floor(min(ball_edge_z(R, s, 0, -ty, thumb_d), ball_edge_z(R, s, x_m, y_m, middle_d), ball_edge_z(R, s, x_r, y_r, ring_d)) - 6);
+function ball_edge_z(R, s, x, y, d, bev) = R - s + sqrt(max(0, R*R - pow(sqrt(x*x + y*y) + d/2 + bev, 2)));
+function ball_cap_z(R, s) = floor(min(thumb_hole ? ball_edge_z(R, s, 0, -ty, thumb_d + ov_t, thumb_bevel) : 1e9,
+    ball_edge_z(R, s, x_m, thumb_hole ? y_m : 0, middle_d + ov_m, finger_bevel),
+    ball_edge_z(R, s, x_r, thumb_hole ? y_r : 0, ring_d + ov_r, finger_bevel)) - 6);
 function ball_swaps(R, s) =
     ball_stripe == "cap"      ? [ball_cap_z(R, s)] :
     ball_stripe == "cap_band" ? [R - s - 6, R - s + 6, ball_cap_z(R, s)] :
@@ -255,8 +318,9 @@ module rev_spinner() {
         }
 
         // finger holes, drilled radially (zero pitch)
-        drill(x_m, 0, middle_d, min(finger_depth, 20), 0, 0, spin_h, -1);
-        drill(x_r, 0, ring_d,   min(finger_depth, 20), 0, 0, spin_h, -1);
+        drill(x_m, 0, middle_d, min(finger_depth, 20), 0, 0, spin_h, -1, false, ball_R, ov_m, finger_oval_angle, finger_bevel);
+        drill(x_r, 0, ring_d,   min(finger_depth, 20), 0, 0, spin_h, -1, false, ball_R, ov_r, finger_oval_angle, finger_bevel);
+        serial_cut(-24, 24);
 
         if (lanyard)
             xtunnel(-spin_d/2 + 18, 8, lanyard_d, spin_d + 20);

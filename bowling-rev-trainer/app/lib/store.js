@@ -55,6 +55,15 @@ const FIT_SCHEMA = {
   ball_flat:          { type: 'num', min: 0, max: 40, label: 'Ball resting flat' },
   ball_groove:        { type: 'bool' },
   ball_stripe:        { type: 'enum', values: ['none', 'cap', 'cap_band', 'bands'] },
+  thumb_hole:         { type: 'bool' },
+  thumb_oval_d:       { type: 'num', min: 0, max: 45, label: 'Thumb oval size' },
+  thumb_oval_angle:   { type: 'num', min: -90, max: 90, label: 'Thumb oval angle', unit: 'deg' },
+  middle_oval_d:      { type: 'num', min: 0, max: 36, label: 'Middle finger oval size' },
+  ring_oval_d:        { type: 'num', min: 0, max: 36, label: 'Ring finger oval size' },
+  finger_oval_angle:  { type: 'num', min: -90, max: 90, label: 'Finger oval angle', unit: 'deg' },
+  thumb_bevel:        { type: 'num', min: 0, max: 8, label: 'Thumb hole bevel' },
+  finger_bevel:       { type: 'num', min: 0, max: 6, label: 'Finger hole bevel' },
+  serial:             { type: 'text', pattern: /^[0-9FS-]{0,12}$/, label: 'Engraved text' },
 };
 
 const LIMITS = { name: 120, email: 200, phone: 60, address: 400, notes: 4000, orderNotes: 4000 };
@@ -78,10 +87,14 @@ function cleanFit(fit) {
       out[k] = v;
     } else if (spec.type === 'bool') {
       out[k] = !!v;
+    } else if (spec.type === 'text') {
+      const t = v == null ? '' : String(v).trim().toUpperCase();
+      if (!spec.pattern.test(t)) throw new UserError(`${spec.label} can only use digits, F, S and a dash (up to 12 characters).`);
+      out[k] = t;
     } else {
       // a real number (or a numeric string); never null, '', true or [] which Number() would turn into 0 or 1
       const n = typeof v === 'number' ? v : (typeof v === 'string' && v.trim() !== '' ? Number(v) : NaN);
-      const unit = spec.unit === 'inch' ? '"' : ' mm';
+      const unit = spec.unit === 'inch' ? '"' : spec.unit === 'deg' ? '°' : ' mm';
       if (!Number.isFinite(n) || n < spec.min || n > spec.max) {
         throw new UserError(`${spec.label}: ${Number.isFinite(n) ? n + unit : 'that value'} is outside the usable range ${spec.min} to ${spec.max}${unit}. Check the drill sheet values and the mm/inches switch.`);
       }

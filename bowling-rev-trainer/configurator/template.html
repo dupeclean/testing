@@ -158,6 +158,9 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
               <option value="drill_sheet">My pro-shop drill sheet</option>
               <option value="sizer_plate">The printed sizer plate</option>
             </select></label>
+          <label class="field" data-only-part="puck spinner ball"><span>Engrave in the base</span>
+            <input type="text" id="serial" maxlength="12" placeholder="FS-0001" style="text-transform:uppercase">
+            <small>Order number: digits, F, S and a dash. Blank for none</small></label>
           <label class="field"><span>Print allowance</span>
             <span class="row" style="gap:6px"><input type="text" id="print_allowance" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
             <small>Added to every bore. Printed holes come out small.</small></label>
@@ -214,9 +217,33 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
           <label class="field"><span>Bridge</span>
             <span class="row" style="gap:6px"><input type="text" id="bridge" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
             <small>Web between the finger holes</small></label>
+          <label class="field" data-only-part="puck ball"><span>Thumb hole bevel</span>
+            <span class="row" style="gap:6px"><input type="text" id="thumb_bevel" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+            <small>Rounded edge, like a pro-shop bevel. 0 = sharp</small></label>
+          <label class="field"><span>Finger hole bevel</span>
+            <span class="row" style="gap:6px"><input type="text" id="finger_bevel" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span></label>
           <label class="check" data-only-part="puck"><input type="checkbox" id="thumb_through"> Thumb hole goes through</label>
           <label class="field" id="thumb_depth_row" data-only-part="puck"><span>Thumb depth</span>
             <span class="row" style="gap:6px"><input type="text" id="thumb_depth" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span></label>
+        </div>
+      </fieldset>
+
+      <fieldset data-only-part="puck spinner ball">
+        <legend>Oval holes</legend>
+        <p class="howto" style="margin:0 0 10px">Leave at 0 for round holes. For an oval hole enter the sheet's hole size on the Drill sheet row (the <b>short</b> way across, the drilled size) and the <b>oval</b> size here (the long way across). The angle is where the long axis points on the sheet: <b>0</b> = straight up the sheet along the thumb-to-fingers line, <b>positive</b> = turned toward the bowling-hand side, negative the other way. Check it against the real ball before printing.</p>
+        <div class="row">
+          <label class="field" data-only-part="puck ball"><span>Thumb oval size</span>
+            <span class="row" style="gap:6px"><input type="text" id="thumb_oval_d" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+            <small>e.g. 25/32 hole, 29/32 oval: enter 29/32 here</small></label>
+          <label class="field" data-only-part="puck ball"><span>Thumb oval angle</span>
+            <span class="row" style="gap:6px"><input type="text" id="thumb_oval_angle" inputmode="decimal"><span class="unit">°</span></span></label>
+          <label class="field"><span>Middle finger oval size</span>
+            <span class="row" style="gap:6px"><input type="text" id="middle_oval_d" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span></label>
+          <label class="field"><span>Ring finger oval size</span>
+            <span class="row" style="gap:6px"><input type="text" id="ring_oval_d" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span></label>
+          <label class="field"><span>Finger oval angle</span>
+            <span class="row" style="gap:6px"><input type="text" id="finger_oval_angle" inputmode="decimal"><span class="unit">°</span></span>
+            <small>0 = long axis toward the thumb</small></label>
         </div>
       </fieldset>
 
@@ -235,9 +262,10 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
           <label class="field"><span>Ball diameter</span>
             <span class="row" style="gap:6px"><input type="text" id="ball_d" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
             <small>200 mm fits a 256 mm printer; a regulation ball is 216 mm</small></label>
-          <label class="field"><span>Thumb hole depth</span>
+          <label class="check"><input type="checkbox" id="thumb_hole"> Thumb hole (untick for a two-handed or no-thumb ball)</label>
+          <label class="field" id="ball_thumb_rows"><span>Thumb hole depth</span>
             <span class="row" style="gap:6px"><input type="text" id="ball_thumb_depth" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
-            <small>The thumb seats fully; 70 mm suits most</small></label>
+            <small>The thumb seats fully; 70 mm suits most. Measure the thumb from its base crease to the tip and add 5 mm</small></label>
           <label class="field"><span>Resting flat on the bottom</span>
             <span class="row" style="gap:6px"><input type="text" id="ball_flat" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
             <small>A small flat so it stands on the print bed; 0 for a perfect sphere</small></label>

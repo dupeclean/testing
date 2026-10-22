@@ -41,6 +41,14 @@ sheet and it rebuilds the model in about 100 ms and lets you download the STL
   Fractions are accepted everywhere: `55/64`, `1 1/32`, `4-1/2`.
 - mm or inches, right or left hand, finger depth, through or blind thumb,
   bridge, weight pocket, lanyard, print allowance.
+- **Oval holes** as drill sheets give them: the hole size is the short
+  (drilled) way across, the oval size the long way, plus the angle of the
+  long axis (0 = up the sheet, + = toward the bowling-hand side).
+- **Rounded hole edges** (thumb 4 mm, fingers 2.5 mm by default) like a
+  pro-shop bevel, and an engraved order number in the base.
+- The **Rev Ball**: a full 200 mm ball with the customer's grip (blind thumb,
+  or no thumb hole for two-handers) and a two-colour cap-and-band pattern
+  with the filament-change heights listed for the slicer.
 - Live 3D preview with the bore axes drawn, so pitch is visible.
 - Geometry checks: it warns when bores would break into each other, the
   pocket, or the lanyard tunnel, and when a blind thumb floor gets thin.
@@ -50,7 +58,10 @@ sheet and it rebuilds the model in about 100 ms and lets you download the STL
 
 The browser build and the OpenSCAD source produce the same geometry (checked
 to 0.1 mm in every dimension and 0.12 % in volume across right/left-hand,
-blind/through and custom-pitch cases; `configurator/test/run.mjs`).
+blind/through and custom-pitch cases; `configurator/test/run.mjs`; pitch
+direction, oval holes, bevels and the Rev Ball are measured on the meshes by
+`configurator/test/pitch_check.*` and `oval_check.*`, with IoU > 0.995 against
+OpenSCAD).
 Rebuild after editing `configurator/app.js` or `template.html` with
 `python3 configurator/build.py`.
 

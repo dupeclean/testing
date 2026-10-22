@@ -252,7 +252,8 @@
 
     if (hasGrip || hasSpin) {
       const rows = [];
-      if (hasGrip) rows.push(['Thumb', both(f.thumb_d), `${m.thumb_bore_in}" (${r2(m.thumb_bore_mm)} mm)`, '-', describePitch(f.thumb_fwd, 'fr', f.hand), describePitch(f.thumb_lat, 'lat', f.hand)]);
+      const ovalTxt = (d, ov, ang, what) => (ov > 0 ? `  ${what}: ${both(d)} drilled, ${both(ov)} oval at ${r2(ang)} deg (0 = up the sheet, + = hand side)` : '');
+      if (hasGrip && f.thumb_hole !== false) rows.push(['Thumb', both(f.thumb_d), `${m.thumb_bore_in}" (${r2(m.thumb_bore_mm)} mm)`, '-', describePitch(f.thumb_fwd, 'fr', f.hand), describePitch(f.thumb_lat, 'lat', f.hand)]);
       rows.push([`Middle (${midSide} hole)`, both(f.middle_d), `${m.middle_bore_in}" (${r2(m.middle_bore_mm)} mm)`, hasGrip ? both(f.span_middle) : '-',
         hasGrip ? describePitch(f.middle_fwd, 'fr', f.hand) : 'zero', hasGrip ? describePitch(f.middle_lat, 'lat', f.hand) : 'zero']);
       rows.push([`Ring (${ringSide} hole)`, both(f.ring_d), `${m.ring_bore_in}" (${r2(m.ring_bore_mm)} mm)`, hasGrip ? both(f.span_ring) : '-',
@@ -261,6 +262,10 @@
       L.push('DRILL SHEET AS ENTERED, AND THE BORE SIZE THE MODEL USES (sheet size + print allowance)');
       L.push(['', 'Sheet size', 'Modeled bore', 'Span (cut to cut)', 'Forward/reverse', 'Lateral'].map((h, i) => i < 5 ? pad(h, W[i]) : h).join(''));
       for (const r of rows) L.push(r.map((c, i) => i < 5 ? pad(c, W[i]) : c).join(''));
+      const ovals = [ovalTxt(f.thumb_d, f.thumb_oval_d, f.thumb_oval_angle, 'Thumb'), ovalTxt(f.middle_d, f.middle_oval_d, f.finger_oval_angle, 'Middle'), ovalTxt(f.ring_d, f.ring_oval_d, f.finger_oval_angle, 'Ring')].filter(Boolean);
+      if (ovals.length) { L.push('OVAL HOLES (the hole size above is the short way across; the oval size is the long way)'); ovals.forEach(x => L.push(x)); }
+      L.push(`Hole edges: thumb bevel ${r2(f.thumb_bevel)} mm, finger bevel ${r2(f.finger_bevel)} mm (rounded).   Engraved in the base: ${order.number}`);
+      if (hasBall && f.thumb_hole === false) L.push('NO THUMB HOLE: two-handed / no-thumb ball; the finger holes sit centred on the top.');
       L.push('');
       if (hasPuck) {
         L.push(`Bridge ${both(f.bridge)}   Finger depth ${f.finger_depth} mm   Thumb ${f.thumb_through ? 'through' : 'blind, ' + f.thumb_depth + ' mm deep'}`);
@@ -287,10 +292,10 @@
 
     L.push('PRINT');
     if (hasPuck || hasSpin || hasSizer) L.push(`${hasBall ? 'Puck, spinner, sizer: ' : ''}PETG, 0.2 mm layers, 4 walls, 20% gyroid infill, flat side down, no supports.`);
-    if (hasBall) L.push(`${hasPuck || hasSpin || hasSizer ? 'Ball: ' : ''}PETG or PLA, 0.2 mm layers, 3 walls, 5% gyroid infill, grip holes facing UP, tree supports under the lower half (it overhangs). Snap the supports off and sand the scar smooth so it rolls true.`);
+    if (hasBall) L.push(`${hasPuck || hasSpin || hasSizer ? 'Ball: ' : ''}PETG or PLA, 0.2 mm layers, 3 walls, 5% gyroid infill, grip holes facing UP. Supports: tree, "On build plate only" (so nothing grows inside the holes); seam: random or scarf (no ridge down one side). Snap the supports off and sand the scar smooth so it rolls true.`);
     for (const s of built.stats) L.push(`  ${s.part}: about ${s.grams} g of filament at ${s.infill_pct}% infill, ${s.bbox_mm.join(' x ')} mm`);
     if (hasGrip || hasSpin) L.push('After printing: smooth the bores with fine sandpaper and check each bore against the sizes above before packing.');
-    if (hasBall) L.push('Ball drill: kneel, swing low, let it go along a strip of tape on the floor with a couch or wall 1.5 to 2 m away. Roll + curve off the line = thumb out, fingers lifted. Straight and short = dumped. Popped up = thumb hung up. Spins in place = hand on top.');
+    if (hasBall) L.push('Ball drill: kneel, swing low, let it go along a strip of tape on the floor with a couch or wall 1.5 to 2 m away. Roll + curve off the line = thumb out, fingers lifted. Straight but long and lively = strong forward roll (fine). Straight and short = dumped. Popped up = thumb hung up. Spins in place = hand on top.');
     if (hasSizer) L.push('Do not sand the sizer plate: its holes are the test. The bore that fits the finger snugly is that finger\'s size.');
     L.push('');
     if (built.warnings.length) {
@@ -300,8 +305,104 @@
     }
     L.push('FILES');
     for (const n of fileNames) L.push('  ' + n);
-    if (hasGrip || hasSpin) L.push('', 'Round bores only: if the sheet lists oval holes, the model uses the round size that was entered. Finish the fit with bowler\'s tape.');
+    if (hasGrip || hasSpin) {
+      const anyOval = f.thumb_oval_d > 0 || f.middle_oval_d > 0 || f.ring_oval_d > 0;
+      L.push('', anyOval ? 'Oval holes are modeled as listed above (short way = hole size, long way = oval size). Finish the fit with bowler\'s tape.'
+        : 'All holes are round. If the sheet lists an oval hole, enter its long size and angle under "Oval holes" and export again. Finish the fit with bowler\'s tape.');
+    }
     return L.join('\r\n') + '\r\n';
+  }
+
+  // ---- customer card: a plain one-page PDF (no library; Helvetica text only) ----
+  function pdfEscape(s) { return String(s).replace(/[^\x20-\x7e]/g, (ch) => ({ '\u2019': "'", '\u2018': "'", '\u201c': '"', '\u201d': '"', '\u2013': '-', '\u2014': '-', '\u00b0': ' deg', '\u00d7': 'x' }[ch] || '?')).replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)'); }
+  function wrap(text, max = 92) {
+    const out = []; for (const para of String(text).split('\n')) { let line = '';
+      for (const w of para.split(' ')) { if ((line + ' ' + w).trim().length > max) { out.push(line.trim()); line = w; } else line += ' ' + w; }
+      out.push(line.trim()); }
+    return out;
+  }
+  // lines: [{ t: text, b: bold?, s: size, gap: extra space after }]
+  function makePdf(lines) {
+    const pages = [[]]; let y = 740;
+    for (const ln of lines) {
+      const size = ln.s || 10.5, lead = size * 1.35;
+      for (const piece of wrap(ln.t, Math.floor(1000 / size))) {
+        if (y < 60) { pages.push([]); y = 740; }
+        pages[pages.length - 1].push(`BT /${ln.b ? 'F2' : 'F1'} ${size} Tf 54 ${y.toFixed(1)} Td (${pdfEscape(piece)}) Tj ET`);
+        y -= lead;
+      }
+      y -= ln.gap || 0;
+    }
+    const objs = []; const add = (s) => { objs.push(s); return objs.length; };
+    const fontR = add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>');
+    const fontB = add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+    const pagesId = objs.length + 1 + pages.length * 2;   // the Pages object comes after all page/content pairs
+    const pageIds = [];
+    for (const pg of pages) {
+      const content = pg.join('\n');
+      const cId = add(`<< /Length ${content.length} >>\nstream\n${content}\nendstream`);
+      const pId = add(`<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 ${fontR} 0 R /F2 ${fontB} 0 R >> >> /Contents ${cId} 0 R >>`);
+      pageIds.push(pId);
+    }
+    const pagesIdReal = add(`<< /Type /Pages /Kids [${pageIds.map(i => i + ' 0 R').join(' ')}] /Count ${pageIds.length} >>`);
+    if (pagesIdReal !== pagesId) throw new Error('pdf object numbering');
+    const catalog = add(`<< /Type /Catalog /Pages ${pagesId} 0 R >>`);
+    let out = '%PDF-1.4\n%\u00e2\u00e3\u00cf\u00d3\n'; const offsets = [];
+    objs.forEach((o, i) => { offsets.push(out.length); out += `${i + 1} 0 obj\n${o}\nendobj\n`; });
+    const xref = out.length;
+    out += `xref\n0 ${objs.length + 1}\n0000000000 65535 f \n` + offsets.map(o => String(o).padStart(10, '0') + ' 00000 n \n').join('');
+    out += `trailer\n<< /Size ${objs.length + 1} /Root ${catalog} 0 R >>\nstartxref\n${xref}\n%%EOF\n`;
+    // bytes: every char here is < 256, so a byte per char (the binary comment line uses 0xe2.. codes)
+    const bytes = new Uint8Array(out.length); for (let i = 0; i < out.length; i++) bytes[i] = out.charCodeAt(i) & 0xff;
+    return bytes;
+  }
+  function customerCard(order, built) {
+    const f = built.fitSheet, m = f.modeled, parts = info.products[order.product].parts;
+    const hasPuck = parts.includes('puck'), hasSpin = parts.includes('spinner'), hasSizer = parts.includes('sizer'), hasBall = parts.includes('ball');
+    const both = (mm) => `${fraction64(mm / IN)}" (${Math.round(mm * 100) / 100} mm)`;
+    const first = (order.customer.name || '').split(/[ ,]+/)[0] || 'there';
+    const L = [];
+    L.push({ t: 'FitSlice', b: true, s: 20 }, { t: `Order ${order.number} - ${(info.products[order.product] || {}).label || order.product}`, s: 11, gap: 8 });
+    L.push({ t: `Hi ${first}, this was printed from your own drill sheet. Here is what it is for and how to use it.`, gap: 8 });
+    L.push({ t: 'YOUR FIT (as printed)', b: true, s: 12 });
+    if (hasPuck || hasBall) {
+      if (f.thumb_hole !== false) L.push({ t: `Thumb ${both(f.thumb_d)}${f.thumb_oval_d > 0 ? `, oval ${both(f.thumb_oval_d)} at ${f.thumb_oval_angle} deg` : ''}, pitch ${describePitch(f.thumb_fwd, 'fr', f.hand)}, ${describePitch(f.thumb_lat, 'lat', f.hand)}` });
+      L.push({ t: `Middle finger ${both(f.middle_d)}${f.middle_oval_d > 0 ? ` oval ${both(f.middle_oval_d)}` : ''}, span ${both(f.span_middle)}, pitch ${describePitch(f.middle_fwd, 'fr', f.hand)}, ${describePitch(f.middle_lat, 'lat', f.hand)}` });
+      L.push({ t: `Ring finger ${both(f.ring_d)}${f.ring_oval_d > 0 ? ` oval ${both(f.ring_oval_d)}` : ''}, span ${both(f.span_ring)}, pitch ${describePitch(f.ring_fwd, 'fr', f.hand)}, ${describePitch(f.ring_lat, 'lat', f.hand)}` });
+      L.push({ t: `${f.hand === 'right' ? 'Right' : 'Left'}-handed. Bridge ${both(f.bridge)}. Printed holes are ${m.print_allowance_mm} mm oversize to allow for printing; finish the fit with bowler's tape, as on a ball.`, gap: 8 });
+    } else if (hasSpin) {
+      L.push({ t: `Middle finger ${both(f.middle_d)}, ring finger ${both(f.ring_d)}, bridge ${both(f.bridge)}.`, gap: 8 });
+    }
+    if (hasBall) {
+      L.push({ t: 'REV BALL: HOW TO USE IT', b: true, s: 12 });
+      L.push({ t: '1. Put a strip of tape on the floor, with a couch or wall 1.5 to 2 m beyond it. Carpet or a rug is best.' });
+      L.push({ t: '2. Kneel on one knee, swing the ball low along the tape and let it go, the way you release on the lane.' });
+      L.push({ t: '3. Read what it does:', gap: 2 });
+      L.push({ t: '   Rolls and curves off the line: thumb out first, fingers lifted. More curve = more revs.' });
+      L.push({ t: '   Straight but long and lively: strong forward roll. Fine.' });
+      L.push({ t: '   Straight and short: everything let go at once (a dump).' });
+      L.push({ t: '   Pops up and lands late: the thumb hung up.' });
+      L.push({ t: '   Spins in place: the hand came over the top.', gap: 4 });
+      L.push({ t: 'The coloured cap and band show the spin. Ten releases a day is plenty. It is a feedback tool, not a measuring instrument, and it is not a promise about your rev rate.', gap: 8 });
+    }
+    if (hasPuck) {
+      L.push({ t: 'REV PUCK: HOW TO USE IT', b: true, s: 12 });
+      L.push({ t: 'Put the cord round your wrist. Hold it like your ball. Fingertip hold: thumb out, carry it on the two fingers for 20 seconds, 4 rounds. Thumb exit: all three in, let it hang, slide the thumb out while the fingers keep carrying it, 10 slow reps, then with a small swing. Add coins to the pocket in the base to make it heavier.', gap: 8 });
+    }
+    if (hasSpin) {
+      L.push({ t: 'REV SPINNER: HOW TO USE IT', b: true, s: 12 });
+      L.push({ t: 'Fingers in to the first joint, short pendulum swing, lift with the fingers at the bottom and let it go onto carpet. It spins; the longer and steadier, the cleaner the lift.', gap: 8 });
+    }
+    if (hasSizer) {
+      L.push({ t: 'SIZER PLATE', b: true, s: 12 });
+      L.push({ t: 'Try each hole to the first joint. The one that is snug all round, with no squeeze needed to hang on, is your size on this printer. Each hole has its size engraved beside it in millimetres.', gap: 8 });
+    }
+    L.push({ t: 'SAFETY', b: true, s: 12 });
+    L.push({ t: `Never throw ${parts.length > 1 ? 'any of these' : 'it'}.${hasBall ? ' Release the ball low and only toward a soft stop.' : ''}${hasPuck ? ' Keep the puck on its wrist cord.' : ''} Stop if your thumb or fingers hurt or go numb. Printed plastic can crack if dropped on a hard floor.`, gap: 8 });
+    L.push({ t: 'CARE', b: true, s: 12 });
+    L.push({ t: 'Wipe with a damp cloth. Keep out of a hot car. A light sand inside a hole makes it smoother; bowler\'s tape makes it snugger.', gap: 8 });
+    L.push({ t: `Questions: reply to your order email and quote ${order.number}.`, s: 9.5 });
+    return makePdf(L);
   }
 
   async function exportFiles() {
@@ -314,12 +415,13 @@
       toast('Building print files…', null, 60000);
       await new Promise(r => setTimeout(r, 30));
       // built from the order exactly as it was just saved, not from whatever the form shows now
-      const built = window.__cfgApp.buildFiles(parts, order.fit);
-      const names = built.files.map(f => f.name).concat(['fit_sheet.json', 'job_sheet.txt']);
+      const built = window.__cfgApp.buildFiles(parts, { ...order.fit, serial: order.number });
+      const names = built.files.map(f => f.name).concat(['fit_sheet.json', 'job_sheet.txt', 'customer_card.pdf']);
       const sheet = { order: order.number, ...built.fitSheet };
       const files = built.files.map(f => ({ name: f.name, data: f.data }));
       files.push({ name: 'fit_sheet.json', data: JSON.stringify(sheet, null, 2) });
       files.push({ name: 'job_sheet.txt', data: jobSheet(order, built, names) });
+      files.push({ name: 'customer_card.pdf', data: customerCard(order, built) });
       const r = await bridge.exportOrder({ orderId: order.id, files });
       const warn = built.warnings.length ? ` ${built.warnings.length} warning${built.warnings.length === 1 ? '' : 's'}: see job_sheet.txt.` : '';
       const old = r.superseded && r.superseded.length ? ` Older files for this order were moved to its "superseded" folder.` : '';

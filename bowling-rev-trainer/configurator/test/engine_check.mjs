@@ -115,5 +115,28 @@ ok('a ball too small for the spans, or a thumb hole too deep, is refused with a 
 for (const part of ['spinner', 'sizer']) { r = await build(SHEET, [part]); assert.ok(r.ok, part + ': ' + r.message); }
 ok('spinner and sizer build');
 
+// 7. oval holes, the engraved order number and the no-thumb ball (the shapes themselves are measured by oval_check.py)
+const OVAL = { ...SHEET, thumb_d: 19.84, thumb_oval_d: 23.02, thumb_oval_angle: 55 };
+for (const parts of [['puck'], ['ball'], ['spinner']]) { r = await build(OVAL, parts); assert.ok(r.ok && r.warnings.length === 0, parts[0] + ' with an oval thumb: ' + (r.message || JSON.stringify(r.warnings))); }
+r = await build({ ...OVAL, thumb_oval_d: 18 });
+assert.equal(r.ok, false); assert.match(r.message, /oval size is the LONG way across/i);
+r = await build({ ...OVAL, thumb_oval_d: 40 });
+assert.equal(r.ok, false); assert.match(r.message, /oval/i);
+r = await build({ ...OVAL, thumb_oval_angle: 120 });
+assert.equal(r.ok, false); assert.match(r.message, /between -90 and 90/);
+ok('oval holes build on every grip part; an oval smaller than the hole, absurdly large, or past 90 degrees is refused');
+const plain = await build(SHEET), numbered = await build({ ...SHEET, serial: 'FS-0042' });
+assert.ok(numbered.ok && numbered.bytes[0] !== plain.bytes[0], 'the engraved number changes the puck mesh');
+r = await build({ ...SHEET, serial: 'hello world' });
+assert.equal(r.ok, false); assert.match(r.message, /digits/i);
+const ballPlain = await build(SHEET, ['ball']), ballNum = await build({ ...SHEET, serial: 'FS-0042' }, ['ball']);
+assert.ok(ballNum.bytes[0] !== ballPlain.bytes[0], 'the number is engraved on the ball too');
+ok('the order number is engraved when given and refused when it is not FS-/digits');
+r = await build({ ...SHEET, thumb_hole: false }, ['ball']);
+assert.ok(r.ok && r.warnings.length === 0, 'no-thumb ball: ' + (r.message || JSON.stringify(r.warnings)));
+assert.deepEqual(r.axes.ball.map(a => a.name).sort(), ['middle', 'ring']);
+assert.ok(r.axes.ball.every(a => Math.abs(a.p[1]) < 1), 'two-handed finger holes sit across the top centre');
+ok('a no-thumb (two-handed) ball has just the two finger holes, centred on top');
+
 await browser.close(); server.close();
 console.log(`\nALL ${results.length} ENGINE CHECKS PASSED`);

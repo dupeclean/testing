@@ -165,6 +165,9 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
               <option value="drill_sheet">My pro-shop drill sheet</option>
               <option value="sizer_plate">The printed sizer plate</option>
             </select></label>
+          <label class="field" data-only-part="puck spinner ball"><span>Engrave in the base</span>
+            <input type="text" id="serial" maxlength="12" placeholder="FS-0001" style="text-transform:uppercase">
+            <small>Order number: digits, F, S and a dash. Blank for none</small></label>
           <label class="field"><span>Print allowance</span>
             <span class="row" style="gap:6px"><input type="text" id="print_allowance" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
             <small>Added to every bore. Printed holes come out small.</small></label>
@@ -221,9 +224,33 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
           <label class="field"><span>Bridge</span>
             <span class="row" style="gap:6px"><input type="text" id="bridge" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
             <small>Web between the finger holes</small></label>
+          <label class="field" data-only-part="puck ball"><span>Thumb hole bevel</span>
+            <span class="row" style="gap:6px"><input type="text" id="thumb_bevel" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+            <small>Rounded edge, like a pro-shop bevel. 0 = sharp</small></label>
+          <label class="field"><span>Finger hole bevel</span>
+            <span class="row" style="gap:6px"><input type="text" id="finger_bevel" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span></label>
           <label class="check" data-only-part="puck"><input type="checkbox" id="thumb_through"> Thumb hole goes through</label>
           <label class="field" id="thumb_depth_row" data-only-part="puck"><span>Thumb depth</span>
             <span class="row" style="gap:6px"><input type="text" id="thumb_depth" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span></label>
+        </div>
+      </fieldset>
+
+      <fieldset data-only-part="puck spinner ball">
+        <legend>Oval holes</legend>
+        <p class="howto" style="margin:0 0 10px">Leave at 0 for round holes. For an oval hole enter the sheet's hole size on the Drill sheet row (the <b>short</b> way across, the drilled size) and the <b>oval</b> size here (the long way across). The angle is where the long axis points on the sheet: <b>0</b> = straight up the sheet along the thumb-to-fingers line, <b>positive</b> = turned toward the bowling-hand side, negative the other way. Check it against the real ball before printing.</p>
+        <div class="row">
+          <label class="field" data-only-part="puck ball"><span>Thumb oval size</span>
+            <span class="row" style="gap:6px"><input type="text" id="thumb_oval_d" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+            <small>e.g. 25/32 hole, 29/32 oval: enter 29/32 here</small></label>
+          <label class="field" data-only-part="puck ball"><span>Thumb oval angle</span>
+            <span class="row" style="gap:6px"><input type="text" id="thumb_oval_angle" inputmode="decimal"><span class="unit">°</span></span></label>
+          <label class="field"><span>Middle finger oval size</span>
+            <span class="row" style="gap:6px"><input type="text" id="middle_oval_d" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span></label>
+          <label class="field"><span>Ring finger oval size</span>
+            <span class="row" style="gap:6px"><input type="text" id="ring_oval_d" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span></label>
+          <label class="field"><span>Finger oval angle</span>
+            <span class="row" style="gap:6px"><input type="text" id="finger_oval_angle" inputmode="decimal"><span class="unit">°</span></span>
+            <small>0 = long axis toward the thumb</small></label>
         </div>
       </fieldset>
 
@@ -242,9 +269,10 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
           <label class="field"><span>Ball diameter</span>
             <span class="row" style="gap:6px"><input type="text" id="ball_d" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
             <small>200 mm fits a 256 mm printer; a regulation ball is 216 mm</small></label>
-          <label class="field"><span>Thumb hole depth</span>
+          <label class="check"><input type="checkbox" id="thumb_hole"> Thumb hole (untick for a two-handed or no-thumb ball)</label>
+          <label class="field" id="ball_thumb_rows"><span>Thumb hole depth</span>
             <span class="row" style="gap:6px"><input type="text" id="ball_thumb_depth" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
-            <small>The thumb seats fully; 70 mm suits most</small></label>
+            <small>The thumb seats fully; 70 mm suits most. Measure the thumb from its base crease to the tip and add 5 mm</small></label>
           <label class="field"><span>Resting flat on the bottom</span>
             <span class="row" style="gap:6px"><input type="text" id="ball_flat" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
             <small>A small flat so it stands on the print bed; 0 for a perfect sphere</small></label>
@@ -367,12 +395,24 @@ const DEFAULTS = {
   // Rev Ball: a full printed ball you release on the floor (grip at the top, resting flat underneath)
   ball_d: 200, ball_thumb_depth: 70, ball_flat: 22, ball_groove: false,
   ball_stripe: 'cap_band',   // second-colour pattern printed by swapping filament: none | cap | cap_band | bands
+  thumb_hole: true,          // ball only: false = two-handed / no-thumb ball
+  // Oval holes, as a pro shop cuts them: the hole size is the SHORT way across, the oval size the
+  // LONG way (0 = round). The angle is where the long axis points on the sheet: 0 = straight up the
+  // sheet (along the thumb-to-fingers line), positive = turned toward the bowling-hand side.
+  thumb_oval_d: 0, thumb_oval_angle: 0,
+  middle_oval_d: 0, ring_oval_d: 0, finger_oval_angle: 0,
+  // rounded edge (bevel) on each hole, mm radius, like the bevel a pro shop puts on a thumb hole
+  thumb_bevel: 4, finger_bevel: 2.5,
+  serial: '',                // engraved in the base, e.g. the order number FS-0001 (digits, F, S and - only)
 };
 
 const LENGTH_KEYS = ['span_middle', 'span_ring', 'thumb_d', 'middle_d', 'ring_d', 'print_allowance',
-  'bridge', 'finger_depth', 'thumb_depth', 'sizer_thumb_center', 'sizer_finger_center', 'sizer_step', 'ball_d', 'ball_thumb_depth', 'ball_flat'];
+  'bridge', 'finger_depth', 'thumb_depth', 'sizer_thumb_center', 'sizer_finger_center', 'sizer_step', 'ball_d', 'ball_thumb_depth', 'ball_flat',
+  'thumb_oval_d', 'middle_oval_d', 'ring_oval_d', 'thumb_bevel', 'finger_bevel'];
 const PITCH_KEYS = ['thumb_fwd', 'thumb_lat', 'middle_fwd', 'middle_lat', 'ring_fwd', 'ring_lat'];
-const BOOL_KEYS = ['thumb_through', 'weight_pocket', 'lanyard', 'ball_groove'];
+const BOOL_KEYS = ['thumb_through', 'weight_pocket', 'lanyard', 'ball_groove', 'thumb_hole'];
+const ANGLE_KEYS = ['thumb_oval_angle', 'finger_oval_angle'];   // degrees
+const SERIAL_RE = /^[0-9FS-]{0,12}$/;
 const BALL_STRIPES = ['none', 'cap', 'cap_band', 'bands'];
 
 // Sensible ranges (mm). Anything outside is almost always a typo or the wrong unit
@@ -384,6 +424,7 @@ const LIMITS = {
   print_allowance: [0, 2], bridge: [2, 30], finger_depth: [8, 50], thumb_depth: [10, 80],
   sizer_thumb_center: [15, 38], sizer_finger_center: [10, 30], sizer_step: [0.1, 2],
   ball_d: [150, 230], ball_thumb_depth: [40, 95], ball_flat: [0, 40],
+  thumb_oval_d: [0, 45], middle_oval_d: [0, 36], ring_oval_d: [0, 36], thumb_bevel: [0, 8], finger_bevel: [0, 6],
 };
 const LABELS = {
   span_middle: 'Middle finger span', span_ring: 'Ring finger span',
@@ -391,6 +432,8 @@ const LABELS = {
   print_allowance: 'Print allowance', bridge: 'Bridge', finger_depth: 'Finger depth', thumb_depth: 'Thumb depth',
   sizer_thumb_center: 'Sizer thumb centre', sizer_finger_center: 'Sizer finger centre', sizer_step: 'Sizer step',
   ball_d: 'Ball diameter', ball_thumb_depth: 'Ball thumb hole depth', ball_flat: 'Ball resting flat',
+  thumb_oval_d: 'Thumb oval size', middle_oval_d: 'Middle finger oval size', ring_oval_d: 'Ring finger oval size',
+  thumb_bevel: 'Thumb hole bevel', finger_bevel: 'Finger hole bevel',
 };
 const PITCH_LIMIT = 1;   // inches
 const WEB_MIN = 2.0;     // mm: thinner than this between the finger holes warns
@@ -419,10 +462,19 @@ function validateParams(p) {
   const out = [];
   const keys = p.part === 'sizer' ? ['sizer_thumb_center', 'sizer_finger_center', 'sizer_step']
     : ['span_middle', 'span_ring', 'thumb_d', 'middle_d', 'ring_d', 'print_allowance', 'bridge', 'finger_depth',
+      'thumb_oval_d', 'middle_oval_d', 'ring_oval_d', 'thumb_bevel', 'finger_bevel',
       ...(p.part === 'ball' ? ['ball_d', 'ball_thumb_depth', 'ball_flat'] : p.thumb_through ? [] : ['thumb_depth'])];
   if (p.part === 'spinner') keys.splice(keys.indexOf('span_middle'), 2);
   for (const k of keys) { const m = checkLength(k, p[k], 'mm'); if (m) out.push({ key: k, message: m }); }
   if (p.part === 'ball' && !BALL_STRIPES.includes(p.ball_stripe)) out.push({ key: 'ball_stripe', message: 'Choose a colour pattern for the ball.' });
+  if (p.part !== 'sizer') {
+    for (const [ov, d, label] of [['thumb_oval_d', 'thumb_d', 'Thumb'], ['middle_oval_d', 'middle_d', 'Middle finger'], ['ring_oval_d', 'ring_d', 'Ring finger']]) {
+      if (p[ov] > 0 && p[ov] < p[d] - 1e-6) out.push({ key: ov, message: `${label} oval size is the LONG way across, so it must be at least the hole size (${fmtMm(p[d])} mm). Enter 0 for a round hole.` });
+      if (p[ov] > 0 && p[ov] - p[d] > 8) out.push({ key: ov, message: `${label} oval is more than 8 mm longer than it is wide; check the two sizes.` });
+    }
+    for (const k of ANGLE_KEYS) if (!Number.isFinite(p[k]) || Math.abs(p[k]) > 90) out.push({ key: k, message: 'Oval angle must be between -90 and 90 degrees.' });
+    if (typeof p.serial !== 'string' || !SERIAL_RE.test(p.serial)) out.push({ key: 'serial', message: 'Engraved text can only use digits, F, S and a dash (up to 12 characters).' });
+  }
   if (p.part !== 'sizer') for (const k of PITCH_KEYS) {
     if (!Number.isFinite(p[k]) || Math.abs(p[k]) > PITCH_LIMIT) out.push({ key: k, message: `Pitch (${k.replace('_', ' ')}) must be between -1" and 1".` });
   }
@@ -475,20 +527,28 @@ function derive(p) {
   const a = p.part === 'sizer' ? 0 : p.print_allowance;
   const mir = p.hand === 'right' ? 1 : -1;
   const td = p.thumb_d + a, md = p.middle_d + a, rd = p.ring_d + a;
+  // oval holes: how much further each hole reaches along the grip line (y) and across it (x)
+  const ovT = p.thumb_oval_d > 0 ? Math.max(0, p.thumb_oval_d - p.thumb_d) : 0;
+  const ovM = p.middle_oval_d > 0 ? Math.max(0, p.middle_oval_d - p.middle_d) : 0;
+  const ovR = p.ring_oval_d > 0 ? Math.max(0, p.ring_oval_d - p.ring_d) : 0;
+  const cT = Math.abs(Math.cos(p.thumb_oval_angle * DEG)), cF = Math.abs(Math.cos(p.finger_oval_angle * DEG)), sF = Math.abs(Math.sin(p.finger_oval_angle * DEG));
+  const rt_y = td / 2 + ovT / 2 * cT;                                   // thumb's reach toward the fingers
+  const rm_y = md / 2 + ovM / 2 * cF, rr_y = rd / 2 + ovR / 2 * cF;     // fingers' reach toward the thumb
+  const rm_x = md / 2 + ovM / 2 * sF, rr_x = rd / 2 + ovR / 2 * sF;     // fingers' reach across the bridge
   // Seen from outside the grip with the thumb hole at the bottom (the way a drill sheet is
   // drawn), a right hand's fingers run index, middle, ring from the thumb side to the pinky
   // side, so the middle finger is the LEFT hole and the ring finger the RIGHT hole. Left
   // hand mirrors that. (+x is the viewer's right.)
-  const x_m = -mir * (md + p.bridge) / 2;
-  const x_r = mir * (rd + p.bridge) / 2;
-  const cc_m = p.span_middle + td / 2 + md / 2;
-  const cc_r = p.span_ring + td / 2 + rd / 2;
+  const x_m = -mir * (rm_x + p.bridge / 2);
+  const x_r = mir * (rr_x + p.bridge / 2);
+  const cc_m = p.span_middle + rt_y + rm_y;
+  const cc_r = p.span_ring + rt_y + rr_y;
   const ty = (cc_m + cc_r) / 4;
   const y_m = -ty + Math.sqrt(Math.max(0, cc_m * cc_m - x_m * x_m));
   const y_r = -ty + Math.sqrt(Math.max(0, cc_r * cc_r - x_r * x_r));
-  const ext_s = ty + td / 2 + G.end_wall;
-  const ext_n = Math.max(y_m + md / 2, y_r + rd / 2) + G.end_wall;
-  return { mir, td, md, rd, x_m, x_r, y_m, y_r, ty, ext_s, ext_n, cc_m, cc_r };
+  const ext_s = ty + td / 2 + ovT / 2 + G.end_wall;
+  const ext_n = Math.max(y_m + md / 2 + ovM / 2, y_r + rd / 2 + ovR / 2) + G.end_wall;
+  return { mir, td, md, rd, x_m, x_r, y_m, y_r, ty, ext_s, ext_n, cc_m, cc_r, ovT, ovM, ovR };
 }
 
 const surfZ = (h, x, y, R = G.R) => h - R + Math.sqrt(R * R - x * x - y * y);
@@ -533,6 +593,17 @@ function holeAxis(x, y, fwdIn, latIn, bodyH, mir, fdir, R = G.R) {
   return { p: P, dir: u, rot: [0, Math.acos(Math.max(-1, Math.min(1, u[2]))) / DEG, Math.atan2(u[1], u[0]) / DEG] };
 }
 
+// Angle (radians) in a hole's local XY plane that puts an oval's long axis where the drill sheet
+// says: sheet angle 0 = straight up the sheet (the thumb-to-fingers line), positive = turned toward
+// the bowling-hand side. rot is the hole's Euler rotation from holeAxis().
+function ovalLocalAngle(rot, sheetDeg, mir) {
+  const b = rot[1] * DEG, c = rot[2] * DEG, t = sheetDeg * DEG;
+  const v = [mir * Math.sin(t), Math.cos(t)];                  // wanted direction in the plan view
+  const va = v[0] * Math.cos(c) + v[1] * Math.sin(c);          // along the local X axis' footprint
+  const vb = -v[0] * Math.sin(c) + v[1] * Math.cos(c);         // along the local Y axis
+  return Math.atan2(vb * Math.cos(b), va);
+}
+
 // ---------------------------------------------------------------------------
 // CSG builder
 // ---------------------------------------------------------------------------
@@ -542,18 +613,38 @@ function makeBuilder(W) {
   const T = (m) => { trash.push(m); return m; };
   const flush = () => { for (const m of trash) { try { m.delete(); } catch (_) { /* already freed */ } } trash.length = 0; };
 
-  function drill(x, y, d, depth, fwdIn, latIn, bodyH, through, mir, fdir, R = G.R) {
+  // opts: { oval: extra length of an oval hole (mm, 0 = round), ovalAngle: sheet angle (deg), bevel: mm }
+  function drill(x, y, d, depth, fwdIn, latIn, bodyH, through, mir, fdir, R = G.R, opts = {}) {
     const ax = holeAxis(x, y, fwdIn, latIn, bodyH, mir, fdir, R);
-    const bore = through
+    const ex = opts.oval || 0, bev = opts.bevel == null ? G.rim_chamfer : opts.bevel;
+    const phi = ex > 0 ? ovalLocalAngle(ax.rot, opts.ovalAngle || 0, mir) : 0;
+    const off = [Math.cos(phi) * ex / 2, Math.sin(phi) * ex / 2];
+    // an oval hole is a round one swept sideways by `ex`: the hull of two copies (each piece is convex)
+    const stretch = (m) => ex > 0 ? T(Manifold.hull([T(m.translate([off[0], off[1], 0])), T(m.translate([-off[0], -off[1], 0]))])) : m;
+    const bore = stretch(through
       ? T(T(Manifold.cylinder(165, d / 2, d / 2, G.seg_hole)).translate([0, 0, -130]))
-      : T(T(Manifold.cylinder(depth + 35, d / 2, d / 2, G.seg_hole)).translate([0, 0, -depth]));
-    const cham = T(T(Manifold.cylinder(G.rim_chamfer + 6, d / 2, d / 2 + G.rim_chamfer + 4, G.seg_hole))
-      .translate([0, 0, -G.rim_chamfer]));
+      : T(T(Manifold.cylinder(depth + 35, d / 2, d / 2, G.seg_hole)).translate([0, 0, -depth])));
+    // rounded edge: a quarter circle of radius `bev` built from short frustums, meeting the bore wall
+    // `bev` below the surface and the surface `bev` out from the bore; above the surface it carries on
+    // as a shallow cone so a surface that rises on one side (pitch, curvature) still gets an edge
+    const pieces = [];
+    const N = 6;
+    for (let k = 0; k < N; k++) {
+      const a0 = (k / N) * Math.PI / 2, a1 = ((k + 1) / N) * Math.PI / 2;
+      const r0 = d / 2 + bev - bev * Math.cos(a0), r1 = d / 2 + bev - bev * Math.cos(a1);
+      const z0 = -bev + bev * Math.sin(a0), z1 = -bev + bev * Math.sin(a1);
+      pieces.push(stretch(T(T(Manifold.cylinder(Math.max(z1 - z0, 0.05), r0, r1, G.seg_hole)).translate([0, 0, z0]))));
+    }
+    pieces.push(stretch(T(Manifold.cylinder(6, d / 2 + bev, d / 2 + bev + 8, G.seg_hole))));
+    const edge = bev > 0 ? T(Manifold.union(pieces)) : null;
     const place = (m) => T(T(m.rotate(ax.rot)).translate(ax.p));
-    // `bore` alone is used for collision checks: chamfers are allowed to merge
+    // `bore` alone is used for collision checks: bevels are allowed to merge
     // at the bridge, exactly like the bevel on a real ball
-    return { cut: place(T(bore.add(cham))), bore: place(bore), axis: ax };
+    return { cut: place(edge ? T(bore.add(edge)) : bore), bore: place(bore), axis: ax };
   }
+  const ovalOpts = (p, which) => which === 'thumb'
+    ? { oval: 0, ovalAngle: p.thumb_oval_angle, bevel: p.thumb_bevel }
+    : { oval: 0, ovalAngle: p.finger_oval_angle, bevel: p.finger_bevel };
 
   function footprint(w, ext_s, ext_n) {
     const a = CrossSection.circle(w / 2, 96).translate([0, -(ext_s - w / 2)]);
@@ -584,11 +675,13 @@ function makeBuilder(W) {
     const prism = T(Manifold.extrude(fp, G.puck_h + 1)); fp.delete();
     const body = T(sph.intersect(prism));
 
-    const thumb = drill(0, -D.ty, D.td, p.thumb_depth, p.thumb_fwd, p.thumb_lat, G.puck_h, p.thumb_through, D.mir, +1);
-    const mid = drill(D.x_m, D.y_m, D.md, p.finger_depth, p.middle_fwd, p.middle_lat, G.puck_h, false, D.mir, -1);
-    const ring = drill(D.x_r, D.y_r, D.rd, p.finger_depth, p.ring_fwd, p.ring_lat, G.puck_h, false, D.mir, -1);
+    const thumb = drill(0, -D.ty, D.td, p.thumb_depth, p.thumb_fwd, p.thumb_lat, G.puck_h, p.thumb_through, D.mir, +1, G.R, { ...ovalOpts(p, 'thumb'), oval: D.ovT });
+    const mid = drill(D.x_m, D.y_m, D.md, p.finger_depth, p.middle_fwd, p.middle_lat, G.puck_h, false, D.mir, -1, G.R, { ...ovalOpts(p, 'finger'), oval: D.ovM });
+    const ring = drill(D.x_r, D.y_r, D.rd, p.finger_depth, p.ring_fwd, p.ring_lat, G.puck_h, false, D.mir, -1, G.R, { ...ovalOpts(p, 'finger'), oval: D.ovR });
     axes.push({ name: 'thumb', ...thumb.axis }, { name: 'middle', ...mid.axis }, { name: 'ring', ...ring.axis });
     const cuts = [thumb.cut, mid.cut, ring.cut];
+    const ser = serialCut(p, 0, D.ext_n - 15);   // the finger end of the base: the thumb bore leans toward the centre and exits the base 20-30 mm in from its entry, so the thumb end is not free
+    if (ser) cuts.push(ser);
     let tunnel = null, pock = null;
     if (p.lanyard) cuts.push(tunnel = xtunnel(44, 10, G.lanyard_d, G.puck_w + 20));
     if (p.weight_pocket) cuts.push(pock = pocket(0, 6));
@@ -626,9 +719,11 @@ function makeBuilder(W) {
     const cyl = T(Manifold.cylinder(G.spin_h + 1, G.spin_d / 2, G.spin_d / 2, 128));
     const body = T(sph.intersect(cyl));
     const depth = Math.min(p.finger_depth, 20);
-    const mid = drill(D.x_m, 0, D.md, depth, 0, 0, G.spin_h, false, D.mir, -1);
-    const ring = drill(D.x_r, 0, D.rd, depth, 0, 0, G.spin_h, false, D.mir, -1);
+    const mid = drill(D.x_m, 0, D.md, depth, 0, 0, G.spin_h, false, D.mir, -1, G.R, { ...ovalOpts(p, 'finger'), oval: D.ovM });
+    const ring = drill(D.x_r, 0, D.rd, depth, 0, 0, G.spin_h, false, D.mir, -1, G.R, { ...ovalOpts(p, 'finger'), oval: D.ovR });
     const cuts = [mid.cut, ring.cut];
+    const ser = serialCut(p, -24, 24);   // one quadrant of the base, clear of the spin bars
+    if (ser) cuts.push(ser);
     if (p.lanyard) cuts.push(xtunnel(-G.spin_d / 2 + 18, 8, G.lanyard_d, G.spin_d + 20));
     for (const a of [0, 90])
       cuts.push(T(T(T(Manifold.cube([G.spin_d - 8, 4, 2.4], true)).rotate([0, 0, a])).translate([0, 0, -0.01])));
@@ -652,10 +747,15 @@ function makeBuilder(W) {
     const sph = T(T(Manifold.sphere(R, G.seg_sphere)).translate([0, 0, R - s]));
     const keep = T(T(Manifold.cube([2 * R + 2, 2 * R + 2, H + 1], true)).translate([0, 0, (H + 1) / 2]));
     const body = T(sph.intersect(keep));
-    const thumb = drill(0, -D.ty, D.td, p.ball_thumb_depth, p.thumb_fwd, p.thumb_lat, H, false, D.mir, +1, R);
-    const mid = drill(D.x_m, D.y_m, D.md, p.finger_depth, p.middle_fwd, p.middle_lat, H, false, D.mir, -1, R);
-    const ring = drill(D.x_r, D.y_r, D.rd, p.finger_depth, p.ring_fwd, p.ring_lat, H, false, D.mir, -1, R);
-    const cuts = [thumb.cut, mid.cut, ring.cut];
+    // without a thumb hole (two-handed / no-thumb) the two finger holes sit centred on the top
+    const yM = p.thumb_hole ? D.y_m : 0, yR = p.thumb_hole ? D.y_r : 0;
+    const thumb = p.thumb_hole ? drill(0, -D.ty, D.td, p.ball_thumb_depth, p.thumb_fwd, p.thumb_lat, H, false, D.mir, +1, R, { ...ovalOpts(p, 'thumb'), oval: D.ovT }) : null;
+    const mid = drill(D.x_m, yM, D.md, p.finger_depth, p.middle_fwd, p.middle_lat, H, false, D.mir, -1, R, { ...ovalOpts(p, 'finger'), oval: D.ovM });
+    const ring = drill(D.x_r, yR, D.rd, p.finger_depth, p.ring_fwd, p.ring_lat, H, false, D.mir, -1, R, { ...ovalOpts(p, 'finger'), oval: D.ovR });
+    const cuts = [mid.cut, ring.cut];
+    if (thumb) cuts.push(thumb.cut);
+    const ser = serialCut(p, 0, 0, 0.8);   // on the resting flat, read with the ball turned over
+    if (ser) cuts.push(ser);
     const groove = (z, w, deep) => {   // a groove w wide and `deep` deep round the ball, centred on height z
       const rz = Math.sqrt(Math.max(1, R * R - (z - (R - s)) ** 2));   // the ball's radius at that height
       const outer = T(Manifold.cylinder(w, R + 5, R + 5, 128));
@@ -666,10 +766,11 @@ function makeBuilder(W) {
     // Second-colour pattern: the slicer swaps filament at these heights (everything printed above a
     // swap takes the new colour until the next swap). A fine groove marks each boundary.
     const zEq = R - s;
-    const edges = [thumb, mid, ring].map((h, i) => {   // lowest point of each hole's chamfer rim
-      const d = [D.td, D.md, D.rd][i], r = Math.hypot(h.axis.p[0], h.axis.p[1]) + d / 2 + G.rim_chamfer;
-      return R - s + Math.sqrt(Math.max(0, R * R - r * r));
-    });
+    const edges = [[thumb, D.td + D.ovT, p.thumb_bevel], [mid, D.md + D.ovM, p.finger_bevel], [ring, D.rd + D.ovR, p.finger_bevel]]
+      .filter(([h]) => h).map(([h, d, bev]) => {   // lowest point of each hole's bevel rim
+        const r = Math.hypot(h.axis.p[0], h.axis.p[1]) + d / 2 + bev;
+        return R - s + Math.sqrt(Math.max(0, R * R - r * r));
+      });
     const zCap = Math.floor(Math.min(...edges) - 6);
     const swaps = { none: [], cap: [[zCap, 'cap']], cap_band: [[zEq - 6, 'band'], [zEq + 6, 'base'], [zCap, 'cap']],
       bands: [[zEq - 36, 'band'], [zEq - 24, 'base'], [zEq - 6, 'band'], [zEq + 6, 'base'], [zEq + 24, 'band'], [zEq + 36, 'base']] }[p.ball_stripe] || [];
@@ -677,7 +778,7 @@ function makeBuilder(W) {
     const colorChanges = swaps.map(([z, what]) => ({ z_mm: +z.toFixed(1), colour: what === 'base' ? 'base colour' : 'second colour' }));
     const result = T(body.subtract(T(Manifold.union(cuts))));
     const warnings = [];
-    if (overlap(thumb.bore, mid.bore) || overlap(thumb.bore, ring.bore))
+    if (thumb && (overlap(thumb.bore, mid.bore) || overlap(thumb.bore, ring.bore)))
       warnings.push('Thumb and finger bores run into each other inside the ball: the spans are too short for these hole sizes, or the thumb hole is too deep.');
     if (overlap(mid.bore, ring.bore))
       warnings.push('The two finger bores intersect below the surface. Increase the bridge or reduce the lateral pitches.');
@@ -685,15 +786,17 @@ function makeBuilder(W) {
     if (web < WEB_MIN && !overlap(mid.bore, ring.bore))
       warnings.push(`The web between the finger holes narrows to ${Math.max(0, web).toFixed(1)} mm deep inside. That is a fragile hairline when printed. Increase the bridge or reduce the finger depth.`);
     const floor = H - R - s + (R - p.ball_thumb_depth);   // rough: thumb bore end above the bed when aimed at the centre
-    if (p.ball_thumb_depth > R - 8) warnings.push('The thumb hole reaches almost to the centre of the ball. Make it shallower.');
+    if (thumb && p.ball_thumb_depth > R - 8) warnings.push('The thumb hole reaches almost to the centre of the ball. Make it shallower.');
     const notes = colorChanges.length
       ? [`Two-colour ball: in the slicer add a filament change at these heights (Bambu Studio: right-click the layer slider, "Add color change"): ${colorChanges.map(c => `${c.z_mm} mm → ${c.colour}`).join('; ')}. Start the print in the base colour.`]
       : [];
-    return { result, warnings, notes, colorChanges, axes: [{ name: 'thumb', ...thumb.axis }, { name: 'middle', ...mid.axis }, { name: 'ring', ...ring.axis }], floor };
+    const axes = [{ name: 'middle', ...mid.axis }, { name: 'ring', ...ring.axis }];
+    if (thumb) axes.unshift({ name: 'thumb', ...thumb.axis });
+    return { result, warnings, notes, colorChanges, axes, floor };
   }
 
   // engraved 7-segment labels for the sizer plate (no font needed)
-  const SEG7 = { '0': 'abcdef', '1': 'bc', '2': 'abged', '3': 'abgcd', '4': 'fgbc', '5': 'afgcd',
+  const SEG7 = { 'F': 'afge', 'S': 'afgcd', '-': 'g', '0': 'abcdef', '1': 'bc', '2': 'abged', '3': 'abgcd', '4': 'fgbc', '5': 'afgcd',
     '6': 'afgedc', '7': 'abc', '8': 'abcdefg', '9': 'abcdfg' };
   const CH_W = 3.4, CH_H = 6.5, STROKE = 0.9, DOT_W = 1.2, GAP = 1.0;
   function glyph(ch) {
@@ -715,7 +818,9 @@ function makeBuilder(W) {
     parts.forEach(c => c.delete());
     return u;
   }
-  function label(text, x, y, depth) {
+  // text engraved `depth` into a face at height z0: a top face (up=false, cut downward from z0) or a
+  // bottom face (up=true, cut upward from z0, mirrored so it reads right when the part is turned over)
+  function label(text, x, y, depth, z0 = G.sizer_t, up = false, scale = 1) {
     const widths = [...text].map(ch => ch === '.' ? DOT_W : CH_W);
     const total = widths.reduce((s, w) => s + w, 0) + GAP * (text.length - 1);
     let cx = -total / 2;
@@ -726,11 +831,17 @@ function makeBuilder(W) {
       g.delete();
       cx += widths[i] + GAP;
     });
-    const all = CrossSection.union(glyphs);
+    const all0 = CrossSection.union(glyphs);
     glyphs.forEach(c => c.delete());
-    const m = T(T(Manifold.extrude(all, depth + 1)).translate([x, y, G.sizer_t - depth]));
+    const all = all0.scale([up ? -scale : scale, scale]); all0.delete();
+    const m = T(T(Manifold.extrude(all, depth + 1)).translate([x, y, up ? z0 - 1 : z0 - depth]));
     all.delete();
     return m;
+  }
+  // the order number (or any FS-/digit text) engraved 0.5 mm into the flat base of a part
+  function serialCut(p, x, y, scale = 1) {
+    const t = String(p.serial || '').toUpperCase();
+    return t && SERIAL_RE.test(t) ? label(t, x, y, 0.5, 0, true, scale) : null;
   }
 
   function sizer(p) {
@@ -773,7 +884,7 @@ function makeBuilder(W) {
     const bad = validateParams(p);
     if (bad.length) throw new FitError(bad[0].message);
     const D = derive(p);
-    const rMax = Math.max(Math.hypot(0, D.ty), Math.hypot(D.x_m, D.y_m), Math.hypot(D.x_r, D.y_r));
+    const rMax = p.part === 'ball' && !p.thumb_hole ? Math.max(Math.abs(D.x_m), Math.abs(D.x_r)) : Math.max(Math.hypot(0, D.ty), Math.hypot(D.x_m, D.y_m), Math.hypot(D.x_r, D.y_r));
     if (p.part === 'puck' && rMax > 92)
       // holes must sit on the part: a hole centre beyond ~92 mm from the axis is off the ball section
       throw new FitError('These spans do not fit on the 8.5-inch ball section: a hole would sit off its edge. Check both spans, and that they are in the right units.');
@@ -1075,8 +1186,11 @@ async function main() {
     showLengths();
     for (const k of PITCH_KEYS) { const el = $(k); if (el) el.value = state[k] === 0 ? '0' : fraction64(state[k]); }
     for (const k of BOOL_KEYS) { const el = $(k); if (el) el.checked = !!state[k]; }
+    for (const k of ANGLE_KEYS) { const el = $(k); if (el) el.value = String(state[k]); }
+    $('serial').value = state.serial || '';
     $('hand').value = state.hand;
     $('ball_stripe').value = state.ball_stripe;
+    $('ball_thumb_rows').hidden = !state.thumb_hole;
     $('size_source').value = state.size_source;
     document.querySelectorAll('[data-part]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.part === state.part)));
     document.querySelectorAll('[data-only-part]').forEach(el => { el.hidden = !el.dataset.onlyPart.split(' ').includes(state.part); });
@@ -1106,6 +1220,19 @@ async function main() {
       refreshHints();
     });
   }
+  for (const k of ANGLE_KEYS) {
+    const el = $(k);
+    el.addEventListener('change', () => {
+      const v = parseNumber(el.value.replace(/[°]/g, ''));
+      if (Number.isFinite(v) && Math.abs(v) <= 90) { state[k] = v; markGood(el); schedule(); }
+      else markBad(el, 'Oval angle must be a number of degrees between -90 and 90.');
+    });
+  }
+  $('serial').addEventListener('change', () => {
+    const el = $('serial'); const v = el.value.trim().toUpperCase();
+    if (SERIAL_RE.test(v)) { state.serial = v; el.value = v; markGood(el); schedule(); }
+    else markBad(el, 'Engraved text can only use digits, F, S and a dash (up to 12 characters).');
+  });
   for (const k of PITCH_KEYS) {
     const el = $(k);
     el.addEventListener('change', () => {
