@@ -28,9 +28,9 @@ concise. The owner has asked for honesty about what has and has not been physica
 - `app/` Electron shell, order book (`lib/store.js`), exports (`lib/files.js`), job sheet and
   customer-card PDF (`renderer-src/orders.js`). `app/docs/START-HERE.txt` ships in the zip.
 - `generate.py` drives OpenSCAD from a fit sheet (CLI alternative to the app).
-- Builds: `app/dist/FitSlice-1.0.0-win-x64.zip` (ignored by git). On the owner's PC the current
-  build is also unpacked at `C:\Users\Tom\Claude\FitSlice-app`; the owner's shortcuts still point
-  at `C:\FitSlice`, which holds the Oct 20 build (see "Not yet done" 2).
+- Builds: `app/dist/FitSlice-1.0.0-win-x64.zip` (ignored by git). On the owner's PC this build
+  is installed at `C:\FitSlice` (where the shortcuts point) since 2026-10-22, with a spare copy
+  at `C:\Users\Tom\Claude\FitSlice-app`; the Oct 20 build is kept in `C:\FitSlice-old-2026-10-20`.
 
 ## Conventions that were verified on meshes (do not change without re-verifying)
 
@@ -115,10 +115,10 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    slice with the job-sheet settings, add colour changes at 93.4, 105.4 and 154 mm and check
    that each lands on a groove ring. Two sessions tried to do this from the PC; one was refused
    desktop control and the other was blocked by a "New version of Bambu Studio" dialog.
-2. Replace the Oct 20 build the owner runs from `C:\FitSlice` (both shortcuts point there) with
-   `app/dist/FitSlice-1.0.0-win-x64.zip`: that old build has no Rev Ball, oval holes, bevels,
-   engraving or customer card. A session was not allowed to overwrite `C:\FitSlice`; close
-   FitSlice and extract the zip over it by hand (or keep the old folder as a backup).
+2. DONE 2026-10-22 (with the owner's go-ahead): `C:\FitSlice` now holds the new build and was
+   launched once from there; the Oct 20 build (no Rev Ball, oval holes, bevels, engraving or
+   customer card) is backed up in `C:\FitSlice-old-2026-10-20` and can be deleted once the new
+   one has been used for a real order.
 3. Re-export FS-0001 ("me", Pair) before printing the puck: its files on disk are from the Oct 20
    build and the Oct 20 sheet (round 29/32 thumb, +3/4 forward fingers). The saved order already
    has -3/4 reverse; it still needs thumb 25/32 drilled + 29/32 oval at 55 deg typed in, then
