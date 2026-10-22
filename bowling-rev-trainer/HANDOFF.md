@@ -8,7 +8,8 @@ last cloud commit is `3fe4d41`, plus the local Windows commit described under "W
 the repo (this project is its `bowling-rev-trainer\` subfolder; the repo root also holds two
 unrelated Go files). Commit there. `C:\FitSlice-src\` is an older, non-git copy of the same zip
 from a parallel session on the same day; everything useful from it has been merged here and it
-can be deleted. Nothing has been pushed from the PC.
+can be deleted. The PC's commits are pushed to GitHub (the owner signed in through Git
+Credential Manager on 2026-10-22, so later pushes need no prompt).
 
 ## Owner and goal
 
@@ -131,8 +132,8 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
 6. No rev-rate claims anywhere: the ball is a feedback tool.
 7. An adversarial code review of the oval/bevel/engraving/customer-card batch was run from the
    cloud session; its findings, if any, will be reported there.
-8. Push the local commit(s) from `C:\Users\Tom\Claude\FitSlice` when the owner wants GitHub in
-   sync (`git push origin claude/bowling-grip-trainer-3d-laejva`).
+8. DONE 2026-10-22: the PC's commits are on `origin/claude/bowling-grip-trainer-3d-laejva`.
+   Push again after each local commit (`git push origin claude/bowling-grip-trainer-3d-laejva`).
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 
