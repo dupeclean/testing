@@ -47,11 +47,11 @@ def assemble(tpl, three, glue, wasm, app, extra_css="", extra_html="", extra_js=
 
 
 def main():
-    tpl = (HERE / "template.html").read_text()
-    three = (HERE / "vendor" / "three.min.js").read_text()
-    glue = (HERE / "vendor" / "manifold.js").read_text()
+    tpl = (HERE / "template.html").read_text(encoding="utf-8")
+    three = (HERE / "vendor" / "three.min.js").read_text(encoding="utf-8")
+    glue = (HERE / "vendor" / "manifold.js").read_text(encoding="utf-8")
     wasm = base64.b64encode((HERE / "vendor" / "manifold.wasm").read_bytes()).decode()
-    app = (HERE / "app.js").read_text()
+    app = (HERE / "app.js").read_text(encoding="utf-8")
 
     # the glue is an ES module; inside our inline module script it must not
     # export, and it never fetches its wasm because we hand it the bytes
@@ -61,15 +61,15 @@ def main():
         assert "</script" not in src, "source would terminate the script tag"
 
     page = assemble(tpl, three, glue, wasm, app)
-    (HERE / "artifact.html").write_text(page)
-    (HERE / "index.html").write_text(SKELETON_HEAD + page + SKELETON_TAIL)
+    (HERE / "artifact.html").write_text(page, encoding="utf-8", newline="\n")
+    (HERE / "index.html").write_text(SKELETON_HEAD + page + SKELETON_TAIL, encoding="utf-8", newline="\n")
     print(f"index.html: {len(page.encode()) / 1e6:.2f} MB (+skeleton); artifact.html written")
 
     src_dir = APP_DIR / "renderer-src"
     if src_dir.exists():
-        css = (src_dir / "orders.css").read_text()
-        html = (src_dir / "orders.html").read_text()
-        js = (src_dir / "orders.js").read_text()
+        css = (src_dir / "orders.css").read_text(encoding="utf-8")
+        html = (src_dir / "orders.html").read_text(encoding="utf-8")
+        js = (src_dir / "orders.js").read_text(encoding="utf-8")
         assert "</script" not in js, "orders.js would terminate the script tag"
         # the module script that hosts app.js also hosts orders.js, which runs after main() is wired
         desk = assemble(tpl, three, glue, wasm, app, css, html, js)
@@ -88,7 +88,7 @@ def main():
                '<meta name="viewport" content="width=device-width, initial-scale=1">\n' + csp + '\n</head>\n<body>\n'
                + desk + SKELETON_TAIL)
         (APP_DIR / "renderer").mkdir(parents=True, exist_ok=True)
-        (APP_DIR / "renderer" / "index.html").write_text(out)
+        (APP_DIR / "renderer" / "index.html").write_text(out, encoding="utf-8", newline="\n")
         print(f"app/renderer/index.html: {len(out.encode()) / 1e6:.2f} MB")
 
 

@@ -241,11 +241,14 @@ test('recordExport remembers the folder and files', () => {
 
 test('only the app\'s own page is trusted, whatever the install path looks like', () => {
   const { isRendererUrl } = require('../lib/trust');
-  const { pathToFileURL } = require('url');
+  // URLs written out by hand: pathToFileURL() follows the host OS, so on a Windows machine it would
+  // turn this POSIX path into a drive-letter URL and the Linux cases would not be Linux cases.
   const posix = '/opt/Fit Slice [2]/~me/resources/app.asar/renderer/index.html';
-  assert.equal(isRendererUrl(pathToFileURL(posix).href, posix, 'linux'), true);
-  assert.equal(isRendererUrl(pathToFileURL(posix).href + '#x', posix, 'linux'), true);
-  assert.equal(isRendererUrl(pathToFileURL('/opt/other.html').href, posix, 'linux'), false);
+  const posixUrl = 'file:///opt/Fit%20Slice%20%5B2%5D/~me/resources/app.asar/renderer/index.html';
+  assert.equal(isRendererUrl(posixUrl, posix, 'linux'), true);
+  assert.equal(isRendererUrl(posixUrl + '#x', posix, 'linux'), true);
+  assert.equal(isRendererUrl(posixUrl.replace('~', '%7E'), posix, 'linux'), true, 'a percent-encoded tilde is the same path');
+  assert.equal(isRendererUrl('file:///opt/other.html', posix, 'linux'), false);
   assert.equal(isRendererUrl('https://example.com/index.html', posix, 'linux'), false);
   assert.equal(isRendererUrl('file:///opt/Fit%20Slice%20%5B2%5D/~me/resources/app.asar/renderer/../renderer/index.html', posix, 'linux'), true);
   assert.equal(isRendererUrl(undefined, posix, 'linux'), false);

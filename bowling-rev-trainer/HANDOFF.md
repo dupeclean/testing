@@ -1,7 +1,14 @@
 # Handoff for a local Claude Code session
 
-State of the project as of commit `0fac0da` on branch `claude/bowling-grip-trainer-3d-laejva`
-(2026-10-22). Read this first, then `app/docs/START-HERE.txt` and `app/README.md`.
+State of the project as of 2026-10-22 on branch `claude/bowling-grip-trainer-3d-laejva`: the
+last cloud commit is `3fe4d41`, plus the local Windows commit described under "Windows session
+2026-10-22". Read this first, then `app/docs/START-HERE.txt` and `app/README.md`.
+
+**Where the live checkout is (owner's PC):** `C:\Users\Tom\Claude\FitSlice` is a git clone of
+the repo (this project is its `bowling-rev-trainer\` subfolder; the repo root also holds two
+unrelated Go files). Commit there. `C:\FitSlice-src\` is an older, non-git copy of the same zip
+from a parallel session on the same day; everything useful from it has been merged here and it
+can be deleted. Nothing has been pushed from the PC.
 
 ## Owner and goal
 
@@ -21,6 +28,9 @@ concise. The owner has asked for honesty about what has and has not been physica
 - `app/` Electron shell, order book (`lib/store.js`), exports (`lib/files.js`), job sheet and
   customer-card PDF (`renderer-src/orders.js`). `app/docs/START-HERE.txt` ships in the zip.
 - `generate.py` drives OpenSCAD from a fit sheet (CLI alternative to the app).
+- Builds: `app/dist/FitSlice-1.0.0-win-x64.zip` (ignored by git). On the owner's PC the current
+  build is also unpacked at `C:\Users\Tom\Claude\FitSlice-app`; the owner's shortcuts still point
+  at `C:\FitSlice`, which holds the Oct 20 build (see "Not yet done" 2).
 
 ## Conventions that were verified on meshes (do not change without re-verifying)
 
@@ -35,7 +45,8 @@ concise. The owner has asked for honesty about what has and has not been physica
   from its entry, so the thumb end is not free).
 - Rev Ball: R = ball_d/2, resting flat 22 mm, blind thumb 70 mm, cap + band colour pattern with
   swap heights on the job sheet, 0.3 mm grooves at colour boundaries; thumb_hole=false gives a
-  two-handed ball.
+  two-handed ball. For the default 200 mm ball the swaps are 93.4, 105.4 and 154 mm
+  (`configurator/test/groove_check.mjs` confirms the grooves on an exported STL).
 
 ## Owner's own sheet (drillsheet.com, right hand)
 
@@ -44,32 +55,127 @@ Thumb 25/32 drilled, 29/32 oval at 55 deg, pitch 0 forward, -1/8 lateral. Middle
 span 4 5/16, -3/4 forward, +1/4 lateral. Bridge 1/2. Finger oval sizes unknown (measure the
 inserts; 0 = round). Thumb length not yet measured (needed for ball_thumb_depth).
 
-## Tests (all green at this commit)
+Pitch sign: the owner's Oct 20 FS-0001 export has +3/4 forward on both fingers; the saved
+order was edited to -3/4 reverse on 2026-10-21 and this handoff says reverse, so reverse is the
+latest word. It has not been checked against the paper sheet: do that before printing.
+
+## Tests (all green at this commit, on Linux and on the owner's Windows PC)
 
 ```
-cd app && npm install
+cd app && npm install                                            # needs Node >= 22 (see below)
 node --test app/test/*.test.js                                   # 26
 PLAYWRIGHT_PATH=<playwright> node configurator/test/engine_check.mjs   # 17
 PLAYWRIGHT_PATH=<playwright> xvfb-run -a node app/test/e2e.mjs   # 18 (Linux; on Windows run without xvfb-run)
+FITSLICE_E2E_BIN=<packaged exe> PLAYWRIGHT_PATH=<playwright> node app/test/e2e.mjs   # 18, against a packaged build
+node configurator/test/groove_check.mjs <ball.stl> <job_sheet.txt>   # colour-change heights vs the mesh
 node configurator/test/oval_check.mjs <out> && python3 configurator/test/oval_check.py <out> --scad
 node configurator/test/pitch_check.mjs <out> && python3 configurator/test/pitch_check.py <out>
 cd app && npm run dist:win                                       # app/dist/FitSlice-1.0.0-win-x64.zip
 ```
 The Python checks need `trimesh`, `shapely`, `manifold3d`, `numpy`; `--scad` needs `openscad`
-on PATH. On Windows, Playwright can be installed with `npm i -D playwright` in `app/`.
+on PATH. None of those are on the owner's PC, so they were not run there. Playwright:
+`npm install --no-save playwright` in `app/` (it is deliberately not in `package.json`), then
+`PLAYWRIGHT_PATH=app/node_modules/playwright`; the engine checks also need
+`node app/node_modules/playwright/cli.js install chromium`.
+
+### On the owner's Windows PC
+
+The installed Node is 20.11.0, too old for this toolchain: Electron 44's install script and
+electron-builder 26 `require()` ES modules (needs Node >= 20.19 or >= 22.12), and the trust
+test needs the `windows` option of `fileURLToPath` (Node >= 20.13). Symptoms: `npm install`
+"succeeds" in 5 s with no `node_modules\electron\dist\electron.exe`, and `ERR_REQUIRE_ESM`
+from electron-builder. A portable Node 24.22.1 is unpacked at
+`C:\Users\Tom\Claude\tools\node-v24.22.1-win-x64` (Photoshop's bundled
+`C:\Program Files\Adobe\Adobe Photoshop 2025\node.exe`, v22, also works). The real fix is to
+install the current Node LTS. `python3` and `python` on PATH are the Microsoft Store stubs; use
+`py -3` (3.14) or `C:\Users\Tom\AppData\Local\Programs\Python\Python313\python.exe`.
+In Git Bash, from the repo root:
+
+```
+export PATH="/c/Users/Tom/Claude/tools/node-v24.22.1-win-x64:$PATH"
+cd bowling-rev-trainer/app && npm install && npm install --no-save playwright
+node node_modules/electron/install.js                 # only if dist/electron.exe is missing
+py -3 ../configurator/build.py                        # must leave git status clean
+node --test test/*.test.js                            # 26
+PW="$PWD/node_modules/playwright"
+PLAYWRIGHT_PATH="$PW" node ../configurator/test/engine_check.mjs   # 17
+PLAYWRIGHT_PATH="$PW" node test/e2e.mjs                             # 18 (real windows open for about a minute)
+node node_modules/electron-builder/cli.js --win zip --x64 --publish never   # dist/FitSlice-1.0.0-win-x64.zip
+FITSLICE_E2E_BIN="$PWD/dist/win-unpacked/FitSlice.exe" PLAYWRIGHT_PATH="$PW" node test/e2e.mjs   # 18
+```
+`npm run dist:win` also works once a Node >= 22 is first on PATH (`build:renderer` falls back
+to `py -3`). The real order book is `%APPDATA%\FitSlice` and `Documents\FitSlice Orders`; the
+tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
 
 ## Not yet done (needs the owner's machine or hands)
 
-1. FitSlice.exe has never been launched on Windows (built on Linux with electron-builder).
-   Launch it, enter the sheet above in inches mode, make a Rev Ball order, export, open the
-   STL in Bambu Studio, confirm the three colour-change heights and the customer card PDF.
-2. Nothing has been printed or rolled. Print the puck first (about 3 h) to check the oval thumb
+1. DONE 2026-10-22 except the look inside Bambu Studio (details under "Windows session").
+   Still open from it: in Bambu Studio open
+   `Documents\FitSlice Orders\FS-0002 me\rev_ball200_R_span104p8-109p5_T20p2_M17p1_R16p3.stl`,
+   slice with the job-sheet settings, add colour changes at 93.4, 105.4 and 154 mm and check
+   that each lands on a groove ring. Two sessions tried to do this from the PC; one was refused
+   desktop control and the other was blocked by a "New version of Bambu Studio" dialog.
+2. Replace the Oct 20 build the owner runs from `C:\FitSlice` (both shortcuts point there) with
+   `app/dist/FitSlice-1.0.0-win-x64.zip`: that old build has no Rev Ball, oval holes, bevels,
+   engraving or customer card. A session was not allowed to overwrite `C:\FitSlice`; close
+   FitSlice and extract the zip over it by hand (or keep the old folder as a backup).
+3. Re-export FS-0001 ("me", Pair) before printing the puck: its files on disk are from the Oct 20
+   build and the Oct 20 sheet (round 29/32 thumb, +3/4 forward fingers). The saved order already
+   has -3/4 reverse; it still needs thumb 25/32 drilled + 29/32 oval at 55 deg typed in, then
+   "Save and export print files". Measure the thumb length for `ball_thumb_depth` (FS-0002 uses
+   the 70 mm default).
+4. Nothing has been printed or rolled. Print the puck first (about 3 h) to check the oval thumb
    fit and the 55 deg orientation against the real ball, then the ball (10-14 h).
-3. Repo is public: make it private. No "patent pending" wording until a provisional is filed
+5. Repo is public: make it private. No "patent pending" wording until a provisional is filed
    (draft package is in the IP artifact; `ip/` is local-only and not in git).
-4. No rev-rate claims anywhere: the ball is a feedback tool.
-5. An adversarial code review of the oval/bevel/engraving/customer-card batch was run from the
+6. No rev-rate claims anywhere: the ball is a feedback tool.
+7. An adversarial code review of the oval/bevel/engraving/customer-card batch was run from the
    cloud session; its findings, if any, will be reported there.
+8. Push the local commit(s) from `C:\Users\Tom\Claude\FitSlice` when the owner wants GitHub in
+   sync (`git push origin claude/bowling-grip-trainer-3d-laejva`).
+
+## Windows session 2026-10-22 (local Claude Code on the owner's PC)
+
+**Item 1 result.** A fresh `FitSlice-1.0.0-win-x64.zip` was built on Windows from this source
+and the packaged `FitSlice.exe` was launched on Windows for the first time with a build that
+has the Rev Ball (the Oct 20 build in `C:\FitSlice` predates it).
+- Plain launch (the double-click path, real order book): window up in about 1 s, FS-0001 listed,
+  clean close, `orders.json` untouched. No SmartScreen prompt because this exe was built on the
+  PC; a downloaded zip will still show one.
+- Driven through its real UI with Playwright against the REAL order book and orders folder,
+  which is what item 1 asked for: inches mode, the owner's sheet typed exactly as listed above,
+  including the 29/32 oval at 55 deg and the -3/4 finger pitches. Parsed to 19.844 / 23.019 /
+  16.669 / 15.875 mm, spans 104.775 / 109.538 mm, no red fields, no model warnings on the ball.
+  New order "me", product Rev Ball, "Save and export print files" gave **FS-0002**, 4 files in
+  `Documents\FitSlice Orders\FS-0002 me\`: `rev_ball200_R_span104p8-109p5_T20p2_M17p1_R16p3.stl`
+  (16,486 triangles, 4144.9 cm3, 200 x 200 x 199.39 mm, about 475 g at 5%), `fit_sheet.json`
+  (records the oval, bevels and `serial` FS-0002), `job_sheet.txt` and `customer_card.pdf` (one
+  page, renders, carries order, fit and instructions, no contact details). No page errors, no
+  content-policy violations. A parallel session made the same run against a temp order book
+  (`FITSLICE_DATA_DIR`) with the same result, and its STL from the packaged exe was
+  byte-identical to one from the source tree.
+- Colour changes on the job sheet: 93.4 mm second colour, 105.4 mm base colour, 154 mm second
+  colour. `configurator/test/groove_check.mjs` finds exactly three full-ring 0.3 mm grooves in
+  the exported STL, centred at 93.4, 105.4 and 154.0 mm (each shows as two edge rings 0.6 mm
+  apart); nothing else goes all the way round. The heights the sheet gives the slicer match the
+  mesh.
+- Tests on Windows (Node 24): unit 26/26, engine checks 17/17, e2e from source 18/18, e2e
+  against the packaged exe 18/18.
+- NOT verified: the layer slider in Bambu Studio (item 1 above), the oval's orientation on a
+  real ball, anything physical. Screenshots and the run record are in `app/test/tmp/` (ignored
+  by git).
+
+**Source changes committed from the PC** (none changes what the shipped app does):
+- `configurator/build.py` reads and writes UTF-8 with LF explicitly. Before, a Windows run
+  crashed on cp1252 or wrote CRLF pages; now a Windows rebuild is byte-identical to the
+  committed `index.html`, `artifact.html` and `app/renderer/index.html` (verified).
+- `app/package.json`: `build:renderer` falls back to `py -3` where `python3` is the Store stub.
+- `app/lib/trust.js` resolves with `path.win32` / `path.posix` according to the `platform`
+  argument rather than the host's module; `app/test/store.test.js` writes its Linux file URLs
+  by hand because `pathToFileURL` follows the host OS (test 23 failed on Windows before this).
+  Windows runtime behaviour is unchanged: the e2e proves every IPC call still passes the check.
+- `configurator/test/groove_check.mjs` (new): full-ring grooves in a ball STL vs the job sheet.
+- `app/README.md`: Node >= 22 and Windows notes.
 
 ## Artifacts (claude.ai, owner-private)
 

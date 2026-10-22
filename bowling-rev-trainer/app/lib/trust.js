@@ -6,12 +6,14 @@ const { fileURLToPath } = require('url');
 
 function isRendererUrl(url, rendererPath, platform = process.platform) {
   if (typeof url !== 'string') return false;
+  const win = platform === 'win32';
+  const P = win ? path.win32 : path.posix;   // the rules of the platform asked about, whatever this machine is
   try {
     const u = new URL(url);
     if (u.protocol !== 'file:') return false;
-    const a = path.resolve(fileURLToPath(u, { windows: platform === 'win32' }));
-    const b = path.resolve(rendererPath);
-    return platform === 'win32' ? a.toLowerCase() === b.toLowerCase() : a === b;
+    const a = P.resolve(fileURLToPath(u, { windows: win }));
+    const b = P.resolve(rendererPath);
+    return win ? a.toLowerCase() === b.toLowerCase() : a === b;
   } catch (_) { return false; }
 }
 

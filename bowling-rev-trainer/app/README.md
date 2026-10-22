@@ -27,11 +27,20 @@ python3 ../configurator/build.py      # regenerates renderer/index.html (do this
 npm start
 ```
 
+Needs Node 22 or newer: Electron's binary installer and electron-builder load an ES-module
+dependency (`@electron/get` 5), so Node 20.11 stops with `ERR_REQUIRE_ESM` and no
+`electron.exe` is downloaded. On Windows, `python3` on PATH is often the Microsoft Store stub;
+call the real `python.exe` by its full path instead.
+
 ## Build the Windows zip (works from Linux or macOS, no Wine needed)
 
 ```
 npm run dist:win     # dist/FitSlice-1.0.0-win-x64.zip, contains FitSlice.exe and START-HERE.txt
 ```
+
+On Windows the `predist` hook's `python3` call usually fails (Store stub), so run the three
+steps yourself: `build.py` with your real Python, `npm test`, then
+`node node_modules/electron-builder/cli.js --win zip --x64 --publish never`.
 
 The exe is unsigned, so Windows SmartScreen shows "Windows protected your PC" on first run
 ("More info" then "Run anyway"). A code-signing certificate removes that.
@@ -44,6 +53,10 @@ PLAYWRIGHT_PATH=/path/to/playwright xvfb-run -a node test/e2e.mjs
                                                    # launches the real app, enters a sheet, exports, restarts
 FITSLICE_E2E_BIN=dist/linux-unpacked/fitslice xvfb-run -a node test/e2e.mjs   # same, against a packaged build
 ```
+
+On Windows run the same without `xvfb-run` (the app's windows open on the desktop for a
+minute); `FITSLICE_E2E_BIN` is then `dist\win-unpacked\FitSlice.exe`. Playwright can be added
+without changing `package.json` with `npm install --no-save playwright`.
 
 Geometry (pitch direction, bridge, spans, oval holes, bevels, engraving, the Rev Ball, parity
 with OpenSCAD) is tested from `../configurator/test/` (`engine_check.mjs`, `pitch_check.mjs` +
