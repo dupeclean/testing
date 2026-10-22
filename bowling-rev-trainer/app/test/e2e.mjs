@@ -268,11 +268,11 @@ try {
   const ballStl = readdirSync(join(ordersDir, f3)).find(n => /rev_ball200/.test(n));
   assert.ok(ballStl, 'ball STL exported: ' + readdirSync(join(ordersDir, f3)).join(', '));
   const bs = readStl(join(ordersDir, f3, ballStl));
-  assert.ok(bs.volume_cm3 > 4000 && bs.volume_cm3 < 4200 && Math.abs(bs.height_mm - 199.4) < 0.2, `ball ${bs.volume_cm3} cm3, ${bs.height_mm} mm`);
+  assert.ok(bs.volume_cm3 > 4000 && bs.volume_cm3 < 4200 && Math.abs(bs.height_mm - 198.9) < 0.2, `ball ${bs.volume_cm3} cm3, ${bs.height_mm} mm`);
   const ballJob = readFileSync(join(ordersDir, f3, 'job_sheet.txt'), 'utf8');
   assert.match(ballJob, /Rev Ball: 200 mm ball/); assert.match(ballJob, /Supports: tree, "On build plate only"/); assert.match(ballJob, /seam: random or scarf/); assert.match(ballJob, /5% gyroid/); assert.match(ballJob, /Ball drill/);
   assert.match(ballJob, /OVAL HOLES[\s\S]*Thumb: 25\/32" \(19\.84 mm\) drilled, 29\/32" \(23\.02 mm\) oval at 55 deg/, 'oval thumb on the job sheet');
-  assert.match(ballJob, /thumb bevel 4 mm, finger bevel 2\.5 mm \(rounded\)/); assert.match(ballJob, /Engraved in the base: FS-0003/);
+  assert.match(ballJob, /thumb bevel 4 mm, finger bevel 2\.5 mm \(rounded\)/); assert.match(ballJob, /modeled 23\.42 mm the long way/); assert.match(ballJob, /Engraved in the base: FS-0003/);
   assert.match(ballJob, /FILES[\s\S]*customer_card\.pdf/);
   const card = readFileSync(join(ordersDir, f3, 'customer_card.pdf'));
   assert.equal(card.subarray(0, 8).toString('latin1'), '%PDF-1.4'); assert.match(card.toString('latin1'), /%%EOF\n$/);
@@ -283,7 +283,7 @@ try {
   copyFileSync(join(ordersDir, f3, 'customer_card.pdf'), join(shotDir, 'customer_card.pdf')); copyFileSync(join(ordersDir, f3, 'job_sheet.txt'), join(shotDir, 'job_sheet_ball.txt'));
   const ballSheet = JSON.parse(readFileSync(join(ordersDir, f3, 'fit_sheet.json'), 'utf8'));
   assert.ok(Math.abs(ballSheet.thumb_oval_d - 23.02) < 0.05 && ballSheet.thumb_oval_angle === 55 && ballSheet.serial === 'FS-0003', 'fit sheet records the oval and the engraved number');
-  assert.match(ballJob, /FILAMENT CHANGES[\s\S]*Add color change[\s\S]*at 93\.[3-6] mm: second colour[\s\S]*at 105\.[3-6] mm: base colour[\s\S]*at 1\d\d(\.\d)? mm: second colour/, 'swap heights on the job sheet');
+  assert.match(ballJob, /FILAMENT CHANGES[\s\S]*Add color change[\s\S]*at 92\.[7-9] mm: second colour[\s\S]*at 104\.[7-9] mm: base colour[\s\S]*at 1\d\d(\.\d)? mm: second colour/, 'swap heights on the job sheet');
   assert.equal(/Wrist-cord/.test(ballJob), false, 'no puck-only lines on a ball job sheet');
   ok('Rev Ball order with an oval thumb exports a 200 mm ball, a job sheet with the oval, bevel, engraving and support settings, and a customer card PDF');
 

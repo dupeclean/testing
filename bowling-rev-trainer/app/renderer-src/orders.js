@@ -161,7 +161,7 @@
     if (!okToLeave()) return;
     if (!cur && sheetEdited() && !window.confirm('The drill sheet on screen has not been saved with an order. Opening another order replaces it. Continue?')) return;
     cur = o;
-    window.__cfgApp.setState(o.fit);
+    window.__cfgApp.setState({ ...o.fit, serial: o.number });   // the preview shows the number that will be engraved
     fillForm(o);
     setBar(); renderList();
   }
@@ -169,6 +169,7 @@
   function newOrder() {
     if (!okToLeave()) return;
     cur = null;
+    window.__cfgApp.patchState({ serial: '', thumb_hole: true });   // the number is engraved once the order has one
     fillForm(null);
     setBar(); renderList();
     openDrawer();
@@ -192,6 +193,10 @@
     if (stuck.length) throw new Error('Fix the drill sheet first. ' + stuck[0]);
     const fit = window.__cfgApp.getState();
     fit.part = info.products[product].parts[0];
+    // the "Thumb hole" switch is a ball option: a puck or spinner order never carries a stale "no thumb"
+    if (!info.products[product].parts.includes('ball')) fit.thumb_hole = true;
+    // FitSlice engraves the order number itself (set once the order has one)
+    fit.serial = cur ? cur.number : '';
     // a Fit Kit's sizer plate is centred on this customer's sizes; keep that in the saved order too
     if (info.products[product].parts.includes('sizer')) {
       fit.sizer_thumb_center = Math.round(fit.thumb_d * 1000) / 1000;
@@ -238,6 +243,7 @@
     const parts = info.products[order.product].parts;
     const hasPuck = parts.includes('puck'), hasSpin = parts.includes('spinner'), hasSizer = parts.includes('sizer'), hasBall = parts.includes('ball');
     const hasGrip = hasPuck || hasBall;   // parts that carry the whole three-hole grip
+    const hasThumb = hasGrip && !(hasBall && f.thumb_hole === false);   // a two-handed ball and the spinner cut no thumb hole
     const r2 = (x) => Math.round(Number(x) * 100) / 100;
     const both = (mm) => `${fraction64(mm / IN)}" (${r2(mm)} mm)`;
     const pad = (s, n) => String(s).padEnd(n);
@@ -252,20 +258,20 @@
 
     if (hasGrip || hasSpin) {
       const rows = [];
-      const ovalTxt = (d, ov, ang, what) => (ov > 0 ? `  ${what}: ${both(d)} drilled, ${both(ov)} oval at ${r2(ang)} deg (0 = up the sheet, + = hand side)` : '');
-      if (hasGrip && f.thumb_hole !== false) rows.push(['Thumb', both(f.thumb_d), `${m.thumb_bore_in}" (${r2(m.thumb_bore_mm)} mm)`, '-', describePitch(f.thumb_fwd, 'fr', f.hand), describePitch(f.thumb_lat, 'lat', f.hand)]);
-      rows.push([`Middle (${midSide} hole)`, both(f.middle_d), `${m.middle_bore_in}" (${r2(m.middle_bore_mm)} mm)`, hasGrip ? both(f.span_middle) : '-',
+      const ovalTxt = (d, ov, ang, what, modeled) => (ov > 0 ? `  ${what}: ${both(d)} drilled, ${both(ov)} oval at ${r2(ang)} deg (0 = up the sheet, + = hand side); modeled ${r2(modeled)} mm the long way` : '');
+      if (hasThumb) rows.push(['Thumb', both(f.thumb_d), `${m.thumb_bore_in}" (${r2(m.thumb_bore_mm)} mm)`, '-', describePitch(f.thumb_fwd, 'fr', f.hand), describePitch(f.thumb_lat, 'lat', f.hand)]);
+      rows.push([`Middle (${midSide} hole)`, both(f.middle_d), `${m.middle_bore_in}" (${r2(m.middle_bore_mm)} mm)`, hasThumb ? both(f.span_middle) : '-',
         hasGrip ? describePitch(f.middle_fwd, 'fr', f.hand) : 'zero', hasGrip ? describePitch(f.middle_lat, 'lat', f.hand) : 'zero']);
-      rows.push([`Ring (${ringSide} hole)`, both(f.ring_d), `${m.ring_bore_in}" (${r2(m.ring_bore_mm)} mm)`, hasGrip ? both(f.span_ring) : '-',
+      rows.push([`Ring (${ringSide} hole)`, both(f.ring_d), `${m.ring_bore_in}" (${r2(m.ring_bore_mm)} mm)`, hasThumb ? both(f.span_ring) : '-',
         hasGrip ? describePitch(f.ring_fwd, 'fr', f.hand) : 'zero', hasGrip ? describePitch(f.ring_lat, 'lat', f.hand) : 'zero']);
       const W = [20, 22, 22, 22, 16];
       L.push('DRILL SHEET AS ENTERED, AND THE BORE SIZE THE MODEL USES (sheet size + print allowance)');
       L.push(['', 'Sheet size', 'Modeled bore', 'Span (cut to cut)', 'Forward/reverse', 'Lateral'].map((h, i) => i < 5 ? pad(h, W[i]) : h).join(''));
       for (const r of rows) L.push(r.map((c, i) => i < 5 ? pad(c, W[i]) : c).join(''));
-      const ovals = [ovalTxt(f.thumb_d, f.thumb_oval_d, f.thumb_oval_angle, 'Thumb'), ovalTxt(f.middle_d, f.middle_oval_d, f.finger_oval_angle, 'Middle'), ovalTxt(f.ring_d, f.ring_oval_d, f.finger_oval_angle, 'Ring')].filter(Boolean);
-      if (ovals.length) { L.push('OVAL HOLES (the hole size above is the short way across; the oval size is the long way)'); ovals.forEach(x => L.push(x)); }
-      L.push(`Hole edges: thumb bevel ${r2(f.thumb_bevel)} mm, finger bevel ${r2(f.finger_bevel)} mm (rounded).   Engraved in the base: ${order.number}`);
-      if (hasBall && f.thumb_hole === false) L.push('NO THUMB HOLE: two-handed / no-thumb ball; the finger holes sit centred on the top.');
+      const ovals = [hasThumb ? ovalTxt(f.thumb_d, f.thumb_oval_d, f.thumb_oval_angle, 'Thumb', m.thumb_oval_mm) : '', ovalTxt(f.middle_d, f.middle_oval_d, f.finger_oval_angle, 'Middle', m.middle_oval_mm), ovalTxt(f.ring_d, f.ring_oval_d, f.finger_oval_angle, 'Ring', m.ring_oval_mm)].filter(Boolean);
+      if (ovals.length) { L.push('OVAL HOLES (the hole size above is the short way across; the oval size is the long way; "modeled" adds the print allowance)'); ovals.forEach(x => L.push(x)); }
+      L.push(`Hole edges: ${hasThumb ? `thumb bevel ${r2(f.thumb_bevel)} mm, ` : ''}finger bevel ${r2(f.finger_bevel)} mm (rounded).   Engraved in the base: ${order.number}`);
+      if (hasBall && f.thumb_hole === false) L.push('NO THUMB HOLE: two-handed / no-thumb ball; the finger holes sit centred on the top, so the spans do not apply.');
       L.push('');
       if (hasPuck) {
         L.push(`Bridge ${both(f.bridge)}   Finger depth ${f.finger_depth} mm   Thumb ${f.thumb_through ? 'through' : 'blind, ' + f.thumb_depth + ' mm deep'}`);
@@ -273,7 +279,7 @@
       }
       if (hasBall) {
         const STRIPE = { none: 'single colour', cap: 'coloured top cap', cap_band: 'coloured top cap and a band round the middle', bands: 'three bands round the middle' };
-        L.push(`Rev Ball: ${r2(f.ball_d)} mm ball. Thumb hole blind, ${r2(f.ball_thumb_depth)} mm deep. Finger depth ${f.finger_depth} mm. Bridge ${both(f.bridge)}. Resting flat ${r2(f.ball_flat)} mm. Colours: ${STRIPE[f.ball_stripe] || f.ball_stripe}. Marker groove ${f.ball_groove ? 'yes' : 'no'}. Print allowance ${m.print_allowance_mm} mm.`);
+        L.push(`Rev Ball: ${r2(f.ball_d)} mm ball. ${f.thumb_hole === false ? 'No thumb hole (two-handed)' : `Thumb hole blind, ${r2(f.ball_thumb_depth)} mm deep`}. Finger depth ${f.finger_depth} mm. Bridge ${both(f.bridge)}. Resting flat ${r2(f.ball_flat)} mm. Colours: ${STRIPE[f.ball_stripe] || f.ball_stripe}. Marker groove ${f.ball_groove ? 'yes' : 'no'}. Print allowance ${m.print_allowance_mm} mm.`);
         const cc = (built.stats.find(s => s.part === 'ball') || {}).color_changes || [];
         if (cc.length) {
           L.push('FILAMENT CHANGES for the two-colour ball (start the print in the base colour). In Bambu Studio slice it, then');
@@ -314,11 +320,28 @@
   }
 
   // ---- customer card: a plain one-page PDF (no library; Helvetica text only) ----
-  function pdfEscape(s) { return String(s).replace(/[^\x20-\x7e]/g, (ch) => ({ '\u2019': "'", '\u2018': "'", '\u201c': '"', '\u201d': '"', '\u2013': '-', '\u2014': '-', '\u00b0': ' deg', '\u00d7': 'x' }[ch] || '?')).replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)'); }
+  const PDF_MAP = { '\u2019': "'", '\u2018': "'", '\u201c': '"', '\u201d': '"', '\u2013': '-', '\u2014': '-', '\u00d7': 'x', '\u2026': '...', '\u20ac': 'EUR', '\u0141': 'L', '\u0142': 'l', '\u0110': 'D', '\u0111': 'd', '\u00d8': 'O', '\u00f8': 'o', '\u00c6': 'AE', '\u00e6': 'ae', '\u0152': 'OE', '\u0153': 'oe', '\u00df': 'ss', '\u00de': 'Th', '\u00fe': 'th', '\u00d0': 'D', '\u00f0': 'd' };
+  function pdfEscape(s) {
+    // the fonts use WinAnsiEncoding, so Latin-1 letters (José, Müller, Zoë) go through as single bytes;
+    // letters beyond Latin-1 lose their accent marks (Łukasz -> Lukasz); the rest becomes '?'
+    const t = String(s).replace(/[^\x20-\x7e\u00a0-\u00ff]|[\u00d7\u00df\u00de\u00fe\u00d0\u00f0\u00d8\u00f8\u00c6\u00e6]/g, (ch) => {
+      if (PDF_MAP[ch]) return PDF_MAP[ch];
+      const base = ch.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      return /^[\x20-\x7e\u00a0-\u00ff]$/.test(base) ? base : '?';
+    }).replace(/[\u0000-\u001f\u007f-\u009f]/g, ' ');
+    return t.replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)');
+  }
+  // word-wrap, keeping a paragraph's leading indent on every line it produces; words longer than the
+  // line are broken rather than left to run off the page
   function wrap(text, max = 92) {
-    const out = []; for (const para of String(text).split('\n')) { let line = '';
-      for (const w of para.split(' ')) { if ((line + ' ' + w).trim().length > max) { out.push(line.trim()); line = w; } else line += ' ' + w; }
-      out.push(line.trim()); }
+    const out = [];
+    for (const para of String(text).split('\n')) {
+      const indent = (para.match(/^ */) || [''])[0], body = para.slice(indent.length), width = Math.max(10, max - indent.length);
+      let line = '';
+      const words = body.split(' ').flatMap(w => { const bits = []; while (w.length > width) { bits.push(w.slice(0, width)); w = w.slice(width); } bits.push(w); return bits; });
+      for (const w of words) { if ((line + ' ' + w).trim().length > width) { out.push(indent + line.trim()); line = w; } else line += ' ' + w; }
+      out.push(indent + line.trim());
+    }
     return out;
   }
   // lines: [{ t: text, b: bold?, s: size, gap: extra space after }]
@@ -359,19 +382,27 @@
   function customerCard(order, built) {
     const f = built.fitSheet, m = f.modeled, parts = info.products[order.product].parts;
     const hasPuck = parts.includes('puck'), hasSpin = parts.includes('spinner'), hasSizer = parts.includes('sizer'), hasBall = parts.includes('ball');
+    const hasThumb = (hasPuck || hasBall) && !(hasBall && f.thumb_hole === false);
     const both = (mm) => `${fraction64(mm / IN)}" (${Math.round(mm * 100) / 100} mm)`;
-    const first = (order.customer.name || '').split(/[ ,]+/)[0] || 'there';
+    // "Jordan Lee" -> Jordan; "Lee, Jordan" -> Jordan
+    const name = String(order.customer.name || '').trim();
+    const first = (name.includes(',') ? name.split(',').slice(1).join(' ') : name).split(/[\s,]+/).filter(Boolean)[0] || 'there';
+    const kitOnly = hasSizer && !hasPuck && !hasBall && !hasSpin;
     const L = [];
     L.push({ t: 'FitSlice', b: true, s: 20 }, { t: `Order ${order.number} - ${(info.products[order.product] || {}).label || order.product}`, s: 11, gap: 8 });
-    L.push({ t: `Hi ${first}, this was printed from your own drill sheet. Here is what it is for and how to use it.`, gap: 8 });
-    L.push({ t: 'YOUR FIT (as printed)', b: true, s: 12 });
+    L.push({ t: kitOnly ? `Hi ${first}, this plate finds the hole sizes that fit you on this printer. Here is how to use it.` : `Hi ${first}, this was printed from your own drill sheet. Here is what it is for and how to use it.`, gap: 8 });
+    L.push({ t: kitOnly ? 'YOUR SIZES (the plate is centred on them)' : 'YOUR FIT (as printed)', b: true, s: 12 });
+    const spanTxt = (mm) => (hasThumb ? `, span ${both(mm)}` : '');
     if (hasPuck || hasBall) {
-      if (f.thumb_hole !== false) L.push({ t: `Thumb ${both(f.thumb_d)}${f.thumb_oval_d > 0 ? `, oval ${both(f.thumb_oval_d)} at ${f.thumb_oval_angle} deg` : ''}, pitch ${describePitch(f.thumb_fwd, 'fr', f.hand)}, ${describePitch(f.thumb_lat, 'lat', f.hand)}` });
-      L.push({ t: `Middle finger ${both(f.middle_d)}${f.middle_oval_d > 0 ? ` oval ${both(f.middle_oval_d)}` : ''}, span ${both(f.span_middle)}, pitch ${describePitch(f.middle_fwd, 'fr', f.hand)}, ${describePitch(f.middle_lat, 'lat', f.hand)}` });
-      L.push({ t: `Ring finger ${both(f.ring_d)}${f.ring_oval_d > 0 ? ` oval ${both(f.ring_oval_d)}` : ''}, span ${both(f.span_ring)}, pitch ${describePitch(f.ring_fwd, 'fr', f.hand)}, ${describePitch(f.ring_lat, 'lat', f.hand)}` });
+      if (hasThumb) L.push({ t: `Thumb ${both(f.thumb_d)}${f.thumb_oval_d > 0 ? `, oval ${both(f.thumb_oval_d)} at ${f.thumb_oval_angle} deg` : ''}, pitch ${describePitch(f.thumb_fwd, 'fr', f.hand)}, ${describePitch(f.thumb_lat, 'lat', f.hand)}` });
+      else L.push({ t: 'No thumb hole (two-handed): the two finger holes sit centred on the top.' });
+      L.push({ t: `Middle finger ${both(f.middle_d)}${f.middle_oval_d > 0 ? ` oval ${both(f.middle_oval_d)}` : ''}${spanTxt(f.span_middle)}, pitch ${describePitch(f.middle_fwd, 'fr', f.hand)}, ${describePitch(f.middle_lat, 'lat', f.hand)}` });
+      L.push({ t: `Ring finger ${both(f.ring_d)}${f.ring_oval_d > 0 ? ` oval ${both(f.ring_oval_d)}` : ''}${spanTxt(f.span_ring)}, pitch ${describePitch(f.ring_fwd, 'fr', f.hand)}, ${describePitch(f.ring_lat, 'lat', f.hand)}` });
       L.push({ t: `${f.hand === 'right' ? 'Right' : 'Left'}-handed. Bridge ${both(f.bridge)}. Printed holes are ${m.print_allowance_mm} mm oversize to allow for printing; finish the fit with bowler's tape, as on a ball.`, gap: 8 });
     } else if (hasSpin) {
-      L.push({ t: `Middle finger ${both(f.middle_d)}, ring finger ${both(f.ring_d)}, bridge ${both(f.bridge)}.`, gap: 8 });
+      L.push({ t: `Middle finger ${both(f.middle_d)}${f.middle_oval_d > 0 ? ` oval ${both(f.middle_oval_d)}` : ''}, ring finger ${both(f.ring_d)}${f.ring_oval_d > 0 ? ` oval ${both(f.ring_oval_d)}` : ''}, bridge ${both(f.bridge)}. Printed holes are ${m.print_allowance_mm} mm oversize to allow for printing; finish the fit with bowler's tape.`, gap: 8 });
+    } else if (kitOnly) {
+      L.push({ t: `Thumb row centred on ${both(f.sizer_thumb_center)}, finger row centred on ${both(f.sizer_finger_center)}, in steps of ${f.sizer_step} mm. Each hole has its size engraved beside it.`, gap: 8 });
     }
     if (hasBall) {
       L.push({ t: 'REV BALL: HOW TO USE IT', b: true, s: 12 });
@@ -383,7 +414,8 @@
       L.push({ t: '   Straight and short: everything let go at once (a dump).' });
       L.push({ t: '   Pops up and lands late: the thumb hung up.' });
       L.push({ t: '   Spins in place: the hand came over the top.', gap: 4 });
-      L.push({ t: 'The coloured cap and band show the spin. Ten releases a day is plenty. It is a feedback tool, not a measuring instrument, and it is not a promise about your rev rate.', gap: 8 });
+      const SPIN = { none: f.ball_groove ? 'The groove round the middle shows the spin.' : 'Watch the finger holes to see the spin.', cap: 'The coloured top cap shows the spin.', cap_band: 'The coloured cap and band show the spin.', bands: 'The coloured bands show the spin.' };
+      L.push({ t: `${SPIN[f.ball_stripe] || SPIN.cap_band} Ten releases a day is plenty. It is a feedback tool, not a measuring instrument, and it is not a promise about your rev rate.`, gap: 8 });
     }
     if (hasPuck) {
       L.push({ t: 'REV PUCK: HOW TO USE IT', b: true, s: 12 });
@@ -478,6 +510,13 @@
     byId('ob-orders').addEventListener('click', () => { el.drawer.hidden ? openDrawer() : closeDrawer(); });
     byId('ob-close').addEventListener('click', closeDrawer);
     byId('ob-new').addEventListener('click', newOrder);
+    // FitSlice engraves the order number itself, so the field only shows it
+    const serialField = byId('serial');
+    if (serialField) {
+      serialField.readOnly = true; serialField.placeholder = 'order number';
+      const note = serialField.parentElement && serialField.parentElement.querySelector('small');
+      if (note) note.textContent = 'The order number is engraved automatically when the order is exported.';
+    }
     byId('ob-save').addEventListener('click', saveOrder);
     byId('ob-export').addEventListener('click', exportFiles);
     byId('ob-form-export').addEventListener('click', exportFiles);

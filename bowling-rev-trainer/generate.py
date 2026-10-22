@@ -79,8 +79,10 @@ def validate(sheet: dict) -> dict:
             sys.exit("error: hand must be 'right' or 'left'")
         if key == "ball_stripe" and val not in ("none", "cap", "cap_band", "bands"):
             sys.exit("error: ball_stripe must be none, cap, cap_band or bands")
-        if key == "serial" and not re.fullmatch(r"[0-9FS-]{0,12}", val.upper()):
-            sys.exit("error: serial may only use digits, F, S and a dash (up to 12 characters)")
+        if key == "serial":
+            val = val.strip().upper()   # engraved as typed in the app: upper case
+            if not re.fullmatch(r"[0-9FS-]{0,12}", val):
+                sys.exit("error: serial may only use digits, F, S and a dash (up to 12 characters)")
         if lo is not None and not (lo <= val <= hi):
             sys.exit(f"error: {key}={val} outside sane range [{lo}, {hi}]")
         out[key] = val

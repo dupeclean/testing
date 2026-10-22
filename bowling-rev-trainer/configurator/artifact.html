@@ -386,7 +386,7 @@ const DEFAULTS = {
   weight_pocket: true, lanyard: true,
   sizer_thumb_center: 25.4, sizer_finger_center: 21.03, sizer_step: IN / 64,
   // Rev Ball: a full printed ball you release on the floor (grip at the top, resting flat underneath)
-  ball_d: 200, ball_thumb_depth: 70, ball_flat: 22, ball_groove: false,
+  ball_d: 200, ball_thumb_depth: 70, ball_flat: 30, ball_groove: false,
   ball_stripe: 'cap_band',   // second-colour pattern printed by swapping filament: none | cap | cap_band | bands
   thumb_hole: true,          // ball only: false = two-handed / no-thumb ball
   // Oval holes, as a pro shop cuts them: the hole size is the SHORT way across, the oval size the
@@ -453,15 +453,18 @@ function checkLength(key, mm, unit) {
 // Every problem in a parameter set (used before any build, so a bad saved order cannot crash the engine).
 function validateParams(p) {
   const out = [];
+  // the spinner and a two-handed ball cut no thumb hole, so the thumb fields (hidden for them) are not checked
+  const hasThumb = p.part === 'puck' || (p.part === 'ball' && p.thumb_hole !== false);
   const keys = p.part === 'sizer' ? ['sizer_thumb_center', 'sizer_finger_center', 'sizer_step']
-    : ['span_middle', 'span_ring', 'thumb_d', 'middle_d', 'ring_d', 'print_allowance', 'bridge', 'finger_depth',
-      'thumb_oval_d', 'middle_oval_d', 'ring_oval_d', 'thumb_bevel', 'finger_bevel',
-      ...(p.part === 'ball' ? ['ball_d', 'ball_thumb_depth', 'ball_flat'] : p.thumb_through ? [] : ['thumb_depth'])];
+    : ['span_middle', 'span_ring', 'middle_d', 'ring_d', 'print_allowance', 'bridge', 'finger_depth',
+      'middle_oval_d', 'ring_oval_d', 'finger_bevel',
+      ...(hasThumb ? ['thumb_d', 'thumb_oval_d', 'thumb_bevel'] : []),
+      ...(p.part === 'ball' ? ['ball_d', 'ball_flat', ...(hasThumb ? ['ball_thumb_depth'] : [])] : p.part === 'puck' && !p.thumb_through ? ['thumb_depth'] : [])];
   if (p.part === 'spinner') keys.splice(keys.indexOf('span_middle'), 2);
   for (const k of keys) { const m = checkLength(k, p[k], 'mm'); if (m) out.push({ key: k, message: m }); }
   if (p.part === 'ball' && !BALL_STRIPES.includes(p.ball_stripe)) out.push({ key: 'ball_stripe', message: 'Choose a colour pattern for the ball.' });
   if (p.part !== 'sizer') {
-    for (const [ov, d, label] of [['thumb_oval_d', 'thumb_d', 'Thumb'], ['middle_oval_d', 'middle_d', 'Middle finger'], ['ring_oval_d', 'ring_d', 'Ring finger']]) {
+    for (const [ov, d, label] of [...(hasThumb ? [['thumb_oval_d', 'thumb_d', 'Thumb']] : []), ['middle_oval_d', 'middle_d', 'Middle finger'], ['ring_oval_d', 'ring_d', 'Ring finger']]) {
       if (p[ov] > 0 && p[ov] < p[d] - 1e-6) out.push({ key: ov, message: `${label} oval size is the LONG way across, so it must be at least the hole size (${fmtMm(p[d])} mm). Enter 0 for a round hole.` });
       if (p[ov] > 0 && p[ov] - p[d] > 8) out.push({ key: ov, message: `${label} oval is more than 8 mm longer than it is wide; check the two sizes.` });
     }
@@ -524,24 +527,36 @@ function derive(p) {
   const ovT = p.thumb_oval_d > 0 ? Math.max(0, p.thumb_oval_d - p.thumb_d) : 0;
   const ovM = p.middle_oval_d > 0 ? Math.max(0, p.middle_oval_d - p.middle_d) : 0;
   const ovR = p.ring_oval_d > 0 ? Math.max(0, p.ring_oval_d - p.ring_d) : 0;
-  const cT = Math.abs(Math.cos(p.thumb_oval_angle * DEG)), cF = Math.abs(Math.cos(p.finger_oval_angle * DEG)), sF = Math.abs(Math.sin(p.finger_oval_angle * DEG));
-  const rt_y = td / 2 + ovT / 2 * cT;                                   // thumb's reach toward the fingers
-  const rm_y = md / 2 + ovM / 2 * cF, rr_y = rd / 2 + ovR / 2 * cF;     // fingers' reach toward the thumb
-  const rm_x = md / 2 + ovM / 2 * sF, rr_x = rd / 2 + ovR / 2 * sF;     // fingers' reach across the bridge
+  // An oval's long axis on the sheet is v = (mir*sin a, cos a): a = 0 points up the sheet (thumb to
+  // fingers), + turns it toward the bowling-hand side. A hole's reach along a unit direction u is
+  // its radius plus the oval's support along u.
+  const vT = [mir * Math.sin(p.thumb_oval_angle * DEG), Math.cos(p.thumb_oval_angle * DEG)];
+  const vF = [mir * Math.sin(p.finger_oval_angle * DEG), Math.cos(p.finger_oval_angle * DEG)];
+  const reach = (d, ex, v, u) => d / 2 + ex / 2 * Math.abs(v[0] * u[0] + v[1] * u[1]);
+  const rm_x = reach(md, ovM, vF, [1, 0]), rr_x = reach(rd, ovR, vF, [1, 0]);   // fingers' reach across the bridge
   // Seen from outside the grip with the thumb hole at the bottom (the way a drill sheet is
   // drawn), a right hand's fingers run index, middle, ring from the thumb side to the pinky
   // side, so the middle finger is the LEFT hole and the ring finger the RIGHT hole. Left
   // hand mirrors that. (+x is the viewer's right.)
   const x_m = -mir * (rm_x + p.bridge / 2);
   const x_r = mir * (rr_x + p.bridge / 2);
-  const cc_m = p.span_middle + rt_y + rm_y;
-  const cc_r = p.span_ring + rt_y + rr_y;
-  const ty = (cc_m + cc_r) / 4;
-  const y_m = -ty + Math.sqrt(Math.max(0, cc_m * cc_m - x_m * x_m));
-  const y_r = -ty + Math.sqrt(Math.max(0, cc_r * cc_r - x_r * x_r));
+  // Spans are cut to cut along the line from the thumb centre to each finger centre, which is tilted
+  // a few degrees off y (in opposite directions for the two fingers). Lay the holes out once along y,
+  // then measure each oval's reach along the true centre line and lay out again (one pass is enough).
+  const layout = (uM, uR) => {
+    const cc_m = p.span_middle + reach(td, ovT, vT, uM) + reach(md, ovM, vF, uM);
+    const cc_r = p.span_ring + reach(td, ovT, vT, uR) + reach(rd, ovR, vF, uR);
+    const ty = (cc_m + cc_r) / 4;
+    const y_m = -ty + Math.sqrt(Math.max(0, cc_m * cc_m - x_m * x_m));
+    const y_r = -ty + Math.sqrt(Math.max(0, cc_r * cc_r - x_r * x_r));
+    return { cc_m, cc_r, ty, y_m, y_r };
+  };
+  const unit = (x, y) => { const n = Math.hypot(x, y) || 1; return [x / n, y / n]; };
+  const first = layout([0, 1], [0, 1]);
+  const { cc_m, cc_r, ty, y_m, y_r } = layout(unit(x_m, first.y_m + first.ty), unit(x_r, first.y_r + first.ty));
   const ext_s = ty + td / 2 + ovT / 2 + G.end_wall;
   const ext_n = Math.max(y_m + md / 2 + ovM / 2, y_r + rd / 2 + ovR / 2) + G.end_wall;
-  return { mir, td, md, rd, x_m, x_r, y_m, y_r, ty, ext_s, ext_n, cc_m, cc_r, ovT, ovM, ovR };
+  return { mir, td, md, rd, x_m, x_r, y_m, y_r, ty, ext_s, ext_n, cc_m, cc_r, ovT, ovM, ovR, rm_x, rr_x };
 }
 
 const surfZ = (h, x, y, R = G.R) => h - R + Math.sqrt(R * R - x * x - y * y);
@@ -620,6 +635,10 @@ function makeBuilder(W) {
     // rounded edge: a quarter circle of radius `bev` built from short frustums, meeting the bore wall
     // `bev` below the surface and the surface `bev` out from the bore; above the surface it carries on
     // as a shallow cone so a surface that rises on one side (pitch, curvature) still gets an edge
+    // The hole's local z = 0 is the sphere's tangent plane at the entry point; at the rim the sphere
+    // has already fallen r^2/(2R) below it, so the whole edge profile is sunk by that sagitta or the
+    // round would meet the surface early, with a crease, about half as wide as asked for.
+    const sag = (d / 2 + bev + ex / 2) ** 2 / (2 * R);
     const pieces = [];
     const N = 6;
     for (let k = 0; k < N; k++) {
@@ -629,7 +648,7 @@ function makeBuilder(W) {
       pieces.push(stretch(T(T(Manifold.cylinder(Math.max(z1 - z0, 0.05), r0, r1, G.seg_hole)).translate([0, 0, z0]))));
     }
     pieces.push(stretch(T(Manifold.cylinder(6, d / 2 + bev, d / 2 + bev + 8, G.seg_hole))));
-    const edge = bev > 0 ? T(Manifold.union(pieces)) : null;
+    const edge = bev > 0 ? T(T(Manifold.union(pieces)).translate([0, 0, -sag])) : null;
     const place = (m) => T(T(m.rotate(ax.rot)).translate(ax.p));
     // `bore` alone is used for collision checks: bevels are allowed to merge
     // at the bridge, exactly like the bevel on a real ball
@@ -673,7 +692,7 @@ function makeBuilder(W) {
     const ring = drill(D.x_r, D.y_r, D.rd, p.finger_depth, p.ring_fwd, p.ring_lat, G.puck_h, false, D.mir, -1, G.R, { ...ovalOpts(p, 'finger'), oval: D.ovR });
     axes.push({ name: 'thumb', ...thumb.axis }, { name: 'middle', ...mid.axis }, { name: 'ring', ...ring.axis });
     const cuts = [thumb.cut, mid.cut, ring.cut];
-    const ser = serialCut(p, 0, D.ext_n - 15);   // the finger end of the base: the thumb bore leans toward the centre and exits the base 20-30 mm in from its entry, so the thumb end is not free
+    const ser = serialCut(p, 0, D.ext_n - 15, 1, 60);   // the finger end of the base: the thumb bore leans toward the centre and exits the base 20-30 mm in from its entry, so the thumb end is not free
     if (ser) cuts.push(ser);
     let tunnel = null, pock = null;
     if (p.lanyard) cuts.push(tunnel = xtunnel(44, 10, G.lanyard_d, G.puck_w + 20));
@@ -686,12 +705,14 @@ function makeBuilder(W) {
       warnings.push('The two finger bores intersect below the surface. Increase the bridge or reduce the lateral pitches.');
     // the two finger bores converge as they go deeper (they aim at the ball's center), so the
     // web between them is thinnest at the bottom of the holes
-    const web = minAxisGap(mid.axis, ring.axis, p.finger_depth) - (D.md + D.rd) / 2;
+    // (an oval finger hole reaches rm_x / rr_x across the bridge, not just its radius)
+    const web = minAxisGap(mid.axis, ring.axis, p.finger_depth) - (D.rm_x + D.rr_x);
     if (web < WEB_MIN && !overlap(mid.bore, ring.bore))
       warnings.push(`The web between the finger holes narrows to ${Math.max(0, web).toFixed(1)} mm deep inside. That is a fragile hairline when printed. Increase the bridge or reduce the finger depth.`);
     for (const [name, h] of [['middle', mid], ['ring', ring]]) {
-      // lowest point of the bore's bottom rim (the bore is tilted, so its rim dips below the centre)
-      const rimZ = h.axis.p[2] - p.finger_depth * h.axis.dir[2] - (name === 'middle' ? D.md : D.rd) / 2 * Math.hypot(h.axis.dir[0], h.axis.dir[1]);
+      // lowest point of the bore's bottom rim (the bore is tilted, so its rim dips below the centre;
+      // an oval's extra length is counted in full, whichever way it points)
+      const rimZ = h.axis.p[2] - p.finger_depth * h.axis.dir[2] - (name === 'middle' ? D.md + D.ovM : D.rd + D.ovR) / 2 * Math.hypot(h.axis.dir[0], h.axis.dir[1]);
       if (rimZ < 1.0) warnings.push(`The ${name} finger bore would break through the base of the puck. Reduce the finger depth.`);
       if (pock && overlap(h.bore, pock)) warnings.push(`The ${name} finger bore breaks into the weight pocket. Turn the pocket off or reduce the finger depth.`);
     }
@@ -715,7 +736,7 @@ function makeBuilder(W) {
     const mid = drill(D.x_m, 0, D.md, depth, 0, 0, G.spin_h, false, D.mir, -1, G.R, { ...ovalOpts(p, 'finger'), oval: D.ovM });
     const ring = drill(D.x_r, 0, D.rd, depth, 0, 0, G.spin_h, false, D.mir, -1, G.R, { ...ovalOpts(p, 'finger'), oval: D.ovR });
     const cuts = [mid.cut, ring.cut];
-    const ser = serialCut(p, -24, 24);   // one quadrant of the base, clear of the spin bars
+    const ser = serialCut(p, -21, 22, 1, 34);   // one quadrant of the 100 mm base, clear of the spin bars; long numbers shrink to fit
     if (ser) cuts.push(ser);
     if (p.lanyard) cuts.push(xtunnel(-G.spin_d / 2 + 18, 8, G.lanyard_d, G.spin_d + 20));
     for (const a of [0, 90])
@@ -724,7 +745,7 @@ function makeBuilder(W) {
     const warnings = [];
     if (overlap(mid.bore, ring.bore)) warnings.push('The two finger bores intersect. Increase the bridge.');
     else {
-      const web = minAxisGap(mid.axis, ring.axis, depth) - (D.md + D.rd) / 2;
+      const web = minAxisGap(mid.axis, ring.axis, depth) - (D.rm_x + D.rr_x);
       if (web < WEB_MIN) warnings.push(`The web between the finger holes narrows to ${Math.max(0, web).toFixed(1)} mm deep inside. That is a fragile hairline when printed. Increase the bridge.`);
     }
     return { result, warnings, axes: [{ name: 'middle', ...mid.axis }, { name: 'ring', ...ring.axis }] };
@@ -747,7 +768,7 @@ function makeBuilder(W) {
     const ring = drill(D.x_r, yR, D.rd, p.finger_depth, p.ring_fwd, p.ring_lat, H, false, D.mir, -1, R, { ...ovalOpts(p, 'finger'), oval: D.ovR });
     const cuts = [mid.cut, ring.cut];
     if (thumb) cuts.push(thumb.cut);
-    const ser = serialCut(p, 0, 0, 0.8);   // on the resting flat, read with the ball turned over
+    const ser = serialCut(p, 0, 0, 0.8, Math.max(8, p.ball_flat - 2));   // on the resting flat (shrunk to fit it), read with the ball turned over
     if (ser) cuts.push(ser);
     const groove = (z, w, deep) => {   // a groove w wide and `deep` deep round the ball, centred on height z
       const rz = Math.sqrt(Math.max(1, R * R - (z - (R - s)) ** 2));   // the ball's radius at that height
@@ -775,7 +796,7 @@ function makeBuilder(W) {
       warnings.push('Thumb and finger bores run into each other inside the ball: the spans are too short for these hole sizes, or the thumb hole is too deep.');
     if (overlap(mid.bore, ring.bore))
       warnings.push('The two finger bores intersect below the surface. Increase the bridge or reduce the lateral pitches.');
-    const web = minAxisGap(mid.axis, ring.axis, p.finger_depth) - (D.md + D.rd) / 2;
+    const web = minAxisGap(mid.axis, ring.axis, p.finger_depth) - (D.rm_x + D.rr_x);
     if (web < WEB_MIN && !overlap(mid.bore, ring.bore))
       warnings.push(`The web between the finger holes narrows to ${Math.max(0, web).toFixed(1)} mm deep inside. That is a fragile hairline when printed. Increase the bridge or reduce the finger depth.`);
     const floor = H - R - s + (R - p.ball_thumb_depth);   // rough: thumb bore end above the bed when aimed at the centre
@@ -832,9 +853,11 @@ function makeBuilder(W) {
     return m;
   }
   // the order number (or any FS-/digit text) engraved 0.5 mm into the flat base of a part
-  function serialCut(p, x, y, scale = 1) {
+  const textWidth = (t) => [...t].reduce((w, ch) => w + (ch === '.' ? DOT_W : CH_W), 0) + GAP * (t.length - 1);
+  function serialCut(p, x, y, scale = 1, maxWidth = Infinity) {
     const t = String(p.serial || '').toUpperCase();
-    return t && SERIAL_RE.test(t) ? label(t, x, y, 0.5, 0, true, scale) : null;
+    if (!t || !SERIAL_RE.test(t)) return null;
+    return label(t, x, y, 0.5, 0, true, Math.min(scale, maxWidth / textWidth(t)));   // long numbers shrink to the room there is
   }
 
   function sizer(p) {
@@ -1107,6 +1130,7 @@ function fileBase(p, D) {
   const mm = (v) => v.toFixed(1).replace('.', 'p');
   if (p.part === 'sizer') return `hole_sizer_T${mm(p.sizer_thumb_center)}_F${mm(p.sizer_finger_center)}_step${mm(p.sizer_step)}`;
   const part = p.part === 'ball' ? `ball${p.ball_d.toFixed(0)}` : p.part;
+  if (p.part === 'ball' && p.thumb_hole === false) return `rev_${part}_${p.hand[0].toUpperCase()}_nothumb_M${mm(D.md)}_R${mm(D.rd)}`;
   return `rev_${part}_${p.hand[0].toUpperCase()}_span${mm(p.span_middle)}-${mm(p.span_ring)}_T${mm(D.td)}_M${mm(D.md)}_R${mm(D.rd)}`;
 }
 
@@ -1117,6 +1141,10 @@ function fitSheet(p, D, data) {
     thumb_bore_mm: +D.td.toFixed(3), middle_bore_mm: +D.md.toFixed(3), ring_bore_mm: +D.rd.toFixed(3),
     print_allowance_mm: p.part === 'sizer' ? 0 : p.print_allowance,
     thumb_bore_in: fraction64(D.td / IN), middle_bore_in: fraction64(D.md / IN), ring_bore_in: fraction64(D.rd / IN),
+    // oval holes: the long way across as modeled (sheet oval size + print allowance)
+    ...(D.ovT > 0 ? { thumb_oval_mm: +(D.td + D.ovT).toFixed(3) } : {}),
+    ...(D.ovM > 0 ? { middle_oval_mm: +(D.md + D.ovM).toFixed(3) } : {}),
+    ...(D.ovR > 0 ? { ring_oval_mm: +(D.rd + D.ovR).toFixed(3) } : {}),
   };
   if (data) sheet.model = { volume_cm3: +(data.volume / 1000).toFixed(1), bbox_mm: data.bbox.map(v => +v.toFixed(1)), triangles: data.tris, ...(data.colorChanges && data.colorChanges.length ? { colour_changes: data.colorChanges } : {}) };
   return sheet;
@@ -1387,7 +1415,14 @@ async function main() {
     // checks any parameter set (e.g. a saved order) without building it
     validate: (obj) => validateParams({ ...state, ...obj }).map(x => x.message),
     defaults: () => JSON.parse(JSON.stringify(DEFAULTS)),
+    // load a whole sheet: keys the sheet lacks (an order saved by an older version) go back to the
+    // defaults instead of keeping whatever the previous customer left on screen
     setState(obj) {
+      for (const k of Object.keys(DEFAULTS)) state[k] = obj && k in obj ? obj[k] : JSON.parse(JSON.stringify(DEFAULTS[k]));
+      showAll(); schedule();
+    },
+    // change some fields, keep the rest
+    patchState(obj) {
       for (const k of Object.keys(DEFAULTS)) if (obj && k in obj) state[k] = obj[k];
       showAll(); schedule();
     },

@@ -133,16 +133,39 @@ def main():
     check(f"finger_oval: thumb stays round ({St:.2f} x {Lt:.2f})", Lt - St < 0.3 and abs(St - short) < 0.25)
 
     # 3. the rounded bevel: across the bore the thumb hole widens smoothly over the top 4 mm and is the
-    #    plain bore below it (the sphere falls away about 1 mm across the rim, so depths are approximate)
-    a = axis("bevel_puck", "thumb", axes)
-    areas = [bore_slice(m["bevel_puck"], a, dep)[0].area for dep in (1.0, 2.0, 3.0, 4.0, 6.0, 9.0)]
+    #    plain bore below it. Local depth 0 is the sphere's tangent plane at the entry point; the rim of
+    #    the round sits one sagitta (r_rim^2 / 2R) below that, where the real surface is.
+    #    (measured on a zero-pitch thumb, whose axis is the surface normal, so a slice just under the rim
+    #    plane is still a closed hole; with pitch the tilted surface opens it on one side)
+    a = axis("bevel_zero", "thumb", axes)
     r = short / 2
+    sag = (r + 4) ** 2 / (2 * 108.0)
+    deps = (sag + 0.3, sag + 1.0, sag + 2.0, sag + 3.0, sag + 4.5, sag + 8.0)
+    areas = [bore_slice(m["bevel_zero"], a, dep)[0].area for dep in deps]
     check("bevel: hole widens toward the rim (areas shrink with depth)", all(areas[i] > areas[i + 1] for i in range(4)), " ".join(f"{x:.0f}" for x in areas))
-    check(f"bevel: 6 mm down it is the plain bore (area {areas[4]:.0f} vs {np.pi * r * r:.0f})", abs(areas[4] - np.pi * r * r) < 0.03 * np.pi * r * r and abs(areas[5] - np.pi * r * r) < 0.03 * np.pi * r * r)
+    check(f"bevel: 4.5 mm below the rim it is the plain bore (area {areas[4]:.0f} vs {np.pi * r * r:.0f})", abs(areas[4] - np.pi * r * r) < 0.03 * np.pi * r * r and abs(areas[5] - np.pi * r * r) < 0.03 * np.pi * r * r)
     r1 = np.sqrt(areas[0] / np.pi)
-    check(f"bevel: 1 mm down the radius is r + {r1 - r:.2f} (a 4 mm quarter-round: between r + 0.3 and r + 2.2)", 0.3 < r1 - r < 2.2)
+    check(f"bevel: 0.3 mm below the rim the hole is r + {r1 - r:.2f} wide (a full 4 mm round: about r + 2.5; a round that met the sphere early gave r + 1.1)", 2.0 < r1 - r < 4.0)
     plain_area = bore_slice(m["plain_puck"], axis("plain_puck", "thumb", axes), 1.0)[0].area
     check(f"bevel 0: the rim is sharp (area {plain_area:.0f} = bore 1 mm down)", abs(plain_area - np.pi * r * r) < 0.03 * np.pi * r * r)
+
+    # 3b. spans are cut to cut on the surface along the thumb-to-finger line, ovals included
+    def stadium(cx, cy, d, ex, v):
+        off = (ex / 2 * v[0], ex / 2 * v[1])
+        return Point(cx + off[0], cy + off[1]).buffer(d / 2, 256).union(Point(cx - off[0], cy - off[1]).buffer(d / 2, 256)).convex_hull
+
+    for case in ("oval_ball", "oval_left", "oval_puck", "finger_oval"):
+        p = axes[case]["params"]; mir = 1 if p["hand"] == "right" else -1
+        aT, aF = np.radians(p.get("thumb_oval_angle", 0)), np.radians(p.get("finger_oval_angle", 0))
+        vT = (mir * np.sin(aT), np.cos(aT)); vF = (mir * np.sin(aF), np.cos(aF))
+        exT = max(0.0, p.get("thumb_oval_d", 0) - p["thumb_d"]) if p.get("thumb_oval_d", 0) > 0 else 0.0
+        exM = max(0.0, p.get("middle_oval_d", 0) - p["middle_d"]) if p.get("middle_oval_d", 0) > 0 else 0.0
+        exR = max(0.0, p.get("ring_oval_d", 0) - p["ring_d"]) if p.get("ring_oval_d", 0) > 0 else 0.0
+        t, mi, ri = (axis(case, n, axes) for n in ("thumb", "middle", "ring"))
+        T2 = stadium(t["p"][0], t["p"][1], p["thumb_d"], exT, vT)
+        gm = T2.distance(stadium(mi["p"][0], mi["p"][1], p["middle_d"], exM, vF))
+        gr = T2.distance(stadium(ri["p"][0], ri["p"][1], p["ring_d"], exR, vF))
+        check(f"{case}: cut-to-cut spans {gm:.2f} / {gr:.2f} mm (sheet {p['span_middle']:.2f} / {p['span_ring']:.2f})", abs(gm - p["span_middle"]) < 0.06 and abs(gr - p["span_ring"]) < 0.06)
 
     # 4. the engraved number: FS-0001 cut 0.5 mm into the base, so a slice at 0.25 mm has glyph voids
     #    (seven characters, each at least one void) that the plain puck does not have
@@ -171,6 +194,24 @@ def main():
             c = Polygon(ring).centroid
             xs.append(trimesh.transform_points([[c.x, c.y, 0]], to3d)[0][0])
     check("serial: the text is mirrored for reading from underneath (glyphs spread across x, centred)", len(xs) >= 7 and abs(np.mean(xs)) < 6 and (max(xs) - min(xs)) > 20, f"(x from {min(xs):.1f} to {max(xs):.1f})")
+
+    # 4b. long numbers shrink to fit: on the spinner the text stays on the 100 mm disc and off the spin
+    #     bars; on the ball it stays on the resting flat (30 mm) so every character is cut
+    def glyphs(mesh, z):
+        sec = mesh.section(plane_origin=[0, 0, z], plane_normal=[0, 0, 1]); planar, to3d = sec.to_2D()
+        out = []
+        for poly in planar.polygons_full:
+            for ring in poly.interiors:
+                pts = trimesh.transform_points([[x, y, 0] for x, y in ring.coords], to3d)[:, :2]
+                out.append(pts)
+        return out
+    sp = [g for g in glyphs(m["spinner_serial"], 0.25) if np.hypot(*g.mean(0)) > 8]   # the finger holes are blind: these are all text
+    rho = max(np.hypot(g[:, 0], g[:, 1]).max() for g in sp)
+    clear = min(min(np.abs(g[:, 0]).min(), np.abs(g[:, 1]).min()) for g in sp)
+    check(f"spinner: a 12-character number gives {len(sp)} glyph voids, all within rho {rho:.1f} < 49 and {clear:.1f} mm clear of the spin bars", len(sp) >= 12 and rho < 49 and clear > 2.2)
+    bg = glyphs(m["ball_serial"], 0.25)
+    rho_b = max(np.hypot(g[:, 0], g[:, 1]).max() for g in bg)
+    check(f"ball: FS-0001 gives {len(bg)} glyph voids on the flat, all within rho {rho_b:.1f} < 15", len(bg) >= 7 and rho_b < 15)
 
     # 5. the no-thumb ball: two holes only, centred on the top, more plastic than the three-hole ball
     nt = axes["nothumb_ball"]["axes"]

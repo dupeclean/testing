@@ -14,7 +14,7 @@ file ships next to `FitSlice.exe`.
 - **Order book** (`lib/store.js`, UI in `renderer-src/orders.*`): orders, statuses, saved drill
   sheets, CSV export. Order numbers (`FS-0001`, ...) are never reused.
 - **Exports** (`lib/files.js`): one folder per order with the STLs (order number engraved in
-  the base), `fit_sheet.json`, `job_sheet.txt` (print settings, filament-change heights, no
+  the base of every part but the sizer plate), `fit_sheet.json`, `job_sheet.txt` (print settings, filament-change heights, no
   customer contact details) and `customer_card.pdf` (a one-page how-to for the customer,
   written without a PDF library in `renderer-src/orders.js`).
 

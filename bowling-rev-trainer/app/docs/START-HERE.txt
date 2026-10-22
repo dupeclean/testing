@@ -62,7 +62,8 @@ d. A folder is created for the order, for example
    customer_card.pdf (a one-page sheet for the customer: their fit as
    printed, how to use the part, safety and care; print it and put it in
    the box). The order number is engraved 0.5 mm into the base of every
-   part, mirrored so it reads right with the part turned over.
+   part except the sizer plate, mirrored so it reads right with the part
+   turned over (the "Engrave in the base" field is filled in for you).
    Open the STL in your slicer (PrusaSlicer, Bambu Studio, Cura).
    Print settings are on the job sheet: PETG, 0.2 mm layers, 4 walls,
    20% gyroid infill, flat side down, no supports (the Rev Ball is

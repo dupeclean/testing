@@ -87,7 +87,7 @@ ball_d = 200;
 // Thumb hole depth in the ball (blind, the thumb seats fully)
 ball_thumb_depth = 70;
 // Small flat on the bottom so the ball stands on the print bed (0 = perfect sphere)
-ball_flat = 22;
+ball_flat = 30;
 // Marker groove round the equator (for a single-colour ball)
 ball_groove = false;
 // Second-colour pattern made by filament swaps at exact heights: none, cap, cap_band, bands
@@ -122,22 +122,32 @@ mir = (hand == "right") ? 1 : -1;
 ov_t = thumb_oval_d  > 0 ? max(0, thumb_oval_d  - thumb_d)  : 0;
 ov_m = middle_oval_d > 0 ? max(0, middle_oval_d - middle_d) : 0;
 ov_r = ring_oval_d   > 0 ? max(0, ring_oval_d   - ring_d)   : 0;
-rt_y = thumb_d/2  + ov_t/2*abs(cos(thumb_oval_angle));
-rm_y = middle_d/2 + ov_m/2*abs(cos(finger_oval_angle));
-rr_y = ring_d/2   + ov_r/2*abs(cos(finger_oval_angle));
-rm_x = middle_d/2 + ov_m/2*abs(sin(finger_oval_angle));
-rr_x = ring_d/2   + ov_r/2*abs(sin(finger_oval_angle));
+// An oval's long axis on the sheet is v = (mir*sin a, cos a): a = 0 points up the sheet, + turns it
+// toward the bowling-hand side. A hole's reach along a unit direction u is its radius plus the
+// oval's support along u.
+function reach(d, ex, v, u) = d/2 + ex/2*abs(v[0]*u[0] + v[1]*u[1]);
+function unit(v) = v / max(1e-9, norm(v));
+v_t = [mir*sin(thumb_oval_angle),  cos(thumb_oval_angle)];
+v_f = [mir*sin(finger_oval_angle), cos(finger_oval_angle)];
+rm_x = reach(middle_d, ov_m, v_f, [1, 0]);
+rr_x = reach(ring_d,   ov_r, v_f, [1, 0]);
 // Finger hole lateral offsets (inner edges stay `bridge` apart)
 x_m = -mir*(rm_x + bridge/2);
 x_r =  mir*(rr_x + bridge/2);
+// Spans are cut to cut along the line from the thumb centre to each finger centre, which is a few
+// degrees off y. Lay out once along y, then measure the ovals' reach along the true centre lines.
+cc_m1 = span_middle + reach(thumb_d, ov_t, v_t, [0, 1]) + reach(middle_d, ov_m, v_f, [0, 1]);
+cc_r1 = span_ring   + reach(thumb_d, ov_t, v_t, [0, 1]) + reach(ring_d,   ov_r, v_f, [0, 1]);
+u_m = unit([x_m, sqrt(max(0, cc_m1*cc_m1 - x_m*x_m))]);
+u_r = unit([x_r, sqrt(max(0, cc_r1*cc_r1 - x_r*x_r))]);
 // Center-to-center distances from the thumb hole, per finger
-cc_m = span_middle + rt_y + rm_y;
-cc_r = span_ring   + rt_y + rr_y;
+cc_m = span_middle + reach(thumb_d, ov_t, v_t, u_m) + reach(middle_d, ov_m, v_f, u_m);
+cc_r = span_ring   + reach(thumb_d, ov_t, v_t, u_r) + reach(ring_d,   ov_r, v_f, u_r);
 // Thumb sits centered below the origin
 ty = (cc_m + cc_r)/4;
 // Finger hole positions honoring each finger's own span
-y_m = -ty + sqrt(cc_m*cc_m - x_m*x_m);
-y_r = -ty + sqrt(cc_r*cc_r - x_r*x_r);
+y_m = -ty + sqrt(max(0, cc_m*cc_m - x_m*x_m));
+y_r = -ty + sqrt(max(0, cc_r*cc_r - x_r*x_r));
 // Puck footprint extents auto-size to the grip
 ext_s = ty + thumb_d/2 + ov_t/2 + end_wall;
 ext_n = max(y_m + middle_d/2 + ov_m/2, y_r + ring_d/2 + ov_r/2) + end_wall;
@@ -190,8 +200,10 @@ module drill(x, y, d, depth, fwd_in, lat_in, body_h, fdir, through = false, R = 
         ovalize(off) translate([0, 0, through ? -130 : -depth])
             cylinder(d = d, h = through ? 165 : depth + 35);
         // rounded edge: a quarter circle of radius `bevel` from short frustums, then a shallow cone
-        // above the surface so a surface that rises on one side still gets an edge
-        if (bevel > 0) {
+        // above the surface so a surface that rises on one side still gets an edge. Local z = 0 is
+        // the sphere's tangent plane; at the rim the sphere has fallen r^2/(2R) below it, so the
+        // whole profile is sunk by that sagitta to meet the real surface tangentially.
+        if (bevel > 0) translate([0, 0, -pow(d/2 + bevel + oval/2, 2)/(2*R)]) {
             N = 6;
             for (k = [0 : N-1]) {
                 a0 = k*90/N; a1 = (k+1)*90/N;
@@ -213,10 +225,11 @@ module ovalize(off) {
 }
 
 // Text engraved 0.5 mm into the base at (x, y), mirrored so it reads right with the part turned over
-module serial_cut(x, y, size = 5.5) {
+module serial_cut(x, y, size = 5.5, max_w = 1e9) {
+    w = len(serial)*size*0.72 + (len(serial) - 1)*size*0.1;   // rough width of the bold text
     if (serial != "")
         translate([x, y, -1]) mirror([1, 0, 0]) linear_extrude(1.5)
-            text(serial, size = size, halign = "center", valign = "center", font = "Liberation Sans:style=Bold");
+            text(serial, size = size*min(1, max_w/max(w, 1)), halign = "center", valign = "center", font = "Liberation Sans:style=Bold");
 }
 
 // Horizontal through-tunnel along X with a self-supporting teardrop roof
@@ -255,7 +268,7 @@ module rev_puck() {
         // fingers: blind fingertip holes, each at its own span, size, pitch
         drill(x_m, y_m, middle_d, finger_depth, middle_fwd, middle_lat, puck_h, -1, false, ball_R, ov_m, finger_oval_angle, finger_bevel);
         drill(x_r, y_r, ring_d,   finger_depth, ring_fwd,   ring_lat,   puck_h, -1, false, ball_R, ov_r, finger_oval_angle, finger_bevel);
-        serial_cut(0, ext_n - 15);   // finger end of the base (the thumb bore exits the base well in from its entry)
+        serial_cut(0, ext_n - 15, 5.5, 60);   // finger end of the base (the thumb bore exits the base well in from its entry)
 
         if (lanyard)
             xtunnel(44, 10, lanyard_d, puck_w + 20);
@@ -282,7 +295,7 @@ module rev_ball() {
             drill(0, -ty, thumb_d, ball_thumb_depth, thumb_fwd, thumb_lat, H, +1, false, R, ov_t, thumb_oval_angle, thumb_bevel);
         drill(x_m, thumb_hole ? y_m : 0, middle_d, finger_depth, middle_fwd, middle_lat, H, -1, false, R, ov_m, finger_oval_angle, finger_bevel);
         drill(x_r, thumb_hole ? y_r : 0, ring_d,   finger_depth, ring_fwd,   ring_lat,   H, -1, false, R, ov_r, finger_oval_angle, finger_bevel);
-        serial_cut(0, 0, 4.4);
+        serial_cut(0, 0, 4.4, max(8, ball_flat - 2));   // on the resting flat, shrunk to fit it
         if (ball_groove) ball_ring(R, s, R - s, 2, 0.8);
         // a fine groove at every colour boundary (the slicer swaps filament at these heights)
         for (z = ball_swaps(R, s)) ball_ring(R, s, z, 0.6, 0.3);
@@ -320,7 +333,7 @@ module rev_spinner() {
         // finger holes, drilled radially (zero pitch)
         drill(x_m, 0, middle_d, min(finger_depth, 20), 0, 0, spin_h, -1, false, ball_R, ov_m, finger_oval_angle, finger_bevel);
         drill(x_r, 0, ring_d,   min(finger_depth, 20), 0, 0, spin_h, -1, false, ball_R, ov_r, finger_oval_angle, finger_bevel);
-        serial_cut(-24, 24);
+        serial_cut(-21, 22, 5.5, 34);   // one quadrant of the base, clear of the spin bars
 
         if (lanyard)
             xtunnel(-spin_d/2 + 18, 8, lanyard_d, spin_d + 20);

@@ -44,10 +44,12 @@ concise. The owner has asked for honesty about what has and has not been physica
 - Bevel: quarter-round, thumb 4 mm, fingers 2.5 mm. Serial (order number) engraved 0.5 mm into
   the base, mirrored; on the puck at the finger end (the thumb bore exits the base 20-30 mm in
   from its entry, so the thumb end is not free).
-- Rev Ball: R = ball_d/2, resting flat 22 mm, blind thumb 70 mm, cap + band colour pattern with
-  swap heights on the job sheet, 0.3 mm grooves at colour boundaries; thumb_hole=false gives a
-  two-handed ball. For the default 200 mm ball the swaps are 93.4, 105.4 and 154 mm
-  (`configurator/test/groove_check.mjs` confirms the grooves on an exported STL).
+- Rev Ball: R = ball_d/2, resting flat 30 mm across by default (1.1 mm deep; orders saved
+  earlier keep their 22 mm), blind thumb 70 mm, cap + band colour pattern with swap heights on
+  the job sheet, 0.3 mm grooves at colour boundaries; thumb_hole=false gives a two-handed ball.
+  For the default 200 mm ball the swaps are 92.9, 104.9 and 154 mm with the 30 mm flat (93.4,
+  105.4 and 154 with a 22 mm flat); `configurator/test/groove_check.mjs` confirms the grooves
+  on an exported STL.
 
 ## Owner's own sheet (drillsheet.com, right hand)
 
@@ -132,8 +134,15 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
 5. Repo is public: make it private. No "patent pending" wording until a provisional is filed
    (draft package is in the IP artifact; `ip/` is local-only and not in git).
 6. No rev-rate claims anywhere: the ball is a feedback tool.
-7. An adversarial code review of the oval/bevel/engraving/customer-card batch was run from the
-   cloud session; its findings, if any, will be reported there.
+7. DONE 2026-10-22 (cloud): an adversarial code review of the oval/bevel/engraving/customer-card
+   batch (62 agents) found 28 defects, all fixed in the commit "Fix the 28 defects ...": cut-to-cut
+   spans for ovals at any angle, the bevel sunk by the sphere's sagitta so it meets the surface
+   at full width, oval-aware web and base-breakthrough warnings, engraving that fits the spinner
+   base and the ball flat (default flat now 30 mm), thumb checks skipped for parts without a
+   thumb hole, old orders no longer inheriting the on-screen sheet, Latin-1 names on the card,
+   and job-sheet and card wording for no-thumb balls, spinners, Fit Kits and colour patterns.
+   The FS-0001 / FS-0002 exports on the PC predate it: pull, rebuild the zip (or take the one
+   from the cloud session), reinstall at C:\FitSlice and re-export both orders.
 8. DONE 2026-10-22: the PC's commits are on `origin/claude/bowling-grip-trainer-3d-laejva`.
    Push again after each local commit (`git push origin claude/bowling-grip-trainer-3d-laejva`).
 

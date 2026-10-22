@@ -37,6 +37,9 @@ const CASES = {
   plain_puck:   { parts: ['puck'], params: { ...SHEET, thumb_oval_d: 0, thumb_bevel: 0, finger_bevel: 0, thumb_through: true } },
   serial_puck:  { parts: ['puck'], params: { ...SHEET, thumb_oval_d: 0, thumb_bevel: 0, finger_bevel: 0, thumb_through: true, serial: 'FS-0001' } },
   bevel_puck:   { parts: ['puck'], params: { ...SHEET, thumb_oval_d: 0, thumb_through: true } },
+  bevel_zero:   { parts: ['puck'], params: { ...SHEET, thumb_oval_d: 0, thumb_through: true, thumb_fwd: 0, thumb_lat: 0 } },   // axis = surface normal, so slices near the rim stay closed
+  spinner_serial: { parts: ['spinner'], params: { ...SHEET, thumb_oval_d: 0, serial: 'FS-2026-0001' } },
+  ball_serial:  { parts: ['ball'], params: { ...SHEET, serial: 'FS-0001' } },
 };
 const axes = {};
 for (const [name, c] of Object.entries(CASES)) {

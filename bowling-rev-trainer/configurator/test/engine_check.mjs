@@ -99,7 +99,7 @@ ok('ball builds with the same hole layout as the puck, holes at the top, no warn
 // the two-colour pattern: swap heights sit round the equator and just below the grip
 const cc = r.stats[0].color_changes;
 assert.equal(cc.length, 3, 'cap + band = 3 filament changes: ' + JSON.stringify(cc));
-assert.ok(Math.abs(cc[0].z_mm - 93.5) < 0.2 && Math.abs(cc[1].z_mm - 105.5) < 0.2, 'band straddles the equator: ' + JSON.stringify(cc));
+assert.ok(Math.abs(cc[0].z_mm - 92.9) < 0.2 && Math.abs(cc[1].z_mm - 104.9) < 0.2, 'band straddles the equator (ball top at 198.9 with the 30 mm flat): ' + JSON.stringify(cc));
 assert.ok(cc[2].z_mm > 140 && cc[2].z_mm < 165 && cc[2].colour === 'second colour', 'cap starts below the lowest hole rim: ' + JSON.stringify(cc));
 assert.ok(r.notes && r.notes.some(n => /Add color change/.test(n)), 'the swap heights are explained: ' + JSON.stringify(r.notes));
 r = await build({ ...SHEET, ball_stripe: 'none' }, ['ball']);
@@ -137,6 +137,33 @@ assert.ok(r.ok && r.warnings.length === 0, 'no-thumb ball: ' + (r.message || JSO
 assert.deepEqual(r.axes.ball.map(a => a.name).sort(), ['middle', 'ring']);
 assert.ok(r.axes.ball.every(a => Math.abs(a.p[1]) < 1), 'two-handed finger holes sit across the top centre');
 ok('a no-thumb (two-handed) ball has just the two finger holes, centred on top');
+
+// 8. fixes from the adversarial review
+// the hairline-web and base-breakthrough checks count an oval finger hole's extra reach
+const FAT = { ...SHEET, print_allowance: 0.4, middle_d: 21.03, ring_d: 21.03, middle_lat: 0, ring_lat: 0, middle_fwd: 0.3125, ring_fwd: 0.3125, finger_depth: 24, bridge: 7.5 };
+r = await build({ ...FAT, middle_oval_d: 24, ring_oval_d: 24, finger_oval_angle: 90 });
+assert.ok(r.ok && r.warnings.some(w => /web between the finger holes narrows/.test(w)), 'ovals across the bridge thin the web: ' + JSON.stringify(r.warnings));
+r = await build({ ...SHEET, print_allowance: 0.4, middle_d: 21.03, ring_d: 21.03, span_middle: 125, span_ring: 125, middle_fwd: 0.75, ring_fwd: 0.75, middle_lat: 0, ring_lat: 0, finger_depth: 27, middle_oval_d: 29.03, ring_oval_d: 29.03, finger_oval_angle: 0, lanyard: false, weight_pocket: false });
+assert.ok(r.ok && r.warnings.some(w => /break through the base/.test(w)), 'an oval along the tilt dips through the base: ' + JSON.stringify(r.warnings));
+ok('oval finger holes are counted in the hairline-web and base-breakthrough warnings');
+// parts without a thumb hole ignore the (hidden) thumb fields
+r = await build({ ...SHEET, thumb_d: 25.4, thumb_oval_d: 23.02 }, ['spinner']);
+assert.ok(r.ok, 'spinner must not refuse over the thumb oval: ' + r.message);
+r = await build({ ...SHEET, thumb_hole: false, thumb_d: 25.4, thumb_oval_d: 23.02, ball_thumb_depth: 99 }, ['ball']);
+assert.ok(r.ok, 'a no-thumb ball must not refuse over thumb fields: ' + r.message);
+r = await build({ ...SHEET, thumb_d: 25.4, thumb_oval_d: 23.02 });
+assert.equal(r.ok, false, 'the puck still refuses an oval smaller than the hole');
+ok('the spinner and a no-thumb ball ignore the thumb fields they do not cut');
+// setState loads a whole sheet: keys an old order lacks go back to the defaults
+await page.evaluate((s) => window.__cfgApp.setState({ ...s, thumb_oval_d: 23.02, thumb_oval_angle: 55, thumb_bevel: 6, thumb_hole: false, serial: 'FS-0007' }), SHEET);
+await page.evaluate((s) => window.__cfgApp.setState(s), SHEET);   // an order saved before these keys existed
+const st = await page.evaluate(() => window.__cfgApp.getState());
+assert.ok(st.thumb_oval_d === 0 && st.thumb_oval_angle === 0 && st.thumb_bevel === 4 && st.thumb_hole === true && st.serial === '', 'stale keys reset: ' + JSON.stringify([st.thumb_oval_d, st.thumb_bevel, st.thumb_hole, st.serial]));
+ok('opening an older order resets the oval, bevel, thumb-hole and engraving fields to their defaults');
+// long order numbers still build (they shrink to fit the spinner base and the ball flat)
+for (const parts of [['spinner'], ['ball'], ['puck']]) { r = await build({ ...SHEET, serial: 'FS-2026-0001' }, parts); assert.ok(r.ok && r.warnings.length === 0, parts[0] + ' with a 12-character number: ' + (r.message || JSON.stringify(r.warnings))); }
+r = await build({ ...SHEET, thumb_hole: false }, ['ball']);
+ok('a 12-character order number builds on every part');
 
 await browser.close(); server.close();
 console.log(`\nALL ${results.length} ENGINE CHECKS PASSED`);

@@ -55,15 +55,17 @@ const FIT_SCHEMA = {
   ball_flat:          { type: 'num', min: 0, max: 40, label: 'Ball resting flat' },
   ball_groove:        { type: 'bool' },
   ball_stripe:        { type: 'enum', values: ['none', 'cap', 'cap_band', 'bands'] },
-  thumb_hole:         { type: 'bool' },
-  thumb_oval_d:       { type: 'num', min: 0, max: 45, label: 'Thumb oval size' },
-  thumb_oval_angle:   { type: 'num', min: -90, max: 90, label: 'Thumb oval angle', unit: 'deg' },
-  middle_oval_d:      { type: 'num', min: 0, max: 36, label: 'Middle finger oval size' },
-  ring_oval_d:        { type: 'num', min: 0, max: 36, label: 'Ring finger oval size' },
-  finger_oval_angle:  { type: 'num', min: -90, max: 90, label: 'Finger oval angle', unit: 'deg' },
-  thumb_bevel:        { type: 'num', min: 0, max: 8, label: 'Thumb hole bevel' },
-  finger_bevel:       { type: 'num', min: 0, max: 6, label: 'Finger hole bevel' },
-  serial:             { type: 'text', pattern: /^[0-9FS-]{0,12}$/, label: 'Engraved text' },
+  // keys added after 1.0: an order saved by an older version gets the default (`def`) instead of
+  // inheriting whatever sheet happens to be on screen when it is reopened
+  thumb_hole:         { type: 'bool', def: true },
+  thumb_oval_d:       { type: 'num', min: 0, max: 45, label: 'Thumb oval size', def: 0 },
+  thumb_oval_angle:   { type: 'num', min: -90, max: 90, label: 'Thumb oval angle', unit: 'deg', def: 0 },
+  middle_oval_d:      { type: 'num', min: 0, max: 36, label: 'Middle finger oval size', def: 0 },
+  ring_oval_d:        { type: 'num', min: 0, max: 36, label: 'Ring finger oval size', def: 0 },
+  finger_oval_angle:  { type: 'num', min: -90, max: 90, label: 'Finger oval angle', unit: 'deg', def: 0 },
+  thumb_bevel:        { type: 'num', min: 0, max: 8, label: 'Thumb hole bevel', def: 4 },
+  finger_bevel:       { type: 'num', min: 0, max: 6, label: 'Finger hole bevel', def: 2.5 },
+  serial:             { type: 'text', pattern: /^[0-9FS-]{0,12}$/, label: 'Engraved text', def: '' },
 };
 
 const LIMITS = { name: 120, email: 200, phone: 60, address: 400, notes: 4000, orderNotes: 4000 };
@@ -80,7 +82,7 @@ function cleanFit(fit) {
   const out = {};
   if (!fit || typeof fit !== 'object') throw new UserError('This order has no fit sheet.');
   for (const [k, spec] of Object.entries(FIT_SCHEMA)) {
-    if (!(k in fit)) continue;
+    if (!(k in fit)) { if ('def' in spec) out[k] = spec.def; continue; }
     const v = fit[k];
     if (spec.type === 'enum') {
       if (!spec.values.includes(v)) throw new UserError(`Fit sheet field "${k}" must be one of ${spec.values.join(', ')}.`);
