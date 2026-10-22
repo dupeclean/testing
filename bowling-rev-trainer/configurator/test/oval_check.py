@@ -161,7 +161,8 @@ def main():
     check(f"serial: {n_s} glyph voids 0.25 mm into the base, {n_p} on the plain puck", n_s - n_p >= 7)
     check(f"serial: no voids left 0.75 mm up (cut is 0.5 mm deep)", n_s1 == n_p)
     dv = m["plain_puck"].volume - m["serial_puck"].volume
-    check(f"serial: engraving removes {dv:.0f} mm3 (glyph area {a_s - a_p:.0f} mm2 x 0.5 mm)", 0.4 * (a_s - a_p) < dv < 0.6 * (a_s - a_p) + 1 and dv > 5)
+    glyph_area = tot_p - tot_s        # material removed from the slice (void areas would double-count the islands inside the 0s)
+    check(f"serial: engraving removes {dv:.1f} mm3 = glyph area {glyph_area:.1f} mm2 x 0.5 mm", abs(dv - 0.5 * glyph_area) < 0.05 * dv + 0.5 and dv > 5)
     # it reads right from below: mirrored in the mesh, so the 'F' (first character) sits at +x when read from above
     xs = []
     sec = m["serial_puck"].section(plane_origin=[0, 0, 0.25], plane_normal=[0, 0, 1]); planar, to3d = sec.to_2D()
