@@ -120,11 +120,13 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    launched once from there; the Oct 20 build (no Rev Ball, oval holes, bevels, engraving or
    customer card) is backed up in `C:\FitSlice-old-2026-10-20` and can be deleted once the new
    one has been used for a real order.
-3. Re-export FS-0001 ("me", Pair) before printing the puck: its files on disk are from the Oct 20
-   build and the Oct 20 sheet (round 29/32 thumb, +3/4 forward fingers). The saved order already
-   has -3/4 reverse; it still needs thumb 25/32 drilled + 29/32 oval at 55 deg typed in, then
-   "Save and export print files". Measure the thumb length for `ball_thumb_depth` (FS-0002 uses
-   the 70 mm default).
+3. DONE 2026-10-22 (owner's go-ahead): FS-0001 ("me", Pair) was reopened in the installed app,
+   given thumb 25/32 drilled + 29/32 oval at 55 deg with the -3/4 reverse finger pitches kept,
+   saved and re-exported: puck (795.7 cm3, 140 x 167.7 x 60 mm) and spinner STLs with bore
+   T20p2, fit sheet, job sheet (oval line, bevels, engraving FS-0001, no warnings) and customer
+   card. The Oct 20 STLs are in `FS-0001 me\superseded\`. Still to do: measure the thumb length
+   for `ball_thumb_depth` (FS-0002 uses the 70 mm default), and confirm the pitch sign on the
+   paper sheet before printing.
 4. Nothing has been printed or rolled. Print the puck first (about 3 h) to check the oval thumb
    fit and the 55 deg orientation against the real ball, then the ball (10-14 h).
 5. Repo is public: make it private. No "patent pending" wording until a provisional is filed
