@@ -134,6 +134,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
     <div class="switches">
       <div class="seg" role="group" aria-label="Part">
         <button type="button" data-part="puck" aria-pressed="true">Puck</button>
+        <button type="button" data-part="ball" aria-pressed="false">Ball</button>
         <button type="button" data-part="spinner" aria-pressed="false">Spinner</button>
         <button type="button" data-part="sizer" aria-pressed="false">Sizer</button>
       </div>
@@ -162,7 +163,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
         </div>
       </fieldset>
 
-      <fieldset data-only-part="puck spinner">
+      <fieldset data-only-part="puck spinner ball">
         <legend>Drill sheet</legend>
         <div class="bores-wrap">
         <table class="drill">
@@ -197,12 +198,13 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
           <option value="0"><option value="1/16"><option value="1/8"><option value="3/16"><option value="1/4"><option value="5/16"><option value="3/8"><option value="1/2">
         </datalist>
         <p class="howto" style="margin-top:10px">Sizes and spans take the drill sheet's own notation: <b>55/64</b>, <b>1 1/32</b>, <b>4-1/2</b> or decimals. Span is the near edge of the thumb hole to the near edge of each finger hole. Zero pitch aims the hole at the ball's center.</p>
+        <p class="howto" data-only-part="ball" style="margin-top:6px"><b>Ball:</b> all three holes, at the sheet's spans and pitches, drilled into a full ball you can release on the floor. The thumb hole is blind (its depth is set below), like a real ball.</p>
         <p class="howto" data-only-part="spinner" style="margin-top:6px"><b>Spinner:</b> only the two finger hole sizes and the bridge are used. Both holes are drilled straight at the ball's center, so the spans and pitches on this sheet do not apply to the spinner. Switch to Puck to use them.</p>
         <p class="howto" style="margin-top:6px"><b>Which hole is which:</b> read the sheet with the thumb hole at the bottom, as it is drawn. For a right hand the <b>left</b> finger hole is the middle finger and the <b>right</b> hole is the ring finger (a left hand is the mirror image). Enter each hole's numbers on the row with the matching side, whatever the sheet calls it.</p>
         <p class="howto" style="margin-top:6px"><b>Pitch</b> is in inches, as drilled. <b>Forward (+)</b>: the inner end of the hole leans toward the middle of the grip: the thumb hole toward the fingers, the finger holes toward the thumb. <b>Reverse (−)</b>: the other way. <b>Lateral (+)</b>: toward the right side of the sheet for a right hand (toward the left for a left hand); <b>−</b> is the other side. The blue lines in the 3D view show where each hole points.</p>
       </fieldset>
 
-      <fieldset data-only-part="puck spinner">
+      <fieldset data-only-part="puck spinner ball">
         <legend>Depths &amp; bridge</legend>
         <div class="row">
           <label class="field"><span>Finger depth</span>
@@ -222,6 +224,23 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
         <div class="row">
           <label class="check" data-only-part="puck"><input type="checkbox" id="weight_pocket"> Weight pocket in the base</label>
           <label class="check"><input type="checkbox" id="lanyard"> Wrist-cord tunnel</label>
+        </div>
+      </fieldset>
+
+      <fieldset data-only-part="ball">
+        <legend>Rev Ball</legend>
+        <p class="howto" style="margin:0 0 10px">A release trainer: kneel, swing low, let it go onto the floor along a strip of tape and watch what it does. Thumb out first and fingers lifting makes it <b>roll and curve</b> off the line; a dump rolls straight and short; a hung-up thumb pops it up. Printed solid-looking but sliced light (3 walls, 5% infill, about 500 g at 200 mm). It needs supports under its lower half; sand the scar smooth. Colour the equator groove in with a marker to see the spin.</p>
+        <div class="row">
+          <label class="field"><span>Ball diameter</span>
+            <span class="row" style="gap:6px"><input type="text" id="ball_d" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+            <small>200 mm fits a 256 mm printer; a regulation ball is 216 mm</small></label>
+          <label class="field"><span>Thumb hole depth</span>
+            <span class="row" style="gap:6px"><input type="text" id="ball_thumb_depth" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+            <small>The thumb seats fully; 70 mm suits most</small></label>
+          <label class="field"><span>Resting flat on the bottom</span>
+            <span class="row" style="gap:6px"><input type="text" id="ball_flat" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+            <small>A small flat so it stands on the print bed; 0 for a perfect sphere</small></label>
+          <label class="check"><input type="checkbox" id="ball_groove"> Equator groove (colour it in to see the spin)</label>
         </div>
       </fieldset>
 
@@ -257,7 +276,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
       <div class="readout">
         <div class="stats">
           <div class="stat"><b id="stat_size">—</b><span>Footprint × height</span></div>
-          <div class="stat"><b id="stat_weight">—</b><span>PETG at <select id="infill" aria-label="Infill"><option value="0.2">20%</option><option value="0.4">40%</option><option value="1">100%</option></select> infill</span></div>
+          <div class="stat"><b id="stat_weight">—</b><span>PETG at <select id="infill" aria-label="Infill"><option value="0.05">5%</option><option value="0.2">20%</option><option value="0.4">40%</option><option value="1">100%</option></select> infill</span></div>
           <div class="stat"><b id="stat_volume">—</b><span>Model volume</span></div>
         </div>
         <div class="bores-wrap"><table class="bores" id="bores"></table></div>

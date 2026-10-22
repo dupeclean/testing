@@ -20,7 +20,7 @@ import argparse, csv, json, shutil, subprocess, sys
 from pathlib import Path
 
 SCAD = Path(__file__).parent / "trainer.scad"
-PARTS = ["puck", "spinner", "sizer"]
+PARTS = ["puck", "ball", "spinner", "sizer"]
 
 # key: (type, min, max) — ranges are sanity rails, in the SCAD's units
 # (mm for sizes/spans, drill-sheet inches for pitches). Same limits as the app.
@@ -41,6 +41,10 @@ SCHEMA = {
     "ring_lat":    (float, -1,    1),
     "weight_pocket": (bool, None, None),
     "lanyard":     (bool,  None,  None),
+    "ball_d":      (float, 150,   230),
+    "ball_thumb_depth": (float, 40, 95),
+    "ball_flat":   (float, 0,     40),
+    "ball_groove": (bool,  None,  None),
 }
 # Keys the FitSlice app writes into fit_sheet.json that this script does not need
 # (its job sheet / model summary, and options trainer.scad has no switch for).

@@ -13,18 +13,20 @@ const { retrySync, writeAtomic, TRANSIENT } = require('./atomic');
 
 const PRODUCTS = {
   puck:         { label: 'Rev Puck',                 price: 89,  parts: ['puck'] },
+  ball:         { label: 'Rev Ball (release trainer)', price: 129, parts: ['ball'] },
   spinner:      { label: 'Rev Spinner',              price: 45,  parts: ['spinner'] },
   pair:         { label: 'Pair (Puck + Spinner)',    price: 119, parts: ['puck', 'spinner'] },
   fitkit:       { label: 'Fit Kit (sizer plate)',    price: 24,  parts: ['sizer'] },
   digital_puck: { label: 'Digital files: Puck',      price: 29,  parts: ['puck', 'sizer'] },
   digital_pair: { label: 'Digital files: Pair',      price: 39,  parts: ['puck', 'spinner', 'sizer'] },
+  digital_ball: { label: 'Digital files: Ball',      price: 34,  parts: ['ball', 'sizer'] },
 };
 const STATUSES = ['new', 'printing', 'shipped', 'done', 'hold'];
 
 // Fit-sheet fields the configurator understands; anything else is dropped. Ranges (mm, and
 // inches for pitches) are the same ones the form enforces (configurator/app.js LIMITS).
 const FIT_SCHEMA = {
-  part:               { type: 'enum', values: ['puck', 'spinner', 'sizer'] },
+  part:               { type: 'enum', values: ['puck', 'ball', 'spinner', 'sizer'] },
   hand:               { type: 'enum', values: ['right', 'left'] },
   size_source:        { type: 'enum', values: ['drill_sheet', 'sizer_plate'] },
   span_middle:        { type: 'num', min: 60, max: 150, label: 'Middle finger span' },
@@ -48,6 +50,10 @@ const FIT_SCHEMA = {
   sizer_thumb_center: { type: 'num', min: 15, max: 38, label: 'Sizer thumb centre' },
   sizer_finger_center:{ type: 'num', min: 10, max: 30, label: 'Sizer finger centre' },
   sizer_step:         { type: 'num', min: 0.1, max: 2, label: 'Sizer step' },
+  ball_d:             { type: 'num', min: 150, max: 230, label: 'Ball diameter' },
+  ball_thumb_depth:   { type: 'num', min: 40, max: 95, label: 'Ball thumb hole depth' },
+  ball_flat:          { type: 'num', min: 0, max: 40, label: 'Ball resting flat' },
+  ball_groove:        { type: 'bool' },
 };
 
 const LIMITS = { name: 120, email: 200, phone: 60, address: 400, notes: 4000, orderNotes: 4000 };

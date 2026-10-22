@@ -111,6 +111,16 @@ folder path from the old computer.
   set "Hole sizes come from" to "The printed sizer plate" (this sets the
   allowance to 0, because the plate already includes your printer), and
   type the engraved numbers as the hole sizes for that customer.
+- The REV BALL is the release trainer: a full 200 mm ball with the
+  customer's grip. Choose the part "Ball" (or product "Rev Ball"). Slice
+  it with 3 walls and 5% infill, grip holes facing up, tree supports
+  under the lower half; snap the supports off and sand the scar smooth.
+  About 475 g and 10 to 14 hours. Colour the equator groove in with a
+  marker. To use it: kneel, swing low, let it go along a strip of tape
+  on the floor with a couch or wall 1.5 to 2 m away. Rolls and curves off
+  the line = thumb out first, fingers lifted. Straight and short = dumped.
+  Pops up = thumb hung up. Spins in place = hand on top. The thumb hole
+  is blind (70 mm deep by default) like a real ball.
 - The Rev Spinner uses only the two finger hole sizes and the bridge;
   its holes are drilled straight at the ball's center, so spans and
   pitches apply to the Rev Puck only.

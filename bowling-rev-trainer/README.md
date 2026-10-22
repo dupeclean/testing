@@ -12,8 +12,10 @@
 | `marketing/` | Go-to-market kit: brand platform, website copy, pro-shop program, retailer and marketplace pitches, creator program, content and launch calendar, paid funnel, support runbook, 72-row target list; rendered page: https://claude.ai/artifact/6e7gbT4rCUBekwZ4mezmyV |
 | `ip/` (local only, not in the public repo) | IP strategy, provisional patent application draft, prior-art memo, filing checklist, figures |
 
-Two 3D-printable training tools for building rev rate (RPM) with a conventional
-one-handed, thumb-in release. Both are slices of a regulation 8.5"-diameter ball
+Three 3D-printable training tools for a conventional one-handed, thumb-in release: the
+**Rev Ball** (a full 200 mm ball with your grip that you release on the floor and watch
+roll and hook, the release trainer), the **Rev Puck** (a slice of ball surface with your
+grip, for hold and thumb-exit drills) and the **Rev Spinner** (fingers only). Both are slices of a regulation 8.5"-diameter ball
 surface, so the curvature, hole angles, and hand position match a real ball.
 
 | Part | What it trains | Size | Weight (4 walls, 20% infill) |

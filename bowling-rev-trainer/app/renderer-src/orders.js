@@ -236,7 +236,8 @@
   function jobSheet(order, built, fileNames) {
     const f = built.fitSheet, m = f.modeled;
     const parts = info.products[order.product].parts;
-    const hasPuck = parts.includes('puck'), hasSpin = parts.includes('spinner'), hasSizer = parts.includes('sizer');
+    const hasPuck = parts.includes('puck'), hasSpin = parts.includes('spinner'), hasSizer = parts.includes('sizer'), hasBall = parts.includes('ball');
+    const hasGrip = hasPuck || hasBall;   // parts that carry the whole three-hole grip
     const r2 = (x) => Math.round(Number(x) * 100) / 100;
     const both = (mm) => `${fraction64(mm / IN)}" (${r2(mm)} mm)`;
     const pad = (s, n) => String(s).padEnd(n);
@@ -249,13 +250,13 @@
     L.push(`Order      ${order.number}`, `Date       ${today}`, `Customer   ${order.customer.name}`);
     L.push(`Product    ${(info.products[order.product] || {}).label || order.product}   ${money(order.price)}`, `Hand       ${side}-handed`, '');
 
-    if (hasPuck || hasSpin) {
+    if (hasGrip || hasSpin) {
       const rows = [];
-      if (hasPuck) rows.push(['Thumb', both(f.thumb_d), `${m.thumb_bore_in}" (${r2(m.thumb_bore_mm)} mm)`, '-', describePitch(f.thumb_fwd, 'fr', f.hand), describePitch(f.thumb_lat, 'lat', f.hand)]);
-      rows.push([`Middle (${midSide} hole)`, both(f.middle_d), `${m.middle_bore_in}" (${r2(m.middle_bore_mm)} mm)`, hasPuck ? both(f.span_middle) : '-',
-        hasPuck ? describePitch(f.middle_fwd, 'fr', f.hand) : 'zero', hasPuck ? describePitch(f.middle_lat, 'lat', f.hand) : 'zero']);
-      rows.push([`Ring (${ringSide} hole)`, both(f.ring_d), `${m.ring_bore_in}" (${r2(m.ring_bore_mm)} mm)`, hasPuck ? both(f.span_ring) : '-',
-        hasPuck ? describePitch(f.ring_fwd, 'fr', f.hand) : 'zero', hasPuck ? describePitch(f.ring_lat, 'lat', f.hand) : 'zero']);
+      if (hasGrip) rows.push(['Thumb', both(f.thumb_d), `${m.thumb_bore_in}" (${r2(m.thumb_bore_mm)} mm)`, '-', describePitch(f.thumb_fwd, 'fr', f.hand), describePitch(f.thumb_lat, 'lat', f.hand)]);
+      rows.push([`Middle (${midSide} hole)`, both(f.middle_d), `${m.middle_bore_in}" (${r2(m.middle_bore_mm)} mm)`, hasGrip ? both(f.span_middle) : '-',
+        hasGrip ? describePitch(f.middle_fwd, 'fr', f.hand) : 'zero', hasGrip ? describePitch(f.middle_lat, 'lat', f.hand) : 'zero']);
+      rows.push([`Ring (${ringSide} hole)`, both(f.ring_d), `${m.ring_bore_in}" (${r2(m.ring_bore_mm)} mm)`, hasGrip ? both(f.span_ring) : '-',
+        hasGrip ? describePitch(f.ring_fwd, 'fr', f.hand) : 'zero', hasGrip ? describePitch(f.ring_lat, 'lat', f.hand) : 'zero']);
       const W = [20, 22, 22, 22, 16];
       L.push('DRILL SHEET AS ENTERED, AND THE BORE SIZE THE MODEL USES (sheet size + print allowance)');
       L.push(['', 'Sheet size', 'Modeled bore', 'Span (cut to cut)', 'Forward/reverse', 'Lateral'].map((h, i) => i < 5 ? pad(h, W[i]) : h).join(''));
@@ -264,6 +265,9 @@
       if (hasPuck) {
         L.push(`Bridge ${both(f.bridge)}   Finger depth ${f.finger_depth} mm   Thumb ${f.thumb_through ? 'through' : 'blind, ' + f.thumb_depth + ' mm deep'}`);
         L.push(`Print allowance ${m.print_allowance_mm} mm   Weight pocket ${f.weight_pocket ? 'yes' : 'no'}   Wrist-cord tunnel ${f.lanyard ? 'yes' : 'no'}`);
+      }
+      if (hasBall) {
+        L.push(`Rev Ball: ${r2(f.ball_d)} mm ball. Thumb hole blind, ${r2(f.ball_thumb_depth)} mm deep. Finger depth ${f.finger_depth} mm. Bridge ${both(f.bridge)}. Resting flat ${r2(f.ball_flat)} mm. Equator groove ${f.ball_groove ? 'yes: colour it in with a marker' : 'no'}. Print allowance ${m.print_allowance_mm} mm.`);
       }
       if (hasSpin) {
         L.push(`${hasPuck ? 'Rev Spinner: ' : ''}two finger holes only, no thumb hole. Spans and pitches above do not apply to the spinner: its holes are drilled straight at the ball's center (zero pitch). Hole spacing uses the bridge ${both(f.bridge)}; finger depth ${Math.min(f.finger_depth, 20)} mm; wrist-cord tunnel ${f.lanyard ? 'yes' : 'no'}; print allowance ${m.print_allowance_mm} mm.`);
@@ -275,9 +279,11 @@
     }
 
     L.push('PRINT');
-    L.push('PETG, 0.2 mm layers, 4 walls, 20% gyroid infill, flat side down, no supports.');
-    for (const s of built.stats) L.push(`  ${s.part}: about ${s.grams_20pct} g of filament at 20% infill, ${s.bbox_mm.join(' x ')} mm`);
-    if (hasPuck || hasSpin) L.push('After printing: smooth the bores with fine sandpaper and check each bore against the sizes above before packing.');
+    if (hasPuck || hasSpin || hasSizer) L.push(`${hasBall ? 'Puck, spinner, sizer: ' : ''}PETG, 0.2 mm layers, 4 walls, 20% gyroid infill, flat side down, no supports.`);
+    if (hasBall) L.push(`${hasPuck || hasSpin || hasSizer ? 'Ball: ' : ''}PETG or PLA, 0.2 mm layers, 3 walls, 5% gyroid infill, grip holes facing UP, tree supports under the lower half (it overhangs). Snap the supports off and sand the scar smooth so it rolls true.`);
+    for (const s of built.stats) L.push(`  ${s.part}: about ${s.grams} g of filament at ${s.infill_pct}% infill, ${s.bbox_mm.join(' x ')} mm`);
+    if (hasGrip || hasSpin) L.push('After printing: smooth the bores with fine sandpaper and check each bore against the sizes above before packing.');
+    if (hasBall) L.push('Ball drill: kneel, swing low, let it go along a strip of tape on the floor with a couch or wall 1.5 to 2 m away. Roll + curve off the line = thumb out, fingers lifted. Straight and short = dumped. Popped up = thumb hung up. Spins in place = hand on top.');
     if (hasSizer) L.push('Do not sand the sizer plate: its holes are the test. The bore that fits the finger snugly is that finger\'s size.');
     L.push('');
     if (built.warnings.length) {
@@ -287,7 +293,7 @@
     }
     L.push('FILES');
     for (const n of fileNames) L.push('  ' + n);
-    if (hasPuck || hasSpin) L.push('', 'Round bores only: if the sheet lists oval holes, the model uses the round size that was entered. Finish the fit with bowler\'s tape.');
+    if (hasGrip || hasSpin) L.push('', 'Round bores only: if the sheet lists oval holes, the model uses the round size that was entered. Finish the fit with bowler\'s tape.');
     return L.join('\r\n') + '\r\n';
   }
 

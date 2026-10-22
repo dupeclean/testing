@@ -13,7 +13,7 @@
 
 /* [Part] */
 // Which part to render ("sizer" is a quick test plate for finding your hole sizes)
-part = "puck"; // [puck, spinner, sizer, both]
+part = "puck"; // [puck, ball, spinner, sizer, both]
 
 /* [Fit — copy from your ball] */
 // Bowling hand (mirrors the finger-hole layout)
@@ -63,6 +63,16 @@ end_wall = 10;
 spin_d = 100;
 // Spinner height at center
 spin_h = 38;
+
+/* [Rev Ball] */
+// Diameter of the release-trainer ball (200 fits a 256 mm printer; a regulation ball is 216)
+ball_d = 200;
+// Thumb hole depth in the ball (blind, the thumb seats fully)
+ball_thumb_depth = 70;
+// Small flat on the bottom so the ball stands on the print bed (0 = perfect sphere)
+ball_flat = 22;
+// Groove round the equator; colour it in with a marker to see the spin
+ball_groove = true;
 
 /* [Options] */
 // Pocket in the puck base for stacked coins/washers (progressive loading). Tape over when filled.
@@ -117,7 +127,7 @@ module footprint(w) {
 
 // Height of the ball surface above z=0 at radius r from the part axis,
 // for a part whose center height is h.
-function surf_z(h, x, y) = h - ball_R + sqrt(ball_R*ball_R - x*x - y*y);
+function surf_z(h, x, y, R = ball_R) = h - R + sqrt(R*R - x*x - y*y);
 
 // Drill a gripping hole into a ball-surface body of center height body_h.
 // The bore axis runs from the surface point above (x, y) through an AIM POINT
@@ -130,9 +140,11 @@ function surf_z(h, x, y) = h - ball_R + sqrt(ball_R*ball_R - x*x - y*y);
 //   lat_in > 0  lateral toward the bowling-hand side (mirrored for lefties).
 // fdir is +1 for the thumb and -1 for the fingers.
 // Depth is measured along the bore axis from the surface.
-module drill(x, y, d, depth, fwd_in, lat_in, body_h, fdir, through = false) {
-    zs     = surf_z(body_h, x, y);
-    aim    = [lat_in*25.4*mir, fwd_in*25.4*fdir, body_h - ball_R];
+// R is the sphere radius the hole is cut into; the pitch offsets are scaled by R/ball_R so a
+// smaller sphere (the Rev Ball) keeps the same hole angles as the regulation ball.
+module drill(x, y, d, depth, fwd_in, lat_in, body_h, fdir, through = false, R = ball_R) {
+    zs     = surf_z(body_h, x, y, R);
+    aim    = [lat_in*25.4*mir*R/ball_R, fwd_in*25.4*fdir*R/ball_R, body_h - R];
     inward = aim - [x, y, zs];
     out    = -inward / norm(inward);                       // outward unit vector
     translate([x, y, zs])
@@ -189,6 +201,30 @@ module rev_puck() {
 
         if (weight_pocket)
             pocket(0, 6);
+    }
+}
+
+// ---------------------------------------------------------------------
+// Rev ball — release trainer: a full ball with the grip at the top and a
+// small flat underneath. Released on the floor it rolls and hooks (or not).
+// ---------------------------------------------------------------------
+module rev_ball() {
+    R = ball_d/2;
+    s = ball_flat > 0 ? R - sqrt(max(0, R*R - (ball_flat/2)*(ball_flat/2))) : 0;  // sagitta of the flat
+    H = 2*R - s;                                                                   // top of the ball
+    difference() {
+        intersection() {
+            translate([0, 0, R - s]) sphere(r = R);
+            translate([-R - 1, -R - 1, 0]) cube([2*R + 2, 2*R + 2, H + 1]);
+        }
+        drill(0, -ty, thumb_d, ball_thumb_depth, thumb_fwd, thumb_lat, H, +1, false, R);
+        drill(x_m, y_m, middle_d, finger_depth, middle_fwd, middle_lat, H, -1, false, R);
+        drill(x_r, y_r, ring_d,   finger_depth, ring_fwd,   ring_lat,   H, -1, false, R);
+        if (ball_groove)
+            translate([0, 0, R - s - 1]) difference() {
+                cylinder(r = R + 5, h = 2);
+                translate([0, 0, -0.2]) cylinder(r = R - 0.8, h = 2.4);
+            }
     }
 }
 
@@ -253,6 +289,7 @@ module hole_sizer() {
 
 // ---------------------------------------------------------------------
 if (part == "puck")    rev_puck();
+if (part == "ball")    rev_ball();
 if (part == "spinner") rev_spinner();
 if (part == "sizer")   hole_sizer();
 if (part == "both") {

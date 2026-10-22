@@ -251,20 +251,36 @@ try {
   assert.equal(/DRILL SHEET AS ENTERED|Bridge |Wrist-cord/.test(kitJob), false, 'a Fit Kit job sheet must not describe puck features');
   ok('second order is FS-0002; Fit Kit exports a sizer plate');
 
+  // a Rev Ball order: the full-sphere part, with its own job-sheet instructions
+  await page.click('#ob-new');
+  await page.fill('#ob-name', 'Ball Buyer'); await page.selectOption('#ob-product', 'ball');
+  await page.evaluate(() => { document.getElementById('ob-toast-text').textContent = ''; });
+  await page.click('#ob-form-export');
+  await page.waitForFunction(() => /Saved \d+ files for FS-0003/.test(document.getElementById('ob-toast-text').textContent), null, { timeout: 90000 });
+  const f3 = readdirSync(ordersDir).find(n => n.startsWith('FS-0003'));
+  const ballStl = readdirSync(join(ordersDir, f3)).find(n => /rev_ball200/.test(n));
+  assert.ok(ballStl, 'ball STL exported: ' + readdirSync(join(ordersDir, f3)).join(', '));
+  const bs = readStl(join(ordersDir, f3, ballStl));
+  assert.ok(bs.volume_cm3 > 4000 && bs.volume_cm3 < 4200 && Math.abs(bs.height_mm - 199.4) < 0.2, `ball ${bs.volume_cm3} cm3, ${bs.height_mm} mm`);
+  const ballJob = readFileSync(join(ordersDir, f3, 'job_sheet.txt'), 'utf8');
+  assert.match(ballJob, /Rev Ball: 200 mm ball/); assert.match(ballJob, /tree supports/); assert.match(ballJob, /5% gyroid/); assert.match(ballJob, /Ball drill/);
+  assert.equal(/Wrist-cord/.test(ballJob), false, 'no puck-only lines on a ball job sheet');
+  ok('Rev Ball order exports a 200 mm ball with its own print and drill instructions');
+
   // delete: a native confirmation, and the number is never reused
   await app.evaluate(({ dialog }) => { dialog.showMessageBox = async () => ({ response: 1 }); });
   await page.click('#ob-delete');
   await page.waitForTimeout(300);
-  assert.equal(await page.evaluate(() => document.querySelectorAll('.orow').length), 2, 'declining keeps the order');
+  assert.equal(await page.evaluate(() => document.querySelectorAll('.orow').length), 3, 'declining keeps the order');
   await app.evaluate(({ dialog }) => { dialog.showMessageBox = async () => ({ response: 0 }); });
   await page.click('#ob-delete');
-  await page.waitForFunction(() => document.querySelectorAll('.orow').length === 1);
-  await page.click('#ob-new');
-  await page.fill('#ob-name', 'Third Customer');
-  await page.click('#ob-form-save');
   await page.waitForFunction(() => document.querySelectorAll('.orow').length === 2);
-  assert.equal(await page.evaluate(() => [...document.querySelectorAll('.orow .n')].map(n => n.textContent).sort().join()), 'FS-0001,FS-0003');
-  ok('delete asks first; after a delete the next order is FS-0003, not a reused FS-0002');
+  await page.click('#ob-new');
+  await page.fill('#ob-name', 'Fourth Customer');
+  await page.click('#ob-form-save');
+  await page.waitForFunction(() => document.querySelectorAll('.orow').length === 3);
+  assert.equal(await page.evaluate(() => [...document.querySelectorAll('.orow .n')].map(n => n.textContent).sort().join()), 'FS-0001,FS-0002,FS-0004');
+  ok('delete asks first; after a delete the next order is FS-0004, not a reused FS-0003');
   await app.close();
   session = null;
   console.log(`\nALL ${results.length} CHECKS PASSED`);

@@ -85,7 +85,24 @@ r = await build({ ...SHEET, span_middle: 130, span_ring: 130, finger_depth: 50, 
 assert.ok(r.warnings.some(w => /break through the base/.test(w)), 'base breakout warns: ' + JSON.stringify(r.warnings));
 ok('a long span with deep finger holes warns that a bore would break through the base');
 
-// 5. spinner and sizer still build
+// 5. the Rev Ball: full sphere, grip at the top, holes exactly as on the puck
+r = await build(SHEET, ['ball']);
+assert.ok(r.ok, 'ball: ' + r.message);
+assert.deepEqual(r.warnings, [], 'ball warns: ' + JSON.stringify(r.warnings));
+const bp = (n) => r.axes.ball.find(a => a.name === n).p;
+assert.ok(bp('thumb')[2] > 150 && bp('middle')[2] > 150 && bp('ring')[2] > 150, 'holes are at the top of the ball');
+assert.ok(bp('middle')[0] < 0 && bp('ring')[0] > 0, 'right hand: middle left, ring right on the ball too');
+const pk = await build(SHEET, ['puck']);
+const flat = (q) => [q[0], q[1]];
+for (const n of ['thumb', 'middle', 'ring']) assert.ok(Math.hypot(...flat(bp(n)).map((v, i) => v - flat(pk.axes.puck.find(a => a.name === n).p)[i])) < 0.01, n + ' sits at the same plan position as on the puck');
+ok('ball builds with the same hole layout as the puck, holes at the top, no warnings');
+r = await build({ ...SHEET, ball_d: 150 }, ['ball']);
+assert.equal(r.ok, false); assert.match(r.message, /too small for these spans/);
+r = await build({ ...SHEET, ball_thumb_depth: 96 }, ['ball']);
+assert.equal(r.ok, false); assert.match(r.message, /Ball thumb hole depth/);
+ok('a ball too small for the spans, or a thumb hole too deep, is refused with a plain message');
+
+// 6. spinner and sizer still build
 for (const part of ['spinner', 'sizer']) { r = await build(SHEET, [part]); assert.ok(r.ok, part + ': ' + r.message); }
 ok('spinner and sizer build');
 

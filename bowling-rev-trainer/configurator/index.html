@@ -141,6 +141,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
     <div class="switches">
       <div class="seg" role="group" aria-label="Part">
         <button type="button" data-part="puck" aria-pressed="true">Puck</button>
+        <button type="button" data-part="ball" aria-pressed="false">Ball</button>
         <button type="button" data-part="spinner" aria-pressed="false">Spinner</button>
         <button type="button" data-part="sizer" aria-pressed="false">Sizer</button>
       </div>
@@ -169,7 +170,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
         </div>
       </fieldset>
 
-      <fieldset data-only-part="puck spinner">
+      <fieldset data-only-part="puck spinner ball">
         <legend>Drill sheet</legend>
         <div class="bores-wrap">
         <table class="drill">
@@ -204,12 +205,13 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
           <option value="0"><option value="1/16"><option value="1/8"><option value="3/16"><option value="1/4"><option value="5/16"><option value="3/8"><option value="1/2">
         </datalist>
         <p class="howto" style="margin-top:10px">Sizes and spans take the drill sheet's own notation: <b>55/64</b>, <b>1 1/32</b>, <b>4-1/2</b> or decimals. Span is the near edge of the thumb hole to the near edge of each finger hole. Zero pitch aims the hole at the ball's center.</p>
+        <p class="howto" data-only-part="ball" style="margin-top:6px"><b>Ball:</b> all three holes, at the sheet's spans and pitches, drilled into a full ball you can release on the floor. The thumb hole is blind (its depth is set below), like a real ball.</p>
         <p class="howto" data-only-part="spinner" style="margin-top:6px"><b>Spinner:</b> only the two finger hole sizes and the bridge are used. Both holes are drilled straight at the ball's center, so the spans and pitches on this sheet do not apply to the spinner. Switch to Puck to use them.</p>
         <p class="howto" style="margin-top:6px"><b>Which hole is which:</b> read the sheet with the thumb hole at the bottom, as it is drawn. For a right hand the <b>left</b> finger hole is the middle finger and the <b>right</b> hole is the ring finger (a left hand is the mirror image). Enter each hole's numbers on the row with the matching side, whatever the sheet calls it.</p>
         <p class="howto" style="margin-top:6px"><b>Pitch</b> is in inches, as drilled. <b>Forward (+)</b>: the inner end of the hole leans toward the middle of the grip: the thumb hole toward the fingers, the finger holes toward the thumb. <b>Reverse (−)</b>: the other way. <b>Lateral (+)</b>: toward the right side of the sheet for a right hand (toward the left for a left hand); <b>−</b> is the other side. The blue lines in the 3D view show where each hole points.</p>
       </fieldset>
 
-      <fieldset data-only-part="puck spinner">
+      <fieldset data-only-part="puck spinner ball">
         <legend>Depths &amp; bridge</legend>
         <div class="row">
           <label class="field"><span>Finger depth</span>
@@ -229,6 +231,23 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
         <div class="row">
           <label class="check" data-only-part="puck"><input type="checkbox" id="weight_pocket"> Weight pocket in the base</label>
           <label class="check"><input type="checkbox" id="lanyard"> Wrist-cord tunnel</label>
+        </div>
+      </fieldset>
+
+      <fieldset data-only-part="ball">
+        <legend>Rev Ball</legend>
+        <p class="howto" style="margin:0 0 10px">A release trainer: kneel, swing low, let it go onto the floor along a strip of tape and watch what it does. Thumb out first and fingers lifting makes it <b>roll and curve</b> off the line; a dump rolls straight and short; a hung-up thumb pops it up. Printed solid-looking but sliced light (3 walls, 5% infill, about 500 g at 200 mm). It needs supports under its lower half; sand the scar smooth. Colour the equator groove in with a marker to see the spin.</p>
+        <div class="row">
+          <label class="field"><span>Ball diameter</span>
+            <span class="row" style="gap:6px"><input type="text" id="ball_d" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+            <small>200 mm fits a 256 mm printer; a regulation ball is 216 mm</small></label>
+          <label class="field"><span>Thumb hole depth</span>
+            <span class="row" style="gap:6px"><input type="text" id="ball_thumb_depth" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+            <small>The thumb seats fully; 70 mm suits most</small></label>
+          <label class="field"><span>Resting flat on the bottom</span>
+            <span class="row" style="gap:6px"><input type="text" id="ball_flat" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+            <small>A small flat so it stands on the print bed; 0 for a perfect sphere</small></label>
+          <label class="check"><input type="checkbox" id="ball_groove"> Equator groove (colour it in to see the spin)</label>
         </div>
       </fieldset>
 
@@ -264,7 +283,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
       <div class="readout">
         <div class="stats">
           <div class="stat"><b id="stat_size">—</b><span>Footprint × height</span></div>
-          <div class="stat"><b id="stat_weight">—</b><span>PETG at <select id="infill" aria-label="Infill"><option value="0.2">20%</option><option value="0.4">40%</option><option value="1">100%</option></select> infill</span></div>
+          <div class="stat"><b id="stat_weight">—</b><span>PETG at <select id="infill" aria-label="Infill"><option value="0.05">5%</option><option value="0.2">20%</option><option value="0.4">40%</option><option value="1">100%</option></select> infill</span></div>
           <div class="stat"><b id="stat_volume">—</b><span>Model volume</span></div>
         </div>
         <div class="bores-wrap"><table class="bores" id="bores"></table></div>
@@ -335,12 +354,14 @@ const DEFAULTS = {
   ring_fwd: 0.3125, ring_lat: 0,
   weight_pocket: true, lanyard: true,
   sizer_thumb_center: 25.4, sizer_finger_center: 21.03, sizer_step: IN / 64,
+  // Rev Ball: a full printed ball you release on the floor (grip at the top, resting flat underneath)
+  ball_d: 200, ball_thumb_depth: 70, ball_flat: 22, ball_groove: true,
 };
 
 const LENGTH_KEYS = ['span_middle', 'span_ring', 'thumb_d', 'middle_d', 'ring_d', 'print_allowance',
-  'bridge', 'finger_depth', 'thumb_depth', 'sizer_thumb_center', 'sizer_finger_center', 'sizer_step'];
+  'bridge', 'finger_depth', 'thumb_depth', 'sizer_thumb_center', 'sizer_finger_center', 'sizer_step', 'ball_d', 'ball_thumb_depth', 'ball_flat'];
 const PITCH_KEYS = ['thumb_fwd', 'thumb_lat', 'middle_fwd', 'middle_lat', 'ring_fwd', 'ring_lat'];
-const BOOL_KEYS = ['thumb_through', 'weight_pocket', 'lanyard'];
+const BOOL_KEYS = ['thumb_through', 'weight_pocket', 'lanyard', 'ball_groove'];
 
 // Sensible ranges (mm). Anything outside is almost always a typo or the wrong unit
 // (110 typed while the switch is on inches, or 4 5/16 typed while it is on mm), and values
@@ -350,12 +371,14 @@ const LIMITS = {
   thumb_d: [15, 38], middle_d: [10, 30], ring_d: [10, 30],
   print_allowance: [0, 2], bridge: [2, 30], finger_depth: [8, 50], thumb_depth: [10, 80],
   sizer_thumb_center: [15, 38], sizer_finger_center: [10, 30], sizer_step: [0.1, 2],
+  ball_d: [150, 230], ball_thumb_depth: [40, 95], ball_flat: [0, 40],
 };
 const LABELS = {
   span_middle: 'Middle finger span', span_ring: 'Ring finger span',
   thumb_d: 'Thumb hole size', middle_d: 'Middle finger hole size', ring_d: 'Ring finger hole size',
   print_allowance: 'Print allowance', bridge: 'Bridge', finger_depth: 'Finger depth', thumb_depth: 'Thumb depth',
   sizer_thumb_center: 'Sizer thumb centre', sizer_finger_center: 'Sizer finger centre', sizer_step: 'Sizer step',
+  ball_d: 'Ball diameter', ball_thumb_depth: 'Ball thumb hole depth', ball_flat: 'Ball resting flat',
 };
 const PITCH_LIMIT = 1;   // inches
 const WEB_MIN = 2.0;     // mm: thinner than this between the finger holes warns
@@ -383,7 +406,8 @@ function checkLength(key, mm, unit) {
 function validateParams(p) {
   const out = [];
   const keys = p.part === 'sizer' ? ['sizer_thumb_center', 'sizer_finger_center', 'sizer_step']
-    : ['span_middle', 'span_ring', 'thumb_d', 'middle_d', 'ring_d', 'print_allowance', 'bridge', 'finger_depth', ...(p.thumb_through ? [] : ['thumb_depth'])];
+    : ['span_middle', 'span_ring', 'thumb_d', 'middle_d', 'ring_d', 'print_allowance', 'bridge', 'finger_depth',
+      ...(p.part === 'ball' ? ['ball_d', 'ball_thumb_depth', 'ball_flat'] : p.thumb_through ? [] : ['thumb_depth'])];
   if (p.part === 'spinner') keys.splice(keys.indexOf('span_middle'), 2);
   for (const k of keys) { const m = checkLength(k, p[k], 'mm'); if (m) out.push({ key: k, message: m }); }
   if (p.part !== 'sizer') for (const k of PITCH_KEYS) {
@@ -454,7 +478,7 @@ function derive(p) {
   return { mir, td, md, rd, x_m, x_r, y_m, y_r, ty, ext_s, ext_n, cc_m, cc_r };
 }
 
-const surfZ = (h, x, y) => h - G.R + Math.sqrt(G.R * G.R - x * x - y * y);
+const surfZ = (h, x, y, R = G.R) => h - R + Math.sqrt(R * R - x * x - y * y);
 
 // Bore axis for a hole, defined the way a drill sheet defines it.
 // The axis runs from the surface point above (x, y) through an AIM POINT near the
@@ -484,9 +508,12 @@ function minAxisGap(a, b, len) {
   return Math.hypot(q[0], q[1], q[2]);
 }
 
-function holeAxis(x, y, fwdIn, latIn, bodyH, mir, fdir) {
-  const P = [x, y, surfZ(bodyH, x, y)];
-  const A = [latIn * IN * mir, fwdIn * IN * fdir, bodyH - G.R];   // aim point
+function holeAxis(x, y, fwdIn, latIn, bodyH, mir, fdir, R = G.R) {
+  const P = [x, y, surfZ(bodyH, x, y, R)];
+  // pitch offsets are drill-sheet inches on a regulation ball; on a smaller sphere they are scaled
+  // so the hole keeps the same ANGLE to the surface as on the real ball
+  const k = R / G.R;
+  const A = [latIn * IN * mir * k, fwdIn * IN * fdir * k, bodyH - R];   // aim point
   const d = [A[0] - P[0], A[1] - P[1], A[2] - P[2]];              // into the body
   const n = Math.hypot(d[0], d[1], d[2]);
   const u = [-d[0] / n, -d[1] / n, -d[2] / n];                    // outward
@@ -502,8 +529,8 @@ function makeBuilder(W) {
   const T = (m) => { trash.push(m); return m; };
   const flush = () => { for (const m of trash) { try { m.delete(); } catch (_) { /* already freed */ } } trash.length = 0; };
 
-  function drill(x, y, d, depth, fwdIn, latIn, bodyH, through, mir, fdir) {
-    const ax = holeAxis(x, y, fwdIn, latIn, bodyH, mir, fdir);
+  function drill(x, y, d, depth, fwdIn, latIn, bodyH, through, mir, fdir, R = G.R) {
+    const ax = holeAxis(x, y, fwdIn, latIn, bodyH, mir, fdir, R);
     const bore = through
       ? T(T(Manifold.cylinder(165, d / 2, d / 2, G.seg_hole)).translate([0, 0, -130]))
       : T(T(Manifold.cylinder(depth + 35, d / 2, d / 2, G.seg_hole)).translate([0, 0, -depth]));
@@ -602,6 +629,40 @@ function makeBuilder(W) {
     return { result, warnings, axes: [{ name: 'middle', ...mid.axis }, { name: 'ring', ...ring.axis }] };
   }
 
+  // Rev Ball: a full sphere with the bowler's grip at the top and a small flat underneath so it can
+  // stand on the print bed. Released on the floor it rolls and hooks (or does not), which shows the
+  // release. Solid in the model; the slicer makes it light (3 walls, about 5% infill).
+  function ball(p, D) {
+    const R = p.ball_d / 2;
+    const s = p.ball_flat > 0 ? R - Math.sqrt(Math.max(0, R * R - (p.ball_flat / 2) ** 2)) : 0;   // sagitta of the flat
+    const H = 2 * R - s;                                                                          // top of the ball above the bed
+    const sph = T(T(Manifold.sphere(R, G.seg_sphere)).translate([0, 0, R - s]));
+    const keep = T(T(Manifold.cube([2 * R + 2, 2 * R + 2, H + 1], true)).translate([0, 0, (H + 1) / 2]));
+    const body = T(sph.intersect(keep));
+    const thumb = drill(0, -D.ty, D.td, p.ball_thumb_depth, p.thumb_fwd, p.thumb_lat, H, false, D.mir, +1, R);
+    const mid = drill(D.x_m, D.y_m, D.md, p.finger_depth, p.middle_fwd, p.middle_lat, H, false, D.mir, -1, R);
+    const ring = drill(D.x_r, D.y_r, D.rd, p.finger_depth, p.ring_fwd, p.ring_lat, H, false, D.mir, -1, R);
+    const cuts = [thumb.cut, mid.cut, ring.cut];
+    if (p.ball_groove) {
+      // a 2 mm wide, 0.8 mm deep ring round the equator; coloured in with a marker it shows the spin
+      const outer = T(Manifold.cylinder(2, R + 5, R + 5, 128));
+      const inner = T(T(Manifold.cylinder(2.4, R - 0.8, R - 0.8, 128)).translate([0, 0, -0.2]));
+      cuts.push(T(T(outer.subtract(inner)).translate([0, 0, R - s - 1])));
+    }
+    const result = T(body.subtract(T(Manifold.union(cuts))));
+    const warnings = [];
+    if (overlap(thumb.bore, mid.bore) || overlap(thumb.bore, ring.bore))
+      warnings.push('Thumb and finger bores run into each other inside the ball: the spans are too short for these hole sizes, or the thumb hole is too deep.');
+    if (overlap(mid.bore, ring.bore))
+      warnings.push('The two finger bores intersect below the surface. Increase the bridge or reduce the lateral pitches.');
+    const web = minAxisGap(mid.axis, ring.axis, p.finger_depth) - (D.md + D.rd) / 2;
+    if (web < WEB_MIN && !overlap(mid.bore, ring.bore))
+      warnings.push(`The web between the finger holes narrows to ${Math.max(0, web).toFixed(1)} mm deep inside. That is a fragile hairline when printed. Increase the bridge or reduce the finger depth.`);
+    const floor = H - R - s + (R - p.ball_thumb_depth);   // rough: thumb bore end above the bed when aimed at the centre
+    if (p.ball_thumb_depth > R - 8) warnings.push('The thumb hole reaches almost to the centre of the ball. Make it shallower.');
+    return { result, warnings, axes: [{ name: 'thumb', ...thumb.axis }, { name: 'middle', ...mid.axis }, { name: 'ring', ...ring.axis }], floor };
+  }
+
   // engraved 7-segment labels for the sizer plate (no font needed)
   const SEG7 = { '0': 'abcdef', '1': 'bc', '2': 'abged', '3': 'abgcd', '4': 'fgbc', '5': 'afgcd',
     '6': 'afgedc', '7': 'abc', '8': 'abcdefg', '9': 'abcdfg' };
@@ -683,13 +744,14 @@ function makeBuilder(W) {
     const bad = validateParams(p);
     if (bad.length) throw new FitError(bad[0].message);
     const D = derive(p);
-    if (p.part === 'puck') {
+    const rMax = Math.max(Math.hypot(0, D.ty), Math.hypot(D.x_m, D.y_m), Math.hypot(D.x_r, D.y_r));
+    if (p.part === 'puck' && rMax > 92)
       // holes must sit on the part: a hole centre beyond ~92 mm from the axis is off the ball section
-      const r = Math.max(Math.hypot(0, D.ty), Math.hypot(D.x_m, D.y_m), Math.hypot(D.x_r, D.y_r));
-      if (r > 92) throw new FitError('These spans do not fit on the 8.5-inch ball section: a hole would sit off its edge. Check both spans, and that they are in the right units.');
-    }
+      throw new FitError('These spans do not fit on the 8.5-inch ball section: a hole would sit off its edge. Check both spans, and that they are in the right units.');
+    if (p.part === 'ball' && rMax > 0.8 * p.ball_d / 2)
+      throw new FitError(`A ${fmtMm(p.ball_d)} mm ball is too small for these spans: the holes would sit on its sides. Use a bigger ball diameter (${fmtMm(Math.ceil(rMax / 0.4 / 10) * 10)} mm or more) or check the spans.`);
     try {
-      const out = p.part === 'puck' ? puck(p, D) : p.part === 'spinner' ? spinner(p, D) : sizer(p);
+      const out = p.part === 'puck' ? puck(p, D) : p.part === 'spinner' ? spinner(p, D) : p.part === 'ball' ? ball(p, D) : sizer(p);
       const m = out.result;
       if (!(m.volume() > 1000)) throw new FitError('The model came out empty. Check the hole sizes and spans.');
       const bb = m.boundingBox();
@@ -909,7 +971,8 @@ function readTokens() {
 function fileBase(p, D) {
   const mm = (v) => v.toFixed(1).replace('.', 'p');
   if (p.part === 'sizer') return `hole_sizer_T${mm(p.sizer_thumb_center)}_F${mm(p.sizer_finger_center)}_step${mm(p.sizer_step)}`;
-  return `rev_${p.part}_${p.hand[0].toUpperCase()}_span${mm(p.span_middle)}-${mm(p.span_ring)}_T${mm(D.td)}_M${mm(D.md)}_R${mm(D.rd)}`;
+  const part = p.part === 'ball' ? `ball${p.ball_d.toFixed(0)}` : p.part;
+  return `rev_${part}_${p.hand[0].toUpperCase()}_span${mm(p.span_middle)}-${mm(p.span_ring)}_T${mm(D.td)}_M${mm(D.md)}_R${mm(D.rd)}`;
 }
 
 function fitSheet(p, D, data) {
@@ -985,7 +1048,7 @@ async function main() {
     $('size_source').value = state.size_source;
     document.querySelectorAll('[data-part]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.part === state.part)));
     document.querySelectorAll('[data-only-part]').forEach(el => { el.hidden = !el.dataset.onlyPart.split(' ').includes(state.part); });
-    $('thumb_depth_row').hidden = state.thumb_through;
+    $('thumb_depth_row').hidden = state.thumb_through || state.part !== 'puck';
     $('print_allowance').disabled = false;
     refreshHints();
   }
@@ -1063,7 +1126,7 @@ async function main() {
   function showStats(data) {
     const D = data.derived, p = state;
     const infill = parseFloat($('infill').value);
-    const shell = Math.min(data.volume, data.area * 1.6);
+    const shell = Math.min(data.volume, data.area * (p.part === 'ball' ? 1.3 : 1.6));
     const grams = (shell + (data.volume - shell) * infill) * 1.27 / 1000;
     $('stat_size').textContent = `${data.bbox.map(v => v.toFixed(0)).join(' × ')} mm`;
     $('stat_weight').textContent = `≈ ${Math.round(grams / 5) * 5} g`;
@@ -1184,9 +1247,12 @@ async function main() {
         files.push({ name: `${base}.stl`, data: toSTL(data.mesh, `${base} - ${APP_NAME} ${APP_VERSION}`), part });
         data.warnings.forEach(w => warnings.push(`${part}: ${w}`));
         axes[part] = data.axes.map(a => ({ name: a.name, p: a.p, dir: a.dir }));
-        const shell = Math.min(data.volume, data.area * 1.6);
+        // the ball is sliced with 3 walls and 5% infill, the other parts with 4 walls and 20%
+        const infill = part === 'ball' ? 0.05 : 0.2;
+        const shell = Math.min(data.volume, data.area * (part === 'ball' ? 1.3 : 1.6));
+        const grams = Math.round(((shell + (data.volume - shell) * infill) * 1.27 / 1000) / 5) * 5;
         stats.push({ part, volume_cm3: +(data.volume / 1000).toFixed(1), bbox_mm: data.bbox.map(v => +v.toFixed(1)),
-          grams_20pct: Math.round(((shell + (data.volume - shell) * 0.2) * 1.27 / 1000) / 5) * 5 });
+          grams, infill_pct: infill * 100, grams_20pct: grams });
         if (!sheet) sheet = fitSheet(p, data.derived, data);
       }
       return { files, warnings, stats, axes, fitSheet: sheet };
