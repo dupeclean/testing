@@ -267,7 +267,14 @@
         L.push(`Print allowance ${m.print_allowance_mm} mm   Weight pocket ${f.weight_pocket ? 'yes' : 'no'}   Wrist-cord tunnel ${f.lanyard ? 'yes' : 'no'}`);
       }
       if (hasBall) {
-        L.push(`Rev Ball: ${r2(f.ball_d)} mm ball. Thumb hole blind, ${r2(f.ball_thumb_depth)} mm deep. Finger depth ${f.finger_depth} mm. Bridge ${both(f.bridge)}. Resting flat ${r2(f.ball_flat)} mm. Equator groove ${f.ball_groove ? 'yes: colour it in with a marker' : 'no'}. Print allowance ${m.print_allowance_mm} mm.`);
+        const STRIPE = { none: 'single colour', cap: 'coloured top cap', cap_band: 'coloured top cap and a band round the middle', bands: 'three bands round the middle' };
+        L.push(`Rev Ball: ${r2(f.ball_d)} mm ball. Thumb hole blind, ${r2(f.ball_thumb_depth)} mm deep. Finger depth ${f.finger_depth} mm. Bridge ${both(f.bridge)}. Resting flat ${r2(f.ball_flat)} mm. Colours: ${STRIPE[f.ball_stripe] || f.ball_stripe}. Marker groove ${f.ball_groove ? 'yes' : 'no'}. Print allowance ${m.print_allowance_mm} mm.`);
+        const cc = (built.stats.find(s => s.part === 'ball') || {}).color_changes || [];
+        if (cc.length) {
+          L.push('FILAMENT CHANGES for the two-colour ball (start the print in the base colour). In Bambu Studio slice it, then');
+          L.push('right-click the layer slider at each height and choose "Add color change"; the printer pauses there for the swap:');
+          for (const c of cc) L.push(`  at ${c.z_mm} mm: ${c.colour}`);
+        }
       }
       if (hasSpin) {
         L.push(`${hasPuck ? 'Rev Spinner: ' : ''}two finger holes only, no thumb hole. Spans and pitches above do not apply to the spinner: its holes are drilled straight at the ball's center (zero pitch). Hole spacing uses the bridge ${both(f.bridge)}; finger depth ${Math.min(f.finger_depth, 20)} mm; wrist-cord tunnel ${f.lanyard ? 'yes' : 'no'}; print allowance ${m.print_allowance_mm} mm.`);

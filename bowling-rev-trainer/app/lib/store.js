@@ -54,6 +54,7 @@ const FIT_SCHEMA = {
   ball_thumb_depth:   { type: 'num', min: 40, max: 95, label: 'Ball thumb hole depth' },
   ball_flat:          { type: 'num', min: 0, max: 40, label: 'Ball resting flat' },
   ball_groove:        { type: 'bool' },
+  ball_stripe:        { type: 'enum', values: ['none', 'cap', 'cap_band', 'bands'] },
 };
 
 const LIMITS = { name: 120, email: 200, phone: 60, address: 400, notes: 4000, orderNotes: 4000 };

@@ -264,6 +264,7 @@ try {
   assert.ok(bs.volume_cm3 > 4000 && bs.volume_cm3 < 4200 && Math.abs(bs.height_mm - 199.4) < 0.2, `ball ${bs.volume_cm3} cm3, ${bs.height_mm} mm`);
   const ballJob = readFileSync(join(ordersDir, f3, 'job_sheet.txt'), 'utf8');
   assert.match(ballJob, /Rev Ball: 200 mm ball/); assert.match(ballJob, /tree supports/); assert.match(ballJob, /5% gyroid/); assert.match(ballJob, /Ball drill/);
+  assert.match(ballJob, /FILAMENT CHANGES[\s\S]*Add color change[\s\S]*at 93\.[3-6] mm: second colour[\s\S]*at 105\.[3-6] mm: base colour[\s\S]*at 1\d\d(\.\d)? mm: second colour/, 'swap heights on the job sheet');
   assert.equal(/Wrist-cord/.test(ballJob), false, 'no puck-only lines on a ball job sheet');
   ok('Rev Ball order exports a 200 mm ball with its own print and drill instructions');
 

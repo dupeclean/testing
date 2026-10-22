@@ -123,6 +123,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
 @media (prefers-reduced-motion: no-preference) { .seg button, .btn { transition: background .15s, color .15s; } }
 /*__APP_EXTRA_CSS__*/
   .drill th small.rowside{display:block;font-weight:400;font-size:11px;opacity:.75;white-space:nowrap}
+  ul.notes{margin:8px 0 0;padding:10px 12px 10px 28px;border-left:3px solid var(--accent, #1f5f8b);background:var(--surface-2, #eef2f5);border-radius:6px;font-size:13px}
 </style>
 
 <div class="wrap">
@@ -229,7 +230,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
 
       <fieldset data-only-part="ball">
         <legend>Rev Ball</legend>
-        <p class="howto" style="margin:0 0 10px">A release trainer: kneel, swing low, let it go onto the floor along a strip of tape and watch what it does. Thumb out first and fingers lifting makes it <b>roll and curve</b> off the line; a dump rolls straight and short; a hung-up thumb pops it up. Printed solid-looking but sliced light (3 walls, 5% infill, about 500 g at 200 mm). It needs supports under its lower half; sand the scar smooth. Colour the equator groove in with a marker to see the spin.</p>
+        <p class="howto" style="margin:0 0 10px">A release trainer: kneel, swing low, let it go onto the floor along a strip of tape and watch what it does. Thumb out first and fingers lifting makes it <b>roll and curve</b> off the line; a dump rolls straight and short; a hung-up thumb pops it up. Printed solid-looking but sliced light (3 walls, 5% infill, about 500 g at 200 mm). It needs supports under its lower half; sand the scar smooth. A second colour makes the spin easy to see: the slicer swaps filament at the heights FitSlice gives you, so the top cap and a band round the middle come out in the other colour.</p>
         <div class="row">
           <label class="field"><span>Ball diameter</span>
             <span class="row" style="gap:6px"><input type="text" id="ball_d" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
@@ -240,7 +241,15 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
           <label class="field"><span>Resting flat on the bottom</span>
             <span class="row" style="gap:6px"><input type="text" id="ball_flat" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
             <small>A small flat so it stands on the print bed; 0 for a perfect sphere</small></label>
-          <label class="check"><input type="checkbox" id="ball_groove"> Equator groove (colour it in to see the spin)</label>
+          <label class="field"><span>Second colour (filament swap)</span>
+            <select id="ball_stripe">
+              <option value="cap_band">Coloured top cap + band round the middle (3 swaps)</option>
+              <option value="cap">Coloured top cap only (1 swap)</option>
+              <option value="bands">Three bands round the middle (6 swaps)</option>
+              <option value="none">Single colour</option>
+            </select>
+            <small>The exact heights for the swaps are shown below the preview and on the job sheet</small></label>
+          <label class="check"><input type="checkbox" id="ball_groove"> Marker groove round the middle (for a single-colour ball)</label>
         </div>
       </fieldset>
 
@@ -282,6 +291,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
         <div class="bores-wrap"><table class="bores" id="bores"></table></div>
         <p class="note" id="bores_note"></p>
         <div hidden><ul class="warnings" id="warnings"></ul></div>
+        <div hidden><ul class="notes" id="notes"></ul></div>
         <div class="actions">
           <button type="button" class="btn primary" id="save_stl">Download STL</button>
           <button type="button" class="btn" id="save_bundle">Download bundle (.zip: STL + fit sheet)</button>

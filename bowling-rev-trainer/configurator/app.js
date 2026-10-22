@@ -40,13 +40,15 @@ const DEFAULTS = {
   weight_pocket: true, lanyard: true,
   sizer_thumb_center: 25.4, sizer_finger_center: 21.03, sizer_step: IN / 64,
   // Rev Ball: a full printed ball you release on the floor (grip at the top, resting flat underneath)
-  ball_d: 200, ball_thumb_depth: 70, ball_flat: 22, ball_groove: true,
+  ball_d: 200, ball_thumb_depth: 70, ball_flat: 22, ball_groove: false,
+  ball_stripe: 'cap_band',   // second-colour pattern printed by swapping filament: none | cap | cap_band | bands
 };
 
 const LENGTH_KEYS = ['span_middle', 'span_ring', 'thumb_d', 'middle_d', 'ring_d', 'print_allowance',
   'bridge', 'finger_depth', 'thumb_depth', 'sizer_thumb_center', 'sizer_finger_center', 'sizer_step', 'ball_d', 'ball_thumb_depth', 'ball_flat'];
 const PITCH_KEYS = ['thumb_fwd', 'thumb_lat', 'middle_fwd', 'middle_lat', 'ring_fwd', 'ring_lat'];
 const BOOL_KEYS = ['thumb_through', 'weight_pocket', 'lanyard', 'ball_groove'];
+const BALL_STRIPES = ['none', 'cap', 'cap_band', 'bands'];
 
 // Sensible ranges (mm). Anything outside is almost always a typo or the wrong unit
 // (110 typed while the switch is on inches, or 4 5/16 typed while it is on mm), and values
@@ -95,6 +97,7 @@ function validateParams(p) {
       ...(p.part === 'ball' ? ['ball_d', 'ball_thumb_depth', 'ball_flat'] : p.thumb_through ? [] : ['thumb_depth'])];
   if (p.part === 'spinner') keys.splice(keys.indexOf('span_middle'), 2);
   for (const k of keys) { const m = checkLength(k, p[k], 'mm'); if (m) out.push({ key: k, message: m }); }
+  if (p.part === 'ball' && !BALL_STRIPES.includes(p.ball_stripe)) out.push({ key: 'ball_stripe', message: 'Choose a colour pattern for the ball.' });
   if (p.part !== 'sizer') for (const k of PITCH_KEYS) {
     if (!Number.isFinite(p[k]) || Math.abs(p[k]) > PITCH_LIMIT) out.push({ key: k, message: `Pitch (${k.replace('_', ' ')}) must be between -1" and 1".` });
   }
@@ -328,12 +331,25 @@ function makeBuilder(W) {
     const mid = drill(D.x_m, D.y_m, D.md, p.finger_depth, p.middle_fwd, p.middle_lat, H, false, D.mir, -1, R);
     const ring = drill(D.x_r, D.y_r, D.rd, p.finger_depth, p.ring_fwd, p.ring_lat, H, false, D.mir, -1, R);
     const cuts = [thumb.cut, mid.cut, ring.cut];
-    if (p.ball_groove) {
-      // a 2 mm wide, 0.8 mm deep ring round the equator; coloured in with a marker it shows the spin
-      const outer = T(Manifold.cylinder(2, R + 5, R + 5, 128));
-      const inner = T(T(Manifold.cylinder(2.4, R - 0.8, R - 0.8, 128)).translate([0, 0, -0.2]));
-      cuts.push(T(T(outer.subtract(inner)).translate([0, 0, R - s - 1])));
-    }
+    const groove = (z, w, deep) => {   // a groove w wide and `deep` deep round the ball, centred on height z
+      const rz = Math.sqrt(Math.max(1, R * R - (z - (R - s)) ** 2));   // the ball's radius at that height
+      const outer = T(Manifold.cylinder(w, R + 5, R + 5, 128));
+      const inner = T(T(Manifold.cylinder(w + 0.4, rz - deep, rz - deep, 128)).translate([0, 0, -0.2]));
+      return T(T(outer.subtract(inner)).translate([0, 0, z - w / 2]));
+    };
+    if (p.ball_groove) cuts.push(groove(R - s, 2, 0.8));   // marker groove round the equator
+    // Second-colour pattern: the slicer swaps filament at these heights (everything printed above a
+    // swap takes the new colour until the next swap). A fine groove marks each boundary.
+    const zEq = R - s;
+    const edges = [thumb, mid, ring].map((h, i) => {   // lowest point of each hole's chamfer rim
+      const d = [D.td, D.md, D.rd][i], r = Math.hypot(h.axis.p[0], h.axis.p[1]) + d / 2 + G.rim_chamfer;
+      return R - s + Math.sqrt(Math.max(0, R * R - r * r));
+    });
+    const zCap = Math.floor(Math.min(...edges) - 6);
+    const swaps = { none: [], cap: [[zCap, 'cap']], cap_band: [[zEq - 6, 'band'], [zEq + 6, 'base'], [zCap, 'cap']],
+      bands: [[zEq - 36, 'band'], [zEq - 24, 'base'], [zEq - 6, 'band'], [zEq + 6, 'base'], [zEq + 24, 'band'], [zEq + 36, 'base']] }[p.ball_stripe] || [];
+    for (const [z] of swaps) cuts.push(groove(z, 0.6, 0.3));
+    const colorChanges = swaps.map(([z, what]) => ({ z_mm: +z.toFixed(1), colour: what === 'base' ? 'base colour' : 'second colour' }));
     const result = T(body.subtract(T(Manifold.union(cuts))));
     const warnings = [];
     if (overlap(thumb.bore, mid.bore) || overlap(thumb.bore, ring.bore))
@@ -345,7 +361,10 @@ function makeBuilder(W) {
       warnings.push(`The web between the finger holes narrows to ${Math.max(0, web).toFixed(1)} mm deep inside. That is a fragile hairline when printed. Increase the bridge or reduce the finger depth.`);
     const floor = H - R - s + (R - p.ball_thumb_depth);   // rough: thumb bore end above the bed when aimed at the centre
     if (p.ball_thumb_depth > R - 8) warnings.push('The thumb hole reaches almost to the centre of the ball. Make it shallower.');
-    return { result, warnings, axes: [{ name: 'thumb', ...thumb.axis }, { name: 'middle', ...mid.axis }, { name: 'ring', ...ring.axis }], floor };
+    const notes = colorChanges.length
+      ? [`Two-colour ball: in the slicer add a filament change at these heights (Bambu Studio: right-click the layer slider, "Add color change"): ${colorChanges.map(c => `${c.z_mm} mm → ${c.colour}`).join('; ')}. Start the print in the base colour.`]
+      : [];
+    return { result, warnings, notes, colorChanges, axes: [{ name: 'thumb', ...thumb.axis }, { name: 'middle', ...mid.axis }, { name: 'ring', ...ring.axis }], floor };
   }
 
   // engraved 7-segment labels for the sizer plate (no font needed)
@@ -448,6 +467,8 @@ function makeBuilder(W) {
         bboxMin: bb.min, bboxMax: bb.max,
         tris: m.numTri(),
         warnings: out.warnings,
+        notes: out.notes || [],
+        colorChanges: out.colorChanges || [],
         axes: out.axes,
         sizes: out.sizes || null,
         derived: D,
@@ -668,7 +689,7 @@ function fitSheet(p, D, data) {
     print_allowance_mm: p.part === 'sizer' ? 0 : p.print_allowance,
     thumb_bore_in: fraction64(D.td / IN), middle_bore_in: fraction64(D.md / IN), ring_bore_in: fraction64(D.rd / IN),
   };
-  if (data) sheet.model = { volume_cm3: +(data.volume / 1000).toFixed(1), bbox_mm: data.bbox.map(v => +v.toFixed(1)), triangles: data.tris };
+  if (data) sheet.model = { volume_cm3: +(data.volume / 1000).toFixed(1), bbox_mm: data.bbox.map(v => +v.toFixed(1)), triangles: data.tris, ...(data.colorChanges && data.colorChanges.length ? { colour_changes: data.colorChanges } : {}) };
   return sheet;
 }
 
@@ -730,6 +751,7 @@ async function main() {
     for (const k of PITCH_KEYS) { const el = $(k); if (el) el.value = state[k] === 0 ? '0' : fraction64(state[k]); }
     for (const k of BOOL_KEYS) { const el = $(k); if (el) el.checked = !!state[k]; }
     $('hand').value = state.hand;
+    $('ball_stripe').value = state.ball_stripe;
     $('size_source').value = state.size_source;
     document.querySelectorAll('[data-part]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.part === state.part)));
     document.querySelectorAll('[data-only-part]').forEach(el => { el.hidden = !el.dataset.onlyPart.split(' ').includes(state.part); });
@@ -772,6 +794,7 @@ async function main() {
     $(k).addEventListener('change', (e) => { state[k] = e.target.checked; if (k === 'thumb_through') $('thumb_depth_row').hidden = state.thumb_through; schedule(); });
   }
   $('hand').addEventListener('change', e => { state.hand = e.target.value; rowLabels(); refreshHints(); schedule(); });
+  $('ball_stripe').addEventListener('change', e => { state.ball_stripe = e.target.value; schedule(); });
   $('size_source').addEventListener('change', e => {
     state.size_source = e.target.value;
     state.print_allowance = state.size_source === 'sizer_plate' ? 0 : 0.4;
@@ -829,6 +852,9 @@ async function main() {
       $('bores').innerHTML = r('Finger row (top)', data.sizes.fingerSizes) + r('Thumb row (bottom)', data.sizes.thumbSizes);
       $('bores_note').textContent = 'Each bore is engraved with its modeled diameter in mm. The one that fits snugly at the first joint, with no squeeze needed to hang on, is your size on this printer.';
     }
+    const n = $('notes');
+    n.innerHTML = (data.notes || []).map(t => `<li>${t}</li>`).join('');
+    n.parentElement.hidden = !(data.notes || []).length;
     const w = $('warnings');
     w.innerHTML = data.warnings.map(t => `<li>${t}</li>`).join('');
     w.parentElement.hidden = !data.warnings.length;
@@ -923,7 +949,7 @@ async function main() {
     // Build print files for the given parts from the current form values.
     // Nothing in the visible form changes.
     buildFiles(parts, overrides = {}) {
-      const files = [], warnings = [], stats = [], axes = {};
+      const files = [], warnings = [], notes = [], stats = [], axes = {};
       let sheet = null;
       for (const part of parts) {
         const p = { ...state, ...overrides, part };
@@ -931,16 +957,17 @@ async function main() {
         const base = fileBase(p, data.derived);
         files.push({ name: `${base}.stl`, data: toSTL(data.mesh, `${base} - ${APP_NAME} ${APP_VERSION}`), part });
         data.warnings.forEach(w => warnings.push(`${part}: ${w}`));
+        (data.notes || []).forEach(t => notes.push(`${part}: ${t}`));
         axes[part] = data.axes.map(a => ({ name: a.name, p: a.p, dir: a.dir }));
         // the ball is sliced with 3 walls and 5% infill, the other parts with 4 walls and 20%
         const infill = part === 'ball' ? 0.05 : 0.2;
         const shell = Math.min(data.volume, data.area * (part === 'ball' ? 1.3 : 1.6));
         const grams = Math.round(((shell + (data.volume - shell) * infill) * 1.27 / 1000) / 5) * 5;
         stats.push({ part, volume_cm3: +(data.volume / 1000).toFixed(1), bbox_mm: data.bbox.map(v => +v.toFixed(1)),
-          grams, infill_pct: infill * 100, grams_20pct: grams });
+          grams, infill_pct: infill * 100, grams_20pct: grams, color_changes: data.colorChanges });
         if (!sheet) sheet = fitSheet(p, data.derived, data);
       }
-      return { files, warnings, stats, axes, fitSheet: sheet };
+      return { files, warnings, notes, stats, axes, fitSheet: sheet };
     },
   };
 }

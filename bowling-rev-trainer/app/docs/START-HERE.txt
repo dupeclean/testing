@@ -115,8 +115,12 @@ folder path from the old computer.
   customer's grip. Choose the part "Ball" (or product "Rev Ball"). Slice
   it with 3 walls and 5% infill, grip holes facing up, tree supports
   under the lower half; snap the supports off and sand the scar smooth.
-  About 475 g and 10 to 14 hours. Colour the equator groove in with a
-  marker. To use it: kneel, swing low, let it go along a strip of tape
+  About 475 g and 10 to 14 hours. It prints in TWO colours with no
+  painting: after slicing, right-click the layer slider in Bambu Studio
+  at each height listed on the job sheet and choose "Add color change";
+  the printer pauses there so you can swap the filament (with an AMS it
+  swaps by itself). Start in the base colour. The coloured top cap and
+  the band round the middle make the spin easy to see. To use it: kneel, swing low, let it go along a strip of tape
   on the floor with a couch or wall 1.5 to 2 m away. Rolls and curves off
   the line = thumb out first, fingers lifted. Straight and short = dumped.
   Pops up = thumb hung up. Spins in place = hand on top. The thumb hole

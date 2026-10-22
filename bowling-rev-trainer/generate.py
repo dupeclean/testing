@@ -45,6 +45,7 @@ SCHEMA = {
     "ball_thumb_depth": (float, 40, 95),
     "ball_flat":   (float, 0,     40),
     "ball_groove": (bool,  None,  None),
+    "ball_stripe": (str,   None,  None),
 }
 # Keys the FitSlice app writes into fit_sheet.json that this script does not need
 # (its job sheet / model summary, and options trainer.scad has no switch for).
@@ -67,6 +68,8 @@ def validate(sheet: dict) -> dict:
             val = typ(raw)
         if key == "hand" and val not in ("right", "left"):
             sys.exit("error: hand must be 'right' or 'left'")
+        if key == "ball_stripe" and val not in ("none", "cap", "cap_band", "bands"):
+            sys.exit("error: ball_stripe must be none, cap, cap_band or bands")
         if lo is not None and not (lo <= val <= hi):
             sys.exit(f"error: {key}={val} outside sane range [{lo}, {hi}]")
         out[key] = val

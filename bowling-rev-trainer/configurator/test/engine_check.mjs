@@ -18,7 +18,7 @@ await page.goto(`http://127.0.0.1:${server.address().port}/`);
 await page.waitForFunction(() => window.__cfgApp && window.__cfgApp.ready, null, { timeout: 90000 });
 
 const build = (params, parts = ['puck']) => page.evaluate(([p, parts]) => {
-  try { const b = window.__cfgApp.buildFiles(parts, p); return { ok: true, warnings: b.warnings, axes: b.axes, bytes: b.files.map(f => f.data.length) }; }
+  try { const b = window.__cfgApp.buildFiles(parts, p); return { ok: true, warnings: b.warnings, notes: b.notes, stats: b.stats, axes: b.axes, bytes: b.files.map(f => f.data.length) }; }
   catch (e) { return { ok: false, message: e.message }; }
 }, [params, parts]);
 const results = [];
@@ -96,6 +96,15 @@ const pk = await build(SHEET, ['puck']);
 const flat = (q) => [q[0], q[1]];
 for (const n of ['thumb', 'middle', 'ring']) assert.ok(Math.hypot(...flat(bp(n)).map((v, i) => v - flat(pk.axes.puck.find(a => a.name === n).p)[i])) < 0.01, n + ' sits at the same plan position as on the puck');
 ok('ball builds with the same hole layout as the puck, holes at the top, no warnings');
+// the two-colour pattern: swap heights sit round the equator and just below the grip
+const cc = r.stats[0].color_changes;
+assert.equal(cc.length, 3, 'cap + band = 3 filament changes: ' + JSON.stringify(cc));
+assert.ok(Math.abs(cc[0].z_mm - 93.5) < 0.2 && Math.abs(cc[1].z_mm - 105.5) < 0.2, 'band straddles the equator: ' + JSON.stringify(cc));
+assert.ok(cc[2].z_mm > 140 && cc[2].z_mm < 165 && cc[2].colour === 'second colour', 'cap starts below the lowest hole rim: ' + JSON.stringify(cc));
+assert.ok(r.notes && r.notes.some(n => /Add color change/.test(n)), 'the swap heights are explained: ' + JSON.stringify(r.notes));
+r = await build({ ...SHEET, ball_stripe: 'none' }, ['ball']);
+assert.equal(r.stats[0].color_changes.length, 0);
+ok('two-colour pattern gives the filament-change heights (none for a single-colour ball)');
 r = await build({ ...SHEET, ball_d: 150 }, ['ball']);
 assert.equal(r.ok, false); assert.match(r.message, /too small for these spans/);
 r = await build({ ...SHEET, ball_thumb_depth: 96 }, ['ball']);

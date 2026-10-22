@@ -71,8 +71,10 @@ ball_d = 200;
 ball_thumb_depth = 70;
 // Small flat on the bottom so the ball stands on the print bed (0 = perfect sphere)
 ball_flat = 22;
-// Groove round the equator; colour it in with a marker to see the spin
-ball_groove = true;
+// Marker groove round the equator (for a single-colour ball)
+ball_groove = false;
+// Second-colour pattern made by filament swaps at exact heights: none, cap, cap_band, bands
+ball_stripe = "cap_band"; // [none, cap, cap_band, bands]
 
 /* [Options] */
 // Pocket in the puck base for stacked coins/washers (progressive loading). Tape over when filled.
@@ -220,13 +222,27 @@ module rev_ball() {
         drill(0, -ty, thumb_d, ball_thumb_depth, thumb_fwd, thumb_lat, H, +1, false, R);
         drill(x_m, y_m, middle_d, finger_depth, middle_fwd, middle_lat, H, -1, false, R);
         drill(x_r, y_r, ring_d,   finger_depth, ring_fwd,   ring_lat,   H, -1, false, R);
-        if (ball_groove)
-            translate([0, 0, R - s - 1]) difference() {
-                cylinder(r = R + 5, h = 2);
-                translate([0, 0, -0.2]) cylinder(r = R - 0.8, h = 2.4);
-            }
+        if (ball_groove) ball_ring(R, s, R - s, 2, 0.8);
+        // a fine groove at every colour boundary (the slicer swaps filament at these heights)
+        for (z = ball_swaps(R, s)) ball_ring(R, s, z, 0.6, 0.3);
     }
 }
+
+// Groove w wide and `deep` deep round a ball of radius R (flat sagitta s), centred on height z
+module ball_ring(R, s, z, w, deep) {
+    rz = sqrt(max(1, R*R - pow(z - (R - s), 2)));   // the ball's radius at that height
+    translate([0, 0, z - w/2]) difference() {
+        cylinder(r = R + 5, h = w);
+        translate([0, 0, -0.2]) cylinder(r = rz - deep, h = w + 0.4);
+    }
+}
+// Lowest point of a hole's chamfer rim on the ball surface
+function ball_edge_z(R, s, x, y, d) = R - s + sqrt(max(0, R*R - pow(sqrt(x*x + y*y) + d/2 + rim_chamfer, 2)));
+function ball_cap_z(R, s) = floor(min(ball_edge_z(R, s, 0, -ty, thumb_d), ball_edge_z(R, s, x_m, y_m, middle_d), ball_edge_z(R, s, x_r, y_r, ring_d)) - 6);
+function ball_swaps(R, s) =
+    ball_stripe == "cap"      ? [ball_cap_z(R, s)] :
+    ball_stripe == "cap_band" ? [R - s - 6, R - s + 6, ball_cap_z(R, s)] :
+    ball_stripe == "bands"    ? [R - s - 36, R - s - 24, R - s - 6, R - s + 6, R - s + 24, R - s + 36] : [];
 
 // ---------------------------------------------------------------------
 // Rev spinner — release / lift trainer (fingers only)
