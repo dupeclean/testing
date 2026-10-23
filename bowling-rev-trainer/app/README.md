@@ -14,7 +14,9 @@ file ships next to `FitSlice.exe`.
 - **Order book** (`lib/store.js`, UI in `renderer-src/orders.*`): orders, statuses, saved drill
   sheets, CSV export. Order numbers (`FS-0001`, ...) are never reused.
 - **Exports** (`lib/files.js`): one folder per order with the STLs (order number engraved in
-  the base of every part but the sizer plate), `fit_sheet.json`, `job_sheet.txt` (print settings, filament-change heights, no
+  the base of every part but the sizer plate), a two-colour `.3mf` of the ball in Bambu Studio's
+  project layout (one object, a part per colour, filaments 1 and 2 assigned; `toBambu3MF` in the
+  engine), `fit_sheet.json`, `job_sheet.txt` (print settings, filament-change heights, no
   customer contact details) and `customer_card.pdf` (a one-page how-to for the customer,
   written without a PDF library in `renderer-src/orders.js`).
 - **Release feedback parts** (design notes in `../docs/release-feedback.md`): the release gate

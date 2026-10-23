@@ -8,7 +8,7 @@ const path = require('path');
 const { UserError } = require('./store');
 const { retrySync, stage, commit } = require('./atomic');
 
-const ALLOWED_EXT = new Set(['.stl', '.json', '.txt', '.pdf']);
+const ALLOWED_EXT = new Set(['.stl', '.3mf', '.json', '.txt', '.pdf']);   // .3mf: the ball's two-colour file for Bambu Studio
 const MAX_FILES = 12;
 const MAX_BYTES = 100 * 1024 * 1024;
 const RESERVED = /^(con|prn|aux|nul|com[1-9]|lpt[1-9])$/i;

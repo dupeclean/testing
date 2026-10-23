@@ -46,8 +46,11 @@ concise. The owner has asked for honesty about what has and has not been physica
   the base, mirrored; on the puck at the finger end (the thumb bore exits the base 20-30 mm in
   from its entry, so the thumb end is not free).
 - Rev Ball: R = ball_d/2, resting flat 30 mm across by default (1.1 mm deep; orders saved
-  earlier keep their 22 mm), blind thumb 70 mm, cap + band colour pattern with swap heights on
-  the job sheet, 0.3 mm grooves at colour boundaries; thumb_hole=false gives a two-handed ball.
+  earlier keep their 22 mm), blind thumb 70 mm, second-colour pattern with swap heights on the job
+  sheet and 0.3 mm grooves at the boundaries (default since 2026-10-23: `spot_band`, a small spot
+  just above the highest hole edge plus a 12 mm band placed by the engine clear of both bullseyes,
+  low on the ball when they are in the way; `cap_band` and the others remain); thumb_hole=false
+  gives a two-handed ball.
   For the default 200 mm ball the swaps are 92.9, 104.9 and 154 mm with the 30 mm flat (93.4,
   105.4 and 154 with a 22 mm flat); `configurator/test/groove_check.mjs` confirms the grooves
   on an exported STL.
@@ -198,6 +201,24 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    one body each (bumpers four). NOT printed: first print checks the tenon press fit (0.25 mm
    clearance), the saddle's fit to the forearm, and which bumper touches at about 90 degrees. A
    printed yo-yo remains unbuilt.
+13. Small spot pattern, automatic band placement and the two-colour 3MF (2026-10-23, after the owner
+   found the 45 mm cap "a lot" of filament and asked for the software to place the marks and carry
+   the colours). Engine: `spot` / `spot_band` patterns (spot = ceil(highest hole-edge z) + 2 mm;
+   on a no-thumb ball the holes sit on the pole, so the mark starts just below them); the band is
+   searched outward from the middle in 1 mm steps for a 12 mm window clear of both bullseye zones
+   (`pap.zones`), above the flat and below the top mark, else dropped with a note; `stats.pattern`
+   = { spot_z, cap_z, band_mm, notes }. Every ball export now also writes `<ball>.3mf`
+   (`toBambu3MF`): a stored zip with [Content_Types].xml, _rels/.rels, 3D/3dmodel.model (one
+   object per colour part, a components object, a build item at 128,128 with the Bambu
+   Application and BambuStudio:3mfVersion metadata) and Metadata/model_settings.config (object >
+   part id/subtype=normal_part with metadata name, matrix, source_file, extruder 1|2; plate >
+   plater_id, model_instance). The parts are the ball minus / within the second-colour slabs,
+   split while the Manifold is alive in build(). The layout follows Bambu Studio's bbs_3mf.cpp
+   (tag constants read from the source) and community notes; it parses with trimesh (two
+   watertight parts) and `files.js` now allows `.3mf`. NOT VERIFIED: that Bambu Studio opens it
+   as one object in two colours. The owner's first import is the test; the STL + heights remain
+   the fallback and the job sheet says so. `trainer.scad` mirrors the spot (`ball_spot_z`) and
+   takes the band centre as `band_z` (the parity check passes the engine's value; -2 = no band).
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 
@@ -276,7 +297,7 @@ customer card and the tests:
 
 Parity with `trainer.scad` (IoU of the browser mesh against OpenSCAD 2021.01, print_allowance 0,
 the owner's sheet, after the merge with the review fixes): gate 0.9999, plugs 0.9989, inlays (plugs +
-rings) 0.9988, ball with dots and rings 0.9991, ball with dots
+rings) 0.9988, ball with dots, rings and the spot pattern 0.9991, ball with dots
 0.9991, humming spinner 0.9984 (16 slots 0.9984); volumes agree within 0.3%. Tests on the PC:
 engine_check 24, unit 26, e2e 18 from source and against the rebuilt zip,
 `feedback_check` 8 cases (mesh checks: two bodies in the gate file, 3 mm sockets at the reported

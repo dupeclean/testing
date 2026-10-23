@@ -265,7 +265,8 @@ try {
   await page.click('#ob-form-export');
   await page.waitForFunction(() => /Saved \d+ files for FS-0003/.test(document.getElementById('ob-toast-text').textContent), null, { timeout: 90000 });
   const f3 = readdirSync(ordersDir).find(n => n.startsWith('FS-0003'));
-  const ballStl = readdirSync(join(ordersDir, f3)).find(n => /rev_ball200/.test(n));
+  const ballStl = readdirSync(join(ordersDir, f3)).find(n => /rev_ball200.*\.stl$/.test(n));
+  assert.ok(readdirSync(join(ordersDir, f3)).some(n => /rev_ball200.*\.3mf$/.test(n)), 'the two-colour 3MF is exported with the ball: ' + readdirSync(join(ordersDir, f3)).join(', '));
   assert.ok(ballStl, 'ball STL exported: ' + readdirSync(join(ordersDir, f3)).join(', '));
   const bs = readStl(join(ordersDir, f3, ballStl));
   assert.ok(bs.volume_cm3 > 4000 && bs.volume_cm3 < 4200 && Math.abs(bs.height_mm - 198.9) < 0.2, `ball ${bs.volume_cm3} cm3, ${bs.height_mm} mm`);
@@ -283,7 +284,7 @@ try {
   copyFileSync(join(ordersDir, f3, 'customer_card.pdf'), join(shotDir, 'customer_card.pdf')); copyFileSync(join(ordersDir, f3, 'job_sheet.txt'), join(shotDir, 'job_sheet_ball.txt'));
   const ballSheet = JSON.parse(readFileSync(join(ordersDir, f3, 'fit_sheet.json'), 'utf8'));
   assert.ok(Math.abs(ballSheet.thumb_oval_d - 23.02) < 0.05 && ballSheet.thumb_oval_angle === 55 && ballSheet.serial === 'FS-0003', 'fit sheet records the oval and the engraved number');
-  assert.match(ballJob, /FILAMENT CHANGES[\s\S]*Add color change[\s\S]*at 92\.[7-9] mm: second colour[\s\S]*at 104\.[7-9] mm: base colour[\s\S]*at 1\d\d(\.\d)? mm: second colour/, 'swap heights on the job sheet');
+  assert.match(ballJob, /FILAMENT CHANGES[\s\S]*Add color change[\s\S]*at \d\d(\.\d)? mm: second colour[\s\S]*at \d\d(\.\d)? mm: base colour[\s\S]*at 1[89]\d(\.\d)? mm: second colour[\s\S]*open the \.3mf/, 'swap heights and the 3mf on the job sheet');
   assert.equal(/Wrist-cord/.test(ballJob), false, 'no puck-only lines on a ball job sheet');
   ok('Rev Ball order with an oval thumb exports a 200 mm ball, a job sheet with the oval, bevel, engraving and support settings, and a customer card PDF');
 

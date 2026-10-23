@@ -134,13 +134,19 @@ folder path from the old computer.
   "On build plate only" (so nothing grows inside the holes). Seam:
   random or scarf (a seam down one side would make it wobble). Snap the
   supports off and sand the scar smooth so it rolls true. About 475 g
-  and 10 to 14 hours. It prints in TWO colours with no painting: after
-  slicing, right-click the layer slider in Bambu Studio at each height
-  listed on the job sheet and choose "Add color change". With your AMS,
-  pick the second filament there and the printer swaps by itself; without
-  one it pauses so you can swap by hand. Start in the base colour. The
-  coloured top cap and the band round the middle make the spin easy to
-  see. To use it: kneel, swing low, let it go along a strip of tape on
+  and 10 to 14 hours. It prints in TWO colours with no painting.
+  Easiest: open the .3mf from the order folder in Bambu Studio. It
+  arrives as one object in two parts with filament 1 (base colour) and
+  filament 2 (second colour) already assigned, so just check it and
+  slice. Otherwise open the STL, right-click the layer slider at each
+  height on the job sheet and choose "Add color change" (with your AMS
+  pick the second filament there; without one the printer pauses so you
+  can swap by hand). Start in the base colour and turn the prime tower
+  off (Others tab): the swaps are one colour per layer. The default
+  pattern is a small coloured spot above the grip holes plus a band that
+  FitSlice places clear of the bullseyes (low on the ball when they are
+  in the way); the full top cap and other patterns are in the "Second
+  colour" list. To use it: kneel, swing low, let it go along a strip of tape on
   the floor with a couch or wall 1.5 to 2 m away. Rolls and curves off
   the line = thumb out first, fingers lifted. Straight but long and
   lively = strong forward roll (fine). Straight and short = dumped. Pops

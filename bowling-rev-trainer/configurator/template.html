@@ -280,7 +280,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
 
       <fieldset data-only-part="ball">
         <legend>Rev Ball</legend>
-        <p class="howto" style="margin:0 0 10px">A release trainer: kneel, swing low, let it go onto the floor along a strip of tape and watch what it does. Thumb out first and fingers lifting makes it <b>roll and curve</b> off the line; a dump rolls straight and short; a hung-up thumb pops it up. Printed solid-looking but sliced light (3 walls, 5% infill, about 500 g at 200 mm). It needs supports under its lower half; sand the scar smooth. A second colour makes the spin easy to see: the slicer swaps filament at the heights FitSlice gives you, so the top cap and a band round the middle come out in the other colour. The <b>axis target</b> (dots and rings, set below) marks the axis your release should spin about: spin it right and the bullseye stands still while the rest of the ball blurs. Its contrasting plugs and rings come in their own file.</p>
+        <p class="howto" style="margin:0 0 10px">A release trainer: kneel, swing low, let it go onto the floor along a strip of tape and watch what it does. Thumb out first and fingers lifting makes it <b>roll and curve</b> off the line; a dump rolls straight and short; a hung-up thumb pops it up. Printed solid-looking but sliced light (3 walls, 5% infill, about 500 g at 200 mm). It needs supports under its lower half; sand the scar smooth. A second colour makes the spin easy to see: the slicer swaps filament at the heights FitSlice gives you, so a small spot above the grip holes (or the full cap) and a band come out in the other colour; FitSlice places them from the layout, the band clear of the bullseyes, and the .3mf in the download carries the colours already assigned. The <b>axis target</b> (dots and rings, set below) marks the axis your release should spin about: spin it right and the bullseye stands still while the rest of the ball blurs. Its contrasting plugs and rings come in their own file.</p>
         <div class="row">
           <label class="field"><span>Ball diameter</span>
             <span class="row" style="gap:6px"><input type="text" id="ball_d" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
@@ -294,8 +294,10 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
             <small>A small flat so it stands on the print bed; 0 for a perfect sphere</small></label>
           <label class="field"><span>Second colour (filament swap)</span>
             <select id="ball_stripe">
-              <option value="cap_band">Coloured top cap + band round the middle (3 swaps)</option>
-              <option value="cap">Coloured top cap only (1 swap)</option>
+              <option value="spot_band">Small coloured spot on top + a band (3 swaps, least filament)</option>
+              <option value="spot">Small coloured spot on top only (1 swap)</option>
+              <option value="cap_band">Full coloured top cap + a band (3 swaps)</option>
+              <option value="cap">Full coloured top cap only (1 swap)</option>
               <option value="bands">Three bands round the middle (6 swaps)</option>
               <option value="none">Single colour</option>
             </select>

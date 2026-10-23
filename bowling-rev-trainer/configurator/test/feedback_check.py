@@ -123,6 +123,10 @@ def main():
             for k in SCAD_KEYS:
                 if k in prm:
                     cmd += ["-D", f"{k}={literal(prm[k])}"]
+            pat = (cases[case].get("stats") or {}).get("pattern")
+            if pat is not None:   # the app placed the band; the reference takes its value
+                band = pat.get("band_mm")
+                cmd += ["-D", f"band_z={(band[0] + band[1]) / 2 if band else -2}"]
             cmd.append(str(SCAD))
             r = subprocess.run(cmd, capture_output=True, text=True)
             if r.returncode:

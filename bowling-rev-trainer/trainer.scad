@@ -91,7 +91,10 @@ ball_flat = 30;
 // Marker groove round the equator (for a single-colour ball)
 ball_groove = false;
 // Second-colour pattern made by filament swaps at exact heights: none, cap, cap_band, bands
-ball_stripe = "cap_band"; // [none, cap, cap_band, bands]
+ball_stripe = "spot_band"; // [none, spot, spot_band, cap, cap_band, bands]
+// Centre height of the band: -1 = the middle. The app places the band clear of the bullseyes and
+// the parity check passes its value here; below -1 = no band.
+band_z = -1;
 // Axis target dots: two plug sockets at the axis the release should spin about (the bowler's PAP)
 pap_marker = true;
 // Axis point, measured along the surface from the grip centre (mm): over toward the hand side, up toward the fingers
@@ -402,9 +405,19 @@ function ball_edge_z(R, s, x, y, d, bev) = R - s + sqrt(max(0, R*R - pow(sqrt(x*
 function ball_cap_z(R, s) = floor(min(thumb_hole ? ball_edge_z(R, s, 0, -ty, thumb_d + ov_t, thumb_bevel) : 1e9,
     ball_edge_z(R, s, x_m, thumb_hole ? y_m : 0, middle_d + ov_m, finger_bevel),
     ball_edge_z(R, s, x_r, thumb_hole ? y_r : 0, ring_d + ov_r, finger_bevel)) - 6);
+// Highest point of a hole's chamfer rim; the small spot starts 2 mm above the highest of them
+function ball_edge_top_z(R, s, x, y, d, bev) = R - s + sqrt(max(0, R*R - pow(max(0, sqrt(x*x + y*y) - d/2 - bev), 2)));
+function ball_spot_z0(R, s) = ceil(max(thumb_hole ? ball_edge_top_z(R, s, 0, -ty, thumb_d + ov_t, thumb_bevel) : -1e9,
+    ball_edge_top_z(R, s, x_m, thumb_hole ? y_m : 0, middle_d + ov_m, finger_bevel),
+    ball_edge_top_z(R, s, x_r, thumb_hole ? y_r : 0, ring_d + ov_r, finger_bevel)) + 2);
+function ball_spot_z(R, s) = ball_spot_z0(R, s) > 2*R - s - 8 ? ball_cap_z(R, s) : ball_spot_z0(R, s);   // no room on a no-thumb ball: the cap
+function band_c(R, s) = band_z < 0 ? R - s : band_z;
+function band_swaps(R, s) = band_z < -1 ? [] : [band_c(R, s) - 6, band_c(R, s) + 6];
 function ball_swaps(R, s) =
+    ball_stripe == "spot"      ? [ball_spot_z(R, s)] :
+    ball_stripe == "spot_band" ? concat(band_swaps(R, s), [ball_spot_z(R, s)]) :
     ball_stripe == "cap"      ? [ball_cap_z(R, s)] :
-    ball_stripe == "cap_band" ? [R - s - 6, R - s + 6, ball_cap_z(R, s)] :
+    ball_stripe == "cap_band" ? concat(band_swaps(R, s), [ball_cap_z(R, s)]) :
     ball_stripe == "bands"    ? [R - s - 36, R - s - 24, R - s - 6, R - s + 6, R - s + 24, R - s + 36] : [];
 
 // ---------------------------------------------------------------------

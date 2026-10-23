@@ -55,7 +55,7 @@ const FIT_SCHEMA = {
   ball_thumb_depth:   { type: 'num', min: 40, max: 95, label: 'Ball thumb hole depth' },
   ball_flat:          { type: 'num', min: 0, max: 40, label: 'Ball resting flat' },
   ball_groove:        { type: 'bool' },
-  ball_stripe:        { type: 'enum', values: ['none', 'cap', 'cap_band', 'bands'] },
+  ball_stripe:        { type: 'enum', values: ['none', 'spot', 'spot_band', 'cap', 'cap_band', 'bands'] },
   // keys added after 1.0: an order saved by an older version gets the default (`def`) instead of
   // inheriting whatever sheet happens to be on screen when it is reopened
   thumb_hole:         { type: 'bool', def: true },

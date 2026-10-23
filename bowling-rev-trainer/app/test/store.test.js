@@ -117,6 +117,7 @@ test('safeFileName allows only stl/json/txt and strips paths', () => {
   assert.equal(safeFileName('C:\\Windows\\fit_sheet.json'), 'fit_sheet.json');
   assert.throws(() => safeFileName('run.exe'), /cannot be exported/);
   assert.throws(() => safeFileName('noext'), /cannot be exported/);
+  assert.equal(safeFileName('rev_ball200_R_span104p8-109p5.3mf'), 'rev_ball200_R_span104p8-109p5.3mf');   // the ball's two-colour file
 });
 
 test('exportOrderFiles writes into <base>/<number name>/ and nowhere else', () => {

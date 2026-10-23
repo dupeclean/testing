@@ -96,15 +96,34 @@ const pk = await build(SHEET, ['puck']);
 const flat = (q) => [q[0], q[1]];
 for (const n of ['thumb', 'middle', 'ring']) assert.ok(Math.hypot(...flat(bp(n)).map((v, i) => v - flat(pk.axes.puck.find(a => a.name === n).p)[i])) < 0.01, n + ' sits at the same plan position as on the puck');
 ok('ball builds with the same hole layout as the puck, holes at the top, no warnings');
-// the two-colour pattern: swap heights sit round the equator and just below the grip
-const cc = r.stats[0].color_changes;
-assert.equal(cc.length, 3, 'cap + band = 3 filament changes: ' + JSON.stringify(cc));
-assert.ok(Math.abs(cc[0].z_mm - 92.9) < 0.2 && Math.abs(cc[1].z_mm - 104.9) < 0.2, 'band straddles the equator (ball top at 198.9 with the 30 mm flat): ' + JSON.stringify(cc));
-assert.ok(cc[2].z_mm > 140 && cc[2].z_mm < 165 && cc[2].colour === 'second colour', 'cap starts below the lowest hole rim: ' + JSON.stringify(cc));
-assert.ok(r.notes && r.notes.some(n => /Add color change/.test(n)), 'the swap heights are explained: ' + JSON.stringify(r.notes));
+// the two-colour pattern: a small spot just above the highest hole edge, a 12 mm band placed clear of the bullseyes
+const cc = r.stats[0].color_changes, pat = r.stats[0].pattern;
+assert.equal(cc.length, 3, 'spot + band = 3 filament changes: ' + JSON.stringify(cc));
+assert.ok(pat && pat.spot_z > 180 && pat.spot_z < 196 && cc[2].z_mm === pat.spot_z && cc[2].colour === 'second colour', 'the spot starts just above the highest hole edge: ' + JSON.stringify([pat, cc]));
+assert.ok(pat.band_mm && Math.abs(pat.band_mm[1] - pat.band_mm[0] - 12) < 0.01 && pat.band_mm[1] < pat.spot_z - 4, 'a 12 mm band below the spot: ' + JSON.stringify(pat));
+const zones = r.stats[0].pap.zones;
+assert.ok(zones.length === 2 && zones.every(([lo, hi]) => pat.band_mm[1] <= lo - 2 + 0.06 || pat.band_mm[0] >= hi + 2 - 0.06), 'the band clears both bullseyes: ' + JSON.stringify([pat.band_mm, zones]));
+assert.ok(pat.notes.some(n => /keep clear of the bullseyes/.test(n)), 'the moved band is explained: ' + JSON.stringify(pat.notes));
+assert.ok(r.notes && r.notes.some(n => /Add color change/.test(n) && /3mf/.test(n)), 'the swap heights and the 3mf are explained: ' + JSON.stringify(r.notes));
+r = await build({ ...SHEET, ball_stripe: 'cap_band' }, ['ball']);
+const cc2 = r.stats[0].color_changes;
+assert.ok(cc2.length === 3 && cc2[2].z_mm > 140 && cc2[2].z_mm < 165 && cc2[2].colour === 'second colour', 'the full cap starts below the lowest hole rim: ' + JSON.stringify(cc2));
+r = await build({ ...SHEET, ball_stripe: 'cap_band', pap_marker: false }, ['ball']);
+const cc3 = r.stats[0].color_changes;
+assert.ok(Math.abs(cc3[0].z_mm - 92.9) < 0.2 && Math.abs(cc3[1].z_mm - 104.9) < 0.2, 'with no bullseyes the band straddles the equator (ball top at 198.9 with the 30 mm flat): ' + JSON.stringify(cc3));
 r = await build({ ...SHEET, ball_stripe: 'none' }, ['ball']);
 assert.equal(r.stats[0].color_changes.length, 0);
-ok('two-colour pattern gives the filament-change heights (none for a single-colour ball)');
+r = await build({ ...SHEET, thumb_hole: false, ball_stripe: 'spot' }, ['ball']);
+assert.ok(r.ok && r.stats[0].pattern.spot_z > 180 && r.stats[0].pattern.spot_z < 196 && r.notes.some(n => /starts just below them/.test(n)), 'a no-thumb ball has its holes on the pole: the top mark starts just below them and says so: ' + JSON.stringify([r.stats[0].pattern, r.notes]));
+// the two-colour 3MF: one object in two parts with filaments 1 and 2 assigned (stored zip, so the text is searchable)
+r = await page.evaluate(() => {
+  const b = window.__cfgApp.buildFiles(['ball'], {});
+  const f = b.files.find(x => /\.3mf$/.test(x.name));
+  const txt = f ? new TextDecoder('latin1').decode(f.data) : '';
+  return { names: b.files.map(x => x.name), size: f ? f.data.length : 0, hasConfig: /Metadata\/model_settings\.config/.test(txt), extruders: (txt.match(/key="extruder" value="[12]"/g) || []).length, parts: (txt.match(/<part id="\d+" subtype="normal_part">/g) || []).length, item: /<item objectid="4" transform="1 0 0 0 1 0 0 0 1 128 128 0"/.test(txt) };
+});
+assert.ok(r.names.length === 2 && r.size > 200000 && r.hasConfig && r.extruders === 3 && r.parts === 2 && r.item, 'the ball export carries a two-part 3MF: ' + JSON.stringify(r));
+ok('two-colour pattern: spot above the holes, band placed clear of the bullseyes, heights listed, two-part 3MF (none for a single-colour ball)');
 r = await build({ ...SHEET, ball_d: 150 }, ['ball']);
 assert.equal(r.ok, false); assert.match(r.message, /too small for these spans/);
 r = await build({ ...SHEET, ball_thumb_depth: 96 }, ['ball']);
@@ -204,7 +223,7 @@ assert.ok(r.ok && r.stats[0].volume_cm3 > 0.6 && r.stats[0].volume_cm3 < 0.9, 't
 r = await build(SHEET, ['plugs']);
 assert.ok(r.ok && r.stats[0].volume_cm3 > 5 && r.stats[0].volume_cm3 < 8 && r.stats[0].bbox_mm[0] > 130 && r.stats[0].bbox_mm[0] < 134 && r.stats[0].bbox_mm[2] > 4 && r.stats[0].bbox_mm[2] < 4.6, 'two plugs and two rings: ' + (r.message || JSON.stringify([r.stats[0].volume_cm3, r.stats[0].bbox_mm])));
 r = await page.evaluate(() => { const b = window.__cfgApp.buildFiles(['ball', 'plugs'], { pap_marker: false }); return b.files.map(f => f.name); });
-assert.ok(r.length === 1 && /rev_ball/.test(r[0]), 'no plugs file when the dots are off: ' + JSON.stringify(r));
+assert.ok(r.length === 2 && r.every(n => /rev_ball/.test(n)) && r.some(n => /\.3mf$/.test(n)), 'no inlays file when the dots are off (just the ball STL and its 3MF): ' + JSON.stringify(r));
 ok('axis target: dots at the PAP (sheet or common, from the grip centre or the finger middle) and their rings, mirrored for a left hand, warnings near holes and the flat, inlays file only when the dots are on');
 
 // 10. release gate: one segment and one pin per file, pins ball diameter + 10 mm apart

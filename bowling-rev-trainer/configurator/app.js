@@ -50,7 +50,7 @@ const DEFAULTS = {
   sizer_thumb_center: 25.4, sizer_finger_center: 21.03, sizer_step: IN / 64,
   // Rev Ball: a full printed ball you release on the floor (grip at the top, resting flat underneath)
   ball_d: 200, ball_thumb_depth: 70, ball_flat: 30, ball_groove: false,
-  ball_stripe: 'cap_band',   // second-colour pattern printed by swapping filament: none | cap | cap_band | bands
+  ball_stripe: 'spot_band',  // second-colour pattern printed by swapping filament: none | spot | spot_band | cap | cap_band | bands
   thumb_hole: true,          // ball only: false = two-handed / no-thumb ball
   // Oval holes, as a pro shop cuts them: the hole size is the SHORT way across, the oval size the
   // LONG way (0 = round). The angle is where the long axis points on the sheet: 0 = straight up the
@@ -82,7 +82,7 @@ const PITCH_KEYS = ['thumb_fwd', 'thumb_lat', 'middle_fwd', 'middle_lat', 'ring_
 const BOOL_KEYS = ['thumb_through', 'weight_pocket', 'lanyard', 'ball_groove', 'thumb_hole', 'pap_marker', 'pap_given', 'pap_ring', 'spin_hum'];
 const ANGLE_KEYS = ['thumb_oval_angle', 'finger_oval_angle'];   // degrees
 const SERIAL_RE = /^[0-9FS-]{0,12}$/;
-const BALL_STRIPES = ['none', 'cap', 'cap_band', 'bands'];
+const BALL_STRIPES = ['none', 'spot', 'spot_band', 'cap', 'cap_band', 'bands'];
 const HUM_SLOTS = [2, 16], HUM_ANGLE = [0, 80];   // humming spinner: slot count, slot angle in degrees from radial
 
 // Sensible ranges (mm). Anything outside is almost always a typo or the wrong unit
@@ -490,24 +490,11 @@ function makeBuilder(W) {
       return T(T(outer.subtract(inner)).translate([0, 0, z - w / 2]));
     };
     if (p.ball_groove) cuts.push(groove(R - s, 2, 0.8));   // marker groove round the equator
-    // Second-colour pattern: the slicer swaps filament at these heights (everything printed above a
-    // swap takes the new colour until the next swap). A fine groove marks each boundary.
-    const zEq = R - s;
-    const edges = [[thumb, D.td + D.ovT, p.thumb_bevel], [mid, D.md + D.ovM, p.finger_bevel], [ring, D.rd + D.ovR, p.finger_bevel]]
-      .filter(([h]) => h).map(([h, d, bev]) => {   // lowest point of each hole's bevel rim
-        const r = Math.hypot(h.axis.p[0], h.axis.p[1]) + d / 2 + bev;
-        return R - s + Math.sqrt(Math.max(0, R * R - r * r));
-      });
-    const zCap = Math.floor(Math.min(...edges) - 6);
-    const swaps = { none: [], cap: [[zCap, 'cap']], cap_band: [[zEq - 6, 'band'], [zEq + 6, 'base'], [zCap, 'cap']],
-      bands: [[zEq - 36, 'band'], [zEq - 24, 'base'], [zEq - 6, 'band'], [zEq + 6, 'base'], [zEq + 24, 'band'], [zEq + 36, 'base']] }[p.ball_stripe] || [];
-    for (const [z] of swaps) cuts.push(groove(z, 0.6, 0.3));
-    const colorChanges = swaps.map(([z, what]) => ({ z_mm: +z.toFixed(1), colour: what === 'base' ? 'base colour' : 'second colour' }));
     // Axis target dots: two shallow sockets at the axis the release should spin about (the PAP), given
     // as surface distances from the grip centre, `pap_over` toward the hand side and `pap_up` toward
     // the fingers; the second socket is at the opposite point. Contrasting plugs (part "plugs") press
     // in. When the ball spins about that axis the dot stands still while the rest of the ball blurs.
-    const papAxes = [], papWarn = new Set();
+    const papAxes = [], papWarn = new Set(), papZones = [];   // papZones: z extents of each bullseye, for the band placement
     let pap = null;
     if (p.pap_marker) {
       // The axis point the way a pro shop measures it: from the CENTRE OF THE GRIP (midway between the
@@ -536,7 +523,7 @@ function makeBuilder(W) {
       const from = thumb ? 'the centre of the grip' : 'the middle of the two finger holes';
       const holeReach = Math.max(D.td, D.md, D.rd) / 2 + Math.max(p.thumb_bevel, p.finger_bevel) + 4;
       pap = { over_mm: over, up_mm: up, given: !!p.pap_given, from, socket_d_mm: +(2 * rP).toFixed(2), depth_mm: G.pap_depth,
-        ring: p.pap_ring ? { r_mm: G.ring_r, w_mm: G.ring_w, depth_mm: G.ring_depth } : null, points: [] };
+        ring: p.pap_ring ? { r_mm: G.ring_r, w_mm: G.ring_w, depth_mm: G.ring_depth } : null, points: [], zones: papZones };
       for (const sign of [1, -1]) {
         const u = d.map(v => v * sign);
         const P = [C[0] + R * u[0], C[1] + R * u[1], C[2] + R * u[2]];
@@ -549,6 +536,10 @@ function makeBuilder(W) {
           cuts.push(T(T(T(ann.translate([0, 0, Math.sqrt(R * R - rOut * rOut) - G.ring_depth])).rotate(rot)).translate(C)));
         }
         pap.points.push(P.map(v => +v.toFixed(2)));
+        {   // the z extent of this bullseye (the ring, or just the socket when the ring is off)
+          const th = p.pap_ring ? thetaOut : Math.asin(Math.min(1, rP / R)), sz = Math.sqrt(Math.max(0, 1 - u[2] * u[2]));
+          papZones.push([C[2] + R * (u[2] * Math.cos(th) - sz * Math.sin(th)), C[2] + R * (u[2] * Math.cos(th) + sz * Math.sin(th))]);
+        }
         papAxes.push({ name: 'axis', p: P, dir: u });
         if (P[2] < s + 15) papWarn.add('An axis target dot sits almost on the resting flat. Move the axis point further over, or turn the dots off.');
         if (p.pap_ring) {
@@ -565,6 +556,40 @@ function makeBuilder(W) {
         }
       }
     }
+    // Second-colour pattern: the slicer swaps filament at these heights (everything printed above a
+    // swap takes the new colour until the next swap). A fine groove marks each boundary. The marks are
+    // placed from the layout: a small spot just above the highest hole edge (or the full cap just below
+    // the lowest), and a 12 mm band in the window nearest the middle that clears both bullseyes.
+    const zEq = R - s, zTop = 2 * R - s;
+    const rims = [[thumb, D.td + D.ovT, p.thumb_bevel], [mid, D.md + D.ovM, p.finger_bevel], [ring, D.rd + D.ovR, p.finger_bevel]].filter(([h]) => h);
+    const rimLow = rims.map(([h, d, bev]) => { const r = Math.hypot(h.axis.p[0], h.axis.p[1]) + d / 2 + bev; return R - s + Math.sqrt(Math.max(0, R * R - r * r)); });
+    const rimHigh = rims.map(([h, d, bev]) => { const r = Math.max(0, Math.hypot(h.axis.p[0], h.axis.p[1]) - d / 2 - bev); return R - s + Math.sqrt(Math.max(0, R * R - r * r)); });
+    const zCap = Math.floor(Math.min(...rimLow) - 6);
+    let zSpot = Math.ceil(Math.max(...rimHigh) + 2);
+    const patternNotes = [];
+    const wantSpot = p.ball_stripe === 'spot' || p.ball_stripe === 'spot_band';
+    if (wantSpot && zSpot > zTop - 8) { zSpot = zCap; patternNotes.push('No room for a spot above the finger holes (they sit on the top), so the top mark starts just below them instead.'); }
+    const bandW = 12;
+    let band = null;
+    if (p.ball_stripe === 'spot_band' || p.ball_stripe === 'cap_band') {
+      const topLimit = (wantSpot ? zSpot : zCap) - 4, botLimit = s + 8;   // below the top mark, above the flat
+      const clear = (zc) => zc - bandW / 2 >= botLimit && zc + bandW / 2 <= topLimit && papZones.every(([lo, hi]) => zc + bandW / 2 <= lo - 2 || zc - bandW / 2 >= hi + 2);
+      for (let step = 0; step <= 150 && !band; step++) for (const zc of [zEq - step, zEq + step]) if (!band && clear(zc)) band = [zc - bandW / 2, zc + bandW / 2];
+      if (!band) patternNotes.push('No band: there is no 12 mm window on this ball that clears both bullseyes. The top mark alone shows the spin.');
+      else if (Math.abs((band[0] + band[1]) / 2 - zEq) > 0.5) patternNotes.push(`The band sits ${(band[0] + band[1]) / 2 < zEq ? 'lower' : 'higher'} than the middle, at ${band[0].toFixed(1)} to ${band[1].toFixed(1)} mm, to keep clear of the bullseyes.`);
+    }
+    if (p.ball_stripe === 'bands' && papZones.length) patternNotes.push('The three bands run across the bullseyes: print the plugs and rings in a third colour, or choose the spot pattern.');
+    const topMark = wantSpot ? [[zSpot, 'cap']] : (p.ball_stripe === 'cap' || p.ball_stripe === 'cap_band') ? [[zCap, 'cap']] : [];
+    const swaps = p.ball_stripe === 'bands'
+      ? [[zEq - 36, 'band'], [zEq - 24, 'base'], [zEq - 6, 'band'], [zEq + 6, 'base'], [zEq + 24, 'band'], [zEq + 36, 'base']]
+      : [...(band ? [[band[0], 'band'], [band[1], 'base']] : []), ...topMark];
+    for (const [z] of swaps) cuts.push(groove(z, 0.6, 0.3));
+    const colorChanges = swaps.map(([z, what]) => ({ z_mm: +z.toFixed(1), colour: what === 'base' ? 'base colour' : 'second colour' }));
+    // the second-colour slabs (from each swap to the next), for the two-part 3MF
+    const colorSpans = [];
+    swaps.forEach(([z, what], i) => { if (what !== 'base') colorSpans.push([z, i + 1 < swaps.length ? swaps[i + 1][0] : zTop + 1]); });
+    const pattern = { name: p.ball_stripe, spot_z: wantSpot && topMark.length ? +zSpot.toFixed(1) : null, cap_z: !wantSpot && topMark.length ? +zCap.toFixed(1) : null,
+      band_mm: band ? band.map(v => +v.toFixed(1)) : null, notes: patternNotes };
     const result = T(body.subtract(T(Manifold.union(cuts))));
     const warnings = [...papWarn];
     if (thumb && (overlap(thumb.bore, mid.bore) || overlap(thumb.bore, ring.bore)))
@@ -576,13 +601,13 @@ function makeBuilder(W) {
       warnings.push(`The web between the finger holes narrows to ${Math.max(0, web).toFixed(1)} mm deep inside. That is a fragile hairline when printed. Increase the bridge or reduce the finger depth.`);
     const floor = H - R - s + (R - p.ball_thumb_depth);   // rough: thumb bore end above the bed when aimed at the centre
     if (thumb && p.ball_thumb_depth > R - 8) warnings.push('The thumb hole reaches almost to the centre of the ball. Make it shallower.');
-    const notes = colorChanges.length
-      ? [`Two-colour ball: in the slicer add a filament change at these heights (Bambu Studio: right-click the layer slider, "Add color change"): ${colorChanges.map(c => `${c.z_mm} mm → ${c.colour}`).join('; ')}. Start the print in the base colour.`]
-      : [];
+    const notes = [...patternNotes, ...(colorChanges.length
+      ? [`Two-colour ball: open the .3mf in Bambu Studio and it arrives as one object in two parts with filaments 1 (base colour) and 2 (second colour) assigned. Or open the STL and add a filament change at these heights (Bambu Studio: right-click the layer slider, "Add color change"): ${colorChanges.map(c => `${c.z_mm} mm → ${c.colour}`).join('; ')}. Start the print in the base colour; no prime tower is needed.`]
+      : [])];
     const axes = [{ name: 'middle', ...mid.axis }, { name: 'ring', ...ring.axis }];
     if (thumb) axes.unshift({ name: 'thumb', ...thumb.axis });
     axes.push(...papAxes);   // drawn in the preview too, so the target axis is visible
-    return { result, warnings, notes, colorChanges, axes, floor, pap };
+    return { result, warnings, notes, colorChanges, colorSpans, pattern, axes, floor, pap };
   }
 
   // The two contrasting plugs for the ball's axis target dots: print them in the second colour and
@@ -739,8 +764,19 @@ function makeBuilder(W) {
       const m = out.result;
       if (!(m.volume() > (p.part === 'plugs' ? 100 : 1000))) throw new FitError('The model came out empty. Check the hole sizes and spans.');
       const bb = m.boundingBox();
+      let colorParts = null;
+      if (out.colorSpans && out.colorSpans.length) {
+        // the ball as one part per colour (what the two-colour 3MF carries): base = ball minus the
+        // second-colour slabs, second = ball within them
+        const big = 2 * (p.ball_d || 300) + 40;
+        const slabList = out.colorSpans.map(([z0, z1]) => T(T(Manifold.cube([big, big, z1 - z0], true)).translate([0, 0, (z0 + z1) / 2])));
+        const slabs = slabList.length === 1 ? slabList[0] : T(Manifold.union(slabList));
+        colorParts = [{ name: 'base colour', extruder: 1, mesh: meshOf(T(m.subtract(slabs))) }, { name: 'second colour', extruder: 2, mesh: meshOf(T(m.intersect(slabs))) }];
+      }
       return {
         mesh: meshOf(m),
+        colorParts,
+        pattern: out.pattern || null,
         volume: m.volume(),
         area: m.surfaceArea(),
         bbox: [0, 1, 2].map(i => bb.max[i] - bb.min[i]),
@@ -804,6 +840,30 @@ function crc32(bytes) {
   let c = 0xFFFFFFFF;
   for (let i = 0; i < bytes.length; i++) c = CRC_TABLE[(c ^ bytes[i]) & 0xFF] ^ (c >>> 8);
   return (c ^ 0xFFFFFFFF) >>> 0;
+}
+// A two-colour 3MF in the layout Bambu Studio writes: one object made of a part per colour, each part
+// assigned a filament in Metadata/model_settings.config, placed at the centre of a 256 mm plate. Opens
+// in Bambu Studio already coloured; other slicers read it as a plain multi-part 3MF.
+function toBambu3MF(parts, name) {
+  const esc = (v) => String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+  const f = (v) => String(+v.toFixed(6));   // full precision: Manifold's booleans leave vertices microns apart, and merging them would open the mesh
+  let res = '', comps = '', cfgParts = '';
+  parts.forEach((pt, i) => {
+    const id = 2 + i, { pos, idx } = pt.mesh;
+    const v = new Array(pos.length / 3), t = new Array(idx.length / 3);
+    for (let k = 0; k < pos.length; k += 3) v[k / 3] = `     <vertex x="${f(pos[k])}" y="${f(pos[k + 1])}" z="${f(pos[k + 2])}"/>`;
+    for (let k = 0; k < idx.length; k += 3) t[k / 3] = `     <triangle v1="${idx[k]}" v2="${idx[k + 1]}" v3="${idx[k + 2]}"/>`;
+    res += `  <object id="${id}" type="model">\n   <mesh>\n    <vertices>\n${v.join('\n')}\n    </vertices>\n    <triangles>\n${t.join('\n')}\n    </triangles>\n   </mesh>\n  </object>\n`;
+    comps += `    <component objectid="${id}" transform="1 0 0 0 1 0 0 0 1 0 0 0"/>\n`;
+    cfgParts += `    <part id="${id}" subtype="normal_part">\n      <metadata key="name" value="${esc(pt.name)}"/>\n      <metadata key="matrix" value="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1"/>\n      <metadata key="source_file" value="${esc(name)}.3mf"/>\n      <metadata key="extruder" value="${pt.extruder}"/>\n    </part>\n`;
+  });
+  const objId = 2 + parts.length;
+  const model = `<?xml version="1.0" encoding="UTF-8"?>\n<model unit="millimeter" xml:lang="en-US" xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02" xmlns:BambuStudio="http://schemas.bambulab.com/package/2021">\n <metadata name="Application">BambuStudio-01.10.01.50</metadata>\n <metadata name="BambuStudio:3mfVersion">1</metadata>\n <metadata name="Title">${esc(name)}</metadata>\n <resources>\n${res}  <object id="${objId}" type="model">\n   <components>\n${comps}   </components>\n  </object>\n </resources>\n <build>\n  <item objectid="${objId}" transform="1 0 0 0 1 0 0 0 1 128 128 0" printable="1"/>\n </build>\n</model>\n`;
+  const config = `<?xml version="1.0" encoding="UTF-8"?>\n<config>\n  <object id="${objId}">\n    <metadata key="name" value="${esc(name)}"/>\n    <metadata key="extruder" value="1"/>\n${cfgParts}  </object>\n  <plate>\n    <metadata key="plater_id" value="1"/>\n    <metadata key="plater_name" value=""/>\n    <metadata key="locked" value="false"/>\n    <model_instance>\n      <metadata key="object_id" value="${objId}"/>\n      <metadata key="instance_id" value="0"/>\n      <metadata key="identify_id" value="${objId}"/>\n    </model_instance>\n  </plate>\n</config>\n`;
+  const types = `<?xml version="1.0" encoding="UTF-8"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">\n <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>\n <Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/>\n</Types>\n`;
+  const rels = `<?xml version="1.0" encoding="UTF-8"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">\n <Relationship Target="/3D/3dmodel.model" Id="rel-1" Type="http://schemas.microsoft.com/3dmanufacturing/2013/01/3dmodel"/>\n</Relationships>\n`;
+  const enc = new TextEncoder();
+  return zipStore([{ name: '[Content_Types].xml', data: enc.encode(types) }, { name: '_rels/.rels', data: enc.encode(rels) }, { name: '3D/3dmodel.model', data: enc.encode(model) }, { name: 'Metadata/model_settings.config', data: enc.encode(config) }]);
 }
 function zipStore(files) {
   // files: [{name, data: Uint8Array}] — "stored" entries, no compression
@@ -1305,6 +1365,7 @@ async function main() {
         const data = builder.build(p);
         const base = fileBase(p, data.derived);
         files.push({ name: `${base}.stl`, data: toSTL(data.mesh, `${base} - ${APP_NAME} ${APP_VERSION}`), part });
+        if (part === 'ball' && data.colorParts) files.push({ name: `${base}.3mf`, data: toBambu3MF(data.colorParts, base), part });
         data.warnings.forEach(w => warnings.push(`${part}: ${w}`));
         (data.notes || []).forEach(t => notes.push(`${part}: ${t}`));
         axes[part] = data.axes.map(a => ({ name: a.name, p: a.p, dir: a.dir }));
@@ -1313,7 +1374,7 @@ async function main() {
         const shell = Math.min(data.volume, data.area * (part === 'ball' ? 1.3 : 1.6));
         const grams = Math.round(((shell + (data.volume - shell) * infill) * 1.27 / 1000) / 5) * 5;
         stats.push({ part, volume_cm3: +(data.volume / 1000).toFixed(1), bbox_mm: data.bbox.map(v => +v.toFixed(1)),
-          grams, infill_pct: infill * 100, grams_20pct: grams, color_changes: data.colorChanges, gate: data.gate, pap: data.pap, hum: data.hum });
+          grams, infill_pct: infill * 100, grams_20pct: grams, color_changes: data.colorChanges, pattern: data.pattern, gate: data.gate, pap: data.pap, hum: data.hum });
         if (!sheet) sheet = fitSheet(p, data.derived, data);
       }
       return { files, warnings, notes, stats, axes, fitSheet: sheet };

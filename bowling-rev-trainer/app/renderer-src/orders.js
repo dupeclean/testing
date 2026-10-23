@@ -278,7 +278,7 @@
         L.push(`Print allowance ${m.print_allowance_mm} mm   Weight pocket ${f.weight_pocket ? 'yes' : 'no'}   Wrist-cord tunnel ${f.lanyard ? 'yes' : 'no'}`);
       }
       if (hasBall) {
-        const STRIPE = { none: 'single colour', cap: 'coloured top cap', cap_band: 'coloured top cap and a band round the middle', bands: 'three bands round the middle' };
+        const STRIPE = { none: 'single colour', spot: 'small coloured spot on top', spot_band: 'small coloured spot on top and a band', cap: 'coloured top cap', cap_band: 'coloured top cap and a band', bands: 'three bands round the middle' };
         L.push(`Rev Ball: ${r2(f.ball_d)} mm ball. ${f.thumb_hole === false ? 'No thumb hole (two-handed)' : `Thumb hole blind, ${r2(f.ball_thumb_depth)} mm deep`}. Finger depth ${f.finger_depth} mm. Bridge ${both(f.bridge)}. Resting flat ${r2(f.ball_flat)} mm. Colours: ${STRIPE[f.ball_stripe] || f.ball_stripe}. Marker groove ${f.ball_groove ? 'yes' : 'no'}. Print allowance ${m.print_allowance_mm} mm.`);
         const pp = (built.stats.find(s => s.part === 'ball') || {}).pap || {};
         const papFrom = pp.from || (f.thumb_hole === false ? 'the middle of the two finger holes' : 'the centre of the grip');
@@ -289,6 +289,8 @@
           L.push('FILAMENT CHANGES for the two-colour ball (start the print in the base colour). In Bambu Studio slice it, then');
           L.push('right-click the layer slider at each height and choose "Add color change"; the printer pauses there for the swap:');
           for (const c of cc) L.push(`  at ${c.z_mm} mm: ${c.colour}`);
+          for (const t of (((built.stats.find(s => s.part === 'ball') || {}).pattern || {}).notes || [])) L.push(`  ${t}`);
+          L.push('  Easier: open the .3mf instead of the STL. It is the same ball as one object in two parts with filament 1 (base colour) and filament 2 (second colour) already assigned, so the swaps are set without touching the slider. If it opens in one colour, use the STL and the heights above. Turn the prime tower off: the swaps are one colour per layer.');
         }
       }
       if (hasSpin) {
@@ -428,7 +430,7 @@
       L.push({ t: '   Pops up and lands late: the thumb hung up.' });
       L.push({ t: '   Spins in place: the hand came over the top.', gap: 4 });
       if (f.pap_marker) L.push({ t: `The two coloured dots${f.pap_ring ? ' and the rings round them' : ''} mark the axis your release should spin about${f.pap_given ? ', your own PAP from the sheet' : ''}. When ${f.pap_ring ? 'the bullseye' : 'a dot'} stands still as the ball rolls away, the axis is right; when it wheels around, the hand came round the ball differently.` });
-      const SPIN = { none: f.ball_groove ? 'The groove round the middle shows the spin.' : 'Watch the finger holes to see the spin.', cap: 'The coloured top cap shows the spin.', cap_band: 'The coloured cap and band show the spin.', bands: 'The coloured bands show the spin.' };
+      const SPIN = { none: f.ball_groove ? 'The groove round the middle shows the spin.' : 'Watch the finger holes to see the spin.', spot: 'The coloured spot on top shows the spin.', spot_band: 'The coloured spot on top and the band show the spin.', cap: 'The coloured top cap shows the spin.', cap_band: 'The coloured cap and band show the spin.', bands: 'The coloured bands show the spin.' };
       L.push({ t: `${SPIN[f.ball_stripe] || SPIN.cap_band} Ten releases a day is plenty. It is a feedback tool, not a measuring instrument, and it is not a promise about your rev rate.`, gap: 8 });
     }
     if (hasSpin && f.spin_hum) {
