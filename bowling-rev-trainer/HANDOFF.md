@@ -190,7 +190,7 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    bullseyes), spot at 190 mm; job sheet carries the note and the 3mf advice. Re-exported a fourth
    time at 10:50 from the groove-fix build, unchanged: `groove_check` finds all three rings
    (36.4, 48.4, 190 mm) on the exported ball, 3MF parts 3857.7 + 280.2 cm3 = the STL's 4137.8.
-   Still unverified: whether Bambu Studio opens the 3MF as one object in two colours.
+   VERIFIED 2026-10-23 by the owner: the 3MF opened in his Bambu Studio as one object in two colours.
 11. DECLINED 2026-10-23: the owner does not want a whistle ("no whistle"), nor a sensor, nor springs.
    Do not revive sound-based or electronic feedback. Kept for the record only. The owner wants instant feedback that the thumb left first
    and the fingers then lifted, and rejected a sensor module ("no sensor. too expensive/complex") and
@@ -225,9 +225,9 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    plater_id, model_instance). The parts are the ball minus / within the second-colour slabs,
    split while the Manifold is alive in build(). The layout follows Bambu Studio's bbs_3mf.cpp
    (tag constants read from the source) and community notes; it parses with trimesh (two
-   watertight parts) and `files.js` now allows `.3mf`. NOT VERIFIED: that Bambu Studio opens it
-   as one object in two colours. The owner's first import is the test; the STL + heights remain
-   the fallback and the job sheet says so. `trainer.scad` mirrors the spot (`ball_spot_z`) and
+   watertight parts) and `files.js` now allows `.3mf`. VERIFIED 2026-10-23: the owner opened the
+   FS-0002 file in his Bambu Studio and it arrived as one object in two colours. The STL + heights
+   remain the fallback for other slicers and the job sheet says so. `trainer.scad` mirrors the spot (`ball_spot_z`) and
    takes the band centre as `band_z` (the parity check passes the engine's value; -2 = no band).
    Groove floor fix (same day, later): the marker grooves were cut as vertical cylinders, which
    near the middle is a 0.3 mm groove but low on the ball or near the top (where the surface is
