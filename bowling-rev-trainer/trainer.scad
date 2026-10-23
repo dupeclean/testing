@@ -99,6 +99,12 @@ pap_over = 139.7;   // 5 1/2"
 pap_up = 12.7;      // 1/2"
 // Socket diameter (add your print allowance) and depth; the plugs in part "plugs" match
 pap_socket_d = 12; pap_depth = 3;
+// The drill sheet gives the PAP (else the common 5 1/2" over, 1/2" up is used)
+pap_given = false;
+// Axis target ring: a second-colour inlay ring round each dot (a bullseye that stands still when the axis is right)
+pap_ring = true;
+// Ring centre-line radius, width and pocket depth (keep in sync with configurator/app.js G.ring_*)
+ring_r = 30; ring_w = 4; ring_depth = 3;
 
 /* [Release gate] */
 // Height of the loose pins that stand on the gate segments (the ball knocks one down)
@@ -329,25 +335,58 @@ module rev_ball() {
 
 // Two shallow sockets at the release axis (PAP) and its opposite point. The axis point is given as
 // arc lengths along the surface from the grip centre: over toward the hand side, up toward the fingers.
+// The axis point the way a pro shop measures it: from the centre of the grip (midway between the
+// thumb hole and the middle of the two finger holes), or from the middle of the fingers on a
+// no-thumb ball; "over" first, along the surface toward the hand side, then "up" toward the fingers.
+function udir(R, x, y) = [x, y, sqrt(max(0, R*R - x*x - y*y))] / R;   // ball centre to the surface point above (x, y)
+function unit3(v) = v / max(1e-9, norm(v));
+function pap_dir(R) =
+    let(fm = unit3(udir(R, x_m, thumb_hole ? y_m : 0) + udir(R, x_r, thumb_hole ? y_r : 0)),
+        n  = thumb_hole ? unit3(udir(R, 0, -ty) + fm) : fm,
+        fy = unit3(thumb_hole ? fm - (fm*n)*n : [0, 1, 0] - n[1]*n),
+        e0 = cross(fy, n),
+        e  = unit3(e0 * (e0[0]*mir >= 0 ? 1 : -1)),
+        over = pap_given ? pap_over : 139.7, up = pap_given ? pap_up : 12.7,
+        ao = over/R*180/PI, au = up/R*180/PI,
+        q  = n*cos(ao) + e*sin(ao))
+    q*cos(au) + fy*sin(au);
+
 module pap_cut(R, s) {
-    a_up = pap_up/R*180/PI; a_over = pap_over/R*180/PI;
-    t0 = [0, sin(a_up), cos(a_up)];                               // the top, tilted toward the fingers
-    d  = [sin(a_over)*t0[2]*mir, t0[1], cos(a_over)*t0[2]];      // then toward the hand side
+    d = pap_dir(R);
+    ri = ring_r - ring_w/2; ro = ring_r + ring_w/2;
     for (sg = [1, -1]) {
         u = d*sg;
         P = [0, 0, R - s] + R*u;
         translate(P) rotate([0, acos(u[2]), atan2(u[1], u[0])])
             translate([0, 0, -pap_depth]) cylinder(d = pap_socket_d, h = pap_depth + 3);
+        // an annular pocket round the dot with a flat bottom, so the inlay ring prints flat
+        if (pap_ring)
+            translate([0, 0, R - s]) rotate([0, acos(u[2]), atan2(u[1], u[0])])
+                translate([0, 0, sqrt(R*R - ro*ro) - ring_depth]) difference() {
+                    cylinder(r = ro, h = ring_depth + 10, $fn = 128);
+                    translate([0, 0, -1]) cylinder(r = ri, h = ring_depth + 12, $fn = 128);
+                }
     }
 }
 
-// The two contrasting plugs for the axis target dots (print in the second colour); 0.3 mm proud
-module axis_plugs() {
+// The second-colour inlays: two plugs for the dots (0.3 mm proud) and, with the ring on, two inlay
+// rings, flat underneath so they print flat, the top following the ball's surface
+module axis_plug() {
     r = pap_socket_d/2; h = pap_depth + 0.3;
-    for (x = [-pap_socket_d, pap_socket_d]) translate([x, 0, 0]) {
-        cylinder(h = 0.5, r1 = r - 0.5, r2 = r);
-        translate([0, 0, 0.5]) cylinder(h = h - 0.5, r = r);
-    }
+    cylinder(h = 0.5, r1 = r - 0.5, r2 = r);
+    translate([0, 0, 0.5]) cylinder(h = h - 0.5, r = r);
+}
+module axis_plugs() {
+    if (pap_ring) {
+        R = ball_d/2; ri = ring_r - ring_w/2; ro = ring_r + ring_w/2;
+        d_plane = sqrt(R*R - ro*ro) - ring_depth;
+        for (x = [-(ro + 2), ro + 2]) translate([x, 0, 0]) intersection() {
+            difference() { cylinder(r = ro, h = 20, $fn = 128); translate([0, 0, -1]) cylinder(r = ri, h = 22, $fn = 128); }
+            translate([0, 0, -d_plane]) sphere(r = R);
+        }
+        for (y = [-40, 40]) translate([0, y, 0]) axis_plug();
+    } else
+        for (x = [-pap_socket_d, pap_socket_d]) translate([x, 0, 0]) axis_plug();
 }
 
 // Groove w wide and `deep` deep round a ball of radius R (flat sagitta s), centred on height z

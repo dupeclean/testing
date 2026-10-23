@@ -198,6 +198,16 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
           </tbody>
         </table>
         </div>
+        <div class="row" data-only-part="ball" style="margin-top:10px">
+          <label class="check" style="flex-basis:100%"><input type="checkbox" id="pap_given"> The sheet gives the axis point (PAP)</label>
+          <label class="field"><span>PAP over, toward the hand side</span>
+            <span class="row" style="gap:6px"><input type="text" id="pap_over" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+            <small>Along the surface, e.g. 5 1/2</small></label>
+          <label class="field"><span>PAP up, toward the fingers</span>
+            <span class="row" style="gap:6px"><input type="text" id="pap_up" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+            <small>e.g. 1/2; negative = down toward the thumb</small></label>
+          <p class="howto" style="flex-basis:100%;margin:0">Measured as a pro shop measures it: from the <b>centre of the grip</b> (midway between the thumb hole and the middle of the two finger holes) for a thumb-in grip, or from the <b>middle of the two finger holes</b> for a two-handed, no-thumb ball. Over first, along the line across the grip, then up. Leave the box unticked if the sheet has no PAP: the ball then uses the common 5 1/2" over, 1/2" up.</p>
+        </div>
         <datalist id="pitch_options">
           <option value="-1/2"><option value="-3/8"><option value="-1/4"><option value="-3/16"><option value="-1/8"><option value="-1/16">
           <option value="0"><option value="1/16"><option value="1/8"><option value="3/16"><option value="1/4"><option value="5/16"><option value="3/8"><option value="1/2">
@@ -270,7 +280,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
 
       <fieldset data-only-part="ball">
         <legend>Rev Ball</legend>
-        <p class="howto" style="margin:0 0 10px">A release trainer: kneel, swing low, let it go onto the floor along a strip of tape and watch what it does. Thumb out first and fingers lifting makes it <b>roll and curve</b> off the line; a dump rolls straight and short; a hung-up thumb pops it up. Printed solid-looking but sliced light (3 walls, 5% infill, about 500 g at 200 mm). It needs supports under its lower half; sand the scar smooth. A second colour makes the spin easy to see: the slicer swaps filament at the heights FitSlice gives you, so the top cap and a band round the middle come out in the other colour. Two <b>axis target dots</b> mark the axis your release should spin about: spin it right and the dot stands still while the rest of the ball blurs. Their contrasting plugs come in their own file.</p>
+        <p class="howto" style="margin:0 0 10px">A release trainer: kneel, swing low, let it go onto the floor along a strip of tape and watch what it does. Thumb out first and fingers lifting makes it <b>roll and curve</b> off the line; a dump rolls straight and short; a hung-up thumb pops it up. Printed solid-looking but sliced light (3 walls, 5% infill, about 500 g at 200 mm). It needs supports under its lower half; sand the scar smooth. A second colour makes the spin easy to see: the slicer swaps filament at the heights FitSlice gives you, so the top cap and a band round the middle come out in the other colour. The <b>axis target</b> (dots and rings, set below) marks the axis your release should spin about: spin it right and the bullseye stands still while the rest of the ball blurs. Its contrasting plugs and rings come in their own file.</p>
         <div class="row">
           <label class="field"><span>Ball diameter</span>
             <span class="row" style="gap:6px"><input type="text" id="ball_d" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
@@ -293,12 +303,8 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
           <label class="check"><input type="checkbox" id="ball_groove"> Marker groove round the middle (for a single-colour ball)</label>
           <label class="check" style="flex-basis:100%"><input type="checkbox" id="pap_marker"> Axis target dots (two plug sockets at the axis your release should spin about)</label>
           <div class="row" id="pap_rows" style="flex-basis:100%">
-            <label class="field"><span>Axis point: over, toward the hand side</span>
-              <span class="row" style="gap:6px"><input type="text" id="pap_over" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
-              <small>Along the surface from the grip centre; a pro shop's PAP, typically 5 1/2"</small></label>
-            <label class="field"><span>Axis point: up, toward the fingers</span>
-              <span class="row" style="gap:6px"><input type="text" id="pap_up" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
-              <small>Typically 1/2"; negative = toward the thumb</small></label>
+            <label class="check" style="flex-basis:100%"><input type="checkbox" id="pap_ring"> Axis target ring: a 60 mm second-colour ring round each dot, a bullseye that stands still when the axis is right</label>
+            <small style="flex-basis:100%">The dots sit at the PAP on the drill sheet above (or the common 5 1/2" over, 1/2" up when the sheet has none). The plugs and rings export as one second-colour file.</small>
           </div>
         </div>
       </fieldset>
@@ -406,6 +412,8 @@ const G = {
   gate_dove_len: 12, gate_dove_w1: 14, gate_dove_w2: 20, gate_clear: 0.3,
   // axis target dots on the ball: socket diameter (plus print allowance) and depth; the plugs match
   pap_d: 12, pap_depth: 3,
+  // axis target ring round each dot: centre-line radius, width and pocket depth (the inlay ring matches)
+  ring_r: 30, ring_w: 4, ring_depth: 3,
   // humming spinner: ring chamber radii, floor and wall-top heights (the 45-degree gable ridge follows) and slot size
   hum_r0: 30, hum_r1: 44, hum_z0: 5, hum_z1: 16, hum_slot_w: 2, hum_slot_l: 10,
 };
@@ -441,7 +449,10 @@ const DEFAULTS = {
   // Axis target dots on the ball: two plug sockets at the axis the release should spin about (the
   // bowler's PAP), as surface distances from the grip centre: over toward the hand side, up toward
   // the fingers. Spin it right and the dot stands still while the rest of the ball blurs.
-  pap_marker: true, pap_over: 5.5 * IN, pap_up: 0.5 * IN,
+  // pap_given: the drill sheet gives the PAP (else the common 5 1/2" over, 1/2" up is used); it is
+  // measured from the centre of the grip, or from the middle of the fingers on a no-thumb ball.
+  // pap_ring: a second-colour inlay ring round each dot, a bullseye that stands still when the axis is right.
+  pap_marker: true, pap_given: false, pap_over: 5.5 * IN, pap_up: 0.5 * IN, pap_ring: true,
   // Humming spinner (experimental, off by default): a hollow ring chamber with slanted slots through
   // the top. Spun fast enough it hums, and keeps humming as long as the spin stays above that speed,
   // so the strength and carry of the finger lift can be heard.
@@ -452,7 +463,7 @@ const LENGTH_KEYS = ['span_middle', 'span_ring', 'thumb_d', 'middle_d', 'ring_d'
   'bridge', 'finger_depth', 'thumb_depth', 'sizer_thumb_center', 'sizer_finger_center', 'sizer_step', 'ball_d', 'ball_thumb_depth', 'ball_flat',
   'thumb_oval_d', 'middle_oval_d', 'ring_oval_d', 'thumb_bevel', 'finger_bevel', 'gate_pin_h', 'pap_over', 'pap_up'];
 const PITCH_KEYS = ['thumb_fwd', 'thumb_lat', 'middle_fwd', 'middle_lat', 'ring_fwd', 'ring_lat'];
-const BOOL_KEYS = ['thumb_through', 'weight_pocket', 'lanyard', 'ball_groove', 'thumb_hole', 'pap_marker', 'spin_hum'];
+const BOOL_KEYS = ['thumb_through', 'weight_pocket', 'lanyard', 'ball_groove', 'thumb_hole', 'pap_marker', 'pap_given', 'pap_ring', 'spin_hum'];
 const ANGLE_KEYS = ['thumb_oval_angle', 'finger_oval_angle'];   // degrees
 const SERIAL_RE = /^[0-9FS-]{0,12}$/;
 const BALL_STRIPES = ['none', 'cap', 'cap_band', 'bands'];
@@ -512,11 +523,11 @@ function validateParams(p) {
   const hasThumb = p.part === 'puck' || (p.part === 'ball' && p.thumb_hole !== false);
   const keys = p.part === 'sizer' ? ['sizer_thumb_center', 'sizer_finger_center', 'sizer_step']
     : p.part === 'gate' ? ['ball_d', 'gate_pin_h']
-    : p.part === 'plugs' ? ['print_allowance']
+    : p.part === 'plugs' ? ['print_allowance', 'ball_d']
     : ['span_middle', 'span_ring', 'middle_d', 'ring_d', 'print_allowance', 'bridge', 'finger_depth',
       'middle_oval_d', 'ring_oval_d', 'finger_bevel',
       ...(hasThumb ? ['thumb_d', 'thumb_oval_d', 'thumb_bevel'] : []),
-      ...(p.part === 'ball' ? ['ball_d', 'ball_flat', ...(hasThumb ? ['ball_thumb_depth'] : []), ...(p.pap_marker ? ['pap_over', 'pap_up'] : [])] : p.part === 'puck' && !p.thumb_through ? ['thumb_depth'] : [])];
+      ...(p.part === 'ball' ? ['ball_d', 'ball_flat', ...(hasThumb ? ['ball_thumb_depth'] : []), ...(p.pap_marker && p.pap_given ? ['pap_over', 'pap_up'] : [])] : p.part === 'puck' && !p.thumb_through ? ['thumb_depth'] : [])];
   if (p.part === 'spinner') keys.splice(keys.indexOf('span_middle'), 2);
   for (const k of keys) { const m = checkLength(k, p[k], 'mm'); if (m) out.push({ key: k, message: m }); }
   if (p.part === 'ball' && !BALL_STRIPES.includes(p.ball_stripe)) out.push({ key: 'ball_stripe', message: 'Choose a colour pattern for the ball.' });
@@ -883,26 +894,58 @@ function makeBuilder(W) {
     const papAxes = [], papWarn = new Set();
     let pap = null;
     if (p.pap_marker) {
-      const aUp = p.pap_up / R, aOver = p.pap_over / R;                              // arc along the surface, radians
-      const t0 = [0, Math.sin(aUp), Math.cos(aUp)];                                   // the top, tilted toward the fingers
-      const d = [Math.sin(aOver) * t0[2] * D.mir, t0[1], Math.cos(aOver) * t0[2]];    // then toward the hand side
-      const rP = G.pap_d / 2 + p.print_allowance / 2;
+      // The axis point the way a pro shop measures it: from the CENTRE OF THE GRIP (midway between the
+      // thumb hole and the middle of the two finger holes), or from the MIDDLE OF THE FINGERS on a
+      // no-thumb ball; "over" first, along the surface across the grip toward the hand side, then "up"
+      // toward the fingers. The sheet's own PAP when it gives one, else the common 5 1/2" x 1/2".
+      const over = p.pap_given ? p.pap_over : DEFAULTS.pap_over, up = p.pap_given ? p.pap_up : DEFAULTS.pap_up;
       const C = [0, 0, R - s];
+      const unit = (v) => { const n = Math.hypot(v[0], v[1], v[2]) || 1; return v.map(x => x / n); };
+      const add = (a, b) => a.map((x, i) => x + b[i]), scale = (a, k) => a.map(x => x * k);
+      const dot3 = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+      const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+      const dirOf = (h) => unit(add(h.axis.p, scale(C, -1)));                 // ball centre to a hole's entry point
+      const fm = unit(add(dirOf(mid), dirOf(ring)));                           // the middle of the two finger holes
+      const n = thumb ? unit(add(dirOf(thumb), fm)) : fm;                      // the reference point
+      const fy = unit(thumb ? add(fm, scale(n, -dot3(fm, n))) : add([0, 1, 0], scale(n, -n[1])));   // "up": toward the fingers
+      const e0 = cross(fy, n), e = unit(scale(e0, e0[0] * D.mir >= 0 ? 1 : -1));                   // "over": toward the hand side
+      const aOver = over / R, aUp = up / R;                                     // arcs along the surface, radians
+      const q = add(scale(n, Math.cos(aOver)), scale(e, Math.sin(aOver)));
+      const d = add(scale(q, Math.cos(aUp)), scale(fy, Math.sin(aUp)));
+      const rP = G.pap_d / 2 + p.print_allowance / 2;
+      const rIn = G.ring_r - G.ring_w / 2 - p.print_allowance / 2, rOut = G.ring_r + G.ring_w / 2 + p.print_allowance / 2;
+      const thetaOut = Math.asin(Math.min(1, rOut / R));
       const entries = [thumb, mid, ring].filter(Boolean).map(h => h.axis.p);
       const clamp1 = (v) => Math.max(-1, Math.min(1, v));
-      pap = { over_mm: p.pap_over, up_mm: p.pap_up, socket_d_mm: +(2 * rP).toFixed(2), depth_mm: G.pap_depth, points: [] };
+      const from = thumb ? 'the centre of the grip' : 'the middle of the two finger holes';
+      const holeReach = Math.max(D.td, D.md, D.rd) / 2 + Math.max(p.thumb_bevel, p.finger_bevel) + 4;
+      pap = { over_mm: over, up_mm: up, given: !!p.pap_given, from, socket_d_mm: +(2 * rP).toFixed(2), depth_mm: G.pap_depth,
+        ring: p.pap_ring ? { r_mm: G.ring_r, w_mm: G.ring_w, depth_mm: G.ring_depth } : null, points: [] };
       for (const sign of [1, -1]) {
         const u = d.map(v => v * sign);
         const P = [C[0] + R * u[0], C[1] + R * u[1], C[2] + R * u[2]];
         const rot = [0, Math.acos(clamp1(u[2])) / DEG, Math.atan2(u[1], u[0]) / DEG];
         cuts.push(T(T(T(Manifold.cylinder(G.pap_depth + 3, rP, rP, G.seg_hole)).translate([0, 0, -G.pap_depth])).rotate(rot)).translate(P));
+        if (p.pap_ring) {
+          // an annular pocket round the dot with a flat bottom, so the inlay ring can print flat
+          const hP = G.ring_depth + 10;
+          const ann = T(T(Manifold.cylinder(hP, rOut, rOut, G.seg_sphere)).subtract(T(T(Manifold.cylinder(hP + 2, rIn, rIn, G.seg_sphere)).translate([0, 0, -1]))));
+          cuts.push(T(T(T(ann.translate([0, 0, Math.sqrt(R * R - rOut * rOut) - G.ring_depth])).rotate(rot)).translate(C)));
+        }
         pap.points.push(P.map(v => +v.toFixed(2)));
         papAxes.push({ name: 'axis', p: P, dir: u });
         if (P[2] < s + 15) papWarn.add('An axis target dot sits almost on the resting flat. Move the axis point further over, or turn the dots off.');
-        for (const e of entries) {
-          const arc = R * Math.acos(clamp1(((e[0] - C[0]) * u[0] + (e[1] - C[1]) * u[1] + (e[2] - C[2]) * u[2]) / R));
-          if (arc < rP + Math.max(D.td, D.md, D.rd) / 2 + Math.max(p.thumb_bevel, p.finger_bevel) + 4)
+        if (p.pap_ring) {
+          const alpha = Math.acos(clamp1(-u[2]));                                 // angle between the axis point and straight down
+          const zMin = C[2] - R * Math.cos(Math.max(0, alpha - thetaOut));       // the ring's lowest point
+          if (zMin < s + 3) papWarn.add('An axis target ring would run onto the resting flat. Move the axis point further over, or turn the ring off.');
+        }
+        for (const ent of entries) {
+          const arc = R * Math.acos(clamp1(((ent[0] - C[0]) * u[0] + (ent[1] - C[1]) * u[1] + (ent[2] - C[2]) * u[2]) / R));
+          if (arc < rP + holeReach)
             papWarn.add('An axis target dot runs into a grip hole. Move the axis point further over or up, or turn the dots off.');
+          else if (p.pap_ring && arc < R * thetaOut + holeReach)
+            papWarn.add('An axis target ring runs into a grip hole. Move the axis point further over or up, or turn the ring off.');
         }
       }
     }
@@ -928,10 +971,22 @@ function makeBuilder(W) {
 
   // The two contrasting plugs for the ball's axis target dots: print them in the second colour and
   // press them in. They stand 0.3 mm proud so the dot catches the light.
-  function plugs() {
+  // The second-colour inlays for the ball: two plugs for the dots and, with the ring on, two inlay
+  // rings (flat underneath so they print flat, the top following the ball's surface).
+  function plugs(p) {
     const r = G.pap_d / 2, h = G.pap_depth + 0.3;
-    const one = (x) => T(T(Manifold.union([T(Manifold.cylinder(0.5, r - 0.5, r, G.seg_hole)), T(T(Manifold.cylinder(h - 0.5, r, r, G.seg_hole)).translate([0, 0, 0.5]))])).translate([x, 0, 0]));
-    const result = T(one(-G.pap_d).add(one(G.pap_d)));
+    const plug = (x, y) => T(T(Manifold.union([T(Manifold.cylinder(0.5, r - 0.5, r, G.seg_hole)), T(T(Manifold.cylinder(h - 0.5, r, r, G.seg_hole)).translate([0, 0, 0.5]))])).translate([x, y, 0]));
+    const parts = [];
+    if (p.pap_ring) {
+      const R = p.ball_d / 2, rIn = G.ring_r - G.ring_w / 2, rOut = G.ring_r + G.ring_w / 2;
+      const dPlane = Math.sqrt(R * R - rOut * rOut) - G.ring_depth;
+      const prism = T(T(Manifold.cylinder(20, rOut, rOut, G.seg_sphere)).subtract(T(T(Manifold.cylinder(22, rIn, rIn, G.seg_sphere)).translate([0, 0, -1]))));
+      // a finer sphere than the ball's: on a 3 mm thick ring the facet sag of 128 segments (0.03 mm) is 1% of the part
+      const one = T(prism.intersect(T(T(Manifold.sphere(R, 2 * G.seg_sphere)).translate([0, 0, -dPlane]))));
+      const off = rOut + 2;
+      parts.push(T(one.translate([-off, 0, 0])), T(one.translate([off, 0, 0])), plug(0, 40), plug(0, -40));
+    } else parts.push(plug(-G.pap_d, 0), plug(G.pap_d, 0));
+    const result = T(Manifold.union(parts));
     return { result, warnings: [], axes: [] };
   }
 
@@ -1064,7 +1119,7 @@ function makeBuilder(W) {
     if (p.part === 'ball' && rMax > 0.8 * p.ball_d / 2)
       throw new FitError(`A ${fmtMm(p.ball_d)} mm ball is too small for these spans: the holes would sit on its sides. Use a bigger ball diameter (${fmtMm(Math.ceil(rMax / 0.4 / 10) * 10)} mm or more) or check the spans.`);
     try {
-      const out = p.part === 'puck' ? puck(p, D) : p.part === 'spinner' ? spinner(p, D) : p.part === 'ball' ? ball(p, D) : p.part === 'gate' ? gate(p) : p.part === 'plugs' ? plugs() : sizer(p);
+      const out = p.part === 'puck' ? puck(p, D) : p.part === 'spinner' ? spinner(p, D) : p.part === 'ball' ? ball(p, D) : p.part === 'gate' ? gate(p) : p.part === 'plugs' ? plugs(p) : sizer(p);
       const m = out.result;
       if (!(m.volume() > (p.part === 'plugs' ? 100 : 1000))) throw new FitError('The model came out empty. Check the hole sizes and spans.');
       const bb = m.boundingBox();
@@ -1290,7 +1345,7 @@ function fileBase(p, D) {
   const mm = (v) => v.toFixed(1).replace('.', 'p');
   if (p.part === 'sizer') return `hole_sizer_T${mm(p.sizer_thumb_center)}_F${mm(p.sizer_finger_center)}_step${mm(p.sizer_step)}`;
   if (p.part === 'gate') return `release_gate_${(p.ball_d + G.gate_gap).toFixed(0)}mm_pin${p.gate_pin_h.toFixed(0)}`;
-  if (p.part === 'plugs') return `axis_plugs_D${G.pap_d}`;
+  if (p.part === 'plugs') return p.pap_ring ? `axis_inlays_D${G.pap_d}_ring${2 * G.ring_r}` : `axis_plugs_D${G.pap_d}`;
   const part = p.part === 'ball' ? `ball${p.ball_d.toFixed(0)}` : p.part === 'spinner' && p.spin_hum ? `spinner_hum${p.spin_hum_slots}` : p.part;
   if (p.part === 'ball' && p.thumb_hole === false) return `rev_${part}_${p.hand[0].toUpperCase()}_nothumb_M${mm(D.md)}_R${mm(D.rd)}`;
   return `rev_${part}_${p.hand[0].toUpperCase()}_span${mm(p.span_middle)}-${mm(p.span_ring)}_T${mm(D.td)}_M${mm(D.md)}_R${mm(D.rd)}`;
@@ -1375,6 +1430,7 @@ async function main() {
     $('ball_stripe').value = state.ball_stripe;
     $('ball_thumb_rows').hidden = !state.thumb_hole;
     $('pap_rows').hidden = !state.pap_marker;
+    $('pap_over').disabled = $('pap_up').disabled = !state.pap_given;
     $('hum_rows').hidden = !state.spin_hum;
     $('spin_hum_slots').value = String(state.spin_hum_slots);
     $('spin_hum_angle').value = String(state.spin_hum_angle);
@@ -1445,6 +1501,11 @@ async function main() {
       if (k === 'thumb_through') $('thumb_depth_row').hidden = state.thumb_through;
       if (k === 'thumb_hole') $('ball_thumb_rows').hidden = !state.thumb_hole;
       if (k === 'pap_marker') $('pap_rows').hidden = !state.pap_marker;
+      if (k === 'pap_given') {
+        // without a PAP on the sheet the ball uses the common position, and the fields show it
+        if (!state.pap_given) { state.pap_over = DEFAULTS.pap_over; state.pap_up = DEFAULTS.pap_up; markGood($('pap_over')); markGood($('pap_up')); showLengths(); }
+        $('pap_over').disabled = $('pap_up').disabled = !state.pap_given;
+      }
       if (k === 'spin_hum') $('hum_rows').hidden = !state.spin_hum;
       schedule();
     });
@@ -1501,7 +1562,9 @@ async function main() {
       $('bores_note').textContent = `One segment and one pin per file: print 3 or 5 copies. Linked segments put the pins ${fmtMm(p.ball_d + G.gate_gap, 0)} mm apart (ball diameter + 10 mm); the pins are ${fmtMm(p.gate_pin_h, 0)} mm tall and stand loose in the cups.`;
     } else if (p.part === 'plugs') {
       $('bores').innerHTML = '';
-      $('bores_note').textContent = `Two ${G.pap_d} mm plugs for the ball's axis target dots. Print them in the second colour, flat side down, and press them into the sockets.`;
+      $('bores_note').textContent = p.pap_ring
+        ? `Two ${G.pap_d} mm plugs and two ${2 * G.ring_r} mm rings for the ball's axis target. Print them in the second colour, flat side down, 100% infill, and press them into the sockets and ring pockets (a drop of glue if a ring is loose).`
+        : `Two ${G.pap_d} mm plugs for the ball's axis target dots. Print them in the second colour, flat side down, and press them into the sockets.`;
     } else if (p.part !== 'sizer') {
       const bore = (name, d, trueD) => `<tr><th>${name}</th><td>${fmtMm(trueD)} mm · ${fraction64(trueD / IN)}"</td><td>${fmtMm(d)} mm · ${fraction64(d / IN)}"</td></tr>`;
       rows.push(bore('Thumb', D.td, p.thumb_d), bore('Middle', D.md, p.middle_d), bore('Ring', D.rd, p.ring_d));

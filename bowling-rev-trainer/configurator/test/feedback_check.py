@@ -24,8 +24,8 @@ SCAD_KEYS = ["hand", "span_middle", "span_ring", "thumb_d", "middle_d", "ring_d"
              "thumb_fwd", "thumb_lat", "middle_fwd", "middle_lat", "ring_fwd", "ring_lat", "weight_pocket", "lanyard",
              "thumb_through", "thumb_oval_d", "thumb_oval_angle", "middle_oval_d", "ring_oval_d", "finger_oval_angle",
              "thumb_bevel", "finger_bevel", "serial", "thumb_hole", "ball_d", "ball_thumb_depth", "ball_flat", "ball_groove", "ball_stripe",
-             "gate_pin_h", "pap_marker", "pap_over", "pap_up", "spin_hum", "spin_hum_slots", "spin_hum_angle"]
-SCAD_CASES = ("gate", "plugs", "dots_ball", "hum_spinner", "hum16_spinner")
+             "gate_pin_h", "pap_marker", "pap_given", "pap_over", "pap_up", "pap_ring", "spin_hum", "spin_hum_slots", "spin_hum_angle"]
+SCAD_CASES = ("gate", "plugs", "inlays", "dots_ball", "hum_spinner", "hum16_spinner")
 
 ok = True
 
@@ -68,6 +68,10 @@ def main():
     p = bodies(m["plugs"])
     check("plugs file holds two plugs", len(p) == 2, f"({len(p)})")
     check("each plug is 12 mm across and 3.3 mm tall", all(abs(b.extents[0] - 12) < 0.2 and abs(b.extents[2] - 3.3) < 0.05 for b in p), f"({[b.extents.round(2).tolist() for b in p]})")
+    q = bodies(m["inlays"])
+    check("inlays file holds two plugs and two rings", len(q) == 4, f"({len(q)})")
+    rings = [b for b in q if b.extents[0] > 50]
+    check("each ring is 64 mm across and about 4.3 mm tall at its inner edge", len(rings) == 2 and all(abs(b.extents[0] - 64) < 0.3 and 4.1 < b.extents[2] < 4.5 for b in rings), f"({[b.extents.round(2).tolist() for b in rings]})")
 
     # 3. axis dots: a socket 3 mm deep at each reported axis point, taking about 0.7 cm3 out of the ball
     for case in ("dots_ball", "dots_left"):
@@ -80,8 +84,19 @@ def main():
             check(f"{case}: socket at ({P[0]:.0f}, {P[1]:.0f}, {P[2]:.0f}) is 3 mm deep", abs(depth - 3) < 0.15, f"({depth:.2f} mm)")
         hand_side = 1 if cases[case]["params"]["hand"] == "right" else -1
         check(f"{case}: the axis point is on the hand side", any(a["dir"][0] * hand_side > 0.9 for a in axes))
-    removed = (m["plain_ball"].volume - m["dots_ball"].volume) / 1000
+        # the ring pocket: about 3.7 mm deep on the ring's centre line (flat bottom under a curved surface)
+        for a in axes:
+            P, u = np.array(a["p"]), np.array(a["dir"])
+            t = np.cross(u, [0, 0, 1]); t /= np.linalg.norm(t)
+            R = 100.0; th = np.arcsin(30 / R)
+            v = u * np.cos(th) + t * np.sin(th); Q = (P - R * u) + R * v
+            loc, _, _ = m[case].ray.intersects_location([Q + 5 * v], [-v], multiple_hits=False)
+            depth = np.linalg.norm(loc[0] - (Q + 5 * v)) - 5 if len(loc) else float("nan")
+            check(f"{case}: ring pocket at ({Q[0]:.0f}, {Q[1]:.0f}, {Q[2]:.0f}) is about 3.7 mm deep", 3.3 < depth < 4.2, f"({depth:.2f} mm)")
+    removed = (m["plain_ball"].volume - m["dots_noring"].volume) / 1000
     check("the two sockets take about 0.68 cm3 out of the ball", 0.55 < removed < 0.85, f"({removed:.3f} cm3)")
+    removed = (m["dots_noring"].volume - m["dots_ball"].volume) / 1000
+    check("the two ring pockets take about 5.4 cm3 more", 4.5 < removed < 6.5, f"({removed:.3f} cm3)")
 
     # 4. humming spinner: ring cavity between 30 and 44 mm radius, no wrist-cord tunnel, slots through the top
     hs = m["hum_spinner"]

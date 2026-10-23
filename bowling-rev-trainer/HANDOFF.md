@@ -158,9 +158,10 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    installed at `C:\FitSlice` and both orders re-exported on 2026-10-23 (item 10).
 8. DONE 2026-10-22: the PC's commits are on `origin/claude/bowling-grip-trainer-3d-laejva`.
    Push again after each local commit (`git push origin claude/bowling-grip-trainer-3d-laejva`).
-9. The release-feedback parts (gate, axis plugs, humming spinner; section below) have never been
-   printed. First prints: one gate segment + pin (does the pin stand loose in its cup, do two
-   segments slide together), the two plugs (press fit into the ball's sockets), one spinner with
+9. The release-feedback parts (gate, axis plugs and rings, humming spinner; section below) have never
+   been printed. First prints: one gate segment + pin (does the pin stand loose in its cup, do two
+   segments slide together), the two plugs and two rings (press fit into the ball's sockets and ring
+   pockets; the rings are flat underneath and may want a drop of glue), one spinner with
    the hum on. Tune `spin_hum_slots` / `spin_hum_angle` by ear; if it never hums at a finger-lift
    speed, drop the feature rather than ship it. Keep it off for customer orders until then.
 10. DONE 2026-10-23 (owner's go-ahead): the zip rebuilt from the merged tree (review fixes +
@@ -238,11 +239,19 @@ customer card and the tests:
    pin (20 mm across, `gate_pin_h` 50-150 mm, default 100) per file; print 3 or 5 copies. The ball
    knocks down the pin where it crosses the tape line. Cup clearance 1 mm, dovetail clearance
    0.3 mm: check both on the first print.
-2. **Axis target dots** on the ball (`pap_marker`, on by default; `pap_over` 139.7 mm and `pap_up`
-   12.7 mm, surface distances from the grip centre toward the hand side and the fingers, i.e. a
-   5 1/2" x 1/2" PAP) with the matching part `plugs` (two 12 x 3.3 mm plugs, exported with the ball
-   only when the dots are on). The second socket is at the opposite point. Warnings when a dot
-   would land on a grip hole or on the resting flat; `pap_over` over 200 mm is refused.
+2. **Axis target: dots and rings** on the ball (`pap_marker` and `pap_ring`, both on by default).
+   Two 12 mm sockets, each inside a 60 mm flat-bottomed ring pocket (r 28-32 mm, 3 mm deep at the
+   outer edge), at the axis point and its opposite. The PAP is measured the pro-shop way, along the
+   surface from the CENTRE OF THE GRIP (midpoint of the thumb hole and the middle of the two finger
+   holes, computed from the holes as drilled) or from the MIDDLE OF THE FINGERS on a no-thumb ball;
+   over first toward the hand side, then up toward the fingers. `pap_given` (on the Drill sheet, Ball
+   screen) says the sheet gives the PAP (`pap_over`, `pap_up`, validated); otherwise the common
+   139.7 x 12.7 mm (5 1/2" x 1/2") is used and the job sheet and card say "not on the sheet". The
+   matching part `plugs` holds two plugs and, with the ring on, two inlay rings (56/64 mm, flat
+   underneath, top following the ball), file `axis_inlays_D12_ring60.stl` (`axis_plugs_D12.stl`
+   with the ring off), exported with the ball only when the dots are on. Warnings when a dot or
+   ring would land on a grip hole or on the resting flat. Added 2026-10-23 at the owner's request
+   ("the PAP on the sheet ... from the centre of the grip; no thumb, from the middle of the fingers").
 3. **Humming spinner** (spinner: `spin_hum`, off by default; `spin_hum_slots` 2-16;
    `spin_hum_angle` 0-80 degrees from radial, mirrored for a left hand). Ring cavity r 30-44 mm,
    floor at 5 mm, walls to 16 mm, 45-degree gable ridge at 23 mm (prints without supports); slots
@@ -251,7 +260,8 @@ customer card and the tests:
    warn.
 
 Parity with `trainer.scad` (IoU of the browser mesh against OpenSCAD 2021.01, print_allowance 0,
-the owner's sheet, after the merge with the review fixes): gate 0.9999, plugs 0.9989, ball with dots
+the owner's sheet, after the merge with the review fixes): gate 0.9999, plugs 0.9989, inlays (plugs +
+rings) 0.9988, ball with dots and rings 0.9991, ball with dots
 0.9991, humming spinner 0.9984 (16 slots 0.9984); volumes agree within 0.3%. Tests on the PC:
 engine_check 24, unit 26, e2e 18 from source and against the rebuilt zip,
 `feedback_check` 8 cases (mesh checks: two bodies in the gate file, 3 mm sockets at the reported

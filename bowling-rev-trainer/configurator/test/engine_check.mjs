@@ -166,7 +166,7 @@ r = await build({ ...SHEET, thumb_hole: false }, ['ball']);
 ok('a 12-character order number builds on every part');
 
 // 9. axis target dots: two sockets at the release axis and its opposite point, plus their plugs
-const dots = await build(SHEET, ['ball']), noDots = await build({ ...SHEET, pap_marker: false }, ['ball']);
+const dots = await build(SHEET, ['ball']), noDots = await build({ ...SHEET, pap_marker: false }, ['ball']), noRing = await build({ ...SHEET, pap_ring: false }, ['ball']);
 assert.ok(dots.ok && noDots.ok && dots.warnings.length === 0, 'dots: ' + JSON.stringify(dots.warnings));
 assert.ok(dots.bytes[0] !== noDots.bytes[0], 'the sockets change the ball mesh');
 const dotAxes = dots.axes.ball.filter(a => a.name === 'axis');
@@ -177,21 +177,35 @@ assert.ok(d1[0] > 0.9 || d2[0] > 0.9, 'right hand: the axis point is far over on
 const dotsL = await build({ ...SHEET, hand: 'left' }, ['ball']);
 assert.ok(dotsL.axes.ball.filter(a => a.name === 'axis').some(a => a.dir[0] < -0.9), 'left hand mirrors the axis point');
 assert.ok(dots.stats[0].pap && dots.stats[0].pap.points.length === 2 && Math.abs(dots.stats[0].pap.over_mm - 139.7) < 0.01, 'pap data on the stats: ' + JSON.stringify(dots.stats[0].pap));
+assert.ok(dots.stats[0].pap.from === 'the centre of the grip' && dots.stats[0].pap.given === false && dots.stats[0].pap.ring && dots.stats[0].pap.ring.r_mm === 30, 'pap reference, source and ring on the stats: ' + JSON.stringify(dots.stats[0].pap));
+const ringCm3 = noRing.stats[0].volume_cm3 - dots.stats[0].volume_cm3;
+assert.ok(noRing.ok && ringCm3 > 4 && ringCm3 < 8, 'two ring pockets take about 6 cm3 out of the ball: ' + ringCm3);
+r = await build({ ...SHEET, thumb_hole: false }, ['ball']);
+assert.ok(r.ok && r.warnings.length === 0 && r.stats[0].pap.from === 'the middle of the two finger holes', 'a no-thumb ball measures the PAP from the middle of the fingers: ' + (r.message || JSON.stringify([r.warnings, r.stats[0].pap])));
+// the sheet's PAP is used only when the sheet gives one; otherwise the common position, whatever the fields hold
+r = await build({ ...SHEET, pap_given: false, pap_over: 50, pap_up: 0 }, ['ball']);
+assert.ok(r.ok && r.bytes[0] === dots.bytes[0] && Math.abs(r.stats[0].pap.over_mm - 139.7) < 0.01, 'without a PAP on the sheet the common position is used');
+r = await build({ ...SHEET, pap_given: true, pap_over: 50, pap_up: 0 }, ['ball']);
+assert.ok(r.ok && r.bytes[0] !== dots.bytes[0] && r.stats[0].pap.given === true && r.stats[0].pap.over_mm === 50, 'the sheet PAP moves the target');
+r = await build({ ...SHEET, pap_given: true, pap_over: 40, pap_up: 30 }, ['ball']);
+assert.ok(r.ok && r.warnings.some(w => /ring runs into a grip hole/.test(w)) && !r.warnings.some(w => /dot runs into/.test(w)), 'a ring near the fingers warns while the dot is still clear: ' + JSON.stringify(r.warnings));
 // aim the dot 12 mm short of the thumb hole centre (pap_up is the arc from the top, negative toward the thumb)
 const thumbP = dots.axes.ball.find(a => a.name === 'thumb').p, Rb = 100;
-r = await build({ ...SHEET, pap_over: 0, pap_up: Math.max(-60, Rb * Math.asin(thumbP[1] / Rb) + 12) }, ['ball']);
+r = await build({ ...SHEET, pap_given: true, pap_over: 0, pap_up: Math.max(-60, Rb * Math.asin(thumbP[1] / Rb) + 12) }, ['ball']);
 assert.ok(r.ok && r.warnings.some(w => /runs into a grip hole/.test(w)), 'a dot on the grip warns: ' + JSON.stringify(r.warnings));
-r = await build({ ...SHEET, pap_over: 15, pap_up: 0 }, ['ball']);
+r = await build({ ...SHEET, pap_given: true, pap_over: 15, pap_up: 0 }, ['ball']);
 assert.ok(r.ok && !r.warnings.some(w => /grip hole/.test(w)) && r.warnings.some(w => /resting flat/.test(w)), 'a dot 15 mm over sits between the holes (no hole warning) but its twin is on the flat: ' + JSON.stringify(r.warnings));
-r = await build({ ...SHEET, pap_over: 0, pap_up: 0 }, ['ball']);
+r = await build({ ...SHEET, pap_given: true, pap_over: 0, pap_up: 0 }, ['ball']);
 assert.ok(r.ok && r.warnings.some(w => /resting flat/.test(w)), 'a dot at the pole puts its twin on the flat and warns: ' + JSON.stringify(r.warnings));
-r = await build({ ...SHEET, pap_over: 250 }, ['ball']);
+r = await build({ ...SHEET, pap_given: true, pap_over: 250 }, ['ball']);
 assert.equal(r.ok, false); assert.match(r.message, /Axis point over/);
-r = await build(SHEET, ['plugs']);
+r = await build({ ...SHEET, pap_ring: false }, ['plugs']);
 assert.ok(r.ok && r.stats[0].volume_cm3 > 0.6 && r.stats[0].volume_cm3 < 0.9, 'two plugs: ' + (r.message || r.stats[0].volume_cm3));
+r = await build(SHEET, ['plugs']);
+assert.ok(r.ok && r.stats[0].volume_cm3 > 5 && r.stats[0].volume_cm3 < 8 && r.stats[0].bbox_mm[0] > 130 && r.stats[0].bbox_mm[0] < 134 && r.stats[0].bbox_mm[2] > 4 && r.stats[0].bbox_mm[2] < 4.6, 'two plugs and two rings: ' + (r.message || JSON.stringify([r.stats[0].volume_cm3, r.stats[0].bbox_mm])));
 r = await page.evaluate(() => { const b = window.__cfgApp.buildFiles(['ball', 'plugs'], { pap_marker: false }); return b.files.map(f => f.name); });
 assert.ok(r.length === 1 && /rev_ball/.test(r[0]), 'no plugs file when the dots are off: ' + JSON.stringify(r));
-ok('axis target dots: two opposite sockets at the hand-side axis point, mirrored for a left hand, warnings near holes and the flat, plugs file only when the dots are on');
+ok('axis target: dots at the PAP (sheet or common, from the grip centre or the finger middle) and their rings, mirrored for a left hand, warnings near holes and the flat, inlays file only when the dots are on');
 
 // 10. release gate: one segment and one pin per file, pins ball diameter + 10 mm apart
 r = await build(SHEET, ['gate']);

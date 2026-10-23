@@ -18,9 +18,11 @@ file ships next to `FitSlice.exe`.
   customer contact details) and `customer_card.pdf` (a one-page how-to for the customer,
   written without a PDF library in `renderer-src/orders.js`).
 - **Release feedback parts** (design notes in `../docs/release-feedback.md`): the release gate
-  (part `gate`, product `gate`, also in every Rev Ball order), the ball's axis target dots with
-  their plugs (part `plugs`, exported with the ball when `pap_marker` is on) and the humming
-  spinner (`spin_hum`, off by default, experimental). None has been printed yet.
+  (part `gate`, product `gate`, also in every Rev Ball order), the ball's axis target (dots at
+  the PAP with a 60 mm ring round each; the PAP from the drill sheet when `pap_given`, measured
+  from the grip centre or the finger middle; plugs and rings in one second-colour part `plugs`,
+  exported with the ball when `pap_marker` is on) and the humming spinner (`spin_hum`, off by
+  default, experimental). None has been printed yet.
 
 ## Run from source
 

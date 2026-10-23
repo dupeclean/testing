@@ -27,8 +27,10 @@ const SHEET = { print_allowance: 0, hand: 'right', thumb_d: 23.02, middle_d: 16.
   thumb_fwd: 0, thumb_lat: -0.125, middle_fwd: 0.75, middle_lat: -0.25, ring_fwd: 0.75, ring_lat: 0.25, serial: '' };
 const CASES = {
   gate:          { parts: ['gate'], params: { ...SHEET } },
-  plugs:         { parts: ['plugs'], params: { ...SHEET } },
+  plugs:         { parts: ['plugs'], params: { ...SHEET, pap_ring: false } },
+  inlays:        { parts: ['plugs'], params: { ...SHEET } },
   dots_ball:     { parts: ['ball'], params: { ...SHEET, pap_marker: true } },
+  dots_noring:   { parts: ['ball'], params: { ...SHEET, pap_marker: true, pap_ring: false } },
   dots_left:     { parts: ['ball'], params: { ...SHEET, pap_marker: true, hand: 'left' } },
   plain_ball:    { parts: ['ball'], params: { ...SHEET, pap_marker: false } },
   hum_spinner:   { parts: ['spinner'], params: { ...SHEET, spin_hum: true } },

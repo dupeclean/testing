@@ -69,6 +69,8 @@ const FIT_SCHEMA = {
   serial:             { type: 'text', pattern: /^[0-9FS-]{0,12}$/, label: 'Engraved text', def: '' },
   gate_pin_h:         { type: 'num', min: 50, max: 150, label: 'Gate pin height', def: 100 },
   pap_marker:         { type: 'bool', def: true },
+  pap_given:          { type: 'bool', def: false },
+  pap_ring:           { type: 'bool', def: true },
   pap_over:           { type: 'num', min: 0, max: 200, label: 'Axis point over', def: 139.7 },
   pap_up:             { type: 'num', min: -60, max: 60, label: 'Axis point up', def: 12.7 },
   spin_hum:           { type: 'bool', def: false },

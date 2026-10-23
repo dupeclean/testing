@@ -148,18 +148,28 @@ folder path from the old computer.
   blind (70 mm deep by default; set it from the customer's thumb length)
   like a real ball. For a two-handed bowler untick "Thumb hole": the two
   finger holes are then centred on top and there is no thumb hole.
-- AXIS TARGET DOTS (Rev Ball): the ball has two small sockets (12 mm)
-  at the axis a good release spins it about: the bowler's PAP, 5 1/2"
-  over toward the hand and 1/2" up toward the fingers from the grip
-  centre by default. If the shop measured the customer's PAP, type it
-  under "Axis target dots" on the Ball screen. A Rev Ball order also
-  exports axis_plugs_D12.stl: two plugs to print in the second colour
-  (100% infill, flat side down) and press into the sockets. When the
-  dot stands still as the ball rolls away, the release spun it about the
-  right axis; when it wheels round, the hand came round the ball some
-  other way. Untick "Axis target dots" for a plain ball (no plugs file
-  is exported then). The app warns if a dot would land on a grip hole or
-  on the resting flat.
+- AXIS TARGET (Rev Ball): the ball has two small sockets (12 mm), each
+  inside a 60 mm ring pocket, at the axis a good release spins it
+  about (the bowler's PAP) and at the opposite point. A Rev Ball order
+  also exports axis_inlays_D12_ring60.stl: two plugs and two rings to
+  print in the second colour (100% infill, flat side down, no supports)
+  and press in (a drop of glue if a ring is loose). The dot and ring
+  make a bullseye: when it stands still as the ball rolls away, the
+  release spun the ball about the right axis; when it wheels round, the
+  hand came round the ball some other way. Untick "Axis target ring"
+  for dots only, or "Axis target dots" for a plain ball (no inlays file
+  is exported then). The app warns if a dot or ring would land on a
+  grip hole or on the resting flat.
+  THE PAP ON THE SHEET: if the shop measured the customer's PAP, tick
+  "The sheet gives the axis point (PAP)" on the Drill sheet section of
+  the Ball screen and type it: over (toward the hand side) first, then
+  up (toward the fingers; negative = down toward the thumb). It is
+  measured along the surface from the CENTRE OF THE GRIP (midway
+  between the thumb hole and the middle of the two finger holes), or
+  from the MIDDLE OF THE TWO FINGER HOLES on a two-handed, no-thumb
+  ball, which is how a pro shop measures it. Leave the box unticked
+  when the sheet has no PAP: the ball then uses the common 5 1/2" over,
+  1/2" up, and the job sheet and customer card say so.
 - RELEASE GATE: the "click" for the ball. Loose pins (20 mm across,
   100 mm tall) stand in shallow cups on base segments that link end to
   end with dovetails, 210 mm apart for the 200 mm ball. The gate file

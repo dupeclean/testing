@@ -280,7 +280,10 @@
       if (hasBall) {
         const STRIPE = { none: 'single colour', cap: 'coloured top cap', cap_band: 'coloured top cap and a band round the middle', bands: 'three bands round the middle' };
         L.push(`Rev Ball: ${r2(f.ball_d)} mm ball. ${f.thumb_hole === false ? 'No thumb hole (two-handed)' : `Thumb hole blind, ${r2(f.ball_thumb_depth)} mm deep`}. Finger depth ${f.finger_depth} mm. Bridge ${both(f.bridge)}. Resting flat ${r2(f.ball_flat)} mm. Colours: ${STRIPE[f.ball_stripe] || f.ball_stripe}. Marker groove ${f.ball_groove ? 'yes' : 'no'}. Print allowance ${m.print_allowance_mm} mm.`);
-        if (f.pap_marker) L.push(`Axis target dots: two ${r2(((built.stats.find(s => s.part === 'ball') || {}).pap || {}).socket_d_mm || 12)} mm sockets at the release axis, ${both(f.pap_over)} over toward the hand side and ${both(f.pap_up)} up from the grip centre, and at the opposite point. Press the two printed plugs (the axis_plugs file, second colour) into them. When the ball spins about that axis the dot stands still.`);
+        const pp = (built.stats.find(s => s.part === 'ball') || {}).pap || {};
+        const papFrom = pp.from || (f.thumb_hole === false ? 'the middle of the two finger holes' : 'the centre of the grip');
+        if (f.pap_marker) L.push(`Axis target${f.pap_ring ? ' dots and rings' : ' dots'}: two ${r2(pp.socket_d_mm || 12)} mm sockets${f.pap_ring ? `, each inside a ${2 * (pp.ring ? pp.ring.r_mm : 30)} mm ring pocket,` : ''} at the axis point and at the opposite point. PAP ${both(pp.over_mm || f.pap_over)} over toward the hand side, then ${both(pp.up_mm || f.pap_up)} up, measured along the surface from ${papFrom} (${f.pap_given ? 'from the drill sheet' : 'not on the sheet: the common position'}). Press the printed ${f.pap_ring ? 'plugs and rings (the axis_inlays file' : 'plugs (the axis_plugs file'}, second colour) in. When the ball spins about that axis the ${f.pap_ring ? 'dot and ring stand' : 'dot stands'} still.`);
+        else if (f.pap_given) L.push(`PAP from the sheet: ${both(f.pap_over)} over, ${both(f.pap_up)} up from ${papFrom} (no axis target on this ball).`);
         const cc = (built.stats.find(s => s.part === 'ball') || {}).color_changes || [];
         if (cc.length) {
           L.push('FILAMENT CHANGES for the two-colour ball (start the print in the base colour). In Bambu Studio slice it, then');
@@ -307,7 +310,7 @@
     L.push('PRINT');
     if (hasPuck || hasSpin || hasSizer || hasGate) L.push(`${hasBall ? 'Puck, spinner, sizer, gate: ' : ''}PETG, 0.2 mm layers, 4 walls, 20% gyroid infill, flat side down, no supports.`);
     if (hasBall) L.push(`${hasPuck || hasSpin || hasSizer ? 'Ball: ' : ''}PETG or PLA, 0.2 mm layers, 3 walls, 5% gyroid infill, grip holes facing UP. Supports: tree, "On build plate only" (so nothing grows inside the holes); seam: random or scarf (no ridge down one side). Snap the supports off and sand the scar smooth so it rolls true.`);
-    if (hasBall && f.pap_marker) L.push('Axis plugs: the second colour, 0.2 mm layers, 100% infill, flat side down. Press one into each socket on the ball.');
+    if (hasBall && f.pap_marker) L.push(`Axis ${f.pap_ring ? 'plugs and rings' : 'plugs'}: the second colour, 0.2 mm layers, 100% infill, flat side down, no supports. Press a plug into each socket${f.pap_ring ? ' and a ring into each ring pocket (a drop of glue if a ring is loose)' : ''}.`);
     for (const s of built.stats) L.push(`  ${s.part}: about ${s.grams} g of filament at ${s.infill_pct}% infill, ${s.bbox_mm.join(' x ')} mm`);
     if (hasGrip || hasSpin) L.push('After printing: smooth the bores with fine sandpaper and check each bore against the sizes above before packing.');
     if (hasBall) L.push('Ball drill: kneel, swing low, let it go along a strip of tape on the floor with a couch or wall 1.5 to 2 m away. Roll + curve off the line = thumb out, fingers lifted. Straight but long and lively = strong forward roll (fine). Straight and short = dumped. Popped up = thumb hung up. Spins in place = hand on top.');
@@ -407,7 +410,8 @@
       else L.push({ t: 'No thumb hole (two-handed): the two finger holes sit centred on the top.' });
       L.push({ t: `Middle finger ${both(f.middle_d)}${f.middle_oval_d > 0 ? ` oval ${both(f.middle_oval_d)}` : ''}${spanTxt(f.span_middle)}, pitch ${describePitch(f.middle_fwd, 'fr', f.hand)}, ${describePitch(f.middle_lat, 'lat', f.hand)}` });
       L.push({ t: `Ring finger ${both(f.ring_d)}${f.ring_oval_d > 0 ? ` oval ${both(f.ring_oval_d)}` : ''}${spanTxt(f.span_ring)}, pitch ${describePitch(f.ring_fwd, 'fr', f.hand)}, ${describePitch(f.ring_lat, 'lat', f.hand)}` });
-      L.push({ t: `${f.hand === 'right' ? 'Right' : 'Left'}-handed. Bridge ${both(f.bridge)}. Printed holes are ${m.print_allowance_mm} mm oversize to allow for printing; finish the fit with bowler's tape, as on a ball.`, gap: 8 });
+      L.push({ t: `${f.hand === 'right' ? 'Right' : 'Left'}-handed. Bridge ${both(f.bridge)}. Printed holes are ${m.print_allowance_mm} mm oversize to allow for printing; finish the fit with bowler's tape, as on a ball.`, gap: hasBall && f.pap_marker ? 2 : 8 });
+      if (hasBall && f.pap_marker) L.push({ t: `Axis point (PAP): ${both(f.pap_over)} over, ${both(f.pap_up)} up from ${f.thumb_hole === false ? 'the middle of the two finger holes' : 'the centre of the grip'}${f.pap_given ? ', from your sheet.' : ' (the standard position; a pro shop can measure your own).'}`, gap: 8 });
     } else if (hasSpin) {
       L.push({ t: `Middle finger ${both(f.middle_d)}${f.middle_oval_d > 0 ? ` oval ${both(f.middle_oval_d)}` : ''}, ring finger ${both(f.ring_d)}${f.ring_oval_d > 0 ? ` oval ${both(f.ring_oval_d)}` : ''}, bridge ${both(f.bridge)}. Printed holes are ${m.print_allowance_mm} mm oversize to allow for printing; finish the fit with bowler's tape.`, gap: 8 });
     } else if (kitOnly) {
@@ -423,7 +427,7 @@
       L.push({ t: '   Straight and short: everything let go at once (a dump).' });
       L.push({ t: '   Pops up and lands late: the thumb hung up.' });
       L.push({ t: '   Spins in place: the hand came over the top.', gap: 4 });
-      if (f.pap_marker) L.push({ t: 'The two coloured dots mark the axis your release should spin about. When a dot stands still as the ball rolls away, the axis is right; when it wheels around, the hand came round the ball differently.' });
+      if (f.pap_marker) L.push({ t: `The two coloured dots${f.pap_ring ? ' and the rings round them' : ''} mark the axis your release should spin about${f.pap_given ? ', your own PAP from the sheet' : ''}. When ${f.pap_ring ? 'the bullseye' : 'a dot'} stands still as the ball rolls away, the axis is right; when it wheels around, the hand came round the ball differently.` });
       const SPIN = { none: f.ball_groove ? 'The groove round the middle shows the spin.' : 'Watch the finger holes to see the spin.', cap: 'The coloured top cap shows the spin.', cap_band: 'The coloured cap and band show the spin.', bands: 'The coloured bands show the spin.' };
       L.push({ t: `${SPIN[f.ball_stripe] || SPIN.cap_band} Ten releases a day is plenty. It is a feedback tool, not a measuring instrument, and it is not a promise about your rev rate.`, gap: 8 });
     }

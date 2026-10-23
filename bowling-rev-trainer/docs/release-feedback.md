@@ -40,22 +40,32 @@ over for a hook. The wrong pin falling says which way the release missed.
 - Exported with the Rev Ball and Digital Ball products and on its own as the Release Gate
   product. Print flat, no supports; the pin stands upright on its foot.
 
-## 2. Axis target dots (ball: `pap_marker`, `pap_over`, `pap_up`)
+## 2. Axis target: dots and rings (ball: `pap_marker`, `pap_ring`, `pap_given`, `pap_over`, `pap_up`)
 
-Two shallow sockets on the ball at the axis the release should produce, with contrasting
-printed plugs. Spin the ball about that axis and the dot sits still while the rest blurs; spin
-about another axis and it wheels around. This is how a pro shop reads a positive axis point
-(PAP), and on this ball the sockets put the target where the bowler's intended axis is.
+Two shallow sockets on the ball at the axis the release should produce, each inside a 60 mm
+ring pocket, with contrasting printed plugs and rings. Spin the ball about that axis and the
+bullseye sits still while the rest blurs; spin about another axis and it wheels around. This is
+how a pro shop reads a positive axis point (PAP), and the ring makes it readable from 2 m away
+in the first half-metre of the roll.
 
-- Position is given in drill-sheet inches along the surface from the grip centre: `pap_over`
-  toward the bowling-hand side (default 5 1/2"), `pap_up` toward the fingers (default 1/2").
-  The second socket is at the antipode. Lengths are not scaled with the ball's radius: they are
-  hand measurements, like a span.
-- Socket: 12 mm diameter plus the print allowance, 3 mm deep. Plug: 12 mm diameter, 3.3 mm
-  tall, 0.5 mm foot chamfer; two plugs in their own STL (`plugs`), printed in the second colour
-  and pressed in. Without plugs the sockets still read as dark dots.
-- Warnings: a socket closer than 4 mm to a hole's bevel rim, or within 15 mm of the resting
-  flat.
+- The PAP is taken the way a pro shop measures it, along the surface with a tape: from the
+  **centre of the grip** (midway between the thumb hole and the middle of the two finger holes)
+  on a thumb-in ball, or from the **middle of the two finger holes** on a no-thumb ball; `over`
+  first, along the line across the grip toward the bowling-hand side, then `up` toward the
+  fingers (negative = toward the thumb). Both reference points are computed from the holes as
+  drilled, so lateral pitches and unequal spans are honoured. Lengths are hand measurements,
+  like a span, not scaled with the ball's radius. The second socket is at the antipode.
+- `pap_given` marks that the drill sheet gives the PAP (then `pap_over`, `pap_up` are the
+  sheet's numbers and are validated); otherwise the common 5 1/2" over, 1/2" up is used and the
+  job sheet and card say "not on the sheet".
+- Socket: 12 mm diameter plus the print allowance, 3 mm deep. Ring pocket: between radii 28 and
+  32 mm (plus the allowance), flat-bottomed 3 mm under the surface at its outer edge (about
+  4.3 mm at the inner edge, the sphere's sag). Plug: 12 mm, 3.3 mm tall, 0.5 mm foot chamfer.
+  Inlay ring: 56/64 mm, flat underneath so it prints flat, top following the ball's surface.
+  Plugs and rings ship in one second-colour STL (`plugs`, named `axis_inlays_...`; `axis_plugs_...`
+  with the ring off). Without inlays the pockets still read as dark marks.
+- Warnings: a socket or ring closer than 4 mm to a hole's bevel rim; a socket within 15 mm of
+  the resting flat, or a ring running onto it.
 - Honest limit: on carpet the ball skids briefly and then rolls, and a hooking ball's axis
   migrates toward the rolling axis, so the dot is steady only during the first part of the
   roll. For a forward-roll (yo-yo) release the two coincide and the dot stays steady throughout.
