@@ -393,11 +393,13 @@ module axis_plugs() {
 }
 
 // Groove w wide and `deep` deep round a ball of radius R (flat sagitta s), centred on height z
+function ball_rz(R, s, z) = sqrt(max(1, R*R - pow(z - (R - s), 2)));   // the ball's radius at a height
 module ball_ring(R, s, z, w, deep) {
-    rz = sqrt(max(1, R*R - pow(z - (R - s), 2)));   // the ball's radius at that height
+    // the groove floor follows the surface (a frustum between the radii at the groove's edges), so it
+    // is `deep` everywhere, low on the ball and near the top as much as round the middle
     translate([0, 0, z - w/2]) difference() {
         cylinder(r = R + 5, h = w);
-        translate([0, 0, -0.2]) cylinder(r = rz - deep, h = w + 0.4);
+        translate([0, 0, -0.2]) cylinder(r1 = ball_rz(R, s, z - w/2 - 0.2) - deep, r2 = ball_rz(R, s, z + w/2 + 0.2) - deep, h = w + 0.4);
     }
 }
 // Lowest point of a hole's chamfer rim on the ball surface

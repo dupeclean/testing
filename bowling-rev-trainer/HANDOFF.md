@@ -132,12 +132,14 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    slice with the job-sheet settings, add colour changes at 93.4, 105.4 and 154 mm and check
    that each lands on a groove ring. Two sessions tried to do this from the PC; one was refused
    desktop control and the other was blocked by a "New version of Bambu Studio" dialog.
-2. DONE (owner's go-ahead each time): `C:\FitSlice` holds the build of 2026-10-23 08:55 (review
-   fixes, feedback parts, axis target ring, PAP on the sheet), installed by renaming the old folder
-   and extracting the zip (the owner had it open; closed with his say-so). Backups: `C:\FitSlice-old-2026-10-20`
-   (Oct 20 build: no Rev Ball, oval holes, bevels, engraving or customer card), `C:\FitSlice-old-2026-10-22`
-   (Oct 22 morning build) and `C:\FitSlice-old-2026-10-22-evening` (review fixes + feedback parts, no
-   ring). All three can be deleted once the installed one has been used for a real order.
+2. DONE (owner's go-ahead each time): `C:\FitSlice` holds the build of 2026-10-23 10:37 (review
+   fixes, feedback parts, axis target ring, PAP on the sheet, spot pattern, two-colour 3MF), installed
+   by renaming the old folder and extracting the zip; the owner had FitSlice open each time and said
+   to close it. Backups: `C:\FitSlice-old-2026-10-20` (Oct 20 build: no Rev Ball, oval holes, bevels,
+   engraving or customer card), `C:\FitSlice-old-2026-10-22` (Oct 22 morning), `C:\FitSlice-old-2026-10-22-evening`
+   (review fixes + feedback parts) and `C:\FitSlice-old-2026-10-23-am` (ring build). All can be deleted
+   once the installed one has been used for a real order. The groove-floor fix (item 13) came after
+   this install, so the installed build cuts the marker grooves as vertical cylinders.
 3. DONE 2026-10-22 (owner's go-ahead): FS-0001 ("me", Pair) was reopened in the installed app,
    given thumb 25/32 drilled + 29/32 oval at 55 deg with the -3/4 reverse finger pitches kept,
    saved and re-exported: puck (795.7 cm3, 140 x 167.7 x 60 mm) and spinner STLs with bore
@@ -181,6 +183,11 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    two plugs + two rings) in its place; ball 4137.7 cm3 with 3.0 mm sockets and 3.9 mm ring pockets
    at both axis points, grooves still at 93.4 / 105.4 / 154 mm; job sheet says the PAP is the
    common position (not on the sheet). FS-0001 (puck + spinner) is unaffected by the ring.
+   Re-exported a third time 2026-10-23 10:40 from the spot-pattern build with the pattern switched
+   to `spot_band` (saved in the order): 7 files, now with `rev_ball...3mf` (two watertight parts,
+   3857.6 + 280.2 cm3, extruders 1 and 2); band at 36.4-48.4 mm (moved low, clear of the
+   bullseyes), spot at 190 mm; job sheet carries the note and the 3mf advice. Its grooves are the
+   old vertical-cylinder kind (see item 13); the heights are right.
 11. DECLINED 2026-10-23: the owner does not want a whistle ("no whistle"), nor a sensor, nor springs.
    Do not revive sound-based or electronic feedback. Kept for the record only. The owner wants instant feedback that the thumb left first
    and the fingers then lifted, and rejected a sensor module ("no sensor. too expensive/complex") and
@@ -219,6 +226,12 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    as one object in two colours. The owner's first import is the test; the STL + heights remain
    the fallback and the job sheet says so. `trainer.scad` mirrors the spot (`ball_spot_z`) and
    takes the band centre as `band_z` (the parity check passes the engine's value; -2 = no band).
+   Groove floor fix (same day, later): the marker grooves were cut as vertical cylinders, which
+   near the middle is a 0.3 mm groove but low on the ball or near the top (where the surface is
+   steep) becomes a lopsided ledge, up to 1 mm one side and nothing the other, which is why
+   `groove_check.mjs` could not see the 36 and 190 mm grooves. Both engines now cut the floor as a
+   frustum between the ball's radii at the groove's edges (`groove()` in app.js, `ball_ring` in
+   trainer.scad), so the groove is 0.3 mm deep everywhere and the detector finds all three.
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 

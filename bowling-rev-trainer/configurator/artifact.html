@@ -870,9 +870,11 @@ function makeBuilder(W) {
     const ser = serialCut(p, 0, 0, 0.8, Math.max(8, p.ball_flat - 2));   // on the resting flat (shrunk to fit it), read with the ball turned over
     if (ser) cuts.push(ser);
     const groove = (z, w, deep) => {   // a groove w wide and `deep` deep round the ball, centred on height z
-      const rz = Math.sqrt(Math.max(1, R * R - (z - (R - s)) ** 2));   // the ball's radius at that height
+      const rz = (zz) => Math.sqrt(Math.max(1, R * R - (zz - (R - s)) ** 2));   // the ball's radius at a height
+      // the groove floor follows the surface (a frustum between the ball's radii at the groove's edges), so
+      // it is `deep` everywhere, low on the ball and near the top as much as round the middle
       const outer = T(Manifold.cylinder(w, R + 5, R + 5, 128));
-      const inner = T(T(Manifold.cylinder(w + 0.4, rz - deep, rz - deep, 128)).translate([0, 0, -0.2]));
+      const inner = T(T(Manifold.cylinder(w + 0.4, rz(z - w / 2 - 0.2) - deep, rz(z + w / 2 + 0.2) - deep, 128)).translate([0, 0, -0.2]));
       return T(T(outer.subtract(inner)).translate([0, 0, z - w / 2]));
     };
     if (p.ball_groove) cuts.push(groove(R - s, 2, 0.8));   // marker groove round the equator
