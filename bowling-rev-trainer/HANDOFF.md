@@ -172,6 +172,15 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    bodies), `release_gate_210mm_pin100.stl` (two bodies, 81 cm3), fit sheet, job sheet (axis dots,
    RELEASE GATE and axis-plug print lines) and customer card (dots and gate sections). The saved
    orders keep their 22 mm flat; new orders get 30 mm.
+11. Vent whistle experiment (2026-10-23). The owner wants instant feedback that the thumb left first
+   and the fingers then lifted, and rejected a sensor module ("no sensor. too expensive/complex") and
+   anything bought or sprung. The one printed-only route is a kettle-type whistle on a vent from each
+   blind hole: the air a snug thumb drags in as it leaves sounds the thumb note, the fingers a higher
+   one. `experiments/vent-whistle/` holds a test coupon (SCAD, STL, README): five holes, four whistle
+   variants and a plain-vent control, one 80-minute print. Print it, pull the thumb out, note which
+   letters sing. If one does, add it to the ball and puck as an option with the usual parity check;
+   if none does, drop the idea and say so. Not in the engine or the order book. For the yo-yo arm
+   motion the printed options are an elbow stop brace and a printed yo-yo (not started).
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 
