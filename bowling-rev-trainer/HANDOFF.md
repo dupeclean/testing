@@ -187,7 +187,17 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    variants and a plain-vent control, one 80-minute print. Print it, pull the thumb out, note which
    letters sing. If one does, add it to the ball and puck as an option with the usual parity check;
    if none does, drop the idea and say so. Not in the engine or the order book. For the yo-yo arm
-   motion the printed options are an elbow stop brace and a printed yo-yo (not started).
+   motion the printed options were an elbow stop brace and a printed yo-yo; see item 12.
+12. Elbow Target (2026-10-23, `accessories/elbow-target/`, SCAD + STLs + README, not in the app).
+   The owner asked for an elbow stop brace for the yo-yo arm motion; built as a TARGET instead of a
+   stop, because a learner's fault is not bending enough: a curved saddle strapped to the inside of
+   the forearm below the crease carries a press-fit bumper (10/20/30/40 mm) that the upper arm meets
+   when the elbow reaches the chosen bend at the bottom of the swing. Saddle 90 x 56 x 3 mm for a
+   90 mm forearm (`forearm_d` in the SCAD; circumference / 3.14), printed standing on its block end;
+   bumpers lying flat; a printed TPU strap with peg and holes, or 25 mm velcro. Meshes watertight,
+   one body each (bumpers four). NOT printed: first print checks the tenon press fit (0.25 mm
+   clearance), the saddle's fit to the forearm, and which bumper touches at about 90 degrees. A
+   printed yo-yo remains unbuilt.
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 
