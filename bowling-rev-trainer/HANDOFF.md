@@ -1,6 +1,6 @@
 # Handoff for a local Claude Code session
 
-State of the project as of 2026-10-22 on branch `claude/bowling-grip-trainer-3d-laejva`: the
+State of the project as of 2026-10-23 on branch `claude/bowling-grip-trainer-3d-laejva`: the
 last cloud commit is `3fe4d41`, plus the local Windows commits described under "Windows session
 2026-10-22" and "Release feedback parts" (all pushed). Read this first, then `app/docs/START-HERE.txt` and `app/README.md`.
 
@@ -129,10 +129,11 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    slice with the job-sheet settings, add colour changes at 93.4, 105.4 and 154 mm and check
    that each lands on a groove ring. Two sessions tried to do this from the PC; one was refused
    desktop control and the other was blocked by a "New version of Bambu Studio" dialog.
-2. DONE 2026-10-22 (with the owner's go-ahead): `C:\FitSlice` now holds the new build and was
-   launched once from there; the Oct 20 build (no Rev Ball, oval holes, bevels, engraving or
-   customer card) is backed up in `C:\FitSlice-old-2026-10-20` and can be deleted once the new
-   one has been used for a real order.
+2. DONE (owner's go-ahead each time): `C:\FitSlice` holds the build of the evening of 2026-10-22
+   (review fixes + feedback parts), installed 2026-10-23 by renaming the old folder and extracting
+   the zip. Backups: `C:\FitSlice-old-2026-10-20` (Oct 20 build: no Rev Ball, oval holes, bevels,
+   engraving or customer card) and `C:\FitSlice-old-2026-10-22` (Oct 22 morning build). Both can be
+   deleted once the installed one has been used for a real order.
 3. DONE 2026-10-22 (owner's go-ahead): FS-0001 ("me", Pair) was reopened in the installed app,
    given thumb 25/32 drilled + 29/32 oval at 55 deg with the -3/4 reverse finger pitches kept,
    saved and re-exported: puck (795.7 cm3, 140 x 167.7 x 60 mm) and spinner STLs with bore
@@ -153,8 +154,8 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    thumb hole, old orders no longer inheriting the on-screen sheet, Latin-1 names on the card,
    and job-sheet and card wording for no-thumb balls, spinners, Fit Kits and colour patterns.
    The FS-0001 / FS-0002 exports on the PC predate it. Pulled and merged on the PC the same
-   evening (with the feedback parts); the zip in `app/dist` is rebuilt from the merged tree. Still
-   to do: reinstall at C:\FitSlice (owner's go-ahead) and re-export both orders.
+   evening (with the feedback parts); the zip in `app/dist` is rebuilt from the merged tree,
+   installed at `C:\FitSlice` and both orders re-exported on 2026-10-23 (item 10).
 8. DONE 2026-10-22: the PC's commits are on `origin/claude/bowling-grip-trainer-3d-laejva`.
    Push again after each local commit (`git push origin claude/bowling-grip-trainer-3d-laejva`).
 9. The release-feedback parts (gate, axis plugs, humming spinner; section below) have never been
@@ -162,10 +163,15 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    segments slide together), the two plugs (press fit into the ball's sockets), one spinner with
    the hum on. Tune `spin_hum_slots` / `spin_hum_angle` by ear; if it never hums at a finger-lift
    speed, drop the feature rather than ship it. Keep it off for customer orders until then.
-10. `app/dist/FitSlice-1.0.0-win-x64.zip` was rebuilt on the evening of 2026-10-22 from the merged
-   tree (the 28 review fixes plus the feedback parts; e2e 18 passes against it). `C:\FitSlice` still
-   holds the morning's build, which has neither. Replace it as in item 2 when the owner says so,
-   then re-export FS-0001 and FS-0002 (their files predate both batches).
+10. DONE 2026-10-23 (owner's go-ahead): the zip rebuilt from the merged tree (review fixes +
+   feedback parts; e2e 18 against it) is installed at `C:\FitSlice`, and FS-0001 and FS-0002 were
+   reopened in the installed app and re-exported without edits (driven by Playwright; no warnings,
+   no bad fields). FS-0001 "me" Pair: puck + spinner STLs replaced (same names), 5 files. FS-0002
+   "me" Rev Ball: now 6 files: the ball (4143.8 cm3, grooves at 93.4 / 105.4 / 154 mm match the job
+   sheet, two 3 mm sockets at the axis points verified on the mesh), `axis_plugs_D12.stl` (two
+   bodies), `release_gate_210mm_pin100.stl` (two bodies, 81 cm3), fit sheet, job sheet (axis dots,
+   RELEASE GATE and axis-plug print lines) and customer card (dots and gate sections). The saved
+   orders keep their 22 mm flat; new orders get 30 mm.
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 
