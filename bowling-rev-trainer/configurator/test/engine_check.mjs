@@ -262,5 +262,18 @@ r = await build({ ...SHEET, spin_hum: true }, ['puck']);
 assert.ok(r.ok && r.bytes[0] === (await build(SHEET, ['puck'])).bytes[0], 'the hum setting does nothing to the puck');
 ok('humming spinner: ring chamber and slots, no wrist-cord tunnel with it, bad slot counts and angles refused, holes reaching the chamber warn');
 
+// 12. the download buttons: the 3MF button appears only for a two-colour ball, and saves a Bambu-style 3MF
+const rebuilt = async (part) => { await page.evaluate(() => { document.getElementById('status').textContent = 'changing'; }); await page.click(`[data-part="${part}"]`); await page.waitForFunction(() => /Built in/.test(document.getElementById('status').textContent), null, { timeout: 120000 }); };
+await rebuilt('ball');
+assert.equal(await page.isHidden('#save_3mf'), false, 'the 3MF button shows for the ball');
+const [dl] = await Promise.all([page.waitForEvent('download'), page.click('#save_3mf')]);
+assert.match(dl.suggestedFilename(), /^rev_ball200.*\.3mf$/, 'download name: ' + dl.suggestedFilename());
+const dlText = readFileSync(await dl.path()).toString('latin1');
+assert.ok(dlText.length > 200000 && /Metadata\/model_settings\.config/.test(dlText) && (dlText.match(/key="extruder" value="[12]"/g) || []).length === 3, 'the download is the two-part 3MF');
+assert.match(await page.textContent('#save_bundle'), /STL \+ 3MF/, 'the bundle button says it carries the 3MF');
+await rebuilt('puck');
+assert.equal(await page.isHidden('#save_3mf'), true, 'no 3MF button for the puck');
+ok('the Download 3MF button appears for a two-colour ball only and saves the Bambu-style file');
+
 await browser.close(); server.close();
 console.log(`\nALL ${results.length} ENGINE CHECKS PASSED`);

@@ -362,6 +362,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
         <div hidden><ul class="notes" id="notes"></ul></div>
         <div class="actions">
           <button type="button" class="btn primary" id="save_stl">Download STL</button>
+          <button type="button" class="btn primary" id="save_3mf" hidden>Download 3MF (two colours, for Bambu Studio)</button>
           <button type="button" class="btn" id="save_bundle">Download bundle (.zip: STL + fit sheet)</button>
         </div>
         <p class="note" id="save_hint">Print flat side down, PETG or PLA+, 4 walls, 20–30% infill, no supports.</p>
@@ -1612,8 +1613,11 @@ async function main() {
     }
   }
 
+  let noDirect = false;   // viewer mode: only the bundle can be saved
   function showStats(data) {
     const D = data.derived, p = state;
+    $('save_3mf').hidden = noDirect || !data.colorParts;
+    $('save_bundle').textContent = noDirect ? 'Download STL bundle (.zip)' : data.colorParts ? 'Download bundle (.zip: STL + 3MF + fit sheet)' : 'Download bundle (.zip: STL + fit sheet)';
     const infill = parseFloat($('infill').value);
     const shell = Math.min(data.volume, data.area * (p.part === 'ball' ? 1.3 : 1.6));
     const grams = (shell + (data.volume - shell) * infill) * 1.27 / 1000;
@@ -1656,17 +1660,23 @@ async function main() {
     const a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click();
     setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 2000);
   }
-  async function saveSTL(bundle) {
+  // kind: 'stl' (the model), '3mf' (the two-colour ball, parts with filaments 1 and 2 assigned) or 'bundle'
+  // (a zip with the STL, the 3MF when there is one, and the fit sheet)
+  async function saveSTL(kind) {
+    if (kind === true) kind = 'bundle'; else if (!kind) kind = 'stl';
     await settle();
     if (invalid.size) { setStatus(`Not saved. ${invalidMessage()}`, 'error'); return; }
     if (!current) { setStatus('Nothing to save: the model could not be built. Fix the message above first.', 'error'); return; }
     const D = current.derived, base = fileBase(state, D);
     const stl = toSTL(current.mesh, `${base} - ${APP_NAME} ${APP_VERSION}`);
     const sheet = new TextEncoder().encode(JSON.stringify(fitSheet(state, D, current), null, 2));
+    const threeMF = current.colorParts ? toBambu3MF(current.colorParts, base) : null;
+    if (kind === '3mf' && !threeMF) { setStatus('No 3MF for this part: only a ball with a second-colour pattern has one.', 'error'); return; }
+    const bundleFiles = [{ name: `${base}.stl`, data: stl }, ...(threeMF ? [{ name: `${base}.3mf`, data: threeMF }] : []), { name: `${base}.fit_sheet.json`, data: sheet }];
     const dl = await downloads;
     if (dl) {
       // the claude.ai viewer saves zip (not stl): bundle the STL with its fit sheet
-      const zip = zipStore([{ name: `${base}.stl`, data: stl }, { name: `${base}.fit_sheet.json`, data: sheet }]);
+      const zip = zipStore(bundleFiles);
       try {
         await dl.save({ filename: `${base}.zip`, data: new Blob([zip]) });
         setStatus(`Saved ${base}.zip — unzip it for the .stl`, 'ok');
@@ -1677,14 +1687,16 @@ async function main() {
       return;
     }
     if (inArtifact) { setStatus('Downloads are not available in this view. Open the standalone copy of this page to download.', 'error'); return; }
-    if (bundle) blobSave(`${base}.zip`, zipStore([{ name: `${base}.stl`, data: stl }, { name: `${base}.fit_sheet.json`, data: sheet }]), 'application/zip');
+    if (kind === 'bundle') blobSave(`${base}.zip`, zipStore(bundleFiles), 'application/zip');
+    else if (kind === '3mf') blobSave(`${base}.3mf`, threeMF, 'model/3mf');
     else blobSave(`${base}.stl`, stl, 'model/stl');
-    setStatus(`Saved ${base}.${bundle ? 'zip' : 'stl'}`, 'ok');
+    setStatus(`Saved ${base}.${kind === 'bundle' ? 'zip' : kind}`, 'ok');
   }
-  $('save_stl').addEventListener('click', () => saveSTL(false));
-  $('save_bundle').addEventListener('click', () => saveSTL(true));
+  $('save_stl').addEventListener('click', () => saveSTL('stl'));
+  $('save_3mf').addEventListener('click', () => saveSTL('3mf'));
+  $('save_bundle').addEventListener('click', () => saveSTL('bundle'));
   downloads.then(dl => {
-    if (dl || inArtifact) { $('save_stl').hidden = true; $('save_bundle').textContent = 'Download STL bundle (.zip)'; $('save_hint').textContent = 'The zip holds the .stl and a fit sheet .json. Unzip and open the .stl in your slicer.'; }
+    if (dl || inArtifact) { $('save_stl').hidden = true; $('save_3mf').hidden = true; noDirect = true; $('save_bundle').textContent = 'Download STL bundle (.zip)'; $('save_hint').textContent = 'The zip holds the .stl and a fit sheet .json. Unzip and open the .stl in your slicer.'; }
   });
 
   $('copy_json').addEventListener('click', async () => {

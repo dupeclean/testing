@@ -71,7 +71,7 @@ latest word. It has not been checked against the paper sheet: do that before pri
 ```
 cd app && npm install                                            # needs Node >= 22 (see below)
 node --test app/test/*.test.js                                   # 26
-PLAYWRIGHT_PATH=<playwright> node configurator/test/engine_check.mjs   # 24
+PLAYWRIGHT_PATH=<playwright> node configurator/test/engine_check.mjs   # 25
 PLAYWRIGHT_PATH=<playwright> xvfb-run -a node app/test/e2e.mjs   # 18 (Linux; on Windows run without xvfb-run)
 FITSLICE_E2E_BIN=<packaged exe> PLAYWRIGHT_PATH=<playwright> node app/test/e2e.mjs   # 18, against a packaged build
 node configurator/test/groove_check.mjs <ball.stl> <job_sheet.txt>   # colour-change heights vs the mesh
@@ -113,7 +113,7 @@ node node_modules/electron/install.js                 # only if dist/electron.ex
 py -3 ../configurator/build.py                        # must leave git status clean
 node --test test/*.test.js                            # 26
 PW="$PWD/node_modules/playwright"
-PLAYWRIGHT_PATH="$PW" node ../configurator/test/engine_check.mjs   # 24
+PLAYWRIGHT_PATH="$PW" node ../configurator/test/engine_check.mjs   # 25
 PLAYWRIGHT_PATH="$PW" node ../configurator/test/feedback_check.mjs ../configurator/test/out/fb
 PYTHONPATH=C:/Users/Tom/Claude/tools/pylibs PATH="/c/Users/Tom/Claude/tools/openscad-2021.01:$PATH" py -3 ../configurator/test/feedback_check.py ../configurator/test/out/fb --scad
 PLAYWRIGHT_PATH="$PW" node test/e2e.mjs                             # 18 (real windows open for about a minute)
@@ -229,7 +229,10 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    (tag constants read from the source) and community notes; it parses with trimesh (two
    watertight parts) and `files.js` now allows `.3mf`. VERIFIED 2026-10-23: the owner opened the
    FS-0002 file in his Bambu Studio and it arrived as one object in two colours. The STL + heights
-   remain the fallback for other slicers and the job sheet says so. `trainer.scad` mirrors the spot (`ball_spot_z`) and
+   remain the fallback for other slicers and the job sheet says so. The configurator page (and the
+   same page inside the app) has a "Download 3MF" button next to "Download STL", shown only when the
+   last build is a ball with a second-colour pattern; the bundle zip then holds STL + 3MF + fit sheet
+   (engine_check 25 covers the button and the download). `trainer.scad` mirrors the spot (`ball_spot_z`) and
    takes the band centre as `band_z` (the parity check passes the engine's value; -2 = no band).
    Groove floor fix (same day, later): the marker grooves were cut as vertical cylinders, which
    near the middle is a 0.3 mm groove but low on the ball or near the top (where the surface is
