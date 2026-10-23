@@ -132,15 +132,15 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    slice with the job-sheet settings, add colour changes at 93.4, 105.4 and 154 mm and check
    that each lands on a groove ring. Two sessions tried to do this from the PC; one was refused
    desktop control and the other was blocked by a "New version of Bambu Studio" dialog.
-2. DONE (owner's go-ahead each time): `C:\FitSlice` holds the build of 2026-10-23 11:00 (review
+2. DONE (owner's go-ahead each time): `C:\FitSlice` holds the build of 2026-10-23 11:07 (review
    fixes, feedback parts, axis target ring, PAP on the sheet, spot pattern, two-colour 3MF, groove
    floors following the surface, build stamp in the title bar), installed
    by renaming the old folder and extracting the zip; the owner had FitSlice open each time and said
    to close it. Backups: `C:\FitSlice-old-2026-10-20` (Oct 20 build: no Rev Ball, oval holes, bevels,
    engraving or customer card), `C:\FitSlice-old-2026-10-22` (Oct 22 morning), `C:\FitSlice-old-2026-10-22-evening`
    (review fixes + feedback parts), `C:\FitSlice-old-2026-10-23-am` (ring build),
-   `C:\FitSlice-old-2026-10-23-b` (spot build before the groove fix) and `C:\FitSlice-old-2026-10-23-c`
-   (groove-fix build, no stamp). All can be deleted once the installed one has been used for a real
+   `C:\FitSlice-old-2026-10-23-b` (spot build before the groove fix), `C:\FitSlice-old-2026-10-23-c`
+   (groove-fix build, no stamp) and `C:\FitSlice-old-2026-10-23-d-wrong-stamp`. All can be deleted once the installed one has been used for a real
    order; while they exist, remember the app is single-instance, so a window from a backup folder
    stays in front when `C:\FitSlice` is launched.
 3. DONE 2026-10-22 (owner's go-ahead): FS-0001 ("me", Pair) was reopened in the installed app,
@@ -244,7 +244,12 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    that were the two spot-pattern zips of 10:05-10:20, never installed. Unresolved; the owner has
    been asked where and when he saw it. So that this is answerable next time, `app:info` now carries
    `built` (the asar's timestamp when packaged, main.js's from source), shown in the window title
-   (`FitSlice 1.0.0 · build 2026-10-23 11:02`) and as the first line of every job sheet.
+   (`FitSlice 1.0.0 · build 2026-10-23 11:07`) and as the first line of every job sheet. First
+   version read the asar's mtime through Electron's patched fs, which presents app.asar as a folder
+   with the launch time as its timestamp, so the stamp was wrong (it showed the launch time); the
+   packaged build reads it through `original-fs`. The 11:00 build with the wrong stamp was installed
+   for a few minutes; it sits in `C:\FitSlice-old-2026-10-23-d-wrong-stamp` (the harness would not
+   delete `C:\FitSlice`, so it was renamed aside like the others) and can be deleted.
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 

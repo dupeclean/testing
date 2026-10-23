@@ -67,8 +67,9 @@ function handle(channel, fn) {
 // a support question can tell which build a window belongs to. Shown in the title bar and on the job sheet.
 function buildStamp() {
   try {
-    const p = app.isPackaged ? path.join(process.resourcesPath, 'app.asar') : __filename;
-    const d = fs.statSync(p).mtime;
+    // Electron's fs shim presents app.asar as a folder with a made-up timestamp (the launch time), so
+    // the archive's real modification time has to come from the unpatched fs
+    const d = app.isPackaged ? require('original-fs').statSync(path.join(process.resourcesPath, 'app.asar')).mtime : fs.statSync(__filename).mtime;
     const two = (n) => String(n).padStart(2, '0');
     return `${d.getFullYear()}-${two(d.getMonth() + 1)}-${two(d.getDate())} ${two(d.getHours())}:${two(d.getMinutes())}`;
   } catch (e) { return 'unknown'; }
