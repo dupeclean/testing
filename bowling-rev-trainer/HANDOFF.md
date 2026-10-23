@@ -132,15 +132,16 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    slice with the job-sheet settings, add colour changes at 93.4, 105.4 and 154 mm and check
    that each lands on a groove ring. Two sessions tried to do this from the PC; one was refused
    desktop control and the other was blocked by a "New version of Bambu Studio" dialog.
-2. DONE (owner's go-ahead each time): `C:\FitSlice` holds the build of 2026-10-23 11:07 (review
+2. DONE (owner's go-ahead each time): `C:\FitSlice` holds the build of 2026-10-23 11:15 (review
    fixes, feedback parts, axis target ring, PAP on the sheet, spot pattern, two-colour 3MF, groove
-   floors following the surface, build stamp in the title bar), installed
+   floors following the surface, build stamp in the title bar, Download 3MF button), installed
    by renaming the old folder and extracting the zip; the owner had FitSlice open each time and said
    to close it. Backups: `C:\FitSlice-old-2026-10-20` (Oct 20 build: no Rev Ball, oval holes, bevels,
    engraving or customer card), `C:\FitSlice-old-2026-10-22` (Oct 22 morning), `C:\FitSlice-old-2026-10-22-evening`
    (review fixes + feedback parts), `C:\FitSlice-old-2026-10-23-am` (ring build),
    `C:\FitSlice-old-2026-10-23-b` (spot build before the groove fix), `C:\FitSlice-old-2026-10-23-c`
-   (groove-fix build, no stamp) and `C:\FitSlice-old-2026-10-23-d-wrong-stamp`. All can be deleted once the installed one has been used for a real
+   (groove-fix build, no stamp), `C:\FitSlice-old-2026-10-23-d-wrong-stamp` and `C:\FitSlice-old-2026-10-23-e`
+   (stamped build before the 3MF button). All can be deleted once the installed one has been used for a real
    order; while they exist, remember the app is single-instance, so a window from a backup folder
    stays in front when `C:\FitSlice` is launched.
 3. DONE 2026-10-22 (owner's go-ahead): FS-0001 ("me", Pair) was reopened in the installed app,
