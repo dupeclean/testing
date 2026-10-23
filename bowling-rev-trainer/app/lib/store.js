@@ -13,20 +13,21 @@ const { retrySync, writeAtomic, TRANSIENT } = require('./atomic');
 
 const PRODUCTS = {
   puck:         { label: 'Rev Puck',                 price: 89,  parts: ['puck'] },
-  ball:         { label: 'Rev Ball (release trainer)', price: 129, parts: ['ball'] },
+  ball:         { label: 'Rev Ball (release trainer)', price: 129, parts: ['ball', 'plugs', 'gate'] },
   spinner:      { label: 'Rev Spinner',              price: 45,  parts: ['spinner'] },
   pair:         { label: 'Pair (Puck + Spinner)',    price: 119, parts: ['puck', 'spinner'] },
   fitkit:       { label: 'Fit Kit (sizer plate)',    price: 24,  parts: ['sizer'] },
+  gate:         { label: 'Release Gate (pins for the ball)', price: 19, parts: ['gate'] },
   digital_puck: { label: 'Digital files: Puck',      price: 29,  parts: ['puck', 'sizer'] },
   digital_pair: { label: 'Digital files: Pair',      price: 39,  parts: ['puck', 'spinner', 'sizer'] },
-  digital_ball: { label: 'Digital files: Ball',      price: 34,  parts: ['ball', 'sizer'] },
+  digital_ball: { label: 'Digital files: Ball',      price: 34,  parts: ['ball', 'plugs', 'sizer', 'gate'] },
 };
 const STATUSES = ['new', 'printing', 'shipped', 'done', 'hold'];
 
 // Fit-sheet fields the configurator understands; anything else is dropped. Ranges (mm, and
 // inches for pitches) are the same ones the form enforces (configurator/app.js LIMITS).
 const FIT_SCHEMA = {
-  part:               { type: 'enum', values: ['puck', 'ball', 'spinner', 'sizer'] },
+  part:               { type: 'enum', values: ['puck', 'ball', 'spinner', 'sizer', 'gate', 'plugs'] },
   hand:               { type: 'enum', values: ['right', 'left'] },
   size_source:        { type: 'enum', values: ['drill_sheet', 'sizer_plate'] },
   span_middle:        { type: 'num', min: 60, max: 150, label: 'Middle finger span' },
@@ -66,6 +67,13 @@ const FIT_SCHEMA = {
   thumb_bevel:        { type: 'num', min: 0, max: 8, label: 'Thumb hole bevel', def: 4 },
   finger_bevel:       { type: 'num', min: 0, max: 6, label: 'Finger hole bevel', def: 2.5 },
   serial:             { type: 'text', pattern: /^[0-9FS-]{0,12}$/, label: 'Engraved text', def: '' },
+  gate_pin_h:         { type: 'num', min: 50, max: 150, label: 'Gate pin height', def: 100 },
+  pap_marker:         { type: 'bool', def: true },
+  pap_over:           { type: 'num', min: 0, max: 200, label: 'Axis point over', def: 139.7 },
+  pap_up:             { type: 'num', min: -60, max: 60, label: 'Axis point up', def: 12.7 },
+  spin_hum:           { type: 'bool', def: false },
+  spin_hum_slots:     { type: 'num', min: 2, max: 16, label: 'Hum slots', def: 8 },
+  spin_hum_angle:     { type: 'num', min: 0, max: 80, label: 'Hum slot angle', unit: 'deg', def: 45 },
 };
 
 const LIMITS = { name: 120, email: 200, phone: 60, address: 400, notes: 4000, orderNotes: 4000 };

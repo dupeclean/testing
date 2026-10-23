@@ -13,7 +13,7 @@
 
 /* [Part] */
 // Which part to render ("sizer" is a quick test plate for finding your hole sizes)
-part = "puck"; // [puck, ball, spinner, sizer, both]
+part = "puck"; // [puck, ball, spinner, sizer, gate, plugs, both]
 
 /* [Fit — copy from your ball] */
 // Bowling hand (mirrors the finger-hole layout)
@@ -92,6 +92,30 @@ ball_flat = 30;
 ball_groove = false;
 // Second-colour pattern made by filament swaps at exact heights: none, cap, cap_band, bands
 ball_stripe = "cap_band"; // [none, cap, cap_band, bands]
+// Axis target dots: two plug sockets at the axis the release should spin about (the bowler's PAP)
+pap_marker = true;
+// Axis point, measured along the surface from the grip centre (mm): over toward the hand side, up toward the fingers
+pap_over = 139.7;   // 5 1/2"
+pap_up = 12.7;      // 1/2"
+// Socket diameter (add your print allowance) and depth; the plugs in part "plugs" match
+pap_socket_d = 12; pap_depth = 3;
+
+/* [Release gate] */
+// Height of the loose pins that stand on the gate segments (the ball knocks one down)
+gate_pin_h = 100;
+// Fixed gate geometry (keep in sync with configurator/app.js G.gate_*)
+gate_w = 40; gate_t = 6; gate_gap = 10; gate_pin_d = 20; gate_cup_depth = 1.5; gate_cup_clear = 1.0;
+gate_dove_len = 12; gate_dove_w1 = 14; gate_dove_w2 = 20; gate_clear = 0.3;
+
+/* [Humming spinner (experimental)] */
+// Hollow ring chamber in the spinner with slanted slots through the top; hums once the spin is fast enough
+spin_hum = false;
+// Slots through the top (2 to 16)
+spin_hum_slots = 8;
+// Slot angle from radial, degrees (0 to 80); mirrored for a left hand
+spin_hum_angle = 45;
+// Fixed chamber geometry (keep in sync with configurator/app.js G.hum_*)
+hum_r0 = 30; hum_r1 = 44; hum_z0 = 5; hum_z1 = 16; hum_slot_w = 2; hum_slot_l = 10;
 
 /* [Options] */
 // Pocket in the puck base for stacked coins/washers (progressive loading). Tape over when filled.
@@ -299,6 +323,30 @@ module rev_ball() {
         if (ball_groove) ball_ring(R, s, R - s, 2, 0.8);
         // a fine groove at every colour boundary (the slicer swaps filament at these heights)
         for (z = ball_swaps(R, s)) ball_ring(R, s, z, 0.6, 0.3);
+        if (pap_marker) pap_cut(R, s);
+    }
+}
+
+// Two shallow sockets at the release axis (PAP) and its opposite point. The axis point is given as
+// arc lengths along the surface from the grip centre: over toward the hand side, up toward the fingers.
+module pap_cut(R, s) {
+    a_up = pap_up/R*180/PI; a_over = pap_over/R*180/PI;
+    t0 = [0, sin(a_up), cos(a_up)];                               // the top, tilted toward the fingers
+    d  = [sin(a_over)*t0[2]*mir, t0[1], cos(a_over)*t0[2]];      // then toward the hand side
+    for (sg = [1, -1]) {
+        u = d*sg;
+        P = [0, 0, R - s] + R*u;
+        translate(P) rotate([0, acos(u[2]), atan2(u[1], u[0])])
+            translate([0, 0, -pap_depth]) cylinder(d = pap_socket_d, h = pap_depth + 3);
+    }
+}
+
+// The two contrasting plugs for the axis target dots (print in the second colour); 0.3 mm proud
+module axis_plugs() {
+    r = pap_socket_d/2; h = pap_depth + 0.3;
+    for (x = [-pap_socket_d, pap_socket_d]) translate([x, 0, 0]) {
+        cylinder(h = 0.5, r1 = r - 0.5, r2 = r);
+        translate([0, 0, 0.5]) cylinder(h = h - 0.5, r = r);
     }
 }
 
@@ -335,8 +383,9 @@ module rev_spinner() {
         drill(x_r, 0, ring_d,   min(finger_depth, 20), 0, 0, spin_h, -1, false, ball_R, ov_r, finger_oval_angle, finger_bevel);
         serial_cut(-21, 22, 5.5, 34);   // one quadrant of the base, clear of the spin bars
 
-        if (lanyard)
+        if (lanyard && !spin_hum)   // the tunnel would cross the chamber
             xtunnel(-spin_d/2 + 18, 8, lanyard_d, spin_d + 20);
+        if (spin_hum) hum_cuts();
 
         // spin-indicator bars engraved in the base: when it spins on the
         // floor the flicker makes rev count easy to read
@@ -345,6 +394,20 @@ module rev_spinner() {
                 translate([0, 0, -eps])
                     cube([spin_d - 8, 4, 2.4], center = true);
     }
+}
+
+// Humming chamber: a ring cavity (house-shaped profile revolved; the 45-degree gable roof prints
+// without supports) and slanted slots from the top surface into it
+module hum_cuts() {
+    rm = (hum_r0 + hum_r1)/2;
+    ridge = hum_z1 + (hum_r1 - hum_r0)/2;
+    rotate_extrude($fn = 128)
+        polygon([[hum_r0, hum_z0], [hum_r1, hum_z0], [hum_r1, hum_z1], [rm, ridge], [hum_r0, hum_z1]]);
+    for (i = [0 : spin_hum_slots - 1])
+        rotate([0, 0, i*360/spin_hum_slots])
+            translate([rm, 0, hum_z1 + 14])
+                rotate([0, 0, mir*spin_hum_angle])
+                    cube([hum_slot_l, hum_slot_w, 30], center = true);
 }
 
 // ---------------------------------------------------------------------
@@ -381,10 +444,47 @@ module hole_sizer() {
 }
 
 // ---------------------------------------------------------------------
+// Release gate — the feedback for the ball. A base segment that links to
+// its neighbours with a dovetail across the tape line, and a loose pin
+// standing in a shallow cup on it; the ball knocks over the pin where it
+// crosses. One file = one segment + one pin; print 3 or 5 copies.
+// ---------------------------------------------------------------------
+module trap(x0, x1, w0, w1) { polygon([[x0, -w0/2], [x1, -w1/2], [x1, w1/2], [x0, w0/2]]); }
+
+module release_gate() {
+    L = ball_d + gate_gap; w = gate_w; t = gate_t; c = gate_clear;
+    slope = (gate_dove_w2 - gate_dove_w1)/2/gate_dove_len;   // half-width gained per mm along a dovetail
+    cup_r = gate_pin_d/2 + gate_cup_clear/2;
+    difference() {
+        union() {
+            translate([0, 0, t/2]) cube([L, w, t], center = true);
+            // dovetail tab on the +X end (starts 0.5 mm inside the body so the two fuse)
+            linear_extrude(t) trap(L/2 - 0.5, L/2 + gate_dove_len, gate_dove_w1 - 2*slope*0.5, gate_dove_w2);
+        }
+        // the matching slot in the -X end, with clearance, open through the end face
+        translate([0, 0, -1]) linear_extrude(t + 2)
+            trap(-L/2 - 1, -L/2 + gate_dove_len + c, gate_dove_w1 + 2*c - 2*slope, gate_dove_w2 + 2*c);
+        // shallow cup the pin stands in, its 45 degree lead-in, and a groove across the top for the tape
+        translate([0, 0, t - gate_cup_depth]) cylinder(r = cup_r, h = gate_cup_depth + 1);
+        translate([0, 0, t - 1]) cylinder(r1 = cup_r, r2 = cup_r + 1, h = 1);
+        translate([0, 0, t]) cube([1, w + 2, 1.2], center = true);
+    }
+    // the pin, standing beside the segment: chamfered foot so it tips out of the cup, chamfered top
+    r = gate_pin_d/2; h = gate_pin_h;
+    translate([0, w/2 + 20, 0]) {
+        cylinder(h = 1, r1 = r - 1, r2 = r);
+        translate([0, 0, 1]) cylinder(h = h - 3, r = r);
+        translate([0, 0, h - 2]) cylinder(h = 2, r1 = r, r2 = r - 2);
+    }
+}
+
+// ---------------------------------------------------------------------
 if (part == "puck")    rev_puck();
 if (part == "ball")    rev_ball();
 if (part == "spinner") rev_spinner();
 if (part == "sizer")   hole_sizer();
+if (part == "gate")    release_gate();
+if (part == "plugs")   axis_plugs();
 if (part == "both") {
     rev_puck();
     translate([puck_w/2 + spin_d/2 + 15, 0, 0]) rev_spinner();

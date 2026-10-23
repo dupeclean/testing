@@ -1,8 +1,8 @@
 # Handoff for a local Claude Code session
 
 State of the project as of 2026-10-22 on branch `claude/bowling-grip-trainer-3d-laejva`: the
-last cloud commit is `3fe4d41`, plus the local Windows commit described under "Windows session
-2026-10-22". Read this first, then `app/docs/START-HERE.txt` and `app/README.md`.
+last cloud commit is `3fe4d41`, plus the local Windows commits described under "Windows session
+2026-10-22" and "Release feedback parts" (all pushed). Read this first, then `app/docs/START-HERE.txt` and `app/README.md`.
 
 **Where the live checkout is (owner's PC):** `C:\Users\Tom\Claude\FitSlice` is a git clone of
 the repo (this project is its `bowling-rev-trainer\` subfolder; the repo root also holds two
@@ -16,7 +16,8 @@ Credential Manager on 2026-10-22, so later pushes need no prompt).
 The owner is a beginner bowler running a small made-to-order business on a Windows PC with a
 Bambu Lab P1S + AMS. FitSlice: drill-sheet values in, printable STL out, as a local desktop app
 with an order book. Products: Rev Puck (grip/thumb-exit trainer), Rev Ball (200 mm release
-trainer, two-colour), Rev Spinner, Fit Kit (sizer plate), digital files. Keep explanations
+trainer, two-colour, with axis target dots), Rev Spinner (optional humming chamber), Release Gate
+(pins the ball knocks down), Fit Kit (sizer plate), digital files. Keep explanations
 concise. The owner has asked for honesty about what has and has not been physically verified.
 
 ## Where things are
@@ -67,16 +68,19 @@ latest word. It has not been checked against the paper sheet: do that before pri
 ```
 cd app && npm install                                            # needs Node >= 22 (see below)
 node --test app/test/*.test.js                                   # 26
-PLAYWRIGHT_PATH=<playwright> node configurator/test/engine_check.mjs   # 17
+PLAYWRIGHT_PATH=<playwright> node configurator/test/engine_check.mjs   # 24
 PLAYWRIGHT_PATH=<playwright> xvfb-run -a node app/test/e2e.mjs   # 18 (Linux; on Windows run without xvfb-run)
 FITSLICE_E2E_BIN=<packaged exe> PLAYWRIGHT_PATH=<playwright> node app/test/e2e.mjs   # 18, against a packaged build
 node configurator/test/groove_check.mjs <ball.stl> <job_sheet.txt>   # colour-change heights vs the mesh
 node configurator/test/oval_check.mjs <out> && python3 configurator/test/oval_check.py <out> --scad
 node configurator/test/pitch_check.mjs <out> && python3 configurator/test/pitch_check.py <out>
+node configurator/test/feedback_check.mjs <out> && python3 configurator/test/feedback_check.py <out> --scad
+                                                                 # gate, axis dots + plugs, humming spinner: mesh checks + IoU
 cd app && npm run dist:win                                       # app/dist/FitSlice-1.0.0-win-x64.zip
 ```
-The Python checks need `trimesh`, `shapely`, `manifold3d`, `numpy`; `--scad` needs `openscad`
-on PATH. None of those are on the owner's PC, so they were not run there. Playwright:
+The Python checks need `trimesh`, `shapely`, `manifold3d`, `numpy`, `scipy`, `networkx`, `rtree`;
+`--scad` needs `openscad` on PATH. On the owner's PC they live in a `--target` folder (see the
+Windows section); `feedback_check` was run there on 2026-10-22, `oval_check`/`pitch_check` only on Linux. Playwright:
 `npm install --no-save playwright` in `app/` (it is deliberately not in `package.json`), then
 `PLAYWRIGHT_PATH=app/node_modules/playwright`; the engine checks also need
 `node app/node_modules/playwright/cli.js install chromium`.
@@ -91,8 +95,13 @@ from electron-builder. A portable Node 24.22.1 is unpacked at
 `C:\Users\Tom\Claude\tools\node-v24.22.1-win-x64` (Photoshop's bundled
 `C:\Program Files\Adobe\Adobe Photoshop 2025\node.exe`, v22, also works). The real fix is to
 install the current Node LTS. `python3` and `python` on PATH are the Microsoft Store stubs; use
-`py -3` (3.14) or `C:\Users\Tom\AppData\Local\Programs\Python\Python313\python.exe`.
-In Git Bash, from the repo root:
+`py -3` (3.14) or `C:\Users\Tom\AppData\Local\Programs\Python\Python313\python.exe`. That 3.13 install
+is missing standard-library modules (`http.cookiejar`, `ensurepip`), so its pip cannot download
+anything; for the Python mesh checks use `py -3` with `PYTHONPATH=C:\Users\Tom\Claude\tools\pylibs`,
+where numpy, trimesh, shapely, manifold3d, scipy, rtree and networkx were installed on 2026-10-22
+(`py -3 -m pip install --target C:\Users\Tom\Claude\tools\pylibs <packages>`). A portable OpenSCAD
+2021.01 is at `C:\Users\Tom\Claude\tools\openscad-2021.01\openscad.exe` (its folder on PATH for
+`--scad`; a ball render takes a few minutes). In Git Bash, from the repo root:
 
 ```
 export PATH="/c/Users/Tom/Claude/tools/node-v24.22.1-win-x64:$PATH"
@@ -101,7 +110,9 @@ node node_modules/electron/install.js                 # only if dist/electron.ex
 py -3 ../configurator/build.py                        # must leave git status clean
 node --test test/*.test.js                            # 26
 PW="$PWD/node_modules/playwright"
-PLAYWRIGHT_PATH="$PW" node ../configurator/test/engine_check.mjs   # 17
+PLAYWRIGHT_PATH="$PW" node ../configurator/test/engine_check.mjs   # 24
+PLAYWRIGHT_PATH="$PW" node ../configurator/test/feedback_check.mjs ../configurator/test/out/fb
+PYTHONPATH=C:/Users/Tom/Claude/tools/pylibs PATH="/c/Users/Tom/Claude/tools/openscad-2021.01:$PATH" py -3 ../configurator/test/feedback_check.py ../configurator/test/out/fb --scad
 PLAYWRIGHT_PATH="$PW" node test/e2e.mjs                             # 18 (real windows open for about a minute)
 node node_modules/electron-builder/cli.js --win zip --x64 --publish never   # dist/FitSlice-1.0.0-win-x64.zip
 FITSLICE_E2E_BIN="$PWD/dist/win-unpacked/FitSlice.exe" PLAYWRIGHT_PATH="$PW" node test/e2e.mjs   # 18
@@ -141,10 +152,20 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    base and the ball flat (default flat now 30 mm), thumb checks skipped for parts without a
    thumb hole, old orders no longer inheriting the on-screen sheet, Latin-1 names on the card,
    and job-sheet and card wording for no-thumb balls, spinners, Fit Kits and colour patterns.
-   The FS-0001 / FS-0002 exports on the PC predate it: pull, rebuild the zip (or take the one
-   from the cloud session), reinstall at C:\FitSlice and re-export both orders.
+   The FS-0001 / FS-0002 exports on the PC predate it. Pulled and merged on the PC the same
+   evening (with the feedback parts); the zip in `app/dist` is rebuilt from the merged tree. Still
+   to do: reinstall at C:\FitSlice (owner's go-ahead) and re-export both orders.
 8. DONE 2026-10-22: the PC's commits are on `origin/claude/bowling-grip-trainer-3d-laejva`.
    Push again after each local commit (`git push origin claude/bowling-grip-trainer-3d-laejva`).
+9. The release-feedback parts (gate, axis plugs, humming spinner; section below) have never been
+   printed. First prints: one gate segment + pin (does the pin stand loose in its cup, do two
+   segments slide together), the two plugs (press fit into the ball's sockets), one spinner with
+   the hum on. Tune `spin_hum_slots` / `spin_hum_angle` by ear; if it never hums at a finger-lift
+   speed, drop the feature rather than ship it. Keep it off for customer orders until then.
+10. `app/dist/FitSlice-1.0.0-win-x64.zip` was rebuilt on the evening of 2026-10-22 from the merged
+   tree (the 28 review fixes plus the feedback parts; e2e 18 passes against it). `C:\FitSlice` still
+   holds the morning's build, which has neither. Replace it as in item 2 when the owner says so,
+   then re-export FS-0001 and FS-0002 (their files predate both batches).
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 
@@ -188,6 +209,37 @@ has the Rev Ball (the Oct 20 build in `C:\FitSlice` predates it).
   Windows runtime behaviour is unchanged: the e2e proves every IPC call still passes the check.
 - `configurator/test/groove_check.mjs` (new): full-ring grooves in a ball STL vs the job sheet.
 - `app/README.md`: Node >= 22 and Windows notes.
+
+## Release feedback parts (2026-10-22, built and tested on the PC, NOT printed)
+
+Owner's ask: immediate feedback on release quality, with the constraint "no springs, 3D printed
+only". Design notes and the honest limits are in `docs/release-feedback.md`. Three features, each
+in the engine, `trainer.scad`, the configurator UI, the order book schema, the job sheet, the
+customer card and the tests:
+
+1. **Release gate** (part and product `gate`; also in every Rev Ball and digital-ball order). One
+   dovetailed base segment (ball diameter + 10 mm long, 40 x 6 mm, 1 mm tape groove) and one loose
+   pin (20 mm across, `gate_pin_h` 50-150 mm, default 100) per file; print 3 or 5 copies. The ball
+   knocks down the pin where it crosses the tape line. Cup clearance 1 mm, dovetail clearance
+   0.3 mm: check both on the first print.
+2. **Axis target dots** on the ball (`pap_marker`, on by default; `pap_over` 139.7 mm and `pap_up`
+   12.7 mm, surface distances from the grip centre toward the hand side and the fingers, i.e. a
+   5 1/2" x 1/2" PAP) with the matching part `plugs` (two 12 x 3.3 mm plugs, exported with the ball
+   only when the dots are on). The second socket is at the opposite point. Warnings when a dot
+   would land on a grip hole or on the resting flat; `pap_over` over 200 mm is refused.
+3. **Humming spinner** (spinner: `spin_hum`, off by default; `spin_hum_slots` 2-16;
+   `spin_hum_angle` 0-80 degrees from radial, mirrored for a left hand). Ring cavity r 30-44 mm,
+   floor at 5 mm, walls to 16 mm, 45-degree gable ridge at 23 mm (prints without supports); slots
+   2 x 10 mm from the top into it; the wrist-cord tunnel is left out with it. Experimental: whether
+   it hums at a finger-lift spin speed is unknown until printed. Holes that reach the chamber wall
+   warn.
+
+Parity with `trainer.scad` (IoU of the browser mesh against OpenSCAD 2021.01, print_allowance 0,
+the owner's sheet, after the merge with the review fixes): gate 0.9999, plugs 0.9989, ball with dots
+0.9991, humming spinner 0.9984 (16 slots 0.9984); volumes agree within 0.3%. Tests on the PC:
+engine_check 24, unit 26, e2e 18 from source and against the rebuilt zip,
+`feedback_check` 8 cases (mesh checks: two bodies in the gate file, 3 mm sockets at the reported
+axis points, the ring cavity and no tunnel in the hum spinner).
 
 ## Artifacts (claude.ai, owner-private)
 

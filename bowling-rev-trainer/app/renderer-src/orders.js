@@ -241,7 +241,7 @@
   function jobSheet(order, built, fileNames) {
     const f = built.fitSheet, m = f.modeled;
     const parts = info.products[order.product].parts;
-    const hasPuck = parts.includes('puck'), hasSpin = parts.includes('spinner'), hasSizer = parts.includes('sizer'), hasBall = parts.includes('ball');
+    const hasPuck = parts.includes('puck'), hasSpin = parts.includes('spinner'), hasSizer = parts.includes('sizer'), hasBall = parts.includes('ball'), hasGate = parts.includes('gate');
     const hasGrip = hasPuck || hasBall;   // parts that carry the whole three-hole grip
     const hasThumb = hasGrip && !(hasBall && f.thumb_hole === false);   // a two-handed ball and the spinner cut no thumb hole
     const r2 = (x) => Math.round(Number(x) * 100) / 100;
@@ -280,6 +280,7 @@
       if (hasBall) {
         const STRIPE = { none: 'single colour', cap: 'coloured top cap', cap_band: 'coloured top cap and a band round the middle', bands: 'three bands round the middle' };
         L.push(`Rev Ball: ${r2(f.ball_d)} mm ball. ${f.thumb_hole === false ? 'No thumb hole (two-handed)' : `Thumb hole blind, ${r2(f.ball_thumb_depth)} mm deep`}. Finger depth ${f.finger_depth} mm. Bridge ${both(f.bridge)}. Resting flat ${r2(f.ball_flat)} mm. Colours: ${STRIPE[f.ball_stripe] || f.ball_stripe}. Marker groove ${f.ball_groove ? 'yes' : 'no'}. Print allowance ${m.print_allowance_mm} mm.`);
+        if (f.pap_marker) L.push(`Axis target dots: two ${r2(((built.stats.find(s => s.part === 'ball') || {}).pap || {}).socket_d_mm || 12)} mm sockets at the release axis, ${both(f.pap_over)} over toward the hand side and ${both(f.pap_up)} up from the grip centre, and at the opposite point. Press the two printed plugs (the axis_plugs file, second colour) into them. When the ball spins about that axis the dot stands still.`);
         const cc = (built.stats.find(s => s.part === 'ball') || {}).color_changes || [];
         if (cc.length) {
           L.push('FILAMENT CHANGES for the two-colour ball (start the print in the base colour). In Bambu Studio slice it, then');
@@ -288,17 +289,25 @@
         }
       }
       if (hasSpin) {
-        L.push(`${hasPuck ? 'Rev Spinner: ' : ''}two finger holes only, no thumb hole. Spans and pitches above do not apply to the spinner: its holes are drilled straight at the ball's center (zero pitch). Hole spacing uses the bridge ${both(f.bridge)}; finger depth ${Math.min(f.finger_depth, 20)} mm; wrist-cord tunnel ${f.lanyard ? 'yes' : 'no'}; print allowance ${m.print_allowance_mm} mm.`);
+        L.push(`${hasPuck ? 'Rev Spinner: ' : ''}two finger holes only, no thumb hole. Spans and pitches above do not apply to the spinner: its holes are drilled straight at the ball's center (zero pitch). Hole spacing uses the bridge ${both(f.bridge)}; finger depth ${Math.min(f.finger_depth, 20)} mm; wrist-cord tunnel ${f.lanyard && !f.spin_hum ? 'yes' : 'no'}; print allowance ${m.print_allowance_mm} mm.`);
+        if (f.spin_hum) L.push(`HUMMING CHAMBER (experimental): a hollow ring inside the spinner with ${f.spin_hum_slots} slots at ${f.spin_hum_angle} deg through the top; it hums once the spin is fast enough and stops when it slows. The wrist-cord tunnel is left out (it would cross the chamber). Print as usual, flat side down, no supports: the chamber roof is a 45 deg gable.`);
       }
       L.push('');
     }
     if (hasSizer) {
       L.push('SIZER PLATE', `Finger row centred on ${both(f.sizer_finger_center)}, thumb row centred on ${both(f.sizer_thumb_center)}, steps of ${r2(f.sizer_step)} mm. Each bore is engraved with its diameter in mm. No print allowance is added: the bores are exactly the engraved size.`, '');
     }
+    if (hasGate) {
+      const g = (built.stats.find(s => s.part === 'gate') || {}).gate || {};
+      L.push('RELEASE GATE (the feedback for the ball)');
+      L.push(`The gate file holds one base segment and one loose pin: print 3 or 5 copies, flat, no supports (the pin prints standing). Linked end to end by their dovetails the segments put the pins ${r2(g.spacing_mm)} mm apart (ball diameter + 10 mm); the pins are ${r2(g.pin_h_mm)} mm tall, ${r2(g.pin_d_mm)} mm across, and stand loose in the shallow cups.`);
+      L.push('Use: link the segments across the tape line 1.5 to 2 m from the release point, with the tape running through the groove on the middle segment, and stand a pin in each cup. Decide which pin a correct release should knock down: the centre pin for straight, heavy forward roll; one or two pins over for a hook. The pin that falls, about a second after the release, is the feedback.', '');
+    }
 
     L.push('PRINT');
-    if (hasPuck || hasSpin || hasSizer) L.push(`${hasBall ? 'Puck, spinner, sizer: ' : ''}PETG, 0.2 mm layers, 4 walls, 20% gyroid infill, flat side down, no supports.`);
+    if (hasPuck || hasSpin || hasSizer || hasGate) L.push(`${hasBall ? 'Puck, spinner, sizer, gate: ' : ''}PETG, 0.2 mm layers, 4 walls, 20% gyroid infill, flat side down, no supports.`);
     if (hasBall) L.push(`${hasPuck || hasSpin || hasSizer ? 'Ball: ' : ''}PETG or PLA, 0.2 mm layers, 3 walls, 5% gyroid infill, grip holes facing UP. Supports: tree, "On build plate only" (so nothing grows inside the holes); seam: random or scarf (no ridge down one side). Snap the supports off and sand the scar smooth so it rolls true.`);
+    if (hasBall && f.pap_marker) L.push('Axis plugs: the second colour, 0.2 mm layers, 100% infill, flat side down. Press one into each socket on the ball.');
     for (const s of built.stats) L.push(`  ${s.part}: about ${s.grams} g of filament at ${s.infill_pct}% infill, ${s.bbox_mm.join(' x ')} mm`);
     if (hasGrip || hasSpin) L.push('After printing: smooth the bores with fine sandpaper and check each bore against the sizes above before packing.');
     if (hasBall) L.push('Ball drill: kneel, swing low, let it go along a strip of tape on the floor with a couch or wall 1.5 to 2 m away. Roll + curve off the line = thumb out, fingers lifted. Straight but long and lively = strong forward roll (fine). Straight and short = dumped. Popped up = thumb hung up. Spins in place = hand on top.');
@@ -381,7 +390,7 @@
   }
   function customerCard(order, built) {
     const f = built.fitSheet, m = f.modeled, parts = info.products[order.product].parts;
-    const hasPuck = parts.includes('puck'), hasSpin = parts.includes('spinner'), hasSizer = parts.includes('sizer'), hasBall = parts.includes('ball');
+    const hasPuck = parts.includes('puck'), hasSpin = parts.includes('spinner'), hasSizer = parts.includes('sizer'), hasBall = parts.includes('ball'), hasGate = parts.includes('gate');
     const hasThumb = (hasPuck || hasBall) && !(hasBall && f.thumb_hole === false);
     const both = (mm) => `${fraction64(mm / IN)}" (${Math.round(mm * 100) / 100} mm)`;
     // "Jordan Lee" -> Jordan; "Lee, Jordan" -> Jordan
@@ -414,8 +423,17 @@
       L.push({ t: '   Straight and short: everything let go at once (a dump).' });
       L.push({ t: '   Pops up and lands late: the thumb hung up.' });
       L.push({ t: '   Spins in place: the hand came over the top.', gap: 4 });
+      if (f.pap_marker) L.push({ t: 'The two coloured dots mark the axis your release should spin about. When a dot stands still as the ball rolls away, the axis is right; when it wheels around, the hand came round the ball differently.' });
       const SPIN = { none: f.ball_groove ? 'The groove round the middle shows the spin.' : 'Watch the finger holes to see the spin.', cap: 'The coloured top cap shows the spin.', cap_band: 'The coloured cap and band show the spin.', bands: 'The coloured bands show the spin.' };
       L.push({ t: `${SPIN[f.ball_stripe] || SPIN.cap_band} Ten releases a day is plenty. It is a feedback tool, not a measuring instrument, and it is not a promise about your rev rate.`, gap: 8 });
+    }
+    if (hasSpin && f.spin_hum) {
+      L.push({ t: 'HUMMING SPINNER', b: true, s: 12 });
+      L.push({ t: 'Spin it on a table with the finger lift alone, the way the fingers come off the ball. The hum starts only when the spin is fast enough and stops as it slows, so a hum that starts at once and lasts is a strong, clean lift. It is experimental: the note and the speed it starts at vary from print to print.', gap: 8 });
+    }
+    if (hasGate) {
+      L.push({ t: 'RELEASE GATE', b: true, s: 12 });
+      L.push({ t: 'Link the segments across the tape line 1.5 to 2 m away, with the tape through the groove on the middle one, and stand a pin in each cup. Before you start, pick the pin a good release should knock down: the centre pin for a straight, heavy roll; one or two over for a hook. The pin that falls, about a second after you let go, is your answer. The wrong pin falling tells you which way you missed.', gap: 8 });
     }
     if (hasPuck) {
       L.push({ t: 'REV PUCK: HOW TO USE IT', b: true, s: 12 });

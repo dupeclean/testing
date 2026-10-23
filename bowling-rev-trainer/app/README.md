@@ -17,6 +17,10 @@ file ships next to `FitSlice.exe`.
   the base of every part but the sizer plate), `fit_sheet.json`, `job_sheet.txt` (print settings, filament-change heights, no
   customer contact details) and `customer_card.pdf` (a one-page how-to for the customer,
   written without a PDF library in `renderer-src/orders.js`).
+- **Release feedback parts** (design notes in `../docs/release-feedback.md`): the release gate
+  (part `gate`, product `gate`, also in every Rev Ball order), the ball's axis target dots with
+  their plugs (part `plugs`, exported with the ball when `pap_marker` is on) and the humming
+  spinner (`spin_hum`, off by default, experimental). None has been printed yet.
 
 ## Run from source
 
@@ -58,8 +62,9 @@ On Windows run the same without `xvfb-run` (the app's windows open on the deskto
 minute); `FITSLICE_E2E_BIN` is then `dist\win-unpacked\FitSlice.exe`. Playwright can be added
 without changing `package.json` with `npm install --no-save playwright`.
 
-Geometry (pitch direction, bridge, spans, oval holes, bevels, engraving, the Rev Ball, parity
-with OpenSCAD) is tested from `../configurator/test/` (`engine_check.mjs`, `pitch_check.mjs` +
+Geometry (pitch direction, bridge, spans, oval holes, bevels, engraving, the Rev Ball, its axis
+target dots and plugs, the release gate, the humming spinner, parity with OpenSCAD) is tested
+from `../configurator/test/` (`engine_check.mjs`, `pitch_check.mjs` +
 `pitch_check.py`, `oval_check.mjs` + `oval_check.py --scad`).
 
 ## Where data lives

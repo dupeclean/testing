@@ -1,0 +1,89 @@
+# Release feedback with printed parts only
+
+Design notes for the three feedback features added on 2026-10-22. Constraint from the owner: the
+bowler must know at once whether a release was done right, using nothing but printed parts. No
+springs, flexures, electronics or bought hardware.
+
+## What a signal can honestly measure
+
+A release is "right" when (1) the thumb leaves before the fingers, (2) the fingers put spin on
+the ball as it leaves, and (3) that spin is about the intended axis. Inside a sealed printed
+ball nothing mechanical can sense any of these: a rolling ball turns at speed over
+circumference whatever the hand did, and a loose rattle pellet co-rotates once centrifugal
+force pins it to the wall, so a rattle or whistle inside the ball would reward throwing harder.
+A printed click at the hand needs stored energy, which means a spring. So the printed-only
+signals are about what the release *did*: where the ball went (gate), what it spun about (axis
+dots), and how hard the fingers lifted (humming spinner). The puck's thumb-pop drill already
+has its own honest signal: after the pop the puck either stays in the fingers or drops to the
+cord.
+
+## 1. Release gate (part `gate`)
+
+A row of loose pins across the tape line at 1.5 to 2 m. The ball topples the pin where it
+crosses, with a clack about a second after the release. The bowler decides which pin a correct
+release should knock down: the centre pin for a yo-yo's straight, heavy roll; one or two pins
+over for a hook. The wrong pin falling says which way the release missed.
+
+- One STL holds one base segment and one pin; print 3 or 5 copies of the file.
+- Segment: `ball_d + 10` long (210 mm for the 200 mm ball, so pins sit 210 mm apart), 40 wide,
+  6 thick. Dovetail tab on the +X end, matching slot on the -X end with 0.3 mm clearance, so
+  segments link into a straight row. At the centre a shallow cup, pin diameter + 1.0 mm across
+  and 1.5 mm deep with a 45 degree lead-in, and a 1 mm groove across the top on both sides of
+  the cup to line the segment up with the tape.
+- Pin: 20 mm diameter, `gate_pin_h` tall (default 100, 50 to 150), 2 mm chamfer on top, 1 mm
+  chamfer at the foot so it tips out of the cup. About 22 g at 20% infill.
+- Why a cup and not a stub: a stub in a socket binds as the pin tilts, so the pin would drag
+  the row instead of falling. A pin standing in a 1.5 mm cup tips freely yet is not brushed off
+  by floor vibration.
+- Resolution: pins are `ball_d + 10` apart, so a ball never reaches more than two neighbours,
+  and a 5 mm dead zone sits between pins where neither falls (read as "between").
+- Exported with the Rev Ball and Digital Ball products and on its own as the Release Gate
+  product. Print flat, no supports; the pin stands upright on its foot.
+
+## 2. Axis target dots (ball: `pap_marker`, `pap_over`, `pap_up`)
+
+Two shallow sockets on the ball at the axis the release should produce, with contrasting
+printed plugs. Spin the ball about that axis and the dot sits still while the rest blurs; spin
+about another axis and it wheels around. This is how a pro shop reads a positive axis point
+(PAP), and on this ball the sockets put the target where the bowler's intended axis is.
+
+- Position is given in drill-sheet inches along the surface from the grip centre: `pap_over`
+  toward the bowling-hand side (default 5 1/2"), `pap_up` toward the fingers (default 1/2").
+  The second socket is at the antipode. Lengths are not scaled with the ball's radius: they are
+  hand measurements, like a span.
+- Socket: 12 mm diameter plus the print allowance, 3 mm deep. Plug: 12 mm diameter, 3.3 mm
+  tall, 0.5 mm foot chamfer; two plugs in their own STL (`plugs`), printed in the second colour
+  and pressed in. Without plugs the sockets still read as dark dots.
+- Warnings: a socket closer than 4 mm to a hole's bevel rim, or within 15 mm of the resting
+  flat.
+- Honest limit: on carpet the ball skids briefly and then rolls, and a hooking ball's axis
+  migrates toward the rolling axis, so the dot is steady only during the first part of the
+  roll. For a forward-roll (yo-yo) release the two coincide and the dot stays steady throughout.
+
+## 3. Humming spinner (spinner: `spin_hum`, `spin_hum_slots`, `spin_hum_angle`)
+
+A hollow ring chamber inside the spinner with slanted slots through the top. Spinning fast
+enough drives air through the slots and the chamber hums, like a humming top. The hum is a
+threshold: it starts once the spin is fast enough and lasts as long as the spin stays above
+that speed, so it reports the strength of the finger lift and how long it carried.
+
+- Chamber: ring from radius 30 to 44 mm, floor at 5 mm, walls to 16 mm, 45 degree gable roof to
+  23 mm (self-supporting, no supports). Keeps 2.6 mm of floor above the engraved spin bars and
+  about 4 mm of wall to the finger bores.
+- Slots: `spin_hum_slots` (default 8, 2 to 16) openings 2 mm wide and 10 mm long through the top
+  into the chamber, each turned `spin_hum_angle` (default 45, 0 to 80) degrees from the radial
+  direction so the moving surface scoops air.
+- The wrist-cord tunnel would cross the chamber, so it is left out when the hum is on.
+- Experimental: the threshold speed and the tone depend on slot size and chamber volume, which
+  only test prints can tune. It is off by default.
+
+## Status
+
+All three are built by the engine (`configurator/app.js`), mirrored in `trainer.scad` (parity
+checked by intersection-over-union of the two meshes; the figures are in `HANDOFF.md`), covered
+by `configurator/test/engine_check.mjs`, and exposed in the configurator, the order book
+(products `ball`, `gate`, `digital_ball`; fit schema keys `gate_pin_h`, `pap_marker`, `pap_over`,
+`pap_up`, `spin_hum`, `spin_hum_slots`, `spin_hum_angle`), the job sheet and the customer card.
+None has been printed or used yet. First prints to check: a gate pin stands freely in its cup and
+two segments slide together; a plug presses into its socket by hand; whether the spinner hums at
+all at a finger-lift spin speed, and with which slot count and angle.

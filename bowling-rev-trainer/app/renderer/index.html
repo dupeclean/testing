@@ -181,6 +181,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
         <button type="button" data-part="ball" aria-pressed="false">Ball</button>
         <button type="button" data-part="spinner" aria-pressed="false">Spinner</button>
         <button type="button" data-part="sizer" aria-pressed="false">Sizer</button>
+        <button type="button" data-part="gate" aria-pressed="false">Gate</button>
       </div>
       <div class="seg" role="group" aria-label="Units">
         <button type="button" data-unit="mm" aria-pressed="true">mm</button>
@@ -246,7 +247,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
         </datalist>
         <p class="howto" style="margin-top:10px">Sizes and spans take the drill sheet's own notation: <b>55/64</b>, <b>1 1/32</b>, <b>4-1/2</b> or decimals. Span is the near edge of the thumb hole to the near edge of each finger hole. Zero pitch aims the hole at the ball's center.</p>
         <p class="howto" data-only-part="ball" style="margin-top:6px"><b>Ball:</b> all three holes, at the sheet's spans and pitches, drilled into a full ball you can release on the floor. The thumb hole is blind (its depth is set below), like a real ball.</p>
-        <p class="howto" data-only-part="spinner" style="margin-top:6px"><b>Spinner:</b> only the two finger hole sizes and the bridge are used. Both holes are drilled straight at the ball's center, so the spans and pitches on this sheet do not apply to the spinner. Switch to Puck to use them.</p>
+        <p class="howto" data-only-part="spinner" style="margin-top:6px"><b>Spinner:</b> only the two finger hole sizes and the bridge are used. Both holes are drilled straight at the ball's center, so the spans and pitches on this sheet do not apply to the spinner. Switch to Puck to use them. An optional <b>humming chamber</b> (under Options) makes the spinner hum once the finger lift spins it fast enough.</p>
         <p class="howto" style="margin-top:6px"><b>Which hole is which:</b> read the sheet with the thumb hole at the bottom, as it is drawn. For a right hand the <b>left</b> finger hole is the middle finger and the <b>right</b> hole is the ring finger (a left hand is the mirror image). Enter each hole's numbers on the row with the matching side, whatever the sheet calls it.</p>
         <p class="howto" style="margin-top:6px"><b>Pitch</b> is in inches, as drilled. <b>Forward (+)</b>: the inner end of the hole leans toward the middle of the grip: the thumb hole toward the fingers, the finger holes toward the thumb. <b>Reverse (−)</b>: the other way. <b>Lateral (+)</b>: toward the right side of the sheet for a right hand (toward the left for a left hand); <b>−</b> is the other side. The blue lines in the 3D view show where each hole points.</p>
       </fieldset>
@@ -296,11 +297,23 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
           <label class="check" data-only-part="puck"><input type="checkbox" id="weight_pocket"> Weight pocket in the base</label>
           <label class="check"><input type="checkbox" id="lanyard"> Wrist-cord tunnel</label>
         </div>
+        <div class="row" data-only-part="spinner" style="margin-top:8px">
+          <label class="check" style="flex-basis:100%"><input type="checkbox" id="spin_hum"> Humming chamber (experimental): a hollow ring inside with slanted slots through the top, so the spinner hums once it spins fast enough</label>
+          <div class="row" id="hum_rows" style="flex-basis:100%">
+            <label class="field"><span>Slots through the top</span>
+              <input type="text" id="spin_hum_slots" inputmode="numeric">
+              <small>2 to 16; more slots, higher note</small></label>
+            <label class="field"><span>Slot angle</span>
+              <span class="row" style="gap:6px"><input type="text" id="spin_hum_angle" inputmode="decimal"><span class="unit">°</span></span>
+              <small>From radial, 0 to 80; 45 scoops air as it spins</small></label>
+          </div>
+          <p class="howto" style="flex-basis:100%;margin:0">The hum is a threshold: it starts when the finger lift spins the spinner fast enough and lasts as long as the spin stays above that speed, so you hear how hard the lift was and how long it carried. The wrist-cord tunnel is left out when the chamber is on (it would cross the chamber). Not yet tuned by test prints: the slot count and angle change the starting speed and the note.</p>
+        </div>
       </fieldset>
 
       <fieldset data-only-part="ball">
         <legend>Rev Ball</legend>
-        <p class="howto" style="margin:0 0 10px">A release trainer: kneel, swing low, let it go onto the floor along a strip of tape and watch what it does. Thumb out first and fingers lifting makes it <b>roll and curve</b> off the line; a dump rolls straight and short; a hung-up thumb pops it up. Printed solid-looking but sliced light (3 walls, 5% infill, about 500 g at 200 mm). It needs supports under its lower half; sand the scar smooth. A second colour makes the spin easy to see: the slicer swaps filament at the heights FitSlice gives you, so the top cap and a band round the middle come out in the other colour.</p>
+        <p class="howto" style="margin:0 0 10px">A release trainer: kneel, swing low, let it go onto the floor along a strip of tape and watch what it does. Thumb out first and fingers lifting makes it <b>roll and curve</b> off the line; a dump rolls straight and short; a hung-up thumb pops it up. Printed solid-looking but sliced light (3 walls, 5% infill, about 500 g at 200 mm). It needs supports under its lower half; sand the scar smooth. A second colour makes the spin easy to see: the slicer swaps filament at the heights FitSlice gives you, so the top cap and a band round the middle come out in the other colour. Two <b>axis target dots</b> mark the axis your release should spin about: spin it right and the dot stands still while the rest of the ball blurs. Their contrasting plugs come in their own file.</p>
         <div class="row">
           <label class="field"><span>Ball diameter</span>
             <span class="row" style="gap:6px"><input type="text" id="ball_d" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
@@ -321,6 +334,15 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
             </select>
             <small>The exact heights for the swaps are shown below the preview and on the job sheet</small></label>
           <label class="check"><input type="checkbox" id="ball_groove"> Marker groove round the middle (for a single-colour ball)</label>
+          <label class="check" style="flex-basis:100%"><input type="checkbox" id="pap_marker"> Axis target dots (two plug sockets at the axis your release should spin about)</label>
+          <div class="row" id="pap_rows" style="flex-basis:100%">
+            <label class="field"><span>Axis point: over, toward the hand side</span>
+              <span class="row" style="gap:6px"><input type="text" id="pap_over" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+              <small>Along the surface from the grip centre; a pro shop's PAP, typically 5 1/2"</small></label>
+            <label class="field"><span>Axis point: up, toward the fingers</span>
+              <span class="row" style="gap:6px"><input type="text" id="pap_up" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+              <small>Typically 1/2"; negative = toward the thumb</small></label>
+          </div>
         </div>
       </fieldset>
 
@@ -335,6 +357,16 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
           <label class="field"><span>Step between bores</span>
             <span class="row" style="gap:6px"><input type="text" id="sizer_step" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
             <small>1/64" = 0.397 mm, a pro-shop half size</small></label>
+        </div>
+      </fieldset>
+
+      <fieldset data-only-part="gate">
+        <legend>Release gate</legend>
+        <p class="howto" style="margin:0 0 10px">The clack that says a release worked. Loose pins stand in shallow cups on base segments linked across a strip of tape on the floor, 1.5 to 2 m from where the ball is let go. The ball knocks over the pin where it crosses, about a second after the release. Decide beforehand which pin a correct release should topple: the <b>centre</b> pin for straight, heavy forward roll; one or two pins <b>over</b> for a hook. The wrong pin falling says which way the release missed. Pins sit the ball's diameter + 10 mm apart, so the ball never reaches more than two neighbours. This file holds <b>one segment and one pin</b>: print 3 or 5 copies, flat, no supports.</p>
+        <div class="row">
+          <label class="field"><span>Pin height</span>
+            <span class="row" style="gap:6px"><input type="text" id="gate_pin_h" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+            <small>100 mm suits the 200 mm ball; the pins are 20 mm across</small></label>
         </div>
       </fieldset>
 
@@ -479,6 +511,13 @@ const G = {
   lanyard_d: 7,
   sizer_t: 15, sizer_w: 175, sizer_h: 92,
   seg_sphere: 128, seg_hole: 96, seg_small: 48,
+  // release gate: base segments (dovetailed end to end) with a loose pin standing in a shallow cup
+  gate_w: 40, gate_t: 6, gate_gap: 10, gate_pin_d: 20, gate_cup_depth: 1.5, gate_cup_clear: 1.0,
+  gate_dove_len: 12, gate_dove_w1: 14, gate_dove_w2: 20, gate_clear: 0.3,
+  // axis target dots on the ball: socket diameter (plus print allowance) and depth; the plugs match
+  pap_d: 12, pap_depth: 3,
+  // humming spinner: ring chamber radii, floor and wall-top heights (the 45-degree gable ridge follows) and slot size
+  hum_r0: 30, hum_r1: 44, hum_z0: 5, hum_z1: 16, hum_slot_w: 2, hum_slot_l: 10,
 };
 
 const DEFAULTS = {
@@ -507,16 +546,27 @@ const DEFAULTS = {
   // rounded edge (bevel) on each hole, mm radius, like the bevel a pro shop puts on a thumb hole
   thumb_bevel: 4, finger_bevel: 2.5,
   serial: '',                // engraved in the base, e.g. the order number FS-0001 (digits, F, S and - only)
+  // Release gate: loose pins on linked base segments across the tape line; the ball knocks one down
+  gate_pin_h: 100,
+  // Axis target dots on the ball: two plug sockets at the axis the release should spin about (the
+  // bowler's PAP), as surface distances from the grip centre: over toward the hand side, up toward
+  // the fingers. Spin it right and the dot stands still while the rest of the ball blurs.
+  pap_marker: true, pap_over: 5.5 * IN, pap_up: 0.5 * IN,
+  // Humming spinner (experimental, off by default): a hollow ring chamber with slanted slots through
+  // the top. Spun fast enough it hums, and keeps humming as long as the spin stays above that speed,
+  // so the strength and carry of the finger lift can be heard.
+  spin_hum: false, spin_hum_slots: 8, spin_hum_angle: 45,
 };
 
 const LENGTH_KEYS = ['span_middle', 'span_ring', 'thumb_d', 'middle_d', 'ring_d', 'print_allowance',
   'bridge', 'finger_depth', 'thumb_depth', 'sizer_thumb_center', 'sizer_finger_center', 'sizer_step', 'ball_d', 'ball_thumb_depth', 'ball_flat',
-  'thumb_oval_d', 'middle_oval_d', 'ring_oval_d', 'thumb_bevel', 'finger_bevel'];
+  'thumb_oval_d', 'middle_oval_d', 'ring_oval_d', 'thumb_bevel', 'finger_bevel', 'gate_pin_h', 'pap_over', 'pap_up'];
 const PITCH_KEYS = ['thumb_fwd', 'thumb_lat', 'middle_fwd', 'middle_lat', 'ring_fwd', 'ring_lat'];
-const BOOL_KEYS = ['thumb_through', 'weight_pocket', 'lanyard', 'ball_groove', 'thumb_hole'];
+const BOOL_KEYS = ['thumb_through', 'weight_pocket', 'lanyard', 'ball_groove', 'thumb_hole', 'pap_marker', 'spin_hum'];
 const ANGLE_KEYS = ['thumb_oval_angle', 'finger_oval_angle'];   // degrees
 const SERIAL_RE = /^[0-9FS-]{0,12}$/;
 const BALL_STRIPES = ['none', 'cap', 'cap_band', 'bands'];
+const HUM_SLOTS = [2, 16], HUM_ANGLE = [0, 80];   // humming spinner: slot count, slot angle in degrees from radial
 
 // Sensible ranges (mm). Anything outside is almost always a typo or the wrong unit
 // (110 typed while the switch is on inches, or 4 5/16 typed while it is on mm), and values
@@ -528,6 +578,8 @@ const LIMITS = {
   sizer_thumb_center: [15, 38], sizer_finger_center: [10, 30], sizer_step: [0.1, 2],
   ball_d: [150, 230], ball_thumb_depth: [40, 95], ball_flat: [0, 40],
   thumb_oval_d: [0, 45], middle_oval_d: [0, 36], ring_oval_d: [0, 36], thumb_bevel: [0, 8], finger_bevel: [0, 6],
+  gate_pin_h: [50, 150],
+  pap_over: [0, 200], pap_up: [-60, 60],
 };
 const LABELS = {
   span_middle: 'Middle finger span', span_ring: 'Ring finger span',
@@ -537,6 +589,8 @@ const LABELS = {
   ball_d: 'Ball diameter', ball_thumb_depth: 'Ball thumb hole depth', ball_flat: 'Ball resting flat',
   thumb_oval_d: 'Thumb oval size', middle_oval_d: 'Middle finger oval size', ring_oval_d: 'Ring finger oval size',
   thumb_bevel: 'Thumb hole bevel', finger_bevel: 'Finger hole bevel',
+  gate_pin_h: 'Gate pin height',
+  pap_over: 'Axis point over', pap_up: 'Axis point up',
 };
 const PITCH_LIMIT = 1;   // inches
 const WEB_MIN = 2.0;     // mm: thinner than this between the finger holes warns
@@ -563,17 +617,24 @@ function checkLength(key, mm, unit) {
 // Every problem in a parameter set (used before any build, so a bad saved order cannot crash the engine).
 function validateParams(p) {
   const out = [];
+  const noGrip = p.part === 'sizer' || p.part === 'gate' || p.part === 'plugs';   // parts without the three-hole grip
   // the spinner and a two-handed ball cut no thumb hole, so the thumb fields (hidden for them) are not checked
   const hasThumb = p.part === 'puck' || (p.part === 'ball' && p.thumb_hole !== false);
   const keys = p.part === 'sizer' ? ['sizer_thumb_center', 'sizer_finger_center', 'sizer_step']
+    : p.part === 'gate' ? ['ball_d', 'gate_pin_h']
+    : p.part === 'plugs' ? ['print_allowance']
     : ['span_middle', 'span_ring', 'middle_d', 'ring_d', 'print_allowance', 'bridge', 'finger_depth',
       'middle_oval_d', 'ring_oval_d', 'finger_bevel',
       ...(hasThumb ? ['thumb_d', 'thumb_oval_d', 'thumb_bevel'] : []),
-      ...(p.part === 'ball' ? ['ball_d', 'ball_flat', ...(hasThumb ? ['ball_thumb_depth'] : [])] : p.part === 'puck' && !p.thumb_through ? ['thumb_depth'] : [])];
+      ...(p.part === 'ball' ? ['ball_d', 'ball_flat', ...(hasThumb ? ['ball_thumb_depth'] : []), ...(p.pap_marker ? ['pap_over', 'pap_up'] : [])] : p.part === 'puck' && !p.thumb_through ? ['thumb_depth'] : [])];
   if (p.part === 'spinner') keys.splice(keys.indexOf('span_middle'), 2);
   for (const k of keys) { const m = checkLength(k, p[k], 'mm'); if (m) out.push({ key: k, message: m }); }
   if (p.part === 'ball' && !BALL_STRIPES.includes(p.ball_stripe)) out.push({ key: 'ball_stripe', message: 'Choose a colour pattern for the ball.' });
-  if (p.part !== 'sizer') {
+  if (p.part === 'spinner' && p.spin_hum) {
+    if (!Number.isInteger(p.spin_hum_slots) || p.spin_hum_slots < HUM_SLOTS[0] || p.spin_hum_slots > HUM_SLOTS[1]) out.push({ key: 'spin_hum_slots', message: `Hum slots: enter a whole number from ${HUM_SLOTS[0]} to ${HUM_SLOTS[1]}.` });
+    if (!Number.isFinite(p.spin_hum_angle) || p.spin_hum_angle < HUM_ANGLE[0] || p.spin_hum_angle > HUM_ANGLE[1]) out.push({ key: 'spin_hum_angle', message: `Hum slot angle must be between ${HUM_ANGLE[0]} and ${HUM_ANGLE[1]} degrees.` });
+  }
+  if (!noGrip) {
     for (const [ov, d, label] of [...(hasThumb ? [['thumb_oval_d', 'thumb_d', 'Thumb']] : []), ['middle_oval_d', 'middle_d', 'Middle finger'], ['ring_oval_d', 'ring_d', 'Ring finger']]) {
       if (p[ov] > 0 && p[ov] < p[d] - 1e-6) out.push({ key: ov, message: `${label} oval size is the LONG way across, so it must be at least the hole size (${fmtMm(p[d])} mm). Enter 0 for a round hole.` });
       if (p[ov] > 0 && p[ov] - p[d] > 8) out.push({ key: ov, message: `${label} oval is more than 8 mm longer than it is wide; check the two sizes.` });
@@ -581,7 +642,7 @@ function validateParams(p) {
     for (const k of ANGLE_KEYS) if (!Number.isFinite(p[k]) || Math.abs(p[k]) > 90) out.push({ key: k, message: 'Oval angle must be between -90 and 90 degrees.' });
     if (typeof p.serial !== 'string' || !SERIAL_RE.test(p.serial)) out.push({ key: 'serial', message: 'Engraved text can only use digits, F, S and a dash (up to 12 characters).' });
   }
-  if (p.part !== 'sizer') for (const k of PITCH_KEYS) {
+  if (!noGrip) for (const k of PITCH_KEYS) {
     if (!Number.isFinite(p[k]) || Math.abs(p[k]) > PITCH_LIMIT) out.push({ key: k, message: `Pitch (${k.replace('_', ' ')}) must be between -1" and 1".` });
   }
   return out;
@@ -848,17 +909,42 @@ function makeBuilder(W) {
     const cuts = [mid.cut, ring.cut];
     const ser = serialCut(p, -21, 22, 1, 34);   // one quadrant of the 100 mm base, clear of the spin bars; long numbers shrink to fit
     if (ser) cuts.push(ser);
-    if (p.lanyard) cuts.push(xtunnel(-G.spin_d / 2 + 18, 8, G.lanyard_d, G.spin_d + 20));
+    if (p.lanyard && !p.spin_hum) cuts.push(xtunnel(-G.spin_d / 2 + 18, 8, G.lanyard_d, G.spin_d + 20));   // the tunnel would cross the chamber
     for (const a of [0, 90])
       cuts.push(T(T(T(Manifold.cube([G.spin_d - 8, 4, 2.4], true)).rotate([0, 0, a])).translate([0, 0, -0.01])));
+    const warnings = [], notes = [];
+    let hum = null;
+    if (p.spin_hum) {
+      cuts.push(...humCuts(p, D));
+      hum = { slots: p.spin_hum_slots, angle_deg: p.spin_hum_angle, chamber_r_mm: [G.hum_r0, G.hum_r1] };
+      notes.push('Humming chamber on (experimental): the wrist-cord tunnel is left out because it would cross the chamber. The speed at which the hum starts, and its note, are tuned by test prints.');
+      // the finger bores must stay clear of the chamber's inner wall
+      const reach = Math.max(Math.abs(D.x_m) + D.md / 2 + D.ovM / 2, Math.abs(D.x_r) + D.rd / 2 + D.ovR / 2) + p.finger_bevel;
+      if (reach > G.hum_r0 - 2.5) warnings.push(`The finger holes reach ${reach.toFixed(1)} mm from the centre, into the humming chamber's wall (which starts at ${G.hum_r0} mm). Reduce the bridge or the hole sizes, or turn the hum off.`);
+    }
     const result = T(body.subtract(T(Manifold.union(cuts))));
-    const warnings = [];
     if (overlap(mid.bore, ring.bore)) warnings.push('The two finger bores intersect. Increase the bridge.');
     else {
       const web = minAxisGap(mid.axis, ring.axis, depth) - (D.rm_x + D.rr_x);
       if (web < WEB_MIN) warnings.push(`The web between the finger holes narrows to ${Math.max(0, web).toFixed(1)} mm deep inside. That is a fragile hairline when printed. Increase the bridge.`);
     }
-    return { result, warnings, axes: [{ name: 'middle', ...mid.axis }, { name: 'ring', ...ring.axis }] };
+    return { result, warnings, notes, hum, axes: [{ name: 'middle', ...mid.axis }, { name: 'ring', ...ring.axis }] };
+  }
+
+  // Humming chamber for the spinner: a ring cavity (house-shaped profile revolved about the axis;
+  // its 45-degree gable roof prints without supports) plus slanted slots from the top surface into it.
+  function humCuts(p, D) {
+    const { hum_r0: r0, hum_r1: r1, hum_z0: z0, hum_z1: z1 } = G;
+    const rm = (r0 + r1) / 2, ridge = z1 + (r1 - r0) / 2;
+    const prof = CrossSection.ofPolygons([[[r0, z0], [r1, z0], [r1, z1], [rm, ridge], [r0, z1]]]);
+    const out = [T(Manifold.revolve(prof, G.seg_sphere))];
+    prof.delete();
+    for (let i = 0; i < p.spin_hum_slots; i++) {
+      // the slot's long axis is turned from radial toward the way the surface moves (mirrored for a left hand)
+      const slot = T(T(T(Manifold.cube([G.hum_slot_l, G.hum_slot_w, 30], true)).rotate([0, 0, D.mir * p.spin_hum_angle])).translate([rm, 0, z1 + 14]));
+      out.push(T(slot.rotate([0, 0, i * 360 / p.spin_hum_slots])));
+    }
+    return out;
   }
 
   // Rev Ball: a full sphere with the bowler's grip at the top and a small flat underneath so it can
@@ -900,8 +986,38 @@ function makeBuilder(W) {
       bands: [[zEq - 36, 'band'], [zEq - 24, 'base'], [zEq - 6, 'band'], [zEq + 6, 'base'], [zEq + 24, 'band'], [zEq + 36, 'base']] }[p.ball_stripe] || [];
     for (const [z] of swaps) cuts.push(groove(z, 0.6, 0.3));
     const colorChanges = swaps.map(([z, what]) => ({ z_mm: +z.toFixed(1), colour: what === 'base' ? 'base colour' : 'second colour' }));
+    // Axis target dots: two shallow sockets at the axis the release should spin about (the PAP), given
+    // as surface distances from the grip centre, `pap_over` toward the hand side and `pap_up` toward
+    // the fingers; the second socket is at the opposite point. Contrasting plugs (part "plugs") press
+    // in. When the ball spins about that axis the dot stands still while the rest of the ball blurs.
+    const papAxes = [], papWarn = new Set();
+    let pap = null;
+    if (p.pap_marker) {
+      const aUp = p.pap_up / R, aOver = p.pap_over / R;                              // arc along the surface, radians
+      const t0 = [0, Math.sin(aUp), Math.cos(aUp)];                                   // the top, tilted toward the fingers
+      const d = [Math.sin(aOver) * t0[2] * D.mir, t0[1], Math.cos(aOver) * t0[2]];    // then toward the hand side
+      const rP = G.pap_d / 2 + p.print_allowance / 2;
+      const C = [0, 0, R - s];
+      const entries = [thumb, mid, ring].filter(Boolean).map(h => h.axis.p);
+      const clamp1 = (v) => Math.max(-1, Math.min(1, v));
+      pap = { over_mm: p.pap_over, up_mm: p.pap_up, socket_d_mm: +(2 * rP).toFixed(2), depth_mm: G.pap_depth, points: [] };
+      for (const sign of [1, -1]) {
+        const u = d.map(v => v * sign);
+        const P = [C[0] + R * u[0], C[1] + R * u[1], C[2] + R * u[2]];
+        const rot = [0, Math.acos(clamp1(u[2])) / DEG, Math.atan2(u[1], u[0]) / DEG];
+        cuts.push(T(T(T(Manifold.cylinder(G.pap_depth + 3, rP, rP, G.seg_hole)).translate([0, 0, -G.pap_depth])).rotate(rot)).translate(P));
+        pap.points.push(P.map(v => +v.toFixed(2)));
+        papAxes.push({ name: 'axis', p: P, dir: u });
+        if (P[2] < s + 15) papWarn.add('An axis target dot sits almost on the resting flat. Move the axis point further over, or turn the dots off.');
+        for (const e of entries) {
+          const arc = R * Math.acos(clamp1(((e[0] - C[0]) * u[0] + (e[1] - C[1]) * u[1] + (e[2] - C[2]) * u[2]) / R));
+          if (arc < rP + Math.max(D.td, D.md, D.rd) / 2 + Math.max(p.thumb_bevel, p.finger_bevel) + 4)
+            papWarn.add('An axis target dot runs into a grip hole. Move the axis point further over or up, or turn the dots off.');
+        }
+      }
+    }
     const result = T(body.subtract(T(Manifold.union(cuts))));
-    const warnings = [];
+    const warnings = [...papWarn];
     if (thumb && (overlap(thumb.bore, mid.bore) || overlap(thumb.bore, ring.bore)))
       warnings.push('Thumb and finger bores run into each other inside the ball: the spans are too short for these hole sizes, or the thumb hole is too deep.');
     if (overlap(mid.bore, ring.bore))
@@ -916,7 +1032,17 @@ function makeBuilder(W) {
       : [];
     const axes = [{ name: 'middle', ...mid.axis }, { name: 'ring', ...ring.axis }];
     if (thumb) axes.unshift({ name: 'thumb', ...thumb.axis });
-    return { result, warnings, notes, colorChanges, axes, floor };
+    axes.push(...papAxes);   // drawn in the preview too, so the target axis is visible
+    return { result, warnings, notes, colorChanges, axes, floor, pap };
+  }
+
+  // The two contrasting plugs for the ball's axis target dots: print them in the second colour and
+  // press them in. They stand 0.3 mm proud so the dot catches the light.
+  function plugs() {
+    const r = G.pap_d / 2, h = G.pap_depth + 0.3;
+    const one = (x) => T(T(Manifold.union([T(Manifold.cylinder(0.5, r - 0.5, r, G.seg_hole)), T(T(Manifold.cylinder(h - 0.5, r, r, G.seg_hole)).translate([0, 0, 0.5]))])).translate([x, 0, 0]));
+    const result = T(one(-G.pap_d).add(one(G.pap_d)));
+    return { result, warnings: [], axes: [] };
   }
 
   // engraved 7-segment labels for the sizer plate (no font needed)
@@ -993,6 +1119,37 @@ function makeBuilder(W) {
     return { result, warnings, axes: [], sizes: { fingerSizes, thumbSizes } };
   }
 
+  // Release gate: a base segment that links to its neighbours with a dovetail across the tape line,
+  // and a loose pin standing in a shallow cup on it. The ball knocks over the pin where it crosses:
+  // the clack is the release feedback. One STL holds one segment and one pin; print 3 or 5 copies.
+  // Pins sit ball_d + gate_gap apart, so the ball never reaches more than two neighbours.
+  function gate(p) {
+    const L = p.ball_d + G.gate_gap, w = G.gate_w, t = G.gate_t, c = G.gate_clear;
+    const slope = (G.gate_dove_w2 - G.gate_dove_w1) / 2 / G.gate_dove_len;   // half-width gained per mm along a dovetail
+    const trap = (x0, x1, w0, w1) => CrossSection.ofPolygons([[[x0, -w0 / 2], [x1, -w1 / 2], [x1, w1 / 2], [x0, w0 / 2]]]);
+    const body = T(T(Manifold.cube([L, w, t], true)).translate([0, 0, t / 2]));
+    // dovetail tab on the +X end (starts 0.5 mm inside the body so the two fuse)
+    const tabCS = trap(L / 2 - 0.5, L / 2 + G.gate_dove_len, G.gate_dove_w1 - 2 * slope * 0.5, G.gate_dove_w2);
+    const tab = T(Manifold.extrude(tabCS, t)); tabCS.delete();
+    // the matching slot in the -X end, with clearance, open through the end face
+    const slotCS = trap(-L / 2 - 1, -L / 2 + G.gate_dove_len + c, G.gate_dove_w1 + 2 * c - 2 * slope, G.gate_dove_w2 + 2 * c);
+    const slot = T(T(Manifold.extrude(slotCS, t + 2)).translate([0, 0, -1])); slotCS.delete();
+    // shallow cup the pin stands in, with a 45 degree lead-in, and a groove across the top to line up with the tape
+    const cupR = G.gate_pin_d / 2 + G.gate_cup_clear / 2;
+    const cup = T(T(Manifold.cylinder(G.gate_cup_depth + 1, cupR, cupR, G.seg_hole)).translate([0, 0, t - G.gate_cup_depth]));
+    const lead = T(T(Manifold.cylinder(1.0, cupR, cupR + 1.0, G.seg_hole)).translate([0, 0, t - 1.0]));
+    const groove = T(T(Manifold.cube([1.0, w + 2, 1.2], true)).translate([0, 0, t]));
+    const segment = T(T(body.add(tab)).subtract(T(Manifold.union([slot, cup, lead, groove]))));
+    // the pin, standing beside the segment: a chamfered foot so it tips out of the cup, a chamfered top
+    const r = G.gate_pin_d / 2, h = p.gate_pin_h;
+    const foot = T(Manifold.cylinder(1, r - 1, r, G.seg_hole));
+    const shaft = T(T(Manifold.cylinder(h - 3, r, r, G.seg_hole)).translate([0, 0, 1]));
+    const top = T(T(Manifold.cylinder(2, r, r - 2, G.seg_hole)).translate([0, 0, h - 2]));
+    const pin = T(T(Manifold.union([foot, shaft, top])).translate([0, w / 2 + 20, 0]));
+    const result = T(segment.add(pin));
+    return { result, warnings: [], axes: [], gate: { spacing_mm: L, pin_h_mm: h, pin_d_mm: G.gate_pin_d } };
+  }
+
   function meshOf(m) {
     const mesh = m.getMesh();
     const np = mesh.numProp;
@@ -1017,9 +1174,9 @@ function makeBuilder(W) {
     if (p.part === 'ball' && rMax > 0.8 * p.ball_d / 2)
       throw new FitError(`A ${fmtMm(p.ball_d)} mm ball is too small for these spans: the holes would sit on its sides. Use a bigger ball diameter (${fmtMm(Math.ceil(rMax / 0.4 / 10) * 10)} mm or more) or check the spans.`);
     try {
-      const out = p.part === 'puck' ? puck(p, D) : p.part === 'spinner' ? spinner(p, D) : p.part === 'ball' ? ball(p, D) : sizer(p);
+      const out = p.part === 'puck' ? puck(p, D) : p.part === 'spinner' ? spinner(p, D) : p.part === 'ball' ? ball(p, D) : p.part === 'gate' ? gate(p) : p.part === 'plugs' ? plugs() : sizer(p);
       const m = out.result;
-      if (!(m.volume() > 1000)) throw new FitError('The model came out empty. Check the hole sizes and spans.');
+      if (!(m.volume() > (p.part === 'plugs' ? 100 : 1000))) throw new FitError('The model came out empty. Check the hole sizes and spans.');
       const bb = m.boundingBox();
       return {
         mesh: meshOf(m),
@@ -1033,6 +1190,9 @@ function makeBuilder(W) {
         colorChanges: out.colorChanges || [],
         axes: out.axes,
         sizes: out.sizes || null,
+        gate: out.gate || null,
+        pap: out.pap || null,
+        hum: out.hum || null,
         derived: D,
       };
     } finally {
@@ -1239,7 +1399,9 @@ function readTokens() {
 function fileBase(p, D) {
   const mm = (v) => v.toFixed(1).replace('.', 'p');
   if (p.part === 'sizer') return `hole_sizer_T${mm(p.sizer_thumb_center)}_F${mm(p.sizer_finger_center)}_step${mm(p.sizer_step)}`;
-  const part = p.part === 'ball' ? `ball${p.ball_d.toFixed(0)}` : p.part;
+  if (p.part === 'gate') return `release_gate_${(p.ball_d + G.gate_gap).toFixed(0)}mm_pin${p.gate_pin_h.toFixed(0)}`;
+  if (p.part === 'plugs') return `axis_plugs_D${G.pap_d}`;
+  const part = p.part === 'ball' ? `ball${p.ball_d.toFixed(0)}` : p.part === 'spinner' && p.spin_hum ? `spinner_hum${p.spin_hum_slots}` : p.part;
   if (p.part === 'ball' && p.thumb_hole === false) return `rev_${part}_${p.hand[0].toUpperCase()}_nothumb_M${mm(D.md)}_R${mm(D.rd)}`;
   return `rev_${part}_${p.hand[0].toUpperCase()}_span${mm(p.span_middle)}-${mm(p.span_ring)}_T${mm(D.td)}_M${mm(D.md)}_R${mm(D.rd)}`;
 }
@@ -1322,6 +1484,10 @@ async function main() {
     $('hand').value = state.hand;
     $('ball_stripe').value = state.ball_stripe;
     $('ball_thumb_rows').hidden = !state.thumb_hole;
+    $('pap_rows').hidden = !state.pap_marker;
+    $('hum_rows').hidden = !state.spin_hum;
+    $('spin_hum_slots').value = String(state.spin_hum_slots);
+    $('spin_hum_angle').value = String(state.spin_hum_angle);
     $('size_source').value = state.size_source;
     document.querySelectorAll('[data-part]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.part === state.part)));
     document.querySelectorAll('[data-only-part]').forEach(el => { el.hidden = !el.dataset.onlyPart.split(' ').includes(state.part); });
@@ -1359,6 +1525,16 @@ async function main() {
       else markBad(el, 'Oval angle must be a number of degrees between -90 and 90.');
     });
   }
+  $('spin_hum_slots').addEventListener('change', () => {
+    const el = $('spin_hum_slots'), v = parseNumber(el.value);
+    if (Number.isInteger(v) && v >= HUM_SLOTS[0] && v <= HUM_SLOTS[1]) { state.spin_hum_slots = v; markGood(el); schedule(); }
+    else markBad(el, `Hum slots: a whole number from ${HUM_SLOTS[0]} to ${HUM_SLOTS[1]}.`);
+  });
+  $('spin_hum_angle').addEventListener('change', () => {
+    const el = $('spin_hum_angle'), v = parseNumber(el.value.replace(/[°]/g, ''));
+    if (Number.isFinite(v) && v >= HUM_ANGLE[0] && v <= HUM_ANGLE[1]) { state.spin_hum_angle = v; markGood(el); schedule(); }
+    else markBad(el, `Hum slot angle must be a number of degrees between ${HUM_ANGLE[0]} and ${HUM_ANGLE[1]}.`);
+  });
   $('serial').addEventListener('change', () => {
     const el = $('serial'); const v = el.value.trim().toUpperCase();
     if (SERIAL_RE.test(v)) { state.serial = v; el.value = v; markGood(el); schedule(); }
@@ -1374,7 +1550,14 @@ async function main() {
     });
   }
   for (const k of BOOL_KEYS) {
-    $(k).addEventListener('change', (e) => { state[k] = e.target.checked; if (k === 'thumb_through') $('thumb_depth_row').hidden = state.thumb_through; schedule(); });
+    $(k).addEventListener('change', (e) => {
+      state[k] = e.target.checked;
+      if (k === 'thumb_through') $('thumb_depth_row').hidden = state.thumb_through;
+      if (k === 'thumb_hole') $('ball_thumb_rows').hidden = !state.thumb_hole;
+      if (k === 'pap_marker') $('pap_rows').hidden = !state.pap_marker;
+      if (k === 'spin_hum') $('hum_rows').hidden = !state.spin_hum;
+      schedule();
+    });
   }
   $('hand').addEventListener('change', e => { state.hand = e.target.value; rowLabels(); refreshHints(); schedule(); });
   $('ball_stripe').addEventListener('change', e => { state.ball_stripe = e.target.value; schedule(); });
@@ -1423,7 +1606,13 @@ async function main() {
     $('stat_weight').textContent = `≈ ${Math.round(grams / 5) * 5} g`;
     $('stat_volume').textContent = `${(data.volume / 1000).toFixed(0)} cm³ · ${data.tris.toLocaleString()} triangles`;
     const rows = [];
-    if (p.part !== 'sizer') {
+    if (p.part === 'gate') {
+      $('bores').innerHTML = '';
+      $('bores_note').textContent = `One segment and one pin per file: print 3 or 5 copies. Linked segments put the pins ${fmtMm(p.ball_d + G.gate_gap, 0)} mm apart (ball diameter + 10 mm); the pins are ${fmtMm(p.gate_pin_h, 0)} mm tall and stand loose in the cups.`;
+    } else if (p.part === 'plugs') {
+      $('bores').innerHTML = '';
+      $('bores_note').textContent = `Two ${G.pap_d} mm plugs for the ball's axis target dots. Print them in the second colour, flat side down, and press them into the sockets.`;
+    } else if (p.part !== 'sizer') {
       const bore = (name, d, trueD) => `<tr><th>${name}</th><td>${fmtMm(trueD)} mm · ${fraction64(trueD / IN)}"</td><td>${fmtMm(d)} mm · ${fraction64(d / IN)}"</td></tr>`;
       rows.push(bore('Thumb', D.td, p.thumb_d), bore('Middle', D.md, p.middle_d), bore('Ring', D.rd, p.ring_d));
       $('bores').innerHTML = `<tr><th></th><th>Drill sheet</th><th>Modeled bore</th></tr>${rows.join('')}`;
@@ -1543,6 +1732,7 @@ async function main() {
       let sheet = null;
       for (const part of parts) {
         const p = { ...state, ...overrides, part };
+        if (part === 'plugs' && !p.pap_marker) continue;   // no dots on the ball, so no plugs to print
         const data = builder.build(p);
         const base = fileBase(p, data.derived);
         files.push({ name: `${base}.stl`, data: toSTL(data.mesh, `${base} - ${APP_NAME} ${APP_VERSION}`), part });
@@ -1554,7 +1744,7 @@ async function main() {
         const shell = Math.min(data.volume, data.area * (part === 'ball' ? 1.3 : 1.6));
         const grams = Math.round(((shell + (data.volume - shell) * infill) * 1.27 / 1000) / 5) * 5;
         stats.push({ part, volume_cm3: +(data.volume / 1000).toFixed(1), bbox_mm: data.bbox.map(v => +v.toFixed(1)),
-          grams, infill_pct: infill * 100, grams_20pct: grams, color_changes: data.colorChanges });
+          grams, infill_pct: infill * 100, grams_20pct: grams, color_changes: data.colorChanges, gate: data.gate, pap: data.pap, hum: data.hum });
         if (!sheet) sheet = fitSheet(p, data.derived, data);
       }
       return { files, warnings, notes, stats, axes, fitSheet: sheet };
@@ -1807,7 +1997,7 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
   function jobSheet(order, built, fileNames) {
     const f = built.fitSheet, m = f.modeled;
     const parts = info.products[order.product].parts;
-    const hasPuck = parts.includes('puck'), hasSpin = parts.includes('spinner'), hasSizer = parts.includes('sizer'), hasBall = parts.includes('ball');
+    const hasPuck = parts.includes('puck'), hasSpin = parts.includes('spinner'), hasSizer = parts.includes('sizer'), hasBall = parts.includes('ball'), hasGate = parts.includes('gate');
     const hasGrip = hasPuck || hasBall;   // parts that carry the whole three-hole grip
     const hasThumb = hasGrip && !(hasBall && f.thumb_hole === false);   // a two-handed ball and the spinner cut no thumb hole
     const r2 = (x) => Math.round(Number(x) * 100) / 100;
@@ -1846,6 +2036,7 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
       if (hasBall) {
         const STRIPE = { none: 'single colour', cap: 'coloured top cap', cap_band: 'coloured top cap and a band round the middle', bands: 'three bands round the middle' };
         L.push(`Rev Ball: ${r2(f.ball_d)} mm ball. ${f.thumb_hole === false ? 'No thumb hole (two-handed)' : `Thumb hole blind, ${r2(f.ball_thumb_depth)} mm deep`}. Finger depth ${f.finger_depth} mm. Bridge ${both(f.bridge)}. Resting flat ${r2(f.ball_flat)} mm. Colours: ${STRIPE[f.ball_stripe] || f.ball_stripe}. Marker groove ${f.ball_groove ? 'yes' : 'no'}. Print allowance ${m.print_allowance_mm} mm.`);
+        if (f.pap_marker) L.push(`Axis target dots: two ${r2(((built.stats.find(s => s.part === 'ball') || {}).pap || {}).socket_d_mm || 12)} mm sockets at the release axis, ${both(f.pap_over)} over toward the hand side and ${both(f.pap_up)} up from the grip centre, and at the opposite point. Press the two printed plugs (the axis_plugs file, second colour) into them. When the ball spins about that axis the dot stands still.`);
         const cc = (built.stats.find(s => s.part === 'ball') || {}).color_changes || [];
         if (cc.length) {
           L.push('FILAMENT CHANGES for the two-colour ball (start the print in the base colour). In Bambu Studio slice it, then');
@@ -1854,17 +2045,25 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
         }
       }
       if (hasSpin) {
-        L.push(`${hasPuck ? 'Rev Spinner: ' : ''}two finger holes only, no thumb hole. Spans and pitches above do not apply to the spinner: its holes are drilled straight at the ball's center (zero pitch). Hole spacing uses the bridge ${both(f.bridge)}; finger depth ${Math.min(f.finger_depth, 20)} mm; wrist-cord tunnel ${f.lanyard ? 'yes' : 'no'}; print allowance ${m.print_allowance_mm} mm.`);
+        L.push(`${hasPuck ? 'Rev Spinner: ' : ''}two finger holes only, no thumb hole. Spans and pitches above do not apply to the spinner: its holes are drilled straight at the ball's center (zero pitch). Hole spacing uses the bridge ${both(f.bridge)}; finger depth ${Math.min(f.finger_depth, 20)} mm; wrist-cord tunnel ${f.lanyard && !f.spin_hum ? 'yes' : 'no'}; print allowance ${m.print_allowance_mm} mm.`);
+        if (f.spin_hum) L.push(`HUMMING CHAMBER (experimental): a hollow ring inside the spinner with ${f.spin_hum_slots} slots at ${f.spin_hum_angle} deg through the top; it hums once the spin is fast enough and stops when it slows. The wrist-cord tunnel is left out (it would cross the chamber). Print as usual, flat side down, no supports: the chamber roof is a 45 deg gable.`);
       }
       L.push('');
     }
     if (hasSizer) {
       L.push('SIZER PLATE', `Finger row centred on ${both(f.sizer_finger_center)}, thumb row centred on ${both(f.sizer_thumb_center)}, steps of ${r2(f.sizer_step)} mm. Each bore is engraved with its diameter in mm. No print allowance is added: the bores are exactly the engraved size.`, '');
     }
+    if (hasGate) {
+      const g = (built.stats.find(s => s.part === 'gate') || {}).gate || {};
+      L.push('RELEASE GATE (the feedback for the ball)');
+      L.push(`The gate file holds one base segment and one loose pin: print 3 or 5 copies, flat, no supports (the pin prints standing). Linked end to end by their dovetails the segments put the pins ${r2(g.spacing_mm)} mm apart (ball diameter + 10 mm); the pins are ${r2(g.pin_h_mm)} mm tall, ${r2(g.pin_d_mm)} mm across, and stand loose in the shallow cups.`);
+      L.push('Use: link the segments across the tape line 1.5 to 2 m from the release point, with the tape running through the groove on the middle segment, and stand a pin in each cup. Decide which pin a correct release should knock down: the centre pin for straight, heavy forward roll; one or two pins over for a hook. The pin that falls, about a second after the release, is the feedback.', '');
+    }
 
     L.push('PRINT');
-    if (hasPuck || hasSpin || hasSizer) L.push(`${hasBall ? 'Puck, spinner, sizer: ' : ''}PETG, 0.2 mm layers, 4 walls, 20% gyroid infill, flat side down, no supports.`);
+    if (hasPuck || hasSpin || hasSizer || hasGate) L.push(`${hasBall ? 'Puck, spinner, sizer, gate: ' : ''}PETG, 0.2 mm layers, 4 walls, 20% gyroid infill, flat side down, no supports.`);
     if (hasBall) L.push(`${hasPuck || hasSpin || hasSizer ? 'Ball: ' : ''}PETG or PLA, 0.2 mm layers, 3 walls, 5% gyroid infill, grip holes facing UP. Supports: tree, "On build plate only" (so nothing grows inside the holes); seam: random or scarf (no ridge down one side). Snap the supports off and sand the scar smooth so it rolls true.`);
+    if (hasBall && f.pap_marker) L.push('Axis plugs: the second colour, 0.2 mm layers, 100% infill, flat side down. Press one into each socket on the ball.');
     for (const s of built.stats) L.push(`  ${s.part}: about ${s.grams} g of filament at ${s.infill_pct}% infill, ${s.bbox_mm.join(' x ')} mm`);
     if (hasGrip || hasSpin) L.push('After printing: smooth the bores with fine sandpaper and check each bore against the sizes above before packing.');
     if (hasBall) L.push('Ball drill: kneel, swing low, let it go along a strip of tape on the floor with a couch or wall 1.5 to 2 m away. Roll + curve off the line = thumb out, fingers lifted. Straight but long and lively = strong forward roll (fine). Straight and short = dumped. Popped up = thumb hung up. Spins in place = hand on top.');
@@ -1947,7 +2146,7 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
   }
   function customerCard(order, built) {
     const f = built.fitSheet, m = f.modeled, parts = info.products[order.product].parts;
-    const hasPuck = parts.includes('puck'), hasSpin = parts.includes('spinner'), hasSizer = parts.includes('sizer'), hasBall = parts.includes('ball');
+    const hasPuck = parts.includes('puck'), hasSpin = parts.includes('spinner'), hasSizer = parts.includes('sizer'), hasBall = parts.includes('ball'), hasGate = parts.includes('gate');
     const hasThumb = (hasPuck || hasBall) && !(hasBall && f.thumb_hole === false);
     const both = (mm) => `${fraction64(mm / IN)}" (${Math.round(mm * 100) / 100} mm)`;
     // "Jordan Lee" -> Jordan; "Lee, Jordan" -> Jordan
@@ -1980,8 +2179,17 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
       L.push({ t: '   Straight and short: everything let go at once (a dump).' });
       L.push({ t: '   Pops up and lands late: the thumb hung up.' });
       L.push({ t: '   Spins in place: the hand came over the top.', gap: 4 });
+      if (f.pap_marker) L.push({ t: 'The two coloured dots mark the axis your release should spin about. When a dot stands still as the ball rolls away, the axis is right; when it wheels around, the hand came round the ball differently.' });
       const SPIN = { none: f.ball_groove ? 'The groove round the middle shows the spin.' : 'Watch the finger holes to see the spin.', cap: 'The coloured top cap shows the spin.', cap_band: 'The coloured cap and band show the spin.', bands: 'The coloured bands show the spin.' };
       L.push({ t: `${SPIN[f.ball_stripe] || SPIN.cap_band} Ten releases a day is plenty. It is a feedback tool, not a measuring instrument, and it is not a promise about your rev rate.`, gap: 8 });
+    }
+    if (hasSpin && f.spin_hum) {
+      L.push({ t: 'HUMMING SPINNER', b: true, s: 12 });
+      L.push({ t: 'Spin it on a table with the finger lift alone, the way the fingers come off the ball. The hum starts only when the spin is fast enough and stops as it slows, so a hum that starts at once and lasts is a strong, clean lift. It is experimental: the note and the speed it starts at vary from print to print.', gap: 8 });
+    }
+    if (hasGate) {
+      L.push({ t: 'RELEASE GATE', b: true, s: 12 });
+      L.push({ t: 'Link the segments across the tape line 1.5 to 2 m away, with the tape through the groove on the middle one, and stand a pin in each cup. Before you start, pick the pin a good release should knock down: the centre pin for a straight, heavy roll; one or two over for a hook. The pin that falls, about a second after you let go, is your answer. The wrong pin falling tells you which way you missed.', gap: 8 });
     }
     if (hasPuck) {
       L.push({ t: 'REV PUCK: HOW TO USE IT', b: true, s: 12 });

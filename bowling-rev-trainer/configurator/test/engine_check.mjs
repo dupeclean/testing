@@ -134,8 +134,8 @@ assert.ok(ballNum.bytes[0] !== ballPlain.bytes[0], 'the number is engraved on th
 ok('the order number is engraved when given and refused when it is not FS-/digits');
 r = await build({ ...SHEET, thumb_hole: false }, ['ball']);
 assert.ok(r.ok && r.warnings.length === 0, 'no-thumb ball: ' + (r.message || JSON.stringify(r.warnings)));
-assert.deepEqual(r.axes.ball.map(a => a.name).sort(), ['middle', 'ring']);
-assert.ok(r.axes.ball.every(a => Math.abs(a.p[1]) < 1), 'two-handed finger holes sit across the top centre');
+assert.deepEqual(r.axes.ball.filter(a => a.name !== 'axis').map(a => a.name).sort(), ['middle', 'ring']);
+assert.ok(r.axes.ball.filter(a => a.name !== 'axis').every(a => Math.abs(a.p[1]) < 1), 'two-handed finger holes sit across the top centre');
 ok('a no-thumb (two-handed) ball has just the two finger holes, centred on top');
 
 // 8. fixes from the adversarial review
@@ -164,6 +164,70 @@ ok('opening an older order resets the oval, bevel, thumb-hole and engraving fiel
 for (const parts of [['spinner'], ['ball'], ['puck']]) { r = await build({ ...SHEET, serial: 'FS-2026-0001' }, parts); assert.ok(r.ok && r.warnings.length === 0, parts[0] + ' with a 12-character number: ' + (r.message || JSON.stringify(r.warnings))); }
 r = await build({ ...SHEET, thumb_hole: false }, ['ball']);
 ok('a 12-character order number builds on every part');
+
+// 9. axis target dots: two sockets at the release axis and its opposite point, plus their plugs
+const dots = await build(SHEET, ['ball']), noDots = await build({ ...SHEET, pap_marker: false }, ['ball']);
+assert.ok(dots.ok && noDots.ok && dots.warnings.length === 0, 'dots: ' + JSON.stringify(dots.warnings));
+assert.ok(dots.bytes[0] !== noDots.bytes[0], 'the sockets change the ball mesh');
+const dotAxes = dots.axes.ball.filter(a => a.name === 'axis');
+assert.equal(dotAxes.length, 2, 'two sockets');
+const [d1, d2] = dotAxes.map(a => a.dir);
+assert.ok(Math.abs(d1[0] + d2[0]) < 1e-9 && Math.abs(d1[2] + d2[2]) < 1e-9, 'the two sockets are opposite each other');
+assert.ok(d1[0] > 0.9 || d2[0] > 0.9, 'right hand: the axis point is far over on the hand (+x) side: ' + JSON.stringify([d1, d2]));
+const dotsL = await build({ ...SHEET, hand: 'left' }, ['ball']);
+assert.ok(dotsL.axes.ball.filter(a => a.name === 'axis').some(a => a.dir[0] < -0.9), 'left hand mirrors the axis point');
+assert.ok(dots.stats[0].pap && dots.stats[0].pap.points.length === 2 && Math.abs(dots.stats[0].pap.over_mm - 139.7) < 0.01, 'pap data on the stats: ' + JSON.stringify(dots.stats[0].pap));
+// aim the dot 12 mm short of the thumb hole centre (pap_up is the arc from the top, negative toward the thumb)
+const thumbP = dots.axes.ball.find(a => a.name === 'thumb').p, Rb = 100;
+r = await build({ ...SHEET, pap_over: 0, pap_up: Math.max(-60, Rb * Math.asin(thumbP[1] / Rb) + 12) }, ['ball']);
+assert.ok(r.ok && r.warnings.some(w => /runs into a grip hole/.test(w)), 'a dot on the grip warns: ' + JSON.stringify(r.warnings));
+r = await build({ ...SHEET, pap_over: 15, pap_up: 0 }, ['ball']);
+assert.ok(r.ok && !r.warnings.some(w => /grip hole/.test(w)) && r.warnings.some(w => /resting flat/.test(w)), 'a dot 15 mm over sits between the holes (no hole warning) but its twin is on the flat: ' + JSON.stringify(r.warnings));
+r = await build({ ...SHEET, pap_over: 0, pap_up: 0 }, ['ball']);
+assert.ok(r.ok && r.warnings.some(w => /resting flat/.test(w)), 'a dot at the pole puts its twin on the flat and warns: ' + JSON.stringify(r.warnings));
+r = await build({ ...SHEET, pap_over: 250 }, ['ball']);
+assert.equal(r.ok, false); assert.match(r.message, /Axis point over/);
+r = await build(SHEET, ['plugs']);
+assert.ok(r.ok && r.stats[0].volume_cm3 > 0.6 && r.stats[0].volume_cm3 < 0.9, 'two plugs: ' + (r.message || r.stats[0].volume_cm3));
+r = await page.evaluate(() => { const b = window.__cfgApp.buildFiles(['ball', 'plugs'], { pap_marker: false }); return b.files.map(f => f.name); });
+assert.ok(r.length === 1 && /rev_ball/.test(r[0]), 'no plugs file when the dots are off: ' + JSON.stringify(r));
+ok('axis target dots: two opposite sockets at the hand-side axis point, mirrored for a left hand, warnings near holes and the flat, plugs file only when the dots are on');
+
+// 10. release gate: one segment and one pin per file, pins ball diameter + 10 mm apart
+r = await build(SHEET, ['gate']);
+assert.ok(r.ok, 'gate: ' + r.message);
+assert.deepEqual(r.warnings, [], 'gate warns: ' + JSON.stringify(r.warnings));
+const g = r.stats[0];
+assert.ok(g.gate && Math.abs(g.gate.spacing_mm - 210) < 1e-9 && g.gate.pin_h_mm === 100, 'gate spacing/pin: ' + JSON.stringify(g.gate));
+assert.ok(g.bbox_mm[0] > 221 && g.bbox_mm[0] < 224 && g.bbox_mm[1] > 69 && g.bbox_mm[1] < 71 && Math.abs(g.bbox_mm[2] - 100) < 0.01, 'gate bbox: ' + JSON.stringify(g.bbox_mm));
+assert.ok(g.volume_cm3 > 70 && g.volume_cm3 < 90, 'gate volume (segment about 50 cm3 + pin about 31 cm3): ' + g.volume_cm3);
+r = await build({ ...SHEET, ball_d: 230 }, ['gate']);
+assert.ok(r.ok && Math.abs(r.stats[0].gate.spacing_mm - 240) < 1e-9, 'spacing follows the ball diameter');
+r = await build({ ...SHEET, gate_pin_h: 30 }, ['gate']);
+assert.equal(r.ok, false); assert.match(r.message, /Gate pin height/);
+ok('release gate builds (segment + pin, spacing = ball diameter + 10 mm); a silly pin height is refused');
+
+// 11. humming spinner: the chamber and slots take plastic out, the wrist-cord tunnel is left out, silly values are refused
+const plainSpin = await build(SHEET, ['spinner']), humSpin = await build({ ...SHEET, spin_hum: true }, ['spinner']);
+assert.ok(humSpin.ok && humSpin.warnings.length === 0, 'hum: ' + (humSpin.message || JSON.stringify(humSpin.warnings)));
+const removed = plainSpin.stats[0].volume_cm3 - humSpin.stats[0].volume_cm3;
+assert.ok(removed > 38 && removed < 56, 'the chamber and slots remove about 45 cm3 (a 203 mm2 ring profile round 37 mm, less the tunnel that is left out): ' + removed);
+assert.ok(humSpin.stats[0].hum && humSpin.stats[0].hum.slots === 8 && humSpin.notes.some(n => /tunnel is left out/.test(n)), 'hum data and the tunnel note: ' + JSON.stringify([humSpin.stats[0].hum, humSpin.notes]));
+const humNoCord = await build({ ...SHEET, spin_hum: true, lanyard: false }, ['spinner']);
+assert.equal(humNoCord.bytes[0], humSpin.bytes[0], 'with the hum on, the wrist-cord setting changes nothing (the tunnel is left out)');
+const hum16 = await build({ ...SHEET, spin_hum: true, spin_hum_slots: 16, spin_hum_angle: 0 }, ['spinner']);
+assert.ok(hum16.ok && hum16.stats[0].volume_cm3 < humSpin.stats[0].volume_cm3, 'more slots take more plastic out');
+r = await build({ ...SHEET, spin_hum: true, spin_hum_slots: 1 }, ['spinner']);
+assert.equal(r.ok, false); assert.match(r.message, /Hum slots/);
+r = await build({ ...SHEET, spin_hum: true, spin_hum_slots: 8.5 }, ['spinner']);
+assert.equal(r.ok, false); assert.match(r.message, /whole number/);
+r = await build({ ...SHEET, spin_hum: true, spin_hum_angle: 85 }, ['spinner']);
+assert.equal(r.ok, false); assert.match(r.message, /slot angle/);
+r = await build({ ...SHEET, spin_hum: true, middle_d: 28, ring_d: 28, bridge: 30 }, ['spinner']);
+assert.ok(r.ok && r.warnings.some(w => /humming chamber/.test(w)), 'wide holes on a wide bridge warn that they reach the chamber: ' + (r.message || JSON.stringify(r.warnings)));
+r = await build({ ...SHEET, spin_hum: true }, ['puck']);
+assert.ok(r.ok && r.bytes[0] === (await build(SHEET, ['puck'])).bytes[0], 'the hum setting does nothing to the puck');
+ok('humming spinner: ring chamber and slots, no wrist-cord tunnel with it, bad slot counts and angles refused, holes reaching the chamber warn');
 
 await browser.close(); server.close();
 console.log(`\nALL ${results.length} ENGINE CHECKS PASSED`);

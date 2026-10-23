@@ -138,6 +138,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
         <button type="button" data-part="ball" aria-pressed="false">Ball</button>
         <button type="button" data-part="spinner" aria-pressed="false">Spinner</button>
         <button type="button" data-part="sizer" aria-pressed="false">Sizer</button>
+        <button type="button" data-part="gate" aria-pressed="false">Gate</button>
       </div>
       <div class="seg" role="group" aria-label="Units">
         <button type="button" data-unit="mm" aria-pressed="true">mm</button>
@@ -203,7 +204,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
         </datalist>
         <p class="howto" style="margin-top:10px">Sizes and spans take the drill sheet's own notation: <b>55/64</b>, <b>1 1/32</b>, <b>4-1/2</b> or decimals. Span is the near edge of the thumb hole to the near edge of each finger hole. Zero pitch aims the hole at the ball's center.</p>
         <p class="howto" data-only-part="ball" style="margin-top:6px"><b>Ball:</b> all three holes, at the sheet's spans and pitches, drilled into a full ball you can release on the floor. The thumb hole is blind (its depth is set below), like a real ball.</p>
-        <p class="howto" data-only-part="spinner" style="margin-top:6px"><b>Spinner:</b> only the two finger hole sizes and the bridge are used. Both holes are drilled straight at the ball's center, so the spans and pitches on this sheet do not apply to the spinner. Switch to Puck to use them.</p>
+        <p class="howto" data-only-part="spinner" style="margin-top:6px"><b>Spinner:</b> only the two finger hole sizes and the bridge are used. Both holes are drilled straight at the ball's center, so the spans and pitches on this sheet do not apply to the spinner. Switch to Puck to use them. An optional <b>humming chamber</b> (under Options) makes the spinner hum once the finger lift spins it fast enough.</p>
         <p class="howto" style="margin-top:6px"><b>Which hole is which:</b> read the sheet with the thumb hole at the bottom, as it is drawn. For a right hand the <b>left</b> finger hole is the middle finger and the <b>right</b> hole is the ring finger (a left hand is the mirror image). Enter each hole's numbers on the row with the matching side, whatever the sheet calls it.</p>
         <p class="howto" style="margin-top:6px"><b>Pitch</b> is in inches, as drilled. <b>Forward (+)</b>: the inner end of the hole leans toward the middle of the grip: the thumb hole toward the fingers, the finger holes toward the thumb. <b>Reverse (−)</b>: the other way. <b>Lateral (+)</b>: toward the right side of the sheet for a right hand (toward the left for a left hand); <b>−</b> is the other side. The blue lines in the 3D view show where each hole points.</p>
       </fieldset>
@@ -253,11 +254,23 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
           <label class="check" data-only-part="puck"><input type="checkbox" id="weight_pocket"> Weight pocket in the base</label>
           <label class="check"><input type="checkbox" id="lanyard"> Wrist-cord tunnel</label>
         </div>
+        <div class="row" data-only-part="spinner" style="margin-top:8px">
+          <label class="check" style="flex-basis:100%"><input type="checkbox" id="spin_hum"> Humming chamber (experimental): a hollow ring inside with slanted slots through the top, so the spinner hums once it spins fast enough</label>
+          <div class="row" id="hum_rows" style="flex-basis:100%">
+            <label class="field"><span>Slots through the top</span>
+              <input type="text" id="spin_hum_slots" inputmode="numeric">
+              <small>2 to 16; more slots, higher note</small></label>
+            <label class="field"><span>Slot angle</span>
+              <span class="row" style="gap:6px"><input type="text" id="spin_hum_angle" inputmode="decimal"><span class="unit">°</span></span>
+              <small>From radial, 0 to 80; 45 scoops air as it spins</small></label>
+          </div>
+          <p class="howto" style="flex-basis:100%;margin:0">The hum is a threshold: it starts when the finger lift spins the spinner fast enough and lasts as long as the spin stays above that speed, so you hear how hard the lift was and how long it carried. The wrist-cord tunnel is left out when the chamber is on (it would cross the chamber). Not yet tuned by test prints: the slot count and angle change the starting speed and the note.</p>
+        </div>
       </fieldset>
 
       <fieldset data-only-part="ball">
         <legend>Rev Ball</legend>
-        <p class="howto" style="margin:0 0 10px">A release trainer: kneel, swing low, let it go onto the floor along a strip of tape and watch what it does. Thumb out first and fingers lifting makes it <b>roll and curve</b> off the line; a dump rolls straight and short; a hung-up thumb pops it up. Printed solid-looking but sliced light (3 walls, 5% infill, about 500 g at 200 mm). It needs supports under its lower half; sand the scar smooth. A second colour makes the spin easy to see: the slicer swaps filament at the heights FitSlice gives you, so the top cap and a band round the middle come out in the other colour.</p>
+        <p class="howto" style="margin:0 0 10px">A release trainer: kneel, swing low, let it go onto the floor along a strip of tape and watch what it does. Thumb out first and fingers lifting makes it <b>roll and curve</b> off the line; a dump rolls straight and short; a hung-up thumb pops it up. Printed solid-looking but sliced light (3 walls, 5% infill, about 500 g at 200 mm). It needs supports under its lower half; sand the scar smooth. A second colour makes the spin easy to see: the slicer swaps filament at the heights FitSlice gives you, so the top cap and a band round the middle come out in the other colour. Two <b>axis target dots</b> mark the axis your release should spin about: spin it right and the dot stands still while the rest of the ball blurs. Their contrasting plugs come in their own file.</p>
         <div class="row">
           <label class="field"><span>Ball diameter</span>
             <span class="row" style="gap:6px"><input type="text" id="ball_d" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
@@ -278,6 +291,15 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
             </select>
             <small>The exact heights for the swaps are shown below the preview and on the job sheet</small></label>
           <label class="check"><input type="checkbox" id="ball_groove"> Marker groove round the middle (for a single-colour ball)</label>
+          <label class="check" style="flex-basis:100%"><input type="checkbox" id="pap_marker"> Axis target dots (two plug sockets at the axis your release should spin about)</label>
+          <div class="row" id="pap_rows" style="flex-basis:100%">
+            <label class="field"><span>Axis point: over, toward the hand side</span>
+              <span class="row" style="gap:6px"><input type="text" id="pap_over" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+              <small>Along the surface from the grip centre; a pro shop's PAP, typically 5 1/2"</small></label>
+            <label class="field"><span>Axis point: up, toward the fingers</span>
+              <span class="row" style="gap:6px"><input type="text" id="pap_up" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+              <small>Typically 1/2"; negative = toward the thumb</small></label>
+          </div>
         </div>
       </fieldset>
 
@@ -292,6 +314,16 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
           <label class="field"><span>Step between bores</span>
             <span class="row" style="gap:6px"><input type="text" id="sizer_step" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
             <small>1/64" = 0.397 mm, a pro-shop half size</small></label>
+        </div>
+      </fieldset>
+
+      <fieldset data-only-part="gate">
+        <legend>Release gate</legend>
+        <p class="howto" style="margin:0 0 10px">The clack that says a release worked. Loose pins stand in shallow cups on base segments linked across a strip of tape on the floor, 1.5 to 2 m from where the ball is let go. The ball knocks over the pin where it crosses, about a second after the release. Decide beforehand which pin a correct release should topple: the <b>centre</b> pin for straight, heavy forward roll; one or two pins <b>over</b> for a hook. The wrong pin falling says which way the release missed. Pins sit the ball's diameter + 10 mm apart, so the ball never reaches more than two neighbours. This file holds <b>one segment and one pin</b>: print 3 or 5 copies, flat, no supports.</p>
+        <div class="row">
+          <label class="field"><span>Pin height</span>
+            <span class="row" style="gap:6px"><input type="text" id="gate_pin_h" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
+            <small>100 mm suits the 200 mm ball; the pins are 20 mm across</small></label>
         </div>
       </fieldset>
 

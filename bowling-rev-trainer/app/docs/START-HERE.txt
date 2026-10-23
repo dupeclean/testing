@@ -148,9 +148,44 @@ folder path from the old computer.
   blind (70 mm deep by default; set it from the customer's thumb length)
   like a real ball. For a two-handed bowler untick "Thumb hole": the two
   finger holes are then centred on top and there is no thumb hole.
+- AXIS TARGET DOTS (Rev Ball): the ball has two small sockets (12 mm)
+  at the axis a good release spins it about: the bowler's PAP, 5 1/2"
+  over toward the hand and 1/2" up toward the fingers from the grip
+  centre by default. If the shop measured the customer's PAP, type it
+  under "Axis target dots" on the Ball screen. A Rev Ball order also
+  exports axis_plugs_D12.stl: two plugs to print in the second colour
+  (100% infill, flat side down) and press into the sockets. When the
+  dot stands still as the ball rolls away, the release spun it about the
+  right axis; when it wheels round, the hand came round the ball some
+  other way. Untick "Axis target dots" for a plain ball (no plugs file
+  is exported then). The app warns if a dot would land on a grip hole or
+  on the resting flat.
+- RELEASE GATE: the "click" for the ball. Loose pins (20 mm across,
+  100 mm tall) stand in shallow cups on base segments that link end to
+  end with dovetails, 210 mm apart for the 200 mm ball. The gate file
+  holds ONE segment and ONE pin: print 3 or 5 copies, flat, no supports
+  (the pin prints standing). Link the segments across the tape line
+  1.5 to 2 m from the release point, tape through the groove on the
+  middle one, a pin in each cup. The ball knocks down the pin where it
+  crosses, about a second after the release. Before each session decide
+  which pin a good release should topple: the centre pin for a straight,
+  heavy roll; one or two over for a hook. The wrong pin falling says
+  which way the release missed. A Rev Ball order includes the gate file;
+  the "Release Gate" product exports it on its own. NOT YET PRINTED:
+  on the first print check that a pin stands freely in its cup (there
+  is 1 mm of clearance) and that two segments slide together.
 - The Rev Spinner uses only the two finger hole sizes and the bridge;
   its holes are drilled straight at the ball's center, so spans and
   pitches apply to the Rev Puck only.
+- HUMMING SPINNER (experimental): under Options on the Spinner screen,
+  "Humming chamber" hollows a ring inside the spinner with slanted
+  slots through the top, so it hums once the finger lift spins it fast
+  enough and goes quiet as it slows: a hum that starts at once and lasts
+  is a strong, clean lift. The wrist-cord tunnel is left out with it.
+  Print as usual (flat side down, no supports; the chamber roof is a
+  45 degree gable). NOT YET PRINTED: the speed it starts humming at and
+  the note depend on the slot count and angle, which only test prints
+  can tune. Leave it off for customer orders until it has been tried.
 - The bridge (the plastic between the two finger holes) should be
   about 1/2 inch, as FitSlice's default. A 1/4 inch bridge is only right
   when the finger holes were cut at 31/32 inch for inserts; with
