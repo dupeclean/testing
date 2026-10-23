@@ -129,11 +129,12 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    slice with the job-sheet settings, add colour changes at 93.4, 105.4 and 154 mm and check
    that each lands on a groove ring. Two sessions tried to do this from the PC; one was refused
    desktop control and the other was blocked by a "New version of Bambu Studio" dialog.
-2. DONE (owner's go-ahead each time): `C:\FitSlice` holds the build of the evening of 2026-10-22
-   (review fixes + feedback parts), installed 2026-10-23 by renaming the old folder and extracting
-   the zip. Backups: `C:\FitSlice-old-2026-10-20` (Oct 20 build: no Rev Ball, oval holes, bevels,
-   engraving or customer card) and `C:\FitSlice-old-2026-10-22` (Oct 22 morning build). Both can be
-   deleted once the installed one has been used for a real order.
+2. DONE (owner's go-ahead each time): `C:\FitSlice` holds the build of 2026-10-23 08:55 (review
+   fixes, feedback parts, axis target ring, PAP on the sheet), installed by renaming the old folder
+   and extracting the zip (the owner had it open; closed with his say-so). Backups: `C:\FitSlice-old-2026-10-20`
+   (Oct 20 build: no Rev Ball, oval holes, bevels, engraving or customer card), `C:\FitSlice-old-2026-10-22`
+   (Oct 22 morning build) and `C:\FitSlice-old-2026-10-22-evening` (review fixes + feedback parts, no
+   ring). All three can be deleted once the installed one has been used for a real order.
 3. DONE 2026-10-22 (owner's go-ahead): FS-0001 ("me", Pair) was reopened in the installed app,
    given thumb 25/32 drilled + 29/32 oval at 55 deg with the -3/4 reverse finger pitches kept,
    saved and re-exported: puck (795.7 cm3, 140 x 167.7 x 60 mm) and spinner STLs with bore
@@ -172,7 +173,11 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    sheet, two 3 mm sockets at the axis points verified on the mesh), `axis_plugs_D12.stl` (two
    bodies), `release_gate_210mm_pin100.stl` (two bodies, 81 cm3), fit sheet, job sheet (axis dots,
    RELEASE GATE and axis-plug print lines) and customer card (dots and gate sections). The saved
-   orders keep their 22 mm flat; new orders get 30 mm.
+   orders keep their 22 mm flat; new orders get 30 mm. Re-exported again 2026-10-23 09:14 from the
+   ring build: `axis_plugs_D12.stl` moved to `superseded`, `axis_inlays_D12_ring60.stl` (6.2 cm3,
+   two plugs + two rings) in its place; ball 4137.7 cm3 with 3.0 mm sockets and 3.9 mm ring pockets
+   at both axis points, grooves still at 93.4 / 105.4 / 154 mm; job sheet says the PAP is the
+   common position (not on the sheet). FS-0001 (puck + spinner) is unaffected by the ring.
 11. DECLINED 2026-10-23: the owner does not want a whistle ("no whistle"), nor a sensor, nor springs.
    Do not revive sound-based or electronic feedback. Kept for the record only. The owner wants instant feedback that the thumb left first
    and the fingers then lifted, and rejected a sensor module ("no sensor. too expensive/complex") and
