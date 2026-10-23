@@ -43,5 +43,6 @@ The whistles open on the long face marked "whistles this side". Keep that face c
 **What it is not.** It cannot sense the hand; it reports the order the holes empty, which is the
 thing itself. It needs a snug fit, which a trainer should have anyway.
 
+Pictures: `whistle_coupon.png` (label side), `whistle_coupon_outlets.png` (whistle side).
 Model: `whistle_coupon.scad` (OpenSCAD). Not part of the engine or the order book; if a variant
 wins it will be added there with the usual parity check.
