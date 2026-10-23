@@ -151,8 +151,11 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    card. The Oct 20 STLs are in `FS-0001 me\superseded\`. Still to do: measure the thumb length
    for `ball_thumb_depth` (FS-0002 uses the 70 mm default), and confirm the pitch sign on the
    paper sheet before printing.
-4. Nothing has been printed or rolled. Print the puck first (about 3 h) to check the oval thumb
-   fit and the 55 deg orientation against the real ball, then the ball (10-14 h).
+4. Nothing had been printed or rolled as of the morning of 2026-10-23. That afternoon the owner said
+   the first Rev Ball (FS-0002, the owner's own sheet) is printing; its pass checklist is
+   `marketing/10-ball-first-plan.md` Section 4.1 (fit, pitch feel, thumb depth, roll-true, bullseye,
+   pattern, print log). The puck (about 3 h) still needs printing to check the oval thumb fit and
+   the 55 deg orientation against the real ball.
 5. Repo is public: make it private. No "patent pending" wording until a provisional is filed
    (draft package is in the IP artifact; `ip/` is local-only and not in git).
 6. No rev-rate claims anywhere: the ball is a feedback tool.
@@ -254,6 +257,23 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    packaged build reads it through `original-fs`. The 11:00 build with the wrong stamp was installed
    for a few minutes; it sits in `C:\FitSlice-old-2026-10-23-d-wrong-stamp` (the harness would not
    delete `C:\FitSlice`, so it was renamed aside like the others) and can be deleted.
+15. Ball-first selling plan (2026-10-23 afternoon; the owner asked "what are the best ways to sell
+   this? ask me questions. should i go ball only first?"). Answered with four questions; the owner's
+   answers: the first ball is printing now, the first buyers should be league mates and locals, a
+   second printer when orders back up, under $200 of cash for 90 days. Written up as
+   `marketing/10-ball-first-plan.md`: lead with the Rev Ball plus the Fit Kit, puck and spinner off
+   the public line at launch, ten local balls at a $99 founder price while the first ball is checked,
+   then a free static host for the configurator and an Etsy listing, the kit's launch gates (LLC,
+   insurance, tolerance table, counsel) funded by the first ten, proposed ball claims, a product page
+   and an Etsy listing draft, the naming decision (rule 8 forbids "ball"; owner to decide), and the
+   per-file change list. The go-to-market kit (`marketing/01`-`09`, `docs/business-plan.md`, all from
+   2026-10-22) is puck-first and never mentioned the ball. The business plan's patent note was wrong
+   and is corrected: US7261638 lapsed 2011-08-28 for unpaid maintenance fees and claims a hollow
+   cylinder with finger plugs (Google Patents, read 2026-10-23; Parts 4, 9, C14, 12 and 13 edited;
+   `01` got a cross-reference under its rules table). NOT rebuilt: `marketing/gtm-kit.html` and
+   `docs/business-plan.html` are rendered by `build_kit.py` / `build_plan.py` with pandoc, which is
+   not on this PC; both HTML files are from 2026-10-22 and lack the new file and the correction.
+   Committed and pushed 2026-10-23 (owner's go-ahead).
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 

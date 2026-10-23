@@ -60,6 +60,8 @@ We write like a good pro-shop operator talks: short sentences, real numbers, no 
 | 9 | Say "to our knowledge, the first trainer that uses your actual drill sheet." | Say "the only" or "the first" without the qualifier, or "patented" and "patent pending" (write `[PATENT STATUS]`). |
 | 10 | Write short declarative sentences. One idea per sentence. | Use em-dash asides, "not X but Y" turns, or the words game changer, revolutionary, unlock, elevate, next-level, pro-approved. |
 
+**Rule 8 and the Rev Ball (23 October 2026).** The Rev Ball, built after this file was written, is a 200 mm practice ball rolled on carpet, never thrown. Whether "what we never call it" (Section 1) and rule 8 change for it is `[DECISION — founder: name]`, with the proposed wording in `10-ball-first-plan.md` Section 8. Until it is decided, internal files say "Rev Ball" and no public copy for the ball ships.
+
 ### Tone by situation
 
 - **Product pages and ads:** confident and specific. Numbers we can measure, the ten-second line, one call to action.

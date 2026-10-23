@@ -1,7 +1,7 @@
 ---
 title: "FitSlice Business Plan"
 subtitle: "A custom-fit, 3D-printed rev trainer for one-handed, thumb-in bowlers"
-date: "October 2026 — working draft v1"
+date: "October 2026 — working draft v1.1 (23 October: patent note corrected; the Rev Ball cross-referenced)"
 ---
 
 > **How to read this.** Every number with a source behind it is marked with a bracketed citation like [M1] that points to the evidence tables in Part 11. Numbers without a citation are our own estimates and say so. The market, competitor, channel and performance-evidence research was gathered by automated web research in October 2026, and most figures were read from search-engine excerpts of the cited pages rather than the pages themselves (the research sandbox could not open them), so spot-check any figure against its URL before it goes on a website, a package or an ad. Two angles, legal and unit costs, could not be web-sourced in that pass at all; Part 5.2 uses our own slicer measurements instead, and Part 9 is written from general knowledge with the exact documents still to pull.
@@ -53,7 +53,7 @@ Nobody sells a bowler's own fit off the ball. Forty-five targeted searches acros
 
 Two facts from the fit world matter most for the pitch. First, bowlers already pay to clone one hole: custom silicone thumb molds cost $15 for a master and $20 per copy, and interchangeable-thumb systems (Turbo Switch Grip, JoPo Twist, Vise IT) reduce the thumb to a standard slug the pro shop custom-drills [C11]. Second, the pro-shop measuring tools that hold a bowler's fit cost about CA$1,342 and live in the shop [C12]. The fit is valuable, portable as data (shops accept uploaded drill sheets [C11]) and has no at-home physical form. That is the gap.
 
-Prior art to respect: a 2007 US patent on a foam "bowling practice device with finger holes for personalizing the fit" (US7261638) is still in force until roughly 2027 and needs a freedom-to-operate review before launch; the 1987 grip-exerciser patent and the thumb-exit-aid patents are expired [C14]. We are not aware of any active patent on generating per-bowler hole geometry from a drill sheet, which is the core of what we do.
+Prior art checked: the 2007 US patent on a "bowling practice device" (US7261638, Davis and Shum) that the first draft of this plan treated as in force until 2027 lapsed on 28 August 2011 for non-payment of maintenance fees, and its only independent claim covers a generally cylindrical hollow body with two finger holes that take finger plugs, not a ball or a slice (Google Patents legal status, read 23 October 2026; confirm in USPTO Patent Center before relying on it). The 1987 grip-exerciser patent and the thumb-exit-aid patents are also expired [C14]. We are not aware of any active patent on generating per-bowler hole geometry from a drill sheet, which is the core of what we do.
 
 # 5. Product, pricing and operations
 
@@ -69,6 +69,8 @@ Prior art to respect: a 2007 US patent on a foam "bowling practice device with f
 | **Pro-shop program** | Shop enters the drill sheet at the counter; we drop-ship; shop earns 25% | wholesale |
 
 Prices are ours, set from three anchors: the wrist-brace band ($40–100) where a comparable "release aid" purchase already happens [C6][C7]; what bowlers pay for fit services ($40–150 drilling, $15–20 thumb molds) [M16][C11]; and unit cost (below). The configurator stays free: it is the sales demo.
+
+**Rev Ball (added 23 October 2026).** A 200 mm practice ball with the customer's grip, two colours and an axis bullseye, built after this plan was written. The decision to lead with it, its proposed price ($129), its unit economics and its claims are in `marketing/10-ball-first-plan.md`; the table above and Part 5.2 describe the puck line and are not yet revised.
 
 ## 5.2 Unit economics (measured on the real models)
 
@@ -201,8 +203,8 @@ Until Study 1 passes, "exact" stays out of headlines; until Study 3 reports, per
 **Status: written from general knowledge, not from sources opened in this research pass.** The legal researcher could not reach ftc.gov, ecfr.gov, uspto.gov, patents.google.com, bowl.com or the insurers' sites, so nothing below is cited. Treat it as the agenda for a one-hour conversation with counsel, and pull the documents listed at the end before quoting any of it.
 
 - **Advertising claims.** US advertising law requires a reasonable basis for objective claims before they are made; for performance and health-adjacent claims the FTC expects competent and reliable evidence, which in practice means tests or studies, not coaching consensus. That is why Part 6 splits claims into green (product facts and attributed opinions), yellow (qualified) and red (performance numbers we do not have). Endorsements must reflect the endorser's honest experience, results shown in testimonials must be typical or the typical result must be disclosed, and any material connection (a free trainer, an affiliate code, a sponsored video) must be disclosed clearly. A 2024 FTC rule on consumer reviews and testimonials carries civil penalties for fake or purchased reviews and for suppressing negative ones; the review program must be hands-off.
-- **Governing body.** The product is a training aid used off the lane. It is not a bowling ball, is not used in sanctioned competition, and to our knowledge no USBC approval applies to it. We say that plainly and never call it a ball, a "mini ball" or "regulation".
-- **Patents.** Freedom-to-operate review of US7261638 (2007, "bowling practice device" with personalized finger holes) before launch; it should expire around 2027 but the claims need reading. The 1987 grip-exerciser patent and the thumb-exit-aid patents from the 1980s–90s are expired [C14]. Our own method (per-bowler hole geometry generated from a drill sheet, bores aimed at the regulation ball center with drill-sheet pitches, on a printed ball-radius slice) is documented with dated repository history; whether to file a provisional is a cost question for counsel.
+- **Governing body.** The product is a training aid used off the lane. It is not a bowling ball, is not used in sanctioned competition, and to our knowledge no USBC approval applies to it. We say that plainly and never call it a ball, a "mini ball" or "regulation". The Rev Ball (23 October 2026) is a 200 mm practice ball rolled on carpet, never thrown; whether this rule changes for it is a founder decision recorded in `marketing/10-ball-first-plan.md` Section 8.
+- **Patents.** US7261638 (2007, "bowling practice device") lapsed on 28 August 2011 for unpaid maintenance fees and its claims cover a hollow cylinder with finger plugs, so the freedom-to-operate review the first draft called for is closed (source: Google Patents legal status, read 23 October 2026; confirm in USPTO Patent Center). The 1987 grip-exerciser patent and the thumb-exit-aid patents from the 1980s–90s are expired [C14]. The Google Patents search in the document list below still runs before launch, now with the Rev Ball's own terms added ("bowling practice ball finger holes", "practice ball axis marker"). Our own method (per-bowler hole geometry generated from a drill sheet, bores aimed at the regulation ball center with drill-sheet pitches, on a printed ball-radius slice) is documented with dated repository history; whether to file a provisional is a cost question for counsel.
 - **Trademark.** "Rev trainer" is descriptive and almost certainly unregistrable; the brand name is what we protect. Clear it against the USPTO register and common-law use before printing packaging. Never use a ball manufacturer's name or trade dress in copy, photos or comparisons beyond plain factual references.
 - **Product safety and liability.** A hand-held sporting good for adults is generally not subject to a specific federal safety rule, but a product-liability claim needs no rule, so: operate through an LLC, carry general liability with product coverage (small e-commerce sellers typically see quotes in the low hundreds to about a thousand dollars a year; get real quotes), print the use warning on the card and the site (swing-and-hold and carpet-release drills only; never throw it; not for children under 12 without supervision), and ship PETG rather than PLA (tougher at the thumb bore). Check whether the chosen filament needs a California Proposition 65 notice.
 - **Data.** A fit sheet is personal data tied to a hand; store it with the order, state the retention period, and delete on request.
@@ -267,7 +269,7 @@ Each row is a claim this plan relies on, the value as the source states it, and 
 | C11 | Fit replication inside the ball | thumb molds $15 master + $20/copy; Turbo Switch Grip inner $13.99; JoPo Twist inner $25.99–29.95; Vise inserts $4.99 per size (chart shows 1/32" steps: 23/32, 3/4, 25/32); shops accept uploaded drill sheets | Virtue Bowling; bowling.com; BowlerX | medium |
 | C12 | Pro-shop fitting hardware; ball spec | Innovative Measuring Ball CA$1,341.95, 40 sizes in 1/64" steps; ball Ø 8.500–8.595", ≤16 lb | https://www.bowlerx.com/innovative-bowling-measuring-ball/ ; Wikipedia / USBC spec | medium |
 | C13 | Gap | 0 off-ball drill-sheet-replicating trainers found after ~45 searches (Oct 2026) | research finding | medium (absence of evidence) |
-| C14 | Patents | US7261638 (2007, personalized-fit practice device) in force to ~2027; US4709916 (1987) and thumb-exit aids US5906546/US5688181 expired | Google Patents | medium |
+| C14 | Patents | US7261638 (2007, "bowling practice device": a hollow cylinder with finger plugs) lapsed 2011-08-28 for unpaid maintenance fees (corrected 2026-10-23 from "in force to ~2027", after reading the Google Patents page); US4709916 (1987) and thumb-exit aids US5906546/US5688181 expired | Google Patents | medium |
 
 ## Evidence on performance and training [E]
 
@@ -333,7 +335,7 @@ The legal and unit-cost research angles returned no sourced findings in this pas
 - Real print-time and material logs for the puck and spinner on the production printer.
 - Commercial print-farm quotes for overflow (Craftcloud, JLC3DP, Xometry).
 - The adult one-handed vs two-handed split (only a youth estimate exists).
-- Freedom-to-operate opinion on US7261638.
+- ~~Freedom-to-operate opinion on US7261638.~~ Closed 23 October 2026: the patent lapsed in 2011 (Part 4). Still open: a patent search on the Rev Ball's own terms (Part 9).
 - Primary-source legal texts and quotes (FTC guides and rules, USBC rules, USPTO) — see the list at the end of Part 9.
 - Shipping rates for a 600–900 g box (USPS Ground Advantage, international), Stripe and Shopify or Etsy plan fees, filament bulk pricing, and a measured electricity draw for the production printer.
 - Real print times on the production printer, to replace the slicer estimates in [X6].
@@ -348,7 +350,7 @@ The legal and unit-cost research angles returned no sourced findings in this pas
 | When | What | Done when |
 |---|---|---|
 | Week 1–2 | Print 10 pucks and 10 spinners from real drill sheets (friends, league, a coach); log print time and material; measure printed bores vs sheet | print log and tolerance table in the repo |
-| Week 2–4 | Pick the brand name and clear it; LLC; insurance quote; counsel review of Part 6 and the patent | name, entity, FTO note |
+| Week 2–4 | Pick the brand name and clear it; LLC; insurance quote; counsel review of Part 6 and the patent search | name, entity, patent-search note |
 | Week 3–6 | Seed 20 trainers to coaches and creators (their own sheets); collect feedback | fix list; two creator videos scheduled |
 | Week 6–8 | Shop live: configurator → Fit Kit / Puck / Spinner / Pair / Digital; Etsy listing linking to the configurator | first paid orders |
 | Week 8–12 | Start the 6-week pilot; first pro shop onboarded; apply for an Open Championships vendor spot | pilot enrolled; one shop entering sheets |
