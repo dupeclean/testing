@@ -2136,7 +2136,7 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
     const d = new Date(), p2 = (n) => String(n).padStart(2, '0');
     const today = `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}`;   // the shop's own calendar day
     const L = [];
-    L.push('FITSLICE JOB SHEET', '==================', '');
+    L.push('FITSLICE JOB SHEET', '==================', `FitSlice ${info.version}, build ${info.built || 'unknown'}`, '');
     L.push(`Order      ${order.number}`, `Date       ${today}`, `Customer   ${order.customer.name}`);
     L.push(`Product    ${(info.products[order.product] || {}).label || order.product}   ${money(order.price)}`, `Hand       ${side}-handed`, '');
 
@@ -2405,6 +2405,7 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
   async function init() {
     await appReady();
     info = await bridge.info();
+    document.title = `FitSlice ${info.version} · build ${info.built || 'unknown'}`;   // which build this window is, for support
     for (const [key, p] of Object.entries(info.products)) {
       const o = document.createElement('option'); o.value = key; o.textContent = `${p.label}: ${money(p.price)}`; el.product.append(o);
     }

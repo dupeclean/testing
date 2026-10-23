@@ -63,9 +63,21 @@ function handle(channel, fn) {
   });
 }
 
+// When this build was made: the package's own timestamp (the asar when packaged, main.js from source), so
+// a support question can tell which build a window belongs to. Shown in the title bar and on the job sheet.
+function buildStamp() {
+  try {
+    const p = app.isPackaged ? path.join(process.resourcesPath, 'app.asar') : __filename;
+    const d = fs.statSync(p).mtime;
+    const two = (n) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${two(d.getMonth() + 1)}-${two(d.getDate())} ${two(d.getHours())}:${two(d.getMinutes())}`;
+  } catch (e) { return 'unknown'; }
+}
+
 function registerIpc() {
   handle('app:info', () => ({
     version: app.getVersion(),
+    built: buildStamp(),
     ordersFolder: settings.ordersFolder,
     dataFolder: app.getPath('userData'),
     products: PRODUCTS,

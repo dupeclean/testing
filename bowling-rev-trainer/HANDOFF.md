@@ -235,6 +235,14 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    `groove_check.mjs` could not see the 36 and 190 mm grooves. Both engines now cut the floor as a
    frustum between the ball's radii at the groove's edges (`groove()` in app.js, `ball_ring` in
    trainer.scad), so the groove is 0.3 mm deep everywhere and the detector finds all three.
+14. Build stamp (2026-10-23 11:00). The owner reported `Files of type ".3mf" cannot be exported.`
+   after the 10:50 install, yet his own FS-0002 export at 10:54 succeeded with the 3MF, no FitSlice
+   was running afterwards, and no build on the disk both writes a 3MF and refuses it (checked the
+   asar of C:\FitSlice, every backup folder and dist/win-unpacked). The only builds that could say
+   that were the two spot-pattern zips of 10:05-10:20, never installed. Unresolved; the owner has
+   been asked where and when he saw it. So that this is answerable next time, `app:info` now carries
+   `built` (the asar's timestamp when packaged, main.js's from source), shown in the window title
+   (`FitSlice 1.0.0 · build 2026-10-23 11:02`) and as the first line of every job sheet.
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 
