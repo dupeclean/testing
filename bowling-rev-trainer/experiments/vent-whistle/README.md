@@ -1,3 +1,5 @@
+**Status: declined by the owner on 2026-10-23 ("no whistle"). Kept for the record; not to be printed or built into any part.**
+
 # Vent whistle: the thumb-first test
 
 **What this settles.** When a snug thumb leaves a blind hole fast it pulls a vacuum behind it.

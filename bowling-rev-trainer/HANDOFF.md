@@ -172,7 +172,8 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    bodies), `release_gate_210mm_pin100.stl` (two bodies, 81 cm3), fit sheet, job sheet (axis dots,
    RELEASE GATE and axis-plug print lines) and customer card (dots and gate sections). The saved
    orders keep their 22 mm flat; new orders get 30 mm.
-11. Vent whistle experiment (2026-10-23). The owner wants instant feedback that the thumb left first
+11. DECLINED 2026-10-23: the owner does not want a whistle ("no whistle"), nor a sensor, nor springs.
+   Do not revive sound-based or electronic feedback. Kept for the record only. The owner wants instant feedback that the thumb left first
    and the fingers then lifted, and rejected a sensor module ("no sensor. too expensive/complex") and
    anything bought or sprung. The one printed-only route is a kettle-type whistle on a vent from each
    blind hole: the air a snug thumb drags in as it leaves sounds the thumb note, the fingers a higher
