@@ -36,7 +36,7 @@ finger_depth = 24;
 /* [Oval holes and bevels] */
 // Thumb oval size: the LONG way across (0 = round). The thumb_d above is the short (drilled) size.
 thumb_oval_d = 0;
-// Where the thumb oval's long axis points: 0 = up the sheet (thumb-to-fingers line), + = toward the hand side
+// Where the thumb oval's long axis points: 0 = up the sheet (thumb-to-fingers line), + = toward the thumb side of the sheet (left for a right hand)
 thumb_oval_angle = 0;
 // Finger oval sizes (long way across, 0 = round) and angle (0 = toward the thumb)
 middle_oval_d = 0;
@@ -91,7 +91,7 @@ ball_flat = 30;
 // Marker groove round the equator (for a single-colour ball)
 ball_groove = false;
 // Second-colour pattern made by filament swaps at exact heights: none, cap, cap_band, bands
-ball_stripe = "spot_band"; // [none, spot, spot_band, cap, cap_band, bands]
+ball_stripe = "none"; // [none, spot, spot_band, cap, cap_band, bands]
 // Centre height of the band: -1 = the middle. The app places the band clear of the bullseyes and
 // the parity check passes its value here; below -1 = no band.
 band_z = -1;
@@ -108,6 +108,12 @@ pap_given = false;
 pap_ring = true;
 // Ring centre-line radius, width and pocket depth (keep in sync with configurator/app.js G.ring_*)
 ring_r = 30; ring_w = 4; ring_depth = 3;
+// Track ring: a second-colour inlay ring on the great circle 90 degrees from the axis point (two arcs glued into a channel)
+pap_track = true;
+// Channel width as cut (the app adds its print allowance), arc width, depth and the gap between the arcs' ends (keep in sync with G.track_*)
+track_w = 12; track_arc_w = 12; track_depth = 2; track_gap = 1;
+// Where the track would run through a grip hole it is interrupted, stopping this far short of the hole's bevel
+track_clear = 3;
 
 /* [Release gate] */
 // Height of the loose pins that stand on the gate segments (the ball knocks one down)
@@ -160,8 +166,8 @@ ov_r = ring_oval_d   > 0 ? max(0, ring_oval_d   - ring_d)   : 0;
 // oval's support along u.
 function reach(d, ex, v, u) = d/2 + ex/2*abs(v[0]*u[0] + v[1]*u[1]);
 function unit(v) = v / max(1e-9, norm(v));
-v_t = [mir*sin(thumb_oval_angle),  cos(thumb_oval_angle)];
-v_f = [mir*sin(finger_oval_angle), cos(finger_oval_angle)];
+v_t = [-mir*sin(thumb_oval_angle),  cos(thumb_oval_angle)];
+v_f = [-mir*sin(finger_oval_angle), cos(finger_oval_angle)];
 rm_x = reach(middle_d, ov_m, v_f, [1, 0]);
 rr_x = reach(ring_d,   ov_r, v_f, [1, 0]);
 // Finger hole lateral offsets (inner edges stay `bridge` apart)
@@ -221,8 +227,8 @@ module drill(x, y, d, depth, fwd_in, lat_in, body_h, fdir, through = false, R = 
     out    = -inward / norm(inward);                       // outward unit vector
     b      = acos(out[2]);
     c      = atan2(out[1], out[0]);
-    // the oval's long axis, as the drill sheet gives it (0 = up the sheet, + = hand side), in the hole's frame
-    v      = [mir*sin(oval_angle), cos(oval_angle)];
+    // the oval's long axis, as the drill sheet gives it (0 = up the sheet, + = thumb side), in the hole's frame
+    v      = [-mir*sin(oval_angle), cos(oval_angle)];
     va     = v[0]*cos(c) + v[1]*sin(c);
     vb     = -v[0]*sin(c) + v[1]*cos(c);
     phi    = oval > 0 ? atan2(vb*cos(b), va) : 0;
@@ -333,6 +339,7 @@ module rev_ball() {
         // a fine groove at every colour boundary (the slicer swaps filament at these heights)
         for (z = ball_swaps(R, s)) ball_ring(R, s, z, 0.6, 0.3);
         if (pap_marker) pap_cut(R, s);
+        if (pap_marker && pap_track) track_cut(R, s);
     }
 }
 
@@ -350,7 +357,7 @@ function pap_dir(R) =
         e0 = cross(fy, n),
         e  = unit3(e0 * (e0[0]*mir >= 0 ? 1 : -1)),
         over = pap_given ? pap_over : 139.7, up = pap_given ? pap_up : 12.7,
-        ao = over/R*180/PI, au = up/R*180/PI,
+        ao = over/ball_R*180/PI, au = up/ball_R*180/PI,   // the sheet's arcs are on a regulation ball: keep the angle
         q  = n*cos(ao) + e*sin(ao))
     q*cos(au) + fy*sin(au);
 
@@ -372,8 +379,62 @@ module pap_cut(R, s) {
     }
 }
 
+// The track: a channel on the great circle 90 degrees from the axis point (the track the ball rolls on
+// when it spins about the PAP), for two second-colour inlay arcs; it runs through a grip hole where a
+// real track does
+module track_cut(R, s) {
+    d = pap_dir(R);
+    difference() {
+        translate([0, 0, R - s]) rotate([0, acos(d[2]), atan2(d[1], d[0])]) intersection() {
+            cube([2*R + 10, 2*R + 10, track_w], center = true);
+            difference() { sphere(r = R + 3); sphere(r = R - track_depth); }
+        }
+        track_guards(R, s);
+    }
+}
+
+// Guards: a cylinder along the ball's radius through each grip hole, the hole's reach (bore, oval,
+// bevel) plus track_clear; the channel and the arcs stop short of the holes by that much
+module track_guards(R, s) {
+    pts = thumb_hole ? [[0, -ty, thumb_d/2 + ov_t/2 + thumb_bevel], [x_m, y_m, middle_d/2 + ov_m/2 + finger_bevel], [x_r, y_r, ring_d/2 + ov_r/2 + finger_bevel]]
+                     : [[x_m, 0, middle_d/2 + ov_m/2 + finger_bevel], [x_r, 0, ring_d/2 + ov_r/2 + finger_bevel]];
+    for (q = pts) {
+        u = udir(R, q[0], q[1]);
+        translate([0, 0, R - s] + R*u) rotate([0, acos(u[2]), atan2(u[1], u[0])]) cylinder(h = 60, r = q[2] + track_clear, center = true);
+    }
+}
+
+// The two track arcs: the belt the channel holds, cut on the ball itself (the grip holes and the flat
+// notch it where they meet the track), then brought back to the bed with the ball's placement undone,
+// so it stands on edge round the origin, split at the track's two side points with a gap. (The app
+// also drops any piece under 150 mm3; this reference does not.)
+module track_arcs() {
+    R = ball_d/2;
+    s = ball_flat > 0 ? R - sqrt(max(0, R*R - (ball_flat/2)*(ball_flat/2))) : 0;
+    H = 2*R - s;
+    d = pap_dir(R); b = acos(d[2]); c = atan2(d[1], d[0]);
+    translate([0, 0, track_arc_w/2]) difference() {
+        rotate([0, -b, 0]) rotate([0, 0, -c]) translate([0, 0, -(R - s)]) difference() {
+            intersection() {
+                translate([0, 0, R - s]) rotate([0, b, c]) intersection() {
+                    cube([2*R + 10, 2*R + 10, track_arc_w], center = true);
+                    difference() { sphere(r = R); sphere(r = R - track_depth); }
+                }
+                translate([-R - 1, -R - 1, 0]) cube([2*R + 2, 2*R + 2, H + 1]);
+            }
+            if (thumb_hole)
+                drill(0, -ty, thumb_d, ball_thumb_depth, thumb_fwd, thumb_lat, H, +1, false, R, ov_t, thumb_oval_angle, thumb_bevel);
+            drill(x_m, thumb_hole ? y_m : 0, middle_d, finger_depth, middle_fwd, middle_lat, H, -1, false, R, ov_m, finger_oval_angle, finger_bevel);
+            drill(x_r, thumb_hole ? y_r : 0, ring_d,   finger_depth, ring_fwd,   ring_lat,   H, -1, false, R, ov_r, finger_oval_angle, finger_bevel);
+            track_guards(R, s);
+        }
+        cube([2*R + 12, track_gap, track_arc_w + 2], center = true);
+    }
+}
+
 // The second-colour inlays: two plugs for the dots (0.3 mm proud) and, with the ring on, two inlay
-// rings, flat underneath so they print flat, the top following the ball's surface
+// rings, flat underneath so they print flat, the top following the ball's surface; with the track on,
+// the two track arcs as well
 module axis_plug() {
     r = pap_socket_d/2; h = pap_depth + 0.3;
     cylinder(h = 0.5, r1 = r - 0.5, r2 = r);
@@ -390,6 +451,7 @@ module axis_plugs() {
         for (y = [-40, 40]) translate([0, y, 0]) axis_plug();
     } else
         for (x = [-pap_socket_d, pap_socket_d]) translate([x, 0, 0]) axis_plug();
+    if (pap_track) track_arcs();
 }
 
 // Groove w wide and `deep` deep round a ball of radius R (flat sagitta s), centred on height z

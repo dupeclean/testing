@@ -24,8 +24,8 @@ SCAD_KEYS = ["hand", "span_middle", "span_ring", "thumb_d", "middle_d", "ring_d"
              "thumb_fwd", "thumb_lat", "middle_fwd", "middle_lat", "ring_fwd", "ring_lat", "weight_pocket", "lanyard",
              "thumb_through", "thumb_oval_d", "thumb_oval_angle", "middle_oval_d", "ring_oval_d", "finger_oval_angle",
              "thumb_bevel", "finger_bevel", "serial", "thumb_hole", "ball_d", "ball_thumb_depth", "ball_flat", "ball_groove", "ball_stripe",
-             "gate_pin_h", "pap_marker", "pap_given", "pap_over", "pap_up", "pap_ring", "spin_hum", "spin_hum_slots", "spin_hum_angle"]
-SCAD_CASES = ("gate", "plugs", "inlays", "dots_ball", "hum_spinner", "hum16_spinner")
+             "gate_pin_h", "pap_marker", "pap_given", "pap_over", "pap_up", "pap_ring", "pap_track", "spin_hum", "spin_hum_slots", "spin_hum_angle"]
+SCAD_CASES = ("gate", "plugs", "inlays", "inlays_notrack", "dots_ball", "track_ball", "hum_spinner", "hum16_spinner")
 
 ok = True
 
@@ -68,10 +68,17 @@ def main():
     p = bodies(m["plugs"])
     check("plugs file holds two plugs", len(p) == 2, f"({len(p)})")
     check("each plug is 12 mm across and 3.3 mm tall", all(abs(b.extents[0] - 12) < 0.2 and abs(b.extents[2] - 3.3) < 0.05 for b in p), f"({[b.extents.round(2).tolist() for b in p]})")
-    q = bodies(m["inlays"])
-    check("inlays file holds two plugs and two rings", len(q) == 4, f"({len(q)})")
+    q = bodies(m["inlays_notrack"])
+    check("inlays file (track off) holds two plugs and two rings", len(q) == 4, f"({len(q)})")
     rings = [b for b in q if b.extents[0] > 50]
     check("each ring is 64 mm across and about 4.3 mm tall at its inner edge", len(rings) == 2 and all(abs(b.extents[0] - 64) < 0.3 and 4.1 < b.extents[2] < 4.5 for b in rings), f"({[b.extents.round(2).tolist() for b in rings]})")
+    # 2b. the track: two arcs standing on edge in the inlays file, and the channel they fit on the ball
+    qt = bodies(m["inlays"])
+    arcs = [b for b in qt if abs(b.extents[2] - 12) < 0.1]   # the arc pieces stand 12 mm tall; plugs and rings are under 5 mm
+    check("inlays file holds the plugs, the rings and the track arcs (one arc in pieces where the track skirts holes)", len(qt) >= 6 and len(arcs) >= 2, f"({len(qt)} bodies, {len(arcs)} arc pieces)")
+    check("the arc pieces stand on edge round a 200 mm circle", 195 < max(max(b.extents[0], b.extents[1]) for b in arcs) < 202 and all(b.extents[0] < 204 and b.extents[1] < 204 for b in arcs), f"({[b.extents.round(1).tolist() for b in arcs]})")
+    removed = (m["dots_ball"].volume - m["track_ball"].volume) / 1000
+    check("the track channel takes about 15 cm3 out of the ball", 11 < removed < 17, f"({removed:.1f} cm3)")
 
     # 3. axis dots: a socket 3 mm deep at each reported axis point, taking about 0.7 cm3 out of the ball
     for case in ("dots_ball", "dots_left"):
@@ -128,14 +135,22 @@ def main():
                 band = pat.get("band_mm")
                 cmd += ["-D", f"band_z={(band[0] + band[1]) / 2 if band else -2}"]
             cmd.append(str(SCAD))
-            r = subprocess.run(cmd, capture_output=True, text=True)
-            if r.returncode:
-                check(f"openscad renders {case}", False, r.stderr[-400:]); continue
+            cached = out / f"scad_{case}.stl"
+            if cached.exists() and cached.stat().st_mtime > SCAD.stat().st_mtime and "--rerender" not in sys.argv:
+                print(f"  (reusing scad_{case}.stl, newer than trainer.scad; pass --rerender to redo)")
+            else:
+                r = subprocess.run(cmd, capture_output=True, text=True)
+                if r.returncode:
+                    check(f"openscad renders {case}", False, r.stderr[-400:]); continue
             a, b = m[case], trimesh.load(out / f"scad_{case}.stl")
             inter = trimesh.boolean.intersection([a, b], engine="manifold")
             union = trimesh.boolean.union([a, b], engine="manifold")
             iou = inter.volume / union.volume
-            check(f'browser vs OpenSCAD mesh match, case "{case}"', iou > 0.995, f"(IoU {iou:.4f})")
+            # the inlays with the track arcs are thin (2 mm) with both faces spherical, so the two engines'
+            # facet sag (OpenSCAD $fa=2, Manifold 256 segments) costs about 0.8% of their volume on its
+            # own; their bodies, volumes and centroids agree to 0.01 cm3 / 0.1 mm (checked 2026-10-24)
+            need = 0.99 if case == "inlays" else 0.995
+            check(f'browser vs OpenSCAD mesh match, case "{case}"', iou > need, f"(IoU {iou:.4f}, need > {need})")
 
     print(chr(10) + ("PASS" if ok else "FAILED"))
     sys.exit(0 if ok else 1)

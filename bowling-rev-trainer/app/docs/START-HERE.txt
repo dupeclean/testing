@@ -31,10 +31,12 @@ b. Fill in the drill sheet: hand, the three hole sizes, both spans,
    drill-sheet row, then open "Oval holes" below and type the oval size
    (the long way across) and its angle. 0 deg points the long axis
    straight up the sheet (thumb-to-fingers line); + turns it toward the
-   bowling-hand side. Leave the oval size at 0 for a round hole. Hold the
-   customer's ball with the finger holes at 12 o'clock and check the
-   long axis of the thumb hole runs the same way as the preview before
-   you print.
+   THUMB side of the sheet (to the left for a right hand, to the right
+   for a left hand). That is how the owner's sheet read against the
+   drilled ball; the first printed ball had it mirrored. Leave the oval
+   size at 0 for a round hole. Hold the customer's ball with the finger
+   holes at 12 o'clock and check the long axis of the thumb hole runs
+   the same way as the preview before you print.
    The hole edges are rounded (thumb 4 mm, fingers 2.5 mm) like a
    pro-shop bevel; set a bevel to 0 for a sharp edge.
 
@@ -131,22 +133,21 @@ folder path from the old computer.
 - The REV BALL is the release trainer: a full 200 mm ball with the
   customer's grip. Choose the part "Ball" (or product "Rev Ball"). Slice
   it with 3 walls and 5% infill, grip holes facing up. Supports: tree,
-  "On build plate only" (so nothing grows inside the holes). Seam:
-  random or scarf (a seam down one side would make it wobble). Snap the
-  supports off and sand the scar smooth so it rolls true. About 475 g
-  and 10 to 14 hours. It prints in TWO colours with no painting.
-  Easiest: open the .3mf from the order folder in Bambu Studio. It
-  arrives as one object in two parts with filament 1 (base colour) and
-  filament 2 (second colour) already assigned, so just check it and
-  slice. Otherwise open the STL, right-click the layer slider at each
-  height on the job sheet and choose "Add color change" (with your AMS
-  pick the second filament there; without one the printer pauses so you
-  can swap by hand). Start in the base colour and turn the prime tower
-  off (Others tab): the swaps are one colour per layer. The default
-  pattern is a small coloured spot above the grip holes plus a band that
-  FitSlice places clear of the bullseyes (low on the ball when they are
-  in the way); the full top cap and other patterns are in the "Second
-  colour" list. To use it: kneel, swing low, let it go along a strip of tape on
+  "On build plate only" (so nothing grows inside the holes), and set the
+  SUPPORT INTERFACE filament to one the ball will not bond to: PLA under
+  a PETG ball, PETG under a PLA ball (Bambu Studio, Support tab:
+  "Filament for support interface"; top Z distance 0, 3 interface
+  layers). The supports then drop off and leave the surface clean; plain
+  PETG supports tear out and leave a scar. Seam: random or scarf (a seam
+  down one side would make it wobble). About 475 g and 10 to 14 hours.
+  The ball body prints in ONE colour. The second colour is the inlays
+  file: the axis plugs and rings and the two track arcs (below), printed
+  separately and pressed or glued in. The "Second colour" list adds an
+  optional layer pattern (a spot, a cap or bands) by filament swaps; the
+  order then also has a .3mf that opens in Bambu Studio as one object in
+  two parts with filament 1 and 2 assigned (or open the STL and add the
+  colour changes on the layer slider at the job-sheet heights, prime
+  tower off). To use it: kneel, swing low, let it go along a strip of tape on
   the floor with a couch or wall 1.5 to 2 m away. Rolls and curves off
   the line = thumb out first, fingers lifted. Straight but long and
   lively = strong forward roll (fine). Straight and short = dumped. Pops
@@ -166,6 +167,16 @@ folder path from the old computer.
   for dots only, or "Axis target dots" for a plain ball (no inlays file
   is exported then). The app warns if a dot or ring would land on a
   grip hole or on the resting flat.
+  TRACK RING: a 12 mm channel 2 mm deep runs round the ball on the great
+  circle a quarter turn from the axis point, the track the ball rolls on
+  when it spins about the PAP. Where it would run through a grip hole, as
+  a real track does, the ring is interrupted with a little clearance. The
+  inlays file holds two second-colour arcs for it (they print standing on
+  edge: give them a brim): glue them into the channel with CA glue and
+  sand flush; the arc notched at the holes may come in pieces, so dry-fit
+  them first.
+  Like the bullseye, the track ring stays put when the axis is right.
+  Untick "Track ring" for a ball without it.
   THE PAP ON THE SHEET: if the shop measured the customer's PAP, tick
   "The sheet gives the axis point (PAP)" on the Drill sheet section of
   the Ball screen and type it: over (toward the hand side) first, then

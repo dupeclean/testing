@@ -71,6 +71,7 @@ const FIT_SCHEMA = {
   pap_marker:         { type: 'bool', def: true },
   pap_given:          { type: 'bool', def: false },
   pap_ring:           { type: 'bool', def: true },
+  pap_track:          { type: 'bool', def: true },
   pap_over:           { type: 'num', min: 0, max: 200, label: 'Axis point over', def: 139.7 },
   pap_up:             { type: 'num', min: -60, max: 60, label: 'Axis point up', def: 12.7 },
   spin_hum:           { type: 'bool', def: false },

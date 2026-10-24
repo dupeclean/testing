@@ -43,12 +43,13 @@ sheet and it rebuilds the model in about 100 ms and lets you download the STL
   bridge, weight pocket, lanyard, print allowance.
 - **Oval holes** as drill sheets give them: the hole size is the short
   (drilled) way across, the oval size the long way, plus the angle of the
-  long axis (0 = up the sheet, + = toward the bowling-hand side).
+  long axis (0 = up the sheet, + = toward the thumb side: left for a right hand).
 - **Rounded hole edges** (thumb 4 mm, fingers 2.5 mm by default) like a
   pro-shop bevel, and an engraved order number in the base.
 - The **Rev Ball**: a full 200 mm ball with the customer's grip (blind thumb,
-  or no thumb hole for two-handers) and a two-colour cap-and-band pattern
-  with the filament-change heights listed for the slicer.
+  or no thumb hole for two-handers), an axis-target bullseye and a track ring
+  as second-colour inlays, and an optional layer pattern with the
+  filament-change heights listed for the slicer.
 - Live 3D preview with the bore axes drawn, so pitch is visible.
 - Geometry checks: it warns when bores would break into each other, the
   pocket, or the lanyard tunnel, and when a blind thumb floor gets thin.

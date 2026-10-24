@@ -40,7 +40,7 @@ over for a hook. The wrong pin falling says which way the release missed.
 - Exported with the Rev Ball and Digital Ball products and on its own as the Release Gate
   product. Print flat, no supports; the pin stands upright on its foot.
 
-## 2. Axis target: dots and rings (ball: `pap_marker`, `pap_ring`, `pap_given`, `pap_over`, `pap_up`)
+## 2. Axis target: dots, rings and the track (ball: `pap_marker`, `pap_ring`, `pap_track`, `pap_given`, `pap_over`, `pap_up`)
 
 Two shallow sockets on the ball at the axis the release should produce, each inside a 60 mm
 ring pocket, with contrasting printed plugs and rings. Spin the ball about that axis and the
@@ -53,8 +53,12 @@ in the first half-metre of the roll.
   on a thumb-in ball, or from the **middle of the two finger holes** on a no-thumb ball; `over`
   first, along the line across the grip toward the bowling-hand side, then `up` toward the
   fingers (negative = toward the thumb). Both reference points are computed from the holes as
-  drilled, so lateral pitches and unequal spans are honoured. Lengths are hand measurements,
-  like a span, not scaled with the ball's radius. The second socket is at the antipode.
+  drilled, so lateral pitches and unequal spans are honoured. The sheet's distances are arcs on a
+  regulation ball (R 108 mm) and are kept as angles on the printed ball, as the pitches are, so the
+  axis sits where it does on the real ball: 5 1/2" over is 74 degrees, 129 mm along the surface of
+  a 200 mm ball. (Until 2026-10-24 the lengths were used unscaled, which put the axis 80 degrees
+  over and the track through the thumb hole and across the flat.) The second socket is at the
+  antipode.
 - `pap_given` marks that the drill sheet gives the PAP (then `pap_over`, `pap_up` are the
   sheet's numbers and are validated); otherwise the common 5 1/2" over, 1/2" up is used and the
   job sheet and card say "not on the sheet".
@@ -64,6 +68,17 @@ in the first half-metre of the roll.
   Inlay ring: 56/64 mm, flat underneath so it prints flat, top following the ball's surface.
   Plugs and rings ship in one second-colour STL (`plugs`, named `axis_inlays_...`; `axis_plugs_...`
   with the ring off). Without inlays the pockets still read as dark marks.
+- Track ring (`pap_track`, on by default; added 2026-10-24 after the first print): a 12 mm channel
+  2 mm deep on the great circle 90 degrees from the axis point, the track the ball rolls on when it
+  spins about the PAP. Where it would run through a grip hole (as a track does on a real ball) the
+  channel is interrupted, stopping 3 mm short of the hole's bevel. Two second-colour arcs for it
+  ship in the inlays file, standing on edge, interrupted the same way (so one may come in pieces),
+  flattened at the flat, split at the track's two side points with a 1 mm gap; glued in and sanded
+  flush. Like the bullseye it stays put when the axis is right and wobbles when it is
+  not, and unlike the bullseye it shows from behind as the ball rolls away. The earlier horizontal
+  spot and band patterns (layer colour swaps) had no relation to the PAP; they remain as options,
+  off by default. A second-colour track by layer swaps is not possible in this print orientation
+  (the ring crosses nearly every layer: about 1,900 filament changes), which is why it is an inlay.
 - Warnings: a socket or ring closer than 4 mm to a hole's bevel rim; a socket within 15 mm of
   the resting flat, or a ring running onto it.
 - Honest limit: on carpet the ball skids briefly and then rolls, and a hooking ball's axis
@@ -94,6 +109,9 @@ checked by intersection-over-union of the two meshes; the figures are in `HANDOF
 by `configurator/test/engine_check.mjs`, and exposed in the configurator, the order book
 (products `ball`, `gate`, `digital_ball`; fit schema keys `gate_pin_h`, `pap_marker`, `pap_over`,
 `pap_up`, `spin_hum`, `spin_hum_slots`, `spin_hum_angle`), the job sheet and the customer card.
-None has been printed or used yet. First prints to check: a gate pin stands freely in its cup and
+The owner printed the first Rev Ball (own sheet) on 2026-10-23: the oval thumb was mirrored (the
+sheet angle now turns toward the thumb side), the horizontal pattern bands read as unrelated to the
+PAP (replaced by the track ring), and PETG supports scarred the underside (the job sheet now asks
+for a PLA support interface). Still to check on prints: a gate pin stands freely in its cup and
 two segments slide together; a plug presses into its socket by hand; whether the spinner hums at
 all at a finger-lift spin speed, and with which slot count and angle.

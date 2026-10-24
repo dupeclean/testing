@@ -7,7 +7,7 @@ finished meshes written by oval_check.mjs.
 
 Oval convention under test: the hole size is the short way across, the oval size the long
 way; angle 0 points the long axis up the sheet (thumb toward fingers, +y), + turns it toward
-the bowling-hand side (+x for a right hand, -x for a left hand).
+the thumb side of the sheet (-x for a right hand, +x for a left hand).
 """
 import json
 import subprocess
@@ -110,23 +110,23 @@ def main():
     short, long_ = 25 / 32 * IN, 29 / 32 * IN
     # 1. the oval thumb: a slice across the bore 10 mm down (past the 4 mm bevel) is the hole size the
     #    short way and the oval size the long way, and the long axis points 55 deg from "up the sheet"
-    #    toward the hand side (a right hand: +x). The left hand mirrors it.
+    #    toward the thumb side (a right hand: -x). The left hand mirrors it.
     for case, hand_x in (("oval_ball", +1), ("oval_left", -1), ("oval_puck", +1)):
         poly, to3d = bore_slice(m[case], axis(case, "thumb", axes), 10)
         L, S, u = long_axis_xy(poly, to3d)
-        want = np.array([hand_x * np.sin(np.radians(55)), np.cos(np.radians(55))])
+        want = np.array([-hand_x * np.sin(np.radians(55)), np.cos(np.radians(55))])
         ang = np.degrees(np.arccos(min(1.0, abs(u @ want))))
         check(f"{case}: thumb slice is {S:.2f} x {L:.2f} mm (want {short:.2f} x {long_:.2f})", abs(S - short) < 0.25 and abs(L - long_) < 0.25)
-        check(f"{case}: long axis is 55 deg from up-the-sheet toward the {'right' if hand_x > 0 else 'left'} (hand side)", ang < 3.0, f"(off by {ang:.1f} deg)")
+        check(f"{case}: long axis is 55 deg from up-the-sheet toward the {'left' if hand_x > 0 else 'right'} (thumb side)", ang < 3.0, f"(off by {ang:.1f} deg)")
         # round finger holes on the same part stay round
         for f, dia in (("middle", 21 / 32 * IN), ("ring", 5 / 8 * IN)):
             Lf, Sf, _ = long_axis_xy(*bore_slice(m[case], axis(case, f, axes), 8))
             check(f"{case}: {f} hole stays round ({Sf:.2f} x {Lf:.2f}, want {dia:.2f})", Lf - Sf < 0.3 and abs(Sf - dia) < 0.25)
 
-    # 2. finger ovals at -30 deg (toward the off side) on an otherwise round-thumb puck
+    # 2. finger ovals at -30 deg (toward the little-finger side) on an otherwise round-thumb puck
     for f, dia in (("middle", 21 / 32 * IN), ("ring", 5 / 8 * IN)):
         Lf, Sf, u = long_axis_xy(*bore_slice(m["finger_oval"], axis("finger_oval", f, axes), 8))
-        want = np.array([np.sin(np.radians(-30)), np.cos(np.radians(-30))])
+        want = np.array([-np.sin(np.radians(-30)), np.cos(np.radians(-30))])
         ang = np.degrees(np.arccos(min(1.0, abs(u @ want))))
         check(f"finger_oval: {f} is {Sf:.2f} x {Lf:.2f} (want {dia:.2f} x {dia + 3:.2f}) at -30 deg", abs(Sf - dia) < 0.25 and abs(Lf - dia - 3) < 0.25 and ang < 3.0, f"(angle off by {ang:.1f})")
     Lt, St, _ = long_axis_xy(*bore_slice(m["finger_oval"], axis("finger_oval", "thumb", axes), 10))
@@ -157,7 +157,7 @@ def main():
     for case in ("oval_ball", "oval_left", "oval_puck", "finger_oval"):
         p = axes[case]["params"]; mir = 1 if p["hand"] == "right" else -1
         aT, aF = np.radians(p.get("thumb_oval_angle", 0)), np.radians(p.get("finger_oval_angle", 0))
-        vT = (mir * np.sin(aT), np.cos(aT)); vF = (mir * np.sin(aF), np.cos(aF))
+        vT = (-mir * np.sin(aT), np.cos(aT)); vF = (-mir * np.sin(aF), np.cos(aF))
         exT = max(0.0, p.get("thumb_oval_d", 0) - p["thumb_d"]) if p.get("thumb_oval_d", 0) > 0 else 0.0
         exM = max(0.0, p.get("middle_oval_d", 0) - p["middle_d"]) if p.get("middle_oval_d", 0) > 0 else 0.0
         exR = max(0.0, p.get("ring_oval_d", 0) - p["ring_d"]) if p.get("ring_oval_d", 0) > 0 else 0.0
@@ -214,7 +214,7 @@ def main():
     check(f"ball: FS-0001 gives {len(bg)} glyph voids on the flat, all within rho {rho_b:.1f} < 15", len(bg) >= 7 and rho_b < 15)
 
     # 5. the no-thumb ball: two holes only, centred on the top, more plastic than the three-hole ball
-    nt = axes["nothumb_ball"]["axes"]
+    nt = [a for a in axes["nothumb_ball"]["axes"] if a["name"] in ("thumb", "middle", "ring")]   # the axis-target points are reported too
     check("no-thumb ball reports two axes (middle, ring)", sorted(a["name"] for a in nt) == ["middle", "ring"])
     zc = max(a["p"][2] for a in nt) - 8
     check(f"no-thumb ball: exactly 2 holes in the slice 8 mm under the rim, none elsewhere", len(holes_at(m["nothumb_ball"], zc)) == 2 and len(holes_at(m["nothumb_ball"], 150)) == 0)

@@ -96,7 +96,8 @@ const pk = await build(SHEET, ['puck']);
 const flat = (q) => [q[0], q[1]];
 for (const n of ['thumb', 'middle', 'ring']) assert.ok(Math.hypot(...flat(bp(n)).map((v, i) => v - flat(pk.axes.puck.find(a => a.name === n).p)[i])) < 0.01, n + ' sits at the same plan position as on the puck');
 ok('ball builds with the same hole layout as the puck, holes at the top, no warnings');
-// the two-colour pattern: a small spot just above the highest hole edge, a 12 mm band placed clear of the bullseyes
+// the optional two-colour layer pattern: a small spot just above the highest hole edge, a 12 mm band placed clear of the bullseyes
+r = await build({ ...SHEET, ball_stripe: 'spot_band' }, ['ball']);
 const cc = r.stats[0].color_changes, pat = r.stats[0].pattern;
 assert.equal(cc.length, 3, 'spot + band = 3 filament changes: ' + JSON.stringify(cc));
 assert.ok(pat && pat.spot_z > 180 && pat.spot_z < 196 && cc[2].z_mm === pat.spot_z && cc[2].colour === 'second colour', 'the spot starts just above the highest hole edge: ' + JSON.stringify([pat, cc]));
@@ -113,11 +114,13 @@ const cc3 = r.stats[0].color_changes;
 assert.ok(Math.abs(cc3[0].z_mm - 92.9) < 0.2 && Math.abs(cc3[1].z_mm - 104.9) < 0.2, 'with no bullseyes the band straddles the equator (ball top at 198.9 with the 30 mm flat): ' + JSON.stringify(cc3));
 r = await build({ ...SHEET, ball_stripe: 'none' }, ['ball']);
 assert.equal(r.stats[0].color_changes.length, 0);
+r = await build(SHEET, ['ball']);
+assert.ok(r.stats[0].color_changes.length === 0 && r.notes.some(n => /inlays file/.test(n) && /track arcs/.test(n)), 'the default ball is one colour, with the second colour in the inlays: ' + JSON.stringify(r.notes));
 r = await build({ ...SHEET, thumb_hole: false, ball_stripe: 'spot' }, ['ball']);
 assert.ok(r.ok && r.stats[0].pattern.spot_z > 180 && r.stats[0].pattern.spot_z < 196 && r.notes.some(n => /starts just below them/.test(n)), 'a no-thumb ball has its holes on the pole: the top mark starts just below them and says so: ' + JSON.stringify([r.stats[0].pattern, r.notes]));
 // the two-colour 3MF: one object in two parts with filaments 1 and 2 assigned (stored zip, so the text is searchable)
 r = await page.evaluate(() => {
-  const b = window.__cfgApp.buildFiles(['ball'], {});
+  const b = window.__cfgApp.buildFiles(['ball'], { ball_stripe: 'spot_band' });
   const f = b.files.find(x => /\.3mf$/.test(x.name));
   const txt = f ? new TextDecoder('latin1').decode(f.data) : '';
   return { names: b.files.map(x => x.name), size: f ? f.data.length : 0, hasConfig: /Metadata\/model_settings\.config/.test(txt), extruders: (txt.match(/key="extruder" value="[12]"/g) || []).length, parts: (txt.match(/<part id="\d+" subtype="normal_part">/g) || []).length, item: /<item objectid="4" transform="1 0 0 0 1 0 0 0 1 128 128 0"/.test(txt) };
@@ -218,13 +221,33 @@ r = await build({ ...SHEET, pap_given: true, pap_over: 0, pap_up: 0 }, ['ball'])
 assert.ok(r.ok && r.warnings.some(w => /resting flat/.test(w)), 'a dot at the pole puts its twin on the flat and warns: ' + JSON.stringify(r.warnings));
 r = await build({ ...SHEET, pap_given: true, pap_over: 250 }, ['ball']);
 assert.equal(r.ok, false); assert.match(r.message, /Axis point over/);
-r = await build({ ...SHEET, pap_ring: false }, ['plugs']);
+r = await build({ ...SHEET, pap_ring: false, pap_track: false }, ['plugs']);
 assert.ok(r.ok && r.stats[0].volume_cm3 > 0.6 && r.stats[0].volume_cm3 < 0.9, 'two plugs: ' + (r.message || r.stats[0].volume_cm3));
-r = await build(SHEET, ['plugs']);
+r = await build({ ...SHEET, pap_track: false }, ['plugs']);
 assert.ok(r.ok && r.stats[0].volume_cm3 > 5 && r.stats[0].volume_cm3 < 8 && r.stats[0].bbox_mm[0] > 130 && r.stats[0].bbox_mm[0] < 134 && r.stats[0].bbox_mm[2] > 4 && r.stats[0].bbox_mm[2] < 4.6, 'two plugs and two rings: ' + (r.message || JSON.stringify([r.stats[0].volume_cm3, r.stats[0].bbox_mm])));
-r = await page.evaluate(() => { const b = window.__cfgApp.buildFiles(['ball', 'plugs'], { pap_marker: false }); return b.files.map(f => f.name); });
+r = await build(SHEET, ['plugs']);
+assert.ok(r.ok && r.stats[0].volume_cm3 > 18 && r.stats[0].volume_cm3 < 27 && r.stats[0].bbox_mm[0] > 198 && r.stats[0].bbox_mm[0] < 206 && r.stats[0].bbox_mm[1] > 198 && r.stats[0].bbox_mm[1] < 206 && Math.abs(r.stats[0].bbox_mm[2] - 12) < 0.1, 'plugs, rings and the two track arcs standing on edge: ' + (r.message || JSON.stringify([r.stats[0].volume_cm3, r.stats[0].bbox_mm])));
+r = await page.evaluate(() => { const b = window.__cfgApp.buildFiles(['ball', 'plugs'], { pap_marker: false, ball_stripe: 'spot_band' }); return b.files.map(f => f.name); });
 assert.ok(r.length === 2 && r.every(n => /rev_ball/.test(n)) && r.some(n => /\.3mf$/.test(n)), 'no inlays file when the dots are off (just the ball STL and its 3MF): ' + JSON.stringify(r));
 ok('axis target: dots at the PAP (sheet or common, from the grip centre or the finger middle) and their rings, mirrored for a left hand, warnings near holes and the flat, inlays file only when the dots are on');
+
+// 9b. the track: a channel on the great circle 90 degrees from the axis point, and two inlay arcs for it
+r = await build(SHEET, ['ball']);
+const tk = r.stats[0].pap.track;
+assert.ok(tk && tk.w_mm === 12 && tk.depth_mm === 2 && Array.isArray(tk.crosses) && tk.on_flat === false, 'track stats: ' + JSON.stringify(tk));
+const noTrack = await build({ ...SHEET, pap_track: false }, ['ball']);
+const trackVol = noTrack.stats[0].volume_cm3 - r.stats[0].volume_cm3;
+assert.ok(trackVol > 11 && trackVol < 17 && noTrack.stats[0].pap.track === null, 'the channel takes about 15 cm3 out of the ball and reports nothing when off: ' + trackVol);
+assert.ok(r.notes.some(n => /track ring is interrupted at the/.test(n)) === (tk.crosses.length > 0), 'holes on the track are noted: ' + JSON.stringify([tk.crosses, r.notes]));
+assert.ok(tk.crosses.includes('thumb') && tk.crosses.includes('middle finger') && !tk.crosses.includes('ring finger'), 'on the owner\'s sheet the track skirts the thumb and the middle finger: ' + JSON.stringify(tk.crosses));
+r = await page.evaluate(() => { const b = window.__cfgApp.buildFiles(['ball', 'plugs'], {}); return { names: b.files.map(f => f.name), notes: b.notes }; });
+assert.ok(r.names.length === 2 && r.names.some(n => /^axis_inlays_D12_ring60_track12\.stl$/.test(n)) && !r.names.some(n => /\.3mf$/.test(n)), 'ball STL plus the inlays file named for the track, no 3MF for a one-colour ball: ' + JSON.stringify(r.names));
+assert.ok(r.notes.some(n => /inlays file/.test(n) && /track arcs/.test(n)), 'the second colour is explained as inlays: ' + JSON.stringify(r.notes));
+r = await page.evaluate(() => window.__cfgApp.buildFiles(['plugs'], { pap_track: false }).files.map(f => f.name));
+assert.deepEqual(r, ['axis_inlays_D12_ring60.stl'], 'the old inlays name with the track off');
+r = await build({ ...SHEET, thumb_hole: false, ball_thumb_depth: 99 }, ['plugs']);
+assert.ok(r.ok && r.stats[0].volume_cm3 > 18, 'the arcs build for a no-thumb ball too: ' + (r.message || r.stats[0].volume_cm3));
+ok('track: a 12 mm channel 2 mm deep round the PAP axis, two arc inlays in the inlays file (named for it), one-colour ball by default');
 
 // 10. release gate: one segment and one pin per file, pins ball diameter + 10 mm apart
 r = await build(SHEET, ['gate']);
@@ -265,7 +288,11 @@ ok('humming spinner: ring chamber and slots, no wrist-cord tunnel with it, bad s
 // 12. the download buttons: the 3MF button appears only for a two-colour ball, and saves a Bambu-style 3MF
 const rebuilt = async (part) => { await page.evaluate(() => { document.getElementById('status').textContent = 'changing'; }); await page.click(`[data-part="${part}"]`); await page.waitForFunction(() => /Built in/.test(document.getElementById('status').textContent), null, { timeout: 120000 }); };
 await rebuilt('ball');
-assert.equal(await page.isHidden('#save_3mf'), false, 'the 3MF button shows for the ball');
+assert.equal(await page.isHidden('#save_3mf'), true, 'no 3MF button for the default one-colour ball');
+await page.evaluate(() => { document.getElementById('status').textContent = 'changing'; });
+await page.selectOption('#ball_stripe', 'spot_band');
+await page.waitForFunction(() => /Built in/.test(document.getElementById('status').textContent), null, { timeout: 90000 });
+assert.equal(await page.isHidden('#save_3mf'), false, 'the 3MF button shows for a two-colour ball');
 const [dl] = await Promise.all([page.waitForEvent('download'), page.click('#save_3mf')]);
 assert.match(dl.suggestedFilename(), /^rev_ball200.*\.3mf$/, 'download name: ' + dl.suggestedFilename());
 const dlText = readFileSync(await dl.path()).toString('latin1');

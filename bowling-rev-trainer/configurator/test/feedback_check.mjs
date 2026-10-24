@@ -27,11 +27,13 @@ const SHEET = { print_allowance: 0, hand: 'right', thumb_d: 23.02, middle_d: 16.
   thumb_fwd: 0, thumb_lat: -0.125, middle_fwd: 0.75, middle_lat: -0.25, ring_fwd: 0.75, ring_lat: 0.25, serial: '' };
 const CASES = {
   gate:          { parts: ['gate'], params: { ...SHEET } },
-  plugs:         { parts: ['plugs'], params: { ...SHEET, pap_ring: false } },
-  inlays:        { parts: ['plugs'], params: { ...SHEET } },
-  dots_ball:     { parts: ['ball'], params: { ...SHEET, pap_marker: true } },
-  dots_noring:   { parts: ['ball'], params: { ...SHEET, pap_marker: true, pap_ring: false } },
-  dots_left:     { parts: ['ball'], params: { ...SHEET, pap_marker: true, hand: 'left' } },
+  plugs:         { parts: ['plugs'], params: { ...SHEET, pap_ring: false, pap_track: false } },
+  inlays:        { parts: ['plugs'], params: { ...SHEET } },                                    // plugs, rings and the two track arcs
+  inlays_notrack: { parts: ['plugs'], params: { ...SHEET, pap_track: false } },
+  dots_ball:     { parts: ['ball'], params: { ...SHEET, pap_marker: true, pap_track: false } },
+  dots_noring:   { parts: ['ball'], params: { ...SHEET, pap_marker: true, pap_ring: false, pap_track: false } },
+  dots_left:     { parts: ['ball'], params: { ...SHEET, pap_marker: true, hand: 'left', pap_track: false } },
+  track_ball:    { parts: ['ball'], params: { ...SHEET, pap_marker: true } },                   // dots, rings and the track channel
   plain_ball:    { parts: ['ball'], params: { ...SHEET, pap_marker: false } },
   hum_spinner:   { parts: ['spinner'], params: { ...SHEET, spin_hum: true } },
   hum16_spinner: { parts: ['spinner'], params: { ...SHEET, spin_hum: true, spin_hum_slots: 16, spin_hum_angle: 0 } },

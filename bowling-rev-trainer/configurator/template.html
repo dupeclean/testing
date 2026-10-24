@@ -241,7 +241,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
 
       <fieldset data-only-part="puck spinner ball">
         <legend>Oval holes</legend>
-        <p class="howto" style="margin:0 0 10px">Leave at 0 for round holes. For an oval hole enter the sheet's hole size on the Drill sheet row (the <b>short</b> way across, the drilled size) and the <b>oval</b> size here (the long way across). The angle is where the long axis points on the sheet: <b>0</b> = straight up the sheet along the thumb-to-fingers line, <b>positive</b> = turned toward the bowling-hand side, negative the other way. Check it against the real ball before printing.</p>
+        <p class="howto" style="margin:0 0 10px">Leave at 0 for round holes. For an oval hole enter the sheet's hole size on the Drill sheet row (the <b>short</b> way across, the drilled size) and the <b>oval</b> size here (the long way across). The angle is where the long axis points on the sheet: <b>0</b> = straight up the sheet along the thumb-to-fingers line, <b>positive</b> = turned toward the thumb side of the sheet (to the left for a right hand, to the right for a left hand), negative toward the little-finger side. Hold the real ball with the finger holes at 12 o'clock and check the preview leans the same way before printing.</p>
         <div class="row">
           <label class="field" data-only-part="puck ball"><span>Thumb oval size</span>
             <span class="row" style="gap:6px"><input type="text" id="thumb_oval_d" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
@@ -294,19 +294,20 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
             <small>A small flat so it stands on the print bed; 0 for a perfect sphere</small></label>
           <label class="field"><span>Second colour (filament swap)</span>
             <select id="ball_stripe">
+              <option value="none">None: one-colour ball, the second colour in the inlays (bullseyes and track)</option>
               <option value="spot_band">Small coloured spot on top + a band (3 swaps, least filament)</option>
               <option value="spot">Small coloured spot on top only (1 swap)</option>
               <option value="cap_band">Full coloured top cap + a band (3 swaps)</option>
               <option value="cap">Full coloured top cap only (1 swap)</option>
               <option value="bands">Three bands round the middle (6 swaps)</option>
-              <option value="none">Single colour</option>
             </select>
-            <small>The exact heights for the swaps are shown below the preview and on the job sheet</small></label>
+            <small>Optional layer pattern by filament swaps; the heights are shown below the preview and on the job sheet</small></label>
           <label class="check"><input type="checkbox" id="ball_groove"> Marker groove round the middle (for a single-colour ball)</label>
           <label class="check" style="flex-basis:100%"><input type="checkbox" id="pap_marker"> Axis target dots (two plug sockets at the axis your release should spin about)</label>
           <div class="row" id="pap_rows" style="flex-basis:100%">
             <label class="check" style="flex-basis:100%"><input type="checkbox" id="pap_ring"> Axis target ring: a 60 mm second-colour ring round each dot, a bullseye that stands still when the axis is right</label>
-            <small style="flex-basis:100%">The dots sit at the PAP on the drill sheet above (or the common 5 1/2" over, 1/2" up when the sheet has none). The plugs and rings export as one second-colour file.</small>
+            <label class="check" style="flex-basis:100%"><input type="checkbox" id="pap_track"> Track ring: a 12 mm second-colour ring on the track, a quarter turn from the axis point, as two inlay arcs glued into a channel; it too stays put when the axis is right</label>
+            <small style="flex-basis:100%">The dots sit at the PAP on the drill sheet above (or the common 5 1/2" over, 1/2" up when the sheet has none). The plugs, rings and track arcs export as one second-colour file.</small>
           </div>
         </div>
       </fieldset>
