@@ -24,8 +24,8 @@ SCAD_KEYS = ["hand", "span_middle", "span_ring", "thumb_d", "middle_d", "ring_d"
              "thumb_fwd", "thumb_lat", "middle_fwd", "middle_lat", "ring_fwd", "ring_lat", "weight_pocket", "lanyard",
              "thumb_through", "thumb_oval_d", "thumb_oval_angle", "middle_oval_d", "ring_oval_d", "finger_oval_angle",
              "thumb_bevel", "finger_bevel", "serial", "thumb_hole", "ball_d", "ball_thumb_depth", "ball_flat", "ball_groove", "ball_stripe",
-             "gate_pin_h", "pap_marker", "pap_given", "pap_over", "pap_up", "pap_ring", "pap_track", "spin_hum", "spin_hum_slots", "spin_hum_angle"]
-SCAD_CASES = ("gate", "plugs", "inlays", "inlays_notrack", "dots_ball", "track_ball", "hum_spinner", "hum16_spinner")
+             "gate_pin_h", "pap_marker", "pap_given", "pap_over", "pap_up", "pap_ring", "pap_track", "track_tilt", "spin_hum", "spin_hum_slots", "spin_hum_angle"]
+SCAD_CASES = ("gate", "plugs", "inlays", "inlays_notrack", "dots_ball", "track_ball", "tilt_ball", "hum_spinner", "hum16_spinner")
 
 ok = True
 
@@ -74,11 +74,12 @@ def main():
     check("each ring is 64 mm across and about 4.3 mm tall at its inner edge", len(rings) == 2 and all(abs(b.extents[0] - 64) < 0.3 and 4.1 < b.extents[2] < 4.5 for b in rings), f"({[b.extents.round(2).tolist() for b in rings]})")
     # 2b. the track: two arcs standing on edge in the inlays file, and the channel they fit on the ball
     qt = bodies(m["inlays"])
-    arcs = [b for b in qt if abs(b.extents[2] - 12) < 0.1]   # the arc pieces stand 12 mm tall; plugs and rings are under 5 mm
-    check("inlays file holds the plugs, the rings and the track arcs (one arc in pieces where the track skirts holes)", len(qt) >= 6 and len(arcs) >= 2, f"({len(qt)} bodies, {len(arcs)} arc pieces)")
-    check("the arc pieces stand on edge round a 200 mm circle", 195 < max(max(b.extents[0], b.extents[1]) for b in arcs) < 202 and all(b.extents[0] < 204 and b.extents[1] < 204 for b in arcs), f"({[b.extents.round(1).tolist() for b in arcs]})")
+    arcs = [b for b in qt if b.extents[2] > 8]   # the arc pieces stand 9 to 12 mm tall; plugs and rings are under 5 mm
+    check("inlays file holds the plugs, the rings and the track arcs", len(qt) >= 6 and len(arcs) >= 2, f"({len(qt)} bodies, {len(arcs)} arc pieces)")
+    check("the arc pieces stand on their lower edge round a circle of 150 to 205 mm (the ring sits where it clears the holes)", 150 < max(max(b.extents[0], b.extents[1]) for b in arcs) < 205 and all(b.extents[0] < 206 and b.extents[1] < 206 for b in arcs), f"({[b.extents.round(1).tolist() for b in arcs]})")
     removed = (m["dots_ball"].volume - m["track_ball"].volume) / 1000
-    check("the track channel takes about 15 cm3 out of the ball", 11 < removed < 17, f"({removed:.1f} cm3)")
+    check("the track channel takes 8 to 17 cm3 out of the ball", 8 < removed < 17, f"({removed:.1f} cm3)")
+    check("tilt_ball: a 20 degree tilt moves the ring and its channel (different volume, both watertight)", m["tilt_ball"].is_watertight and abs(m["tilt_ball"].volume - m["track_ball"].volume) > 500)
 
     # 3. axis dots: a socket 3 mm deep at each reported axis point, taking about 0.7 cm3 out of the ball
     for case in ("dots_ball", "dots_left"):

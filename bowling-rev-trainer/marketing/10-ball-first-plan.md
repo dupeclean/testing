@@ -46,7 +46,7 @@ Everything in this section comes from the exported job sheet and `START-HERE.txt
 | Finger depth, bridge | 24 mm; bridge from the sheet (1/2" default) |
 | Resting flat | A 22 mm flat on the bottom so it sits still on a shelf and stands on the build plate |
 | Axis target | Two 12 mm sockets, each inside a 60 mm ring pocket, at the axis point (the PAP) and the opposite point; plugs and rings print in the second colour and press in. PAP from the drill sheet when the shop measured it (over, then up, along the surface from the centre of the grip; from the middle of the finger holes on a no-thumb ball), otherwise the common position (5 1/2" over, 1/2" up) |
-| Second colour | The axis bullseyes and a 12 mm track ring on the great circle a quarter turn from the axis point, all printed inlays (plugs, rings and two arcs) pressed or glued in; the ball body is one colour. An optional layer pattern (spot, cap, bands) by filament swaps remains in the Second colour list, then exported as a Bambu Studio 3MF with both colours assigned (verified to open as one object in two colours, 23 October) |
+| Second colour | The axis bullseyes and a 12 mm track ring on the line the ball rolls on about the axis point, all printed inlays (plugs, rings and two arcs) pressed or glued in; the ball body is one colour. An optional layer pattern (spot, cap, bands) by filament swaps remains in the Second colour list, then exported as a Bambu Studio 3MF with both colours assigned (verified to open as one object in two colours, 23 October) |
 | Engraving | The order number, 0.5 mm into the flat |
 | Files per order | ball STL, ball 3MF (only with a layer pattern), `axis_inlays_D12_ring60_track12.stl`, `release_gate_210mm_pin100.stl`, fit sheet (JSON), job sheet, customer card (PDF) |
 | Release gate | In every ball order's files: dovetailed segments and loose 20 mm pins 210 mm apart that the ball knocks down 1.5 to 2 m out; about 65 g and a short print per segment. Not a product yet (Section 3) |
@@ -103,7 +103,7 @@ FS-0002 is printing. Before anyone else's sheet goes in, it passes every line:
 | Thumb depth | 70 mm is right for the founder's thumb, or the right value is known |
 | Roll | After the support scar is sanded, the ball rolls straight on carpet from a push with no visible wobble |
 | Axis target | Plugs and rings press in and stay in; the bullseye reads from 2 m while the ball rolls away |
-| Track ring | The arcs seat flush in the channel, the notched arc in place (in pieces if a hole took its whole width); the ring reads from behind as the ball rolls away |
+| Track ring | The arcs seat flush in the channel; the ring reads from behind as the ball rolls away |
 | Print log | Actual time and grams from Bambu Studio, and the support weight, written into Section 3's table (`[PRINT LOG]`) |
 | Gate | Segments link, pins stand, a rolled ball knocks a pin down at 1.5 to 2 m; if it does not earn its place, it stays out of the box |
 
@@ -268,7 +268,7 @@ The Rev Ball is a 200 mm practice ball printed from your drill sheet: thumb, mid
 - Built from your drill sheet: hole sizes in 1/64" steps, both spans, forward/reverse and lateral pitch for every hole, oval thumb if your sheet gives one.
 - Blind thumb hole, 70 mm deep or set from your thumb length. Two-handed: no thumb hole, finger holes centred on top.
 - A bullseye at your axis point and at the opposite point: a printed dot inside a printed ring, in the second colour. If your shop measured your PAP, enter it and the bullseye goes there; otherwise it goes at the common position. When the ball spins about that axis, the bullseye stands still.
-- The track ring, a quarter turn from the bullseye, in the second colour: it holds still when the axis is right.
+- The track ring in the second colour: the line the ball rolls on when it spins about your axis point. Roll it right and the ball rolls along the ring.
 - A flat on the bottom so it sits still on a shelf.
 - Designed to show what the hand did: roll it along a strip of tape toward the couch, and it rolls and curves off the line, or it does not. The card in the box lists the readings.
 - Bores are smoothed by hand before shipping. Finish the fit with bowler's tape, as on your ball.
@@ -321,7 +321,7 @@ Your drill sheet, in a ball you can roll at home.
 
 The FitSlice Rev Ball is a 200 mm practice ball, 3D printed from your drill sheet: thumb, middle and ring hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch on every hole, right or left hand, or with no thumb hole if you bowl two-handed. It weighs about 475 g. You roll it on carpet from a kneeling swing along a strip of tape toward the couch, and it rolls and curves off the line, or it does not. The card in the box lists what each outcome shows.
 
-The second colour marks a bullseye (a dot inside a ring) at your axis point and the opposite point, and the track ring a quarter turn from it. If your pro shop measured your PAP, send it and the marks go there. When the ball spins about that axis, the bullseye and the track ring stand still as it rolls away.
+The second colour marks a bullseye (a dot inside a ring) at your axis point and the opposite point, and the track ring: the line the ball rolls on when it spins about that point. If your pro shop measured your PAP, send it and the marks go there. When the ball spins about that axis, the bullseye and the track ring stand still as it rolls away.
 
 What to send me: your drill sheet in the personalization box, using the template below. Your pro shop has your sheet on file; ask them for it. Fractions are fine.
 

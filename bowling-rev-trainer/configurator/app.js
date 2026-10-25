@@ -30,7 +30,7 @@ const G = {
   pap_d: 12, pap_depth: 3,
   // axis target ring round each dot: centre-line radius, width and pocket depth (the inlay ring matches)
   ring_r: 30, ring_w: 4, ring_depth: 3,
-  track_w: 12, track_depth: 2, track_gap: 1, track_clear: 3,
+  track_w: 12, track_depth: 2, track_gap: 1, track_clear: 1.5, track_foot: 0.8,
   // humming spinner: ring chamber radii, floor and wall-top heights (the 45-degree gable ridge follows) and slot size
   hum_r0: 30, hum_r1: 44, hum_z0: 5, hum_z1: 16, hum_slot_w: 2, hum_slot_l: 10,
 };
@@ -70,9 +70,11 @@ const DEFAULTS = {
   // pap_given: the drill sheet gives the PAP (else the common 5 1/2" over, 1/2" up is used); it is
   // measured from the centre of the grip, or from the middle of the fingers on a no-thumb ball.
   // pap_ring: a second-colour inlay ring round each dot, a bullseye that stands still when the axis is right.
-  // pap_track: the track, a 12 mm second-colour ring on the great circle 90 degrees from the axis point
-  // (two inlay arcs glued into a channel); like the bullseye it stays put when the axis is right.
-  pap_marker: true, pap_given: false, pap_over: 5.5 * IN, pap_up: 0.5 * IN, pap_ring: true, pap_track: true,
+  // pap_track: the track ring, a 12 mm second-colour ring on the line the ball rolls on when it spins about
+  // the axis point (two inlay arcs glued into a channel); like the bullseye it stays put when the axis is right.
+  // track_tilt: the axis tilt (degrees) that line is drawn for: 0 = end over end about the axis point (the
+  // ring is its equator); a tilted release rolls on a smaller ring nearer the axis point.
+  pap_marker: true, pap_given: false, pap_over: 5.5 * IN, pap_up: 0.5 * IN, pap_ring: true, pap_track: true, track_tilt: 0,
   // Humming spinner (experimental, off by default): a hollow ring chamber with slanted slots through
   // the top. Spun fast enough it hums, and keeps humming as long as the spin stays above that speed,
   // so the strength and carry of the finger lift can be heard.
@@ -88,6 +90,7 @@ const ANGLE_KEYS = ['thumb_oval_angle', 'finger_oval_angle'];   // degrees
 const SERIAL_RE = /^[0-9FS-]{0,12}$/;
 const BALL_STRIPES = ['none', 'spot', 'spot_band', 'cap', 'cap_band', 'bands'];
 const HUM_SLOTS = [2, 16], HUM_ANGLE = [0, 80];   // humming spinner: slot count, slot angle in degrees from radial
+const TRACK_TILT = [0, 45];                       // axis tilt the track ring is drawn for, degrees
 
 // Sensible ranges (mm). Anything outside is almost always a typo or the wrong unit
 // (110 typed while the switch is on inches, or 4 5/16 typed while it is on mm), and values
@@ -138,7 +141,7 @@ function checkLength(key, mm, unit) {
 // Every problem in a parameter set (used before any build, so a bad saved order cannot crash the engine).
 function validateParams(p) {
   const out = [];
-  // the inlays with the track on are interrupted at the grip holes, so they are laid out like the ball
+  // the inlays with the track on stop at the grip holes the ring meets, so they are laid out like the ball
   const ballLike = p.part === 'ball' || (p.part === 'plugs' && p.pap_marker && p.pap_track);
   const noGrip = p.part === 'sizer' || p.part === 'gate' || (p.part === 'plugs' && !ballLike);   // parts without the three-hole grip
   // the spinner and a two-handed ball cut no thumb hole, so the thumb fields (hidden for them) are not checked
@@ -153,6 +156,8 @@ function validateParams(p) {
   if (p.part === 'spinner') keys.splice(keys.indexOf('span_middle'), 2);
   for (const k of keys) { const m = checkLength(k, p[k], 'mm'); if (m) out.push({ key: k, message: m }); }
   if (p.part === 'ball' && !BALL_STRIPES.includes(p.ball_stripe)) out.push({ key: 'ball_stripe', message: 'Choose a colour pattern for the ball.' });
+  if (ballLike && p.pap_marker && p.pap_track && !(Number.isFinite(p.track_tilt) && p.track_tilt >= TRACK_TILT[0] && p.track_tilt <= TRACK_TILT[1]))
+    out.push({ key: 'track_tilt', message: `Axis tilt for the track ring must be between ${TRACK_TILT[0]} and ${TRACK_TILT[1]} degrees.` });
   if (p.part === 'spinner' && p.spin_hum) {
     if (!Number.isInteger(p.spin_hum_slots) || p.spin_hum_slots < HUM_SLOTS[0] || p.spin_hum_slots > HUM_SLOTS[1]) out.push({ key: 'spin_hum_slots', message: `Hum slots: enter a whole number from ${HUM_SLOTS[0]} to ${HUM_SLOTS[1]}.` });
     if (!Number.isFinite(p.spin_hum_angle) || p.spin_hum_angle < HUM_ANGLE[0] || p.spin_hum_angle > HUM_ANGLE[1]) out.push({ key: 'spin_hum_angle', message: `Hum slot angle must be between ${HUM_ANGLE[0]} and ${HUM_ANGLE[1]} degrees.` });
@@ -508,23 +513,31 @@ function makeBuilder(W) {
   // Rev Ball: a full sphere with the bowler's grip at the top and a small flat underneath so it can
   // stand on the print bed. Released on the floor it rolls and hooks (or does not), which shows the
   // release. Solid in the model; the slicer makes it light (3 walls, about 5% infill).
-  // Where the track would run through a grip hole (as a track does on a real ball), the channel and
-  // the arcs are interrupted instead: a guard cylinder along the ball's radius through each such
-  // hole, its radius the hole's reach (bore, oval, bevel) plus a clearance. Returns the guards (in
-  // ball coordinates) and the names of the holes the track meets.
-  function trackGuards(p, D, thumb, mid, ring, dirOf, d, R, wC) {
+  // Where the track ring goes: the line the ball rolls on when it spins about the axis point with
+  // p.track_tilt degrees of axis tilt, the circle (90 - tilt) degrees from the axis point (0 tilt: the
+  // equator about the axis, end over end). A real track runs through the grip holes it meets, so where
+  // this ring would, the channel and the arcs stop a little short of the hole's bevel instead (guard
+  // cylinders along the ball's radius: the hole's reach plus G.track_clear). Angles in radians.
+  function trackPlan(p, D, thumb, mid, ring, dirOf, d, R, s, wC) {
+    const beta = (wC / 2) / R;                                                   // half the band, as an angle
+    const theta = (90 - p.track_tilt) * DEG;
     const guards = [], crosses = [];
     for (const [h, name, dia, ex, bev] of [[thumb, 'thumb', D.td, D.ovT, p.thumb_bevel], [mid, 'middle finger', D.md, D.ovM, p.finger_bevel], [ring, 'ring finger', D.rd, D.ovR, p.finger_bevel]]) {
       if (!h) continue;
       const rG = dia / 2 + ex / 2 + bev + G.track_clear;
-      const u = dirOf(h);
-      const off = R * Math.asin(V.clamp1(Math.abs(V.dot(u, d))));   // surface distance from the hole's centre to the track's centre line
-      if (off >= rG + wC / 2) continue;
+      const u = dirOf(h), psi = Math.acos(V.clamp1(V.dot(u, d)));              // the hole's centre, from the axis point
+      if (Math.abs(psi - theta) >= Math.asin(Math.min(1, rG / R)) + beta) continue;
       crosses.push(name);
       const rotG = [0, Math.acos(V.clamp1(u[2])) / DEG, Math.atan2(u[1], u[0]) / DEG];
       guards.push(T(T(T(T(Manifold.cylinder(60, rG, rG, G.seg_hole)).translate([0, 0, -30])).rotate(rotG)).translate(h.axis.p)));
     }
-    return { guards, crosses };
+    const psiPole = Math.acos(V.clamp1(-d[2])), angFlat = Math.asin(Math.min(1, (p.ball_flat / 2) / R));
+    return { theta, guards, crosses, onFlat: Math.abs(psiPole - theta) < angFlat + beta };
+  }
+  // the slab (in the axis frame, axis = z) that cuts a band of half-angle beta round polar angle theta
+  function zoneSlab(R, theta, beta) {
+    const z0 = R * Math.cos(theta + beta), z1 = R * Math.cos(theta - beta);
+    return T(T(Manifold.cube([2 * R + 10, 2 * R + 10, z1 - z0], true)).translate([0, 0, (z0 + z1) / 2]));
   }
 
   function ball(p, D) {
@@ -605,25 +618,19 @@ function makeBuilder(W) {
         }
       }
       if (p.pap_track) {
-        // The track: a channel on the great circle 90 degrees from the axis point (where the ball meets
-        // the floor when it spins about the PAP), for two second-colour inlay arcs (part "plugs"). Like
-        // the bullseye it stays put when the axis is right and wobbles when it is not, and it shows
-        // from behind as the ball rolls away. Where it would run through a grip hole (as a track does
-        // on a real ball) it is interrupted, with a clearance round the hole's bevel.
+        // The track ring: a channel on the line the ball rolls on when it spins about the axis point
+        // (trackPlan), for two second-colour inlay arcs (part "plugs"). Roll it right and the ball rolls
+        // along the ring while the ring stays put; when it wobbles, the axis is off.
         const wC = G.track_w + p.print_allowance;                               // the channel, with the allowance
+        const plan = trackPlan(p, D, thumb, mid, ring, dirOf, d, R, s, wC);
         const rotT = [0, Math.acos(clamp1(d[2])) / DEG, Math.atan2(d[1], d[0]) / DEG];
         const shell = T(T(Manifold.sphere(R + 3, G.seg_sphere)).subtract(T(Manifold.sphere(R - G.track_depth, G.seg_sphere))));
-        const slab = T(Manifold.cube([2 * R + 10, 2 * R + 10, wC], true));
-        const channel = T(T(T(slab.intersect(shell)).rotate(rotT)).translate(C));
-        const { guards, crosses } = trackGuards(p, D, thumb, mid, ring, dirOf, d, R, wC);
-        cuts.push(guards.length ? T(channel.subtract(T(Manifold.union(guards)))) : channel);
-        // the track's angular distance from the bottom pole against the flat's reach (near the pole the
-        // surface is nearly level, so heights would understate how close the band comes to the flat)
-        const angPole = Math.asin(Math.abs(d[2])), angFlat = Math.asin(Math.min(1, (p.ball_flat / 2) / R));
-        const onFlat = angPole - (wC / 2) / R < angFlat;
-        pap.track = { w_mm: G.track_w, depth_mm: G.track_depth, clear_mm: G.track_clear, crosses, on_flat: onFlat };
-        if (crosses.length) trackNotes.push(`The track ring is interrupted at the ${crosses.join(' and ')} hole${crosses.length > 1 ? 's' : ''}, which it would otherwise run through (as a track does on a real ball): the channel and the arc keep ${G.track_clear} mm clear of the bevel there, so the arc is notched and may come in pieces.`);
-        if (onFlat) trackNotes.push('The track runs across the resting flat; the arc is flattened there.');
+        const channel = T(T(T(zoneSlab(R, plan.theta, (wC / 2) / R).intersect(shell)).rotate(rotT)).translate(C));
+        cuts.push(plan.guards.length ? T(channel.subtract(T(Manifold.union(plan.guards)))) : channel);
+        const deg = Math.round(plan.theta / DEG);
+        pap.track = { w_mm: G.track_w, depth_mm: G.track_depth, clear_mm: G.track_clear, tilt_deg: p.track_tilt, angle_deg: +(plan.theta / DEG).toFixed(1), crosses: plan.crosses, on_flat: plan.onFlat };
+        trackNotes.push(`The track ring is the line the ball rolls on when it spins about the axis point${p.track_tilt ? ` with ${p.track_tilt} degrees of axis tilt (${deg} degrees from the axis point)` : ' end over end (its equator about the axis point)'}.${plan.crosses.length ? ` It runs through the ${plan.crosses.join(' and ')} hole${plan.crosses.length > 1 ? 's' : ''}, as a track does; the channel stops ${G.track_clear} mm short of each bevel, so that arc comes in pieces.` : ' It clears the grip holes.'}`);
+        if (plan.onFlat) trackNotes.push('The track runs across the resting flat; the arc is flattened there.');
       }
     }
     // Second-colour pattern: the slicer swaps filament at these heights (everything printed above a
@@ -671,7 +678,7 @@ function makeBuilder(W) {
       warnings.push(`The web between the finger holes narrows to ${Math.max(0, web).toFixed(1)} mm deep inside. That is a fragile hairline when printed. Increase the bridge or reduce the finger depth.`);
     const floor = H - R - s + (R - p.ball_thumb_depth);   // rough: thumb bore end above the bed when aimed at the centre
     if (thumb && p.ball_thumb_depth > R - 8) warnings.push('The thumb hole reaches almost to the centre of the ball. Make it shallower.');
-    const inlayNote = p.pap_marker ? [`The second colour is the inlays file: the axis plugs${p.pap_ring ? ' and rings' : ''}${p.pap_track ? ' and the two track arcs' : ''}, printed flat in the second colour and pressed${p.pap_track ? ' or glued' : ''} in.`] : [];
+    const inlayNote = p.pap_marker ? [`The second colour is the inlays file: the axis plugs${p.pap_ring ? ' and rings' : ''}${p.pap_track ? ' and the two track arcs' : ''}, printed in the second colour as exported and pressed${p.pap_track ? ' or glued' : ''} in.`] : [];
     const notes = [...inlayNote, ...trackNotes, ...patternNotes, ...(colorChanges.length
       ? [`Two-colour ball: open the .3mf in Bambu Studio and it arrives as one object in two parts with filaments 1 (base colour) and 2 (second colour) assigned. Or open the STL and add a filament change at these heights (Bambu Studio: right-click the layer slider, "Add color change"): ${colorChanges.map(c => `${c.z_mm} mm → ${c.colour}`).join('; ')}. Start the print in the base colour; no prime tower is needed.`]
       : [])];
@@ -684,7 +691,7 @@ function makeBuilder(W) {
   // The second-colour inlays for the ball: two plugs for the dots (0.3 mm proud so the dot catches
   // the light), with the ring on two inlay rings (flat underneath so they print flat, the top
   // following the ball's surface), and with the track on two arcs for the track channel, standing on
-  // edge round the plugs, interrupted wherever the track would run through a grip hole, flattened at the flat.
+  // their lower edge round the plugs, on the roll line (trackPlan), stopping at the grip holes it meets.
   function plugs(p, D) {
     const r = G.pap_d / 2, h = G.pap_depth + 0.3;
     const plug = (x, y) => T(T(Manifold.union([T(Manifold.cylinder(0.5, r - 0.5, r, G.seg_hole)), T(T(Manifold.cylinder(h - 0.5, r, r, G.seg_hole)).translate([0, 0, 0.5]))])).translate([x, y, 0]));
@@ -698,11 +705,13 @@ function makeBuilder(W) {
       const off = rOut + 2;
       parts.push(T(one.translate([-off, 0, 0])), T(one.translate([off, 0, 0])), plug(0, 40), plug(0, -40));
     } else parts.push(plug(-G.pap_d, 0), plug(G.pap_d, 0));
+    let trackInfo = null;
     if (p.pap_track) {
-      // the arcs are the belt the channel holds, cut on the ball itself (the grip holes and the flat
-      // notch them exactly where they meet the track), then brought back to the bed: the ball's
-      // placement undone, so the belt stands on edge round the origin, split at the track's two side
-      // points with a gap. Pieces too small to print (a sliver where a hole clips the band) are dropped.
+      // the arcs are the belt the channel holds, cut on the ball itself (the flat and the holes the ring
+      // runs through cut them exactly as they cut the channel), then brought back to
+      // the bed: the ball's placement undone so the axis points up, the belt stood on its lower rim with
+      // a small flat foot cut (its rim is a cone, so the inner corner is the lowest point), split at
+      // the ring's two side points with a gap. Pieces too small to print are dropped.
       const R = p.ball_d / 2;
       const s = p.ball_flat > 0 ? R - Math.sqrt(Math.max(0, R * R - (p.ball_flat / 2) ** 2)) : 0, H = 2 * R - s, C = [0, 0, R - s];
       const yM = p.thumb_hole ? D.y_m : 0, yR = p.thumb_hole ? D.y_r : 0;
@@ -711,20 +720,26 @@ function makeBuilder(W) {
       const ring = drill(D.x_r, yR, D.rd, p.finger_depth, p.ring_fwd, p.ring_lat, H, false, D.mir, -1, R, { ...ovalOpts(p, 'finger'), oval: D.ovR });
       const { d, dirOf } = papDirection(p, D, thumb, mid, ring, C);
       const b = Math.acos(V.clamp1(d[2])) / DEG, c = Math.atan2(d[1], d[0]) / DEG;
+      const plan = trackPlan(p, D, thumb, mid, ring, dirOf, d, R, s, G.track_w + p.print_allowance);
+      trackInfo = { angle_deg: +(plan.theta / DEG).toFixed(1), crosses: plan.crosses };
+      const betaA = (G.track_w / 2) / R;
       const shell = T(T(Manifold.sphere(R, 2 * G.seg_sphere)).subtract(T(Manifold.sphere(R - G.track_depth, 2 * G.seg_sphere))));
-      const slab = T(Manifold.cube([2 * R + 10, 2 * R + 10, G.track_w], true));
-      const beltWorld = T(T(T(slab.intersect(shell)).rotate([0, b, c])).translate(C));
+      const beltWorld = T(T(T(zoneSlab(R, plan.theta, betaA).intersect(shell)).rotate([0, b, c])).translate(C));
       const keep = T(T(Manifold.cube([2 * R + 2, 2 * R + 2, H + 1], true)).translate([0, 0, (H + 1) / 2]));
       const holes = [mid.cut, ring.cut]; if (thumb) holes.push(thumb.cut);
-      const { guards } = trackGuards(p, D, thumb, mid, ring, dirOf, d, R, G.track_w + p.print_allowance);
-      const onBall = T(T(beltWorld.intersect(keep)).subtract(T(Manifold.union([...holes, ...guards]))));
-      const flat = T(T(T(onBall.translate([-C[0], -C[1], -C[2]])).rotate([0, 0, -c])).rotate([0, -b, 0]));
-      const gap = T(Manifold.cube([2 * R + 12, G.track_gap, G.track_w + 2], true));
-      const arcs = T(T(flat.subtract(gap)).translate([0, 0, G.track_w / 2]));
+      const onBall = T(T(beltWorld.intersect(keep)).subtract(T(Manifold.union([...holes, ...plan.guards]))));
+      const framed = T(T(T(onBall.translate([-C[0], -C[1], -C[2]])).rotate([0, 0, -c])).rotate([0, -b, 0]));
+      const phiLow = plan.theta + betaA;                                          // the lower rim's polar angle
+      const zLow = Math.min(R * Math.cos(phiLow), (R - G.track_depth) * Math.cos(phiLow));
+      const foot = Math.min(G.track_foot, 0.75 * G.track_depth * Math.abs(Math.cos(phiLow)));   // never more than 3/4 of the rim's drop; nothing on a great circle
+      const above = T(T(Manifold.cube([2 * R + 20, 2 * R + 20, 2 * R], true)).translate([0, 0, R + foot]));
+      const stood = T(T(T(framed.translate([0, 0, -zLow])).intersect(above)).translate([0, 0, -foot]));
+      const gap = T(Manifold.cube([2 * R + 12, G.track_gap, 2 * R + 20], true));
+      const arcs = T(stood.subtract(gap));
       for (const piece of arcs.decompose()) { if (piece.volume() >= 150) parts.push(T(piece)); else piece.delete(); }
     }
     const result = T(Manifold.union(parts));
-    return { result, warnings: [], axes: [] };
+    return { result, warnings: [], axes: [], pap: trackInfo ? { track: trackInfo } : null };
   }
 
   // engraved 7-segment labels for the sizer plate (no font needed)
@@ -1206,6 +1221,8 @@ async function main() {
     $('hum_rows').hidden = !state.spin_hum;
     $('spin_hum_slots').value = String(state.spin_hum_slots);
     $('spin_hum_angle').value = String(state.spin_hum_angle);
+    $('track_tilt').value = String(state.track_tilt);
+    $('track_tilt').disabled = !state.pap_track;
     $('size_source').value = state.size_source;
     document.querySelectorAll('[data-part]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.part === state.part)));
     document.querySelectorAll('[data-only-part]').forEach(el => { el.hidden = !el.dataset.onlyPart.split(' ').includes(state.part); });
@@ -1248,6 +1265,11 @@ async function main() {
     if (Number.isInteger(v) && v >= HUM_SLOTS[0] && v <= HUM_SLOTS[1]) { state.spin_hum_slots = v; markGood(el); schedule(); }
     else markBad(el, `Hum slots: a whole number from ${HUM_SLOTS[0]} to ${HUM_SLOTS[1]}.`);
   });
+  $('track_tilt').addEventListener('change', () => {
+    const el = $('track_tilt'), v = parseNumber(el.value.replace(/[\u00b0]/g, ''));
+    if (Number.isFinite(v) && v >= TRACK_TILT[0] && v <= TRACK_TILT[1]) { state.track_tilt = v; markGood(el); schedule(); }
+    else markBad(el, `Axis tilt must be a number of degrees between ${TRACK_TILT[0]} and ${TRACK_TILT[1]}.`);
+  });
   $('spin_hum_angle').addEventListener('change', () => {
     const el = $('spin_hum_angle'), v = parseNumber(el.value.replace(/[°]/g, ''));
     if (Number.isFinite(v) && v >= HUM_ANGLE[0] && v <= HUM_ANGLE[1]) { state.spin_hum_angle = v; markGood(el); schedule(); }
@@ -1279,6 +1301,7 @@ async function main() {
         $('pap_over').disabled = $('pap_up').disabled = !state.pap_given;
       }
       if (k === 'spin_hum') $('hum_rows').hidden = !state.spin_hum;
+      if (k === 'pap_track') $('track_tilt').disabled = !state.pap_track;
       schedule();
     });
   }
@@ -1340,7 +1363,7 @@ async function main() {
       $('bores_note').textContent = (p.pap_ring
         ? `Two ${G.pap_d} mm plugs and two ${2 * G.ring_r} mm rings for the ball's axis target. Print them in the second colour, flat side down, 100% infill, and press them into the sockets and ring pockets (a drop of glue if a ring is loose).`
         : `Two ${G.pap_d} mm plugs for the ball's axis target dots. Print them in the second colour, flat side down, and press them into the sockets.`)
-        + (p.pap_track ? ` The two arcs are the track ring: they print standing on edge as exported (use a brim). Glue them into the channel round the ball and sand flush; where the track would run through a grip hole the ring keeps clear of it, so that arc is notched and may come in pieces (dry-fit them first).` : '');
+        + (p.pap_track ? ` The two arcs are the track ring: they print standing on edge as exported (use a brim). They stand on their lower edge as exported (no supports; a brim helps). Glue them into the channel and sand flush; where the ring runs through a grip hole that arc comes in pieces, so dry-fit them first.` : '');
     } else if (p.part !== 'sizer') {
       const bore = (name, d, trueD) => `<tr><th>${name}</th><td>${fmtMm(trueD)} mm · ${fraction64(trueD / IN)}"</td><td>${fmtMm(d)} mm · ${fraction64(d / IN)}"</td></tr>`;
       rows.push(bore('Thumb', D.td, p.thumb_d), bore('Middle', D.md, p.middle_d), bore('Ring', D.rd, p.ring_d));

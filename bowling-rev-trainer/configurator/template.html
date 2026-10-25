@@ -306,7 +306,10 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
           <label class="check" style="flex-basis:100%"><input type="checkbox" id="pap_marker"> Axis target dots (two plug sockets at the axis your release should spin about)</label>
           <div class="row" id="pap_rows" style="flex-basis:100%">
             <label class="check" style="flex-basis:100%"><input type="checkbox" id="pap_ring"> Axis target ring: a 60 mm second-colour ring round each dot, a bullseye that stands still when the axis is right</label>
-            <label class="check" style="flex-basis:100%"><input type="checkbox" id="pap_track"> Track ring: a 12 mm second-colour ring on the track, a quarter turn from the axis point, as two inlay arcs glued into a channel; it too stays put when the axis is right</label>
+            <label class="check" style="flex-basis:100%"><input type="checkbox" id="pap_track"> Track ring: a 12 mm second-colour ring on the line the ball rolls on when it spins about the axis point, as two inlay arcs glued into a channel; roll it right and the ball rolls along the ring</label>
+            <label class="field"><span>Axis tilt for the track ring</span>
+              <span class="row" style="gap:6px"><input type="text" id="track_tilt" inputmode="decimal"><span class="unit">&deg;</span></span>
+              <small>0 = the ball rolls end over end about the axis point (the ring is its equator). A tilted release rolls on a smaller ring nearer the axis point. Where the ring runs through a grip hole it stops just short of the bevel.</small></label>
             <small style="flex-basis:100%">The dots sit at the PAP on the drill sheet above (or the common 5 1/2" over, 1/2" up when the sheet has none). The plugs, rings and track arcs export as one second-colour file.</small>
           </div>
         </div>

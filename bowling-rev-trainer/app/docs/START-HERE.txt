@@ -136,8 +136,9 @@ folder path from the old computer.
   "On build plate only" (so nothing grows inside the holes), and set the
   SUPPORT INTERFACE filament to one the ball will not bond to: PLA under
   a PETG ball, PETG under a PLA ball (Bambu Studio, Support tab:
-  "Filament for support interface"; top Z distance 0, 3 interface
-  layers). The supports then drop off and leave the surface clean; plain
+  "Filament for support interface"; threshold angle 45, so the whole
+  underside is held; top Z distance 0, 3 interface layers). The supports
+  then drop off and leave the surface clean; plain
   PETG supports tear out and leave a scar. Seam: random or scarf (a seam
   down one side would make it wobble). About 475 g and 10 to 14 hours.
   The ball body prints in ONE colour. The second colour is the inlays
@@ -167,14 +168,17 @@ folder path from the old computer.
   for dots only, or "Axis target dots" for a plain ball (no inlays file
   is exported then). The app warns if a dot or ring would land on a
   grip hole or on the resting flat.
-  TRACK RING: a 12 mm channel 2 mm deep runs round the ball on the great
-  circle a quarter turn from the axis point, the track the ball rolls on
-  when it spins about the PAP. Where it would run through a grip hole, as
-  a real track does, the ring is interrupted with a little clearance. The
-  inlays file holds two second-colour arcs for it (they print standing on
-  edge: give them a brim): glue them into the channel with CA glue and
-  sand flush; the arc notched at the holes may come in pieces, so dry-fit
-  them first.
+  TRACK RING: a 12 mm channel 2 mm deep on the line the ball rolls on
+  when it spins about the axis point. "Axis tilt" on the Ball screen sets
+  which line: 0 (the default) is end over end, the ring is the ball's
+  equator about the axis point; a tilted release rolls on a smaller ring
+  nearer the axis point. With a common PAP that line runs through the
+  thumb and a finger hole, as a real track does; the channel stops 1.5 mm
+  short of each bevel, so the arc comes in pieces there. The inlays file
+  holds the two second-colour arcs; they stand on their lower edge as
+  exported (no supports; give them a brim). Dry-fit, glue them into the
+  channel with CA glue and sand flush. Roll it right and the ball rolls
+  along the ring while the ring holds still.
   Like the bullseye, the track ring stays put when the axis is right.
   Untick "Track ring" for a ball without it.
   THE PAP ON THE SHEET: if the shop measured the customer's PAP, tick

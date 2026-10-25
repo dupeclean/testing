@@ -22,7 +22,8 @@ SCAD = Path(__file__).resolve().parents[2] / "trainer.scad"
 SCAD_KEYS = ["hand", "span_middle", "span_ring", "thumb_d", "middle_d", "ring_d", "bridge", "finger_depth",
              "thumb_fwd", "thumb_lat", "middle_fwd", "middle_lat", "ring_fwd", "ring_lat", "weight_pocket", "lanyard",
              "thumb_through", "thumb_oval_d", "thumb_oval_angle", "middle_oval_d", "ring_oval_d", "finger_oval_angle",
-             "thumb_bevel", "finger_bevel", "serial", "thumb_hole", "ball_d", "ball_thumb_depth", "ball_flat", "ball_groove", "ball_stripe"]
+             "thumb_bevel", "finger_bevel", "serial", "thumb_hole", "ball_d", "ball_thumb_depth", "ball_flat", "ball_groove", "ball_stripe",
+             "pap_marker", "pap_ring", "pap_track"]
 
 
 def literal(v):

@@ -226,20 +226,26 @@ assert.ok(r.ok && r.stats[0].volume_cm3 > 0.6 && r.stats[0].volume_cm3 < 0.9, 't
 r = await build({ ...SHEET, pap_track: false }, ['plugs']);
 assert.ok(r.ok && r.stats[0].volume_cm3 > 5 && r.stats[0].volume_cm3 < 8 && r.stats[0].bbox_mm[0] > 130 && r.stats[0].bbox_mm[0] < 134 && r.stats[0].bbox_mm[2] > 4 && r.stats[0].bbox_mm[2] < 4.6, 'two plugs and two rings: ' + (r.message || JSON.stringify([r.stats[0].volume_cm3, r.stats[0].bbox_mm])));
 r = await build(SHEET, ['plugs']);
-assert.ok(r.ok && r.stats[0].volume_cm3 > 18 && r.stats[0].volume_cm3 < 27 && r.stats[0].bbox_mm[0] > 198 && r.stats[0].bbox_mm[0] < 206 && r.stats[0].bbox_mm[1] > 198 && r.stats[0].bbox_mm[1] < 206 && Math.abs(r.stats[0].bbox_mm[2] - 12) < 0.1, 'plugs, rings and the two track arcs standing on edge: ' + (r.message || JSON.stringify([r.stats[0].volume_cm3, r.stats[0].bbox_mm])));
+assert.ok(r.ok && r.stats[0].volume_cm3 > 15 && r.stats[0].volume_cm3 < 27 && r.stats[0].bbox_mm[0] > 150 && r.stats[0].bbox_mm[0] < 206 && r.stats[0].bbox_mm[1] > 150 && r.stats[0].bbox_mm[1] < 206 && r.stats[0].bbox_mm[2] > 8 && r.stats[0].bbox_mm[2] < 12.5 && r.stats[0].pap && r.stats[0].pap.track.angle_deg > 45, 'plugs, rings and the two track arcs standing on their lower edge: ' + (r.message || JSON.stringify([r.stats[0].volume_cm3, r.stats[0].bbox_mm, r.stats[0].pap])));
 r = await page.evaluate(() => { const b = window.__cfgApp.buildFiles(['ball', 'plugs'], { pap_marker: false, ball_stripe: 'spot_band' }); return b.files.map(f => f.name); });
 assert.ok(r.length === 2 && r.every(n => /rev_ball/.test(n)) && r.some(n => /\.3mf$/.test(n)), 'no inlays file when the dots are off (just the ball STL and its 3MF): ' + JSON.stringify(r));
 ok('axis target: dots at the PAP (sheet or common, from the grip centre or the finger middle) and their rings, mirrored for a left hand, warnings near holes and the flat, inlays file only when the dots are on');
 
-// 9b. the track: a channel on the great circle 90 degrees from the axis point, and two inlay arcs for it
+// 9b. the track ring: a channel round the axis point, placed to clear the grip holes, and two inlay arcs for it
 r = await build(SHEET, ['ball']);
 const tk = r.stats[0].pap.track;
 assert.ok(tk && tk.w_mm === 12 && tk.depth_mm === 2 && Array.isArray(tk.crosses) && tk.on_flat === false, 'track stats: ' + JSON.stringify(tk));
 const noTrack = await build({ ...SHEET, pap_track: false }, ['ball']);
 const trackVol = noTrack.stats[0].volume_cm3 - r.stats[0].volume_cm3;
 assert.ok(trackVol > 11 && trackVol < 17 && noTrack.stats[0].pap.track === null, 'the channel takes about 15 cm3 out of the ball and reports nothing when off: ' + trackVol);
-assert.ok(r.notes.some(n => /track ring is interrupted at the/.test(n)) === (tk.crosses.length > 0), 'holes on the track are noted: ' + JSON.stringify([tk.crosses, r.notes]));
-assert.ok(tk.crosses.includes('thumb') && tk.crosses.includes('middle finger') && !tk.crosses.includes('ring finger'), 'on the owner\'s sheet the track skirts the thumb and the middle finger: ' + JSON.stringify(tk.crosses));
+assert.ok(tk.angle_deg === 90 && tk.tilt_deg === 0 && tk.crosses.includes('thumb') && tk.crosses.includes('middle finger') && !tk.crosses.includes('ring finger') && r.notes.some(n => /rolls on when it spins about the axis point end over end/.test(n) && /runs through the thumb and middle finger holes/.test(n)), 'with no tilt the ring is the equator about the axis point and, on the owner\'s sheet, runs through the thumb and middle finger: ' + JSON.stringify([tk, r.notes]));
+r = await build({ ...SHEET, track_tilt: 20 }, ['ball']);
+assert.ok(r.ok && r.stats[0].pap.track.angle_deg === 70 && r.stats[0].pap.track.tilt_deg === 20 && r.stats[0].pap.track.crosses.includes('ring finger'), 'a 20 degree tilt puts the ring 70 degrees from the axis point, through the ring finger on this sheet: ' + JSON.stringify(r.stats[0].pap.track));
+r = await build({ ...SHEET, track_tilt: 50 }, ['ball']);
+assert.equal(r.ok, false); assert.match(r.message, /Axis tilt/);
+r = await build({ ...SHEET, pap_given: true, pap_over: 100, pap_up: 12.7 }, ['ball']);
+assert.ok(r.ok && r.stats[0].pap.track.crosses.length === 0 && r.notes.some(n => /clears the grip holes/.test(n)), 'with the axis point nearer the grip the ring clears the holes: ' + JSON.stringify([r.stats[0].pap.track, r.notes]));
+r = await build(SHEET, ['ball']);
 r = await page.evaluate(() => { const b = window.__cfgApp.buildFiles(['ball', 'plugs'], {}); return { names: b.files.map(f => f.name), notes: b.notes }; });
 assert.ok(r.names.length === 2 && r.names.some(n => /^axis_inlays_D12_ring60_track12\.stl$/.test(n)) && !r.names.some(n => /\.3mf$/.test(n)), 'ball STL plus the inlays file named for the track, no 3MF for a one-colour ball: ' + JSON.stringify(r.names));
 assert.ok(r.notes.some(n => /inlays file/.test(n) && /track arcs/.test(n)), 'the second colour is explained as inlays: ' + JSON.stringify(r.notes));
@@ -247,7 +253,7 @@ r = await page.evaluate(() => window.__cfgApp.buildFiles(['plugs'], { pap_track:
 assert.deepEqual(r, ['axis_inlays_D12_ring60.stl'], 'the old inlays name with the track off');
 r = await build({ ...SHEET, thumb_hole: false, ball_thumb_depth: 99 }, ['plugs']);
 assert.ok(r.ok && r.stats[0].volume_cm3 > 18, 'the arcs build for a no-thumb ball too: ' + (r.message || r.stats[0].volume_cm3));
-ok('track: a 12 mm channel 2 mm deep round the PAP axis, two arc inlays in the inlays file (named for it), one-colour ball by default');
+ok('track ring: the roll line 90 minus the axis tilt from the axis point, stopping short of the holes it meets, two arc inlays in the inlays file (named for it), one-colour ball by default');
 
 // 10. release gate: one segment and one pin per file, pins ball diameter + 10 mm apart
 r = await build(SHEET, ['gate']);

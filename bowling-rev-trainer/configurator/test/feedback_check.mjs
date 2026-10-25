@@ -34,6 +34,7 @@ const CASES = {
   dots_noring:   { parts: ['ball'], params: { ...SHEET, pap_marker: true, pap_ring: false, pap_track: false } },
   dots_left:     { parts: ['ball'], params: { ...SHEET, pap_marker: true, hand: 'left', pap_track: false } },
   track_ball:    { parts: ['ball'], params: { ...SHEET, pap_marker: true } },                   // dots, rings and the track channel
+  tilt_ball:     { parts: ['ball'], params: { ...SHEET, pap_marker: true, track_tilt: 20 } },   // the ring 70 degrees from the axis point
   plain_ball:    { parts: ['ball'], params: { ...SHEET, pap_marker: false } },
   hum_spinner:   { parts: ['spinner'], params: { ...SHEET, spin_hum: true } },
   hum16_spinner: { parts: ['spinner'], params: { ...SHEET, spin_hum: true, spin_hum_slots: 16, spin_hum_angle: 0 } },

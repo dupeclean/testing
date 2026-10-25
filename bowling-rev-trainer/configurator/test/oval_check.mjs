@@ -24,7 +24,7 @@ await page.waitForFunction(() => window.__cfgApp && window.__cfgApp.ready, null,
 
 const IN = 25.4;
 // the owner's sheet as drilled: thumb 25/32 with a 29/32 oval at 55 degrees, reverse 3/4 fingers
-const SHEET = { print_allowance: 0, hand: 'right', thumb_d: 25 / 32 * IN, thumb_oval_d: 29 / 32 * IN, thumb_oval_angle: 55,
+const SHEET = { print_allowance: 0, hand: 'right', pap_track: false, thumb_d: 25 / 32 * IN, thumb_oval_d: 29 / 32 * IN, thumb_oval_angle: 55,
   middle_d: 21 / 32 * IN, ring_d: 5 / 8 * IN, span_middle: 4.125 * IN, span_ring: 4.3125 * IN, bridge: 0.5 * IN,
   thumb_fwd: 0, thumb_lat: -0.125, middle_fwd: -0.75, middle_lat: -0.25, ring_fwd: -0.75, ring_lat: 0.25,
   thumb_bevel: 4, finger_bevel: 2.5, serial: '', weight_pocket: false, lanyard: false };

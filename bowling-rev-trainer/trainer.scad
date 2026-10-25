@@ -108,12 +108,18 @@ pap_given = false;
 pap_ring = true;
 // Ring centre-line radius, width and pocket depth (keep in sync with configurator/app.js G.ring_*)
 ring_r = 30; ring_w = 4; ring_depth = 3;
-// Track ring: a second-colour inlay ring on the great circle 90 degrees from the axis point (two arcs glued into a channel)
+// Track ring: a second-colour inlay ring on the line the ball rolls on about the axis point (two arcs glued into a channel)
 pap_track = true;
 // Channel width as cut (the app adds its print allowance), arc width, depth and the gap between the arcs' ends (keep in sync with G.track_*)
 track_w = 12; track_arc_w = 12; track_depth = 2; track_gap = 1;
 // Where the track would run through a grip hole it is interrupted, stopping this far short of the hole's bevel
-track_clear = 3;
+track_clear = 1.5;
+// Axis tilt (degrees) the track ring is drawn for: 0 = the ball rolls end over end about the axis point (the ring
+// is its equator); a tilted release rolls on a smaller ring nearer the axis point. The ring sits 90 - track_tilt from it.
+track_tilt = 0;
+track_angle = 90 - track_tilt;
+// The flat foot cut under the standing arcs (never more than 3/4 of the rim's drop)
+track_foot = 0.8;
 
 /* [Release gate] */
 // Height of the loose pins that stand on the gate segments (the ball knocks one down)
@@ -379,14 +385,19 @@ module pap_cut(R, s) {
     }
 }
 
-// The track: a channel on the great circle 90 degrees from the axis point (the track the ball rolls on
-// when it spins about the PAP), for two second-colour inlay arcs; it runs through a grip hole where a
-// real track does
+// The track ring: a channel on the line the ball rolls on when it spins about the axis point with track_tilt
+// of axis tilt (track_angle from it), for two second-colour inlay arcs; where it runs through a grip hole
+// the guards stop it short of the bevel
+// the slab (axis frame, axis = z) that cuts a band of half-angle beta (degrees) round polar angle theta
+module zone_slab(R, theta, beta) {
+    z0 = R*cos(theta + beta); z1 = R*cos(theta - beta);
+    translate([0, 0, (z0 + z1)/2]) cube([2*R + 10, 2*R + 10, z1 - z0], center = true);
+}
 module track_cut(R, s) {
     d = pap_dir(R);
     difference() {
         translate([0, 0, R - s]) rotate([0, acos(d[2]), atan2(d[1], d[0])]) intersection() {
-            cube([2*R + 10, 2*R + 10, track_w], center = true);
+            zone_slab(R, track_angle, (track_w/2)/R*180/PI);
             difference() { sphere(r = R + 3); sphere(r = R - track_depth); }
         }
         track_guards(R, s);
@@ -404,31 +415,39 @@ module track_guards(R, s) {
     }
 }
 
-// The two track arcs: the belt the channel holds, cut on the ball itself (the grip holes and the flat
-// notch it where they meet the track), then brought back to the bed with the ball's placement undone,
-// so it stands on edge round the origin, split at the track's two side points with a gap. (The app
-// also drops any piece under 150 mm3; this reference does not.)
+// The two track arcs: the belt the channel holds, cut on the ball itself (the flat, and the holes the
+// ring runs through), then brought back to the bed with the ball's placement undone so the
+// axis points up, stood on its lower rim with a small flat foot cut (the rim is a cone: its inner corner
+// is the lowest point), split at the ring's two side points with a gap. (The app also drops any piece
+// under 150 mm3; this reference does not.)
 module track_arcs() {
     R = ball_d/2;
     s = ball_flat > 0 ? R - sqrt(max(0, R*R - (ball_flat/2)*(ball_flat/2))) : 0;
     H = 2*R - s;
     d = pap_dir(R); b = acos(d[2]); c = atan2(d[1], d[0]);
-    translate([0, 0, track_arc_w/2]) difference() {
-        rotate([0, -b, 0]) rotate([0, 0, -c]) translate([0, 0, -(R - s)]) difference() {
-            intersection() {
-                translate([0, 0, R - s]) rotate([0, b, c]) intersection() {
-                    cube([2*R + 10, 2*R + 10, track_arc_w], center = true);
-                    difference() { sphere(r = R); sphere(r = R - track_depth); }
+    beta = (track_arc_w/2)/R*180/PI;
+    phi_l = track_angle + beta;
+    z_low = min(R*cos(phi_l), (R - track_depth)*cos(phi_l));
+    foot = min(track_foot, 0.75*track_depth*abs(cos(phi_l)));
+    translate([0, 0, -foot]) difference() {
+        intersection() {
+            translate([0, 0, -z_low]) rotate([0, -b, 0]) rotate([0, 0, -c]) translate([0, 0, -(R - s)]) difference() {
+                intersection() {
+                    translate([0, 0, R - s]) rotate([0, b, c]) intersection() {
+                        zone_slab(R, track_angle, beta);
+                        difference() { sphere(r = R); sphere(r = R - track_depth); }
+                    }
+                    translate([-R - 1, -R - 1, 0]) cube([2*R + 2, 2*R + 2, H + 1]);
                 }
-                translate([-R - 1, -R - 1, 0]) cube([2*R + 2, 2*R + 2, H + 1]);
+                if (thumb_hole)
+                    drill(0, -ty, thumb_d, ball_thumb_depth, thumb_fwd, thumb_lat, H, +1, false, R, ov_t, thumb_oval_angle, thumb_bevel);
+                drill(x_m, thumb_hole ? y_m : 0, middle_d, finger_depth, middle_fwd, middle_lat, H, -1, false, R, ov_m, finger_oval_angle, finger_bevel);
+                drill(x_r, thumb_hole ? y_r : 0, ring_d,   finger_depth, ring_fwd,   ring_lat,   H, -1, false, R, ov_r, finger_oval_angle, finger_bevel);
+                track_guards(R, s);
             }
-            if (thumb_hole)
-                drill(0, -ty, thumb_d, ball_thumb_depth, thumb_fwd, thumb_lat, H, +1, false, R, ov_t, thumb_oval_angle, thumb_bevel);
-            drill(x_m, thumb_hole ? y_m : 0, middle_d, finger_depth, middle_fwd, middle_lat, H, -1, false, R, ov_m, finger_oval_angle, finger_bevel);
-            drill(x_r, thumb_hole ? y_r : 0, ring_d,   finger_depth, ring_fwd,   ring_lat,   H, -1, false, R, ov_r, finger_oval_angle, finger_bevel);
-            track_guards(R, s);
+            translate([0, 0, R + foot]) cube([2*R + 20, 2*R + 20, 2*R], center = true);   // the flat foot
         }
-        cube([2*R + 12, track_gap, track_arc_w + 2], center = true);
+        cube([2*R + 12, track_gap, 2*R + 20], center = true);
     }
 }
 

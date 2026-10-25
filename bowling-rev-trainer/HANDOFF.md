@@ -132,9 +132,9 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    slice with the job-sheet settings, add colour changes at 93.4, 105.4 and 154 mm and check
    that each lands on a groove ring. Two sessions tried to do this from the PC; one was refused
    desktop control and the other was blocked by a "New version of Bambu Studio" dialog.
-2. DONE (owner's go-ahead each time): `C:\FitSlice` holds the build of 2026-10-24 12:27 (item 16: oval toward the thumb side,
-   track ring, PAP angle, PLA support interface; the 2026-10-23 11:15 build it replaced is in
-   `C:\FitSlice-old-2026-10-24`), and before that the build of 2026-10-23 11:15 (review
+2. DONE (owner's go-ahead each time): `C:\FitSlice` holds the build of 2026-10-24 20:53 (item 18: the roll-line track ring with the
+   axis-tilt field, on top of item 16; the 12:27 build it replaced is in `C:\FitSlice-old-2026-10-24-b`
+   and the 2026-10-23 11:15 build in `C:\FitSlice-old-2026-10-24`), and before that the build of 2026-10-23 11:15 (review
    fixes, feedback parts, axis target ring, PAP on the sheet, spot pattern, two-colour 3MF, groove
    floors following the surface, build stamp in the title bar, Download 3MF button), installed
    by renaming the old folder and extracting the zip; the owner had FitSlice open each time and said
@@ -323,7 +323,62 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    re-exported with `ball_stripe` switched to `none` and saved: 6 files (ball STL 4123.4 cm3,
    `axis_inlays_D12_ring60_track12.stl` 20.3 cm3 in 6 bodies, gate, fit sheet, job sheet stamped
    build 2026-10-24 12:27, card); the old 3MF and inlays file went to `superseded`. Committed and
-   pushed the same day.
+   pushed the same day (1fb4d52). Superseded the same evening by item 17.
+17. Track ring placed clear of the holes (2026-10-24 evening; the owner, looking at the re-exported
+   ball: "shouldn't the band not go thru the thumb hole?"). With a 5 1/2" PAP the equator about the
+   axis passes 17 mm from the thumb centre, so a 12 mm band cannot clear the thumb bevel, and the
+   item-16 interruption still read as a band through the hole. Now `trackPlan()` (shared by the ball
+   and the inlays) picks the largest circle about the axis point, searching outward from 90 deg in
+   0.5 deg steps within `G.track_min` 45 to `G.track_max` 110, that keeps `G.track_clear` 3 mm clear
+   of every grip hole (bore + oval + bevel), the resting flat and both bullseye pockets; any circle
+   about the axis stands still when the axis is right, and a smaller one is the track of a
+   higher-tilt release. On the owner's sheet the ring sits at 54 deg (the track of a release with
+   36 deg of tilt), a 162 mm circle round the bullseye, nowhere near the holes. Only when nothing in
+   range clears does the ring stay on the equator and get interrupted (the item-16 guards). The
+   channel and arcs are cut as a zone between polar angles theta +- beta (`zoneSlab`; band width
+   measured along the surface). The arcs stand on their lower rim, which is a cone, so a flat foot
+   is cut at the inner corner (`G.track_foot` 0.8 mm, never more than 3/4 of the rim's drop, nothing
+   on a great circle) and they lean inward about 36 deg: on the owner's sheet two identical pieces
+   168.5 x 83.8 x 9.7 mm, 6.0 cm3 each, no notches. `stats.pap.track.angle_deg`; the plugs part now
+   also reports `pap.track` so the parity check can pass `track_angle` to the SCAD (`track_angle`,
+   `track_foot`, `zone_slab` in trainer.scad; the SCAD does not search, it takes the angle). Job
+   sheet, card, UI help, START-HERE, release-feedback and the ball-first plan say where the ring
+   sits and why. oval_check's cases now set `pap_track: false` (the ring's angle is the feedback
+   check's business). Results: engine_check 26/26 (9b asserts 45-70 deg on the owner's sheet and 90
+   deg with a PAP 100 mm over), e2e 18/18 from source and 18/18 packaged, feedback_check all ok with
+   parity gate 0.9999, plugs 0.9989, inlays 0.9954 (the 54 deg arcs match better than the 90 deg
+   ones did), inlays_notrack 0.9988, dots_ball 0.9991, track_ball 0.9991, hum 0.9984; the channel
+   takes 12.1 cm3 out of the ball; oval_check all ok (its cases now set `pap_track: false` and pass
+   the pap_* keys to the SCAD, parity 0.9991 / 0.9988 / 0.9988 / 0.9991 / 0.9988). Never installed:
+   superseded by item 18 the same evening, when the owner said what the ring is for.
+18. The ring is the roll line (2026-10-24 evening; the owner: "i want that ring to be basically the
+   line you want the ball to follow via those rpms based on their pap"). The item-17 "largest clear
+   circle" is gone. `trackPlan()` now puts the ring (90 - `track_tilt`) deg from the axis point: the
+   circle the ball rolls on when it spins about the PAP with that axis tilt. `track_tilt` is a new
+   field (Ball screen, under the track checkbox; `TRACK_TILT` 0-45 deg, default 0 = end over end, the
+   ring is the equator about the axis point; store.js `track_tilt` num def 0; SCAD `track_tilt`,
+   `track_angle = 90 - track_tilt`, passed by the parity check). Where that line runs through a grip
+   hole, as a real track does (on the owner's sheet the thumb and the middle finger at 0 deg tilt; the
+   ring finger too at 20 deg), the channel and the arc stop `G.track_clear` = 1.5 mm short of the
+   bevel (the item-16 guards), so the grip is untouched and that arc comes in pieces; the notes, job
+   sheet, card, UI help, START-HERE, release-feedback and the ball-first plan say so ("roll it right
+   and the ball rolls along the ring while the ring holds still"). The arcs keep the item-17 flat foot
+   (nothing is cut on a great circle). Results: engine_check 26/26 (9b: equator + thumb and middle
+   finger at 0 deg, 70 deg and the ring finger at 20 deg, 50 deg refused, a PAP 100 mm over clears
+   the holes), e2e 18/18 from source and 18/18 packaged, oval_check all ok, feedback_check all ok with
+   parity gate 0.9999, plugs 0.9989, inlays 0.9923 (need 0.99), inlays_notrack 0.9988, dots_ball
+   0.9991, track_ball 0.9991, tilt_ball 0.9991 (20 deg tilt), hum 0.9984; the first parity run
+   failed on inlays (0.9830) because the SCAD still had track_clear 3 while the engine had 1.5, fixed
+   in the SCAD. The job sheet and START-HERE then gained the support threshold angle 45 (the owner
+   asked what angle to use: supports then hold the whole underside up to 29 mm above the flat) and
+   the zip was rebuilt (`app/dist/FitSlice-1.0.0-win-x64.zip`, 2026-10-24 evening). Installed at
+   `C:\FitSlice` the same evening on the owner's go-ahead (FitSlice was open and was closed as
+   authorised, nothing unsaved; the 12:27 build went to `C:\FitSlice-old-2026-10-24-b`). FS-0002
+   re-exported unchanged: 6 files, job sheet stamped build 2026-10-24 20:53 with the track-ring and
+   threshold-45 lines. The owner had meanwhile saved his own PAP in the order (4 1/2" over, 2" up,
+   `pap_given` true), so on his ball the roll line runs through the thumb hole only: the inlays
+   file is 20.2 cm3 in 7 bodies (one arc whole, the other in two pieces of 176 and 43 mm).
+   Committed and pushed the same evening.
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 

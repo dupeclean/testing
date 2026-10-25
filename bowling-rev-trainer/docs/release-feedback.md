@@ -68,13 +68,17 @@ in the first half-metre of the roll.
   Inlay ring: 56/64 mm, flat underneath so it prints flat, top following the ball's surface.
   Plugs and rings ship in one second-colour STL (`plugs`, named `axis_inlays_...`; `axis_plugs_...`
   with the ring off). Without inlays the pockets still read as dark marks.
-- Track ring (`pap_track`, on by default; added 2026-10-24 after the first print): a 12 mm channel
-  2 mm deep on the great circle 90 degrees from the axis point, the track the ball rolls on when it
-  spins about the PAP. Where it would run through a grip hole (as a track does on a real ball) the
-  channel is interrupted, stopping 3 mm short of the hole's bevel. Two second-colour arcs for it
-  ship in the inlays file, standing on edge, interrupted the same way (so one may come in pieces),
-  flattened at the flat, split at the track's two side points with a 1 mm gap; glued in and sanded
-  flush. Like the bullseye it stays put when the axis is right and wobbles when it is
+- Track ring (`pap_track`, on by default, with `track_tilt`; added 2026-10-24 after the first
+  print): a 12 mm channel 2 mm deep on the line the ball rolls on when it spins about the axis
+  point with `track_tilt` degrees of axis tilt, the circle (90 - tilt) degrees from the axis point.
+  The default tilt is 0: end over end, the ring is the ball's equator about the axis point. Where
+  that line runs through a grip hole (with a common PAP it runs through the thumb and a finger
+  hole, as a real track does) the channel stops 1.5 mm short of the bevel, so the grip is untouched
+  and that arc comes in pieces. Two second-colour arcs for it ship in the inlays file, standing on
+  their lower rim with a small flat foot cut (the rim is a cone when the ring is tilted), split at
+  the ring's two side points with a 1 mm gap; glued in and sanded flush. Roll it right and the ball
+  rolls along the ring while the ring holds still. (An earlier version the same day moved the ring
+  to the largest circle clear of the holes; the owner wanted the roll line itself.) Like the bullseye it stays put when the axis is right and wobbles when it is
   not, and unlike the bullseye it shows from behind as the ball rolls away. The earlier horizontal
   spot and band patterns (layer colour swaps) had no relation to the PAP; they remain as options,
   off by default. A second-colour track by layer swaps is not possible in this print orientation
