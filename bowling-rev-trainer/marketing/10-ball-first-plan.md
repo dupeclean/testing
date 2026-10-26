@@ -40,21 +40,23 @@ Everything in this section comes from the exported job sheet and `START-HERE.txt
 
 | Fact | Value |
 |---|---|
-| Size and weight | 200 mm ball; about 475 g of PETG at 3 walls and 5% infill (`[PRINT LOG]` replaces this with the sliced figure) |
+| Size and weight | 200 mm ball; about 700 g of PETG at 4 walls and 8% gyroid infill (`[PRINT LOG]` replaces this with the sliced figure) |
 | Grip | The customer's drill sheet: thumb, middle and ring sizes in 1/64" steps, both spans, forward/reverse and lateral pitch on every hole, oval thumb if the sheet gives one, right or left hand, bevelled hole edges (thumb 4 mm, fingers 2.5 mm) |
 | Thumb | Blind, 70 mm deep by default, set from the customer's thumb length; or no thumb hole for a two-handed bowler (the finger holes then sit centred on top) |
 | Finger depth, bridge | 24 mm; bridge from the sheet (1/2" default) |
 | Resting flat | A 22 mm flat on the bottom so it sits still on a shelf and stands on the build plate |
-| Axis target | Two 12 mm sockets, each inside a 60 mm ring pocket, at the axis point (the PAP) and the opposite point; plugs and rings print in the second colour and press in. PAP from the drill sheet when the shop measured it (over, then up, along the surface from the centre of the grip; from the middle of the finger holes on a no-thumb ball), otherwise the common position (5 1/2" over, 1/2" up) |
+| Axis target | Two 12 mm sockets, each inside a 60 mm ring pocket, at the axis point (the PAP) and the opposite point; plugs and rings print in the second colour and press in. PAP from the drill sheet when the shop measured it (over, then up, along the surface from the centre of the grip; from the middle of the finger holes on a no-thumb ball), otherwise the forward-roll axis: 90° round from the grip centre, straight out the sides of the ball (6 11/16" over, 0 up on a regulation ball), the axis of the yo-yo roll |
 | Second colour | The axis bullseyes and a 12 mm track ring on the line the ball rolls on about the axis point, all printed inlays (plugs, rings and two arcs) pressed or glued in; the ball body is one colour. An optional layer pattern (spot, cap, bands) by filament swaps remains in the Second colour list, then exported as a Bambu Studio 3MF with both colours assigned (verified to open as one object in two colours, 23 October) |
 | Engraving | The order number, 0.5 mm into the flat |
 | Files per order | ball STL, ball 3MF (only with a layer pattern), `axis_inlays_D12_ring60_track12.stl`, `release_gate_210mm_pin100.stl`, fit sheet (JSON), job sheet, customer card (PDF) |
 | Release gate | In every ball order's files: dovetailed segments and loose 20 mm pins 210 mm apart that the ball knocks down 1.5 to 2 m out; about 65 g and a short print per segment. Not a product yet (Section 3) |
-| Print | PETG (or PLA), 0.2 mm layers, 3 walls, 5% gyroid infill, grip holes up, tree supports on the build plate only with the support interface in the other material (PLA under PETG) so they drop off clean, random or scarf seam. Inlays: 100% infill, no supports; the arcs stand on edge |
+| Print | PETG, 0.2 mm layers, 4 walls, 8% gyroid infill, 5 top and bottom layers, a hot nozzle and a low fan, grip holes up, tree supports on the build plate only with the support interface in the other material (PLA under PETG) so they drop off clean, random or scarf seam. Inlays: 100% infill, no supports; the arcs stand on edge |
 
-**How it is used** (the drill on the customer card): kneel, swing low, let it go along a strip of tape on the floor with a couch or wall 1.5 to 2 m away. It rolls and curves off the line, or it does not. The customer card lists what each outcome shows (roll and curve: thumb out, fingers lifted; straight and lively: forward roll; straight and short: dumped; pops up: thumb hung up; spins in place: hand on top) and the bullseye reading (stands still as the ball rolls away: the ball spun about the axis point; wheels round: it did not). How those readings are worded in public copy is governed by Section 6.
+**How it is used** (the drill on the customer card): kneel, swing low, let it go along a strip of tape on the floor with a couch or wall 1.5 to 2 m away. It rolls and curves off the line, or it does not. The customer card lists what each outcome shows (roll and curve: thumb out, fingers lifted, hand coming round the ball; straight and lively: forward roll, hand behind the ball; straight and short: dumped; pops up: thumb hung up; spins in place: hand on top) and the behind-the-ball reading: the bullseyes sit at the forward-roll axis, straight out the sides, so a yo-yo roll (hand behind the ball, fingers lifting straight) keeps them still at the ball's centre height with the track ring rolling along the tape, while a hand that comes round the ball has its axis swung round by the carpet in the first foot, so the bullseye swings back, the ring wobbles and the path kinks. A bullseye at the bowler's own PAP (the sheet option) is read in the first frames of a slow-motion clip, not on the roll. How those readings are worded in public copy is governed by Section 6.
 
-**What it is not.** Not a bowling ball, not a regulation anything, never thrown, never used on a lane. 200 mm against a regulation 8.5 inches (216 mm); about 475 g against 6 to 16 pounds. It is rolled on carpet from a kneeling swing.
+**What carpet does to the axis (worked 26 October 2026).** A 200 mm, 700 g ball released at 2 m/s and 150 rpm stops slipping within 10 to 30 cm of carpet, and while it slips the friction swings its spin axis inside the ball by about two thirds of the axis rotation it was released with: 0° of rotation leaves the axis where it was; 20° swings it 14° (25 mm across the surface) and kinks the path 6°; 45° swings it 33° (57 mm) and kinks the path 12°. So a hook release's bullseye swings on carpet whether the release was right or not. A straight forward roll (the yo-yo release: hand behind the ball, fingers lifting straight up the back) is the one release whose axis holds, and its axis sits 90° round from the grip centre, straight out the sides of the ball, for every bowler, because a straight finger lift turns the ball about the line between the finger holes. That is why the bullseyes and the track ring sit at the forward-roll axis unless the sheet gives a PAP, and why the card reads them as a behind-the-ball check rather than a verdict on a hook release. A smooth floor doubles the slip distance; a slow-motion clip shows the axis at release before the floor moves it.
+
+**What it is not.** Not a bowling ball, not a regulation anything, never thrown, never used on a lane. 200 mm against a regulation 8.5 inches (216 mm); about 700 g against 6 to 16 pounds. It is rolled on carpet from a kneeling swing.
 
 ---
 
@@ -77,7 +79,7 @@ Everything in this section comes from the exported job sheet and `START-HERE.txt
 
 | Item | Online sale at $129 | Hand-delivered at $99 | Basis |
 |---|---|---|---|
-| PETG: ball 475 g, inlays 10 g, supports `[PRINT LOG]` | $13 | $13 | $25/kg; supports guessed at 40 g |
+| PETG: ball 700 g, inlays 20 g, supports `[PRINT LOG]` | $19 | $19 | $25/kg; supports guessed at 40 g |
 | Machine time, 12 to 15 h | $3 | $3 | Part 5.2 basis, scaled from 11 h |
 | Labour: supports off, scar sanded, roll check, bores checked, inlays pressed, pack | $8 | $8 | 25 min at $20/h |
 | Box (9 by 9 by 9 in), padding, card | $5 | $0 | *estimate* |
@@ -102,12 +104,12 @@ FS-0002 is printing. Before anyone else's sheet goes in, it passes every line:
 | Pitches | Forward/reverse and lateral feel the same as on the drilled ball; if they feel backwards, the pitch sign is wrong (`HANDOFF.md` item 3) and nothing ships until it is fixed and re-verified |
 | Thumb depth | 70 mm is right for the founder's thumb, or the right value is known |
 | Roll | After the support scar is sanded, the ball rolls straight on carpet from a push with no visible wobble |
-| Axis target | Plugs and rings press in and stay in; the bullseye reads from 2 m while the ball rolls away |
-| Track ring | The arcs seat flush in the channel; the ring reads from behind as the ball rolls away |
+| Axis target | Plugs and rings press in and stay in; rolled straight forward with the hand behind the ball, the bullseyes sit still at centre height and read from 2 m; rolled with the hand round the side, the bullseye swings back in the first foot |
+| Track ring | The arcs seat flush in the channel; on a forward roll the ring stays under the ball along the tape and reads from behind |
 | Print log | Actual time and grams from Bambu Studio, and the support weight, written into Section 3's table (`[PRINT LOG]`) |
 | Gate | Segments link, pins stand, a rolled ball knocks a pin down at 1.5 to 2 m; if it does not earn its place, it stays out of the box |
 
-The clip is filmed on this ball: phone on the floor, the ball rolling away along the tape, the bullseye still. That is the hero asset for everything in Section 5 and it costs nothing.
+The clip is filmed on this ball: phone on the floor, the ball rolling straight away along the tape from a behind-the-ball release, the bullseye still; then one with the hand round the side, the bullseye swinging back. That is the hero asset for everything in Section 5 and it costs nothing.
 
 ### 4.2 Weeks 1 to 4: ten balls for ten people the founder bowls with
 
@@ -169,20 +171,22 @@ Same three colours, same rules. These are proposed until counsel has read them w
 **Green: product facts**
 
 - "Built from your drill sheet: hole sizes in 1/64" steps, both spans, forward/reverse and lateral pitch for every hole, on a 200 mm ball." (Model fact, as the puck's. "Exact" about the printed bore only after Section 4.3.)
-- "A 200 mm practice ball, about 475 g, rolled on carpet. Not a bowling ball, never thrown." (Product fact and use.)
-- "The dot and ring sit at your axis point, from your sheet if your shop measured it. When the ball spins about that axis they stand still." (Physical fact about a marked sphere.)
+- "A 200 mm practice ball, about 700 g, rolled on carpet. Not a bowling ball, never thrown." (Product fact and use.)
+- "The bullseyes and the track ring sit at the forward-roll axis, straight out the sides of the ball, or at your own axis point if your sheet gives it. When the ball spins about that axis they stand still." (Physical fact about a marked sphere.)
+- "Stay behind the ball, fingers lifting straight up the back, and the bullseyes sit still as it rolls away; come round the ball and they swing back." (What a rolling sphere does on carpet: the carpet swings the axis of a turned release in the first foot; Section 2.)
 - "The second colour marks your axis point and your track, as printed inlays, not paint." (Product fact.)
 - "Your order number is in the base. Your sheet is on file." (Product fact.)
 
 **Yellow: with the qualifier**
 
-- "*Designed to show* what the hand did: it rolls and curves off the line, or it does not." (Not "tells you your release is right". The ball shows an outcome; reading that outcome as thumb and fingers is the coaching consensus `01` already attributes.)
+- "*Designed to show* what the hand did: it rolls and curves off the line, or it does not, and the bullseyes sit still or swing back." (Not "tells you your release is right". The ball shows an outcome; reading that outcome as thumb, fingers and the hand behind or round the ball is the coaching consensus `01` already attributes.)
+- "*Practise* staying behind the ball, the yo-yo roll, with your own holes." (Not "teaches" or "fixes".)
 - "*Practice* a clean, early thumb exit and let the fingers lift, with your own holes." (Not "fixes" or "improves".)
 - "*To our knowledge*, the first practice ball built from your actual drill sheet."
 
 **Red: unchanged**
 
-- Any number for revs, hook, pins or average; "feels exactly like your ball"; "approved"; any ball company's name; results in testimonials without the typical-result disclosure.
+- Any number for revs, hook, pins or average; "feels exactly like your ball"; "approved"; any ball company's name; results in testimonials without the typical-result disclosure; the bullseye standing still on a hook release, or any reading of the bullseye as a verdict on a hook release (on carpet the carpet swings that axis whatever the hand did).
 
 **Lines for the ball** (each tied to a true property, like Part 6's):
 
@@ -261,14 +265,14 @@ Tagline: Roll it. Read it.
 
 **Description**
 
-The Rev Ball is a 200 mm practice ball printed from your drill sheet: thumb, middle and ring hole sizes in 1/64" steps, both spans, forward or reverse and lateral pitch on every hole, right or left hand, or no thumb hole for a two-handed bowler. About 475 g in PETG. Rolled on carpet from a kneeling swing, never thrown. It is not a bowling ball.
+The Rev Ball is a 200 mm practice ball printed from your drill sheet: thumb, middle and ring hole sizes in 1/64" steps, both spans, forward or reverse and lateral pitch on every hole, right or left hand, or no thumb hole for a two-handed bowler. About 700 g in PETG. Rolled on carpet from a kneeling swing, never thrown. It is not a bowling ball.
 
 **Details**
 
 - Built from your drill sheet: hole sizes in 1/64" steps, both spans, forward/reverse and lateral pitch for every hole, oval thumb if your sheet gives one.
 - Blind thumb hole, 70 mm deep or set from your thumb length. Two-handed: no thumb hole, finger holes centred on top.
-- A bullseye at your axis point and at the opposite point: a printed dot inside a printed ring, in the second colour. If your shop measured your PAP, enter it and the bullseye goes there; otherwise it goes at the common position. When the ball spins about that axis, the bullseye stands still.
-- The track ring in the second colour: the line the ball rolls on when it spins about your axis point. Roll it right and the ball rolls along the ring.
+- Two bullseyes, a printed dot inside a printed ring in the second colour, at the forward-roll axis: straight out the sides of the ball, the axis it spins about when your hand stays behind it and the fingers lift straight up the back, like throwing a yo-yo. Stay behind the ball and they sit still as it rolls away; come round the ball and they swing back. If your shop measured your PAP, enter it and the bullseyes go there instead (read in slow motion, as the card explains).
+- The track ring in the second colour: the line the ball rolls on about that axis, up through the thumb hole, between the fingers and over the top. Stay behind the ball and the ring rolls along the tape under it; come round the ball and it wobbles.
 - A flat on the bottom so it sits still on a shelf.
 - Designed to show what the hand did: roll it along a strip of tape toward the couch, and it rolls and curves off the line, or it does not. The card in the box lists the readings.
 - Bores are smoothed by hand before shipping. Finish the fit with bowler's tape, as on your ball.
@@ -276,7 +280,7 @@ The Rev Ball is a 200 mm practice ball printed from your drill sheet: thumb, mid
 
 **What you need to order**
 
-Your drill sheet (the same list as the Rev Puck page), plus: through or no thumb hole; your thumb length to the first joint if you want the blind hole set to it; your PAP (over, then up) if your pro shop measured it; your two colours.
+Your drill sheet (the same list as the Rev Puck page), plus: through or no thumb hole; your thumb length to the first joint if you want the blind hole set to it; your PAP (over, then up) if your pro shop measured it, otherwise the bullseyes go at the forward-roll axis for the yo-yo roll; your two colours.
 
 Enter it in the configurator and the 3D preview shows your holes, your axes and the bullseye before you order. If you completed a Fit Kit, enter the sizes from your fitting card. If you do not have your sheet, your pro shop usually has it on file.
 
@@ -319,9 +323,9 @@ bowling practice ball · custom bowling · bowling release trainer · bowling dr
 
 Your drill sheet, in a ball you can roll at home.
 
-The FitSlice Rev Ball is a 200 mm practice ball, 3D printed from your drill sheet: thumb, middle and ring hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch on every hole, right or left hand, or with no thumb hole if you bowl two-handed. It weighs about 475 g. You roll it on carpet from a kneeling swing along a strip of tape toward the couch, and it rolls and curves off the line, or it does not. The card in the box lists what each outcome shows.
+The FitSlice Rev Ball is a 200 mm practice ball, 3D printed from your drill sheet: thumb, middle and ring hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch on every hole, right or left hand, or with no thumb hole if you bowl two-handed. It weighs about 700 g. You roll it on carpet from a kneeling swing along a strip of tape toward the couch, and it rolls and curves off the line, or it does not. The card in the box lists what each outcome shows.
 
-The second colour marks a bullseye (a dot inside a ring) at your axis point and the opposite point, and the track ring: the line the ball rolls on when it spins about that point. If your pro shop measured your PAP, send it and the marks go there. When the ball spins about that axis, the bullseye and the track ring stand still as it rolls away.
+The second colour marks two bullseyes (a dot inside a ring) at the forward-roll axis, straight out the sides of the ball, and the track ring: the line it rolls on about that axis, up through the thumb hole and between the fingers. Stay behind the ball, fingers lifting straight up the back like a yo-yo, and the bullseyes sit still and the ring rolls along the tape as it rolls away; come round the ball and they swing. If your pro shop measured your PAP, send it and the marks go there instead.
 
 What to send me: your drill sheet in the personalization box, using the template below. Your pro shop has your sheet on file; ask them for it. Fractions are fine.
 
@@ -363,9 +367,9 @@ Buyer limit is 1,024 characters. The template uses about 420.
 
 *Is it a bowling ball?* No. It is a 200 mm practice ball, rolled on carpet, never thrown.
 
-*What does the bullseye do?* It marks the axis the ball should spin about. When it does, the bullseye stands still as the ball rolls away. When the hand came round the ball some other way, it wheels round.
+*What does the bullseye do?* It marks the forward-roll axis, straight out the sides of the ball. Stay behind the ball and lift straight, and the bullseye stands still as the ball rolls away. Come round the ball and the carpet swings the axis in the first foot, so the bullseye swings back; the further it swings, the further round your hand came. If you send your own PAP the bullseye goes there instead, and you read it in a slow-motion clip of the release, because carpet swings a hook release's axis whether the release was right or not.
 
-*What is it made of?* PETG, 3 walls, 5% infill, with the bullseyes and the track ring as printed inlays in the second colour, bores smoothed by hand.
+*What is it made of?* PETG, 4 walls, 8% infill, with the bullseyes and the track ring as printed inlays in the second colour, bores smoothed by hand.
 
 *What if the holes do not fit?* Your sheet is stored with the order. If the ball does not match it, or does not roll true, I reprint it free within 30 days.
 

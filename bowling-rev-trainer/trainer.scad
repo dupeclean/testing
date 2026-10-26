@@ -98,13 +98,13 @@ band_z = -1;
 // Axis target dots: two plug sockets at the axis the release should spin about (the bowler's PAP)
 pap_marker = true;
 // Axis point, measured along the surface from the grip centre (mm): over toward the hand side, up toward the fingers
-pap_over = 139.7;   // 5 1/2"
-pap_up = 12.7;      // 1/2"
+pap_over = 169.646; // the forward-roll axis: 90 degrees round from the grip centre (6 11/16" on a regulation ball)
+pap_up = 0;
 // Socket diameter (add your print allowance) and depth; the plugs in part "plugs" match
 pap_socket_d = 12; pap_depth = 3;
-// The drill sheet gives the PAP (else the common 5 1/2" over, 1/2" up is used)
+// The drill sheet gives the bowler's own PAP (else the forward-roll axis, 90 degrees over, 0 up, is used)
 pap_given = false;
-// Axis target ring: a second-colour inlay ring round each dot (a bullseye that stands still when the axis is right)
+// Axis target ring: a second-colour inlay ring round each dot (a bullseye that stands still when the ball spins about the axis)
 pap_ring = true;
 // Ring centre-line radius, width and pocket depth (keep in sync with configurator/app.js G.ring_*)
 ring_r = 30; ring_w = 4; ring_depth = 3;
@@ -362,7 +362,7 @@ function pap_dir(R) =
         fy = unit3(thumb_hole ? fm - (fm*n)*n : [0, 1, 0] - n[1]*n),
         e0 = cross(fy, n),
         e  = unit3(e0 * (e0[0]*mir >= 0 ? 1 : -1)),
-        over = pap_given ? pap_over : 139.7, up = pap_given ? pap_up : 12.7,
+        over = pap_given ? pap_over : ball_R*PI/2, up = pap_given ? pap_up : 0,
         ao = over/ball_R*180/PI, au = up/ball_R*180/PI,   // the sheet's arcs are on a regulation ball: keep the angle
         q  = n*cos(ao) + e*sin(ao))
     q*cos(au) + fy*sin(au);

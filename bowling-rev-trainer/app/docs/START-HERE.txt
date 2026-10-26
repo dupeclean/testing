@@ -132,7 +132,10 @@ folder path from the old computer.
   type the engraved numbers as the hole sizes for that customer.
 - The REV BALL is the release trainer: a full 200 mm ball with the
   customer's grip. Choose the part "Ball" (or product "Rev Ball"). Slice
-  it with 3 walls and 5% infill, grip holes facing up. Supports: tree,
+  it in PETG (not PLA: it cracks) with 4 walls, 8% gyroid infill and 5
+  top and bottom layers, the nozzle at the top of the PETG range (about
+  250 C) and the part fan at 30 to 40% so the layers bond, grip holes
+  facing up. Supports: tree,
   "On build plate only" (so nothing grows inside the holes), and set the
   SUPPORT INTERFACE filament to one the ball will not bond to: PLA under
   a PETG ball, PETG under a PLA ball (Bambu Studio, Support tab:
@@ -140,7 +143,7 @@ folder path from the old computer.
   underside is held; top Z distance 0, 3 interface layers). The supports
   then drop off and leave the surface clean; plain
   PETG supports tear out and leave a scar. Seam: random or scarf (a seam
-  down one side would make it wobble). About 475 g and 10 to 14 hours.
+  down one side would make it wobble). About 700 g and 14 to 18 hours.
   The ball body prints in ONE colour. The second colour is the inlays
   file: the axis plugs and rings and the two track arcs (below), printed
   separately and pressed or glued in. The "Second colour" list adds an
@@ -150,36 +153,49 @@ folder path from the old computer.
   colour changes on the layer slider at the job-sheet heights, prime
   tower off). To use it: kneel, swing low, let it go along a strip of tape on
   the floor with a couch or wall 1.5 to 2 m away. Rolls and curves off
-  the line = thumb out first, fingers lifted. Straight but long and
-  lively = strong forward roll (fine). Straight and short = dumped. Pops
-  up = thumb hung up. Spins in place = hand on top. The thumb hole is
+  the line = thumb out first, fingers lifted, hand coming round the
+  ball. Straight but long and lively = forward roll, hand behind the
+  ball (fine). Straight and short = dumped. Pops up = thumb hung up.
+  Spins in place = hand on top. The thumb hole is
   blind (70 mm deep by default; set it from the customer's thumb length)
   like a real ball. For a two-handed bowler untick "Thumb hole": the two
   finger holes are then centred on top and there is no thumb hole.
 - AXIS TARGET (Rev Ball): the ball has two small sockets (12 mm), each
-  inside a 60 mm ring pocket, at the axis a good release spins it
-  about (the bowler's PAP) and at the opposite point. A Rev Ball order
-  also exports axis_inlays_D12_ring60.stl: two plugs and two rings to
-  print in the second colour (100% infill, flat side down, no supports)
-  and press in (a drop of glue if a ring is loose). The dot and ring
-  make a bullseye: when it stands still as the ball rolls away, the
-  release spun the ball about the right axis; when it wheels round, the
-  hand came round the ball some other way. Untick "Axis target ring"
-  for dots only, or "Axis target dots" for a plain ball (no inlays file
-  is exported then). The app warns if a dot or ring would land on a
-  grip hole or on the resting flat.
+  inside a 60 mm ring pocket, at the axis the ball should spin about
+  and at the opposite point. Unless the sheet gives the bowler's own
+  PAP (below) that axis is the FORWARD-ROLL AXIS: 90 degrees round from
+  the grip centre, straight out the sides of the ball (6 11/16" over,
+  0 up on a regulation ball). It is the axis a straight finger lift
+  spins the ball about with the hand behind it, the yo-yo roll, and it
+  is the one axis carpet lets a bowler read: a ball released with the
+  hand round the side has its axis swung round inside it in the first
+  foot as the carpet grabs (by about two thirds of the axis rotation),
+  so its bullseye swings whatever the release was. A Rev Ball order
+  also exports the inlays file: two plugs and two rings (and the track
+  arcs, below) to print in the second colour (100% infill, flat side
+  down, no supports) and press in (a drop of glue if a ring is loose).
+  The dot and ring make a bullseye: stay behind the ball and it sits
+  still at the ball's centre height as the ball rolls away; come round
+  the ball and it swings back, the further the further round the hand
+  came. Untick "Axis target ring" for dots only, or "Axis target dots"
+  for a plain ball (no inlays file is exported then). The app warns if
+  a dot or ring would land on a grip hole or on the resting flat.
   TRACK RING: a 12 mm channel 2 mm deep on the line the ball rolls on
   when it spins about the axis point. "Axis tilt" on the Ball screen sets
   which line: 0 (the default) is end over end, the ring is the ball's
   equator about the axis point; a tilted release rolls on a smaller ring
-  nearer the axis point. With a common PAP that line runs through the
-  thumb and a finger hole, as a real track does; the channel stops 1.5 mm
-  short of each bevel, so the arc comes in pieces there. The inlays file
-  holds the two second-colour arcs; they stand on their lower edge as
-  exported (no supports; give them a brim). Dry-fit, glue them into the
-  channel with CA glue and sand flush. Roll it right and the ball rolls
-  along the ring while the ring holds still.
-  Like the bullseye, the track ring stays put when the axis is right.
+  nearer the axis point. With the forward-roll axis that line is the
+  full roller's track: up through the thumb hole, between the fingers
+  and over the top, so the channel stops 1.5 mm short of each bevel it
+  meets and the arcs come in pieces (it also crosses the resting flat,
+  0.6 mm deep; the arc is flattened there). With a sheet PAP it runs
+  through the thumb and perhaps a finger hole. The inlays file holds
+  the second-colour arcs; they stand on their lower edge as exported
+  (no supports; give them a brim). Dry-fit, glue them into the channel
+  with CA glue and sand flush. Stay behind the ball and the ring rolls
+  along the tape under the ball while the ring holds still; come round
+  the ball and the carpet swings the axis, the ring wobbles and the
+  path kinks.
   Untick "Track ring" for a ball without it.
   THE PAP ON THE SHEET: if the shop measured the customer's PAP, tick
   "The sheet gives the axis point (PAP)" on the Drill sheet section of
@@ -189,8 +205,11 @@ folder path from the old computer.
   between the thumb hole and the middle of the two finger holes), or
   from the MIDDLE OF THE TWO FINGER HOLES on a two-handed, no-thumb
   ball, which is how a pro shop measures it. Leave the box unticked
-  when the sheet has no PAP: the ball then uses the common 5 1/2" over,
-  1/2" up, and the job sheet and customer card say so.
+  when the sheet has no PAP: the ball then uses the forward-roll axis
+  (above), and the job sheet and customer card say so. A sheet PAP is
+  the bowler's hook axis: on carpet it holds only in the first frames
+  of a slow-motion clip (about twice as far on a smooth floor), and the
+  card says so.
 - RELEASE GATE: the "click" for the ball. Loose pins (20 mm across,
   100 mm tall) stand in shallow cups on base segments that link end to
   end with dovetails, 210 mm apart for the 200 mm ball. The gate file

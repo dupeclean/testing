@@ -273,9 +273,9 @@ try {
   assert.ok(ballStl, 'ball STL exported: ' + readdirSync(join(ordersDir, f3)).join(', '));
   assert.ok(readdirSync(join(ordersDir, f3)).some(n => /^axis_inlays_D12_ring60_track12\.stl$/.test(n)), 'the inlays file carries the track arcs: ' + readdirSync(join(ordersDir, f3)).join(', '));
   const bs = readStl(join(ordersDir, f3, ballStl));
-  assert.ok(bs.volume_cm3 > 4000 && bs.volume_cm3 < 4200 && Math.abs(bs.height_mm - 198.9) < 0.2, `ball ${bs.volume_cm3} cm3, ${bs.height_mm} mm`);
+  assert.ok(bs.volume_cm3 > 4000 && bs.volume_cm3 < 4200 && Math.abs(bs.height_mm - 198.7) < 0.2, `ball ${bs.volume_cm3} cm3, ${bs.height_mm} mm`);   // 198.7: the resting flat below, and the track channel (forward-roll axis) across the pole above
   const ballJob = readFileSync(join(ordersDir, f3, 'job_sheet.txt'), 'utf8');
-  assert.match(ballJob, /Rev Ball: 200 mm ball/); assert.match(ballJob, /Supports: tree, "On build plate only"/); assert.match(ballJob, /Filament for support interface/); assert.match(ballJob, /Track ring: a 12 mm channel 2 mm deep/); assert.match(ballJob, /seam: random or scarf/); assert.match(ballJob, /5% gyroid/); assert.match(ballJob, /Ball drill/);
+  assert.match(ballJob, /Rev Ball: 200 mm ball/); assert.match(ballJob, /Supports: tree, "On build plate only"/); assert.match(ballJob, /Filament for support interface/); assert.match(ballJob, /Track ring: a 12 mm channel 2 mm deep/); assert.match(ballJob, /seam: random or scarf/); assert.match(ballJob, /4 walls, 8% gyroid infill/); assert.match(ballJob, /about 250 C/); assert.match(ballJob, /Ball drill/);
   assert.match(ballJob, /OVAL HOLES[\s\S]*Thumb: 25\/32" \(19\.84 mm\) drilled, 29\/32" \(23\.02 mm\) oval at 55 deg/, 'oval thumb on the job sheet');
   assert.match(ballJob, /thumb bevel 4 mm, finger bevel 2\.5 mm \(rounded\)/); assert.match(ballJob, /modeled 23\.42 mm the long way/); assert.match(ballJob, /Engraved in the base: FS-0003/);
   assert.match(ballJob, /FILES[\s\S]*customer_card\.pdf/);

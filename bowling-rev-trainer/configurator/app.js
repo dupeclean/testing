@@ -64,17 +64,23 @@ const DEFAULTS = {
   serial: '',                // engraved in the base, e.g. the order number FS-0001 (digits, F, S and - only)
   // Release gate: loose pins on linked base segments across the tape line; the ball knocks one down
   gate_pin_h: 100,
-  // Axis target dots on the ball: two plug sockets at the axis the release should spin about (the
-  // bowler's PAP), as surface distances from the grip centre: over toward the hand side, up toward
-  // the fingers. Spin it right and the dot stands still while the rest of the ball blurs.
-  // pap_given: the drill sheet gives the PAP (else the common 5 1/2" over, 1/2" up is used); it is
-  // measured from the centre of the grip, or from the middle of the fingers on a no-thumb ball.
-  // pap_ring: a second-colour inlay ring round each dot, a bullseye that stands still when the axis is right.
+  // Axis target dots on the ball: two plug sockets at the axis the ball should spin about, as surface
+  // distances from the grip centre: over toward the hand side, up toward the fingers. Spin the ball about
+  // that axis and the dot stands still while the rest of the ball blurs.
+  // pap_given: the drill sheet gives the bowler's own PAP. Else the FORWARD-ROLL AXIS is used: 90 degrees
+  // round from the grip centre, straight out the sides of the ball (6 11/16" over, 0 up on a regulation
+  // ball), the axis a straight finger lift spins the ball about with the hand behind it (the yo-yo roll).
+  // On carpet that is the only release whose axis holds: a hook release's axis swings round inside the
+  // ball in the first foot as the carpet grabs (by about two thirds of the axis rotation), so its bullseye
+  // swings whatever the hand did. The PAP is measured from the centre of the grip, or from the middle of
+  // the fingers on a no-thumb ball.
+  // pap_ring: a second-colour inlay ring round each dot, a bullseye that stands still when the ball spins about the axis.
   // pap_track: the track ring, a 12 mm second-colour ring on the line the ball rolls on when it spins about
-  // the axis point (two inlay arcs glued into a channel); like the bullseye it stays put when the axis is right.
+  // the axis point (two inlay arcs glued into a channel); it rolls along the floor under the ball when the ball
+  // spins about the axis, and wobbles when the carpet swings the axis.
   // track_tilt: the axis tilt (degrees) that line is drawn for: 0 = end over end about the axis point (the
   // ring is its equator); a tilted release rolls on a smaller ring nearer the axis point.
-  pap_marker: true, pap_given: false, pap_over: 5.5 * IN, pap_up: 0.5 * IN, pap_ring: true, pap_track: true, track_tilt: 0,
+  pap_marker: true, pap_given: false, pap_over: G.R * Math.PI / 2, pap_up: 0, pap_ring: true, pap_track: true, track_tilt: 0,
   // Humming spinner (experimental, off by default): a hollow ring chamber with slanted slots through
   // the top. Spun fast enough it hums, and keeps humming as long as the spin stays above that speed,
   // so the strength and carry of the finger lift can be heard.
@@ -512,7 +518,7 @@ function makeBuilder(W) {
 
   // Rev Ball: a full sphere with the bowler's grip at the top and a small flat underneath so it can
   // stand on the print bed. Released on the floor it rolls and hooks (or does not), which shows the
-  // release. Solid in the model; the slicer makes it light (3 walls, about 5% infill).
+  // release. Solid in the model; the slicer makes it light (4 walls, 8% gyroid infill: about 700 g).
   // Where the track ring goes: the line the ball rolls on when it spins about the axis point with
   // p.track_tilt degrees of axis tilt, the circle (90 - tilt) degrees from the axis point (0 tilt: the
   // equator about the axis, end over end). A real track runs through the grip holes it meets, so where
@@ -619,8 +625,8 @@ function makeBuilder(W) {
       }
       if (p.pap_track) {
         // The track ring: a channel on the line the ball rolls on when it spins about the axis point
-        // (trackPlan), for two second-colour inlay arcs (part "plugs"). Roll it right and the ball rolls
-        // along the ring while the ring stays put; when it wobbles, the axis is off.
+        // (trackPlan), for two second-colour inlay arcs (part "plugs"). Spun about the axis, the ball rolls
+        // along the ring and the ring holds still; the carpet swings any other axis round and the ring wobbles.
         const wC = G.track_w + p.print_allowance;                               // the channel, with the allowance
         const plan = trackPlan(p, D, thumb, mid, ring, dirOf, d, R, s, wC);
         const rotT = [0, Math.acos(clamp1(d[2])) / DEG, Math.atan2(d[1], d[0]) / DEG];
@@ -1296,7 +1302,7 @@ async function main() {
       if (k === 'thumb_hole') $('ball_thumb_rows').hidden = !state.thumb_hole;
       if (k === 'pap_marker') $('pap_rows').hidden = !state.pap_marker;
       if (k === 'pap_given') {
-        // without a PAP on the sheet the ball uses the common position, and the fields show it
+        // without a PAP on the sheet the ball uses the forward-roll axis, and the fields show it
         if (!state.pap_given) { state.pap_over = DEFAULTS.pap_over; state.pap_up = DEFAULTS.pap_up; markGood($('pap_over')); markGood($('pap_up')); showLengths(); }
         $('pap_over').disabled = $('pap_up').disabled = !state.pap_given;
       }
@@ -1349,7 +1355,7 @@ async function main() {
     $('save_3mf').hidden = noDirect || !data.colorParts;
     $('save_bundle').textContent = noDirect ? 'Download STL bundle (.zip)' : data.colorParts ? 'Download bundle (.zip: STL + 3MF + fit sheet)' : 'Download bundle (.zip: STL + fit sheet)';
     const infill = parseFloat($('infill').value);
-    const shell = Math.min(data.volume, data.area * (p.part === 'ball' ? 1.3 : 1.6));
+    const shell = Math.min(data.volume, data.area * (p.part === 'ball' ? 1.8 : 1.6));   // 4 walls on the ball
     const grams = (shell + (data.volume - shell) * infill) * 1.27 / 1000;
     $('stat_size').textContent = `${data.bbox.map(v => v.toFixed(0)).join(' × ')} mm`;
     $('stat_weight').textContent = `≈ ${Math.round(grams / 5) * 5} g`;
@@ -1500,9 +1506,10 @@ async function main() {
         data.warnings.forEach(w => warnings.push(`${part}: ${w}`));
         (data.notes || []).forEach(t => notes.push(`${part}: ${t}`));
         axes[part] = data.axes.map(a => ({ name: a.name, p: a.p, dir: a.dir }));
-        // the ball is sliced with 3 walls and 5% infill, the other parts with 4 walls and 20%
-        const infill = part === 'ball' ? 0.05 : 0.2;
-        const shell = Math.min(data.volume, data.area * (part === 'ball' ? 1.3 : 1.6));
+        // the ball is sliced with 4 walls and 8% gyroid infill (a drop onto a floor must not crack it),
+        // the other parts with 4 walls and 20%
+        const infill = part === 'ball' ? 0.08 : 0.2;
+        const shell = Math.min(data.volume, data.area * (part === 'ball' ? 1.8 : 1.6));
         const grams = Math.round(((shell + (data.volume - shell) * infill) * 1.27 / 1000) / 5) * 5;
         stats.push({ part, volume_cm3: +(data.volume / 1000).toFixed(1), bbox_mm: data.bbox.map(v => +v.toFixed(1)),
           grams, infill_pct: infill * 100, grams_20pct: grams, color_changes: data.colorChanges, pattern: data.pattern, gate: data.gate, pap: data.pap, hum: data.hum });

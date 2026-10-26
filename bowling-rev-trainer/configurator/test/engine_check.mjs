@@ -198,15 +198,15 @@ assert.ok(Math.abs(d1[0] + d2[0]) < 1e-9 && Math.abs(d1[2] + d2[2]) < 1e-9, 'the
 assert.ok(d1[0] > 0.9 || d2[0] > 0.9, 'right hand: the axis point is far over on the hand (+x) side: ' + JSON.stringify([d1, d2]));
 const dotsL = await build({ ...SHEET, hand: 'left' }, ['ball']);
 assert.ok(dotsL.axes.ball.filter(a => a.name === 'axis').some(a => a.dir[0] < -0.9), 'left hand mirrors the axis point');
-assert.ok(dots.stats[0].pap && dots.stats[0].pap.points.length === 2 && Math.abs(dots.stats[0].pap.over_mm - 139.7) < 0.01, 'pap data on the stats: ' + JSON.stringify(dots.stats[0].pap));
+assert.ok(dots.stats[0].pap && dots.stats[0].pap.points.length === 2 && Math.abs(dots.stats[0].pap.over_mm - 169.65) < 0.01 && dots.stats[0].pap.up_mm === 0 && Math.abs(dots.stats[0].pap.over_ball_mm - 157.1) < 0.2, 'pap data on the stats (the forward-roll axis, 90 degrees over): ' + JSON.stringify(dots.stats[0].pap));
 assert.ok(dots.stats[0].pap.from === 'the centre of the grip' && dots.stats[0].pap.given === false && dots.stats[0].pap.ring && dots.stats[0].pap.ring.r_mm === 30, 'pap reference, source and ring on the stats: ' + JSON.stringify(dots.stats[0].pap));
 const ringCm3 = noRing.stats[0].volume_cm3 - dots.stats[0].volume_cm3;
 assert.ok(noRing.ok && ringCm3 > 4 && ringCm3 < 8, 'two ring pockets take about 6 cm3 out of the ball: ' + ringCm3);
 r = await build({ ...SHEET, thumb_hole: false }, ['ball']);
 assert.ok(r.ok && r.warnings.length === 0 && r.stats[0].pap.from === 'the middle of the two finger holes', 'a no-thumb ball measures the PAP from the middle of the fingers: ' + (r.message || JSON.stringify([r.warnings, r.stats[0].pap])));
-// the sheet's PAP is used only when the sheet gives one; otherwise the common position, whatever the fields hold
+// the sheet's PAP is used only when the sheet gives one; otherwise the forward-roll axis, whatever the fields hold
 r = await build({ ...SHEET, pap_given: false, pap_over: 50, pap_up: 0 }, ['ball']);
-assert.ok(r.ok && r.bytes[0] === dots.bytes[0] && Math.abs(r.stats[0].pap.over_mm - 139.7) < 0.01, 'without a PAP on the sheet the common position is used');
+assert.ok(r.ok && r.bytes[0] === dots.bytes[0] && Math.abs(r.stats[0].pap.over_mm - 169.65) < 0.01, 'without a PAP on the sheet the forward-roll axis is used');
 r = await build({ ...SHEET, pap_given: true, pap_over: 50, pap_up: 0 }, ['ball']);
 assert.ok(r.ok && r.bytes[0] !== dots.bytes[0] && r.stats[0].pap.given === true && r.stats[0].pap.over_mm === 50, 'the sheet PAP moves the target');
 r = await build({ ...SHEET, pap_given: true, pap_over: 40, pap_up: 30 }, ['ball']);
@@ -234,13 +234,15 @@ ok('axis target: dots at the PAP (sheet or common, from the grip centre or the f
 // 9b. the track ring: a channel round the axis point, placed to clear the grip holes, and two inlay arcs for it
 r = await build(SHEET, ['ball']);
 const tk = r.stats[0].pap.track;
-assert.ok(tk && tk.w_mm === 12 && tk.depth_mm === 2 && Array.isArray(tk.crosses) && tk.on_flat === false, 'track stats: ' + JSON.stringify(tk));
+assert.ok(tk && tk.w_mm === 12 && tk.depth_mm === 2 && Array.isArray(tk.crosses) && tk.on_flat === true, 'track stats (the forward-roll ring crosses the resting flat): ' + JSON.stringify(tk));
 const noTrack = await build({ ...SHEET, pap_track: false }, ['ball']);
 const trackVol = noTrack.stats[0].volume_cm3 - r.stats[0].volume_cm3;
 assert.ok(trackVol > 11 && trackVol < 17 && noTrack.stats[0].pap.track === null, 'the channel takes about 15 cm3 out of the ball and reports nothing when off: ' + trackVol);
-assert.ok(tk.angle_deg === 90 && tk.tilt_deg === 0 && tk.crosses.includes('thumb') && tk.crosses.includes('middle finger') && !tk.crosses.includes('ring finger') && r.notes.some(n => /rolls on when it spins about the axis point end over end/.test(n) && /runs through the thumb and middle finger holes/.test(n)), 'with no tilt the ring is the equator about the axis point and, on the owner\'s sheet, runs through the thumb and middle finger: ' + JSON.stringify([tk, r.notes]));
+assert.ok(tk.angle_deg === 90 && tk.tilt_deg === 0 && tk.crosses.length === 3 && r.notes.some(n => /rolls on when it spins about the axis point end over end/.test(n) && /runs through the thumb and middle finger and ring finger holes/.test(n)) && r.notes.some(n => /across the resting flat/.test(n)), 'with no tilt the ring is the equator about the axis point and, on the owner\'s sheet, runs through the thumb and middle finger: ' + JSON.stringify([tk, r.notes]));
 r = await build({ ...SHEET, track_tilt: 20 }, ['ball']);
-assert.ok(r.ok && r.stats[0].pap.track.angle_deg === 70 && r.stats[0].pap.track.tilt_deg === 20 && r.stats[0].pap.track.crosses.includes('ring finger'), 'a 20 degree tilt puts the ring 70 degrees from the axis point, through the ring finger on this sheet: ' + JSON.stringify(r.stats[0].pap.track));
+assert.ok(r.ok && r.stats[0].pap.track.angle_deg === 70 && r.stats[0].pap.track.tilt_deg === 20 && r.stats[0].pap.track.crosses.length === 0 && !r.stats[0].pap.track.on_flat, 'a 20 degree tilt puts the ring 70 degrees from the forward-roll axis, clear of the holes and the flat: ' + JSON.stringify(r.stats[0].pap.track));
+r = await build({ ...SHEET, pap_given: true, pap_over: 139.7, pap_up: 12.7, track_tilt: 20 }, ['ball']);
+assert.ok(r.ok && r.stats[0].pap.track.angle_deg === 70 && r.stats[0].pap.track.crosses.includes('ring finger'), 'about a sheet PAP 5 1/2 over, 1/2 up the same tilt runs the ring through the ring finger: ' + JSON.stringify(r.stats[0].pap.track));
 r = await build({ ...SHEET, track_tilt: 50 }, ['ball']);
 assert.equal(r.ok, false); assert.match(r.message, /Axis tilt/);
 r = await build({ ...SHEET, pap_given: true, pap_over: 100, pap_up: 12.7 }, ['ball']);

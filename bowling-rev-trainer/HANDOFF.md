@@ -132,7 +132,9 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    slice with the job-sheet settings, add colour changes at 93.4, 105.4 and 154 mm and check
    that each lands on a groove ring. Two sessions tried to do this from the PC; one was refused
    desktop control and the other was blocked by a "New version of Bambu Studio" dialog.
-2. DONE (owner's go-ahead each time): `C:\FitSlice` holds the build of 2026-10-24 20:53 (item 18: the roll-line track ring with the
+2. DONE (owner's go-ahead each time): `C:\FitSlice` holds the build of 2026-10-26 10:18 (items 19 and 20: the durable print defaults
+   and the forward-roll axis; the 2026-10-24 20:53 build it replaced is in `C:\FitSlice-old-2026-10-26`),
+   and before that the build of 2026-10-24 20:53 (item 18: the roll-line track ring with the
    axis-tilt field, on top of item 16; the 12:27 build it replaced is in `C:\FitSlice-old-2026-10-24-b`
    and the 2026-10-23 11:15 build in `C:\FitSlice-old-2026-10-24`), and before that the build of 2026-10-23 11:15 (review
    fixes, feedback parts, axis target ring, PAP on the sheet, spot pattern, two-colour 3MF, groove
@@ -378,7 +380,54 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    threshold-45 lines. The owner had meanwhile saved his own PAP in the order (4 1/2" over, 2" up,
    `pap_given` true), so on his ball the roll line runs through the thumb hole only: the inlays
    file is 20.2 cm3 in 7 bodies (one arc whole, the other in two pieces of 176 and 43 mm).
-   Committed and pushed the same evening.
+   Committed and pushed the same evening (f973b9a).
+19. Durable print defaults for the ball (2026-10-26; the owner asked what to do for durability and
+   took the advice). The job sheet and START-HERE now say: PETG (not PLA: it cracks), 4 walls, 8%
+   gyroid infill, 5 top and bottom layers, nozzle at the top of the PETG range (about 250 C) with the
+   part fan at 30 to 40% so the layers bond; the filament estimate uses a 1.8 mm shell and 8%
+   (`buildFiles` and `showStats` in app.js), so a 200 mm ball reads about 710 g (was 475 g at 3
+   walls / 5%); the UI help and the ball-first plan say about 700 g; e2e asserts the new line.
+   Engine 26, store 26, e2e 18 from source. Packaged, installed and committed together with item 20
+   on 2026-10-26 (see there).
+20. The forward-roll axis is the ball's default axis; the readings follow the carpet physics
+   (2026-10-26; the owner: "ensure this does what I claim ... a way to help people stay behind the
+   ball, with a yo-yo release"). Worked on a uniform 200 mm, 700 g ball (I about 0.5 m R^2; the
+   scratchpad script `carpet_swing.py`): carpet stops the slip within 10 to 30 cm and the friction
+   swings the spin axis inside the ball by about two thirds of the axis rotation at release (45 deg
+   of rotation: a 33 deg swing, 57 mm on the surface, a 12 deg kink in the path; 0 deg: none), so
+   the old card reading ("bullseye still = axis right; wheels = hand came round") was wrong for
+   every hook release, and a straight forward roll (the yo-yo release) spins about an axis 90 deg
+   round from the grip centre (a straight finger lift turns the ball about the line between the
+   finger holes), not about a bowler's hook PAP. Changes: `DEFAULTS.pap_over = G.R * Math.PI / 2`
+   (169.65 mm, 6 11/16"), `pap_up = 0` (was 5 1/2" over, 1/2" up); store.js defs 169.65 / 0;
+   trainer.scad `pap_over = 169.646`, `pap_up = 0`, `pap_dir` falls back to `ball_R*PI/2`, 0. With
+   it the ring at 0 tilt is the full roller's track (thumb, between the fingers, over the top): on
+   the owner's sheet it crosses all three holes and the resting flat (arcs in three pieces, 7.1 /
+   5.3 / 1.2 cm3; the flat is 0.6 mm deep, the arc flattened there) and the channel across the pole
+   lowers the ball's bbox by 0.2 mm (e2e now expects 198.7). `pap_given` keeps the sheet PAP. Copy:
+   the card has a STAYING BEHIND THE BALL (THE YO-YO ROLL) block for the default axis (still at
+   centre height = behind the ball; swings back = came round, the ring wobbles, the path kinks) and
+   a YOUR AXIS POINT block for a sheet PAP (read in the first frames of a slow-motion clip; a smooth
+   floor holds it twice as far); the card's axis line now prints the engine's values (`pb.over_mm`),
+   not the stale fit fields; readings say "hand coming round the ball" / "hand behind the ball" and
+   "more curve = more side rotation, or more revs"; job sheet, START-HERE, template help, the kit
+   (axis row, how-it-is-used, a "What carpet does to the axis" paragraph, 4.1 rows, section 6: a new
+   green and yellow claim and a red one, product page, Etsy description, FAQ) and release-feedback
+   section 2 rewritten to match. Tests: engine_check 26/26 (default 169.65 / 0 and 157.1 mm on the
+   ball, ring crosses 3 holes + on_flat true, tilt 20 clears the holes about the forward-roll axis
+   and still crosses the ring finger about a sheet PAP 5 1/2 / 1/2), store 26, e2e 18 from source.
+   Parity (engine vs OpenSCAD, 2026-10-26 09:32 to 09:57): feedback PASS (gate 0.9999, plugs 0.9989, inlays
+   0.9925, inlays_notrack 0.9988, dots_ball / track_ball / tilt_ball 0.9991, hum 0.9984; the track channel
+   13.7 cm3; the arcs 3 pieces), oval PASS (0.9991 / 0.9988 / 0.9988 / 0.9991 / 0.9988). The tilt_ball check
+   in feedback_check.py no longer compares volumes (about the forward-roll axis the 70 deg ring clears the
+   holes and lands within 0.5 cm3 of the 90 deg one); it probes the surface 70 deg from the axis point
+   toward the bottom: 2.01 mm deep on tilt_ball, 0.02 on track_ball. Packaged 2026-10-26 10:18 (`app/dist/FitSlice-1.0.0-win-x64.zip`), packaged
+   e2e 18/18, installed at `C:\FitSlice` on the owner's go-ahead (FitSlice was not running; the 20:53
+   build went to `C:\FitSlice-old-2026-10-26`). FS-0002 re-exported unchanged: 6 files, job sheet
+   stamped build 2026-10-26 10:18 with the new axis and track lines, the card's YOUR AXIS POINT block
+   (the order has the owner's own PAP), inlays 20.2 cm3 in 7 bodies as before. Committed and pushed
+   with item 19 the same morning. Old orders saved with `pap_given` false re-export with
+   the forward-roll axis (the engine ignores their stale 139.7 / 12.7 fields), which is intended.
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 

@@ -48,6 +48,19 @@ bullseye sits still while the rest blurs; spin about another axis and it wheels 
 how a pro shop reads a positive axis point (PAP), and the ring makes it readable from 2 m away
 in the first half-metre of the roll.
 
+Since 26 October 2026 the default axis (no PAP on the sheet) is the forward-roll axis: 90° round
+from the grip centre, straight out the sides of the ball (6 11/16" over, 0 up on a regulation ball),
+in place of the earlier common position (5 1/2" over, 1/2" up). Reason: on carpet the ball stops
+slipping within 10 to 30 cm, and while it slips the friction swings the spin axis inside the ball
+by about two thirds of the axis rotation it was released with (45° of rotation: a 33° swing, 57 mm
+across the surface, and a 12° kink in the path), so a hook release's bullseye swings whether the
+release was right or not. Only a straight forward roll (the yo-yo release) keeps its axis, and that
+axis sits at 90° over for every bowler, because a straight finger lift turns the ball about the line
+between the finger holes. The card now reads the bullseye and the ring as a behind-the-ball check:
+still at centre height = the hand stayed behind the ball; swung back = it came round. A sheet PAP
+stays the option, read in the first frames of a slow-motion clip (a smooth floor holds it about
+twice as far).
+
 - The PAP is taken the way a pro shop measures it, along the surface with a tape: from the
   **centre of the grip** (midway between the thumb hole and the middle of the two finger holes)
   on a thumb-in ball, or from the **middle of the two finger holes** on a no-thumb ball; `over`
@@ -72,14 +85,15 @@ in the first half-metre of the roll.
   print): a 12 mm channel 2 mm deep on the line the ball rolls on when it spins about the axis
   point with `track_tilt` degrees of axis tilt, the circle (90 - tilt) degrees from the axis point.
   The default tilt is 0: end over end, the ring is the ball's equator about the axis point. Where
-  that line runs through a grip hole (with a common PAP it runs through the thumb and a finger
-  hole, as a real track does) the channel stops 1.5 mm short of the bevel, so the grip is untouched
+  that line runs through a grip hole (with the forward-roll axis it runs up through the thumb and
+  between the fingers, the full roller's track; with a sheet PAP through the thumb and perhaps a
+  finger hole) the channel stops 1.5 mm short of the bevel, so the grip is untouched
   and that arc comes in pieces. Two second-colour arcs for it ship in the inlays file, standing on
   their lower rim with a small flat foot cut (the rim is a cone when the ring is tilted), split at
-  the ring's two side points with a 1 mm gap; glued in and sanded flush. Roll it right and the ball
-  rolls along the ring while the ring holds still. (An earlier version the same day moved the ring
-  to the largest circle clear of the holes; the owner wanted the roll line itself.) Like the bullseye it stays put when the axis is right and wobbles when it is
-  not, and unlike the bullseye it shows from behind as the ball rolls away. The earlier horizontal
+  the ring's two side points with a 1 mm gap; glued in and sanded flush. Stay behind the ball and
+  the ball rolls along the ring while the ring holds still. (An earlier version the same day moved the ring
+  to the largest circle clear of the holes; the owner wanted the roll line itself.) Like the bullseye it stays put when the ball spins about the axis and wobbles when
+  the carpet swings the axis, and unlike the bullseye it shows from behind as the ball rolls away. The earlier horizontal
   spot and band patterns (layer colour swaps) had no relation to the PAP; they remain as options,
   off by default. A second-colour track by layer swaps is not possible in this print orientation
   (the ring crosses nearly every layer: about 1,900 filament changes), which is why it is an inlay.
