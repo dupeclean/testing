@@ -323,7 +323,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
 
       <fieldset data-only-part="ball">
         <legend>Rev Ball</legend>
-        <p class="howto" style="margin:0 0 10px">A release trainer: kneel, swing low, let it go onto the floor along a strip of tape and watch what it does. Thumb out first, fingers lifting and the hand coming round makes it <b>roll and curve</b> off the line; the hand behind the ball and the fingers lifting straight makes it <b>roll straight, long and lively</b>; a dump rolls straight and short; a hung-up thumb pops it up. Printed solid-looking but sliced light (4 walls, 8% gyroid infill, about 700 g at 200 mm). It needs supports under its lower half; sand the scar smooth. A second colour makes the spin easy to see: the slicer swaps filament at the heights FitSlice gives you, so a small spot above the grip holes (or the full cap) and a band come out in the other colour; FitSlice places them from the layout, the band clear of the bullseyes, and the .3mf in the download carries the colours already assigned. The <b>axis target</b> (dots and rings, set below) marks the axis the ball should spin about: the forward-roll axis, straight out the sides, unless the sheet gives the bowler's own PAP. Stay behind the ball and lift straight, like throwing a yo-yo, and the bullseye sits still at the ball's centre height as it rolls away; come round the ball and the carpet swings the axis in the first foot, so the bullseye swings back. Its contrasting plugs and rings come in their own file.</p>
+        <p class="howto" style="margin:0 0 10px">A release trainer: kneel, swing low, let it go onto the floor along a strip of tape and watch what it does. Thumb out first, fingers lifting and the hand coming round makes it <b>roll and curve</b> off the line; the hand behind the ball and the fingers lifting straight makes it <b>roll straight, long and lively</b>; a dump rolls straight and short; a hung-up thumb pops it up. Printed solid-looking but sliced light (4 walls, 8% gyroid infill, about 700 g at 200 mm). It needs supports under its lower half; sand the scar smooth. A second colour makes the spin easy to see: the slicer swaps filament at the heights FitSlice gives you, so a small spot above the grip holes (or the full cap) and a band come out in the other colour; FitSlice places them from the layout, the band clear of the bullseyes, and the .3mf in the download carries the colours already assigned. The <b>axis target</b> (dots and rings, set below) marks the axis the ball should spin about: the forward-roll axis, straight out the sides, unless the sheet gives the bowler's own PAP. Stay behind the ball and lift straight, like throwing a yo-yo, and the bullseye sits still at the ball's centre height as it rolls away; come round the ball and the carpet swings the axis in the first foot, so the bullseye swings back. That is drill 1 on the card. Drill 2 is the proper release: a phone on the floor behind the bowler shows the ring opening from a straight line into an oval as the hand turns through the ball, and the opening is the release angle, read against the scale printed on the card (half open is 30&deg;, three quarters 45&deg;; a lean is axis tilt); the gate's pin one or two over is the hook target. Its contrasting plugs and rings come in their own file.</p>
         <div class="row">
           <label class="field"><span>Ball diameter</span>
             <span class="row" style="gap:6px"><input type="text" id="ball_d" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
@@ -2389,10 +2389,34 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
     }
     return out;
   }
-  // lines: [{ t: text, b: bold?, s: size, gap: extra space after }]
+  // The release-angle scale: the track ring seen from a phone on the floor behind the release point.
+  // The ring turns with the hand, so it is a straight line on a forward roll and opens into an oval
+  // as the hand turns through the ball; width over height is the sine of the release angle.
+  function ovalScale(yTop) {
+    const ops = ['q 1.2 w 0 0 0 RG'], ry = 17, cy = yTop - ry - 2, k = 0.5523;
+    [[0, '0\u00b0 yo-yo'], [30, '30\u00b0'], [45, '45\u00b0 hook'], [60, '60\u00b0']].forEach(([deg, label], i) => {
+      const cx = 120 + i * 118, rx = ry * Math.sin(deg * Math.PI / 180), n = (v) => v.toFixed(1);
+      if (rx < 0.5) ops.push(`${cx} ${n(cy - ry)} m ${cx} ${n(cy + ry)} l S`);
+      else ops.push(`${n(cx + rx)} ${n(cy)} m`,
+        `${n(cx + rx)} ${n(cy + k * ry)} ${n(cx + k * rx)} ${n(cy + ry)} ${cx} ${n(cy + ry)} c`,
+        `${n(cx - k * rx)} ${n(cy + ry)} ${n(cx - rx)} ${n(cy + k * ry)} ${n(cx - rx)} ${n(cy)} c`,
+        `${n(cx - rx)} ${n(cy - k * ry)} ${n(cx - k * rx)} ${n(cy - ry)} ${cx} ${n(cy - ry)} c`,
+        `${n(cx + k * rx)} ${n(cy - ry)} ${n(cx + rx)} ${n(cy - k * ry)} ${n(cx + rx)} ${n(cy)} c S`);
+      ops.push(`0.5 w ${cx - 24} ${n(cy - ry - 2)} m ${cx + 24} ${n(cy - ry - 2)} l S 1.2 w`);   // the floor
+      ops.push(`BT /F1 8.5 Tf ${n(cx - 22)} ${n(cy - ry - 13)} Td (${pdfEscape(label)}) Tj ET`);
+    });
+    ops.push('Q');
+    return ops;
+  }
+  // lines: [{ t: text, b: bold?, s: size, gap: extra space after }] or { scale: true } for the oval scale
   function makePdf(lines) {
     const pages = [[]]; let y = 740;
     for (const ln of lines) {
+      if (ln.scale) {
+        if (y < 60 + 56) { pages.push([]); y = 740; }
+        pages[pages.length - 1].push(...ovalScale(y)); y -= 56 + (ln.gap || 0);
+        continue;
+      }
       const size = ln.s || 10.5, lead = size * 1.35;
       for (const piece of wrap(ln.t, Math.floor(1000 / size))) {
         if (y < 60) { pages.push([]); y = 740; }
@@ -2429,6 +2453,7 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
     const hasPuck = parts.includes('puck'), hasSpin = parts.includes('spinner'), hasSizer = parts.includes('sizer'), hasBall = parts.includes('ball'), hasGate = parts.includes('gate');
     const hasThumb = (hasPuck || hasBall) && !(hasBall && f.thumb_hole === false);
     const both = (mm) => `${fraction64(mm / IN)}" (${Math.round(mm * 100) / 100} mm)`;
+    const hookSide = f.hand === 'left' ? 'right' : 'left';   // a hook curves toward the thumb side
     // "Jordan Lee" -> Jordan; "Lee, Jordan" -> Jordan
     const name = String(order.customer.name || '').trim();
     const first = (name.includes(',') ? name.split(',').slice(1).join(' ') : name).split(/[\s,]+/).filter(Boolean)[0] || 'there';
@@ -2452,31 +2477,37 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
       L.push({ t: `Thumb row centred on ${both(f.sizer_thumb_center)}, finger row centred on ${both(f.sizer_finger_center)}, in steps of ${f.sizer_step} mm. Each hole has its size engraved beside it.`, gap: 8 });
     }
     if (hasBall) {
-      L.push({ t: 'REV BALL: HOW TO USE IT', b: true, s: 12 });
-      L.push({ t: '1. Put a strip of tape on the floor, with a couch or wall 1.5 to 2 m beyond it. Carpet or a rug is best.' });
+      const eye = f.pap_ring ? 'bullseye' : 'dot', eyes = f.pap_ring ? 'bullseyes' : 'dots';
+      const line = f.thumb_hole === false ? 'between the finger holes, over the top and round' : 'up through the thumb hole, between the fingers, over the top and round';
+      const marks = f.pap_marker && !f.pap_given, ownPap = f.pap_marker && f.pap_given, ring = f.pap_marker && f.pap_track;
+      L.push({ t: 'REV BALL: TWO DRILLS, ONE BALL', b: true, s: 12 });
+      L.push({ t: `1. Put a strip of tape on the floor with a couch or wall 1.5 to 2 m beyond it${hasGate ? ', and the release gate across the tape there' : ''}. Carpet or a rug is best. A phone on the floor behind you, looking down the tape, reads the release.` });
       L.push({ t: '2. Kneel on one knee, swing the ball low along the tape and let it go, the way you release on the lane.' });
       L.push({ t: '3. Read what it does:', gap: 2 });
-      L.push({ t: '   Rolls and curves off the line: thumb out first, fingers lifted, hand coming round the ball. More curve = more side rotation, or more revs.' });
+      L.push({ t: '   Rolls and curves off the line: thumb out first, fingers lifted, hand turned through the ball. More curve = more side rotation, or more revs.' });
       L.push({ t: '   Straight but long and lively: forward roll, the hand behind the ball. Fine.' });
       L.push({ t: '   Straight and short: everything let go at once (a dump).' });
       L.push({ t: '   Pops up and lands late: the thumb hung up.' });
       L.push({ t: '   Spins in place: the hand came over the top.', gap: 4 });
-      if (f.pap_marker) {
-        const eye = f.pap_ring ? 'bullseye' : 'dot', eyes = f.pap_ring ? 'bullseyes' : 'dots';
-        const line = f.thumb_hole === false ? 'between the finger holes, over the top and round' : 'up through the thumb hole, between the fingers, over the top and round';
-        if (!f.pap_given) {
-          L.push({ t: 'STAYING BEHIND THE BALL (THE YO-YO ROLL)', b: true, s: 11 });
-          L.push({ t: `The two coloured ${eyes} sit at the forward-roll axis, straight out the sides of the ball: the axis it spins about when your hand stays behind it and the fingers lift straight up the back, like throwing a yo-yo.${f.pap_track ? ` The coloured ring is that roll line, ${line}.` : ''}` });
-          L.push({ t: `Stay behind the ball and ${f.pap_track ? 'the ring rolls along the tape, the holes go over the top' : 'the holes go over the top'} and both ${eyes} sit still at the ball's centre height as it rolls away. Come round the ball and the carpet swings the axis in the first foot: the ${eye} swings back${f.pap_track ? ', the ring wobbles' : ''} and the ball kinks off the line. The further it swings, the further round the ball your hand came.`, gap: 4 });
-        } else {
-          L.push({ t: 'YOUR AXIS POINT', b: true, s: 11 });
-          L.push({ t: `The two coloured ${eyes} sit at your own axis point (PAP) from your sheet${f.pap_track ? ', and the coloured ring is the line the ball rolls on when it spins about it' : ''}. Carpet grabs the ball in the first foot and swings the axis of a hook release round, so on a hook roll the ${eye} will not sit still even when the release is right: that is the carpet, not your hand. To check your axis, film the release in slow motion: in the first frames the ${eye} should hold still at the ball's centre height. A smooth floor holds it about twice as far.` });
-          L.push({ t: `To practise staying behind the ball, roll it straight forward with the hand behind it, like throwing a yo-yo: it then spins about an axis straight out its sides, not about this ${eye}, and the test is the path: straight, long and lively, with no kink.`, gap: 4 });
-        }
+      L.push({ t: 'DRILL 1: THE YO-YO ROLL (STAY BEHIND THE BALL)', b: true, s: 11 });
+      const yoyoStart = 'Hand behind the ball, thumb out first, fingers lifting straight up the back, like throwing a yo-yo.';
+      if (marks) {
+        L.push({ t: `${yoyoStart} The two coloured ${eyes} sit at that axis, straight out the sides of the ball${ring ? `, and the coloured ring is the line it rolls on, ${line}` : ''}. Done right: ${ring ? 'the ring rolls along the tape, the holes go over the top' : 'the holes go over the top'}, both ${eyes} sit still at the ball's centre height as it rolls away${hasGate ? ', and the centre pin of the gate falls' : ', and it runs straight down the tape'}. Come round the ball and the carpet swings the axis in the first foot: the ${eye} swings back${ring ? ', the ring wobbles' : ''} and the ball kinks off the line; the further it swings, the further round your hand came. Ten in a row with the ${eye} still, then drill 2.`, gap: 4 });
+      } else if (ownPap) {
+        L.push({ t: `${yoyoStart} Done right the ball runs straight, long and lively down the tape${hasGate ? ' and the centre pin of the gate falls' : ''}, with the holes going over the top. The two coloured ${eyes} on this ball sit at your own axis point (PAP) from your sheet, which is your hook axis, so on a yo-yo roll they wheel in a small circle rather than sit still: read the path, not the ${eye}. Ten straight ones in a row, then drill 2.`, gap: 4 });
+      } else {
+        L.push({ t: `${yoyoStart} Done right the ball runs straight, long and lively down the tape${hasGate ? ' and the centre pin of the gate falls' : ''}, with the holes going over the top. Ten in a row, then drill 2.`, gap: 4 });
       }
+      L.push({ t: 'DRILL 2: THE PROPER RELEASE (TURN THROUGH THE BALL)', b: true, s: 11 });
+      const ringRead = !ring ? 'The finger holes turn with your hand, so the phone behind you shows how far you turned.'
+        : marks ? 'The coloured ring turns with your hand, so the phone behind you shows your release angle: on a yo-yo roll the ring is a straight line, and it opens into an oval as the hand turns through the ball. Match the oval to the scale; a lean in the oval is axis tilt.'
+        : 'The coloured ring sits 90 degrees from your axis point, so at your hook release it turns with the ball\'s axis: the phone behind you shows it as an oval whose opening is your axis rotation. Match the oval to the scale; a lean in the oval is axis tilt.';
+      L.push({ t: `Same start, hand behind the ball. As the thumb leaves, the fingers lift and the hand turns through the ball to the handshake. ${ringRead}` });
+      if (ring) L.push({ scale: true, gap: 2 });
+      L.push({ t: `On carpet the ball then kinks off the tape to the ${hookSide}${hasGate ? ` and knocks down a pin one or two over to the ${hookSide}` : ''}${f.pap_marker ? `, and the ${eye} wheels in a circle whose size is your rotation` : ''}. Done right: the same ${ring ? 'oval, the same ' : ''}curve${hasGate ? ', the same pin' : ''}${f.pap_marker ? ' and the same circle' : ''} ten times in a row. Add speed and revs only once that holds.`, gap: 4 });
       const SPIN = { none: f.ball_groove ? 'The groove round the middle shows the spin.' : 'Watch the finger holes to see the spin.', spot: 'The coloured spot on top shows the spin.', spot_band: 'The coloured spot on top and the band show the spin.', cap: 'The coloured top cap shows the spin.', cap_band: 'The coloured cap and band show the spin.', bands: 'The coloured bands show the spin.' };
-      const spinTxt = f.pap_marker && f.pap_track ? `The track ring shows the spin.${f.ball_stripe && f.ball_stripe !== 'none' ? ' ' + (SPIN[f.ball_stripe] || '') : ''}` : (SPIN[f.ball_stripe] || SPIN.cap_band);
-      L.push({ t: `${spinTxt} Ten releases a day is plenty. It is a feedback tool, not a measuring instrument, and it is not a promise about your rev rate.`, gap: 8 });
+      const spinTxt = ring ? `The track ring shows the spin.${f.ball_stripe && f.ball_stripe !== 'none' ? ' ' + (SPIN[f.ball_stripe] || '') : ''}` : (SPIN[f.ball_stripe] || SPIN.cap_band);
+      L.push({ t: `${spinTxt} Ten releases of each drill a day is plenty. It is a feedback tool, not a measuring instrument, and it is not a promise about your rev rate.`, gap: 8 });
     }
     if (hasSpin && f.spin_hum) {
       L.push({ t: 'HUMMING SPINNER', b: true, s: 12 });
@@ -2484,7 +2515,7 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
     }
     if (hasGate) {
       L.push({ t: 'RELEASE GATE', b: true, s: 12 });
-      L.push({ t: 'Link the segments across the tape line 1.5 to 2 m away, with the tape through the groove on the middle one, and stand a pin in each cup. Before you start, pick the pin a good release should knock down: the centre pin for a straight, heavy roll; one or two over for a hook. The pin that falls, about a second after you let go, is your answer. The wrong pin falling tells you which way you missed.', gap: 8 });
+      L.push({ t: `Link the segments across the tape line 1.5 to 2 m away, with the tape through the groove on the middle one, and stand a pin in each cup. The centre pin is the yo-yo target: a ball rolled straight with the hand behind it knocks it down about a second after you let go. The pin one or two over to the ${hookSide} is your hook target: a proper release knocks the same one down every time. The wrong pin falling tells you which way you missed.`, gap: 8 });
     }
     if (hasPuck) {
       L.push({ t: 'REV PUCK: HOW TO USE IT', b: true, s: 12 });

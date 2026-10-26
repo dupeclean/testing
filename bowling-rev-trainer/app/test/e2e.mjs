@@ -282,7 +282,8 @@ try {
   const card = readFileSync(join(ordersDir, f3, 'customer_card.pdf'));
   assert.equal(card.subarray(0, 8).toString('latin1'), '%PDF-1.4'); assert.match(card.toString('latin1'), /%%EOF\n$/);
   const cardText = card.toString('latin1');
-  assert.ok(/Order FS-0003/.test(cardText) && /Ball Buyer|Hi Ball/.test(cardText) && /oval 29\/32/.test(cardText) && /REV BALL: HOW TO USE IT/.test(cardText), 'customer card carries the order, fit and instructions');
+  assert.ok(/Order FS-0003/.test(cardText) && /Ball Buyer|Hi Ball/.test(cardText) && /oval 29\/32/.test(cardText) && /REV BALL: TWO DRILLS, ONE BALL/.test(cardText) && /DRILL 1: THE YO-YO ROLL/.test(cardText) && /DRILL 2: THE PROPER RELEASE/.test(cardText) && /yo-yo target/.test(cardText), 'customer card carries the order, fit and the two drills');
+  assert.ok(/ l S\n/.test(cardText) && (cardText.match(/ c S\n/g) || []).length === 3 && /45\xb0 hook/.test(cardText), 'the card draws the release-angle scale: a line and three ovals with their labels');
   assert.equal(/example\.com|@/.test(cardText.replace(/%[^\n]*/g, '')), false, 'no contact details on the card');
   // keep the card and job sheet for a look (test/tmp is ignored by git)
   copyFileSync(join(ordersDir, f3, 'customer_card.pdf'), join(shotDir, 'customer_card.pdf')); copyFileSync(join(ordersDir, f3, 'job_sheet.txt'), join(shotDir, 'job_sheet_ball.txt'));

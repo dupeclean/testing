@@ -132,7 +132,9 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    slice with the job-sheet settings, add colour changes at 93.4, 105.4 and 154 mm and check
    that each lands on a groove ring. Two sessions tried to do this from the PC; one was refused
    desktop control and the other was blocked by a "New version of Bambu Studio" dialog.
-2. DONE (owner's go-ahead each time): `C:\FitSlice` holds the build of 2026-10-26 10:18 (items 19 and 20: the durable print defaults
+2. DONE (owner's go-ahead each time): `C:\FitSlice` holds the build of 2026-10-26 10:51 (item 21: two drills on the card with the
+   release-angle scale; the 10:18 build it replaced is in `C:\FitSlice-old-2026-10-26-b`), and before
+   that the build of 2026-10-26 10:18 (items 19 and 20: the durable print defaults
    and the forward-roll axis; the 2026-10-24 20:53 build it replaced is in `C:\FitSlice-old-2026-10-26`),
    and before that the build of 2026-10-24 20:53 (item 18: the roll-line track ring with the
    axis-tilt field, on top of item 16; the 12:27 build it replaced is in `C:\FitSlice-old-2026-10-24-b`
@@ -428,6 +430,32 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    (the order has the owner's own PAP), inlays 20.2 cm3 in 7 bodies as before. Committed and pushed
    with item 19 the same morning. Old orders saved with `pap_given` false re-export with
    the forward-roll axis (the engine ignores their stale 139.7 / 12.7 fields), which is intended.
+21. Two drills, one ball: the card carries both releases (2026-10-26, later; the owner: "i want the
+   ball to train on the yo yo as well as proper release. that is the entire purpose of the product",
+   then "i want the product itself to promote these things"). No geometry change. The instrument for
+   the proper release is the ring itself: it turns with the finger line, so a phone on the floor
+   behind the release point sees it as a straight line on a forward roll and as an oval that opens
+   with the hand's turn, width over height = sin(release angle); a lean is axis tilt. The card's PDF
+   writer draws that scale (`ovalScale` in orders.js: a line and three Bezier ovals at 0, 30, 45 and
+   60 deg with a floor line and labels, pushed as `{ scale: true }`, only when the ball has the track
+   ring). Card block "REV BALL: TWO DRILLS, ONE BALL": the five outcome readings; DRILL 1, THE YO-YO
+   ROLL (forward-roll ball: bullseyes still, ring on the tape, centre pin; sheet-PAP ball: read the
+   path, the bullseye wheels in a small circle); DRILL 2, THE PROPER RELEASE (turn through the ball;
+   the oval against the scale, the ball kinks to the thumb side and knocks a pin one or two over,
+   the bullseye's circle is the rotation; the same oval, pin and circle ten in a row). The gate's
+   card text and START-HERE name the centre pin as the yo-yo target and a pin one or two over as the
+   hook target (`hookSide`: left for a right-hander). A second "hook line" on the ball was rejected:
+   at a turned release no line on the ball lies along the tape, since the whole ball turns with the
+   hand and then skids. Same text in START-HERE, the configurator help, the kit (section 2 how-it-is-
+   used and gate rows, 4.1 hero clip, section 6: a green oval claim, a yellow "two drills" claim, the
+   line "Two drills. One ball.", product page bullet, Etsy description, what ships, FAQ) and
+   release-feedback section 2. e2e asserts the two drill headings, the gate's "yo-yo target", the
+   line and three ovals and the "45 deg hook" label in the card. Store 26, e2e 18 from source,
+   engine 26; no parity needed. Packaged 2026-10-26 10:51, packaged e2e 18/18, installed at
+   `C:\FitSlice` on the owner's go-ahead (FitSlice was not running; the 10:18 build went to
+   `C:\FitSlice-old-2026-10-26-b`). FS-0002 re-exported unchanged: 6 files, job sheet stamped build
+   2026-10-26 10:51, the card with both drills and the drawn scale (two pages; drill 1 reads the path,
+   since the order has the owner's own PAP). Committed and pushed the same morning.
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 

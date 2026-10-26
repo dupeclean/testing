@@ -61,6 +61,14 @@ still at centre height = the hand stayed behind the ball; swung back = it came r
 stays the option, read in the first frames of a slow-motion clip (a smooth floor holds it about
 twice as far).
 
+Later the same day the card became two drills with a drawn release-angle scale (`ovalScale` in
+orders.js, only when the ball has the track ring): the ring turns with the finger line, so a phone
+on the floor behind the release point sees it as a straight line on a forward roll and as an oval
+that opens with the hand's turn, width over height = sin(angle). Drill 1 is the yo-yo roll (bullseye
+still, ring on the tape, the gate's centre pin); drill 2 the proper release (the oval against the
+scale, a pin one or two over, the bullseye's circle, ten in a row). The gate's card text names the
+two targets.
+
 - The PAP is taken the way a pro shop measures it, along the surface with a tape: from the
   **centre of the grip** (midway between the thumb hole and the middle of the two finger holes)
   on a thumb-in ball, or from the **middle of the two finger holes** on a no-thumb ball; `over`

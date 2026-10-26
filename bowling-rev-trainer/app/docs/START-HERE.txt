@@ -156,7 +156,17 @@ folder path from the old computer.
   the line = thumb out first, fingers lifted, hand coming round the
   ball. Straight but long and lively = forward roll, hand behind the
   ball (fine). Straight and short = dumped. Pops up = thumb hung up.
-  Spins in place = hand on top. The thumb hole is
+  Spins in place = hand on top. The card runs TWO DRILLS: drill 1, the
+  yo-yo roll (hand behind the ball; the bullseyes sit still, the ring
+  rolls on the tape, the centre pin of the gate falls) and drill 2, the
+  proper release (the hand turns through the ball as the thumb leaves;
+  a phone on the floor behind the bowler shows the ring opening from a
+  straight line into an oval, and the opening is the release angle: the
+  card prints a scale, half open = 30 degrees, three quarters = 45, a
+  lean = axis tilt; the ball kinks off the tape and knocks down a pin
+  one or two over; the same oval, pin and bullseye circle ten in a row).
+  The ovals are drawn by the card's PDF writer (ovalScale in orders.js),
+  only when the ball has the track ring. The thumb hole is
   blind (70 mm deep by default; set it from the customer's thumb length)
   like a real ball. For a two-handed bowler untick "Thumb hole": the two
   finger holes are then centred on top and there is no thumb hole.
@@ -217,10 +227,11 @@ folder path from the old computer.
   (the pin prints standing). Link the segments across the tape line
   1.5 to 2 m from the release point, tape through the groove on the
   middle one, a pin in each cup. The ball knocks down the pin where it
-  crosses, about a second after the release. Before each session decide
-  which pin a good release should topple: the centre pin for a straight,
-  heavy roll; one or two over for a hook. The wrong pin falling says
-  which way the release missed. A Rev Ball order includes the gate file;
+  crosses, about a second after the release. The centre pin is the
+  yo-yo target (drill 1) and the pin one or two over toward the thumb
+  side is the hook target (drill 2): a proper release topples the same
+  one every time. The wrong pin falling says which way the release
+  missed. A Rev Ball order includes the gate file;
   the "Release Gate" product exports it on its own. NOT YET PRINTED:
   on the first print check that a pin stands freely in its cup (there
   is 1 mm of clearance) and that two segments slide together.
