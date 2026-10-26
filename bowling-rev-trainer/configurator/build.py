@@ -12,6 +12,9 @@ Outputs:
                                    or host it on any static site. No server, no CDN.
   artifact.html                    the same page without the document skeleton, in the
                                    shape the claude.ai Artifact publisher expects.
+  ../marketing/launch/site/index.html
+                                   the same page as index.html, in the folder that is uploaded
+                                   to the public host (rollread.com).
   ../app/renderer/index.html       the desktop app's page: the configurator plus the
                                    order book (../app/renderer-src/orders.*), with no
                                    network references and a strict content security policy.
@@ -63,7 +66,10 @@ def main():
     page = assemble(tpl, three, glue, wasm, app)
     (HERE / "artifact.html").write_text(page, encoding="utf-8", newline="\n")
     (HERE / "index.html").write_text(SKELETON_HEAD + page + SKELETON_TAIL, encoding="utf-8", newline="\n")
-    print(f"index.html: {len(page.encode()) / 1e6:.2f} MB (+skeleton); artifact.html written")
+    site = HERE.parent / "marketing" / "launch" / "site"
+    site.mkdir(parents=True, exist_ok=True)
+    (site / "index.html").write_text(SKELETON_HEAD + page + SKELETON_TAIL, encoding="utf-8", newline="\n")
+    print(f"index.html: {len(page.encode()) / 1e6:.2f} MB (+skeleton); artifact.html and marketing/launch/site/index.html written")
 
     src_dir = APP_DIR / "renderer-src"
     if src_dir.exists():
@@ -77,10 +83,10 @@ def main():
         desk = re.sub(r'<link rel="preconnect"[^>]*>\n?', "", desk)
         desk = re.sub(r'<link rel="stylesheet" href="https://fonts[^>]*>\n?', "", desk)
         assert "fonts.googleapis.com" not in desk, "web-font link left in the offline app page"
-        # this is the FitSlice app, not the web configurator
-        desk = desk.replace("<title>Rev Trainer Configurator</title>", "<title>FitSlice</title>")
-        desk = desk.replace("<h1>Rev Trainer Configurator</h1>", "<h1>FitSlice</h1>")
-        assert "Rev Trainer Configurator</h1>" not in desk
+        # this is the RollRead app, not the web configurator
+        desk = desk.replace("<title>RollRead configurator</title>", "<title>RollRead</title>")
+        desk = desk.replace("<h1>RollRead configurator</h1>", "<h1>RollRead</h1>")
+        assert "configurator</h1>" not in desk and "FitSlice" not in desk
         desk = desk.replace("The model is rebuilt with those exact holes and you download a print-ready file.",
                             "The model is rebuilt with those exact holes; the print files are saved with each order.")
         csp = f'<meta http-equiv="Content-Security-Policy" content="{APP_CSP}">'

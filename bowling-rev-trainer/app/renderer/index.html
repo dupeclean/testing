@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; base-uri 'none'; form-action 'none'">
 </head>
 <body>
-<title>FitSlice</title>
+<title>RollRead</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* Layout: a pro-shop drill sheet on the left, the print bench (3D view + readout) on the right; stacks on phones. */
@@ -172,7 +172,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
 <div class="wrap">
   <header class="top">
     <div class="brand">
-      <h1>FitSlice</h1>
+      <h1>RollRead</h1>
       <p>Enter the numbers from your pro-shop drill sheet. The model is rebuilt with those exact holes; the print files are saved with each order.</p>
     </div>
     <div class="switches">
@@ -1688,7 +1688,7 @@ async function main() {
   let unit = 'mm';
   let current = null; // last build result
 
-  // download capability (claude.ai viewer) vs. plain blob save (standalone)
+  // download capability (the artifact viewer) vs. plain blob save (standalone)
   const inArtifact = !!(window.claude && typeof window.claude.use === 'function');
   const downloads = inArtifact ? window.claude.use('downloads').catch(() => null) : Promise.resolve(null);
 
@@ -1924,7 +1924,7 @@ async function main() {
     const bundleFiles = [{ name: `${base}.stl`, data: stl }, ...(threeMF ? [{ name: `${base}.3mf`, data: threeMF }] : []), { name: `${base}.fit_sheet.json`, data: sheet }];
     const dl = await downloads;
     if (dl) {
-      // the claude.ai viewer saves zip (not stl): bundle the STL with its fit sheet
+      // the artifact viewer saves zip (not stl): bundle the STL with its fit sheet
       const zip = zipStore(bundleFiles);
       try {
         await dl.save({ filename: `${base}.zip`, data: new Blob([zip]) });

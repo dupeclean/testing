@@ -1,0 +1,90 @@
+ETSY LISTING: FIT KIT
+Paste each block into the matching Etsy field. Written 2026-10-26 from the kit's section F.1
+(marketing/04-retailers-and-marketplaces.md), US spelling because the shop ships from the US.
+This is the first listing to create: Etsy needs one to open the shop, and the plate photographs
+before the ball is finished.
+
+LISTING TYPE: Physical item
+WHO MADE IT: I did
+WHAT IS IT: A finished product
+WHEN WAS IT MADE: Made to order
+CATEGORY: type "bowling" in the category box and take the closest sporting-goods match
+RENEWAL: Automatic
+
+TITLE (138 characters; the limit is 140)
+Bowling Hole Sizer Plate, Custom Fit Kit Printed Around Your Thumb and Finger Sizes in 1/64 Inch Steps, With Bowlers Tape and Fitting Card
+
+PRICE: 24.00
+QUANTITY: 50
+SKU: RR-FITKIT
+SHIPPING PROFILE: Made to order (same profile as the ball)
+
+TAGS (13; Etsy allows 20 characters each; enter one at a time)
+bowling hole sizer
+bowling fit kit
+bowling thumb size
+finger hole sizer
+bowling tape
+bowling fit
+pro shop tool
+bowling sizer plate
+3d printed bowling
+custom bowling
+bowling trainer
+bowling accessory
+league bowler gift
+
+MATERIALS
+PETG
+bowler's tape
+
+PERSONALIZATION: on, required. Instruction shown to the buyer (244 characters; the limit is 256):
+Copy this template into the box and fill it in from your drill sheet (fractions are fine): THUMB SIZE: __ | MIDDLE SIZE: __ | RING SIZE: __ | UNITS: inches or mm | HAND SIZE if no sheet: small/medium/large. Or paste your configurator fit sheet.
+
+DESCRIPTION (everything between the two ==== lines; Etsy keeps the line breaks)
+====
+Find your size before you print your fit.
+
+The Fit Kit is a flat sizer plate I print around the thumb and finger hole sizes you expect, in 1/64-inch steps, with the size engraved next to each bore. It comes with a roll of bowler's tape and a fitting card that explains what a good fit feels like: snug all round at the first joint, no squeeze needed to hang on.
+
+Why it exists: printed holes come out a few tenths of a millimeter smaller than drawn. The plate comes off the same printer, in the same material, as your Rev Ball, so the bore that fits your thumb on the plate is the bore I print in your ball. The $24 comes off a Rev Ball with the code in the box.
+
+To order, put your expected thumb, middle and ring sizes from your drill sheet in the personalization box, using the template below. No sheet? Write "unknown" and tell me whether your hand is small, medium or large, and I'll center the plate on common sizes.
+
+TEMPLATE (copy it into the personalization box and fill it in)
+THUMB SIZE: 31/32
+MIDDLE SIZE: 55/64
+RING SIZE: 27/32
+UNITS: inches
+HAND SIZE (only if you have no sheet): medium
+NOTES: anything else on your sheet
+
+In the box: one sizer plate (about 175 x 92 x 15 mm, about 100 g), a roll of bowler's tape, the fitting card, and a $24 credit code.
+
+Want to see it first? Build your plate in the free RollRead configurator (the address is in the shop announcement), export the fit sheet, and paste that into the box.
+
+This is a fitting tool for off the lane. It is not a bowling ball, and RollRead isn't connected to any ball maker or bowling body.
+
+QUESTIONS PEOPLE ASK
+
+Do I need a drill sheet? It helps. The plate is centered on the sizes you give me. Without one, tell me small, medium or large and I'll center it on common sizes.
+
+How do I use it? Put your thumb in each bore in turn. The right one is snug all round at the first joint with no squeeze needed to hang on. Same for the middle and ring fingers. Write the three sizes down. Then build any fit back with the tape, exactly like on a ball.
+
+How does the $24 credit work? A code in the box, good for $24 off a Rev Ball in this shop.
+
+What's it made of? PETG, printed flat with no supports. I sand the bores lightly.
+
+Is this a bowling ball? No. It's a flat fitting plate for off the lane.
+====
+
+THE CREDIT CODE: Etsy > Marketing > Sales and discounts > create a promo code, fixed amount $24 off,
+minimum order $100 so it only works on a ball. Check whether Etsy lets you limit it to one use per buyer
+when you make it; if not, use one code for all Fit Kit buyers and check the buyer's history on each ball order.
+
+PHOTOS (your own, in this order)
+1. The plate with your thumb in the bore that fits, sizes engraved and readable.
+2. The plate lying on a drill sheet.
+3. The plate, the tape and the fitting card together.
+4. The underside, to show it's printed flat.
+5. The plate next to a bowling ball, for scale.

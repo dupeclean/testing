@@ -1187,7 +1187,7 @@ async function main() {
   let unit = 'mm';
   let current = null; // last build result
 
-  // download capability (claude.ai viewer) vs. plain blob save (standalone)
+  // download capability (the artifact viewer) vs. plain blob save (standalone)
   const inArtifact = !!(window.claude && typeof window.claude.use === 'function');
   const downloads = inArtifact ? window.claude.use('downloads').catch(() => null) : Promise.resolve(null);
 
@@ -1423,7 +1423,7 @@ async function main() {
     const bundleFiles = [{ name: `${base}.stl`, data: stl }, ...(threeMF ? [{ name: `${base}.3mf`, data: threeMF }] : []), { name: `${base}.fit_sheet.json`, data: sheet }];
     const dl = await downloads;
     if (dl) {
-      // the claude.ai viewer saves zip (not stl): bundle the STL with its fit sheet
+      // the artifact viewer saves zip (not stl): bundle the STL with its fit sheet
       const zip = zipStore(bundleFiles);
       try {
         await dl.save({ filename: `${base}.zip`, data: new Blob([zip]) });

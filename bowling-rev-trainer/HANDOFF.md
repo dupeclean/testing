@@ -535,6 +535,33 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    `settings.json` written with `ordersFolder` = `Documents\FitSlice Orders`. FS-0002 re-exported
    unchanged: 6 files at 12:49, job sheet header `ROLLREAD JOB SHEET`, `RollRead 1.0.0, build 2026-10-26
    12:49`, tilt 15 and no warning (the owner had entered the tilt). Committed and pushed the same afternoon.
+24. LAUNCH FOLDER and the channel order (2026-10-26, after the install; committed the same afternoon). The owner asked
+   "lets do tiktok shop, etsy, even my own website? give recommendations". The answer, written into
+   `marketing/launch/setup-steps.md` with the fees as checked that day against seller guides (not the
+   platforms' own pages): Etsy now (made-to-order processing time, the personalization box takes the sheet,
+   Etsy runs cards, sales tax and trust); rollread.com now as the demo and brand home, no prices or buy
+   buttons while Etsy is the shop; TikTok, Instagram and Shorts clips now with the link in bio; TikTok Shop
+   NOT yet (its shop handling time is 1 to 2 business days to dispatch, a ball is a day on the printer, the
+   checkout has no field for the drill sheet; revisit with a second printer and a confirmed pre-order
+   setting); Shopify when Etsy orders cover the plan. The folder: `etsy-rev-ball.txt` and `etsy-fit-kit.txt`
+   (paste-ready, every Etsy field, US spelling, from `10` 10.2 and `04` F.1; the ball template gained an
+   AXIS TILT line; one [EDIT] bracket for the stocked colours; a script checked the limits: titles 139 and
+   138 of 140, 13 tags each 20 characters or under, instructions 217 and 244 of 256, templates 492 and 148
+   of 1,024), `setup-steps.md` (today / tomorrow / this week, the stops, the brackets to fill),
+   `league-post.md` (the ball version of `06` 5.2 in the maker's first person, a no-link variant, the five
+   texts; [brackets] for facts only the owner knows) and `site/` (README: Cloudflare Pages steps, GitHub
+   Pages fallback, Email Routing, the checks; `site/index.html` is now written by `configurator/build.py`
+   on every build). Also in this item: the configurator page is retitled `RollRead configurator`
+   (template.html); build.py's desktop replacement still wrote `<title>FitSlice</title>` and
+   `<h1>FitSlice</h1>` into `app/renderer/index.html` (missed in item 23: the INSTALLED C:\RollRead shows
+   an h1 of FitSlice) and now writes `RollRead`, with an assert that no FitSlice is left; two code comments
+   in app.js that named claude.ai are reworded, so the public page contains neither `FitSlice` nor
+   `claude.ai`. Tests: engine 26, e2e 18 from source and packaged. Packaged 2026-10-26 13:17
+   (`app/dist/RollRead-1.0.0-win-x64.zip`), installed to `C:\RollRead` on the owner's go-ahead (the running app
+   closed as authorised, nothing unsaved; the previous install copied to `C:\RollRead-old-2026-10-26`); the
+   installed page's h1 is RollRead. FS-0002 re-exported unchanged: 6 files at 13:18, `ROLLREAD JOB SHEET`,
+   `build 2026-10-26 13:16`, tilt 15, no warning. Still open from the kit: the $129/$99 price decision, the
+   stocked colours, the owner's true details for the Etsy About and the league post.
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 

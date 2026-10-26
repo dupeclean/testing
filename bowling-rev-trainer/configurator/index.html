@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 </head>
 <body>
-<title>Rev Trainer Configurator</title>
+<title>RollRead configurator</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -136,7 +136,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
 <div class="wrap">
   <header class="top">
     <div class="brand">
-      <h1>Rev Trainer Configurator</h1>
+      <h1>RollRead configurator</h1>
       <p>Enter the numbers from your pro-shop drill sheet. The model is rebuilt with those exact holes and you download a print-ready file.</p>
     </div>
     <div class="switches">
@@ -1585,7 +1585,7 @@ async function main() {
   let unit = 'mm';
   let current = null; // last build result
 
-  // download capability (claude.ai viewer) vs. plain blob save (standalone)
+  // download capability (the artifact viewer) vs. plain blob save (standalone)
   const inArtifact = !!(window.claude && typeof window.claude.use === 'function');
   const downloads = inArtifact ? window.claude.use('downloads').catch(() => null) : Promise.resolve(null);
 
@@ -1821,7 +1821,7 @@ async function main() {
     const bundleFiles = [{ name: `${base}.stl`, data: stl }, ...(threeMF ? [{ name: `${base}.3mf`, data: threeMF }] : []), { name: `${base}.fit_sheet.json`, data: sheet }];
     const dl = await downloads;
     if (dl) {
-      // the claude.ai viewer saves zip (not stl): bundle the STL with its fit sheet
+      // the artifact viewer saves zip (not stl): bundle the STL with its fit sheet
       const zip = zipStore(bundleFiles);
       try {
         await dl.save({ filename: `${base}.zip`, data: new Blob([zip]) });
