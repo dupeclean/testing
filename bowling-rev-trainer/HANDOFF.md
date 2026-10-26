@@ -562,7 +562,7 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    installed page's h1 is RollRead. FS-0002 re-exported unchanged: 6 files at 13:18, `ROLLREAD JOB SHEET`,
    `build 2026-10-26 13:16`, tilt 15, no warning. Still open from the kit: the $129/$99 price decision, the
    stocked colours, the owner's true details for the Etsy About and the league post.
-25. THE THREE STOREFRONTS (2026-10-26, late afternoon; NOT committed). The owner: "okay i want to build
+25. THE THREE STOREFRONTS (2026-10-26, late afternoon; committed as e637f3c and pushed the same evening). The owner: "okay i want to build
    storefronts now. etsy, tiktok shop, my own website? aske me questions, give advice, do it all for me.
    ensure it does not appear ai generatrdf". Asked and answered: no domain yet (rollread.com still available,
    $16 at Shopify's registrar, about $10 at Cloudflare's); TikTok Shop gets "ball, spinner, puck"; the owner
