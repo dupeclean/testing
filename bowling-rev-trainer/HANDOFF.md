@@ -588,7 +588,7 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    Reprint-when-the-sheet-was-wrong prices on the guarantee page: $25 puck, $15 spinner, half price ball
    (the ball figure is mine, flagged in setup-steps as a decision). The owner still has to: register the
    domain, open both seller accounts, fill About, take photos, paste the listings, fill `links.js`.
-   THEN (same evening, uncommitted): the owner objected that the site was built without his decision
+   THEN (same evening, committed as f25465c and pushed): the owner objected that the site was built without his decision
    ("you are just doing things rather than asking"; memory `ask-before-building`), asked whether he needs one,
    and chose a FREE Cloudflare Pages address with NO domain for now. So: every `rollread.com` in the public
    files became `[site address]` (Etsy shop announcement, league post) or "the site address" (TikTok setup,
