@@ -597,6 +597,12 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    sends his facts); `site/README.md` and `setup-steps.md` put the free upload first (its address goes
    into everything else) and the domain under open decisions; `check_launch.py` now treats `rollread.com`
    as a never-word in public files. The checker passes clean.
+   THEN ("these files suck, i cant open .md"): the launch folder's four .md files became plain .txt with
+   Windows line endings (setup-steps, tiktok-setup, league-post, site/README; scratchpad `md_to_txt.py`),
+   the hand-check list from `10` 4.1 and the posting cadence from `06` 1.4 are written out inside
+   setup-steps.txt so the owner never needs the kit's .md files, and `check_launch.py` globs
+   `tiktok-rev-*.txt` (tiktok-setup.txt has no product). Committed and pushed. Rule for the owner's files from now on:
+   .txt, never .md.
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 

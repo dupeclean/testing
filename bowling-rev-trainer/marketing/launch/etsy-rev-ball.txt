@@ -16,7 +16,7 @@ Custom Bowling Practice Ball Printed From Your Drill Sheet, Your Hole Sizes Span
 PRICE: 129.00
 QUANTITY: 50
 SKU: RR-BALL
-SHIPPING PROFILE: Made to order (processing time 5 to 10 business days; see setup-steps.md)
+SHIPPING PROFILE: Made to order (processing time 5 to 10 business days; see setup-steps.txt)
 
 TAGS (13; Etsy allows 20 characters each; enter one at a time)
 bowling practice

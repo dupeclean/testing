@@ -39,7 +39,7 @@ for f in sorted(HERE.glob('etsy-*.txt')):
     if len(ins) > 256: problems.append(f'{f.name}: instruction over 256')
     if len(chr(10).join(tpl)) > 1024: problems.append(f'{f.name}: template over 1,024')
 
-for f in sorted(HERE.glob('tiktok-*.txt')):
+for f in sorted(HERE.glob('tiktok-rev-*.txt')):
     lines = f.read_text(encoding='utf-8').split('\n')
     name = block(lines, 'PRODUCT NAME')[0]
     desc = f.read_text(encoding='utf-8').split('====')[1] if '====' in f.read_text(encoding='utf-8') else ''
@@ -47,13 +47,13 @@ for f in sorted(HERE.glob('tiktok-*.txt')):
     if len(name) > 255 or len(name) < 25: problems.append(f'{f.name}: product name length {len(name)}')
     if re.search(r'https?://|www\.|\.com\b|@', desc): problems.append(f'{f.name}: a link, address or handle in the description (TikTok forbids it)')
 
-public = list(HERE.glob('etsy-*.txt')) + list(HERE.glob('tiktok-*.txt')) + [HERE / 'league-post.md'] + list(SITE.glob('*.html'))
+public = list(HERE.glob('etsy-*.txt')) + list(HERE.glob('tiktok-*.txt')) + [HERE / 'league-post.txt'] + list(SITE.glob('*.html'))
 for f in public:
     txt = f.read_text(encoding='utf-8')
     # the configurator page is the application itself, not copy: only the never-words apply to it
     words = NEVER if f.name == 'configurator.html' else TELLS + NEVER
     for w in words:
-        if w in txt and not (f.name == 'league-post.md' and w == 'claude.ai'):
+        if w in txt and not (f.name == 'league-post.txt' and w == 'claude.ai'):
             problems.append(f'{f.name}: contains ' + ('an em dash' if w == chr(0x2014) else repr(w)))
 
 for f in sorted(SITE.glob('*.html')):
