@@ -198,15 +198,15 @@ assert.ok(Math.abs(d1[0] + d2[0]) < 1e-9 && Math.abs(d1[2] + d2[2]) < 1e-9, 'the
 assert.ok(d1[0] > 0.9 || d2[0] > 0.9, 'right hand: the axis point is far over on the hand (+x) side: ' + JSON.stringify([d1, d2]));
 const dotsL = await build({ ...SHEET, hand: 'left' }, ['ball']);
 assert.ok(dotsL.axes.ball.filter(a => a.name === 'axis').some(a => a.dir[0] < -0.9), 'left hand mirrors the axis point');
-assert.ok(dots.stats[0].pap && dots.stats[0].pap.points.length === 2 && Math.abs(dots.stats[0].pap.over_mm - 169.65) < 0.01 && dots.stats[0].pap.up_mm === 0 && Math.abs(dots.stats[0].pap.over_ball_mm - 157.1) < 0.2, 'pap data on the stats (the forward-roll axis, 90 degrees over): ' + JSON.stringify(dots.stats[0].pap));
+assert.ok(dots.stats[0].pap && dots.stats[0].pap.points.length === 2 && Math.abs(dots.stats[0].pap.over_mm - 139.7) < 0.01 && Math.abs(dots.stats[0].pap.up_mm - 12.7) < 0.01 && Math.abs(dots.stats[0].pap.over_ball_mm - 129.4) < 0.2, 'pap data on the stats (the common position, 5 1/2 over, 1/2 up): ' + JSON.stringify(dots.stats[0].pap));
 assert.ok(dots.stats[0].pap.from === 'the centre of the grip' && dots.stats[0].pap.given === false && dots.stats[0].pap.ring && dots.stats[0].pap.ring.r_mm === 30, 'pap reference, source and ring on the stats: ' + JSON.stringify(dots.stats[0].pap));
 const ringCm3 = noRing.stats[0].volume_cm3 - dots.stats[0].volume_cm3;
 assert.ok(noRing.ok && ringCm3 > 4 && ringCm3 < 8, 'two ring pockets take about 6 cm3 out of the ball: ' + ringCm3);
 r = await build({ ...SHEET, thumb_hole: false }, ['ball']);
 assert.ok(r.ok && r.warnings.length === 0 && r.stats[0].pap.from === 'the middle of the two finger holes', 'a no-thumb ball measures the PAP from the middle of the fingers: ' + (r.message || JSON.stringify([r.warnings, r.stats[0].pap])));
-// the sheet's PAP is used only when the sheet gives one; otherwise the forward-roll axis, whatever the fields hold
+// the sheet's PAP is used only when the sheet gives one; otherwise the common position, whatever the fields hold
 r = await build({ ...SHEET, pap_given: false, pap_over: 50, pap_up: 0 }, ['ball']);
-assert.ok(r.ok && r.bytes[0] === dots.bytes[0] && Math.abs(r.stats[0].pap.over_mm - 169.65) < 0.01, 'without a PAP on the sheet the forward-roll axis is used');
+assert.ok(r.ok && r.bytes[0] === dots.bytes[0] && Math.abs(r.stats[0].pap.over_mm - 139.7) < 0.01, 'without a PAP on the sheet the common position is used');
 r = await build({ ...SHEET, pap_given: true, pap_over: 50, pap_up: 0 }, ['ball']);
 assert.ok(r.ok && r.bytes[0] !== dots.bytes[0] && r.stats[0].pap.given === true && r.stats[0].pap.over_mm === 50, 'the sheet PAP moves the target');
 r = await build({ ...SHEET, pap_given: true, pap_over: 40, pap_up: 30 }, ['ball']);
@@ -231,22 +231,24 @@ r = await page.evaluate(() => { const b = window.__cfgApp.buildFiles(['ball', 'p
 assert.ok(r.length === 2 && r.every(n => /rev_ball/.test(n)) && r.some(n => /\.3mf$/.test(n)), 'no inlays file when the dots are off (just the ball STL and its 3MF): ' + JSON.stringify(r));
 ok('axis target: dots at the PAP (sheet or common, from the grip centre or the finger middle) and their rings, mirrored for a left hand, warnings near holes and the flat, inlays file only when the dots are on');
 
-// 9b. the track ring: a channel round the axis point, placed to clear the grip holes, and two inlay arcs for it
+// 9b. the track ring: the bowler's track, (90 + tilt) degrees from the axis point, round the opposite axis point
 r = await build(SHEET, ['ball']);
 const tk = r.stats[0].pap.track;
-assert.ok(tk && tk.w_mm === 12 && tk.depth_mm === 2 && Array.isArray(tk.crosses) && tk.on_flat === true, 'track stats (the forward-roll ring crosses the resting flat): ' + JSON.stringify(tk));
+assert.ok(tk && tk.w_mm === 12 && tk.depth_mm === 2 && Array.isArray(tk.crosses) && tk.gaps_mm && typeof tk.gaps_mm.thumb === 'number', 'track stats: ' + JSON.stringify(tk));
 const noTrack = await build({ ...SHEET, pap_track: false }, ['ball']);
 const trackVol = noTrack.stats[0].volume_cm3 - r.stats[0].volume_cm3;
 assert.ok(trackVol > 11 && trackVol < 17 && noTrack.stats[0].pap.track === null, 'the channel takes about 15 cm3 out of the ball and reports nothing when off: ' + trackVol);
-assert.ok(tk.angle_deg === 90 && tk.tilt_deg === 0 && tk.crosses.length === 3 && r.notes.some(n => /rolls on when it spins about the axis point end over end/.test(n) && /runs through the thumb and middle finger and ring finger holes/.test(n)) && r.notes.some(n => /across the resting flat/.test(n)), 'with no tilt the ring is the equator about the axis point and, on the owner\'s sheet, runs through the thumb and middle finger: ' + JSON.stringify([tk, r.notes]));
-r = await build({ ...SHEET, track_tilt: 20 }, ['ball']);
-assert.ok(r.ok && r.stats[0].pap.track.angle_deg === 70 && r.stats[0].pap.track.tilt_deg === 20 && r.stats[0].pap.track.crosses.length === 0 && !r.stats[0].pap.track.on_flat, 'a 20 degree tilt puts the ring 70 degrees from the forward-roll axis, clear of the holes and the flat: ' + JSON.stringify(r.stats[0].pap.track));
-r = await build({ ...SHEET, pap_given: true, pap_over: 139.7, pap_up: 12.7, track_tilt: 20 }, ['ball']);
-assert.ok(r.ok && r.stats[0].pap.track.angle_deg === 70 && r.stats[0].pap.track.crosses.includes('ring finger'), 'about a sheet PAP 5 1/2 over, 1/2 up the same tilt runs the ring through the ring finger: ' + JSON.stringify(r.stats[0].pap.track));
-r = await build({ ...SHEET, track_tilt: 50 }, ['ball']);
+assert.ok(tk.angle_deg === 105 && tk.tilt_deg === 15 && tk.crosses.length === 0 && tk.gaps_mm.thumb > 15 && tk.gaps_mm['middle finger'] > 15 && r.warnings.length === 0 && r.notes.some(n => /with 15 degrees of axis tilt \(105 degrees from the axis point, round the opposite axis point\)/.test(n) && /clears the grip holes/.test(n)) && r.notes.some(n => /centre line passes \d+ mm from the thumb hole/.test(n)), 'at the typical 15 degrees of tilt the ring sits 105 degrees from the common axis point, clear of the holes, and the notes give its distance from each hole: ' + JSON.stringify([tk, r.notes, r.warnings]));
+r = await build({ ...SHEET, track_tilt: 0 }, ['ball']);
+assert.ok(r.ok && r.stats[0].pap.track.angle_deg === 90 && r.stats[0].pap.track.crosses.includes('thumb') && r.stats[0].pap.track.gaps_mm.thumb < 0 && r.warnings.some(w => /track ring runs through the thumb/.test(w)) && r.notes.some(n => /end over end/.test(n) && /runs through the thumb/.test(n)), 'at 0 tilt the common-position ring is the equator, through the thumb hole on this sheet, and the ball warns: ' + JSON.stringify([r.stats[0].pap.track, r.warnings]));
+r = await build({ ...SHEET, track_tilt: 30 }, ['ball']);
+assert.ok(r.ok && r.stats[0].pap.track.angle_deg === 120 && r.stats[0].pap.track.tilt_deg === 30 && r.stats[0].pap.track.gaps_mm.thumb > tk.gaps_mm.thumb, 'more tilt moves the ring further from the holes, round the opposite axis point: ' + JSON.stringify(r.stats[0].pap.track));
+r = await build({ ...SHEET, track_tilt: 70 }, ['ball']);
 assert.equal(r.ok, false); assert.match(r.message, /Axis tilt/);
-r = await build({ ...SHEET, pap_given: true, pap_over: 100, pap_up: 12.7 }, ['ball']);
-assert.ok(r.ok && r.stats[0].pap.track.crosses.length === 0 && r.notes.some(n => /clears the grip holes/.test(n)), 'with the axis point nearer the grip the ring clears the holes: ' + JSON.stringify([r.stats[0].pap.track, r.notes]));
+r = await build({ ...SHEET, pap_given: true, pap_over: 114.3, pap_up: 50.8, track_tilt: 0 }, ['ball']);
+assert.ok(r.ok && r.stats[0].pap.track.crosses.includes('thumb') && r.warnings.some(w => /runs through the thumb hole/.test(w)), 'the owner\'s 4 1/2 over, 2 up at 0 tilt runs through the thumb hole and warns: ' + JSON.stringify(r.stats[0].pap.track));
+r = await build({ ...SHEET, pap_given: true, pap_over: 114.3, pap_up: 50.8, track_tilt: 15 }, ['ball']);
+assert.ok(r.ok && r.stats[0].pap.track.crosses.length === 0 && r.warnings.length === 0, 'with 15 degrees of tilt it clears the holes: ' + JSON.stringify([r.stats[0].pap.track, r.warnings]));
 r = await build(SHEET, ['ball']);
 r = await page.evaluate(() => { const b = window.__cfgApp.buildFiles(['ball', 'plugs'], {}); return { names: b.files.map(f => f.name), notes: b.notes }; });
 assert.ok(r.names.length === 2 && r.names.some(n => /^axis_inlays_D12_ring60_track12\.stl$/.test(n)) && !r.names.some(n => /\.3mf$/.test(n)), 'ball STL plus the inlays file named for the track, no 3MF for a one-colour ball: ' + JSON.stringify(r.names));
@@ -255,7 +257,7 @@ r = await page.evaluate(() => window.__cfgApp.buildFiles(['plugs'], { pap_track:
 assert.deepEqual(r, ['axis_inlays_D12_ring60.stl'], 'the old inlays name with the track off');
 r = await build({ ...SHEET, thumb_hole: false, ball_thumb_depth: 99 }, ['plugs']);
 assert.ok(r.ok && r.stats[0].volume_cm3 > 18, 'the arcs build for a no-thumb ball too: ' + (r.message || r.stats[0].volume_cm3));
-ok('track ring: the roll line 90 minus the axis tilt from the axis point, stopping short of the holes it meets, two arc inlays in the inlays file (named for it), one-colour ball by default');
+ok('track ring: the bowler track 90 plus the axis tilt from the axis point, round the opposite axis point, clear of the holes (a warning when not), two arc inlays in the inlays file (named for it), one-colour ball by default');
 
 // 10. release gate: one segment and one pin per file, pins ball diameter + 10 mm apart
 r = await build(SHEET, ['gate']);

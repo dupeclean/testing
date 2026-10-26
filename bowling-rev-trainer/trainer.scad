@@ -98,11 +98,11 @@ band_z = -1;
 // Axis target dots: two plug sockets at the axis the release should spin about (the bowler's PAP)
 pap_marker = true;
 // Axis point, measured along the surface from the grip centre (mm): over toward the hand side, up toward the fingers
-pap_over = 169.646; // the forward-roll axis: 90 degrees round from the grip centre (6 11/16" on a regulation ball)
-pap_up = 0;
+pap_over = 139.7;   // 5 1/2"
+pap_up = 12.7;      // 1/2"
 // Socket diameter (add your print allowance) and depth; the plugs in part "plugs" match
 pap_socket_d = 12; pap_depth = 3;
-// The drill sheet gives the bowler's own PAP (else the forward-roll axis, 90 degrees over, 0 up, is used)
+// The drill sheet gives the bowler's own PAP (else the common 5 1/2" over, 1/2" up is used)
 pap_given = false;
 // Axis target ring: a second-colour inlay ring round each dot (a bullseye that stands still when the ball spins about the axis)
 pap_ring = true;
@@ -115,9 +115,10 @@ track_w = 12; track_arc_w = 12; track_depth = 2; track_gap = 1;
 // Where the track would run through a grip hole it is interrupted, stopping this far short of the hole's bevel
 track_clear = 1.5;
 // Axis tilt (degrees) the track ring is drawn for: 0 = the ball rolls end over end about the axis point (the ring
-// is its equator); a tilted release rolls on a smaller ring nearer the axis point. The ring sits 90 - track_tilt from it.
-track_tilt = 0;
-track_angle = 90 - track_tilt;
+// is its equator); the axis point is the upper end of a tilted axis, so a tilted release rolls on a smaller ring round the
+// OPPOSITE axis point, lower on the far side of the ball. The ring sits 90 + track_tilt from the axis point; 15 is typical.
+track_tilt = 15;
+track_angle = 90 + track_tilt;
 // The flat foot cut under the standing arcs (never more than 3/4 of the rim's drop)
 track_foot = 0.8;
 
@@ -362,7 +363,7 @@ function pap_dir(R) =
         fy = unit3(thumb_hole ? fm - (fm*n)*n : [0, 1, 0] - n[1]*n),
         e0 = cross(fy, n),
         e  = unit3(e0 * (e0[0]*mir >= 0 ? 1 : -1)),
-        over = pap_given ? pap_over : ball_R*PI/2, up = pap_given ? pap_up : 0,
+        over = pap_given ? pap_over : 139.7, up = pap_given ? pap_up : 12.7,
         ao = over/ball_R*180/PI, au = up/ball_R*180/PI,   // the sheet's arcs are on a regulation ball: keep the angle
         q  = n*cos(ao) + e*sin(ao))
     q*cos(au) + fy*sin(au);

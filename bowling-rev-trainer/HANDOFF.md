@@ -132,7 +132,9 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    slice with the job-sheet settings, add colour changes at 93.4, 105.4 and 154 mm and check
    that each lands on a groove ring. Two sessions tried to do this from the PC; one was refused
    desktop control and the other was blocked by a "New version of Bambu Studio" dialog.
-2. DONE (owner's go-ahead each time): `C:\FitSlice` holds the build of 2026-10-26 10:51 (item 21: two drills on the card with the
+2. DONE (owner's go-ahead each time): `C:\FitSlice` holds the build of 2026-10-26 11:37 (item 22: the ring is the real track, tilt on the
+   right side, common PAP again; the 10:51 build it replaced is in `C:\FitSlice-old-2026-10-26-c`), and
+   before that the build of 2026-10-26 10:51 (item 21: two drills on the card with the
    release-angle scale; the 10:18 build it replaced is in `C:\FitSlice-old-2026-10-26-b`), and before
    that the build of 2026-10-26 10:18 (items 19 and 20: the durable print defaults
    and the forward-roll axis; the 2026-10-24 20:53 build it replaced is in `C:\FitSlice-old-2026-10-26`),
@@ -456,6 +458,45 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    `C:\FitSlice-old-2026-10-26-b`). FS-0002 re-exported unchanged: 6 files, job sheet stamped build
    2026-10-26 10:51, the card with both drills and the drawn scale (two pages; drill 1 reads the path,
    since the order has the owner's own PAP). Committed and pushed the same morning.
+22. The ring is the bowler's real track; the tilt was on the wrong side (2026-10-26, midday; the
+   owner: "the ring around the ball just seems wrong. based on the pap, i want the ring to form and be
+   accurate"; asked, he chose the real track, said his sheet gives the tilt, and confirmed 4 1/2 over,
+   2 up). Two causes. (a) SIGN ERROR: the axis point is the UPPER end of a tilted axis, so the track is
+   the circle (90 + tilt) deg from the PAP, round the opposite axis point on the far side of the ball,
+   lower and further from the holes as tilt grows; the engine and SCAD had (90 - tilt), on the PAP's
+   side, which no parity check could see (both wrong the same way; identical at 0). Fixed in
+   `trackPlan` (`theta = (90 + p.track_tilt) * DEG`) and `trainer.scad` (`track_angle = 90 +
+   track_tilt`); `TRACK_TILT` 0-60. (b) The forward-roll default of item 20 put the ring through the
+   thumb and between the fingers (a full roller's track), which reads as wrong to any bowler. Reverted:
+   DEFAULTS `pap_over 5.5"`, `pap_up 0.5"` (store 139.7 / 12.7; SCAD too), and `track_tilt` now
+   defaults to 15 (typical hook; the sheet's value when given). New: `trackPlan` returns `gaps` (mm
+   along the surface from each hole's bevel rim to the ring's centre line, negative = through the
+   hole) -> `pap.track.gaps_mm`; a note and the job sheet print them ("compare it with the oil ring
+   on the bowler's own ball"); a WARNING when the ring would cross a hole ("on a real ball that track
+   would hit the hole: check the PAP and the axis tilt"), the guard interruption kept. Card: the ball
+   block opens with the axis point and "your track ... passing N mm from the thumb hole, ...; it is
+   where the oil ring runs on your own ball"; drill 1 (yo-yo roll) now reads the PATH on every ball
+   (a straight lift spins the ball about the line between the finger holes, not the PAP, so the
+   bullseye wheels in a small circle and the ring shows part open); drill 2's oval is the AXIS
+   ROTATION (the track ring is square to the axis the ball spins about), lean = tilt; the scale's 0
+   label lost "yo-yo". Template help, START-HERE (axis target, track ring, PAP paragraphs), the kit
+   (axis row, how-it-is-used, the carpet paragraph with the history, 4.1 rows, hero clip, section 6
+   claims, product page, Etsy copy, what to send, FAQ incl. "Is the ring my real track?") and
+   release-feedback rewritten. Tests: engine_check 9b rebuilt (default: 105 deg, clear of the holes,
+   gaps > 15 mm, no warning; 0 tilt: equator through the thumb (and the middle finger's bevel zone on
+   the owner's sheet), warning; 30 deg further from the holes; 70 refused; the owner's 4 1/2 x 2 at
+   0 tilt warns, at 15 clears); feedback_check.py's tilt probe moved to 110 deg sideways from the
+   axis point (2 mm on tilt_ball, plain on the 15-deg ball). Engine 26, store 26, e2e 18 from source.
+   Parity (11:11 to 11:34): feedback PASS (gate 0.9999, plugs 0.9989, inlays 0.9935, inlays_notrack 0.9988,
+   dots_ball / track_ball / tilt_ball 0.9991, hum 0.9984; the 105-deg channel 14.2 cm3; the arcs two whole
+   pieces of 195 mm; the 110-deg probe 2.01 / 0.02 mm), oval PASS (0.9991 / 0.9988 / 0.9988 / 0.9991 /
+   0.9988). Packaged 2026-10-26 11:36, packaged e2e 18/18, installed at `C:\FitSlice` on the owner's
+   go-ahead (FitSlice was not running; the 10:51 build went to `C:\FitSlice-old-2026-10-26-c`).
+   FS-0002 re-exported unchanged: 6 files, job sheet stamped build 2026-10-26 11:37. The order still
+   has `track_tilt` 0, so its ring is the equator about his PAP, through the thumb hole (centre line
+   through the thumb, 42 mm from the middle finger, 72 mm from the ring finger), and the job sheet
+   carries the new WARNING ("check the PAP and the axis tilt"), as designed: the owner said his sheet
+   gives the tilt and will enter it in the app, then re-export. Committed and pushed the same midday.
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 

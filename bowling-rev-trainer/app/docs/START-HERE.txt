@@ -157,55 +157,57 @@ folder path from the old computer.
   ball. Straight but long and lively = forward roll, hand behind the
   ball (fine). Straight and short = dumped. Pops up = thumb hung up.
   Spins in place = hand on top. The card runs TWO DRILLS: drill 1, the
-  yo-yo roll (hand behind the ball; the bullseyes sit still, the ring
-  rolls on the tape, the centre pin of the gate falls) and drill 2, the
-  proper release (the hand turns through the ball as the thumb leaves;
-  a phone on the floor behind the bowler shows the ring opening from a
-  straight line into an oval, and the opening is the release angle: the
-  card prints a scale, half open = 30 degrees, three quarters = 45, a
-  lean = axis tilt; the ball kinks off the tape and knocks down a pin
-  one or two over; the same oval, pin and bullseye circle ten in a row).
+  yo-yo roll (hand behind the ball; read the path: straight, long and
+  lively, the centre pin of the gate falls; the bullseye wheels in a
+  small circle on this roll, since a straight lift does not spin the
+  ball about the PAP) and drill 2, the proper release (the hand turns
+  through the ball as the thumb leaves; a phone on the floor behind the
+  bowler shows the track ring as an oval whose opening is the axis
+  rotation: the card prints a scale, half open = 30 degrees, three
+  quarters = 45, a lean = axis tilt; the ball kinks off the tape and
+  knocks down a pin one or two over; the same oval, pin and bullseye
+  circle ten in a row).
   The ovals are drawn by the card's PDF writer (ovalScale in orders.js),
   only when the ball has the track ring. The thumb hole is
   blind (70 mm deep by default; set it from the customer's thumb length)
   like a real ball. For a two-handed bowler untick "Thumb hole": the two
   finger holes are then centred on top and there is no thumb hole.
 - AXIS TARGET (Rev Ball): the ball has two small sockets (12 mm), each
-  inside a 60 mm ring pocket, at the axis the ball should spin about
-  and at the opposite point. Unless the sheet gives the bowler's own
-  PAP (below) that axis is the FORWARD-ROLL AXIS: 90 degrees round from
-  the grip centre, straight out the sides of the ball (6 11/16" over,
-  0 up on a regulation ball). It is the axis a straight finger lift
-  spins the ball about with the hand behind it, the yo-yo roll, and it
-  is the one axis carpet lets a bowler read: a ball released with the
-  hand round the side has its axis swung round inside it in the first
-  foot as the carpet grabs (by about two thirds of the axis rotation),
-  so its bullseye swings whatever the release was. A Rev Ball order
-  also exports the inlays file: two plugs and two rings (and the track
-  arcs, below) to print in the second colour (100% infill, flat side
-  down, no supports) and press in (a drop of glue if a ring is loose).
-  The dot and ring make a bullseye: stay behind the ball and it sits
-  still at the ball's centre height as the ball rolls away; come round
-  the ball and it swings back, the further the further round the hand
-  came. Untick "Axis target ring" for dots only, or "Axis target dots"
-  for a plain ball (no inlays file is exported then). The app warns if
-  a dot or ring would land on a grip hole or on the resting flat.
-  TRACK RING: a 12 mm channel 2 mm deep on the line the ball rolls on
-  when it spins about the axis point. "Axis tilt" on the Ball screen sets
-  which line: 0 (the default) is end over end, the ring is the ball's
-  equator about the axis point; a tilted release rolls on a smaller ring
-  nearer the axis point. With the forward-roll axis that line is the
-  full roller's track: up through the thumb hole, between the fingers
-  and over the top, so the channel stops 1.5 mm short of each bevel it
-  meets and the arcs come in pieces (it also crosses the resting flat,
-  0.6 mm deep; the arc is flattened there). With a sheet PAP it runs
-  through the thumb and perhaps a finger hole. The inlays file holds
-  the second-colour arcs; they stand on their lower edge as exported
-  (no supports; give them a brim). Dry-fit, glue them into the channel
-  with CA glue and sand flush. Stay behind the ball and the ring rolls
-  along the tape under the ball while the ring holds still; come round
-  the ball and the carpet swings the axis, the ring wobbles and the
-  path kinks.
+  inside a 60 mm ring pocket, at the bowler's axis point (the PAP from
+  the sheet, below; else the common 5 1/2" over, 1/2" up) and at the
+  opposite point. A Rev Ball order also exports the inlays file: two
+  plugs and two rings (and the track arcs, below) to print in the
+  second colour (100% infill, flat side down, no supports) and press in
+  (a drop of glue if a ring is loose). The dot and ring make a bullseye
+  that stands still when the ball spins about that axis. On carpet that
+  shows only in the first frames of a release: the carpet swings a hook
+  release's axis round inside the ball in the first foot (by about two
+  thirds of the axis rotation), after which the bullseye wheels in a
+  circle whose size is the rotation; the card says so. Untick "Axis
+  target ring" for dots only, or "Axis target dots" for a plain ball
+  (no inlays file is exported then). The app warns if a dot or ring
+  would land on a grip hole or on the resting flat.
+  TRACK RING: a 12 mm channel 2 mm deep on the bowler's TRACK: the line
+  the ball rolls on when it spins about the axis point with their axis
+  tilt, where the oil ring runs on their own ball. "Axis tilt" on the
+  Ball screen takes the sheet's value (15 degrees, typical of a hook,
+  when the sheet has none). The axis point is the UPPER end of a tilted
+  axis, so the ring sits 90 + tilt degrees from it, round the opposite
+  axis point: 0 is end over end, the ring is the ball's equator about
+  the axis point; more tilt is a smaller ring lower on the far side of
+  the ball, further from the grip holes. The job sheet and the card
+  give the ring's distance from each hole's bevel rim: hold the
+  customer's own ball next to the print and the oil ring should run at
+  the same distances; if not, the PAP or the tilt on the sheet is off.
+  A real track never crosses a hole; if the sheet's numbers put the
+  ring through one, the app warns, and the channel stops 1.5 mm short
+  of the bevel so the grip is untouched (the arc then comes in pieces).
+  Where it crosses the resting flat (0.6 mm deep) the arc is flattened.
+  The inlays file holds the second-colour arcs; they stand on their
+  lower edge as exported (no supports; give them a brim). Dry-fit, glue
+  them into the channel with CA glue and sand flush. At the bowler's
+  release the ring is square to the ball's axis, which is how the card
+  reads the release angle from it (the oval scale).
   Untick "Track ring" for a ball without it.
   THE PAP ON THE SHEET: if the shop measured the customer's PAP, tick
   "The sheet gives the axis point (PAP)" on the Drill sheet section of
@@ -215,11 +217,10 @@ folder path from the old computer.
   between the thumb hole and the middle of the two finger holes), or
   from the MIDDLE OF THE TWO FINGER HOLES on a two-handed, no-thumb
   ball, which is how a pro shop measures it. Leave the box unticked
-  when the sheet has no PAP: the ball then uses the forward-roll axis
-  (above), and the job sheet and customer card say so. A sheet PAP is
-  the bowler's hook axis: on carpet it holds only in the first frames
-  of a slow-motion clip (about twice as far on a smooth floor), and the
-  card says so.
+  when the sheet has no PAP: the ball then uses the common 5 1/2" over,
+  1/2" up, and the job sheet and customer card say so. Enter the
+  sheet's axis tilt too (the "Axis tilt" field under the track ring),
+  or the ring will not be the customer's track.
 - RELEASE GATE: the "click" for the ball. Loose pins (20 mm across,
   100 mm tall) stand in shallow cups on base segments that link end to
   end with dovetails, 210 mm apart for the 200 mm ball. The gate file

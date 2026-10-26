@@ -48,26 +48,22 @@ bullseye sits still while the rest blurs; spin about another axis and it wheels 
 how a pro shop reads a positive axis point (PAP), and the ring makes it readable from 2 m away
 in the first half-metre of the roll.
 
-Since 26 October 2026 the default axis (no PAP on the sheet) is the forward-roll axis: 90° round
-from the grip centre, straight out the sides of the ball (6 11/16" over, 0 up on a regulation ball),
-in place of the earlier common position (5 1/2" over, 1/2" up). Reason: on carpet the ball stops
-slipping within 10 to 30 cm, and while it slips the friction swings the spin axis inside the ball
-by about two thirds of the axis rotation it was released with (45° of rotation: a 33° swing, 57 mm
-across the surface, and a 12° kink in the path), so a hook release's bullseye swings whether the
-release was right or not. Only a straight forward roll (the yo-yo release) keeps its axis, and that
-axis sits at 90° over for every bowler, because a straight finger lift turns the ball about the line
-between the finger holes. The card now reads the bullseye and the ring as a behind-the-ball check:
-still at centre height = the hand stayed behind the ball; swung back = it came round. A sheet PAP
-stays the option, read in the first frames of a slow-motion clip (a smooth floor holds it about
-twice as far).
+On 26 October 2026 the default axis was briefly the forward-roll axis (90° round from the grip centre,
+the yo-yo line through the thumb and between the fingers); the owner rejected that the same day ("based
+on the pap, i want the ring to form and be accurate"), and the default is the common position again,
+5 1/2" over, 1/2" up. What carpet does is still true and is on the card: the ball stops slipping within
+10 to 30 cm and the friction swings the spin axis inside the ball by about two thirds of the axis
+rotation (45°: a 33° swing, 57 mm, a 12° kink), so the bullseye is read in the first frames of a
+slow-motion clip, and after that as the size of the circle it wheels in. A straight forward roll spins
+the ball about the line between the finger holes, not the PAP, so drill 1 (the yo-yo roll) is read
+from the path.
 
-Later the same day the card became two drills with a drawn release-angle scale (`ovalScale` in
-orders.js, only when the ball has the track ring): the ring turns with the finger line, so a phone
-on the floor behind the release point sees it as a straight line on a forward roll and as an oval
-that opens with the hand's turn, width over height = sin(angle). Drill 1 is the yo-yo roll (bullseye
-still, ring on the tape, the gate's centre pin); drill 2 the proper release (the oval against the
-scale, a pin one or two over, the bullseye's circle, ten in a row). The gate's card text names the
-two targets.
+The card runs two drills with a drawn release-angle scale (`ovalScale` in orders.js, only when the
+ball has the track ring): the track ring is square to the axis the ball spins about, so a phone on the
+floor behind the release point sees it as an oval whose width over height = sin(axis rotation),
+leaning with the tilt. Drill 1 is the yo-yo roll (read from the path; the gate's centre pin); drill 2
+the proper release (the oval against the scale, a pin one or two over, the bullseye's circle, ten in a
+row). The gate's card text names the two targets.
 
 - The PAP is taken the way a pro shop measures it, along the surface with a tape: from the
   **centre of the grip** (midway between the thumb hole and the middle of the two finger holes)
@@ -92,10 +88,13 @@ two targets.
 - Track ring (`pap_track`, on by default, with `track_tilt`; added 2026-10-24 after the first
   print): a 12 mm channel 2 mm deep on the line the ball rolls on when it spins about the axis
   point with `track_tilt` degrees of axis tilt, the circle (90 - tilt) degrees from the axis point.
-  The default tilt is 0: end over end, the ring is the ball's equator about the axis point. Where
-  that line runs through a grip hole (with the forward-roll axis it runs up through the thumb and
-  between the fingers, the full roller's track; with a sheet PAP through the thumb and perhaps a
-  finger hole) the channel stops 1.5 mm short of the bevel, so the grip is untouched
+  The default tilt is 15°, typical of a hook; 0 is end over end, the ring the ball's equator about the
+  axis point. The axis point is the upper end of a tilted axis, so the track sits 90° plus the tilt from
+  it, round the opposite axis point, lower on the far side of the ball and further from the holes as the
+  tilt grows (until 26 October the engine had it 90° minus the tilt, on the PAP's side: wrong for any
+  tilt, invisible at 0). The job sheet gives the ring's distance from each hole's bevel rim. Where
+  that line runs through a grip hole (it should not: a real track clears the holes, so the ball warns
+  that the PAP or the tilt is off) the channel stops 1.5 mm short of the bevel, so the grip is untouched
   and that arc comes in pieces. Two second-colour arcs for it ship in the inlays file, standing on
   their lower rim with a small flat foot cut (the rim is a cone when the ring is tilted), split at
   the ring's two side points with a 1 mm gap; glued in and sanded flush. Stay behind the ball and
@@ -109,7 +108,7 @@ two targets.
   the resting flat, or a ring running onto it.
 - Honest limit: on carpet the ball skids briefly and then rolls, and a hooking ball's axis
   migrates toward the rolling axis, so the dot is steady only during the first part of the
-  roll. For a forward-roll (yo-yo) release the two coincide and the dot stays steady throughout.
+  roll. For a release that spins the ball about its axis point the dot stays steady throughout.
 
 ## 3. Humming spinner (spinner: `spin_hum`, `spin_hum_slots`, `spin_hum_angle`)
 

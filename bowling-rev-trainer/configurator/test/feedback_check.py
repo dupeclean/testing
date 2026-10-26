@@ -79,17 +79,18 @@ def main():
     check("the arc pieces stand on their lower edge round a circle of 150 to 205 mm (the ring sits where it clears the holes)", 150 < max(max(b.extents[0], b.extents[1]) for b in arcs) < 205 and all(b.extents[0] < 206 and b.extents[1] < 206 for b in arcs), f"({[b.extents.round(1).tolist() for b in arcs]})")
     removed = (m["dots_ball"].volume - m["track_ball"].volume) / 1000
     check("the track channel takes 8 to 17 cm3 out of the ball", 8 < removed < 17, f"({removed:.1f} cm3)")
-    # a 20 degree tilt moves the ring to 70 degrees from the axis point: probe the surface there, toward the
-    # bottom of the ball (clear of the holes and the flat): a 2 mm channel on tilt_ball, plain surface on track_ball
+    # a 20 degree tilt moves the ring to 110 degrees from the axis point (round the opposite axis point): probe
+    # the surface there, sideways from the axis point (clear of the holes on top and the flat below): a 2 mm
+    # channel on tilt_ball; the 15-degree ball's channel (105 +- 3.4 degrees) is 5 degrees away, so plain there
     ax = next(a for a in cases["tilt_ball"]["axes"] if a["name"] == "axis")
     P, u = np.array(ax["p"]), np.array(ax["dir"]); R = 100.0; Cb = P - R * u
-    w = np.array([0, 0, -1.0]) - u * np.dot([0, 0, -1.0], u); w /= np.linalg.norm(w)
-    v = u * np.cos(np.radians(70)) + w * np.sin(np.radians(70)); Q = Cb + R * v
+    side = np.cross(u, [0, 0, -1.0]); side /= np.linalg.norm(side)
+    v = u * np.cos(np.radians(110)) + side * np.sin(np.radians(110)); Q = Cb + R * v
     def depth_at(case):
         loc, _, _ = m[case].ray.intersects_location([Q + 5 * v], [-v], multiple_hits=False)
         return np.linalg.norm(loc[0] - (Q + 5 * v)) - 5 if len(loc) else float("nan")
     d_tilt, d_track = depth_at("tilt_ball"), depth_at("track_ball")
-    check("tilt_ball: a 20 degree tilt moves the channel to 70 degrees from the axis point (2 mm deep there, plain on the 0-tilt ball)", m["tilt_ball"].is_watertight and 1.8 < d_tilt < 2.4 and d_track < 0.3, f"({d_tilt:.2f} / {d_track:.2f} mm)")
+    check("tilt_ball: a 20 degree tilt moves the channel to 110 degrees from the axis point, round the opposite axis point (2 mm deep there, plain on the 15-degree ball)", m["tilt_ball"].is_watertight and 1.8 < d_tilt < 2.4 and d_track < 0.3, f"({d_tilt:.2f} / {d_track:.2f} mm)")
 
     # 3. axis dots: a socket 3 mm deep at each reported axis point, taking about 0.7 cm3 out of the ball
     for case in ("dots_ball", "dots_left"):

@@ -249,7 +249,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
           <label class="field"><span>PAP up, toward the fingers</span>
             <span class="row" style="gap:6px"><input type="text" id="pap_up" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
             <small>e.g. 1/2; negative = down toward the thumb</small></label>
-          <p class="howto" style="flex-basis:100%;margin:0">Measured as a pro shop measures it: from the <b>centre of the grip</b> (midway between the thumb hole and the middle of the two finger holes) for a thumb-in grip, or from the <b>middle of the two finger holes</b> for a two-handed, no-thumb ball. Over first, along the line across the grip, then up. Leave the box unticked if the sheet has no PAP: the ball then uses the forward-roll axis, 90&deg; round from the grip centre (6 11/16" over, 0 up on a regulation ball), straight out the sides of the ball: the axis of the yo-yo roll, which is the one release carpet lets a bowler read. A sheet PAP is a hook axis; on carpet it holds only in the first frames of a slow-motion clip.</p>
+          <p class="howto" style="flex-basis:100%;margin:0">Measured as a pro shop measures it: from the <b>centre of the grip</b> (midway between the thumb hole and the middle of the two finger holes) for a thumb-in grip, or from the <b>middle of the two finger holes</b> for a two-handed, no-thumb ball. Over first, along the line across the grip, then up. Leave the box unticked if the sheet has no PAP: the ball then uses the common 5 1/2" over, 1/2" up. On carpet the bullseye holds only in the first frames of a release (the carpet swings a hook release's axis round in the first foot), so it is read in a slow-motion clip.</p>
         </div>
         <datalist id="pitch_options">
           <option value="-1/2"><option value="-3/8"><option value="-1/4"><option value="-3/16"><option value="-1/8"><option value="-1/16">
@@ -323,7 +323,7 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
 
       <fieldset data-only-part="ball">
         <legend>Rev Ball</legend>
-        <p class="howto" style="margin:0 0 10px">A release trainer: kneel, swing low, let it go onto the floor along a strip of tape and watch what it does. Thumb out first, fingers lifting and the hand coming round makes it <b>roll and curve</b> off the line; the hand behind the ball and the fingers lifting straight makes it <b>roll straight, long and lively</b>; a dump rolls straight and short; a hung-up thumb pops it up. Printed solid-looking but sliced light (4 walls, 8% gyroid infill, about 700 g at 200 mm). It needs supports under its lower half; sand the scar smooth. A second colour makes the spin easy to see: the slicer swaps filament at the heights FitSlice gives you, so a small spot above the grip holes (or the full cap) and a band come out in the other colour; FitSlice places them from the layout, the band clear of the bullseyes, and the .3mf in the download carries the colours already assigned. The <b>axis target</b> (dots and rings, set below) marks the axis the ball should spin about: the forward-roll axis, straight out the sides, unless the sheet gives the bowler's own PAP. Stay behind the ball and lift straight, like throwing a yo-yo, and the bullseye sits still at the ball's centre height as it rolls away; come round the ball and the carpet swings the axis in the first foot, so the bullseye swings back. That is drill 1 on the card. Drill 2 is the proper release: a phone on the floor behind the bowler shows the ring opening from a straight line into an oval as the hand turns through the ball, and the opening is the release angle, read against the scale printed on the card (half open is 30&deg;, three quarters 45&deg;; a lean is axis tilt); the gate's pin one or two over is the hook target. Its contrasting plugs and rings come in their own file.</p>
+        <p class="howto" style="margin:0 0 10px">A release trainer: kneel, swing low, let it go onto the floor along a strip of tape and watch what it does. Thumb out first, fingers lifting and the hand coming round makes it <b>roll and curve</b> off the line; the hand behind the ball and the fingers lifting straight makes it <b>roll straight, long and lively</b>; a dump rolls straight and short; a hung-up thumb pops it up. Printed solid-looking but sliced light (4 walls, 8% gyroid infill, about 700 g at 200 mm). It needs supports under its lower half; sand the scar smooth. A second colour makes the spin easy to see: the slicer swaps filament at the heights FitSlice gives you, so a small spot above the grip holes (or the full cap) and a band come out in the other colour; FitSlice places them from the layout, the band clear of the bullseyes, and the .3mf in the download carries the colours already assigned. The <b>axis target</b> (dots and rings, set below) marks the bowler's axis point (PAP), and the <b>track ring</b> is their track: the line the ball rolls on about that axis with their axis tilt, where the oil ring runs on their own ball. The card runs two drills: the yo-yo roll (hand behind the ball; read the path: straight, long and lively, the gate's centre pin) and the proper release (turn through the ball; a phone on the floor behind the bowler shows the track ring as an oval whose opening is the axis rotation, read against the scale printed on the card, half open 30&deg;, three quarters 45&deg;, a lean is tilt; the gate's pin one or two over is the hook target). The plugs, rings and arcs come in their own file.</p>
         <div class="row">
           <label class="field"><span>Ball diameter</span>
             <span class="row" style="gap:6px"><input type="text" id="ball_d" inputmode="decimal"><span class="unit" data-unit-label>mm</span></span>
@@ -349,10 +349,10 @@ details summary { cursor: pointer; font: 700 15px/1 var(--display); text-transfo
           <label class="check" style="flex-basis:100%"><input type="checkbox" id="pap_marker"> Axis target dots (two plug sockets at the axis your release should spin about)</label>
           <div class="row" id="pap_rows" style="flex-basis:100%">
             <label class="check" style="flex-basis:100%"><input type="checkbox" id="pap_ring"> Axis target ring: a 60 mm second-colour ring round each dot, a bullseye that stands still when the ball spins about the axis</label>
-            <label class="check" style="flex-basis:100%"><input type="checkbox" id="pap_track"> Track ring: a 12 mm second-colour ring on the line the ball rolls on when it spins about the axis point, as two inlay arcs glued into a channel; stay behind the ball and the ring rolls along the floor under it</label>
+            <label class="check" style="flex-basis:100%"><input type="checkbox" id="pap_track"> Track ring: a 12 mm second-colour ring on the bowler's track, the line the ball rolls on when it spins about the axis point with the axis tilt below, as two inlay arcs glued into a channel</label>
             <label class="field"><span>Axis tilt for the track ring</span>
               <span class="row" style="gap:6px"><input type="text" id="track_tilt" inputmode="decimal"><span class="unit">&deg;</span></span>
-              <small>0 = the ball rolls end over end about the axis point (the ring is its equator). A tilted release rolls on a smaller ring nearer the axis point. Where the ring runs through a grip hole it stops just short of the bevel.</small></label>
+              <small>From the drill sheet (a typical hook is about 15&deg;). 0 = end over end, the ring is the ball's equator about the axis point; more tilt = a smaller ring lower on the far side of the ball, away from the holes, as on a real ball. The job sheet gives the ring's distance from each hole to compare with the oil ring on the bowler's own ball; if it would run through a hole the app warns and cuts it short of the bevel.</small></label>
             <small style="flex-basis:100%">The dots sit at the PAP on the drill sheet above (or the common 5 1/2" over, 1/2" up when the sheet has none). The plugs, rings and track arcs export as one second-colour file.</small>
           </div>
         </div>
@@ -565,23 +565,21 @@ const DEFAULTS = {
   serial: '',                // engraved in the base, e.g. the order number FS-0001 (digits, F, S and - only)
   // Release gate: loose pins on linked base segments across the tape line; the ball knocks one down
   gate_pin_h: 100,
-  // Axis target dots on the ball: two plug sockets at the axis the ball should spin about, as surface
-  // distances from the grip centre: over toward the hand side, up toward the fingers. Spin the ball about
-  // that axis and the dot stands still while the rest of the ball blurs.
-  // pap_given: the drill sheet gives the bowler's own PAP. Else the FORWARD-ROLL AXIS is used: 90 degrees
-  // round from the grip centre, straight out the sides of the ball (6 11/16" over, 0 up on a regulation
-  // ball), the axis a straight finger lift spins the ball about with the hand behind it (the yo-yo roll).
-  // On carpet that is the only release whose axis holds: a hook release's axis swings round inside the
-  // ball in the first foot as the carpet grabs (by about two thirds of the axis rotation), so its bullseye
-  // swings whatever the hand did. The PAP is measured from the centre of the grip, or from the middle of
-  // the fingers on a no-thumb ball.
+  // Axis target dots on the ball: two plug sockets at the axis the ball should spin about (the bowler's
+  // PAP), as surface distances from the grip centre: over toward the hand side, up toward the fingers.
+  // Spin the ball about that axis and the dot stands still while the rest of the ball blurs.
+  // pap_given: the drill sheet gives the bowler's own PAP (else the common 5 1/2" over, 1/2" up is used);
+  // it is measured from the centre of the grip, or from the middle of the fingers on a no-thumb ball.
+  // On carpet the bullseye holds only in the first frames of a release: the carpet swings a hook
+  // release's axis round inside the ball in the first foot (by about two thirds of the axis rotation).
   // pap_ring: a second-colour inlay ring round each dot, a bullseye that stands still when the ball spins about the axis.
-  // pap_track: the track ring, a 12 mm second-colour ring on the line the ball rolls on when it spins about
-  // the axis point (two inlay arcs glued into a channel); it rolls along the floor under the ball when the ball
-  // spins about the axis, and wobbles when the carpet swings the axis.
-  // track_tilt: the axis tilt (degrees) that line is drawn for: 0 = end over end about the axis point (the
-  // ring is its equator); a tilted release rolls on a smaller ring nearer the axis point.
-  pap_marker: true, pap_given: false, pap_over: G.R * Math.PI / 2, pap_up: 0, pap_ring: true, pap_track: true, track_tilt: 0,
+  // pap_track: the track ring, a 12 mm second-colour ring on the bowler's track: the line the ball rolls on
+  // when it spins about the axis point with track_tilt degrees of axis tilt (two inlay arcs glued into a
+  // channel). The axis point is the UPPER end of a tilted axis, so the track sits (90 + tilt) degrees from
+  // it, round the opposite axis point on the far side of the ball: 0 tilt = end over end, the ring is the
+  // equator about the axis point; more tilt = a smaller ring lower on the far side, further from the grip
+  // holes, as the oil ring on a real ball. 15 degrees is typical; the sheet's value when it gives one.
+  pap_marker: true, pap_given: false, pap_over: 5.5 * IN, pap_up: 0.5 * IN, pap_ring: true, pap_track: true, track_tilt: 15,
   // Humming spinner (experimental, off by default): a hollow ring chamber with slanted slots through
   // the top. Spun fast enough it hums, and keeps humming as long as the spin stays above that speed,
   // so the strength and carry of the finger lift can be heard.
@@ -597,7 +595,7 @@ const ANGLE_KEYS = ['thumb_oval_angle', 'finger_oval_angle'];   // degrees
 const SERIAL_RE = /^[0-9FS-]{0,12}$/;
 const BALL_STRIPES = ['none', 'spot', 'spot_band', 'cap', 'cap_band', 'bands'];
 const HUM_SLOTS = [2, 16], HUM_ANGLE = [0, 80];   // humming spinner: slot count, slot angle in degrees from radial
-const TRACK_TILT = [0, 45];                       // axis tilt the track ring is drawn for, degrees
+const TRACK_TILT = [0, 60];                       // axis tilt the track ring is drawn for, degrees
 
 // Sensible ranges (mm). Anything outside is almost always a typo or the wrong unit
 // (110 typed while the switch is on inches, or 4 5/16 typed while it is on mm), and values
@@ -1020,26 +1018,32 @@ function makeBuilder(W) {
   // Rev Ball: a full sphere with the bowler's grip at the top and a small flat underneath so it can
   // stand on the print bed. Released on the floor it rolls and hooks (or does not), which shows the
   // release. Solid in the model; the slicer makes it light (4 walls, 8% gyroid infill: about 700 g).
-  // Where the track ring goes: the line the ball rolls on when it spins about the axis point with
-  // p.track_tilt degrees of axis tilt, the circle (90 - tilt) degrees from the axis point (0 tilt: the
-  // equator about the axis, end over end). A real track runs through the grip holes it meets, so where
-  // this ring would, the channel and the arcs stop a little short of the hole's bevel instead (guard
-  // cylinders along the ball's radius: the hole's reach plus G.track_clear). Angles in radians.
+  // Where the track ring goes: the bowler's track, the line the ball rolls on when it spins about the
+  // axis point with p.track_tilt degrees of axis tilt. The axis point is the upper end of a tilted axis,
+  // so the track is the circle (90 + tilt) degrees from it, round the opposite axis point on the far side
+  // of the ball (0 tilt: the equator about the axis, end over end; more tilt: a smaller ring lower on the
+  // far side, further from the grip holes). A real track never crosses a hole; where this ring would
+  // (the PAP or the tilt is off, and the ball warns), the channel and the arcs stop a little short of the
+  // hole's bevel instead (guard cylinders along the ball's radius: the hole's reach plus G.track_clear).
+  // gaps: the distance along the surface from each hole's bevel rim to the ring's centre line (negative
+  // = the ring runs through the hole), for the job sheet, to compare with the oil ring on the bowler's
+  // own ball. Angles in radians.
   function trackPlan(p, D, thumb, mid, ring, dirOf, d, R, s, wC) {
     const beta = (wC / 2) / R;                                                   // half the band, as an angle
-    const theta = (90 - p.track_tilt) * DEG;
-    const guards = [], crosses = [];
+    const theta = (90 + p.track_tilt) * DEG;
+    const guards = [], crosses = [], gaps = {};
     for (const [h, name, dia, ex, bev] of [[thumb, 'thumb', D.td, D.ovT, p.thumb_bevel], [mid, 'middle finger', D.md, D.ovM, p.finger_bevel], [ring, 'ring finger', D.rd, D.ovR, p.finger_bevel]]) {
       if (!h) continue;
       const rG = dia / 2 + ex / 2 + bev + G.track_clear;
       const u = dirOf(h), psi = Math.acos(V.clamp1(V.dot(u, d)));              // the hole's centre, from the axis point
+      gaps[name] = Math.round(R * Math.abs(psi - theta) - (rG - G.track_clear));   // bevel rim to the ring's centre line, mm
       if (Math.abs(psi - theta) >= Math.asin(Math.min(1, rG / R)) + beta) continue;
       crosses.push(name);
       const rotG = [0, Math.acos(V.clamp1(u[2])) / DEG, Math.atan2(u[1], u[0]) / DEG];
       guards.push(T(T(T(T(Manifold.cylinder(60, rG, rG, G.seg_hole)).translate([0, 0, -30])).rotate(rotG)).translate(h.axis.p)));
     }
     const psiPole = Math.acos(V.clamp1(-d[2])), angFlat = Math.asin(Math.min(1, (p.ball_flat / 2) / R));
-    return { theta, guards, crosses, onFlat: Math.abs(psiPole - theta) < angFlat + beta };
+    return { theta, guards, crosses, gaps, onFlat: Math.abs(psiPole - theta) < angFlat + beta };
   }
   // the slab (in the axis frame, axis = z) that cuts a band of half-angle beta round polar angle theta
   function zoneSlab(R, theta, beta) {
@@ -1135,9 +1139,12 @@ function makeBuilder(W) {
         const channel = T(T(T(zoneSlab(R, plan.theta, (wC / 2) / R).intersect(shell)).rotate(rotT)).translate(C));
         cuts.push(plan.guards.length ? T(channel.subtract(T(Manifold.union(plan.guards)))) : channel);
         const deg = Math.round(plan.theta / DEG);
-        pap.track = { w_mm: G.track_w, depth_mm: G.track_depth, clear_mm: G.track_clear, tilt_deg: p.track_tilt, angle_deg: +(plan.theta / DEG).toFixed(1), crosses: plan.crosses, on_flat: plan.onFlat };
-        trackNotes.push(`The track ring is the line the ball rolls on when it spins about the axis point${p.track_tilt ? ` with ${p.track_tilt} degrees of axis tilt (${deg} degrees from the axis point)` : ' end over end (its equator about the axis point)'}.${plan.crosses.length ? ` It runs through the ${plan.crosses.join(' and ')} hole${plan.crosses.length > 1 ? 's' : ''}, as a track does; the channel stops ${G.track_clear} mm short of each bevel, so that arc comes in pieces.` : ' It clears the grip holes.'}`);
+        pap.track = { w_mm: G.track_w, depth_mm: G.track_depth, clear_mm: G.track_clear, tilt_deg: p.track_tilt, angle_deg: +(plan.theta / DEG).toFixed(1), crosses: plan.crosses, gaps_mm: plan.gaps, on_flat: plan.onFlat };
+        trackNotes.push(`The track ring is the line the ball rolls on when it spins about the axis point${p.track_tilt ? ` with ${p.track_tilt} degrees of axis tilt (${deg} degrees from the axis point, round the opposite axis point)` : ' end over end (its equator about the axis point)'}.${plan.crosses.length ? ` It runs through the ${plan.crosses.join(' and ')} hole${plan.crosses.length > 1 ? 's' : ''}, as a track does; the channel stops ${G.track_clear} mm short of each bevel, so that arc comes in pieces.` : ' It clears the grip holes.'}`);
         if (plan.onFlat) trackNotes.push('The track runs across the resting flat; the arc is flattened there.');
+        const gapTxt = Object.entries(plan.gaps).map(([n, g]) => g >= 0 ? `${g} mm from the ${n} hole` : `through the ${n} hole`).join(', ');
+        if (gapTxt) trackNotes.push(`The ring's centre line passes ${gapTxt} (bevel rim to centre line, along the surface): compare it with the oil ring on the bowler's own ball.`);
+        if (plan.crosses.length) papWarn.add(`The track ring runs through the ${plan.crosses.join(' and ')} hole${plan.crosses.length > 1 ? 's' : ''}. On a real ball that track would hit the hole: check the PAP and the axis tilt on the sheet. The channel is cut short of the bevel, so the grip is untouched.`);
       }
     }
     // Second-colour pattern: the slicer swaps filament at these heights (everything printed above a
@@ -1803,7 +1810,7 @@ async function main() {
       if (k === 'thumb_hole') $('ball_thumb_rows').hidden = !state.thumb_hole;
       if (k === 'pap_marker') $('pap_rows').hidden = !state.pap_marker;
       if (k === 'pap_given') {
-        // without a PAP on the sheet the ball uses the forward-roll axis, and the fields show it
+        // without a PAP on the sheet the ball uses the common position, and the fields show it
         if (!state.pap_given) { state.pap_over = DEFAULTS.pap_over; state.pap_up = DEFAULTS.pap_up; markGood($('pap_over')); markGood($('pap_up')); showLengths(); }
         $('pap_over').disabled = $('pap_up').disabled = !state.pap_given;
       }
@@ -2307,13 +2314,14 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
         L.push(`Rev Ball: ${r2(f.ball_d)} mm ball. ${f.thumb_hole === false ? 'No thumb hole (two-handed)' : `Thumb hole blind, ${r2(f.ball_thumb_depth)} mm deep`}. Finger depth ${f.finger_depth} mm. Bridge ${both(f.bridge)}. Resting flat ${r2(f.ball_flat)} mm. Colours: ${STRIPE[f.ball_stripe] || f.ball_stripe}. Marker groove ${f.ball_groove ? 'yes' : 'no'}. Print allowance ${m.print_allowance_mm} mm.`);
         const pp = (built.stats.find(s => s.part === 'ball') || {}).pap || {};
         const papFrom = pp.from || (f.thumb_hole === false ? 'the middle of the two finger holes' : 'the centre of the grip');
-        if (f.pap_marker) L.push(`Axis target${f.pap_ring ? ' dots and rings' : ' dots'}: two ${r2(pp.socket_d_mm || 12)} mm sockets${f.pap_ring ? `, each inside a ${2 * (pp.ring ? pp.ring.r_mm : 30)} mm ring pocket,` : ''} at the axis point and at the opposite point. PAP ${both(pp.over_mm ?? f.pap_over)} over toward the hand side, then ${both(pp.up_mm ?? f.pap_up)} up, measured along the surface from ${papFrom} (${f.pap_given ? 'from the drill sheet' : 'not on the sheet: the forward-roll axis, 90 degrees round from the grip centre, straight out the sides'}); those are distances on a regulation ball, so on this ${r2(f.ball_d)} mm ball the axis sits at the same angle, ${r2(pp.over_ball_mm)} mm over and ${r2(pp.up_ball_mm)} mm up along the surface. Press the printed ${f.pap_ring ? 'plugs and rings (the axis_inlays file' : 'plugs (the axis_plugs file'}, second colour) in. When the ball spins about that axis the ${f.pap_ring ? 'dot and ring stand' : 'dot stands'} still; on carpet only a forward roll keeps its axis, a hook release's axis swings round in the first foot as the carpet grabs.`);
+        if (f.pap_marker) L.push(`Axis target${f.pap_ring ? ' dots and rings' : ' dots'}: two ${r2(pp.socket_d_mm || 12)} mm sockets${f.pap_ring ? `, each inside a ${2 * (pp.ring ? pp.ring.r_mm : 30)} mm ring pocket,` : ''} at the axis point and at the opposite point. PAP ${both(pp.over_mm ?? f.pap_over)} over toward the hand side, then ${both(pp.up_mm ?? f.pap_up)} up, measured along the surface from ${papFrom} (${f.pap_given ? 'from the drill sheet' : 'not on the sheet: the common position'}); those are distances on a regulation ball, so on this ${r2(f.ball_d)} mm ball the axis sits at the same angle, ${r2(pp.over_ball_mm)} mm over and ${r2(pp.up_ball_mm)} mm up along the surface. Press the printed ${f.pap_ring ? 'plugs and rings (the axis_inlays file' : 'plugs (the axis_plugs file'}, second colour) in. When the ball spins about that axis the ${f.pap_ring ? 'dot and ring stand' : 'dot stands'} still; on carpet only a forward roll keeps its axis, a hook release's axis swings round in the first foot as the carpet grabs.`);
         else if (f.pap_given) L.push(`PAP from the sheet: ${both(f.pap_over)} over, ${both(f.pap_up)} up from ${papFrom} (no axis target on this ball).`);
         if (f.pap_marker && f.pap_track) {
           const tk = pp.track || {};
-          const tiltTxt = tk.tilt_deg ? `with ${r2(tk.tilt_deg)} degrees of axis tilt (${r2(tk.angle_deg)} degrees from the axis point)` : 'end over end (the ring is its equator about the axis point)';
+          const tiltTxt = tk.tilt_deg ? `with ${r2(tk.tilt_deg)} degrees of axis tilt (${r2(tk.angle_deg)} degrees from the axis point, round the opposite axis point on the far side of the ball)` : 'end over end (the ring is its equator about the axis point)';
           const through = tk.crosses && tk.crosses.length ? ` It runs through the ${tk.crosses.join(' and ')} hole${tk.crosses.length > 1 ? 's' : ''}, as a track does; the channel stops ${r2(tk.clear_mm || 1.5)} mm short of each bevel, so that arc comes in pieces: dry-fit them round the ball before gluing.` : ' It clears the grip holes.';
-          L.push(`Track ring: a ${r2(tk.w_mm || 12)} mm channel ${r2(tk.depth_mm || 2)} mm deep on the line the ball rolls on when it spins about the axis point ${tiltTxt}.${through} Two second-colour arcs in the inlays file fit it; they stand on their lower edge as exported (no supports; a brim helps). Glue them in (CA glue) and sand flush. Rolled forward about that axis the ball rolls along the ring and the ring holds still; released with the hand round the side, the carpet swings the axis and the ring wobbles.`);
+          const gapsTxt = tk.gaps_mm ? ` Its centre line passes ${Object.entries(tk.gaps_mm).map(([n, g]) => g >= 0 ? `${g} mm from the ${n} hole's bevel` : `through the ${n} hole`).join(', ')} (along the surface): compare with the oil ring on the bowler's own ball.` : '';
+          L.push(`Track ring: a ${r2(tk.w_mm || 12)} mm channel ${r2(tk.depth_mm || 2)} mm deep on the bowler's track, the line the ball rolls on when it spins about the axis point ${tiltTxt}.${through}${gapsTxt} Two second-colour arcs in the inlays file fit it; they stand on their lower edge as exported (no supports; a brim helps). Glue them in (CA glue) and sand flush. Rolled forward about that axis the ball rolls along the ring and the ring holds still; released with the hand round the side, the carpet swings the axis and the ring wobbles.`);
         }
         const cc = (built.stats.find(s => s.part === 'ball') || {}).color_changes || [];
         if (cc.length) {
@@ -2394,7 +2402,7 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
   // as the hand turns through the ball; width over height is the sine of the release angle.
   function ovalScale(yTop) {
     const ops = ['q 1.2 w 0 0 0 RG'], ry = 17, cy = yTop - ry - 2, k = 0.5523;
-    [[0, '0\u00b0 yo-yo'], [30, '30\u00b0'], [45, '45\u00b0 hook'], [60, '60\u00b0']].forEach(([deg, label], i) => {
+    [[0, '0\u00b0'], [30, '30\u00b0'], [45, '45\u00b0 hook'], [60, '60\u00b0']].forEach(([deg, label], i) => {
       const cx = 120 + i * 118, rx = ry * Math.sin(deg * Math.PI / 180), n = (v) => v.toFixed(1);
       if (rx < 0.5) ops.push(`${cx} ${n(cy - ry)} m ${cx} ${n(cy + ry)} l S`);
       else ops.push(`${n(cx + rx)} ${n(cy)} m`,
@@ -2470,7 +2478,7 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
       L.push({ t: `Ring finger ${both(f.ring_d)}${f.ring_oval_d > 0 ? ` oval ${both(f.ring_oval_d)}` : ''}${spanTxt(f.span_ring)}, pitch ${describePitch(f.ring_fwd, 'fr', f.hand)}, ${describePitch(f.ring_lat, 'lat', f.hand)}` });
       L.push({ t: `${f.hand === 'right' ? 'Right' : 'Left'}-handed. Bridge ${both(f.bridge)}. Printed holes are ${m.print_allowance_mm} mm oversize to allow for printing; finish the fit with bowler's tape, as on a ball.`, gap: hasBall && f.pap_marker ? 2 : 8 });
       const pb = (built.stats.find(s => s.part === 'ball') || {}).pap || {};
-      if (hasBall && f.pap_marker) L.push({ t: `Axis point: ${both(pb.over_mm ?? f.pap_over)} over, ${both(pb.up_mm ?? f.pap_up)} up from ${f.thumb_hole === false ? 'the middle of the two finger holes' : 'the centre of the grip'}${f.pap_given ? ', your PAP from your sheet.' : ' (the forward-roll axis, straight out the sides of the ball; a pro shop can measure your own PAP).'}`, gap: 8 });
+      if (hasBall && f.pap_marker) L.push({ t: `Axis point: ${both(pb.over_mm ?? f.pap_over)} over, ${both(pb.up_mm ?? f.pap_up)} up from ${f.thumb_hole === false ? 'the middle of the two finger holes' : 'the centre of the grip'}${f.pap_given ? ', your PAP from your sheet.' : ' (the common position; a pro shop can measure your own).'}`, gap: 8 });
     } else if (hasSpin) {
       L.push({ t: `Middle finger ${both(f.middle_d)}${f.middle_oval_d > 0 ? ` oval ${both(f.middle_oval_d)}` : ''}, ring finger ${both(f.ring_d)}${f.ring_oval_d > 0 ? ` oval ${both(f.ring_oval_d)}` : ''}, bridge ${both(f.bridge)}. Printed holes are ${m.print_allowance_mm} mm oversize to allow for printing; finish the fit with bowler's tape.`, gap: 8 });
     } else if (kitOnly) {
@@ -2478,9 +2486,11 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
     }
     if (hasBall) {
       const eye = f.pap_ring ? 'bullseye' : 'dot', eyes = f.pap_ring ? 'bullseyes' : 'dots';
-      const line = f.thumb_hole === false ? 'between the finger holes, over the top and round' : 'up through the thumb hole, between the fingers, over the top and round';
-      const marks = f.pap_marker && !f.pap_given, ownPap = f.pap_marker && f.pap_given, ring = f.pap_marker && f.pap_track;
+      const ring = f.pap_marker && f.pap_track;
+      const tkb = ((built.stats.find(s => s.part === 'ball') || {}).pap || {}).track || {};
+      const gapsTxt = tkb.gaps_mm ? Object.entries(tkb.gaps_mm).map(([n, g]) => g >= 0 ? `${g} mm from the ${n} hole` : `through the ${n} hole`).join(', ') : '';
       L.push({ t: 'REV BALL: TWO DRILLS, ONE BALL', b: true, s: 12 });
+      if (f.pap_marker) L.push({ t: `The two coloured ${eyes} sit at your axis point (PAP)${f.pap_given ? ', from your sheet' : ', the common position (a pro shop can measure your own)'}.${ring ? ` The coloured ring is your track: the line the ball rolls on about that axis with ${tkb.tilt_deg ?? f.track_tilt} degrees of axis tilt${gapsTxt ? `, passing ${gapsTxt}` : ''}. It is where the oil ring runs on your own ball; if they do not match, the PAP or the tilt on the sheet is off.` : ''}`, gap: 4 });
       L.push({ t: `1. Put a strip of tape on the floor with a couch or wall 1.5 to 2 m beyond it${hasGate ? ', and the release gate across the tape there' : ''}. Carpet or a rug is best. A phone on the floor behind you, looking down the tape, reads the release.` });
       L.push({ t: '2. Kneel on one knee, swing the ball low along the tape and let it go, the way you release on the lane.' });
       L.push({ t: '3. Read what it does:', gap: 2 });
@@ -2490,21 +2500,11 @@ main().catch(e => { console.error(e); const s = document.getElementById('status'
       L.push({ t: '   Pops up and lands late: the thumb hung up.' });
       L.push({ t: '   Spins in place: the hand came over the top.', gap: 4 });
       L.push({ t: 'DRILL 1: THE YO-YO ROLL (STAY BEHIND THE BALL)', b: true, s: 11 });
-      const yoyoStart = 'Hand behind the ball, thumb out first, fingers lifting straight up the back, like throwing a yo-yo.';
-      if (marks) {
-        L.push({ t: `${yoyoStart} The two coloured ${eyes} sit at that axis, straight out the sides of the ball${ring ? `, and the coloured ring is the line it rolls on, ${line}` : ''}. Done right: ${ring ? 'the ring rolls along the tape, the holes go over the top' : 'the holes go over the top'}, both ${eyes} sit still at the ball's centre height as it rolls away${hasGate ? ', and the centre pin of the gate falls' : ', and it runs straight down the tape'}. Come round the ball and the carpet swings the axis in the first foot: the ${eye} swings back${ring ? ', the ring wobbles' : ''} and the ball kinks off the line; the further it swings, the further round your hand came. Ten in a row with the ${eye} still, then drill 2.`, gap: 4 });
-      } else if (ownPap) {
-        L.push({ t: `${yoyoStart} Done right the ball runs straight, long and lively down the tape${hasGate ? ' and the centre pin of the gate falls' : ''}, with the holes going over the top. The two coloured ${eyes} on this ball sit at your own axis point (PAP) from your sheet, which is your hook axis, so on a yo-yo roll they wheel in a small circle rather than sit still: read the path, not the ${eye}. Ten straight ones in a row, then drill 2.`, gap: 4 });
-      } else {
-        L.push({ t: `${yoyoStart} Done right the ball runs straight, long and lively down the tape${hasGate ? ' and the centre pin of the gate falls' : ''}, with the holes going over the top. Ten in a row, then drill 2.`, gap: 4 });
-      }
+      L.push({ t: `Hand behind the ball, thumb out first, fingers lifting straight up the back, like throwing a yo-yo. Done right the ball runs straight, long and lively down the tape${hasGate ? ' and the centre pin of the gate falls' : ''}, with the holes going over the top.${f.pap_marker ? ` A straight lift spins the ball about an axis out its sides rather than about your PAP, so on this roll the ${eye} wheels in a small circle${ring ? ' and the ring shows part open' : ''}: read the path.` : ''} Come round the ball and the carpet kinks it off the line in the first foot. Ten straight ones in a row, then drill 2.`, gap: 4 });
       L.push({ t: 'DRILL 2: THE PROPER RELEASE (TURN THROUGH THE BALL)', b: true, s: 11 });
-      const ringRead = !ring ? 'The finger holes turn with your hand, so the phone behind you shows how far you turned.'
-        : marks ? 'The coloured ring turns with your hand, so the phone behind you shows your release angle: on a yo-yo roll the ring is a straight line, and it opens into an oval as the hand turns through the ball. Match the oval to the scale; a lean in the oval is axis tilt.'
-        : 'The coloured ring sits 90 degrees from your axis point, so at your hook release it turns with the ball\'s axis: the phone behind you shows it as an oval whose opening is your axis rotation. Match the oval to the scale; a lean in the oval is axis tilt.';
-      L.push({ t: `Same start, hand behind the ball. As the thumb leaves, the fingers lift and the hand turns through the ball to the handshake. ${ringRead}` });
+      L.push({ t: `Same start, hand behind the ball. As the thumb leaves, the fingers lift and the hand turns through the ball to the handshake. ${ring ? 'Your track ring sits square to the axis the ball spins about, so the phone behind you shows it as an oval whose opening is your axis rotation; a lean in the oval is your axis tilt. Match the oval to the scale.' : 'The finger holes turn with your hand, so the phone behind you shows how far you turned.'}` });
       if (ring) L.push({ scale: true, gap: 2 });
-      L.push({ t: `On carpet the ball then kinks off the tape to the ${hookSide}${hasGate ? ` and knocks down a pin one or two over to the ${hookSide}` : ''}${f.pap_marker ? `, and the ${eye} wheels in a circle whose size is your rotation` : ''}. Done right: the same ${ring ? 'oval, the same ' : ''}curve${hasGate ? ', the same pin' : ''}${f.pap_marker ? ' and the same circle' : ''} ten times in a row. Add speed and revs only once that holds.`, gap: 4 });
+      L.push({ t: `On carpet the ball then kinks off the tape to the ${hookSide}${hasGate ? ` and knocks down a pin one or two over to the ${hookSide}` : ''}${f.pap_marker ? `, and the ${eye} holds for the first frames and then wheels in a circle as the carpet grabs: the size of the circle is your rotation` : ''}. Done right: the same ${ring ? 'oval, the same ' : ''}curve${hasGate ? ', the same pin' : ''}${f.pap_marker ? ' and the same circle' : ''} ten times in a row. Add speed and revs only once that holds.`, gap: 4 });
       const SPIN = { none: f.ball_groove ? 'The groove round the middle shows the spin.' : 'Watch the finger holes to see the spin.', spot: 'The coloured spot on top shows the spin.', spot_band: 'The coloured spot on top and the band show the spin.', cap: 'The coloured top cap shows the spin.', cap_band: 'The coloured cap and band show the spin.', bands: 'The coloured bands show the spin.' };
       const spinTxt = ring ? `The track ring shows the spin.${f.ball_stripe && f.ball_stripe !== 'none' ? ' ' + (SPIN[f.ball_stripe] || '') : ''}` : (SPIN[f.ball_stripe] || SPIN.cap_band);
       L.push({ t: `${spinTxt} Ten releases of each drill a day is plenty. It is a feedback tool, not a measuring instrument, and it is not a promise about your rev rate.`, gap: 8 });
