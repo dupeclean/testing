@@ -12,7 +12,7 @@ RENEWAL: Automatic
 TITLE (131 characters; the limit is 140)
 Custom Fit Bowling Release Trainer Printed From Your Drill Sheet, Grip and Thumb Exit Practice Puck for One Handed Thumb In Bowlers
 
-PRICE: 89.00
+PRICE: 59.00
 QUANTITY: 50
 SKU: RR-PUCK
 VARIATIONS: Hand: Right, Left (no price difference)

@@ -17,7 +17,7 @@ I built a practice ball that takes the fit off the ball. It's 3D printed from yo
 
 It's a feedback tool, not a magic ball. I won't tell you it adds revs. It shows you what your hand did.
 
-I'm doing the first ten for people in this league at [price], and I need your drill sheet to make one. [Pro shop] has it on file if you don't. Type it in at [site address] and you'll see the ball on screen before I print anything. No account, no email.
+I'm doing the first ten for people in this league at $99, and I need your drill sheet to make one. [Pro shop] has it on file if you don't. Type it in at [site address] and you'll see the ball on screen before I print anything. No account, no email.
 
 Question for the group: do you have a copy of your drill sheet, or does the shop have the only one?
 
@@ -28,7 +28,7 @@ THE POST (NO LINK ALLOWED)
 
 Same text, with the site-address paragraph replaced by:
 
-I'm doing the first ten for people in this league at [price], and I need your drill sheet to make one. [Pro shop] has it on file if you don't. Message me and I'll send you the page where you type it in and see the ball before I print anything.
+I'm doing the first ten for people in this league at $99, and I need your drill sheet to make one. [Pro shop] has it on file if you don't. Message me and I'll send you the page where you type it in and see the ball before I print anything.
 
 THE FIVE TEXTS
 --------------
@@ -43,4 +43,4 @@ It's a 3D printed ball with your exact grip in it. You roll it on carpet to work
 
 If they ask what it costs:
 
-[price] for the first ten in the league, and I only print it from your sheet, so it's yours or nobody's.
+$99 for the first ten in the league, and I only print it from your sheet, so it's yours or nobody's.

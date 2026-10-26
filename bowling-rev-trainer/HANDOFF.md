@@ -603,6 +603,10 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    setup-steps.txt so the owner never needs the kit's .md files, and `check_launch.py` globs
    `tiktok-rev-*.txt` (tiktok-setup.txt has no product). Committed and pushed. Rule for the owner's files from now on:
    .txt, never .md.
+   THEN ("129? really?"): prices start low and rise with the queue. Ball $99, puck $59, spinner $39 now in
+   every listing, the site and the steps; $129, $69 and $45 once paid orders waiting run more than a week
+   deep (the rule is written in setup-steps.txt under open decisions). The league post's [price] is $99, the
+   shop price. Fit Kit $24 credited unchanged. Committed and pushed.
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 

@@ -12,17 +12,17 @@ paste-ready.
 WHAT GOES WHERE
 ---------------
 
-- Rev Ball, $129.
+- Rev Ball, $99.
     Etsy: etsy-rev-ball.txt
     TikTok Shop: tiktok-rev-ball.txt, handling 10 business days
     Site page: site/ball.html
 
-- Rev Puck, $89.
+- Rev Puck, $59.
     Etsy: etsy-rev-puck.txt
     TikTok Shop: tiktok-rev-puck.txt, handling 5
     Site page: site/puck.html
 
-- Rev Spinner, $45.
+- Rev Spinner, $39.
     Etsy: etsy-rev-spinner.txt
     TikTok Shop: tiktok-rev-spinner.txt, handling 3
     Site page: site/spinner.html
@@ -41,7 +41,7 @@ $39 a month; the products can be made from this session's Shopify tools then.
 
 Fees as checked 2026-10-26: Etsy $0.20 per listing, 6.5% of item plus shipping, 3% plus $0.25 processing,
 a possible one-time set-up fee at opening ($15 to $29 in the guides), Offsite Ads 15% only on sales they
-bring. TikTok Shop about 6% referral. On a $129 ball with $12 shipping, Etsy's cut is about $13.65.
+bring. TikTok Shop about 6% referral. On a $99 ball with $12 shipping, Etsy's cut is about $10.80.
 
 TODAY, WHILE THE BALL PRINTS
 ----------------------------
@@ -118,7 +118,7 @@ BRACKETS TO FILL BEFORE ANYTHING GOES LIVE
 - etsy-rev-ball.txt and tiktok-rev-ball.txt: the [EDIT] colors line.
 - [site address] in etsy-rev-ball.txt (the shop announcement) and league-post.txt, once Cloudflare gives it to you.
 - site/about.html is short and true for now; it grows when you send your own facts and a photo.
-- league-post.txt: [admin's name], [pro shop], [price], [Name], [league night].
+- league-post.txt: [admin's name], [pro shop], [Name], [league night].
 - Etsy About and TikTok shop profile: your own words and photo.
 - Shipping: the packed weight and box size of each part.
 
@@ -128,7 +128,10 @@ DECISIONS STILL OPEN FROM THE KIT
 - The domain. rollread.com was free on 2026-10-26 (about $10 a year at Cloudflare). Buy it when the shops
   sell; until then the free address does the job. The support mailbox comes with it.
 
-- $129 online and $99 local for the first ten. The listings and the site say $129.
+- Prices start low and rise with the queue: ball $99, puck $59, spinner $39 now; $129, $69 and $45 once paid
+  orders waiting run more than a week deep (five balls). Change the price on Etsy and TikTok the same day,
+  then on the site (the home page list and the product page) and upload again. The first ten in the league
+  pay the shop price, $99.
 - The ball's reprint price when the sheet was entered wrong: the guarantee page says half price. Change it
   if you want a fixed number.
 - Whether the puck and spinner's older drill cards get the same voice pass as the ball's card before they

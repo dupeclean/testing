@@ -13,7 +13,7 @@ RENEWAL: Automatic
 TITLE (139 characters; the limit is 140)
 Custom Bowling Practice Ball Printed From Your Drill Sheet, Your Hole Sizes Spans and Pitches, Two Colors, Axis Bullseye, Rolled Not Thrown
 
-PRICE: 129.00
+PRICE: 99.00
 QUANTITY: 50
 SKU: RR-BALL
 SHIPPING PROFILE: Made to order (processing time 5 to 10 business days; see setup-steps.txt)
