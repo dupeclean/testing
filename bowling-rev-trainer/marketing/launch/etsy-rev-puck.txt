@@ -1,0 +1,97 @@
+ETSY LISTING: REV PUCK
+Paste each block into the matching Etsy field. Written 2026-10-26 from the kit's section F.2
+(marketing/04-retailers-and-marketplaces.md), US spelling because the shop ships from the US.
+
+LISTING TYPE: Physical item
+WHO MADE IT: I did
+WHAT IS IT: A finished product
+WHEN WAS IT MADE: Made to order
+CATEGORY: type "bowling" in the category box and take the closest sporting-goods match
+RENEWAL: Automatic
+
+TITLE (131 characters; the limit is 140)
+Custom Fit Bowling Release Trainer Printed From Your Drill Sheet, Grip and Thumb Exit Practice Puck for One Handed Thumb In Bowlers
+
+PRICE: 89.00
+QUANTITY: 50
+SKU: RR-PUCK
+VARIATIONS: Hand: Right, Left (no price difference)
+SHIPPING PROFILE: Made to order (processing time 3 to 5 business days)
+
+TAGS (13; Etsy allows 20 characters each; enter one at a time)
+bowling trainer
+bowling release
+bowling grip
+rev trainer
+custom bowling
+bowling practice
+3d printed bowling
+league bowler gift
+bowling accessory
+thumb exit trainer
+fingertip grip
+drill sheet
+bowler gift for him
+
+MATERIALS
+PETG
+paracord
+bowler's tape
+
+PERSONALIZATION: on, required. Instruction shown to the buyer (under 256 characters):
+Paste your drill sheet using the template in the description: HAND, THUMB SIZE, MIDDLE SIZE, RING SIZE, MIDDLE SPAN, RING SPAN, THUMB PITCH, MIDDLE PITCH, RING PITCH, THUMB HOLE (through/blind), UNITS. Or paste your configurator fit sheet.
+
+DESCRIPTION (everything between the two ==== lines; Etsy keeps the line breaks)
+====
+Your drill sheet, off the ball.
+
+The Rev Puck is the part of your ball your hand touches, printed from your drill sheet: thumb, middle and ring hole sizes in 1/64-inch steps, both spans, forward or reverse and lateral pitch on every hole, right or left hand, through or blind thumb. The holes are aimed at the ball's center the way a zero-pitch hole is drilled, with your pitches on top, so your thumb and fingers oppose each other the way they do on your ball.
+
+It's about 300 g in PETG. Light enough to hold for a long time, heavy enough that your fingertips have to work. A pocket in the base takes coins or washers when you want more weight. A tunnel through the side takes the paracord wrist cord that comes with it, so you can swing it without it going anywhere.
+
+Four drills on the card: fingertip carries at your desk, thumb pops on the cord, slow swings to feel where the thumb leaves, and cupped-wrist holds. Ten to fifteen minutes a day. It's for the thumb leaving first and the fingers staying, in your own holes, without a fifteen-pound ball in the room.
+
+To order, choose your hand and paste your drill sheet into the personalization box using the template below. Fractions are fine. Your pro shop keeps your sheet on file, so just ask them for it.
+
+TEMPLATE (copy it into the personalization box and fill it in)
+HAND: right
+THUMB SIZE: 31/32
+MIDDLE SIZE: 55/64
+RING SIZE: 27/32
+MIDDLE SPAN: 4 3/8
+RING SPAN: 4 1/4
+THUMB PITCH: 1/8 reverse, 1/8 left
+MIDDLE PITCH: 3/8 forward, 0 lateral
+RING PITCH: 5/16 forward, 1/8 right
+THUMB HOLE: through
+UNITS: inches
+NOTES: anything else on your sheet
+
+In the box: one Rev Puck from your sheet with the bores smoothed by hand, the paracord wrist cord threaded, a printed fit sheet, the drill card, and a roll of bowler's tape. Made to order: printing takes 2 to 4 business days, and it ships within 5.
+
+Not sure of your sizes? Order the Fit Kit first. Its sizer plate comes off the same printer, and the $24 comes off this.
+
+Want to see it first? Build it in the free RollRead configurator (the address is in the shop announcement), export the fit sheet, and paste that into the box instead.
+
+Your sheet is stored with the order. If the puck doesn't match it, I reprint it free within 30 days.
+
+A training aid for off the lane. Swing-and-hold drills only. Never throw it. It is not a bowling ball, and RollRead isn't connected to any ball maker or bowling body. Not for children under 12 without supervision.
+
+QUESTIONS PEOPLE ASK
+
+Do I need a drill sheet? Yes. It's your fit, and the shop that drilled your ball has it on file. If you've never been fitted, start with the Fit Kit.
+
+Through or blind thumb? Through is open at the bottom like most balls. Blind stops at your thumb length, which some people prefer for the feel. Either way, say which.
+
+Will it change my rev rate? I don't claim that. It's for practicing a clean thumb exit and a fingertip hold in your own holes. What it does to your game on the lane is up to you.
+
+What's it made of? PETG at 20% infill, bores sanded by hand. The weight pocket is open; seal it with tape once it's loaded.
+====
+
+PHOTOS (your own, in this order)
+1. The puck from above on a plain surface, three holes showing, the curve obvious.
+2. Your hand in it, wrist cord on.
+3. The underside with the weight pocket.
+4. The puck on a drill sheet.
+5. The puck, cord, card and tape together.
+VIDEO: a thumb pop on the cord, slow motion, 10 seconds.

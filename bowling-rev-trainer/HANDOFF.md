@@ -562,6 +562,32 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    installed page's h1 is RollRead. FS-0002 re-exported unchanged: 6 files at 13:18, `ROLLREAD JOB SHEET`,
    `build 2026-10-26 13:16`, tilt 15, no warning. Still open from the kit: the $129/$99 price decision, the
    stocked colours, the owner's true details for the Etsy About and the league post.
+25. THE THREE STOREFRONTS (2026-10-26, late afternoon; NOT committed). The owner: "okay i want to build
+   storefronts now. etsy, tiktok shop, my own website? aske me questions, give advice, do it all for me.
+   ensure it does not appear ai generatrdf". Asked and answered: no domain yet (rollread.com still available,
+   $16 at Shopify's registrar, about $10 at Cloudflare's); TikTok Shop gets "ball, spinner, puck"; the owner
+   pastes the listings himself; the site stays free with checkout on Etsy and TikTok Shop (Shopify not
+   chosen: Starter $5/month + 5%, Basic $39/month, as checked that day). The TikTok Shop advice changed:
+   TikTok Shop US has a Made-to-Order selling type with 3 to 14 business days of handling and an extended
+   ship-by date (an integration guide, not TikTok's own page), so the ball can be listed there: handling
+   10 (ball), 5 (puck), 3 (spinner). `marketing/launch/` now holds `tiktok-setup.md` and three
+   `tiktok-*.txt` listings (no links or handles inside, TikTok's rule; `check_launch.py` greps for them),
+   `etsy-rev-puck.txt` (from `04` F.2, voice pass, US spelling) and `etsy-rev-spinner.txt` (new), and a
+   rewritten `setup-steps.md` (what goes where, today/tomorrow/this week, stops, brackets, open decisions).
+   The site (`marketing/launch/site/`) is now a hand-written static site: `index.html` (home), `ball`,
+   `puck`, `spinner`, `fit-kit`, `drills`, `guarantee`, `about` pages, `style.css` (one accent, system
+   fonts, nothing loaded from elsewhere), `links.js` (shop and listing addresses; empty = the button says
+   "opens this week"), `site.js`, `img/` (renders of the real models from the configurator's preview via
+   Playwright, scratchpad `renders.mjs`; captions say they are previews; photos replace them), and
+   `configurator.html`, which `build.py` now writes with a `SITE_NAV` bar instead of `site/index.html`.
+   `about.html` is all square brackets on purpose: facts only the owner knows; `check_launch.py` (in the
+   folder) refuses the site while a bracket or `img/about-photo.jpg` is missing, and also checks the Etsy
+   limits, the TikTok name length and link rule, the never-words (FitSlice, claude.ai) and the
+   machine-sounding phrases (the configurator page is exempt from the phrase list: it is the app). All
+   checks pass except the About brackets. Engine/e2e not rerun: app.js and the app page are unchanged.
+   Reprint-when-the-sheet-was-wrong prices on the guarantee page: $25 puck, $15 spinner, half price ball
+   (the ball figure is mine, flagged in setup-steps as a decision). The owner still has to: register the
+   domain, open both seller accounts, fill About, take photos, paste the listings, fill `links.js`.
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 

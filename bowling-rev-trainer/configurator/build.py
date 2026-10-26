@@ -12,9 +12,9 @@ Outputs:
                                    or host it on any static site. No server, no CDN.
   artifact.html                    the same page without the document skeleton, in the
                                    shape the claude.ai Artifact publisher expects.
-  ../marketing/launch/site/index.html
-                                   the same page as index.html, in the folder that is uploaded
-                                   to the public host (rollread.com).
+  ../marketing/launch/site/configurator.html
+                                   the same page with a bar linking back to the public site
+                                   (rollread.com); the rest of that folder is hand-written.
   ../app/renderer/index.html       the desktop app's page: the configurator plus the
                                    order book (../app/renderer-src/orders.*), with no
                                    network references and a strict content security policy.
@@ -33,6 +33,13 @@ SKELETON_HEAD = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-
                  '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
                  '</head>\n<body>\n')
 SKELETON_TAIL = '\n</body>\n</html>\n'
+
+# the public site's copy carries a bar back to the site; the page itself is unchanged
+SITE_NAV = ('<div style="font: 15px/1.4 -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background: #f7f4ee; '
+            'color: #5d574f; border-bottom: 1px solid #d9d2c6; padding: 10px 16px">'
+            '<a href="index.html" style="font-family: Georgia, serif; font-size: 20px; color: #1d1a17; text-decoration: none; margin-right: 14px">RollRead</a>'
+            'Type in your drill sheet, see your part, export the fit sheet, then paste it into your order on Etsy or TikTok Shop. Nothing is stored.'
+            '</div>\n')
 
 # The desktop page loads nothing from the network and cannot navigate or fetch.
 APP_CSP = ("default-src 'none'; script-src 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'unsafe-inline'; "
@@ -68,8 +75,8 @@ def main():
     (HERE / "index.html").write_text(SKELETON_HEAD + page + SKELETON_TAIL, encoding="utf-8", newline="\n")
     site = HERE.parent / "marketing" / "launch" / "site"
     site.mkdir(parents=True, exist_ok=True)
-    (site / "index.html").write_text(SKELETON_HEAD + page + SKELETON_TAIL, encoding="utf-8", newline="\n")
-    print(f"index.html: {len(page.encode()) / 1e6:.2f} MB (+skeleton); artifact.html and marketing/launch/site/index.html written")
+    (site / "configurator.html").write_text(SKELETON_HEAD + SITE_NAV + page + SKELETON_TAIL, encoding="utf-8", newline="\n")
+    print(f"index.html: {len(page.encode()) / 1e6:.2f} MB (+skeleton); artifact.html and marketing/launch/site/configurator.html written")
 
     src_dir = APP_DIR / "renderer-src"
     if src_dir.exists():
