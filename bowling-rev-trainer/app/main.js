@@ -8,7 +8,7 @@ const { writeAtomic } = require('./lib/atomic');
 const { isRendererUrl } = require('./lib/trust');
 
 // Test and portable-use overrides. Normal use never sets these.
-if (process.env.FITSLICE_DATA_DIR) app.setPath('userData', path.resolve(process.env.FITSLICE_DATA_DIR));
+if (process.env.ROLLREAD_DATA_DIR) app.setPath('userData', path.resolve(process.env.ROLLREAD_DATA_DIR));
 
 const RENDERER = path.join(__dirname, 'renderer', 'index.html');
 let win = null;
@@ -17,10 +17,32 @@ let settings = { ordersFolder: null };
 
 function settingsFile() { return path.join(app.getPath('userData'), 'settings.json'); }
 
+// The app was called FitSlice until 26 October 2026, so an earlier install kept its order book in
+// %APPDATA%\FitSlice and its print files in Documents\FitSlice Orders. The first start of RollRead
+// copies the book (and the settings) across and keeps pointing at the old print-files folder, so
+// nothing is lost or moved. Never runs under the test override, and never twice.
+let migratedFrom = null;
+function migrateFromFitSlice() {
+  if (process.env.ROLLREAD_DATA_DIR) return;
+  const newDir = app.getPath('userData'), oldDir = path.join(path.dirname(newDir), 'FitSlice');
+  try {
+    if (oldDir === newDir || fs.existsSync(path.join(newDir, 'orders.json')) || !fs.existsSync(path.join(oldDir, 'orders.json'))) return;
+    fs.mkdirSync(newDir, { recursive: true });
+    for (const f of ['orders.json', 'orders.json.bak', 'orders.json.seq', 'settings.json'])
+      if (fs.existsSync(path.join(oldDir, f))) fs.copyFileSync(path.join(oldDir, f), path.join(newDir, f));
+    let s = {};
+    try { s = JSON.parse(fs.readFileSync(path.join(newDir, 'settings.json'), 'utf8')); } catch (_) { /* none saved */ }
+    const oldOrders = path.join(app.getPath('documents'), 'FitSlice Orders');
+    if (!s.ordersFolder && fs.existsSync(oldOrders)) fs.writeFileSync(path.join(newDir, 'settings.json'), JSON.stringify({ ordersFolder: oldOrders }, null, 2));
+    migratedFrom = oldDir;
+  } catch (e) { console.error('could not carry the FitSlice order book over:', e); }
+}
+
 function loadSettings() {
+  migrateFromFitSlice();
   try { settings = { ...settings, ...JSON.parse(fs.readFileSync(settingsFile(), 'utf8')) }; } catch (_) { /* first run */ }
-  if (process.env.FITSLICE_ORDERS_DIR) settings.ordersFolder = path.resolve(process.env.FITSLICE_ORDERS_DIR);
-  const fallback = path.join(app.getPath('documents'), 'FitSlice Orders');
+  if (process.env.ROLLREAD_ORDERS_DIR) settings.ordersFolder = path.resolve(process.env.ROLLREAD_ORDERS_DIR);
+  const fallback = path.join(app.getPath('documents'), 'RollRead Orders');
   if (!settings.ordersFolder) settings.ordersFolder = fallback;
   // a folder saved on another computer (or a drive that is gone) must not break every export
   try { fs.mkdirSync(settings.ordersFolder, { recursive: true }); } catch (_) {
@@ -43,7 +65,7 @@ function trusted(event) {
 function friendlyFsError(e) {
   const code = e && e.code;
   if (code === 'ENOSPC') return 'The disk is full, so nothing could be saved. Free some space and try again.';
-  if (code === 'EPERM' || code === 'EBUSY' || code === 'EACCES') return `Windows would not let FitSlice write ${e.path ? '"' + e.path + '"' : 'there'}. A file may be open in another program (Excel, a slicer, a sync or backup tool), or the folder is protected. Close it and try again. If it is the print-files folder, you can choose another with File > Choose orders folder.`;
+  if (code === 'EPERM' || code === 'EBUSY' || code === 'EACCES') return `Windows would not let RollRead write ${e.path ? '"' + e.path + '"' : 'there'}. A file may be open in another program (Excel, a slicer, a sync or backup tool), or the folder is protected. Close it and try again. If it is the print-files folder, you can choose another with File > Choose orders folder.`;
   if (code === 'ENOENT' || code === 'ENOTDIR') return 'The orders folder could not be found. It may be on a drive that is not connected. Choose another with File > Choose orders folder.';
   if (code === 'EROFS') return 'That folder is read-only. Choose another with File > Choose orders folder.';
   return null;
@@ -174,7 +196,7 @@ function menu() {
 function createWindow() {
   win = new BrowserWindow({
     width: 1440, height: 920, minWidth: 900, minHeight: 640,
-    title: 'FitSlice', backgroundColor: '#e9edf0',
+    title: 'RollRead', backgroundColor: '#e9edf0',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true, nodeIntegration: false, sandbox: true,
@@ -195,7 +217,7 @@ function createWindow() {
   });
   win.webContents.on('render-process-gone', (_e, details) => {
     console.error('renderer gone:', details.reason);
-    dialog.showMessageBoxSync(win, { type: 'error', message: 'The FitSlice window stopped working.', detail: 'Your saved orders are safe. The window will reopen; anything you had typed but not saved is lost.' });
+    dialog.showMessageBoxSync(win, { type: 'error', message: 'The RollRead window stopped working.', detail: 'Your saved orders are safe. The window will reopen; anything you had typed but not saved is lost.' });
     if (win && !win.isDestroyed()) win.loadFile(RENDERER);
   });
   win.loadFile(RENDERER);
@@ -218,11 +240,12 @@ if (!gotLock) {
     try {
       store = new OrderStore(path.join(app.getPath('userData'), 'orders.json'));
     } catch (e) {
-      dialog.showErrorBox('FitSlice could not open your order book', e instanceof UserError ? e.message : `${e && e.message || e}`);
+      dialog.showErrorBox('RollRead could not open your order book', e instanceof UserError ? e.message : `${e && e.message || e}`);
       app.quit();
       return;
     }
     registerIpc();
+    if (migratedFrom) dialog.showMessageBox({ type: 'info', title: 'RollRead', message: 'Your order book was carried over from FitSlice.', detail: `The orders were copied from ${migratedFrom}; the old copy is untouched. Print files keep going to your existing orders folder. New orders are numbered RR-; the FS- numbers already issued stay as they are.` });
     menu();
     createWindow();
     app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) createWindow(); });

@@ -1,18 +1,18 @@
 FITSLICE 1.0.0
-Drill sheet in, print-ready STL out. FitSlice itself never connects to the
+Drill sheet in, print-ready STL out. RollRead itself never connects to the
 internet and needs no account or other software.
 
 ------------------------------------------------------------------
 1. START THE APP (first time)
 ------------------------------------------------------------------
 a. Right-click the zip file and choose "Extract All".
-   Put the folder somewhere you will keep it, for example C:\FitSlice
+   Put the folder somewhere you will keep it, for example C:\RollRead
    (do not run the app from inside the zip).
-b. Open the folder and double-click  FitSlice.exe
+b. Open the folder and double-click  RollRead.exe
 c. Windows may show a blue box, "Windows protected your PC". That is
    because the app is not signed with a paid publisher certificate.
    Click "More info", then "Run anyway". You only do this once.
-d. Tip: right-click FitSlice.exe, "Show more options", "Send to",
+d. Tip: right-click RollRead.exe, "Show more options", "Send to",
    "Desktop (create shortcut)".
 
 ------------------------------------------------------------------
@@ -59,7 +59,7 @@ c. Click "New order". Type the customer's name (required), pick the
    The drill sheet on the main screen goes with the order, including any
    numbers left over from the last customer, so check it first.
 d. A folder is created for the order, for example
-      Documents\FitSlice Orders\FS-0001 Jordan Lee\
+      Documents\RollRead Orders\RR-0001 Jordan Lee\
    It holds the STL file(s), fit_sheet.json, job_sheet.txt and
    customer_card.pdf (a one-page sheet for the customer: their fit as
    printed, how to use the part, safety and care; print it and put it in
@@ -82,10 +82,10 @@ Click "Orders" to see every order, search by name or number, and reopen
 an order to see its saved drill sheet again. Changing the status (New,
 Printing, Shipped, Done, On hold) or any other field only counts once you
 click "Save order". If you try to leave an order with unsaved changes,
-FitSlice asks first.
+RollRead asks first.
 "Export orders to spreadsheet" makes orders.csv you can open in Excel.
 Close orders.csv in Excel before exporting again, or Windows will not let
-FitSlice replace it.
+RollRead replace it.
 
 Order numbers are never reused, even if you delete an order. Deleting
 asks you to confirm; it does not delete the order's exported files.
@@ -93,26 +93,30 @@ asks you to confirm; it does not delete the order's exported files.
 ------------------------------------------------------------------
 4. WHERE EVERYTHING IS SAVED (and how to back it up)
 ------------------------------------------------------------------
-Print files:  Documents\FitSlice Orders\
+Print files:  Documents\RollRead Orders\
               (change it any time: File > Choose orders folder)
-Order book:   %APPDATA%\FitSlice\orders.json
-              (paste %APPDATA%\FitSlice into the File Explorer address bar)
+Order book:   %APPDATA%\RollRead\orders.json
+              (paste %APPDATA%\RollRead into the File Explorer address bar)
 
-FitSlice never sends any of this anywhere. But if Windows backs up your
+RollRead never sends any of this anywhere. But if Windows backs up your
 Documents folder to OneDrive (or another sync service), the print files
 and orders.csv, which lists your customers' names, emails, phones and
 addresses, are backed up with it. Choose another orders folder if you do
 not want that.
 
-BACK UP the folder %APPDATA%\FitSlice regularly (copy it to a USB stick
+If you used the app when it was called FitSlice: the first start of RollRead
+copies your order book from %APPDATA%\FitSlice (the old copy stays) and
+keeps saving print files to your existing FitSlice Orders folder. Orders
+already numbered FS- keep their numbers; new ones are RR-.
+BACK UP the folder %APPDATA%\RollRead regularly (copy it to a USB stick
 or a cloud folder you trust). It holds your customers' names, contact
 details and drill sheets. The app also keeps one automatic previous copy
 (orders.json.bak) and restores it if the file is ever damaged; if that
 happens it tells you, and order numbers already used are not reused.
 
-To move to a new computer: close FitSlice, copy ONLY orders.json (and
-orders.json.bak and orders.json.seq if present) from %APPDATA%\FitSlice to
-the same folder on the new computer, copy your FitSlice Orders folder, and
+To move to a new computer: close RollRead, copy ONLY orders.json (and
+orders.json.bak and orders.json.seq if present) from %APPDATA%\RollRead to
+the same folder on the new computer, copy your RollRead Orders folder, and
 install the app the same way. Do not copy settings.json: it remembers a
 folder path from the old computer.
 
@@ -249,7 +253,7 @@ folder path from the old computer.
   the note depend on the slot count and angle, which only test prints
   can tune. Leave it off for customer orders until it has been tried.
 - The bridge (the plastic between the two finger holes) should be
-  about 1/2 inch, as FitSlice's default. A 1/4 inch bridge is only right
+  about 1/2 inch, as RollRead's default. A 1/4 inch bridge is only right
   when the finger holes were cut at 31/32 inch for inserts; with
   finger-sized holes it leaves a hairline web deep inside and the app
   warns.

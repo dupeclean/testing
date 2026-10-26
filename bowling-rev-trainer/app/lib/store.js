@@ -66,7 +66,7 @@ const FIT_SCHEMA = {
   finger_oval_angle:  { type: 'num', min: -90, max: 90, label: 'Finger oval angle', unit: 'deg', def: 0 },
   thumb_bevel:        { type: 'num', min: 0, max: 8, label: 'Thumb hole bevel', def: 4 },
   finger_bevel:       { type: 'num', min: 0, max: 6, label: 'Finger hole bevel', def: 2.5 },
-  serial:             { type: 'text', pattern: /^[0-9FS-]{0,12}$/, label: 'Engraved text', def: '' },
+  serial:             { type: 'text', pattern: /^[0-9RFS-]{0,12}$/, label: 'Engraved text', def: '' },
   gate_pin_h:         { type: 'num', min: 50, max: 150, label: 'Gate pin height', def: 100 },
   pap_marker:         { type: 'bool', def: true },
   pap_given:          { type: 'bool', def: false },
@@ -135,7 +135,7 @@ class OrderStore {
   _read(p) {
     let text;
     try { text = retrySync(() => fs.readFileSync(p, 'utf8')); } catch (e) {
-      if (e && TRANSIENT.has(e.code)) throw new UserError(`The order book (${p}) is locked by another program right now (${e.code}). Close anything that might have it open, such as a backup or sync tool, and start FitSlice again. Your orders have not been changed.`);
+      if (e && TRANSIENT.has(e.code)) throw new UserError(`The order book (${p}) is locked by another program right now (${e.code}). Close anything that might have it open, such as a backup or sync tool, and start RollRead again. Your orders have not been changed.`);
       throw e;
     }
     const parsed = JSON.parse(text.replace(/^\uFEFF/, ''));
@@ -151,7 +151,8 @@ class OrderStore {
     try { const n = JSON.parse(fs.readFileSync(this.seqFile, 'utf8')).last; return Number.isInteger(n) ? n : 0; } catch (_) { return 0; }
   }
   _writeSeq(n) { writeAtomic(this.seqFile, JSON.stringify({ last: n })); }
-  _numberOf(o) { const m = /^FS-(\d+)$/.exec(o && o.number || ''); return m ? parseInt(m[1], 10) : 0; }
+  // RR-0003 since the RollRead rename; FS-0001 and FS-0002 were issued under the old name and still count
+  _numberOf(o) { const m = /^(?:RR|FS)-(\d+)$/.exec(o && o.number || ''); return m ? parseInt(m[1], 10) : 0; }
   // never lower than any number ever issued, even after a restore from an older backup
   _fixNextNumber() {
     const top = Math.max(0, ...this.data.orders.map(o => this._numberOf(o)));
@@ -174,7 +175,7 @@ class OrderStore {
       const quarantined = `${this.file}.corrupt-${stamp}`;
       try { fs.renameSync(this.file, quarantined); } catch (_) { /* leave it */ }
       const issued = this._readSeq();
-      const gap = issued ? ` Order numbers up to FS-${pad(issued)} have been used and will not be reused; any order created after the backup was made is missing from the book, so check the FitSlice Orders folder for its files.` : '';
+      const gap = issued ? ` Order numbers up to RR-${pad(issued)} have been used and will not be reused; any order created after the backup was made is missing from the book, so check the RollRead Orders folder for its files.` : '';
       try {
         this.data = this._read(this.bak);
         this.recovered = `The order book could not be read, so the last backup was restored. The damaged file was kept as ${path.basename(quarantined)}.${gap}`;
@@ -244,7 +245,7 @@ class OrderStore {
     const saved = this._commit((draft) => {
       let order = input.id ? draft.orders.find(o => o.id === input.id) : null;
       if (!order) {
-        order = { id: crypto.randomUUID(), number: `FS-${pad(draft.nextNumber)}`, createdAt: now };
+        order = { id: crypto.randomUUID(), number: `RR-${pad(draft.nextNumber)}`, createdAt: now };
         draft.nextNumber += 1;
         draft.orders.push(order);
       }

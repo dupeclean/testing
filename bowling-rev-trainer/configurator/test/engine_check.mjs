@@ -147,13 +147,13 @@ assert.equal(r.ok, false); assert.match(r.message, /oval/i);
 r = await build({ ...OVAL, thumb_oval_angle: 120 });
 assert.equal(r.ok, false); assert.match(r.message, /between -90 and 90/);
 ok('oval holes build on every grip part; an oval smaller than the hole, absurdly large, or past 90 degrees is refused');
-const plain = await build(SHEET), numbered = await build({ ...SHEET, serial: 'FS-0042' });
+const plain = await build(SHEET), numbered = await build({ ...SHEET, serial: 'RR-0042' });
 assert.ok(numbered.ok && numbered.bytes[0] !== plain.bytes[0], 'the engraved number changes the puck mesh');
 r = await build({ ...SHEET, serial: 'hello world' });
 assert.equal(r.ok, false); assert.match(r.message, /digits/i);
-const ballPlain = await build(SHEET, ['ball']), ballNum = await build({ ...SHEET, serial: 'FS-0042' }, ['ball']);
+const ballPlain = await build(SHEET, ['ball']), ballNum = await build({ ...SHEET, serial: 'RR-0042' }, ['ball']);
 assert.ok(ballNum.bytes[0] !== ballPlain.bytes[0], 'the number is engraved on the ball too');
-ok('the order number is engraved when given and refused when it is not FS-/digits');
+ok('the order number is engraved when given and refused when it is not RR-/digits');
 r = await build({ ...SHEET, thumb_hole: false }, ['ball']);
 assert.ok(r.ok && r.warnings.length === 0, 'no-thumb ball: ' + (r.message || JSON.stringify(r.warnings)));
 assert.deepEqual(r.axes.ball.filter(a => a.name !== 'axis').map(a => a.name).sort(), ['middle', 'ring']);
@@ -177,13 +177,13 @@ r = await build({ ...SHEET, thumb_d: 25.4, thumb_oval_d: 23.02 });
 assert.equal(r.ok, false, 'the puck still refuses an oval smaller than the hole');
 ok('the spinner and a no-thumb ball ignore the thumb fields they do not cut');
 // setState loads a whole sheet: keys an old order lacks go back to the defaults
-await page.evaluate((s) => window.__cfgApp.setState({ ...s, thumb_oval_d: 23.02, thumb_oval_angle: 55, thumb_bevel: 6, thumb_hole: false, serial: 'FS-0007' }), SHEET);
+await page.evaluate((s) => window.__cfgApp.setState({ ...s, thumb_oval_d: 23.02, thumb_oval_angle: 55, thumb_bevel: 6, thumb_hole: false, serial: 'RR-0007' }), SHEET);
 await page.evaluate((s) => window.__cfgApp.setState(s), SHEET);   // an order saved before these keys existed
 const st = await page.evaluate(() => window.__cfgApp.getState());
 assert.ok(st.thumb_oval_d === 0 && st.thumb_oval_angle === 0 && st.thumb_bevel === 4 && st.thumb_hole === true && st.serial === '', 'stale keys reset: ' + JSON.stringify([st.thumb_oval_d, st.thumb_bevel, st.thumb_hole, st.serial]));
 ok('opening an older order resets the oval, bevel, thumb-hole and engraving fields to their defaults');
 // long order numbers still build (they shrink to fit the spinner base and the ball flat)
-for (const parts of [['spinner'], ['ball'], ['puck']]) { r = await build({ ...SHEET, serial: 'FS-2026-0001' }, parts); assert.ok(r.ok && r.warnings.length === 0, parts[0] + ' with a 12-character number: ' + (r.message || JSON.stringify(r.warnings))); }
+for (const parts of [['spinner'], ['ball'], ['puck']]) { r = await build({ ...SHEET, serial: 'RR-2026-0001' }, parts); assert.ok(r.ok && r.warnings.length === 0, parts[0] + ' with a 12-character number: ' + (r.message || JSON.stringify(r.warnings))); }
 r = await build({ ...SHEET, thumb_hole: false }, ['ball']);
 ok('a 12-character order number builds on every part');
 

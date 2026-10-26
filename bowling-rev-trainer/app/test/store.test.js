@@ -7,7 +7,7 @@ const path = require('path');
 const { OrderStore, PRODUCTS } = require('../lib/store');
 const { exportOrderFiles, sanitizeName, safeFileName } = require('../lib/files');
 
-const tmp = () => fs.mkdtempSync(path.join(os.tmpdir(), 'fitslice-'));
+const tmp = () => fs.mkdtempSync(path.join(os.tmpdir(), 'rollread-'));
 const FIT = { part: 'puck', hand: 'right', span_middle: 104.8, span_ring: 100, thumb_d: 23, middle_d: 15.9, ring_d: 16.7,
   bridge: 12.7, thumb_fwd: 0, thumb_lat: -0.125, middle_fwd: 0.75, middle_lat: 0.25, ring_fwd: 0.75, ring_lat: -0.25,
   thumb_through: true, weight_pocket: true, lanyard: true };
@@ -18,18 +18,22 @@ test('saves, numbers and reloads orders', () => {
   const a = new OrderStore(path.join(dir, 'orders.json'));
   const o1 = a.save(input());
   const o2 = a.save(input({ customer: { name: 'Sam Ortiz' }, product: 'puck' }));
-  assert.equal(o1.number, 'FS-0001'); assert.equal(o2.number, 'FS-0002');
+  assert.equal(o1.number, 'RR-0001'); assert.equal(o2.number, 'RR-0002');
+  // orders issued under the old name keep their FS- numbers and the sequence carries on after them
+  const old = new OrderStore(path.join(tmp(), 'orders.json')); old.save(input()); old.save(input());
+  fs.writeFileSync(old.file, fs.readFileSync(old.file, 'utf8').split('RR-').join('FS-'));
+  const cont = new OrderStore(old.file); assert.deepEqual(cont.list().map((o) => o.number).sort(), ['FS-0001', 'FS-0002']); assert.equal(cont.save(input()).number, 'RR-0003');
   assert.equal(o1.price, PRODUCTS.pair.price);
   const b = new OrderStore(path.join(dir, 'orders.json'));
   assert.equal(b.list().length, 2);
-  assert.equal(b.list()[0].number, 'FS-0002');
+  assert.equal(b.list()[0].number, 'RR-0002');
   assert.equal(b.get(o1.id).fit.middle_fwd, 0.75);
 });
 
 test('numbers are never reused after a delete', () => {
   const s = new OrderStore(path.join(tmp(), 'orders.json'));
   const o1 = s.save(input()); s.delete(o1.id);
-  assert.equal(s.save(input()).number, 'FS-0002');
+  assert.equal(s.save(input()).number, 'RR-0002');
 });
 
 test('updates keep number and creation time', () => {
@@ -91,7 +95,7 @@ test('CSV quotes fields and neutralizes spreadsheet formulas', () => {
   const csv = s.toCsv();
   assert.match(csv, /'=HYPERLINK/);
   assert.match(csv, /"line1\nline2, ""quoted"""/);
-  assert.match(csv, /FS-0001/);
+  assert.match(csv, /RR-0001/);
   // negative numbers in numeric columns are not treated as formulas
   assert.equal(/'-/.test(csv.split('\r\n')[1].split(',').slice(11, 13).join(',')), false);
 });
@@ -122,7 +126,7 @@ test('safeFileName allows only stl/json/txt and strips paths', () => {
 
 test('exportOrderFiles writes into <base>/<number name>/ and nowhere else', () => {
   const base = tmp();
-  const order = { number: 'FS-0007', customer: { name: '../../Jordan' } };
+  const order = { number: 'RR-0007', customer: { name: '../../Jordan' } };
   const r = exportOrderFiles(base, order, [
     { name: '../../evil/rev_puck.stl', data: new Uint8Array([1, 2, 3]) },
     { name: 'fit_sheet.json', data: '{"ok":true}' },
@@ -135,7 +139,7 @@ test('exportOrderFiles writes into <base>/<number name>/ and nowhere else', () =
 });
 
 test('exportOrderFiles rejects empty, duplicate and oversize requests', () => {
-  const base = tmp(); const order = { number: 'FS-0001', customer: { name: 'A' } };
+  const base = tmp(); const order = { number: 'RR-0001', customer: { name: 'A' } };
   assert.throws(() => exportOrderFiles(base, order, []), /no files/);
   assert.throws(() => exportOrderFiles(base, order, [{ name: 'a.stl', data: new Uint8Array(0) }]), /empty or too large/);
   assert.throws(() => exportOrderFiles(base, order, [{ name: 'a.stl', data: 'x' }, { name: 'A.STL', data: 'y' }]), /same name/);
@@ -158,21 +162,21 @@ test('a failed save changes nothing on screen or on disk, and a retry makes ONE 
   assert.equal(s.list().length, 1, 'a failed delete must not remove it');
   fs.rmdirSync(file + '.tmp');
   const o = s.save(input({ customer: { name: 'Second' } }));
-  assert.equal(o.number, 'FS-0002'); assert.equal(s.list().length, 2);
+  assert.equal(o.number, 'RR-0002'); assert.equal(s.list().length, 2);
   assert.equal(new OrderStore(file).list().length, 2);
 });
 
 test('order numbers are never reused, even after a restore from the backup', () => {
   const dir = tmp(); const file = path.join(dir, 'orders.json');
   const s = new OrderStore(file);
-  s.save(input()); s.save(input()); s.save(input());          // FS-0001..3; the .bak holds FS-0001..2
+  s.save(input()); s.save(input()); s.save(input());          // RR-0001..3; the .bak holds RR-0001..2
   fs.writeFileSync(file, 'garbage');
   const r = new OrderStore(file);
-  assert.match(r.recovered, /FS-0003/);
-  assert.equal(r.save(input()).number, 'FS-0004');
+  assert.match(r.recovered, /RR-0003/);
+  assert.equal(r.save(input()).number, 'RR-0004');
   // and with the counter file gone, numbers still come from the orders that exist
   fs.unlinkSync(file + '.seq');
-  assert.equal(new OrderStore(file).save(input()).number, 'FS-0005');
+  assert.equal(new OrderStore(file).save(input()).number, 'RR-0005');
 });
 
 test('a UTF-8 BOM in the order book is not treated as damage', () => {
@@ -205,7 +209,7 @@ test('fit values: junk is refused, noise is rounded, ranges match the configurat
 
 test('re-exporting keeps one folder, replaces the files and moves stale ones aside', () => {
   const base = tmp();
-  const order = { number: 'FS-0003', customer: { name: 'Jordan Lee' } };
+  const order = { number: 'RR-0003', customer: { name: 'Jordan Lee' } };
   const first = exportOrderFiles(base, order, [{ name: 'rev_puck_old.stl', data: 'a' }, { name: 'job_sheet.txt', data: 'one' }]);
   // the customer name is corrected later: the same folder must still be used
   const again = exportOrderFiles(base, { ...order, customer: { name: 'Jordan Leigh' }, exportFolder: first.folder, exportFiles: first.files },
@@ -223,8 +227,8 @@ test('re-exporting keeps one folder, replaces the files and moves stale ones asi
 
 test('a failed export leaves no half-written files', () => {
   const base = tmp();
-  const order = { number: 'FS-0009', customer: { name: 'Pat' } };
-  const dir = path.join(base, 'FS-0009 Pat'); fs.mkdirSync(dir);
+  const order = { number: 'RR-0009', customer: { name: 'Pat' } };
+  const dir = path.join(base, 'RR-0009 Pat'); fs.mkdirSync(dir);
   fs.mkdirSync(path.join(dir, 'b.stl.tmp'));          // the second file cannot be staged
   assert.throws(() => exportOrderFiles(base, order, [{ name: 'a.stl', data: 'x' }, { name: 'b.stl', data: 'y' }]));
   assert.deepEqual(fs.readdirSync(dir).filter(n => n.endsWith('.stl')), [], 'no final file may exist');
@@ -234,10 +238,10 @@ test('a failed export leaves no half-written files', () => {
 test('recordExport remembers the folder and files', () => {
   const s = new OrderStore(path.join(tmp(), 'orders.json'));
   const o = s.save(input());
-  const r = s.recordExport(o.id, { folder: 'FS-0001 Jordan Lee', files: ['rev_puck.stl'] });
-  assert.equal(r.exportFolder, 'FS-0001 Jordan Lee'); assert.deepEqual(r.exportFiles, ['rev_puck.stl']);
+  const r = s.recordExport(o.id, { folder: 'RR-0001 Jordan Lee', files: ['rev_puck.stl'] });
+  assert.equal(r.exportFolder, 'RR-0001 Jordan Lee'); assert.deepEqual(r.exportFiles, ['rev_puck.stl']);
   const again = s.save({ ...input(), id: o.id, status: 'shipped' });
-  assert.equal(again.exportFolder, 'FS-0001 Jordan Lee', 'a later edit keeps the export record');
+  assert.equal(again.exportFolder, 'RR-0001 Jordan Lee', 'a later edit keeps the export record');
 });
 
 test('only the app\'s own page is trusted, whatever the install path looks like', () => {
@@ -255,8 +259,8 @@ test('only the app\'s own page is trusted, whatever the install path looks like'
   assert.equal(isRendererUrl(undefined, posix, 'linux'), false);
   assert.equal(isRendererUrl('not a url', posix, 'linux'), false);
   // Windows paths compare case-insensitively
-  const win = 'C:\\Users\\Pat\\FitSlice [new]\\resources\\app.asar\\renderer\\index.html';
-  assert.equal(isRendererUrl('file:///c:/users/pat/FitSlice%20%5Bnew%5D/resources/app.asar/renderer/index.html', win, 'win32'), true);
+  const win = 'C:\\Users\\Pat\\RollRead [new]\\resources\\app.asar\\renderer\\index.html';
+  assert.equal(isRendererUrl('file:///c:/users/pat/RollRead%20%5Bnew%5D/resources/app.asar/renderer/index.html', win, 'win32'), true);
 });
 
 test('if the order-number counter cannot be written, the change is refused (no number is handed out unrecorded)', () => {
@@ -266,19 +270,19 @@ test('if the order-number counter cannot be written, the change is refused (no n
   assert.throws(() => s.save(input({ customer: { name: 'Second' } })));
   assert.equal(s.list().length, 1);
   fs.rmdirSync(file + '.seq.tmp');
-  assert.equal(s.save(input({ customer: { name: 'Second' } })).number, 'FS-0002');
+  assert.equal(s.save(input({ customer: { name: 'Second' } })).number, 'RR-0002');
 });
 
 test('a rename that fails part-way through an export is explained, and no temp files are left', () => {
   const base = tmp();
-  const order = { number: 'FS-0004', customer: { name: 'Lee' } };
+  const order = { number: 'RR-0004', customer: { name: 'Lee' } };
   const files = [{ name: 'a.stl', data: 'a' }, { name: 'b.stl', data: 'b' }, { name: 'job_sheet.txt', data: 'j' }];
   const real = fs.renameSync;
   fs.renameSync = (from, to) => { if (String(to).endsWith('b.stl')) { const e = new Error('locked'); e.code = 'EPERM'; e.path = to; throw e; } return real(from, to); };
   try {
-    assert.throws(() => exportOrderFiles(base, order, files), /would not let FitSlice replace "b\.stl".*1 of 3 files had been replaced \(a\.stl\)/s);
+    assert.throws(() => exportOrderFiles(base, order, files), /would not let RollRead replace "b\.stl".*1 of 3 files had been replaced \(a\.stl\)/s);
   } finally { fs.renameSync = real; }
-  const dir = path.join(base, 'FS-0004 Lee');
+  const dir = path.join(base, 'RR-0004 Lee');
   assert.deepEqual(fs.readdirSync(dir).filter(n => n.endsWith('.tmp')), [], 'staged temp files are cleaned up');
   // exporting again simply works
   assert.equal(exportOrderFiles(base, order, files).files.length, 3);

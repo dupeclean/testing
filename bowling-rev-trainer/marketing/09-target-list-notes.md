@@ -1,4 +1,4 @@
-# FitSlice Outreach Target List: How to Use It
+# RollRead Outreach Target List: How to Use It
 
 Working draft, October 2026. This file explains `marketing/targets.csv`: what is in it, how far to trust it, who to contact first and why, and the weekly rhythm for working through it. The list has 72 targets in seven segments. Every row cites a search result seen during the research pass, and every contact path is a description of where to look. The file holds no email addresses and no phone numbers.
 
@@ -48,8 +48,8 @@ These apply to every email, call script, DM and form. They come from the busines
 
 - **Claims.** Use green-list facts and yellow-list claims with their qualifier only. Say "built from your drill sheet". Use "exact" about the printed part only after Study 1 has passed. Say "practice" and "train". Never state or imply a number for rev rate, hook, average or injury results.
 - **No ball-company names or comparisons.** Do not name one in a message, a tracker note you might paste into a message, or a call. If a creator or coach has an equipment sponsor, ask them to tell you whether their agreement limits what they may show. You do not need the sponsor's name.
-- **Disclosure travels with every unit.** Seeded unit: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge." Affiliate code: "I earn a commission when you order with my code." Paid placement adds "Paid partnership with FitSlice." Shops that earn the 25% margin carry the shop disclosure from `03`. Put the line in the first email and the box note.
-- **Governing bodies.** Name an event or a program as a location or a fact. Nothing we write or print may state or imply that a governing body, a tour or an event organizer backs FitSlice. Use none of their logos.
+- **Disclosure travels with every unit.** Seeded unit: "RollRead sent me this trainer, printed from my own drill sheet, free of charge." Affiliate code: "I earn a commission when you order with my code." Paid placement adds "Paid partnership with RollRead." Shops that earn the 25% margin carry the shop disclosure from `03`. Put the line in the first email and the box note.
+- **Governing bodies.** Name an event or a program as a location or a fact. Nothing we write or print may state or imply that a governing body, a tour or an event organizer backs RollRead. Use none of their logos.
 - **Quotes.** Nobody is quoted until they have said something. Layouts carry `[QUOTE PLACEHOLDER — name]` until they agree.
 - **No testimonials or review counts.** Seeded recipients stay out of the review pool (`05` Section 6).
 - **IP.** Where a message would mention patents or filings, write `[PATENT STATUS]`.
@@ -195,7 +195,7 @@ Keep a working copy of `targets.csv` outside the repository, with these extra co
 
 **Online retailers and marketplaces.** Marketplaces need an account, not an email. The retail buyers at Bowling.com, BowlingBall.com and DiscountBowlingSupply.com get the `04` deck once the Fit Kit has orders. Bowling.com's Knowledge Hub is credited to an in-house pro staff, so a content conversation starts after launch.
 
-**Creators.** Meet all five `05` Section 1.3 criteria before a unit ships. The House Bowling, Darren Tang and 220 Average Bowler lean toward entertainment, equipment or unknown content, so they wait for Wave 3. A paid placement carries "Paid partnership with FitSlice." and goes through the same claims review as a seeded one. SponsorRadar's rate estimate for The House Bowling is $626 to $1.3K per sponsored video, which is an estimate and needs checking.
+**Creators.** Meet all five `05` Section 1.3 criteria before a unit ships. The House Bowling, Darren Tang and 220 Average Bowler lean toward entertainment, equipment or unknown content, so they wait for Wave 3. A paid placement carries "Paid partnership with RollRead." and goes through the same claims review as a seeded one. SponsorRadar's rate estimate for The House Bowling is $626 to $1.3K per sponsored video, which is an estimate and needs checking.
 
 **Podcasts and media.** Offer the writer or host a unit printed from their own sheet, say that it is free, and ask that the piece or episode says so. Bowlers Journal International is partnered with the governing body for member subscriptions, so keep any copy free of implied involvement.
 
@@ -223,6 +223,6 @@ Keep a working copy of `targets.csv` outside the repository, with these extra co
 
 - Approval of the Wave 1 list and the seed-cohort names in Section 5.3.
 - The sending address and the person who makes the shop discovery calls.
-- Whether FitSlice will ever pay for a placement. Wave 1 and 2 assume no.
+- Whether RollRead will ever pay for a placement. Wave 1 and 2 assume no.
 - Where the working tracker lives and who can see drill sheets.
 - Which Facebook groups to join, and under what name.

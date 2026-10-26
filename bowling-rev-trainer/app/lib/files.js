@@ -89,7 +89,7 @@ function exportOrderFiles(baseDir, order, files) {
   } catch (e) {
     for (const s of staged) { try { fs.unlinkSync(s.tmp); } catch (_) { /* already renamed or never created */ } }
     if (e && ['EPERM', 'EBUSY', 'EACCES'].includes(e.code)) {
-      throw new UserError(`Windows would not let FitSlice replace ${e.path ? '"' + path.basename(e.path) + '"' : 'a file'} in the order folder. It is probably open in another program (a slicer, Explorer's preview, a sync tool). ${done.length} of ${staged.length} files had been replaced (${done.join(', ') || 'none'}). Close the other program and export again; nothing needs cleaning up.`);
+      throw new UserError(`Windows would not let RollRead replace ${e.path ? '"' + path.basename(e.path) + '"' : 'a file'} in the order folder. It is probably open in another program (a slicer, Explorer's preview, a sync tool). ${done.length} of ${staged.length} files had been replaced (${done.join(', ') || 'none'}). Close the other program and export again; nothing needs cleaning up.`);
     }
     throw e;
   }

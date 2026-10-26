@@ -3,7 +3,7 @@
  * and IN) and only activates when the preload bridge exists. All customer text is
  * written with textContent, never as HTML. */
 (function ordersModule() {
-  const bridge = window.fitslice;
+  const bridge = window.rollread;
   if (!bridge || !bridge.isApp) return;
 
   const byId = (id) => document.getElementById(id);
@@ -195,7 +195,7 @@
     fit.part = info.products[product].parts[0];
     // the "Thumb hole" switch is a ball option: a puck or spinner order never carries a stale "no thumb"
     if (!info.products[product].parts.includes('ball')) fit.thumb_hole = true;
-    // FitSlice engraves the order number itself (set once the order has one)
+    // RollRead engraves the order number itself (set once the order has one)
     fit.serial = cur ? cur.number : '';
     // a Fit Kit's sizer plate is centred on this customer's sizes; keep that in the saved order too
     if (info.products[product].parts.includes('sizer')) {
@@ -252,7 +252,7 @@
     const d = new Date(), p2 = (n) => String(n).padStart(2, '0');
     const today = `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}`;   // the shop's own calendar day
     const L = [];
-    L.push('FITSLICE JOB SHEET', '==================', `FitSlice ${info.version}, build ${info.built || 'unknown'}`, '');
+    L.push('ROLLREAD JOB SHEET', '==================', `RollRead ${info.version}, build ${info.built || 'unknown'}`, '');
     L.push(`Order      ${order.number}`, `Date       ${today}`, `Customer   ${order.customer.name}`);
     L.push(`Product    ${(info.products[order.product] || {}).label || order.product}   ${money(order.price)}`, `Hand       ${side}-handed`, '');
 
@@ -435,8 +435,8 @@
     const first = (name.includes(',') ? name.split(',').slice(1).join(' ') : name).split(/[\s,]+/).filter(Boolean)[0] || 'there';
     const kitOnly = hasSizer && !hasPuck && !hasBall && !hasSpin;
     const L = [];
-    L.push({ t: 'FitSlice', b: true, s: 20 }, { t: `Order ${order.number} - ${(info.products[order.product] || {}).label || order.product}`, s: 11, gap: 8 });
-    L.push({ t: kitOnly ? `Hi ${first}, this plate finds the hole sizes that fit you on this printer. Here is how to use it.` : `Hi ${first}, this was printed from your own drill sheet. Here is what it is for and how to use it.`, gap: 8 });
+    L.push({ t: 'RollRead', b: true, s: 20 }, { t: `Order ${order.number} - ${(info.products[order.product] || {}).label || order.product}`, s: 11, gap: 8 });
+    L.push({ t: kitOnly ? `Hi ${first}. This plate is for finding the hole sizes that fit you on my printer. Here's how to use it.` : `Hi ${first}. This came off my printer from your own drill sheet. Here's what it's for and how to use it.`, gap: 8 });
     L.push({ t: kitOnly ? 'YOUR SIZES (the plate is centred on them)' : 'YOUR FIT (as printed)', b: true, s: 12 });
     const spanTxt = (mm) => (hasThumb ? `, span ${both(mm)}` : '');
     if (hasPuck || hasBall) {
@@ -458,24 +458,24 @@
       const tkb = ((built.stats.find(s => s.part === 'ball') || {}).pap || {}).track || {};
       const gapsTxt = tkb.gaps_mm ? Object.entries(tkb.gaps_mm).map(([n, g]) => g >= 0 ? `${g} mm from the ${n} hole` : `through the ${n} hole`).join(', ') : '';
       L.push({ t: 'REV BALL: TWO DRILLS, ONE BALL', b: true, s: 12 });
-      if (f.pap_marker) L.push({ t: `The two coloured ${eyes} sit at your axis point (PAP)${f.pap_given ? ', from your sheet' : ', the common position (a pro shop can measure your own)'}.${ring ? ` The coloured ring is your track: the line the ball rolls on about that axis with ${tkb.tilt_deg ?? f.track_tilt} degrees of axis tilt${gapsTxt ? `, passing ${gapsTxt}` : ''}. It is where the oil ring runs on your own ball; if they do not match, the PAP or the tilt on the sheet is off.` : ''}`, gap: 4 });
-      L.push({ t: `1. Put a strip of tape on the floor with a couch or wall 1.5 to 2 m beyond it${hasGate ? ', and the release gate across the tape there' : ''}. Carpet or a rug is best. A phone on the floor behind you, looking down the tape, reads the release.` });
-      L.push({ t: '2. Kneel on one knee, swing the ball low along the tape and let it go, the way you release on the lane.' });
-      L.push({ t: '3. Read what it does:', gap: 2 });
-      L.push({ t: '   Rolls and curves off the line: thumb out first, fingers lifted, hand turned through the ball. More curve = more side rotation, or more revs.' });
-      L.push({ t: '   Straight but long and lively: forward roll, the hand behind the ball. Fine.' });
-      L.push({ t: '   Straight and short: everything let go at once (a dump).' });
-      L.push({ t: '   Pops up and lands late: the thumb hung up.' });
-      L.push({ t: '   Spins in place: the hand came over the top.', gap: 4 });
+      if (f.pap_marker) L.push({ t: `The two coloured ${eyes} are your axis point, the PAP${f.pap_given ? ', from your sheet' : `. Your sheet didn't give one, so they're at the common spot; a pro shop can measure yours`}.${ring ? ` The coloured ring is your track: the line the ball rolls on around that axis with ${tkb.tilt_deg ?? f.track_tilt} degrees of tilt. On this ball it passes ${gapsTxt || 'the holes'}. Hold your real ball next to it and the oil ring should run in about the same place. If it doesn't, the PAP or the tilt on the sheet is off, not the print.` : ''}`, gap: 4 });
+      L.push({ t: `1. Tape a line on the carpet, with the couch or a wall 1.5 to 2 m past the end of it${hasGate ? ' and the gate across the tape there' : ''}. Put your phone on the floor behind you, pointing down the tape.` });
+      L.push({ t: '2. Kneel on one knee and swing it low along the tape. Let it go the way you do on the lane.' });
+      L.push({ t: '3. What it did:', gap: 2 });
+      L.push({ t: '   Rolled and curved off the line. Thumb out first, fingers lifted, hand turned through it. More curve means more side rotation, or more revs.' });
+      L.push({ t: '   Straight, long and lively. Forward roll, hand behind the ball. Nothing wrong with that.' });
+      L.push({ t: '   Straight and short. Everything let go at once. A dump.' });
+      L.push({ t: '   Popped up and landed late. The thumb hung up.' });
+      L.push({ t: '   Spun in place. The hand came over the top.', gap: 4 });
       L.push({ t: 'DRILL 1: THE YO-YO ROLL (STAY BEHIND THE BALL)', b: true, s: 11 });
-      L.push({ t: `Hand behind the ball, thumb out first, fingers lifting straight up the back, like throwing a yo-yo. Done right the ball runs straight, long and lively down the tape${hasGate ? ' and the centre pin of the gate falls' : ''}, with the holes going over the top.${f.pap_marker ? ` A straight lift spins the ball about an axis out its sides rather than about your PAP, so on this roll the ${eye} wheels in a small circle${ring ? ' and the ring shows part open' : ''}: read the path.` : ''} Come round the ball and the carpet kinks it off the line in the first foot. Ten straight ones in a row, then drill 2.`, gap: 4 });
+      L.push({ t: `Hand behind the ball, thumb out first, fingers lifting straight up the back, like you're throwing a yo-yo. Done right it runs straight and long down the tape with the holes going over the top${hasGate ? ' and takes out the centre pin' : ''}.${f.pap_marker ? ` Don't watch the ${eye} on this one. A straight lift spins the ball about an axis out through its sides, not your PAP, so the ${eye} wheels in a small circle${ring ? ' and the ring shows a bit open' : ''}. Watch the path.` : ''} Come round the ball and the carpet kinks it off the line in the first foot. Ten straight ones in a row, then drill 2.`, gap: 4 });
       L.push({ t: 'DRILL 2: THE PROPER RELEASE (TURN THROUGH THE BALL)', b: true, s: 11 });
-      L.push({ t: `Same start, hand behind the ball. As the thumb leaves, the fingers lift and the hand turns through the ball to the handshake. ${ring ? 'Your track ring sits square to the axis the ball spins about, so the phone behind you shows it as an oval whose opening is your axis rotation; a lean in the oval is your axis tilt. Match the oval to the scale.' : 'The finger holes turn with your hand, so the phone behind you shows how far you turned.'}` });
+      L.push({ t: `Same start, hand behind it. As the thumb comes out, the fingers lift and the hand turns through the ball to the handshake. ${ring ? 'The track ring sits square to the axis the ball spins about, so the phone behind you sees it as an oval, and how far open it is is your axis rotation. A lean in the oval is your tilt. Match it to the scale:' : 'The finger holes turn with your hand, so the phone behind you shows how far you turned.'}` });
       if (ring) L.push({ scale: true, gap: 2 });
-      L.push({ t: `On carpet the ball then kinks off the tape to the ${hookSide}${hasGate ? ` and knocks down a pin one or two over to the ${hookSide}` : ''}${f.pap_marker ? `, and the ${eye} holds for the first frames and then wheels in a circle as the carpet grabs: the size of the circle is your rotation` : ''}. Done right: the same ${ring ? 'oval, the same ' : ''}curve${hasGate ? ', the same pin' : ''}${f.pap_marker ? ' and the same circle' : ''} ten times in a row. Add speed and revs only once that holds.`, gap: 4 });
+      L.push({ t: `Carpet grabs the ball in the first foot, so it kinks off the tape to the ${hookSide}${hasGate ? ` and knocks down a pin one or two over` : ''}${f.pap_marker ? `, and the ${eye} holds for the first few frames and then wheels in a circle. The size of that circle is your rotation` : ''}. What you're after is the same ${ring ? 'oval, the same ' : ''}curve${hasGate ? ', the same pin' : ''}${f.pap_marker ? ' and the same circle' : ''}, ten times running. Add speed and revs after that holds, not before.`, gap: 4 });
       const SPIN = { none: f.ball_groove ? 'The groove round the middle shows the spin.' : 'Watch the finger holes to see the spin.', spot: 'The coloured spot on top shows the spin.', spot_band: 'The coloured spot on top and the band show the spin.', cap: 'The coloured top cap shows the spin.', cap_band: 'The coloured cap and band show the spin.', bands: 'The coloured bands show the spin.' };
       const spinTxt = ring ? `The track ring shows the spin.${f.ball_stripe && f.ball_stripe !== 'none' ? ' ' + (SPIN[f.ball_stripe] || '') : ''}` : (SPIN[f.ball_stripe] || SPIN.cap_band);
-      L.push({ t: `${spinTxt} Ten releases of each drill a day is plenty. It is a feedback tool, not a measuring instrument, and it is not a promise about your rev rate.`, gap: 8 });
+      L.push({ t: `${spinTxt} Ten of each a day is plenty. It's a feedback tool, not a measuring instrument, and it makes no promise about your rev rate.`, gap: 8 });
     }
     if (hasSpin && f.spin_hum) {
       L.push({ t: 'HUMMING SPINNER', b: true, s: 12 });
@@ -483,7 +483,7 @@
     }
     if (hasGate) {
       L.push({ t: 'RELEASE GATE', b: true, s: 12 });
-      L.push({ t: `Link the segments across the tape line 1.5 to 2 m away, with the tape through the groove on the middle one, and stand a pin in each cup. The centre pin is the yo-yo target: a ball rolled straight with the hand behind it knocks it down about a second after you let go. The pin one or two over to the ${hookSide} is your hook target: a proper release knocks the same one down every time. The wrong pin falling tells you which way you missed.`, gap: 8 });
+      L.push({ t: `Link the segments across the tape 1.5 to 2 m out, tape through the groove on the middle one, a pin in each cup. The centre pin is the yo-yo target: roll it straight with your hand behind the ball and that pin goes down about a second after you let go. The pin one or two over to the ${hookSide} is your hook target, and a proper release takes the same one every time. When the wrong pin falls, you know which way you missed.`, gap: 8 });
     }
     if (hasPuck) {
       L.push({ t: 'REV PUCK: HOW TO USE IT', b: true, s: 12 });
@@ -559,13 +559,13 @@
   }
 
   function showWhere() {
-    el.where.textContent = `Print files: ${info.ordersFolder}. Order book: ${info.dataFolder}. FitSlice never sends them anywhere, but if Windows backs up your Documents folder to OneDrive, the print files and orders.csv (which holds customer contact details) go with it. Back up the order book folder to keep your customers safe.`;
+    el.where.textContent = `Print files: ${info.ordersFolder}. Order book: ${info.dataFolder}. RollRead never sends them anywhere, but if Windows backs up your Documents folder to OneDrive, the print files and orders.csv (which holds customer contact details) go with it. Back up the order book folder to keep your customers safe.`;
   }
 
   async function init() {
     await appReady();
     info = await bridge.info();
-    document.title = `FitSlice ${info.version} · build ${info.built || 'unknown'}`;   // which build this window is, for support
+    document.title = `RollRead ${info.version} · build ${info.built || 'unknown'}`;   // which build this window is, for support
     for (const [key, p] of Object.entries(info.products)) {
       const o = document.createElement('option'); o.value = key; o.textContent = `${p.label}: ${money(p.price)}`; el.product.append(o);
     }
@@ -579,7 +579,7 @@
     byId('ob-orders').addEventListener('click', () => { el.drawer.hidden ? openDrawer() : closeDrawer(); });
     byId('ob-close').addEventListener('click', closeDrawer);
     byId('ob-new').addEventListener('click', newOrder);
-    // FitSlice engraves the order number itself, so the field only shows it
+    // RollRead engraves the order number itself, so the field only shows it
     const serialField = byId('serial');
     if (serialField) {
       serialField.readOnly = true; serialField.placeholder = 'order number';

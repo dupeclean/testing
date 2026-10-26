@@ -50,11 +50,11 @@ def main():
                             f'<div class="tablewrap"><table><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table></div>')
             toc.append(f'<li><a href="#s{n}">{n}. Outreach target list</a></li>')
 
-    css = CSS.replace("<title>FitSlice Business Plan</title>", "<title>FitSlice Go-to-Market Kit</title>")
+    css = CSS.replace("<title>RollRead Business Plan</title>", "<title>RollRead Go-to-Market Kit</title>")
     css = css.replace("article { max-width: 72ch; }", "article { max-width: 80ch; }")
     page = (css + '<div class="wrap">\n'
             '<header class="title"><p class="eyebrow">Go-to-market kit · compliance-reviewed drafts</p>'
-            '<h1>FitSlice Go-to-Market Kit</h1>'
+            '<h1>RollRead Go-to-Market Kit</h1>'
             '<p class="sub">Brand platform, website copy, pro-shop program, retailer and marketplace pitches, creator and coach program, content and launch calendar, paid funnel and the path to $1M, support runbook, and the outreach target list.</p>'
             '<p class="date">October 2026 — every asset was written to the claims guide in business-plan Part 6 and reviewed against it; placeholders in [BRACKETS] need a real quote, a filed patent, or a founder decision before use.</p></header>\n'
             f'<nav class="toc"><p>Contents</p><ol>{"".join(toc)}</ol></nav>\n'

@@ -1,5 +1,8 @@
 # Handoff for a local Claude Code session
 
+The product was renamed RollRead on 2026-10-26 (item 23). The items below keep the names of their day:
+FitSlice, FS- order numbers, C:\FitSlice, FITSLICE_* environment variables.
+
 State of the project as of 2026-10-23 on branch `claude/bowling-grip-trainer-3d-laejva`: the
 last cloud commit is `3fe4d41`, plus the local Windows commits described under "Windows session
 2026-10-22" and "Release feedback parts" (all pushed). Read this first, then `app/docs/START-HERE.txt` and `app/README.md`.
@@ -132,7 +135,9 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    slice with the job-sheet settings, add colour changes at 93.4, 105.4 and 154 mm and check
    that each lands on a groove ring. Two sessions tried to do this from the PC; one was refused
    desktop control and the other was blocked by a "New version of Bambu Studio" dialog.
-2. DONE (owner's go-ahead each time): `C:\FitSlice` holds the build of 2026-10-26 11:37 (item 22: the ring is the real track, tilt on the
+2. DONE (owner's go-ahead each time): `C:\FitSlice` is superseded: since 2026-10-26 12:49 the app is RollRead at `C:\RollRead` (item 23;
+   `%APPDATA%\RollRead` holds the migrated order book; `C:\FitSlice` and `%APPDATA%\FitSlice` are left as
+   they were). Before that `C:\FitSlice` held the build of 2026-10-26 11:37 (item 22: the ring is the real track, tilt on the
    right side, common PAP again; the 10:51 build it replaced is in `C:\FitSlice-old-2026-10-26-c`), and
    before that the build of 2026-10-26 10:51 (item 21: two drills on the card with the
    release-angle scale; the 10:18 build it replaced is in `C:\FitSlice-old-2026-10-26-b`), and before
@@ -497,6 +502,39 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    through the thumb, 42 mm from the middle finger, 72 mm from the ring finger), and the job sheet
    carries the new WARNING ("check the PAP and the axis tilt"), as designed: the owner said his sheet
    gives the tilt and will enter it in the app, then re-export. Committed and pushed the same midday.
+23. RENAMED: FitSlice -> RollRead (2026-10-26 afternoon; the owner: "i dony like the name fitslice", then
+   chose RollRead from the tagline "Roll it. Read it.", plain tone; rollread.com was available at $16 that
+   day, the owner registers it; a first web search found no RollRead brand and no ROLLREAD filing, which is
+   not clearance: `01` section 11 lists the to-dos). Scope, decided by the owner: (1) brand text everywhere
+   going forward (app title bar, job sheet header "ROLLREAD JOB SHEET", card header, configurator, START-HERE,
+   README, business plan, every kit file incl. shopify_products.csv handles and support@rollread.com),
+   history left as written (this file, with the note at the top); (2) the Electron app itself: package.json
+   name `rollread`, productName `RollRead`, appId `com.rollread.app`, artifact `RollRead-1.0.0-win-x64.zip`,
+   exe `RollRead.exe`, userData `%APPDATA%\RollRead`; `migrateFromFitSlice()` in main.js copies orders.json
+   (+ .bak, .seq, settings.json) from `%APPDATA%\FitSlice` on the first start when the new folder has no
+   book, and points the orders folder at the existing `Documents\FitSlice Orders` so no export moves; a
+   one-time dialog says so; never under `ROLLREAD_DATA_DIR` (the e2e override; `ROLLREAD_ORDERS_DIR`,
+   `ROLLREAD_E2E_BIN` likewise renamed); the renderer bridge is `window.rollread`; (3) order numbers: new
+   orders are `RR-0003` onward (`store.js` `_numberOf` reads `(?:RR|FS)-`, so FS-0001/0002 stay and count),
+   the engraving font got an `R` glyph (a P with a rotated-leg stroke in `glyph()`; `SERIAL_RE` and the
+   store pattern allow R; the SCAD uses a real font, so parity needed no change and has no serial case).
+   Tests: store 26 (a new case: FS- orders continue at RR-0003), engine 26 (serials `RR-0042`, `RR-2026-0001`),
+   e2e 18 from source (RR- numbers). Also, on the owner's rule "ensure all branding, websites, text, etc,
+   do not appear to be AI generated" (memory `no-ai-sounding-copy`), a VOICE PASS in the maker's first
+   person: the card's ball block, greeting and gate text; the 10.1 product page; the 10.2 Etsy listing and
+   FAQ; the Fit Kit listing and FAQ in `04` F.1; the configurator's Rev Ball help. A lexical sweep found no
+   em dashes in prose (only in placeholders and UI) and no stock phrases; `02-website-copy.md` (puck era),
+   `03`, `05` and the `06` posts still await the same pass. NOT packaged, NOT installed, NOT committed; the
+   installed `C:\FitSlice` (build 11:37) still says FitSlice. Install goes to `C:\RollRead` (new folder;
+   the first start migrates the order book). The launch folder the owner declined under the old name
+   (Etsy listings, setup steps) is not written.
+   Packaged 2026-10-26 12:48 (`app/dist/RollRead-1.0.0-win-x64.zip`; the old `FitSlice-1.0.0-win-x64.zip`
+   sits beside it), packaged e2e 18/18. Installed to `C:\RollRead` on the owner's go-ahead (the old FitSlice
+   was running and was closed as authorised, nothing unsaved; `C:\FitSlice` untouched). First start
+   migrated the book: `%APPDATA%\RollRead\orders.json` (+ .bak, .seq) copied from `%APPDATA%\FitSlice`,
+   `settings.json` written with `ordersFolder` = `Documents\FitSlice Orders`. FS-0002 re-exported
+   unchanged: 6 files at 12:49, job sheet header `ROLLREAD JOB SHEET`, `RollRead 1.0.0, build 2026-10-26
+   12:49`, tilt 15 and no warning (the owner had entered the tilt). Committed and pushed the same afternoon.
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 

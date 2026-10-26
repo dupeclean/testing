@@ -1,10 +1,10 @@
-# FitSlice Ball-First Plan: Selling the Rev Ball on One Printer and Under $200
+# RollRead Ball-First Plan: Selling the Rev Ball on One Printer and Under $200
 
 Working draft, 23 October 2026. This file records the decision to lead with the Rev Ball, the plan for the first ninety days on one printer with under $200 of cash, the Rev Ball's product facts, prices, unit economics and claims, the copy the ball needs (a product page and an Etsy listing), the naming decision the founder still has to make, and the changes every other file in this kit needs before the ball goes public. The nine files before it were written for the Rev Puck on 22 October, before the Rev Ball existed, and none of them mentions it.
 
 How to use this file:
 
-- Source of truth for every product fact is `app/docs/START-HERE.txt` (section 5, the Rev Ball) and the job sheet FitSlice exports with each ball order; for claims, `docs/business-plan.md` Part 6 plus Section 6 of this file. Language follows `01-brand-platform.md` except where Section 8 proposes a change, which is a founder decision until adopted.
+- Source of truth for every product fact is `app/docs/START-HERE.txt` (section 5, the Rev Ball) and the job sheet RollRead exports with each ball order; for claims, `docs/business-plan.md` Part 6 plus Section 6 of this file. Language follows `01-brand-platform.md` except where Section 8 proposes a change, which is a founder decision until adopted.
 - Every number marked *estimate* is ours and unsourced. `[PRINT LOG]` marks a figure the founder's first printed balls replace. `[RATE]` marks a shipping, hosting or fee figure nobody has looked up. `[DECISION — founder: …]` marks a choice only the founder can make.
 - The founder's answers of 23 October that shaped this plan: the first Rev Ball (order FS-0002, the founder's own sheet) is printing now; the first ten buyers should be league mates and local bowlers; a second printer comes when orders back up; cash for the next ninety days is under $200.
 
@@ -28,7 +28,7 @@ Three reasons the ball leads.
 
 3. **It carries every drill the puck had.** The grip is in it, the blind thumb is in it, and the two-handed version (no thumb hole, finger holes centred on top) covers the spinner's customer. A buyer with the ball has no reason to buy the puck.
 
-Why not ball-only: the Fit Kit stays. It is how the ball's holes get sized on our printer, it is the $24 first purchase a stranger will risk, and its credit carries the buyer to the ball. Why not yet: no FitSlice part has been printed and used. Thumb depth (70 mm default) and the pitch sign are still unconfirmed on a real hand (`HANDOFF.md` items 3 and 4). A ball that wobbles after its support scar is sanded, or whose pitches feel backwards, is a refund on a twelve-hour print.
+Why not ball-only: the Fit Kit stays. It is how the ball's holes get sized on our printer, it is the $24 first purchase a stranger will risk, and its credit carries the buyer to the ball. Why not yet: no RollRead part has been printed and used. Thumb depth (70 mm default) and the pitch sign are still unconfirmed on a real hand (`HANDOFF.md` items 3 and 4). A ball that wobbles after its support scar is sanded, or whose pitches feel backwards, is a refund on a twelve-hour print.
 
 What this does not change: the channel order in business-plan Part 8 and `09-target-list-notes.md` Section 4 (small coaches first, then larger channels, shops as drill-sheet capture, marketplaces for discovery, booths last), the claims rules in Part 6, the disclosure rules in `01` Section 3, the pilot in Part 7, and the fit guarantee.
 
@@ -114,7 +114,7 @@ The clip is filmed on this ball: phone on the floor behind the release, the trac
 ### 4.2 Weeks 1 to 4: ten balls for ten people the founder bowls with
 
 1. **Ask for the drill sheet.** Each person asks their pro shop for it (the shop has it on file). How many of the ten can produce one, and in what form, is the plan's open question (Part 12) answered on a small sample; write it down.
-2. **Enter it in FitSlice, export, print.** One a day. Ten balls is about two weeks of printer, three with reprints.
+2. **Enter it in RollRead, export, print.** One a day. Ten balls is about two weeks of printer, three with reprints.
 3. **Check every ball** against Section 4.1 before it leaves, and measure the three bores against the sheet. Ten balls give the first tolerance table (Section 4.3).
 4. **Deliver by hand, inlays pressed in, $99 by cash or Venmo.** Say it is a founder price. A friend who paid is a customer and may be quoted with permission. Anyone who receives a ball free carries the disclosure line from `01` Section 3 on anything they say about it in public.
 5. **Collect three things** from every buyer within a week: the sentence they use to describe it to someone else (the product page opens with the best one, in their words, with permission); whether the holes fit without tape; whether the bullseye reads from the couch.
@@ -228,6 +228,8 @@ Same three colours, same rules. These are proposed until counsel has read them w
 
 Until decided, internal files say "Rev Ball" and no public copy for the ball ships.
 
+**The brand name, decided (26 October 2026).** The founder dropped "FitSlice" ("i dony like the name fitslice") and chose **RollRead**, from the tagline "Roll it. Read it.", with a plain, says-what-it-does tone, over "Rev Ball" as the brand and "HomeRoll". rollread.com was available at $16 that morning (homeroll.com, revball.com and axispoint.com were taken); the founder registers it. The app, the job sheet, the card, START-HERE, the configurator and every kit file now say RollRead; new order numbers are RR-; FS-0001 and FS-0002 keep their numbers. The Rev Ball product name (above) is still the founder's call.
+
 ---
 
 ## 9. After the ten: coaches, the local shop, the second printer (weeks 8 to 12)
@@ -268,18 +270,18 @@ Tagline: Roll it. Read it.
 
 **Description**
 
-The Rev Ball is a 200 mm practice ball printed from your drill sheet: thumb, middle and ring hole sizes in 1/64" steps, both spans, forward or reverse and lateral pitch on every hole, right or left hand, or no thumb hole for a two-handed bowler. About 700 g in PETG. Rolled on carpet from a kneeling swing, never thrown. It is not a bowling ball.
+I print the Rev Ball from your pro shop's drill sheet: thumb, middle and ring hole sizes in 1/64" steps, both spans, forward or reverse and lateral pitch on every hole, right or left hand. Two-handed? Leave the thumb hole off. It's 200 mm across and about 700 g in PETG, so it's a bit smaller and a lot lighter than your ball, and you roll it on carpet from a kneeling swing. Never thrown. It is not a bowling ball.
 
 **Details**
 
-- Built from your drill sheet: hole sizes in 1/64" steps, both spans, forward/reverse and lateral pitch for every hole, oval thumb if your sheet gives one.
-- Blind thumb hole, 70 mm deep or set from your thumb length. Two-handed: no thumb hole, finger holes centred on top.
-- Two bullseyes, a printed dot inside a printed ring in the second colour, at your axis point (PAP) from your sheet, or at the common position if your shop never measured it. When the ball spins about that axis they stand still; on carpet that shows in the first frames of a slow-motion clip, before the carpet swings a hook's axis.
-- The track ring in the second colour: your track, the line the ball rolls on about that axis with your axis tilt, where the oil ring runs on your own ball. The job sheet gives its distance from each hole so you can check it against your ball.
-- Two drills on the card. Drill 1, the yo-yo roll: hand behind the ball, straight and long down the tape, the centre pin of the gate falls. Drill 2, the proper release: turn through the ball; a phone on the floor behind you shows the track ring as an oval, and the card's scale reads your axis rotation; the same pin one or two over, the same oval, ten in a row.
-- A flat on the bottom so it sits still on a shelf.
-- Designed to show what the hand did: roll it along a strip of tape toward the couch, and it rolls and curves off the line, or it does not. The card in the box lists the readings.
-- Bores are smoothed by hand before shipping. Finish the fit with bowler's tape, as on your ball.
+- Your sheet, as written: hole sizes in 1/64" steps, both spans, forward/reverse and lateral pitch on every hole, and the oval thumb if your sheet has one.
+- The thumb hole is blind, 70 mm deep, or set from your thumb length if you give it to me. Two-handed balls get no thumb hole and the finger holes sit centred on top.
+- Two bullseyes in the second colour, a dot inside a ring, at your axis point from your sheet. If your shop never measured a PAP, I put them at the common spot. When the ball spins about that axis they hold still. On carpet you see that in the first frames of a slow-motion clip, before the carpet swings a hook's axis round.
+- The track ring, also in the second colour. It's your track: the line the ball rolls on about that axis with your axis tilt, the same line as the oil ring on your own ball. The job sheet tells you how far it sits from each hole, so you can hold your ball next to it and check.
+- Two drills on the card. The yo-yo roll: hand behind the ball, straight and long down the tape, centre pin of the gate goes down. The proper release: turn through the ball, and a phone on the floor behind you shows the ring as an oval that the card's scale turns into your axis rotation. Same pin one or two over, same oval, ten in a row.
+- A small flat on the bottom so it stays put on a shelf.
+- It shows what your hand did. Roll it along a strip of tape toward the couch and it either rolls and curves off the line or it doesn't. The card tells you what each result means.
+- I smooth the bores by hand before it ships. Finish the fit with bowler's tape, same as your ball.
 - Your order number is in the base. Your fit sheet is stored with your order.
 
 **What you need to order**
@@ -327,17 +329,17 @@ bowling practice ball · custom bowling · bowling release trainer · bowling dr
 
 Your drill sheet, in a ball you can roll at home.
 
-The FitSlice Rev Ball is a 200 mm practice ball, 3D printed from your drill sheet: thumb, middle and ring hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch on every hole, right or left hand, or with no thumb hole if you bowl two-handed. It weighs about 700 g. You roll it on carpet from a kneeling swing along a strip of tape toward the couch, and it rolls and curves off the line, or it does not. The card in the box lists what each outcome shows.
+I print the Rev Ball from your pro shop's drill sheet: thumb, middle and ring hole sizes in 1/64-inch steps, both spans, forward or reverse and lateral pitch on every hole, right or left hand. Two-handed? Leave the thumb hole off. It's 200 mm across and about 700 g, so it's a bit smaller and a lot lighter than your ball, and you roll it on carpet from a kneeling swing along a strip of tape toward the couch. It either rolls and curves off the line or it doesn't, and the card in the box tells you what each result says about your hand.
 
-The second colour marks two bullseyes (a dot inside a ring) at your axis point and the track ring: your track, the line the ball rolls on about that axis with your axis tilt, where the oil ring runs on your own ball. Send your PAP and tilt from your sheet and the marks go there; without them the ball uses the common position and a typical tilt. The card runs two drills: the yo-yo roll, read from the path, and the proper release, read from a phone behind you as the track ring shows an oval against the card's printed scale.
+The second colour is two bullseyes at your axis point and a ring on your track, the line the ball rolls on about that axis, which is where the oil ring sits on your own ball. Send the PAP and axis tilt from your sheet and the marks go there. If your shop never measured them, I put the bullseyes at the common spot with a typical tilt. The card has two drills on it: the yo-yo roll, which you read off the path, and the proper release, which you read off a phone on the floor behind you as the ring shows up as an oval against a scale printed on the card.
 
-What to send me: your drill sheet in the personalization box, using the template below. Your pro shop has your sheet on file; ask them for it. Fractions are fine.
+To order, paste your drill sheet into the personalization box using the template below. Your pro shop keeps your sheet on file, so just ask them for it. Fractions are fine. That's how shops write them anyway.
 
-What ships: one Rev Ball in your two colours with the axis bullseyes and the track ring fitted, a printed fit sheet, the two-drill training card with the release-angle scale, and a roll of bowler's tape. Made to order, one ball a day.
+In the box: the ball in your two colours with the bullseyes and the ring fitted, a printed fit sheet, the training card, and a roll of bowler's tape. Made to order. I print one ball a day, so allow 5 to 10 business days.
 
-Prefer to see it first? Build your ball in the free FitSlice configurator (link in the listing photos and the shop announcement), export the fit sheet, and paste it into the box.
+Want to see it first? Build your ball in the free RollRead configurator (link in the photos and the shop announcement), export the fit sheet, and paste that into the box instead.
 
-This is a practice ball for use off the lane, rolled on carpet, never thrown. It is not a bowling ball. FitSlice is not affiliated with any ball manufacturer or bowling governing body.
+This is a practice ball for off the lane. Roll it, never throw it. It is not a bowling ball, and RollRead isn't connected to any ball maker or bowling body.
 
 **Personalization field**
 
@@ -367,19 +369,19 @@ Buyer limit is 1,024 characters. The template uses about 420.
 
 **FAQ**
 
-*Do I need a drill sheet?* Yes. It is your fit, and the shop that drilled your ball has it. If you have never been fitted, start with the Fit Kit and have a pro shop measure your spans and pitches.
+*Do I need a drill sheet?* Yes. It's your fit, and the shop that drilled your ball has it on file. If you've never been fitted, start with the Fit Kit and have a pro shop measure your spans and pitches.
 
-*Is it a bowling ball?* No. It is a 200 mm practice ball, rolled on carpet, never thrown.
+*Is it a bowling ball?* No. It's a 200 mm practice ball. You roll it on carpet. You don't throw it.
 
-*What does the bullseye do?* It marks your axis point, the PAP. When the ball spins about that axis the bullseye stands still. On carpet that shows in the first frames of a slow-motion clip; after that the carpet swings a hook's axis round and the bullseye wheels in a circle whose size is your rotation, so the drill is the same circle every time.
+*What does the bullseye do?* It marks your axis point, the PAP. When the ball spins about that axis the bullseye holds still. On carpet you'll see that in the first frames of a slow-motion clip. After that the carpet swings a hook's axis round and the bullseye wheels in a circle, and the size of that circle is your rotation, so the drill becomes the same circle every time.
 
-*How do I see my release angle?* Put a phone on the floor behind you, looking down the tape. At your release the track ring shows as an oval; the more you turn through the ball, the wider it opens. The card prints the scale: half open is 30 degrees of axis rotation, three quarters is 45. A lean in the oval is axis tilt.
+*How do I see my release angle?* Phone on the floor behind you, pointing down the tape. At your release the track ring shows as an oval, and the more you turn through the ball the wider it opens. The card has a scale: half open is 30 degrees of axis rotation, three quarters is 45. If the oval leans, that's axis tilt.
 
-*Is the ring my real track?* Yes, when your sheet's PAP and axis tilt are right: it is the circle the ball rolls on about your axis point with your tilt, the same line as the oil ring on your ball. The job sheet gives its distance from the thumb and finger holes; hold your ball next to it. If they disagree, the numbers on the sheet are off, not the ball.
+*Is the ring my real track?* If your sheet's PAP and tilt are right, yes. It's the circle the ball rolls on about your axis point with your tilt, the same line as the oil ring on your ball. The job sheet gives its distance from the thumb and finger holes. Hold your ball next to it. If they disagree, the numbers on the sheet are off, not the ball.
 
-*What is it made of?* PETG, 4 walls, 8% infill, with the bullseyes and the track ring as printed inlays in the second colour, bores smoothed by hand.
+*What's it made of?* PETG, 4 walls, 8% infill, with the bullseyes and the track ring as printed inlays in the second colour. I smooth the bores by hand.
 
-*What if the holes do not fit?* Your sheet is stored with the order. If the ball does not match it, or does not roll true, I reprint it free within 30 days.
+*What if the holes don't fit?* Your sheet is stored with the order. If the ball doesn't match it, or doesn't roll true, I reprint it free within 30 days.
 
 ---
 
@@ -396,7 +398,7 @@ Buyer limit is 1,024 characters. The template uses about 420.
 | `07-paid-and-funnel.md` | 2, 3, 11 | Revenue model at $129 and one ball a day; the capacity ceiling; no paid spend in the first ninety days | When ads are considered |
 | `08-customer-support-and-ops.md` | 1, 5, 6 | Runbook adds supports, sanding, the roll check and the inlays; safety card from Section 10.1; QC log adds roll-true and inlay fit | Week 1 |
 | `09-target-list-notes.md` | none | Outreach order unchanged | |
-| `shopify_products.csv` | | A `fitslice-rev-ball` row, right and left, 750 g, when Shopify opens | Later |
+| `shopify_products.csv` | | A `rollread-rev-ball` row, right and left, 750 g, when Shopify opens | Later |
 | `docs/business-plan.md` | 4, 9, C14, 12, 13 | Patent note corrected (done 23 October). Part 5.1 and 5.2 still describe the puck line; the ball's line and economics are in Section 3 of this file until the plan is revised | Done / later |
 
 ---

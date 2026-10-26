@@ -1,12 +1,12 @@
 {
-  "name": "fitslice",
-  "productName": "FitSlice",
+  "name": "rollread",
+  "productName": "RollRead",
   "version": "1.0.0",
   "description": "Drill sheet in, print-ready STL out, with a local order book. Runs entirely on this computer.",
   "main": "main.js",
   "private": true,
   "license": "UNLICENSED",
-  "author": "FitSlice",
+  "author": "RollRead",
   "scripts": {
     "start": "electron .",
     "test": "node --test test/*.test.js",
@@ -21,8 +21,8 @@
     "dist:linux": "electron-builder --linux AppImage --publish never"
   },
   "build": {
-    "appId": "com.fitslice.app",
-    "productName": "FitSlice",
+    "appId": "com.rollread.app",
+    "productName": "RollRead",
     "directories": {
       "output": "dist"
     },
@@ -42,7 +42,7 @@
         }
       ]
     },
-    "artifactName": "FitSlice-${version}-${os}-${arch}.${ext}",
+    "artifactName": "RollRead-${version}-${os}-${arch}.${ext}",
     "linux": {
       "extraFiles": [
         {

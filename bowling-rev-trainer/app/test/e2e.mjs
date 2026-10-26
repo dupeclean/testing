@@ -20,18 +20,18 @@ const electronBin = require(join(appDir, 'node_modules', 'electron'));
 const shotDir = process.argv[2] || join(appDir, 'test', 'tmp');
 mkdirSync(shotDir, { recursive: true });
 
-const root = mkdtempSync(join(tmpdir(), 'fitslice-e2e-'));
+const root = mkdtempSync(join(tmpdir(), 'rollread-e2e-'));
 const dataDir = join(root, 'data');
 const ordersDir = join(root, 'orders');
 const results = [];
 const ok = (name) => { results.push(name); console.log('  ok  ' + name); };
 
 async function launch() {
-  // FITSLICE_E2E_BIN runs a packaged build (e.g. dist/linux-unpacked/fitslice) instead of the source tree
-  const packaged = process.env.FITSLICE_E2E_BIN;
+  // ROLLREAD_E2E_BIN runs a packaged build (e.g. dist/linux-unpacked/rollread) instead of the source tree
+  const packaged = process.env.ROLLREAD_E2E_BIN;
   const args = packaged ? ['--disable-gpu'] : [appDir, '--disable-gpu'];
   if (typeof process.getuid === 'function' && process.getuid() === 0) args.push('--no-sandbox');
-  const app = await electron.launch({ executablePath: packaged || electronBin, args, env: { ...process.env, FITSLICE_DATA_DIR: dataDir, FITSLICE_ORDERS_DIR: ordersDir } });
+  const app = await electron.launch({ executablePath: packaged || electronBin, args, env: { ...process.env, ROLLREAD_DATA_DIR: dataDir, ROLLREAD_ORDERS_DIR: ordersDir } });
   const page = await app.firstWindow();
   const problems = [];
   page.on('pageerror', (e) => problems.push('pageerror: ' + e.message));
@@ -66,7 +66,7 @@ try {
   let { app, page, problems } = session;
 
   // sandboxed page: no Node, only the named bridge
-  const sec = await page.evaluate(() => ({ req: typeof require, proc: typeof process, bridge: Object.keys(window.fitslice).sort() }));
+  const sec = await page.evaluate(() => ({ req: typeof require, proc: typeof process, bridge: Object.keys(window.rollread).sort() }));
   assert.equal(sec.req, 'undefined'); assert.equal(sec.proc, 'undefined');
   assert.ok(sec.bridge.includes('saveOrder') && !sec.bridge.includes('writeFile'));
   ok('page has no Node access, only the named bridge');
@@ -100,11 +100,11 @@ try {
   await page.fill('#ob-notes', 'League bowler, wants it before Thursday');
   await page.click('#ob-form-save');
   await page.waitForSelector('.orow');
-  assert.equal(await page.textContent('.orow .n'), 'FS-0001');
+  assert.equal(await page.textContent('.orow .n'), 'RR-0001');
   assert.equal(await page.evaluate(() => window.__pwn === undefined), true);
   assert.equal(await page.evaluate(() => document.querySelectorAll('#ob-list img').length), 0);
   assert.match(await page.textContent('#ob-stats'), /1 order · \$119\.00/);
-  ok('order saved as FS-0001 at $119.00; customer text is not interpreted as HTML');
+  ok('order saved as RR-0001 at $119.00; customer text is not interpreted as HTML');
 
   // export print files
   await page.click('#ob-close');
@@ -113,7 +113,7 @@ try {
   const folders = readdirSync(ordersDir);
   assert.equal(folders.length, 1);
   const folder = join(ordersDir, folders[0]);
-  assert.ok(/^FS-0001 Jordan/.test(folders[0]) && !/[<>"]/.test(folders[0]), 'folder name is safe: ' + folders[0]);
+  assert.ok(/^RR-0001 Jordan/.test(folders[0]) && !/[<>"]/.test(folders[0]), 'folder name is safe: ' + folders[0]);
   const files = readdirSync(folder).sort();
   assert.equal(files.filter(f => f.endsWith('.stl')).length, 2);
   assert.ok(files.includes('fit_sheet.json') && files.includes('job_sheet.txt'));
@@ -124,16 +124,16 @@ try {
   assert.ok(puck.volume_cm3 > 600 && puck.volume_cm3 < 900, 'puck volume ' + puck.volume_cm3);
   assert.ok(Math.abs(puck.height_mm - 60) < 0.01 && Math.abs(spin.height_mm - 38) < 0.01);
   const sheet = JSON.parse(readFileSync(join(folder, 'fit_sheet.json'), 'utf8'));
-  assert.equal(sheet.order, 'FS-0001'); assert.equal(sheet.hand, 'right'); assert.equal(sheet.middle_fwd, 0.75);
+  assert.equal(sheet.order, 'RR-0001'); assert.equal(sheet.hand, 'right'); assert.equal(sheet.middle_fwd, 0.75);
   assert.ok(Math.abs(sheet.modeled.middle_bore_mm - (15.875 + 0.4)) < 0.01, 'modeled middle bore includes print allowance');
   const job = readFileSync(join(folder, 'job_sheet.txt'), 'utf8');
-  assert.match(job, /FS-0001/); assert.match(job, /5\/8/); assert.equal(/jordan@example\.com/.test(job), false);
+  assert.match(job, /RR-0001/); assert.match(job, /5\/8/); assert.equal(/jordan@example\.com/.test(job), false);
   ok(`exported ${files.length} files: two valid STLs (puck ${puck.volume_cm3.toFixed(0)} cm3, spinner ${spin.volume_cm3.toFixed(0)} cm3), fit sheet, job sheet without contact details`);
 
   // spreadsheet export
-  await page.evaluate(() => window.fitslice.exportCsv());
+  await page.evaluate(() => window.rollread.exportCsv());
   const csv = readFileSync(join(ordersDir, 'orders.csv'), 'utf8');
-  assert.match(csv, /FS-0001/); assert.match(csv, /119\.00/);
+  assert.match(csv, /RR-0001/); assert.match(csv, /119\.00/);
   ok('orders.csv written');
 
   // millimetres typed while the switch is on inches: refused plainly, no crash, no save
@@ -171,7 +171,7 @@ try {
   await page.evaluate(() => { document.getElementById('ob-toast-text').textContent = ''; });
   await fill(page, 'middle_d', '11/16');
   await page.click('#ob-export');
-  await page.waitForFunction(() => /Saved \d+ files for FS-0001/.test(document.getElementById('ob-toast-text').textContent), null, { timeout: 60000 });
+  await page.waitForFunction(() => /Saved \d+ files for RR-0001/.test(document.getElementById('ob-toast-text').textContent), null, { timeout: 60000 });
   const dirsIn = () => readdirSync(ordersDir, { withFileTypes: true }).filter(d => d.isDirectory()).map(d => d.name);
   assert.equal(dirsIn().length, 1, 'still one folder');
   const nowFiles = readdirSync(folder).filter(f => f !== 'superseded');
@@ -184,7 +184,7 @@ try {
   await page.fill('#ob-name', 'Jordan Leigh');
   await page.evaluate(() => { document.getElementById('ob-toast-text').textContent = ''; });
   await page.click('#ob-form-export');
-  await page.waitForFunction(() => /Saved \d+ files for FS-0001/.test(document.getElementById('ob-toast-text').textContent), null, { timeout: 60000 });
+  await page.waitForFunction(() => /Saved \d+ files for RR-0001/.test(document.getElementById('ob-toast-text').textContent), null, { timeout: 60000 });
   assert.deepEqual(dirsIn(), [folders[0]], 'the same folder is reused after a rename');
   ok('renaming the customer reuses the same files folder');
   await page.click('#ob-close');
@@ -201,7 +201,7 @@ try {
   console.log('second launch (restart)');
   session = await launch(); ({ app, page, problems } = session);
   await page.click('#ob-orders');
-  assert.equal(await page.textContent('.orow .n'), 'FS-0001');
+  assert.equal(await page.textContent('.orow .n'), 'RR-0001');
   await page.click('.orow');
   await page.waitForFunction(() => /Built in/.test(document.getElementById('status').textContent));
   const re = await page.evaluate(() => window.__cfgApp.getState());
@@ -215,8 +215,8 @@ try {
   const dialogs = [];
   page.once('dialog', (d) => { dialogs.push(d.message()); d.dismiss(); });
   await page.click('#ob-new');
-  assert.equal(await page.textContent('#ob-num'), 'FS-0001', 'declining stays on the order');
-  assert.match(dialogs[0], /FS-0001 has changes that are not saved/);
+  assert.equal(await page.textContent('#ob-num'), 'RR-0001', 'declining stays on the order');
+  assert.match(dialogs[0], /RR-0001 has changes that are not saved/);
   page.once('dialog', (d) => d.accept());
   await page.click('#ob-new');
   assert.equal(await page.textContent('#ob-num'), 'New order');
@@ -227,10 +227,10 @@ try {
   const nag = (d) => { nagged = true; d.dismiss(); };
   page.on('dialog', nag);
   await page.click('.orow');
-  await page.waitForFunction(() => /FS-0001/.test(document.getElementById('ob-num').textContent));
+  await page.waitForFunction(() => /RR-0001/.test(document.getElementById('ob-num').textContent));
   await page.click('#ob-new');
   await page.click('.orow');
-  await page.waitForFunction(() => /FS-0001/.test(document.getElementById('ob-num').textContent));
+  await page.waitForFunction(() => /RR-0001/.test(document.getElementById('ob-num').textContent));
   page.off('dialog', nag);
   assert.equal(nagged, false, 'no confirm when nothing was changed');
   await page.click('#ob-new');
@@ -243,13 +243,13 @@ try {
   await page.waitForFunction(() => document.querySelectorAll('.orow').length === 2);
   assert.match(await page.textContent('#ob-stats'), /2 orders · \$143\.00/);
   await page.click('#ob-form-export');
-  await page.waitForFunction(() => /Saved \d+ files for FS-0002/.test(document.getElementById('ob-toast-text').textContent), null, { timeout: 60000 });
-  const f2 = readdirSync(ordersDir).find(n => n.startsWith('FS-0002'));
+  await page.waitForFunction(() => /Saved \d+ files for RR-0002/.test(document.getElementById('ob-toast-text').textContent), null, { timeout: 60000 });
+  const f2 = readdirSync(ordersDir).find(n => n.startsWith('RR-0002'));
   assert.ok(readdirSync(join(ordersDir, f2)).some(n => /hole_sizer/.test(n)), 'fit kit exports a sizer plate');
   const kitJob = readFileSync(join(ordersDir, f2, 'job_sheet.txt'), 'utf8');
   assert.match(kitJob, /SIZER PLATE/); assert.match(kitJob, /Do not sand the sizer plate/);
   assert.equal(/DRILL SHEET AS ENTERED|Bridge |Wrist-cord/.test(kitJob), false, 'a Fit Kit job sheet must not describe puck features');
-  ok('second order is FS-0002; Fit Kit exports a sizer plate');
+  ok('second order is RR-0002; Fit Kit exports a sizer plate');
 
   // a Rev Ball order with an oval thumb (as on the owner's sheet): the full-sphere part, with its own job-sheet instructions
   await page.click('#ob-close');
@@ -259,15 +259,15 @@ try {
   // the optional layer pattern too, so the two-colour 3MF is exercised (the default ball is one colour with the inlays)
   await page.evaluate(() => { document.getElementById('status').textContent = 'changing'; window.__cfgApp.setState({ ...window.__cfgApp.getState(), ball_stripe: 'spot_band' }); });
   await page.waitForFunction(() => /Built in/.test(document.getElementById('status').textContent));
-  // the edited sheet still belongs to the open order (FS-0002), so "New order" asks before leaving it: accept
+  // the edited sheet still belongs to the open order (RR-0002), so "New order" asks before leaving it: accept
   const leave = (d) => d.accept(); page.on('dialog', leave);
   await page.click('#ob-new');
   await page.waitForSelector('#ob-name:visible'); page.off('dialog', leave);
   await page.fill('#ob-name', 'Ball Buyer'); await page.selectOption('#ob-product', 'ball');
   await page.evaluate(() => { document.getElementById('ob-toast-text').textContent = ''; });
   await page.click('#ob-form-export');
-  await page.waitForFunction(() => /Saved \d+ files for FS-0003/.test(document.getElementById('ob-toast-text').textContent), null, { timeout: 90000 });
-  const f3 = readdirSync(ordersDir).find(n => n.startsWith('FS-0003'));
+  await page.waitForFunction(() => /Saved \d+ files for RR-0003/.test(document.getElementById('ob-toast-text').textContent), null, { timeout: 90000 });
+  const f3 = readdirSync(ordersDir).find(n => n.startsWith('RR-0003'));
   const ballStl = readdirSync(join(ordersDir, f3)).find(n => /rev_ball200.*\.stl$/.test(n));
   assert.ok(readdirSync(join(ordersDir, f3)).some(n => /rev_ball200.*\.3mf$/.test(n)), 'the two-colour 3MF is exported with the ball: ' + readdirSync(join(ordersDir, f3)).join(', '));
   assert.ok(ballStl, 'ball STL exported: ' + readdirSync(join(ordersDir, f3)).join(', '));
@@ -277,18 +277,18 @@ try {
   const ballJob = readFileSync(join(ordersDir, f3, 'job_sheet.txt'), 'utf8');
   assert.match(ballJob, /Rev Ball: 200 mm ball/); assert.match(ballJob, /Supports: tree, "On build plate only"/); assert.match(ballJob, /Filament for support interface/); assert.match(ballJob, /Track ring: a 12 mm channel 2 mm deep/); assert.match(ballJob, /seam: random or scarf/); assert.match(ballJob, /4 walls, 8% gyroid infill/); assert.match(ballJob, /about 250 C/); assert.match(ballJob, /Ball drill/);
   assert.match(ballJob, /OVAL HOLES[\s\S]*Thumb: 25\/32" \(19\.84 mm\) drilled, 29\/32" \(23\.02 mm\) oval at 55 deg/, 'oval thumb on the job sheet');
-  assert.match(ballJob, /thumb bevel 4 mm, finger bevel 2\.5 mm \(rounded\)/); assert.match(ballJob, /modeled 23\.42 mm the long way/); assert.match(ballJob, /Engraved in the base: FS-0003/);
+  assert.match(ballJob, /thumb bevel 4 mm, finger bevel 2\.5 mm \(rounded\)/); assert.match(ballJob, /modeled 23\.42 mm the long way/); assert.match(ballJob, /Engraved in the base: RR-0003/);
   assert.match(ballJob, /FILES[\s\S]*customer_card\.pdf/);
   const card = readFileSync(join(ordersDir, f3, 'customer_card.pdf'));
   assert.equal(card.subarray(0, 8).toString('latin1'), '%PDF-1.4'); assert.match(card.toString('latin1'), /%%EOF\n$/);
   const cardText = card.toString('latin1');
-  assert.ok(/Order FS-0003/.test(cardText) && /Ball Buyer|Hi Ball/.test(cardText) && /oval 29\/32/.test(cardText) && /REV BALL: TWO DRILLS, ONE BALL/.test(cardText) && /DRILL 1: THE YO-YO ROLL/.test(cardText) && /DRILL 2: THE PROPER RELEASE/.test(cardText) && /yo-yo target/.test(cardText), 'customer card carries the order, fit and the two drills');
+  assert.ok(/Order RR-0003/.test(cardText) && /Ball Buyer|Hi Ball/.test(cardText) && /oval 29\/32/.test(cardText) && /REV BALL: TWO DRILLS, ONE BALL/.test(cardText) && /DRILL 1: THE YO-YO ROLL/.test(cardText) && /DRILL 2: THE PROPER RELEASE/.test(cardText) && /yo-yo target/.test(cardText), 'customer card carries the order, fit and the two drills');
   assert.ok(/ l S\n/.test(cardText) && (cardText.match(/ c S\n/g) || []).length === 3 && /45\xb0 hook/.test(cardText), 'the card draws the release-angle scale: a line and three ovals with their labels');
   assert.equal(/example\.com|@/.test(cardText.replace(/%[^\n]*/g, '')), false, 'no contact details on the card');
   // keep the card and job sheet for a look (test/tmp is ignored by git)
   copyFileSync(join(ordersDir, f3, 'customer_card.pdf'), join(shotDir, 'customer_card.pdf')); copyFileSync(join(ordersDir, f3, 'job_sheet.txt'), join(shotDir, 'job_sheet_ball.txt'));
   const ballSheet = JSON.parse(readFileSync(join(ordersDir, f3, 'fit_sheet.json'), 'utf8'));
-  assert.ok(Math.abs(ballSheet.thumb_oval_d - 23.02) < 0.05 && ballSheet.thumb_oval_angle === 55 && ballSheet.serial === 'FS-0003', 'fit sheet records the oval and the engraved number');
+  assert.ok(Math.abs(ballSheet.thumb_oval_d - 23.02) < 0.05 && ballSheet.thumb_oval_angle === 55 && ballSheet.serial === 'RR-0003', 'fit sheet records the oval and the engraved number');
   assert.match(ballJob, /FILAMENT CHANGES[\s\S]*Add color change[\s\S]*at \d\d(\.\d)? mm: second colour[\s\S]*at \d\d(\.\d)? mm: base colour[\s\S]*at 1[89]\d(\.\d)? mm: second colour[\s\S]*open the \.3mf/, 'swap heights and the 3mf on the job sheet');
   assert.equal(/Wrist-cord/.test(ballJob), false, 'no puck-only lines on a ball job sheet');
   ok('Rev Ball order with an oval thumb exports a 200 mm ball, a job sheet with the oval, bevel, engraving and support settings, and a customer card PDF');
@@ -305,8 +305,8 @@ try {
   await page.fill('#ob-name', 'Fourth Customer');
   await page.click('#ob-form-save');
   await page.waitForFunction(() => document.querySelectorAll('.orow').length === 3);
-  assert.equal(await page.evaluate(() => [...document.querySelectorAll('.orow .n')].map(n => n.textContent).sort().join()), 'FS-0001,FS-0002,FS-0004');
-  ok('delete asks first; after a delete the next order is FS-0004, not a reused FS-0003');
+  assert.equal(await page.evaluate(() => [...document.querySelectorAll('.orow .n')].map(n => n.textContent).sort().join()), 'RR-0001,RR-0002,RR-0004');
+  ok('delete asks first; after a delete the next order is RR-0004, not a reused RR-0003');
   await app.close();
   session = null;
   console.log(`\nALL ${results.length} CHECKS PASSED`);

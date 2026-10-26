@@ -35,11 +35,11 @@ const CASES = {
   finger_oval:  { parts: ['puck'], params: { ...SHEET, thumb_oval_d: 0, middle_oval_d: 21 / 32 * IN + 3, ring_oval_d: 5 / 8 * IN + 3, finger_oval_angle: -30, thumb_through: true } },
   nothumb_ball: { parts: ['ball'], params: { ...SHEET, thumb_hole: false } },
   plain_puck:   { parts: ['puck'], params: { ...SHEET, thumb_oval_d: 0, thumb_bevel: 0, finger_bevel: 0, thumb_through: true } },
-  serial_puck:  { parts: ['puck'], params: { ...SHEET, thumb_oval_d: 0, thumb_bevel: 0, finger_bevel: 0, thumb_through: true, serial: 'FS-0001' } },
+  serial_puck:  { parts: ['puck'], params: { ...SHEET, thumb_oval_d: 0, thumb_bevel: 0, finger_bevel: 0, thumb_through: true, serial: 'RR-0001' } },
   bevel_puck:   { parts: ['puck'], params: { ...SHEET, thumb_oval_d: 0, thumb_through: true } },
   bevel_zero:   { parts: ['puck'], params: { ...SHEET, thumb_oval_d: 0, thumb_through: true, thumb_fwd: 0, thumb_lat: 0 } },   // axis = surface normal, so slices near the rim stay closed
-  spinner_serial: { parts: ['spinner'], params: { ...SHEET, thumb_oval_d: 0, serial: 'FS-2026-0001' } },
-  ball_serial:  { parts: ['ball'], params: { ...SHEET, serial: 'FS-0001' } },
+  spinner_serial: { parts: ['spinner'], params: { ...SHEET, thumb_oval_d: 0, serial: 'RR-2026-0001' } },
+  ball_serial:  { parts: ['ball'], params: { ...SHEET, serial: 'RR-0001' } },
 };
 const axes = {};
 for (const [name, c] of Object.entries(CASES)) {

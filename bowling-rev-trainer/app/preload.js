@@ -4,7 +4,7 @@
 // it has no Node.js access.
 const { contextBridge, ipcRenderer } = require('electron');
 
-contextBridge.exposeInMainWorld('fitslice', {
+contextBridge.exposeInMainWorld('rollread', {
   isApp: true,
   info: () => ipcRenderer.invoke('app:info'),
   listOrders: () => ipcRenderer.invoke('orders:list'),

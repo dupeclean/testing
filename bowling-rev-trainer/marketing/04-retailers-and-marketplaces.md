@@ -1,6 +1,6 @@
-# FitSlice: Online Retailers and Marketplaces
+# RollRead: Online Retailers and Marketplaces
 
-Asset 04 of the FitSlice go-to-market set. Working draft, October 2026. Source of truth for every product fact and claim: `docs/business-plan.md` (Part 2, Part 4, Part 5, Part 6, Part 8) and `README.md`. Language and disclosure lines follow `marketing/01-brand-platform.md`.
+Asset 04 of the RollRead go-to-market set. Working draft, October 2026. Source of truth for every product fact and claim: `docs/business-plan.md` (Part 2, Part 4, Part 5, Part 6, Part 8) and `README.md`. Language and disclosure lines follow `marketing/01-brand-platform.md`.
 
 **How to use this file**
 
@@ -28,7 +28,7 @@ Asset 04 of the FitSlice go-to-market set. Working draft, October 2026. Source o
 
 Hi [Buyer first name],
 
-You already collect drill sheets to drill the balls you ship. FitSlice is a training aid made from that same sheet.
+You already collect drill sheets to drill the balls you ship. RollRead is a training aid made from that same sheet.
 
 It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere. Each Rev Puck is a slice of regulation 8.5-inch ball surface with the customer's drill sheet reproduced in it: hole sizes in 1/64-inch steps, both spans, every pitch, right or left hand. The holes are aimed at the ball's center the way a zero-pitch hole is drilled, so the thumb and fingers oppose each other exactly as on the ball. Coaches agree the thumb must leave first and a relaxed hand creates more revs. The drills are designed to practice a relaxed hold and a clean, early thumb exit in the bowler's own holes. To our knowledge, it is the first trainer that uses the bowler's actual drill sheet.
 
@@ -45,7 +45,7 @@ Configurator: https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p
 
 Thanks,
 [Name]
-FitSlice
+RollRead
 [Phone] · [Email]
 
 ---
@@ -54,14 +54,14 @@ FitSlice
 
 Format for each slide: title, on-slide bullets, speaker note. Slide copy is final. Images are described in brackets and are the founder's to supply. Present in 15 minutes, leave 5 for questions.
 
-### Slide 1. FitSlice. Your drill sheet, off the ball.
+### Slide 1. RollRead. Your drill sheet, off the ball.
 
 - A made-to-order release trainer for one-handed, thumb-in bowlers
 - Printed from the customer's own drill sheet
 - A dropship program for online pro shops: 25% margin, no inventory
 - [Photo: Rev Puck beside a drill sheet, hand resting in the holes]
 
-**Speaker note:** Open with the ten-second line, verbatim: "It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere." Then hand the sample across the table. It was printed from the buyer's own sheet and sent free, not for resale. If anyone on the buyer's team posts about it, ask them to say FitSlice sent it free. The sample answers the next question by itself. Ask it anyway: "Does it feel like your ball?"
+**Speaker note:** Open with the ten-second line, verbatim: "It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere." Then hand the sample across the table. It was printed from the buyer's own sheet and sent free, not for resale. If anyone on the buyer's team posts about it, ask them to say RollRead sent it free. The sample answers the next question by itself. Ask it anyway: "Does it feel like your ball?"
 
 ### Slide 2. What it is
 
@@ -77,7 +77,7 @@ Format for each slide: title, on-slide bullets, speaker note. Slide copy is fina
 
 ### Slide 3. Why your customer wants it
 
-- Customers who send you a drill sheet to have a ball drilled already have what FitSlice needs.
+- Customers who send you a drill sheet to have a ball drilled already have what RollRead needs.
 - Coaches agree the thumb must leave first and a relaxed hand creates more revs.
 - The pro-shop trade body puts hole size at about 20% of a fit; span and pitch are 40% each. We copy all three.
 - Coaching sources say oversized holes make you squeeze, and squeezing limits hook.
@@ -94,12 +94,12 @@ Format for each slide: title, on-slide bullets, speaker note. Slide copy is fina
 | Practice balls with holes | Hand-position feel | Generic one-size holes |
 | Wrist positioners and braces | Hold the wrist during the shot | Sized S/M/L by hand length |
 | Rev-counting apps and sensors | Measure revs from video or sensors | Measure, do not train |
-| **FitSlice** | **Built from the bowler's drill sheet, used off the ball** | **Does not teach footwork, timing or targeting. It copies the fit it is given.** |
+| **RollRead** | **Built from the bowler's drill sheet, used off the ball** | **Does not teach footwork, timing or targeting. It copies the fit it is given.** |
 
 - Unlike generic one-size trainers and S/M/L wrist braces, it is built from the bowler's fit.
 - To our knowledge, the first trainer that uses the bowler's actual drill sheet.
 
-**Speaker note:** Compare by category, never by brand. If the buyer names a brand they stock, answer about the category: "A brace holds the wrist for you during the shot. This is designed for practicing the same hold with the hand alone." The point of the slide is that FitSlice does not displace anything on their shelf. It is a new line in a category their customers already shop.
+**Speaker note:** Compare by category, never by brand. If the buyer names a brand they stock, answer about the category: "A brace holds the wrist for you during the shot. This is designed for practicing the same hold with the hand alone." The point of the slide is that RollRead does not displace anything on their shelf. It is a new line in a category their customers already shop.
 
 ### Slide 5. The line and the prices
 
@@ -112,7 +112,7 @@ Format for each slide: title, on-slide bullets, speaker note. Slide copy is fina
 | FS-DIG-PUCK / FS-DIG-PAIR | Digital Files | STL files and fit sheet for the customer's own printer | $29 / $39 | $21.75 / $29.25 | 25% |
 
 - MAP is MSRP. Pro shops earn the same 25% at the same prices. No channel undercuts another.
-- The Fit Kit credit is funded by FitSlice on the wholesale invoice. Your 25% is protected.
+- The Fit Kit credit is funded by RollRead on the wholesale invoice. Your 25% is protected.
 
 **Speaker note:** The Pair is the SKU we lead with. The Fit Kit is the entry for the hesitant customer and the answer to the one technical risk in the chain: printed holes come out a few tenths of a millimeter small, and the plate is printed on the same printer and material as the order, so the bore that fits is the bore we print. Explain the credit mechanics if asked: the customer gets a $24 code in the box, you honor it on the trainer, and we take $24 off that order's wholesale, so your margin on the trainer stays at 25% of MSRP.
 
@@ -143,7 +143,7 @@ Format for each slide: title, on-slide bullets, speaker note. Slide copy is fina
 ### Slide 8. Marketing we bring
 
 - The configurator is the demo. A bowler who types in their own spans and watches their grip appear is already imagining holding it.
-- Creator program with bowling's teaching channels. Every video opens with the disclosure, spoken aloud: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge." Affiliate codes pay 15% and carry the line "I earn a commission when you order with my code."
+- Creator program with bowling's teaching channels. Every video opens with the disclosure, spoken aloud: "RollRead sent me this trainer, printed from my own drill sheet, free of charge." Affiliate codes pay 15% and carry the line "I earn a commission when you order with my code."
 - Tournament vendor booths with a sizer plate and a printer running
 - Launch kit for you: product photos, a 15-second thumb-pop clip, the approved copy deck, an email template and the Shopify CSV
 - Available to a launch partner: your referral link in one creator video during your launch quarter, disclosed as above
@@ -176,7 +176,7 @@ Format for each slide: title, on-slide bullets, speaker note. Slide copy is fina
 
 - List four products: Fit Kit, Rev Puck, Rev Spinner, Pair. Digital Files optional.
 - We deliver the launch kit within 5 business days of a signed dropship agreement
-- Your buyer's sample trainer ships first, printed from their own sheet, at no charge, not for resale. Anyone who posts about it should say FitSlice sent it free.
+- Your buyer's sample trainer ships first, printed from their own sheet, at no charge, not for resale. Anyone who posts about it should say RollRead sent it free.
 - Check-ins at day 45 and day 90: units, sheet-completeness rate, fit-guarantee rate, time to ship
 - Either side may end the pilot on 30 days' notice. Open orders are finished.
 
@@ -186,7 +186,7 @@ Format for each slide: title, on-slide bullets, speaker note. Slide copy is fina
 
 ## C. Line sheet
 
-**FitSlice dropship line sheet. Effective October 2026. Prices in USD.**
+**RollRead dropship line sheet. Effective October 2026. Prices in USD.**
 
 | SKU | Product | What ships | Options | MSRP | MAP | Wholesale | Case pack | Lead time | Ship weight |
 |---|---|---|---|---|---|---|---|---|---|
@@ -200,25 +200,25 @@ Format for each slide: title, on-slide bullets, speaker note. Slide copy is fina
 **Terms**
 
 - **Margin:** 25% of MSRP on every SKU. Wholesale is 75% of MSRP.
-- **MAP:** MSRP. Permitted promotions: the Fit Kit credit, and the Pair price itself. Site-wide percentage promotions may not apply to FitSlice SKUs. MAP applies equally to FitSlice's own site and to pro shops.
-- **Fit Kit credit:** the box carries a single-use $24 code valid on a Rev Puck, Rev Spinner or Pair from the retailer that sold the kit. The retailer honors the code at checkout. FitSlice deducts $24 from that order's wholesale on the next invoice. The retailer's margin on the trainer stays at 25% of MSRP.
+- **MAP:** MSRP. Permitted promotions: the Fit Kit credit, and the Pair price itself. Site-wide percentage promotions may not apply to RollRead SKUs. MAP applies equally to RollRead's own site and to pro shops.
+- **Fit Kit credit:** the box carries a single-use $24 code valid on a Rev Puck, Rev Spinner or Pair from the retailer that sold the kit. The retailer honors the code at checkout. RollRead deducts $24 from that order's wholesale on the next invoice. The retailer's margin on the trainer stays at 25% of MSRP.
 - **Case pack:** not applicable. Every unit is made to order and ships one order per parcel.
 - **Minimums:** none.
 - **Capacity:** launch allocation up to 40 printed units per calendar month per partner. More on 30 days' notice.
 - **Shipping:** flat $9 per domestic parcel, billed with the wholesale. The retailer sets its own customer-facing shipping charge. Digital Files carry no shipping.
 - **Payment:** weekly invoice for orders shipped that week. Net 15. ACH or card.
-- **Fit guarantee:** 30 days from delivery. If the printed bores do not match the fit sheet on the order, FitSlice reprints at no charge to the retailer or the customer. If the customer's sheet was entered wrong, a reprint from a corrected sheet is 50% of MSRP, billed to the retailer at the same amount, with no margin either way.
+- **Fit guarantee:** 30 days from delivery. If the printed bores do not match the fit sheet on the order, RollRead reprints at no charge to the retailer or the customer. If the customer's sheet was entered wrong, a reprint from a corrected sheet is 50% of MSRP, billed to the retailer at the same amount, with no margin either way.
 - **Returns:** Rev Puck, Rev Spinner and Pair are personalized goods and are not returnable for refund. The fit guarantee is how they are made right. Fit Kits unopened may be returned to the retailer under its own policy. Digital goods are not refundable except where the files are defective.
-- **Packaging:** FitSlice box, FitSlice drill card and fit sheet inside. The retailer's packing slip goes in the box. No FitSlice pricing or promotional inserts are included in dropship orders.
+- **Packaging:** RollRead box, RollRead drill card and fit sheet inside. The retailer's packing slip goes in the box. No RollRead pricing or promotional inserts are included in dropship orders.
 
 **Dropship model**
 
 1. The retailer lists the SKUs at MSRP using the supplied copy, photos and CSV.
 2. The retailer's product pages carry the configurator link with the retailer's referral code: `https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p?ref=[RETAILER CODE]`. The configurator is free and carries no prices or buy buttons for referred traffic.
 3. The customer enters their drill sheet in the configurator, sees the model, exports the fit sheet, and orders on the retailer's site. The fit sheet attaches to the order as order fields (on Shopify, the line-item properties in Section H). The referral code is stored on the order as a hidden field.
-4. The order reaches FitSlice by one of three routes, chosen in the agreement: (a) the retailer forwards the order confirmation email, with the fit sheet in the body; (b) a daily CSV export in the FitSlice order template, one row per order and one column per fit-sheet field, which FitSlice's build pipeline reads directly; (c) a Shopify order sync for orders tagged `fitslice`.
-5. FitSlice generates the model from the sheet, prints, checks the bores against the sheet, packs with the retailer's packing slip, ships, and returns the tracking number to the retailer within one business day of shipping.
-6. Incomplete or inconsistent sheets: FitSlice emails the customer the same business day from a FitSlice address that names the retailer and the order number, with the retailer copied. Lead time starts when the sheet is complete.
+4. The order reaches RollRead by one of three routes, chosen in the agreement: (a) the retailer forwards the order confirmation email, with the fit sheet in the body; (b) a daily CSV export in the RollRead order template, one row per order and one column per fit-sheet field, which RollRead's build pipeline reads directly; (c) a Shopify order sync for orders tagged `rollread`.
+5. RollRead generates the model from the sheet, prints, checks the bores against the sheet, packs with the retailer's packing slip, ships, and returns the tracking number to the retailer within one business day of shipping.
+6. Incomplete or inconsistent sheets: RollRead emails the customer the same business day from a RollRead address that names the retailer and the order number, with the retailer copied. Lead time starts when the sheet is complete.
 
 **Fit-sheet field map**
 
@@ -243,7 +243,7 @@ Every channel collects the same fields. This table is the translation between th
 | Configurator export | Configurator fit sheet | (pasted JSON) | all keys | mm and inches |
 | Retailer referral code | _Referral | n/a | n/a | code |
 
-Fractions are accepted in every size and span field: 55/64, 1 1/32, 4-1/2. Lateral pitch is written as the sheet shows it: left or right, as drawn with the thumb hole at the bottom. FitSlice converts it using the hand.
+Fractions are accepted in every size and span field: 55/64, 1 1/32, 4-1/2. Lateral pitch is written as the sheet shows it: left or right, as drawn with the thumb hole at the bottom. RollRead converts it using the hand.
 
 ---
 
@@ -251,34 +251,34 @@ Fractions are accepted in every size and span field: 55/64, 1 1/32, 4-1/2. Later
 
 For counsel to draft from. Each heading lists the terms the business has decided; counsel supplies the language. Schedule A is the line sheet in Section C. Schedule B is the approved copy deck. Schedule C is the claims list from Slide 9.
 
-1. **Parties and purpose.** FitSlice [legal entity], as supplier. [Retailer legal entity], as retailer. Non-exclusive appointment to sell FitSlice products to end customers through the retailer's own online store, fulfilled by FitSlice directly to the end customer.
+1. **Parties and purpose.** RollRead [legal entity], as supplier. [Retailer legal entity], as retailer. Non-exclusive appointment to sell RollRead products to end customers through the retailer's own online store, fulfilled by RollRead directly to the end customer.
 2. **Term.** Initial 90-day pilot, then 12 months, renewing annually. Either party may terminate for convenience on 30 days' written notice. Orders accepted before notice are completed on the agreed terms.
-3. **Products and pricing.** Products, SKUs, MSRP, MAP and wholesale as in Schedule A. FitSlice may change Schedule A on 30 days' notice; orders placed before the change are honored at the old price. Retailer sets its own shipping and tax charges to the customer.
-4. **Orders and data transfer.** The retailer transmits each paid order with the complete fit sheet and the referral code within one business day by the route elected (order email, daily CSV in the FitSlice template, or Shopify sync). FitSlice acknowledges receipt within one business day. An order is "complete" when every required fit-sheet field is present and the configurator's geometry check passes.
-5. **Fit-sheet data and privacy.** The fit sheet is personal data tied to a hand. FitSlice uses it to make the order and to honor the fit guarantee, and for nothing else. Retention period stated in the agreement (recommended: duration of the guarantee plus the period needed for reprints, then deletion or anonymization). Deletion on the customer's or retailer's request. FitSlice does not market to the retailer's customers and does not use their contact details except to resolve an incomplete sheet or a guarantee claim, with the retailer copied. Each party complies with applicable privacy law and its own posted privacy policy.
-6. **Lead times and service levels.** Ship within the lead times in Schedule A from a complete fit sheet. Tracking returned to the retailer within one business day of shipping. Monthly capacity allocation as in Schedule A. If FitSlice expects to miss a lead time, it notifies the retailer before the lead time passes, and the retailer may cancel that order without charge.
-7. **Shipping and risk of loss.** FitSlice ships by a tracked domestic carrier at the flat rate in Schedule A. Risk of loss passes to the customer on delivery. Lost or damaged parcels are replaced by FitSlice at no charge on the carrier's confirmation.
-8. **Packaging and branding.** FitSlice packaging, drill card and fit sheet in the box. Retailer's packing slip in the box. No FitSlice pricing or promotional material in dropship parcels. Retailer may describe the product as "ships from FitSlice" on its site.
-9. **Fit guarantee, reprints and returns.** FitSlice honors the 30-day fit guarantee directly with the customer and keeps the retailer informed. Customer-error reprints at the price in Schedule A. Personalized goods are not returnable for refund; Fit Kits and Digital Files follow Schedule A. The retailer's customer-facing policy for FitSlice products reflects these terms and FitSlice supplies the policy text.
-10. **Payment.** Weekly invoice for orders shipped, Net 15, ACH or card. Fit Kit credits and any guarantee adjustments appear as line items on the next invoice. Late payment interest at a rate counsel sets. FitSlice may pause acceptance of new orders while an invoice is more than 30 days past due.
-11. **MAP policy.** Retailer advertises FitSlice products at no less than MAP in Schedule A. Permitted exceptions: the Fit Kit credit and the Pair bundle price. Two written notices, then FitSlice may suspend the program. Counsel confirms the policy is drafted as a unilateral policy where that matters.
-12. **Marketing, copy and claims.** Retailer uses copy, images and video supplied in Schedule B, or copy approved by FitSlice in writing. Retailer does not make or publish any statement about rev rate, hook, average, injury prevention, or governing-body approval or endorsement, and does not compare FitSlice to any named ball company or its products (Schedule C). Retailer corrects or removes non-conforming copy within two business days of notice. Any creator, affiliate or seeded-product content either party publishes carries a clear material-connection disclosure in the first line. Neither party writes, buys or suppresses customer reviews, or pays or rewards anyone for a positive one. Review requests, if any, go to all customers equally. Any review or testimonial from a person with a material connection (employee, creator, affiliate, coach) carries the matching disclosure.
-13. **Intellectual property.** FitSlice grants a limited, non-exclusive, revocable license to use the FitSlice name, logos and supplied images solely to sell the products during the term. All designs, the configurator, the fit-sheet format and the generated files remain FitSlice's. The retailer acquires no rights in fit-sheet data beyond its own customer records. [PATENT STATUS]
+3. **Products and pricing.** Products, SKUs, MSRP, MAP and wholesale as in Schedule A. RollRead may change Schedule A on 30 days' notice; orders placed before the change are honored at the old price. Retailer sets its own shipping and tax charges to the customer.
+4. **Orders and data transfer.** The retailer transmits each paid order with the complete fit sheet and the referral code within one business day by the route elected (order email, daily CSV in the RollRead template, or Shopify sync). RollRead acknowledges receipt within one business day. An order is "complete" when every required fit-sheet field is present and the configurator's geometry check passes.
+5. **Fit-sheet data and privacy.** The fit sheet is personal data tied to a hand. RollRead uses it to make the order and to honor the fit guarantee, and for nothing else. Retention period stated in the agreement (recommended: duration of the guarantee plus the period needed for reprints, then deletion or anonymization). Deletion on the customer's or retailer's request. RollRead does not market to the retailer's customers and does not use their contact details except to resolve an incomplete sheet or a guarantee claim, with the retailer copied. Each party complies with applicable privacy law and its own posted privacy policy.
+6. **Lead times and service levels.** Ship within the lead times in Schedule A from a complete fit sheet. Tracking returned to the retailer within one business day of shipping. Monthly capacity allocation as in Schedule A. If RollRead expects to miss a lead time, it notifies the retailer before the lead time passes, and the retailer may cancel that order without charge.
+7. **Shipping and risk of loss.** RollRead ships by a tracked domestic carrier at the flat rate in Schedule A. Risk of loss passes to the customer on delivery. Lost or damaged parcels are replaced by RollRead at no charge on the carrier's confirmation.
+8. **Packaging and branding.** RollRead packaging, drill card and fit sheet in the box. Retailer's packing slip in the box. No RollRead pricing or promotional material in dropship parcels. Retailer may describe the product as "ships from RollRead" on its site.
+9. **Fit guarantee, reprints and returns.** RollRead honors the 30-day fit guarantee directly with the customer and keeps the retailer informed. Customer-error reprints at the price in Schedule A. Personalized goods are not returnable for refund; Fit Kits and Digital Files follow Schedule A. The retailer's customer-facing policy for RollRead products reflects these terms and RollRead supplies the policy text.
+10. **Payment.** Weekly invoice for orders shipped, Net 15, ACH or card. Fit Kit credits and any guarantee adjustments appear as line items on the next invoice. Late payment interest at a rate counsel sets. RollRead may pause acceptance of new orders while an invoice is more than 30 days past due.
+11. **MAP policy.** Retailer advertises RollRead products at no less than MAP in Schedule A. Permitted exceptions: the Fit Kit credit and the Pair bundle price. Two written notices, then RollRead may suspend the program. Counsel confirms the policy is drafted as a unilateral policy where that matters.
+12. **Marketing, copy and claims.** Retailer uses copy, images and video supplied in Schedule B, or copy approved by RollRead in writing. Retailer does not make or publish any statement about rev rate, hook, average, injury prevention, or governing-body approval or endorsement, and does not compare RollRead to any named ball company or its products (Schedule C). Retailer corrects or removes non-conforming copy within two business days of notice. Any creator, affiliate or seeded-product content either party publishes carries a clear material-connection disclosure in the first line. Neither party writes, buys or suppresses customer reviews, or pays or rewards anyone for a positive one. Review requests, if any, go to all customers equally. Any review or testimonial from a person with a material connection (employee, creator, affiliate, coach) carries the matching disclosure.
+13. **Intellectual property.** RollRead grants a limited, non-exclusive, revocable license to use the RollRead name, logos and supplied images solely to sell the products during the term. All designs, the configurator, the fit-sheet format and the generated files remain RollRead's. The retailer acquires no rights in fit-sheet data beyond its own customer records. [PATENT STATUS]
 14. **Confidentiality.** Wholesale prices, order volumes, capacity figures and this agreement are confidential. Customer data is handled under clause 5.
-15. **Warranties, liability and insurance.** FitSlice warrants products conform to the fit sheet on the order and are free from manufacturing defects, remedied by reprint or refund of wholesale. Products are training aids for use off the lane and are not bowling balls or competition equipment; use instructions and safety warnings are printed on the card and supplied to the retailer for its page. FitSlice carries general and product liability insurance and provides a certificate on request. FitSlice indemnifies the retailer for product defect claims; the retailer indemnifies FitSlice for claims arising from copy or statements the retailer published that were not supplied or approved by FitSlice. Mutual cap at amounts paid under the agreement in the prior 12 months, with exclusions counsel sets.
-16. **Compliance.** Each party complies with applicable consumer-protection, advertising, privacy and tax law, including sales-tax collection by the retailer as seller of record. FitSlice confirms any required product labeling, including any California Proposition 65 notice, before the first shipment.
-17. **Termination and wind-down.** On termination, retailer removes listings within 10 business days, FitSlice completes open orders, honors guarantees on products already shipped, and deletes the retailer's customer fit sheets at the end of the retention period.
+15. **Warranties, liability and insurance.** RollRead warrants products conform to the fit sheet on the order and are free from manufacturing defects, remedied by reprint or refund of wholesale. Products are training aids for use off the lane and are not bowling balls or competition equipment; use instructions and safety warnings are printed on the card and supplied to the retailer for its page. RollRead carries general and product liability insurance and provides a certificate on request. RollRead indemnifies the retailer for product defect claims; the retailer indemnifies RollRead for claims arising from copy or statements the retailer published that were not supplied or approved by RollRead. Mutual cap at amounts paid under the agreement in the prior 12 months, with exclusions counsel sets.
+16. **Compliance.** Each party complies with applicable consumer-protection, advertising, privacy and tax law, including sales-tax collection by the retailer as seller of record. RollRead confirms any required product labeling, including any California Proposition 65 notice, before the first shipment.
+17. **Termination and wind-down.** On termination, retailer removes listings within 10 business days, RollRead completes open orders, honors guarantees on products already shipped, and deletes the retailer's customer fit sheets at the end of the retention period.
 18. **General.** Independent contractors. Notices by email to named addresses. Governing law and venue counsel's choice. Entire agreement includes Schedules A, B and C. Amendments in writing.
 
 ---
 
 ## E. Amazon listing: Rev Puck
 
-**Category:** Sports & Outdoors > Bowling > Accessories (training aids). **Brand:** FitSlice. **Fulfillment:** merchant-fulfilled, made to order.
+**Category:** Sports & Outdoors > Bowling > Accessories (training aids). **Brand:** RollRead. **Fulfillment:** merchant-fulfilled, made to order.
 
 ### Title (under 200 characters)
 
-FitSlice Rev Puck Custom-Fit Bowling Release Trainer, Printed from Your Drill Sheet, for One-Handed Thumb-In Bowlers, Grip and Thumb-Exit Practice, PETG, About 300 g, Right or Left Hand
+RollRead Rev Puck Custom-Fit Bowling Release Trainer, Printed from Your Drill Sheet, for One-Handed Thumb-In Bowlers, Grip and Thumb-Exit Practice, PETG, About 300 g, Right or Left Hand
 
 ### Five bullets
 
@@ -292,7 +292,7 @@ FitSlice Rev Puck Custom-Fit Bowling Release Trainer, Printed from Your Drill Sh
 
 It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.
 
-Your pro shop measured your hand to a sixty-fourth of an inch and drilled that fit into a ball you cannot hold at your desk or carry in a backpack. The FitSlice Rev Puck is a 3D-printed slice of regulation 8.5-inch ball surface with your own drill sheet reproduced in it: thumb, middle and ring hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand, through or blind thumb. The holes are aimed at the ball's center the way a zero-pitch hole is drilled, with your pitches applied, so your thumb and fingers oppose each other exactly as on your ball.
+Your pro shop measured your hand to a sixty-fourth of an inch and drilled that fit into a ball you cannot hold at your desk or carry in a backpack. The RollRead Rev Puck is a 3D-printed slice of regulation 8.5-inch ball surface with your own drill sheet reproduced in it: thumb, middle and ring hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand, through or blind thumb. The holes are aimed at the ball's center the way a zero-pitch hole is drilled, with your pitches applied, so your thumb and fingers oppose each other exactly as on your ball.
 
 It weighs about 300 g in PETG at 20% infill. A weight pocket in the base takes coins or washers when you want more. A wrist-cord tunnel keeps it on your arm for swing drills.
 
@@ -302,7 +302,7 @@ How it is made: every Rev Puck is printed to order from your fit sheet. Enter yo
 
 Fit guarantee: your fit sheet is stored with your order. If the printed holes do not match it, we reprint it free within 30 days.
 
-Not sure of your numbers? Order the FitSlice Fit Kit first. Its sizer plate is printed on the same printer and material as your trainer.
+Not sure of your numbers? Order the RollRead Fit Kit first. Its sizer plate is printed on the same printer and material as your trainer.
 
 This is a training aid for use off the lane. It is not a bowling ball and is not equipment for sanctioned competition. Swing-and-hold and carpet-release drills only. Never throw it. Not for children under 12 without adult supervision.
 
@@ -312,13 +312,13 @@ bowling training aid release trainer thumb exit practice fingertip grip hold cus
 
 ### A+ content module outline
 
-1. **Standard Company Logo.** FitSlice wordmark. Alt text: "FitSlice. Your drill sheet, off the ball."
+1. **Standard Company Logo.** RollRead wordmark. Alt text: "RollRead. Your drill sheet, off the ball."
 2. **Standard Image Header With Text.** Headline: "Your drill sheet, off the ball." Body: the ten-second explanation, verbatim. Image: hand resting in the Rev Puck beside the drill sheet it was printed from.
 3. **Standard Single Image & Sidebar.** Headline: "Built from your fit." Body: the 1/64-inch sizes, both spans, every pitch, right or left hand, holes aimed at the ball's center. Sidebar: "Weighs about 300 g in PETG at 20% infill. Weight pocket. Wrist-cord tunnel." Image: configurator screenshot with bore axes drawn.
 4. **Standard Four Image & Text.** The four Rev Puck drills, one per panel: Fingertip carries. Thumb pops. Swing sync. Cupped-wrist isometrics. Each panel is two sentences from the drill card and names what the drill practices. No results language.
-5. **Standard Comparison Chart.** FitSlice products only: Fit Kit, Rev Puck, Rev Spinner, Pair. Rows: what ships, weight, what it practices, needs a drill sheet, price. No competitor columns.
+5. **Standard Comparison Chart.** RollRead products only: Fit Kit, Rev Puck, Rev Spinner, Pair. Rows: what ships, weight, what it practices, needs a drill sheet, price. No competitor columns.
 6. **Standard Technical Specifications.** Material PETG; infill 20%; weight about 300 g; curvature of a regulation 8.5-inch diameter ball; hole size steps 1/64 inch; pitches forward/reverse and lateral per hole; hand right or left; thumb through or blind; made to order; ships within 5 business days of a complete fit sheet.
-7. **Standard Text.** "How your fit sheet reaches us" (customization fields or post-purchase link), the fit guarantee, and the safety paragraph. Legal line: "FitSlice trainers are training aids for use off the lane. They are not bowling balls and are not equipment for sanctioned competition. FitSlice is not affiliated with any ball manufacturer or bowling governing body."
+7. **Standard Text.** "How your fit sheet reaches us" (customization fields or post-purchase link), the fit guarantee, and the safety paragraph. Legal line: "RollRead trainers are training aids for use off the lane. They are not bowling balls and are not equipment for sanctioned competition. RollRead is not affiliated with any ball manufacturer or bowling governing body."
 
 ### Note on collecting the fit sheet on Amazon
 
@@ -353,17 +353,17 @@ bowling hole sizer · bowling fit kit · bowling thumb size · finger hole sizer
 
 Find your size before you print your fit.
 
-The FitSlice Fit Kit is a flat sizer plate, 3D printed around the thumb and finger hole sizes you expect, in 1/64-inch steps, with the size engraved beside each bore. It comes with a roll of bowler's tape and a fitting card that explains what a good fit feels like: snug all around at the first joint, with no squeeze needed to hang on.
+The Fit Kit is a flat sizer plate I print around the thumb and finger hole sizes you expect, in 1/64-inch steps, with the size engraved next to each bore. It comes with a roll of bowler's tape and a fitting card that explains what a good fit feels like: snug all round at the first joint, no squeeze needed to hang on.
 
-Why it exists: printed holes come out a few tenths of a millimeter smaller than drawn. The plate is printed on the same printer and material that will print your trainer, so the bore that fits your thumb on the plate is the bore we print in your Rev Puck. The $24 is credited toward a Rev Puck, Rev Spinner or Pair with the code in the box.
+Why it exists: printed holes come out a few tenths of a millimetre smaller than drawn. The plate comes off the same printer, in the same material, as your Rev Ball, so the bore that fits your thumb on the plate is the bore I print in your ball. The $24 comes off a Rev Ball with the code in the box.
 
-What to send me: your expected thumb, middle and ring hole sizes from your drill sheet, in the personalization box, using the template below. If you do not have a drill sheet, write "unknown" and tell me whether your hand is small, medium or large, and I will center the plate on common sizes.
+To order, put your expected thumb, middle and ring sizes from your drill sheet in the personalization box, using the template below. No sheet? Write "unknown" and tell me whether your hand is small, medium or large, and I'll centre the plate on common sizes.
 
-What ships: one sizer plate (about 175 x 92 x 15 mm, about 100 g), one roll of bowler's tape, one fitting card, one $24 credit code.
+In the box: one sizer plate (about 175 x 92 x 15 mm, about 100 g), a roll of bowler's tape, the fitting card, and a $24 credit code.
 
-Prefer to see it first? Build your sizer plate in the free FitSlice configurator (link in the listing photos and in the shop announcement), export the fit sheet, and paste it into the personalization box.
+Want to see it first? Build your plate in the free RollRead configurator (link in the photos and the shop announcement), export the fit sheet, and paste that into the box.
 
-This is a fitting tool for use off the lane. It is not a bowling ball. FitSlice is not affiliated with any ball manufacturer or bowling governing body.
+This is a fitting tool for off the lane. It is not a bowling ball, and RollRead isn't connected to any ball maker or bowling body.
 
 **Personalization field**
 
@@ -386,15 +386,15 @@ Buyer limit is 1,024 characters. The template uses about 130.
 
 **FAQ**
 
-*Do I need a drill sheet?* It helps. The plate is centered on the sizes you give. Without a sheet, tell me small, medium or large and I will center it on common sizes.
+*Do I need a drill sheet?* It helps. The plate is centred on the sizes you give me. Without one, tell me small, medium or large and I'll centre it on common sizes.
 
-*How do I use it?* Put your thumb into each bore in turn. The right one is snug all around at the first joint with no squeeze needed to hang on. Do the same for the middle and ring fingers. Write down the three sizes. Then build back any fit with the tape, exactly as on a ball.
+*How do I use it?* Put your thumb in each bore in turn. The right one is snug all round at the first joint with no squeeze needed to hang on. Same for the middle and ring fingers. Write the three sizes down. Then build any fit back with the tape, exactly like on a ball.
 
-*How is the $24 credit applied?* A single-use code in the box, good for $24 off a Rev Puck, Rev Spinner or Pair in this shop.
+*How does the $24 credit work?* A single-use code in the box, good for $24 off a Rev Ball in this shop.
 
-*What is it made of?* PETG, printed flat with no supports, bores lightly sanded.
+*What's it made of?* PETG, printed flat with no supports. I sand the bores lightly.
 
-*Is this a bowling ball?* No. It is a flat fitting plate for use off the lane.
+*Is this a bowling ball?* No. It's a flat fitting plate for off the lane.
 
 ### F.2 Etsy listing: Rev Puck
 
@@ -414,13 +414,13 @@ Your drill sheet, off the ball.
 
 It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.
 
-The FitSlice Rev Puck is a 3D-printed slice of regulation 8.5-inch ball surface with your own drill sheet reproduced in it: thumb, middle and ring hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand, through or blind thumb. The holes are aimed at the ball's center the way a zero-pitch hole is drilled, with your pitches applied, so your thumb and fingers oppose each other exactly as on your ball. Unlike generic one-size practice balls and S/M/L wrist braces, it is built from your fit. To my knowledge, it is the first trainer that uses your actual drill sheet.
+The RollRead Rev Puck is a 3D-printed slice of regulation 8.5-inch ball surface with your own drill sheet reproduced in it: thumb, middle and ring hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand, through or blind thumb. The holes are aimed at the ball's center the way a zero-pitch hole is drilled, with your pitches applied, so your thumb and fingers oppose each other exactly as on your ball. Unlike generic one-size practice balls and S/M/L wrist braces, it is built from your fit. To my knowledge, it is the first trainer that uses your actual drill sheet.
 
 It weighs about 300 g in PETG at 20% infill, light enough for long holds and heavy enough to need real fingertip pressure. A weight pocket in the base takes coins or washers when you want more. A wrist-cord tunnel and a paracord loop keep it on your arm for swing drills.
 
 Coaches agree the thumb must leave first and a relaxed hand creates more revs. The drill card is designed to practice a relaxed hold and a clean, early thumb exit in your own holes: fingertip carries, thumb pops, slow swing sync to rehearse the release point, and cupped-wrist isometrics. Ten to fifteen minutes a day.
 
-How to order: choose your hand, then paste your drill sheet into the personalization box using the template below. Fractions are fine (55/64, 1 1/32, 4-1/2). Or build your model in the free FitSlice configurator, watch your grip appear in 3D, export the fit sheet and paste that instead. I check every sheet before printing and message you if anything is missing. Printing starts when the sheet is complete and your order ships within 5 business days after that. Finish the fit with bowler's tape, exactly as on a ball.
+How to order: choose your hand, then paste your drill sheet into the personalization box using the template below. Fractions are fine (55/64, 1 1/32, 4-1/2). Or build your model in the free RollRead configurator, watch your grip appear in 3D, export the fit sheet and paste that instead. I check every sheet before printing and message you if anything is missing. Printing starts when the sheet is complete and your order ships within 5 business days after that. Finish the fit with bowler's tape, exactly as on a ball.
 
 Not sure of your sizes? Order the Fit Kit first. Its sizer plate is printed on the same printer and material as your trainer, and the $24 is credited toward this listing.
 
@@ -428,7 +428,7 @@ Not sure of your sizes? Order the Fit Kit first. Its sizer plate is printed on t
 
 What ships: one Rev Puck printed from your sheet, paracord wrist cord, drill card, your fit sheet.
 
-This is a training aid for use off the lane. It is not a bowling ball and is not equipment for sanctioned competition. Swing-and-hold drills only. Never throw it. Not for children under 12 without adult supervision. FitSlice is not affiliated with any ball manufacturer or bowling governing body.
+This is a training aid for use off the lane. It is not a bowling ball and is not equipment for sanctioned competition. Swing-and-hold drills only. Never throw it. Not for children under 12 without adult supervision. RollRead is not affiliated with any ball manufacturer or bowling governing body.
 
 **Personalization field**
 
@@ -482,56 +482,56 @@ Column notes:
 - The weight column uses Shopify's header `Variant Grams`, which is the "Variant Weight (grams)" field in the admin. Shopify's importer reads that header name.
 - `Variant Inventory Policy` is `continue` on every row because every unit is made to order and no inventory is tracked.
 - `Variant Requires Shipping` is `TRUE` on physical goods and `FALSE` on Digital Files.
-- Product tags include `fitslice-fit-kit` and `fitslice-digital`, which the Liquid snippet in Section H reads to choose the right form.
+- Product tags include `rollread-fit-kit` and `rollread-digital`, which the Liquid snippet in Section H reads to choose the right form.
 - After import, set vendor-level fulfillment to manual, add the product photos, and set the Digital Files product to deliver by email after the fit sheet is checked.
 
 ```csv
 Handle,Title,Body (HTML),Vendor,Type,Tags,Published,Option1 Name,Option1 Value,Variant SKU,Variant Price,Variant Inventory Policy,Variant Requires Shipping,Variant Grams
-fitslice-fit-kit,FitSlice Fit Kit,"<p>Find your size before you print your fit. The Fit Kit is a sizer plate printed around the hole sizes you expect, in 1/64-inch steps, with a roll of bowler's tape and a fitting card.</p><ul><li>Printed on the same printer and material as your trainer, so the bore that fits is the bore we print.</li><li>Size engraved beside each bore. The right bore is snug all around at the first joint with no squeeze needed to hang on.</li><li>The $24 is credited toward a Rev Puck, Rev Spinner or Pair with the code in the box.</li></ul><p>Enter your expected thumb, middle and ring sizes in the fields below, or build your plate in the free configurator and paste the fit sheet. Ships in 3 business days. A fitting tool for use off the lane. Not a bowling ball.</p>",FitSlice,Bowling Training Aid,"fitslice, fitslice-fit-kit, bowling, sizer plate, fit kit",TRUE,Title,Default Title,FS-KIT,24.00,continue,TRUE,150
-fitslice-rev-puck,FitSlice Rev Puck,"<p>Your drill sheet, off the ball. It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.</p><ul><li>Built from your drill sheet: hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand, through or blind thumb, on the curvature of a regulation 8.5-inch ball.</li><li>Holes are aimed at the ball's center the way a zero-pitch hole is drilled, so your thumb and fingers oppose each other exactly as on your ball.</li><li>About 300 g in PETG at 20% infill. Weight pocket for coins or washers. Wrist-cord tunnel and paracord loop for swing drills.</li><li>Designed to practice a relaxed fingertip hold and a clean, early thumb exit. Four drills on the card. Coaches agree the thumb must leave first and a relaxed hand creates more revs.</li></ul><p>Made to order from the fit sheet you enter below. Ships within 5 business days of a complete sheet. 30-day fit guarantee: if the printed holes do not match your sheet, we reprint free. A training aid for use off the lane. Not a bowling ball. Swing-and-hold drills only; never throw it.</p>",FitSlice,Bowling Training Aid,"fitslice, fitslice-puck, bowling, release trainer, custom fit",TRUE,Hand,Right,FS-PUCK-R,89.00,continue,TRUE,300
-fitslice-rev-puck,,,,,,,,Left,FS-PUCK-L,89.00,continue,TRUE,300
-fitslice-rev-spinner,FitSlice Rev Spinner,"<p>Lift it, spin it, count it. The Rev Spinner is a fingers-only release disc printed from your drill sheet: middle and ring hole sizes in 1/64-inch steps, right or left hand, drilled straight at the ball's center, on the curvature of a regulation 8.5-inch ball.</p><ul><li>Release it onto carpet from a short pendulum swing and it spins in place. The engraved bars on the base flicker as it spins; count the seconds until it stops. Designed to give you a cue on finger lift through how long it spins. It is a feedback device. It is not a measuring instrument.</li><li>Two drills on the card: carpet spins and rotation-axis control.</li><li>About 100 g in PETG. The product for two-handed bowlers and for anyone working on finger lift.</li></ul><p>Made to order from the fit sheet you enter below. Ships within 3 business days of a complete sheet. 30-day fit guarantee. A training aid for use off the lane. Not a bowling ball. Carpet-release drills only; never throw it.</p>",FitSlice,Bowling Training Aid,"fitslice, fitslice-spinner, bowling, release trainer, finger lift",TRUE,Hand,Right,FS-SPIN-R,45.00,continue,TRUE,100
-fitslice-rev-spinner,,,,,,,,Left,FS-SPIN-L,45.00,continue,TRUE,100
-fitslice-pair,FitSlice Pair: Rev Puck and Rev Spinner,"<p>Both trainers from one fit sheet. The Rev Puck is the part of your ball your hand touches, printed with your exact holes, for grip holds, thumb pops, swing sync and cupped-wrist isometrics. The Rev Spinner is the fingers-only disc for carpet spins and rotation-axis control.</p><ul><li>Both are built from your drill sheet: hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand, on the curvature of a regulation 8.5-inch ball.</li><li>Rev Puck about 300 g with weight pocket and wrist cord. Rev Spinner about 100 g with spin-count bars. Both in PETG at 20% infill.</li><li>Six drills across two cards, 10 to 15 minutes a day. Designed to practice a relaxed fingertip hold, a clean, early thumb exit and finger lift.</li></ul><p>Made to order. Ships within 5 business days of a complete fit sheet. 30-day fit guarantee on both parts. Training aids for use off the lane. Not bowling balls. Never throw them.</p>",FitSlice,Bowling Training Aid,"fitslice, fitslice-pair, bowling, release trainer, custom fit",TRUE,Hand,Right,FS-PAIR-R,119.00,continue,TRUE,400
-fitslice-pair,,,,,,,,Left,FS-PAIR-L,119.00,continue,TRUE,400
-fitslice-digital-files,FitSlice Digital Files,"<p>Your fit, as files for your own printer. We generate the STL for your Rev Puck, or for your Rev Puck and Rev Spinner, from the fit sheet you enter, plus a sizer-plate STL centered on your sizes and your fit sheet as a JSON file.</p><ul><li>Same geometry as the parts we print, built from your drill sheet.</li><li>Print settings included: PETG or PLA+, 4 walls, 20% gyroid infill, flat side down, no supports.</li><li>Print the sizer plate first. Printed holes come out 0.2 to 0.4 mm small, and the plate calibrates your printer before you print the big part.</li></ul><p>Delivered by email within one business day of a complete fit sheet. If the files do not match your sheet, we regenerate them free. Because we do not control your printer or filament, the fit guarantee on printed dimensions does not apply to digital files. Digital goods are not refundable except where the files are defective. Training aids for use off the lane. Not bowling balls. Never throw them.</p>",FitSlice,Digital Download,"fitslice, fitslice-digital, bowling, stl, digital files",TRUE,Set,Rev Puck files,FS-DIG-PUCK,29.00,continue,FALSE,0
-fitslice-digital-files,,,,,,,,Rev Puck and Rev Spinner files,FS-DIG-PAIR,39.00,continue,FALSE,0
+rollread-fit-kit,RollRead Fit Kit,"<p>Find your size before you print your fit. The Fit Kit is a sizer plate printed around the hole sizes you expect, in 1/64-inch steps, with a roll of bowler's tape and a fitting card.</p><ul><li>Printed on the same printer and material as your trainer, so the bore that fits is the bore we print.</li><li>Size engraved beside each bore. The right bore is snug all around at the first joint with no squeeze needed to hang on.</li><li>The $24 is credited toward a Rev Puck, Rev Spinner or Pair with the code in the box.</li></ul><p>Enter your expected thumb, middle and ring sizes in the fields below, or build your plate in the free configurator and paste the fit sheet. Ships in 3 business days. A fitting tool for use off the lane. Not a bowling ball.</p>",RollRead,Bowling Training Aid,"rollread, rollread-fit-kit, bowling, sizer plate, fit kit",TRUE,Title,Default Title,FS-KIT,24.00,continue,TRUE,150
+rollread-rev-puck,RollRead Rev Puck,"<p>Your drill sheet, off the ball. It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.</p><ul><li>Built from your drill sheet: hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand, through or blind thumb, on the curvature of a regulation 8.5-inch ball.</li><li>Holes are aimed at the ball's center the way a zero-pitch hole is drilled, so your thumb and fingers oppose each other exactly as on your ball.</li><li>About 300 g in PETG at 20% infill. Weight pocket for coins or washers. Wrist-cord tunnel and paracord loop for swing drills.</li><li>Designed to practice a relaxed fingertip hold and a clean, early thumb exit. Four drills on the card. Coaches agree the thumb must leave first and a relaxed hand creates more revs.</li></ul><p>Made to order from the fit sheet you enter below. Ships within 5 business days of a complete sheet. 30-day fit guarantee: if the printed holes do not match your sheet, we reprint free. A training aid for use off the lane. Not a bowling ball. Swing-and-hold drills only; never throw it.</p>",RollRead,Bowling Training Aid,"rollread, rollread-puck, bowling, release trainer, custom fit",TRUE,Hand,Right,FS-PUCK-R,89.00,continue,TRUE,300
+rollread-rev-puck,,,,,,,,Left,FS-PUCK-L,89.00,continue,TRUE,300
+rollread-rev-spinner,RollRead Rev Spinner,"<p>Lift it, spin it, count it. The Rev Spinner is a fingers-only release disc printed from your drill sheet: middle and ring hole sizes in 1/64-inch steps, right or left hand, drilled straight at the ball's center, on the curvature of a regulation 8.5-inch ball.</p><ul><li>Release it onto carpet from a short pendulum swing and it spins in place. The engraved bars on the base flicker as it spins; count the seconds until it stops. Designed to give you a cue on finger lift through how long it spins. It is a feedback device. It is not a measuring instrument.</li><li>Two drills on the card: carpet spins and rotation-axis control.</li><li>About 100 g in PETG. The product for two-handed bowlers and for anyone working on finger lift.</li></ul><p>Made to order from the fit sheet you enter below. Ships within 3 business days of a complete sheet. 30-day fit guarantee. A training aid for use off the lane. Not a bowling ball. Carpet-release drills only; never throw it.</p>",RollRead,Bowling Training Aid,"rollread, rollread-spinner, bowling, release trainer, finger lift",TRUE,Hand,Right,FS-SPIN-R,45.00,continue,TRUE,100
+rollread-rev-spinner,,,,,,,,Left,FS-SPIN-L,45.00,continue,TRUE,100
+rollread-pair,RollRead Pair: Rev Puck and Rev Spinner,"<p>Both trainers from one fit sheet. The Rev Puck is the part of your ball your hand touches, printed with your exact holes, for grip holds, thumb pops, swing sync and cupped-wrist isometrics. The Rev Spinner is the fingers-only disc for carpet spins and rotation-axis control.</p><ul><li>Both are built from your drill sheet: hole sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch for every hole, right or left hand, on the curvature of a regulation 8.5-inch ball.</li><li>Rev Puck about 300 g with weight pocket and wrist cord. Rev Spinner about 100 g with spin-count bars. Both in PETG at 20% infill.</li><li>Six drills across two cards, 10 to 15 minutes a day. Designed to practice a relaxed fingertip hold, a clean, early thumb exit and finger lift.</li></ul><p>Made to order. Ships within 5 business days of a complete fit sheet. 30-day fit guarantee on both parts. Training aids for use off the lane. Not bowling balls. Never throw them.</p>",RollRead,Bowling Training Aid,"rollread, rollread-pair, bowling, release trainer, custom fit",TRUE,Hand,Right,FS-PAIR-R,119.00,continue,TRUE,400
+rollread-pair,,,,,,,,Left,FS-PAIR-L,119.00,continue,TRUE,400
+rollread-digital-files,RollRead Digital Files,"<p>Your fit, as files for your own printer. We generate the STL for your Rev Puck, or for your Rev Puck and Rev Spinner, from the fit sheet you enter, plus a sizer-plate STL centered on your sizes and your fit sheet as a JSON file.</p><ul><li>Same geometry as the parts we print, built from your drill sheet.</li><li>Print settings included: PETG or PLA+, 4 walls, 20% gyroid infill, flat side down, no supports.</li><li>Print the sizer plate first. Printed holes come out 0.2 to 0.4 mm small, and the plate calibrates your printer before you print the big part.</li></ul><p>Delivered by email within one business day of a complete fit sheet. If the files do not match your sheet, we regenerate them free. Because we do not control your printer or filament, the fit guarantee on printed dimensions does not apply to digital files. Digital goods are not refundable except where the files are defective. Training aids for use off the lane. Not bowling balls. Never throw them.</p>",RollRead,Digital Download,"rollread, rollread-digital, bowling, stl, digital files",TRUE,Set,Rev Puck files,FS-DIG-PUCK,29.00,continue,FALSE,0
+rollread-digital-files,,,,,,,,Rev Puck and Rev Spinner files,FS-DIG-PAIR,39.00,continue,FALSE,0
 ```
 
 ---
 
 ## H. Liquid snippet: fit-sheet line-item properties and configurator link
 
-Save as `snippets/fitslice-fit-sheet.liquid`. Render it inside the product form, after the variant picker and before the add-to-cart button, in the theme's main product section:
+Save as `snippets/rollread-fit-sheet.liquid`. Render it inside the product form, after the variant picker and before the add-to-cart button, in the theme's main product section:
 
 ```liquid
-{% render 'fitslice-fit-sheet', product: product %}
+{% render 'rollread-fit-sheet', product: product %}
 ```
 
-It shows on products whose vendor is `FitSlice`. It writes the customer's drill sheet into line-item properties so the sheet travels with the order into the order confirmation, the admin, the CSV export and any order sync. It links to the configurator with the shop's referral code. Set two shop metafields under Settings > Custom data > Shop: `fitslice.referral_code` (single line text; the code FitSlice issued to the shop) and, optionally, `fitslice.configurator_url` (single line text; defaults to the hosted configurator). Products tagged `fitslice-fit-kit` get the short size form.
+It shows on products whose vendor is `RollRead`. It writes the customer's drill sheet into line-item properties so the sheet travels with the order into the order confirmation, the admin, the CSV export and any order sync. It links to the configurator with the shop's referral code. Set two shop metafields under Settings > Custom data > Shop: `rollread.referral_code` (single line text; the code RollRead issued to the shop) and, optionally, `rollread.configurator_url` (single line text; defaults to the hosted configurator). Products tagged `rollread-fit-kit` get the short size form.
 
 ```liquid
 {% comment %}
-  snippets/fitslice-fit-sheet.liquid
+  snippets/rollread-fit-sheet.liquid
   Render inside {% form 'product', product %} ... {% endform %}:
-    {% render 'fitslice-fit-sheet', product: product %}
+    {% render 'rollread-fit-sheet', product: product %}
   Writes the customer's drill sheet into line-item properties and links to the
-  FitSlice configurator with this shop's referral code.
-  Shop metafields: fitslice.referral_code (required), fitslice.configurator_url (optional).
-  Tag the Fit Kit product "fitslice-fit-kit" for the short form.
+  RollRead configurator with this shop's referral code.
+  Shop metafields: rollread.referral_code (required), rollread.configurator_url (optional).
+  Tag the Fit Kit product "rollread-fit-kit" for the short form.
 {% endcomment %}
-{%- if product.vendor == 'FitSlice' -%}
-{%- assign fs_ref = shop.metafields.fitslice.referral_code | default: 'DIRECT' -%}
-{%- assign fs_base = shop.metafields.fitslice.configurator_url | default: 'https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p' -%}
+{%- if product.vendor == 'RollRead' -%}
+{%- assign fs_ref = shop.metafields.rollread.referral_code | default: 'DIRECT' -%}
+{%- assign fs_base = shop.metafields.rollread.configurator_url | default: 'https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p' -%}
 {%- assign fs_link = fs_base | append: '?ref=' | append: fs_ref -%}
 {%- assign fs_kit = false -%}
-{%- if product.tags contains 'fitslice-fit-kit' -%}{%- assign fs_kit = true -%}{%- endif -%}
+{%- if product.tags contains 'rollread-fit-kit' -%}{%- assign fs_kit = true -%}{%- endif -%}
 {%- assign fs_id = product.id -%}
 
-<fieldset class="fitslice-fit" id="fitslice-fit-{{ fs_id }}">
-  <legend class="fitslice-fit__legend">Your fit sheet</legend>
+<fieldset class="rollread-fit" id="rollread-fit-{{ fs_id }}">
+  <legend class="rollread-fit__legend">Your fit sheet</legend>
 
-  <p class="fitslice-fit__intro">
+  <p class="rollread-fit__intro">
     {%- if fs_kit -%}
       Tell us the thumb, middle and ring hole sizes you expect. The plate is printed around them in 1/64-inch steps.
     {%- else -%}
@@ -539,8 +539,8 @@ It shows on products whose vendor is `FitSlice`. It writes the customer's drill 
     {%- endif -%}
     Or build your model in the free configurator, export the fit sheet, and paste it below.
   </p>
-  <p class="fitslice-fit__link">
-    <a href="{{ fs_link }}" target="_blank" rel="noopener">Open the FitSlice configurator</a>
+  <p class="rollread-fit__link">
+    <a href="{{ fs_link }}" target="_blank" rel="noopener">Open the RollRead configurator</a>
     <span>(opens in a new tab; your model appears in 3D as you type)</span>
   </p>
 
@@ -565,7 +565,7 @@ It shows on products whose vendor is `FitSlice`. It writes the customer's drill 
   </select>
   {%- endunless -%}
 
-  <div class="fitslice-fit__row">
+  <div class="rollread-fit__row">
     <label for="fs-thumb-{{ fs_id }}">Thumb hole size</label>
     <input id="fs-thumb-{{ fs_id }}" name="properties[Thumb size]" type="text" inputmode="decimal" placeholder="31/32" required data-fs="thumb_d">
     <label for="fs-middle-{{ fs_id }}">Middle hole size</label>
@@ -575,15 +575,15 @@ It shows on products whose vendor is `FitSlice`. It writes the customer's drill 
   </div>
 
   {%- unless fs_kit -%}
-  <div class="fitslice-fit__row">
+  <div class="rollread-fit__row">
     <label for="fs-span-m-{{ fs_id }}">Middle span</label>
     <input id="fs-span-m-{{ fs_id }}" name="properties[Middle span]" type="text" inputmode="decimal" placeholder="4 3/8" required data-fs="span_middle">
     <label for="fs-span-r-{{ fs_id }}">Ring span</label>
     <input id="fs-span-r-{{ fs_id }}" name="properties[Ring span]" type="text" inputmode="decimal" placeholder="4 1/4" required data-fs="span_ring">
   </div>
 
-  <p class="fitslice-fit__hint">Pitches: write them as your sheet shows them (for example "1/8 reverse" or "3/8 forward", and "1/8 left" or "1/8 right"). If a field fills from the configurator it shows decimal inches: positive is forward or toward your bowling-hand side, negative is reverse.</p>
-  <div class="fitslice-fit__row">
+  <p class="rollread-fit__hint">Pitches: write them as your sheet shows them (for example "1/8 reverse" or "3/8 forward", and "1/8 left" or "1/8 right"). If a field fills from the configurator it shows decimal inches: positive is forward or toward your bowling-hand side, negative is reverse.</p>
+  <div class="rollread-fit__row">
     <label for="fs-t-fwd-{{ fs_id }}">Thumb pitch, forward/reverse</label>
     <input id="fs-t-fwd-{{ fs_id }}" name="properties[Thumb pitch fwd/rev]" type="text" placeholder="1/8 reverse" required data-fs="thumb_fwd">
     <label for="fs-t-lat-{{ fs_id }}">Thumb pitch, lateral</label>
@@ -605,12 +605,12 @@ It shows on products whose vendor is `FitSlice`. It writes the customer's drill 
   </select>
   {%- endunless -%}
 
-  <label class="fitslice-fit__confirm">
+  <label class="rollread-fit__confirm">
     <input type="checkbox" name="properties[Sheet confirmed]" value="Yes" required>
     I checked these numbers against my drill sheet. My order is printed from them.
   </label>
 
-  <p class="fitslice-fit__note">
+  <p class="rollread-fit__note">
     Your fit sheet is stored with your order to make the part and to honor the 30-day fit guarantee.
     Training aid for use off the lane. Not a bowling ball.
   </p>
@@ -618,7 +618,7 @@ It shows on products whose vendor is `FitSlice`. It writes the customer's drill 
 
 <script>
 (function () {
-  var root = document.getElementById('fitslice-fit-{{ fs_id }}');
+  var root = document.getElementById('rollread-fit-{{ fs_id }}');
   if (!root) return;
   var paste = root.querySelector('textarea');
   var units = root.querySelector('[data-fs-units]');
@@ -678,4 +678,4 @@ Notes for the theme developer:
 - `_Referral` starts with an underscore, so Shopify hides it from the customer in the cart and checkout while keeping it on the order for attribution.
 - The `required` attributes block add-to-cart until the fields are filled. Themes that add to cart over AJAX still submit the properties; themes that bypass form validation should call `form.reportValidity()` before posting.
 - The variant-sync script looks for the two common variant-picker markups (radio inputs named `Hand`, or a select named `options[Hand]`). If the theme uses another markup, adjust the two selectors.
-- Style the `fitslice-fit__*` classes in the theme's CSS. The snippet carries no styles of its own.
+- Style the `rollread-fit__*` classes in the theme's CSS. The snippet carries no styles of its own.

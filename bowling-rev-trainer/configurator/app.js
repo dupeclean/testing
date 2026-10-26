@@ -9,7 +9,7 @@
 const IN = 25.4;
 const DEG = Math.PI / 180;
 const APP_VERSION = '1.0';
-const APP_NAME = (typeof window !== 'undefined' && window.fitslice) ? 'FitSlice' : 'Rev Trainer Configurator';
+const APP_NAME = (typeof window !== 'undefined' && window.rollread) ? 'RollRead' : 'RollRead configurator';
 
 // ---------------------------------------------------------------------------
 // Geometry constants — keep in sync with trainer.scad
@@ -61,7 +61,7 @@ const DEFAULTS = {
   middle_oval_d: 0, ring_oval_d: 0, finger_oval_angle: 0,
   // rounded edge (bevel) on each hole, mm radius, like the bevel a pro shop puts on a thumb hole
   thumb_bevel: 4, finger_bevel: 2.5,
-  serial: '',                // engraved in the base, e.g. the order number FS-0001 (digits, F, S and - only)
+  serial: '',                // engraved in the base, e.g. the order number RR-0001 (digits, R, F, S and - only)
   // Release gate: loose pins on linked base segments across the tape line; the ball knocks one down
   gate_pin_h: 100,
   // Axis target dots on the ball: two plug sockets at the axis the ball should spin about (the bowler's
@@ -91,7 +91,7 @@ const LENGTH_KEYS = ['span_middle', 'span_ring', 'thumb_d', 'middle_d', 'ring_d'
 const PITCH_KEYS = ['thumb_fwd', 'thumb_lat', 'middle_fwd', 'middle_lat', 'ring_fwd', 'ring_lat'];
 const BOOL_KEYS = ['thumb_through', 'weight_pocket', 'lanyard', 'ball_groove', 'thumb_hole', 'pap_marker', 'pap_given', 'pap_ring', 'pap_track', 'spin_hum'];
 const ANGLE_KEYS = ['thumb_oval_angle', 'finger_oval_angle'];   // degrees
-const SERIAL_RE = /^[0-9FS-]{0,12}$/;
+const SERIAL_RE = /^[0-9RFS-]{0,12}$/;
 const BALL_STRIPES = ['none', 'spot', 'spot_band', 'cap', 'cap_band', 'bands'];
 const HUM_SLOTS = [2, 16], HUM_ANGLE = [0, 80];   // humming spinner: slot count, slot angle in degrees from radial
 const TRACK_TILT = [0, 60];                       // axis tilt the track ring is drawn for, degrees
@@ -172,7 +172,7 @@ function validateParams(p) {
       if (p[ov] > 0 && p[ov] - p[d] > 8) out.push({ key: ov, message: `${label} oval is more than 8 mm longer than it is wide; check the two sizes.` });
     }
     for (const k of ANGLE_KEYS) if (!Number.isFinite(p[k]) || Math.abs(p[k]) > 90) out.push({ key: k, message: 'Oval angle must be between -90 and 90 degrees.' });
-    if (typeof p.serial !== 'string' || !SERIAL_RE.test(p.serial)) out.push({ key: 'serial', message: 'Engraved text can only use digits, F, S and a dash (up to 12 characters).' });
+    if (typeof p.serial !== 'string' || !SERIAL_RE.test(p.serial)) out.push({ key: 'serial', message: 'Engraved text can only use digits, R, F, S and a dash (up to 12 characters).' });
   }
   if (!noGrip) for (const k of PITCH_KEYS) {
     if (!Number.isFinite(p[k]) || Math.abs(p[k]) > PITCH_LIMIT) out.push({ key: k, message: `Pitch (${k.replace('_', ' ')}) must be between -1" and 1".` });
@@ -765,6 +765,10 @@ function makeBuilder(W) {
     const hw = CH_W / 2, hh = CH_H / 2;
     const horiz = (y) => CrossSection.square([CH_W, STROKE], true).translate([0, y]);
     const vert = (x, y) => CrossSection.square([STROKE, hh], true).translate([x, y]);
+    if (ch === 'R') {   // the order prefix RR-: a P with a leg (not in the 7-segment table)
+      parts.push(horiz(hh - STROKE / 2), horiz(0), vert(-hw + STROKE / 2, hh / 2), vert(-hw + STROKE / 2, -hh / 2), vert(hw - STROKE / 2, hh / 2));
+      parts.push(CrossSection.square([STROKE, hh * 0.95], true).rotate(24).translate([hw * 0.4, -hh / 2 + 0.15]));
+    }
     for (const s of SEG7[ch] || '') {
       if (s === 'a') parts.push(horiz(hh - STROKE / 2));
       if (s === 'g') parts.push(horiz(0));
@@ -798,7 +802,7 @@ function makeBuilder(W) {
     all.delete();
     return m;
   }
-  // the order number (or any FS-/digit text) engraved 0.5 mm into the flat base of a part
+  // the order number (or any RR-/FS-/digit text) engraved 0.5 mm into the flat base of a part
   const textWidth = (t) => [...t].reduce((w, ch) => w + (ch === '.' ? DOT_W : CH_W), 0) + GAP * (t.length - 1);
   function serialCut(p, x, y, scale = 1, maxWidth = Infinity) {
     const t = String(p.serial || '').toUpperCase();
@@ -1291,7 +1295,7 @@ async function main() {
   $('serial').addEventListener('change', () => {
     const el = $('serial'); const v = el.value.trim().toUpperCase();
     if (SERIAL_RE.test(v)) { state.serial = v; el.value = v; markGood(el); schedule(); }
-    else markBad(el, 'Engraved text can only use digits, F, S and a dash (up to 12 characters).');
+    else markBad(el, 'Engraved text can only use digits, R, F, S and a dash (up to 12 characters).');
   });
   for (const k of PITCH_KEYS) {
     const el = $(k);

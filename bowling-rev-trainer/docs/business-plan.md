@@ -1,5 +1,5 @@
 ---
-title: "FitSlice Business Plan"
+title: "RollRead Business Plan"
 subtitle: "A custom-fit, 3D-printed rev trainer for one-handed, thumb-in bowlers"
 date: "October 2026 — working draft v1.1 (23 October: patent note corrected; the Rev Ball cross-referenced)"
 ---
@@ -8,7 +8,7 @@ date: "October 2026 — working draft v1.1 (23 October: patent note corrected; t
 
 # 1. The idea in one paragraph
 
-Serious bowlers already pay a pro shop to measure their hand to a 64th of an inch and drill three holes into a $200 ball at specific spans and pitches. That fit exists in exactly one place: the ball. **FitSlice** prints the patch of ball surface the hand actually touches, with the bowler's own drill sheet reproduced in it, so the release can be practiced anywhere: fingertip grip holds, thumb-exit timing reps and finger-lift drills on a 320-gram part instead of a 15-pound ball on a lane. A free web configurator turns the drill sheet into the model in about a tenth of a second; we print and ship, or sell the file. No product we could find does this: the closest things on the market are soft practice balls with generic one-size holes and wrist braces sized small/medium/large [C4][C6].
+Serious bowlers already pay a pro shop to measure their hand to a 64th of an inch and drill three holes into a $200 ball at specific spans and pitches. That fit exists in exactly one place: the ball. **RollRead** prints the patch of ball surface the hand actually touches, with the bowler's own drill sheet reproduced in it, so the release can be practiced anywhere: fingertip grip holds, thumb-exit timing reps and finger-lift drills on a 320-gram part instead of a 15-pound ball on a lane. A free web configurator turns the drill sheet into the model in about a tenth of a second; we print and ship, or sell the file. No product we could find does this: the closest things on the market are soft practice balls with generic one-size holes and wrist braces sized small/medium/large [C4][C6].
 
 # 2. How it actually helps (the honest version)
 

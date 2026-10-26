@@ -1,6 +1,6 @@
-# FitSlice Website Copy
+# RollRead Website Copy
 
-Complete, final copy for the FitSlice site. Every page, policy, email and error string the launch site needs is in this file, in the order a visitor meets them.
+Complete, final copy for the RollRead site. Every page, policy, email and error string the launch site needs is in this file, in the order a visitor meets them.
 
 How to use this file:
 
@@ -19,7 +19,7 @@ The configurator lives at https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p unti
 
 ### BLOCK: Navigation
 
-Logo: FitSlice
+Logo: RollRead
 
 Links, left to right: Configurator · Rev Puck · Rev Spinner · Pair · Fit Kit · Digital Files · Help · Pro Shops
 
@@ -70,7 +70,7 @@ Six drills, ten to fifteen minutes. Fingertip carries, thumb pops, swing sync an
 
 **Built for one-handed, thumb-in bowlers who already have a fitted ball.**
 
-If a pro shop has measured your hand and drilled a ball to it, you have a drill sheet. FitSlice builds your trainer from it. That is the whole product.
+If a pro shop has measured your hand and drilled a ball to it, you have a drill sheet. RollRead builds your trainer from it. That is the whole product.
 
 - **League and tournament bowlers.** You paid for a fit measured to a 64th of an inch. Right now it exists in one place: the ball. Carry it in a bag instead.
 - **Two-handed and thumbless bowlers.** The Rev Puck needs a thumb hole. The Rev Spinner does not. It takes your finger sizes (its holes are drilled straight at the ball's center) so you can practice finger lift.
@@ -103,7 +103,7 @@ $45 · See the Rev Spinner
 
 ### BLOCK: What you practice
 
-**Coaches agree on where revs come from. FitSlice lets you practice it with your real fit.**
+**Coaches agree on where revs come from. RollRead lets you practice it with your real fit.**
 
 Coaches agree the thumb must leave first, and a relaxed hand creates more revs. Oversized holes make you squeeze; squeezing limits hook. Those are coaching views, and they are the reason a thumb-in bowler's fit matters so much: the pro-shop trade body puts hole size at about 20% of a fit, with span and pitch at 40% each. We copy all three.
 
@@ -113,13 +113,13 @@ What that means in your hands:
 - **A clean, early thumb exit.** Practice a clean, early thumb exit with the thumb-pop drill: relax the thumb, let it slide out, and let the fingers catch the weight. If the puck falls, the fingers were not carrying it. You cannot drill that safely with a fifteen-pound ball in your living room.
 - **Finger lift you can count.** Release the Rev Spinner onto carpet and count how long it spins. Try to beat your count.
 
-What FitSlice does not do: it does not teach footwork, timing or targeting, and it copies whatever fit you give it. To our knowledge, no study has measured whether any off-lane trainer changes a bowler's results on the lane, and that includes us. We tell you what it is, and your hand tells you whether it feels like your ball.
+What RollRead does not do: it does not teach footwork, timing or targeting, and it copies whatever fit you give it. To our knowledge, no study has measured whether any off-lane trainer changes a bowler's results on the lane, and that includes us. We tell you what it is, and your hand tells you whether it feels like your ball.
 
 ### BLOCK: Why it starts from your fit
 
 **Unlike generic one-size trainers and S/M/L wrist braces, it is built from your fit.**
 
-Most soft practice balls come with one set of generic holes. Most wrist supports come in small, medium and large. Your ball came with three holes placed to a 64th of an inch at your spans and your pitches. To our knowledge, FitSlice is the first trainer that uses your actual drill sheet.
+Most soft practice balls come with one set of generic holes. Most wrist supports come in small, medium and large. Your ball came with three holes placed to a 64th of an inch at your spans and your pitches. To our knowledge, RollRead is the first trainer that uses your actual drill sheet.
 
 Same holes. Same pitch. No lane fee.
 
@@ -139,7 +139,7 @@ Your fit sheet is stored with your order. If the part we ship does not match it,
 
 [QUOTE PLACEHOLDER — creator name, channel]
 
-Disclosure, shown directly under the quotes in the same type size: The coaches and creators quoted here received a FitSlice trainer printed from their own drill sheet at no charge. Some also earn a commission when you buy through their code. Their words are their own.
+Disclosure, shown directly under the quotes in the same type size: The coaches and creators quoted here received a RollRead trainer printed from their own drill sheet at no charge. Some also earn a commission when you buy through their code. Their words are their own.
 
 ### BLOCK: FAQ teaser
 
@@ -188,11 +188,11 @@ How to read your drill sheet · Fit guarantee and returns · Shipping · Privacy
 Pro shops: enter a bowler's sheet at the counter and earn 25% on the order. · Coaches and creators
 
 **Contact**
-support@fitslice.com
+support@rollread.com
 
-Legal line: © 2026 FitSlice. All rights reserved. FitSlice trainers are training aids for use off the lane. They are not bowling balls and are not equipment for sanctioned competition. FitSlice is not affiliated with any ball manufacturer or bowling governing body. [PATENT STATUS]
+Legal line: © 2026 RollRead. All rights reserved. RollRead trainers are training aids for use off the lane. They are not bowling balls and are not equipment for sanctioned competition. RollRead is not affiliated with any ball manufacturer or bowling governing body. [PATENT STATUS]
 
-Use warning: FitSlice trainers are for swing-and-hold and carpet-release drills only. Never throw a trainer. Keep the wrist cord on your wrist for every swing drill. Not for children under 12 without adult supervision. Stop any drill that hurts.
+Use warning: RollRead trainers are for swing-and-hold and carpet-release drills only. Never throw a trainer. Keep the wrist cord on your wrist for every swing drill. Not for children under 12 without adult supervision. Stop any drill that hurts.
 
 ---
 
@@ -476,7 +476,7 @@ Most sheets have a drawing of a hand or three circles. Around the drawing you wi
 3. **Spans.** Two measurements, usually written along lines from the thumb hole to each finger hole. The middle span is normally a little longer than the ring span. Most shops measure "cut to cut": from the near edge of the thumb hole to the near edge of the finger hole. That is what the configurator uses.
 4. **Forward or reverse pitch.** One fraction with a direction next to each hole: "3/8 fwd", "1/8 rev", "0". Fingers are usually forward. The thumb is often zero or reverse.
 5. **Lateral pitch.** One fraction with "left" or "right" next to each hole, or "0". Often blank, which means zero.
-6. **Grip type.** Fingertip or conventional. FitSlice is built around fingertip grips.
+6. **Grip type.** Fingertip or conventional. RollRead is built around fingertip grips.
 7. **Inserts and slugs.** If you use finger inserts, the sheet may list the drilled hole (often 31/32 or 1") and the insert's inner size separately. If you use a thumb slug or interchangeable thumb, the sheet lists the size drilled into the slug.
 8. **Bridge.** The distance between the finger holes. Usually 1/4". Only some sheets list it.
 9. **Date and tape.** How much tape was in the thumb at fitting. Useful to know, but not entered. You finish the fit with tape on the trainer, as on your ball.
@@ -542,7 +542,7 @@ The configurator accepts fractions typed any of these ways: `55/64`, `1 3/64`, `
 
 ### Still unsure
 
-Take a photo of the sheet and email it to support@fitslice.com with "drill sheet" in the subject line. We will read it with you and send back the configurator values. Or hand the sheet to your pro shop and ask them to enter it on the Pro Shops page. They earn 25% on the order for doing it.
+Take a photo of the sheet and email it to support@rollread.com with "drill sheet" in the subject line. We will read it with you and send back the configurator values. Or hand the sheet to your pro shop and ask them to enter it on the Pro Shops page. They earn 25% on the order for doing it.
 
 Button: Open the configurator
 
@@ -552,7 +552,7 @@ Button: Open the configurator
 
 **Fit guarantee and returns**
 
-FitSlice parts are made to order from your drill sheet. That changes what a return means, so here is exactly what we stand behind.
+RollRead parts are made to order from your drill sheet. That changes what a return means, so here is exactly what we stand behind.
 
 ### The 30-day fit guarantee
 
@@ -566,7 +566,7 @@ If the part matches your fit sheet but the sheet does not match your ball, the p
 
 ### How to make a claim
 
-1. Email support@fitslice.com with your order number and a short description. A photo of the part next to your ball, or next to a ruler, speeds things up.
+1. Email support@rollread.com with your order number and a short description. A photo of the part next to your ball, or next to a ruler, speeds things up.
 2. If the part does not match your sheet, we confirm within 2 business days and start the reprint.
 3. If the sheet was entered wrong, we send you a link to confirm the new numbers in the configurator, then print from those.
 
@@ -621,7 +621,7 @@ You receive an email when your part starts printing and another with a tracking 
 
 ### Changing an order
 
-You can change your fit sheet or shipping address at no charge until printing starts. Reply to your order confirmation or email support@fitslice.com with your order number. Once printing starts the sheet is locked, because the part is already being made from it.
+You can change your fit sheet or shipping address at no charge until printing starts. Reply to your order confirmation or email support@rollread.com with your order number. Once printing starts the sheet is locked, because the part is already being made from it.
 
 ### Lost or damaged packages
 
@@ -653,7 +653,7 @@ We keep your fit sheet for three years from your last order so a reprint uses th
 
 ### Who sees it
 
-- FitSlice staff who print and check your order.
+- RollRead staff who print and check your order.
 - A printing partner, only if we send your order to one during busy periods, and only the fit sheet and shipping label needed to make and ship your part. Partners work under a written agreement that limits use of your data to your order.
 - Your pro shop, if the shop entered the sheet for you. The shop already has your sheet; we do not send them anything new.
 - Our shop platform, payment processor and email provider, in the normal course of running the store.
@@ -665,15 +665,15 @@ We do not sell fit sheets or any other customer data. We do not share your fit s
 - **See it:** your fit sheet is on every order in your account and in your confirmation email.
 - **Export it:** download it as a JSON file the configurator can reload.
 - **Correct it:** change it free until printing starts.
-- **Delete it:** email support@fitslice.com with "delete my fit sheet" and your order email address.
+- **Delete it:** email support@rollread.com with "delete my fit sheet" and your order email address.
 
 ### Children
 
-FitSlice does not knowingly collect information from children under 13. Youth bowlers' fit sheets should be entered by a parent or guardian.
+RollRead does not knowingly collect information from children under 13. Youth bowlers' fit sheets should be entered by a parent or guardian.
 
 ### Questions
 
-support@fitslice.com. This note covers fit-sheet data specifically; our full privacy policy covers cookies, analytics and your other rights.
+support@rollread.com. This note covers fit-sheet data specifically; our full privacy policy covers cookies, analytics and your other rights.
 
 ---
 
@@ -714,15 +714,15 @@ Link: How to read your drill sheet
 
 ### Confirmation email
 
-Subject: You're on the FitSlice list
+Subject: You're on the RollRead list
 
 Preheader: Find your drill sheet. Then see your grip in 3D.
 
 Hi {{first_name_or_"there"}},
 
-You're on the FitSlice list. When orders open you will get the link a week before anyone else.
+You're on the RollRead list. When orders open you will get the link a week before anyone else.
 
-FitSlice is the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere. Your thumb, middle and ring holes in 1/64" steps, both spans, every pitch, on a regulation 8.5" ball surface.
+RollRead is the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere. Your thumb, middle and ring holes in 1/64" steps, both spans, every pitch, on a regulation 8.5" ball surface.
 
 Two things to do before then:
 
@@ -732,10 +732,10 @@ Two things to do before then:
 If you have a question about your sheet, reply to this email with a photo of it and we will send back the values.
 
 See you on the list,
-FitSlice
+RollRead
 
 Unsubscribe: {{unsubscribe_url}}
-FitSlice, {{postal_address}}
+RollRead, {{postal_address}}
 
 ---
 
@@ -782,9 +782,9 @@ Fit sheet file: {{fit_sheet_json_url}} (reloads in the configurator)
 Shipping to:
 {{shipping_address}}
 
-Questions: reply to this email or write to support@fitslice.com.
+Questions: reply to this email or write to support@rollread.com.
 
-FitSlice
+RollRead
 
 ### Email 2: Your part is printing
 
@@ -804,7 +804,7 @@ Your fit sheet is now locked to this print. After it comes off the bed we smooth
 
 Expect a shipping email with tracking within {{days_to_ship}} business days.
 
-FitSlice
+RollRead
 
 ### Email 3: Shipped
 
@@ -835,11 +835,11 @@ Carrier: {{carrier}} · Estimated delivery: {{delivery_estimate}}
 **Does it match your sheet?** Your fit sheet is in the box and on your order. If anything on the part does not match it, reply to this email within 30 days and we reprint it free. Terms: {{guarantee_url}}
 
 Enjoy it,
-FitSlice
+RollRead
 
 ### Shared email footer
 
-FitSlice · support@fitslice.com · {{postal_address}}
+RollRead · support@rollread.com · {{postal_address}}
 Your fit sheet is stored with this order for reprints. Read how we handle it: {{privacy_url}}
 Manage email preferences: {{preferences_url}}
 
@@ -858,9 +858,9 @@ Where to next:
 - Open the configurator
 - Rev Puck · Rev Spinner · Pair · Fit Kit · Digital Files
 - How to read your drill sheet
-- Contact us: support@fitslice.com
+- Contact us: support@rollread.com
 
-Search box label: Search FitSlice
+Search box label: Search RollRead
 
 [IMAGE: the Rev Spinner lying on its side on carpet, stopped.]
 
@@ -868,7 +868,7 @@ Search box label: Search FitSlice
 
 **Something broke on our side.**
 
-Your order and your fit sheet are safe. Please try again in a minute. If it keeps happening, email support@fitslice.com and tell us what you were doing. We read every one.
+Your order and your fit sheet are safe. Please try again in a minute. If it keeps happening, email support@rollread.com and tell us what you were doing. We read every one.
 
 Button: Try again
 
@@ -878,11 +878,11 @@ We could not read "{{input}}". Enter sizes and spans as fractions like 55/64 or 
 
 ### Configurator: value out of range
 
-{{field_name}} of {{input}} is outside the range we print ({{min}} to {{max}}). Check the number against your sheet. If your sheet really says this, email a photo to support@fitslice.com and we will look at it with you.
+{{field_name}} of {{input}} is outside the range we print ({{min}} to {{max}}). Check the number against your sheet. If your sheet really says this, email a photo to support@rollread.com and we will look at it with you.
 
 ### Configurator: finger bores would collide
 
-At these finger sizes and spans, the middle and ring bores would break into each other. Check both spans and both finger sizes against your sheet, and check that the bridge is not set below 7/16". If every number matches your sheet, email a photo of it to support@fitslice.com and we will work it out with you before you order.
+At these finger sizes and spans, the middle and ring bores would break into each other. Check both spans and both finger sizes against your sheet, and check that the bridge is not set below 7/16". If every number matches your sheet, email a photo of it to support@rollread.com and we will work it out with you before you order.
 
 ### Configurator: bore breaks into weight pocket or cord tunnel
 
@@ -894,7 +894,7 @@ A blind thumb at this depth leaves too little material under the hole. Reduce th
 
 ### Configurator: preview could not load
 
-Your browser could not show the 3D preview. The model still built, and the numbers you entered are saved. Try a current version of Chrome, Edge, Firefox or Safari, or email support@fitslice.com and we will send you a rendered image of your fit.
+Your browser could not show the 3D preview. The model still built, and the numbers you entered are saved. Try a current version of Chrome, Edge, Firefox or Safari, or email support@rollread.com and we will send you a rendered image of your fit.
 
 ### Checkout: fit sheet missing
 
@@ -920,7 +920,7 @@ This download link has expired. Sign in to your account to get a fresh one, or r
 
 ### Waitlist form: submission failed
 
-We could not add you to the list just now. Check that the email address is complete and try again. If it still fails, email support@fitslice.com with "waitlist" in the subject and we will add you by hand.
+We could not add you to the list just now. Check that the email address is complete and try again. If it still fails, email support@rollread.com with "waitlist" in the subject and we will add you by hand.
 
 ### Waitlist form: already on the list
 

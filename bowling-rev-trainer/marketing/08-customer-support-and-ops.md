@@ -1,4 +1,4 @@
-# FitSlice Customer Support and Operations
+# RollRead Customer Support and Operations
 
 Everything needed to take an order from fit sheet to delivered box, and to answer the customer when something is off: the order-to-ship runbook, the fit-guarantee process, 15 support macros, the onboarding email sequence, the safety and use card, QC log templates, the returns policy, a measuring guide for customers who have no drill sheet, and the data-retention statement for fit sheets.
 
@@ -16,7 +16,7 @@ These come from business-plan Part 6 and Part 9. They apply to every reply, macr
 
 1. Say what the part is and what we did. Do not state or imply any result for rev rate, hook, average or injuries, and never give a number for any of them. Use "designed to", "practice" and "train". Do not use verbs that promise a result. The full list is in `marketing/01-brand-platform.md` section 3.
 2. Never name a ball company or compare to one. Compare by category only: generic one-size practice balls, S/M/L wrist braces, roller trainers.
-3. Never claim that any governing body or association has backed FitSlice in any way. If a customer asks, the answer is the practice-tool line in macro 8.
+3. Never claim that any governing body or association has backed RollRead in any way. If a customer asks, the answer is the practice-tool line in macro 8.
 4. Never state or imply any patent status. Write `[PATENT STATUS]` where such a line would go.
 5. Never invent a testimonial, a review, a star rating or a customer name. Quote a coach or creator only after they have said it and agreed to the use, and run the quote with the matching disclosure line beside it. Until then, leave the quote-placeholder marker from `marketing/01-brand-platform.md` in the layout.
 6. Any mention of a creator, coach, affiliate code, seeded unit or pro-shop margin carries a plain disclosure in the same message. Use the standard disclosure lines in `marketing/01-brand-platform.md` section 3 word for word.
@@ -46,7 +46,7 @@ These come from business-plan Part 6 and Part 9. They apply to every reply, macr
 | Weights and print times (slicer, PETG) | Rev Puck 297 g, 11 h 20 m on a CoreXY profile, 19 h 24 m on a conventional printer. Rev Spinner 98 g, 3 h 38 m or 6 h 21 m. Sizer plate 97 g, 3 h 24 m or 6 h 12 m. |
 | Print allowance | The configurator adds 0.4 mm to every bore when sizes come from a drill sheet. It adds 0 when sizes come from a printed sizer plate. |
 | Fit sheet retention | Three years from the last order, then deleted. Deleted within 30 days of a request. |
-| Contact | support@fitslice.com. Replies within 2 business days. Coaches: coaches@fitslice.com. Creators: creators@fitslice.com. |
+| Contact | support@rollread.com. Replies within 2 business days. Coaches: coaches@rollread.com. Creators: creators@rollread.com. |
 
 ### 0.2 Merge fields
 
@@ -84,7 +84,7 @@ Tags: `fit-tight`, `fit-loose`, `depth`, `hand`, `no-sheet`, `copy-ball`, `left-
 
 Marketplace orders: the message arrives through the marketplace inbox. Use the same macros. Refunds go through the marketplace's refund tool. Do not ask a marketplace customer for a review. The marketplace sends its own request.
 
-Orders entered by a pro shop: write to the bowler and copy the shop. Under Counter Sale the shop is the seller of record. Reduced-price reprints for a wrong sheet are billed to the shop at the reprint prices. The shop earns a margin on these orders, so every message to the bowler on an order that carries a shop code includes the line "This shop earns a margin on FitSlice orders entered here."
+Orders entered by a pro shop: write to the bowler and copy the shop. Under Counter Sale the shop is the seller of record. Reduced-price reprints for a wrong sheet are billed to the shop at the reprint prices. The shop earns a margin on these orders, so every message to the bowler on an order that carries a shop code includes the line "This shop earns a margin on RollRead orders entered here."
 
 ---
 
@@ -113,7 +113,7 @@ The sheet arrives one of four ways.
 
 1. **Web order.** The configurator writes the fit sheet into the order as line-item properties and the confirmation email carries a JSON file. In the configurator, paste the JSON into the fit-sheet box and press Load.
 2. **Marketplace order.** The sheet comes back as the personalization text. Type it into the configurator and save the JSON. Send the confirmation email with the sheet as entered. Hold the print for a written yes.
-3. **Pro-shop order.** The shop's order form. Send the confirmation with the ship date and the sheet as entered within one business day. The confirmation carries the line "This shop earns a margin on FitSlice orders entered here." Attach the shop code to the fit sheet record for twelve months.
+3. **Pro-shop order.** The shop's order form. Send the confirmation with the ship date and the sheet as entered within one business day. The confirmation carries the line "This shop earns a margin on RollRead orders entered here." Attach the shop code to the fit sheet record for twelve months.
 4. **Photo or email.** A customer sends a picture of the sheet. Type it into the configurator, reply with the values (macro 5), and hold the print for a written yes.
 
 Rules for all four:
@@ -170,7 +170,7 @@ For Digital Files orders the customer generates the files in their own session a
 > Nothing is printing yet. You can change anything free until it starts.
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 For a Digital Files order, change the first paragraph to "Before you start an 11-hour print, I want to check one number against your drill sheet, because a printed part cannot be edited once it is on the bed." Delete "Nothing is printing yet." and say "We regenerate your files free if your fit changes within 30 days."
 
@@ -178,7 +178,7 @@ For a Digital Files order, change the first paragraph to "Before you start an 11
 
 1. Load the fit sheet in the configurator. Pick the part. Pick the size source. Confirm the warnings panel is empty.
 2. Download the STL bundle. It holds the STL and the fit sheet JSON. Rename both with the order number and part, for example `FS-1042-puck.stl`.
-3. Slice with the FitSlice PETG profile: 0.2 mm layers, 4 walls, 5 top and bottom layers, 20% gyroid, no supports, flat base on the bed. Sizer plates use the same profile.
+3. Slice with the RollRead PETG profile: 0.2 mm layers, 4 walls, 5 top and bottom layers, 20% gyroid, no supports, flat base on the bed. Sizer plates use the same profile.
 4. Record the slicer's filament grams and print time on the order.
 5. Look at the sliced preview. The base is on the bed. No supports were generated. The bores have all four walls. The weight pocket and cord tunnel are open.
 
@@ -324,7 +324,7 @@ From the published page:
 | **C. Fit by feel** | The customer says it feels off and has no measurement | Run the evidence ladder (section 2.5). The outcome is A or B, or tape advice |
 | **D. Shipping** | Damaged in transit, or no tracking movement for 7 days | Free reprint and reship. No evidence of fault needed beyond photos of the damage |
 
-A wrong sheet entered by a pro shop is path B. Under Counter Sale the reduced price is billed to the shop. Under Referral the bowler pays. A wrong sheet typed by FitSlice from a photo is path A.
+A wrong sheet entered by a pro shop is path B. Under Counter Sale the reduced price is billed to the shop. Under Referral the bowler pays. A wrong sheet typed by RollRead from a photo is path A.
 
 ### 2.4 The window
 
@@ -409,7 +409,7 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 > If it measures within 0.2 mm of your sheet, the part is what you ordered, and you have two good options. Lightly sand: wrap fine sandpaper around a pencil, turn it a few times, check, and stop early. Or order a Fit Kit ($24, credited toward a trainer) to find the size that feels right on our printer, and I will reprint at {{reprint_price}} from your new numbers.
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 **After:** tag `fit-tight`. If the customer measures a miss, move to path A and reprint. If no evidence after two exchanges, escalate to the founder.
 
@@ -433,7 +433,7 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 > If the part matches your sheet and your ball feels different, the usual reason is a change in your hand or your tape since the sheet was written. In that case a Fit Kit ($24, credited toward a trainer) finds the right size, and I can reprint at {{reprint_price}}.
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 **After:** tag `fit-loose`. More than two layers needed: ask for the measurement and follow section 2.5.
 
@@ -456,7 +456,7 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 > If we measured the depth at {{qc_depth_mm}} mm and your sheet said {{sheet_depth_mm}} mm, the part missed what you ordered and the reprint is free.
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 **After:** tag `depth`. Use path A only if the QC depth was outside ±1 mm of the sheet. Otherwise path B.
 
@@ -477,7 +477,7 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 > A part laid out for one hand is not a match for the other. If you are not sure, send me a photo of your drill sheet and I will tell you what the sheet says.
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 **After:** tag `hand`. If the customer has already ordered and chose the wrong hand before printing started, change it free. After printing started, section 3, macro 15.
 
@@ -493,7 +493,7 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 >
 > 1. **Ask the shop that drilled your ball.** Ask for a copy or a photo of your drill sheet. If they keep your sheet in software, a printout works.
 > 2. **No record, or the shop has closed?** Take your ball to any pro shop and ask whether they can read the sizes, spans and pitches off it and write them down. Some will do it at the counter, some charge a small fee, and some will not. Ask before you go.
-> 3. **Let the shop enter it for you.** Pro shops in our program can enter your sheet and we print and ship. Disclosure: FitSlice pays the shop 25% of the order for entering the sheet, so the shop earns money when you order this way. Shops in the program say so at the counter: "This shop earns a margin on FitSlice orders entered here." You can also enter the sheet yourself in the configurator.
+> 3. **Let the shop enter it for you.** Pro shops in our program can enter your sheet and we print and ship. Disclosure: RollRead pays the shop 25% of the order for entering the sheet, so the shop earns money when you order this way. Shops in the program say so at the counter: "This shop earns a margin on RollRead orders entered here." You can also enter the sheet yourself in the configurator.
 > 4. **Find your hole sizes at home.** The $24 Fit Kit is a plate with bores in 1/64" steps, printed on the same printer as your trainer. The $24 is credited toward your order. Say "no sheet" in the notes and we print a wider range of sizes.
 >
 > We do not estimate spans or pitches from a photo of a hand, because spans and pitches make up about 80% of a fit by the pro-shop trade body's own rule of thumb. A pro-shop fitting is better than any measurement you take at home. Our guide for what you can measure yourself, and what to bring to a fitter, is here: {{help_measure_url}}
@@ -501,7 +501,7 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 > If you do find a sheet, send me a photo and I will send back the values to type into the configurator.
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 **After:** tag `no-sheet`. Do not offer to guess any number.
 
@@ -524,13 +524,13 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 > Once you have the numbers, the configurator rebuilds the model in about a tenth of a second and draws the hole axes, so you can compare it with your ball: {{configurator_url}}
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 **After:** tag `copy-ball`. If a ball arrives anyway, do not open or use it. Email the sender the same day, ship it back at our cost with tracking, and tell the founder.
 
 ### Macro 7. Left-handed
 
-**Use when:** a left-handed bowler asks whether FitSlice works for them.
+**Use when:** a left-handed bowler asks whether RollRead works for them.
 
 > Subject: Re: left-handed bowlers
 >
@@ -546,13 +546,13 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 > How to read a drill sheet: {{help_drill_sheet_url}}
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 **After:** tag `left-hand`. Run sanity-check item 1 on the order.
 
 ### Macro 8. Two-handed
 
-**Use when:** a two-handed or thumbless bowler asks whether FitSlice is for them.
+**Use when:** a two-handed or thumbless bowler asks whether RollRead is for them.
 
 > Subject: Re: two-handed bowling
 >
@@ -566,10 +566,10 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 >
 > The Rev Puck is made for thumb-in bowlers. If your ball does have a thumb hole, send me your sheet and I will tell you what we can make from it.
 >
-> If you are wondering: FitSlice is a practice tool for your hand. It is not a bowling ball. Do not use it on a lane or in competition.
+> If you are wondering: RollRead is a practice tool for your hand. It is not a bowling ball. Do not use it on a lane or in competition.
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 **After:** tag `two-handed`. Point the customer to the Spinner. Suggest the Pair only if their ball has a thumb hole.
 
@@ -588,7 +588,7 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 > Tell me your country and I will add you to the list, so we know where to open next. Your email goes on that list only for that purpose.
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 **After:** tag `intl`. If asked about mail-forwarding services: we ship to any US street address, and the customs and onward leg are between the customer and the forwarder. Do not name a forwarder. Digital sales to other countries may carry local tax duties; the founder sets that in the shop platform.
 
@@ -615,7 +615,7 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 > **Sharing and selling.** The license is personal use. Print as many copies as you like for yourself. Please do not share the files or sell prints. [PATENT STATUS]
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 **After:** tag `digital`. Resend the link if asked. Do not refund a downloaded file that opens and matches the sheet. Delete `[PATENT STATUS]` before sending until counsel supplies the wording.
 
@@ -647,7 +647,7 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 > Send me a photo if a print gives you trouble and I will help you read it.
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 **After:** tag `printer`. We help with these settings and do not troubleshoot the customer's printer hardware.
 
@@ -674,7 +674,7 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 > Nothing here limits any rights you have under the consumer laws where you live.
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 **After:** tag `refund`. A second miss on the same order gets branch F: a full refund (section 2.6). If a card dispute opens, send the processor the order record, the QC row, the printed fit sheet and the tracking.
 
@@ -697,7 +697,7 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 > Your sheet is on file, so you do not need to retype anything. I will confirm within 2 business days and start the reprint. It goes to the front of the queue, and you will get a printing email and a tracking email as usual.
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 **After:** tag `damaged`, path D, cause code `P5`. File the carrier claim with the photos. If the part is cracked and the box looks fine, treat it as a possible safety report (section 2.8).
 
@@ -724,7 +724,7 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 > If your sheet needs a change, tell me now. You can change it free until printing starts.
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 **After:** tag `wismo`. If the stall reaches 7 days, start the reprint (section 1.8).
 
@@ -747,7 +747,7 @@ Fifteen replies. Each has a use case, what to check first, the reply and what to
 > The quickest way to avoid a reprint: look at the sheet in your confirmation email before printing starts. It shows the numbers we will use to build your part.
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 **After:** tag `change-sheet`. If the print is less than an hour old, the operator may stop it and restart with the new sheet at no charge. Log it as goodwill. Do not offer this in the reply.
 
@@ -759,7 +759,7 @@ Four emails keyed to the carrier's delivery scan. They sit alongside the three o
 
 Rules for the sequence:
 
-- Send from the support address. Every email ends with the shared footer from the website copy: FitSlice, support@fitslice.com, `{{postal_address}}`, the fit-sheet note with `{{privacy_url}}`, and `{{preferences_url}}`.
+- Send from the support address. Every email ends with the shared footer from the website copy: RollRead, support@rollread.com, `{{postal_address}}`, the fit-sheet note with `{{privacy_url}}`, and `{{preferences_url}}`.
 - A reprint restarts the sequence from the replacement's delivery scan.
 - Orders with a coach code, seeded units, affiliate links or pro-shop staff get emails 1 to 3 and do not get email 4. Marketplace orders get emails 1 to 3 and the marketplace sends its own review request.
 - The drill text is the six drills in the README. The only claim in it that needs its qualifier is the daily-practice line, and it carries it.
@@ -795,7 +795,7 @@ Trigger: delivery scan.
 > Your drill guide: {{training_guide_url}}
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 ### Email 2. Day 3: the drills
 
@@ -826,7 +826,7 @@ Trigger: 3 days after the delivery scan.
 > Your guide with every drill: {{training_guide_url}}
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 ### Email 3. Day 10: check-in
 
@@ -852,7 +852,7 @@ Trigger: 10 days after the delivery scan.
 > **Your guarantee runs through {{guarantee_end_date}}.** If the part does not match the sheet on your order, we reprint it free: {{guarantee_url}}
 >
 > {{agent_first_name}}
-> FitSlice
+> RollRead
 
 ### Email 4. Day 30: review request
 
@@ -879,14 +879,14 @@ Rules this email follows:
 >
 > Write your review: {{review_link}}
 >
-> If the part does not match your fit sheet, that is a guarantee claim. Email support@fitslice.com with your order number and we reprint it free: {{guarantee_url}}. The guarantee runs through {{guarantee_end_date}}.
+> If the part does not match your fit sheet, that is a guarantee claim. Email support@rollread.com with your order number and we reprint it free: {{guarantee_url}}. The guarantee runs through {{guarantee_end_date}}.
 >
 > There is no reward for reviewing, and we would not want one to color what you say.
 >
 > Thank you for trying it.
 >
 > {{founder_name}}
-> FitSlice
+> RollRead
 
 ### Variants
 
@@ -906,7 +906,7 @@ Print on the back of the training guide card, or as its own card in the box. The
 
 **Print-ready text**
 
-> **FITSLICE USE AND SAFETY**
+> **ROLLREAD USE AND SAFETY**
 >
 > This is a practice tool for your hand. It is not a bowling ball. Do not use it on a lane.
 >
@@ -924,7 +924,7 @@ Print on the back of the training guide card, or as its own card in the box. The
 >
 > Check for cracks before each session. Retire any cracked part.
 >
-> support@fitslice.com
+> support@rollread.com
 
 Print notes: black on white, 10 pt minimum, the heading in bold, a thin border. The same text goes on the product pages and in the Digital Files bundle, since it applies to parts customers print themselves.
 
@@ -937,7 +937,7 @@ Keep the log in a spreadsheet. Use the order number as the only identifier. Neve
 ### 6.1 The QC card (one per part, printed or on a tablet)
 
 ```
-FITSLICE QC CARD                       Order: ____________   Part: Puck / Spinner / Sizer
+ROLLREAD QC CARD                       Order: ____________   Part: Puck / Spinner / Sizer
 Date: ______   Printer ID: ______   Filament lot: ______   Size source: Sheet / Plate
 Print start: ______   End: ______   Slicer g: ______   Scale g: ______   (within 5%?  Y / N)
 
@@ -1001,7 +1001,7 @@ This is the page text for the site and the policy attached to the order confirma
 
 > **Returns and refunds**
 >
-> FitSlice parts are made to order from your drill sheet. Here is what that means for returns, in plain terms.
+> RollRead parts are made to order from your drill sheet. Here is what that means for returns, in plain terms.
 >
 > **The short version**
 >
@@ -1025,7 +1025,7 @@ This is the page text for the site and the policy attached to the order confirma
 >
 > **What the guarantee does not cover.** Parts printed from Digital Files. Wear from use, including bores enlarged by sanding or by removing tape repeatedly. Damage from throwing or dropping onto hard floors, or use outside the drills in the guide. Changes to your fit after you ordered. Those changes are still available as a reprint at the prices above.
 >
-> **How to start.** Email support@fitslice.com with your order number and a short note. A photo of the part next to a ruler, or next to your ball, speeds it up. We confirm within 2 business days.
+> **How to start.** Email support@rollread.com with your order number and a short note. A photo of the part next to a ruler, or next to your ball, speeds it up. We confirm within 2 business days.
 >
 > **How refunds are paid.** To your original payment method, sent within 3 business days of agreeing it. Your bank decides how long it takes to show.
 >
@@ -1078,7 +1078,7 @@ This is the text for the help page `{{help_measure_url}}`.
 >
 > **Two-handed or thumbless?** The Rev Spinner needs only the middle and ring sizes and the bridge, so skip the thumb column and the spans.
 >
-> **Stuck?** Send a photo of anything you have to support@fitslice.com with "drill sheet" in the subject line. We will read it with you and send back the values to type in.
+> **Stuck?** Send a photo of anything you have to support@rollread.com with "drill sheet" in the subject line. We will read it with you and send back the values to type in.
 
 ---
 
@@ -1098,9 +1098,9 @@ For the privacy page, under "How long". It matches the Privacy and your fit shee
 >
 > **How long.** Three years from your last order. After that your fit sheet is deleted. The print files we make from your sheet are deleted 35 days after delivery. We can make them again from your stored sheet.
 >
-> **Delete it sooner.** Email support@fitslice.com from your order email address with "delete my fit sheet". We delete your fit sheet from our order system, our files and our support mailbox within 30 days of your request, and we write back to tell you it is done. Copies in our routine backups are not restored and are overwritten within 30 days after that. We keep the order record for as long as tax and accounting rules require. It shows what you bought, the price and the address it shipped to, and not your fit sheet.
+> **Delete it sooner.** Email support@rollread.com from your order email address with "delete my fit sheet". We delete your fit sheet from our order system, our files and our support mailbox within 30 days of your request, and we write back to tell you it is done. Copies in our routine backups are not restored and are overwritten within 30 days after that. We keep the order record for as long as tax and accounting rules require. It shows what you bought, the price and the address it shipped to, and not your fit sheet.
 >
-> **Who sees it.** FitSlice staff who print and check your order. A printing partner, only if we send your order to one in a busy period, and only the fit sheet and shipping label needed to make and ship your part, under a written agreement that limits use of the data to your order. Your pro shop, if the shop entered the sheet for you, since it already has your sheet. Our shop platform, payment processor and email provider, in the normal course of running the store.
+> **Who sees it.** RollRead staff who print and check your order. A printing partner, only if we send your order to one in a busy period, and only the fit sheet and shipping label needed to make and ship your part, under a written agreement that limits use of the data to your order. Your pro shop, if the shop entered the sheet for you, since it already has your sheet. Our shop platform, payment processor and email provider, in the normal course of running the store.
 >
 > We do not sell fit sheets or any other customer data. We do not share your fit sheet with ball manufacturers, pro shops you did not order through, or anyone else for marketing.
 >

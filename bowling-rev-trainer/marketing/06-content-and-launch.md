@@ -1,4 +1,4 @@
-# FitSlice Content, Social and Launch Plan
+# RollRead Content, Social and Launch Plan
 
 Working draft, October 2026. Asset 06 of the marketing set. The source of truth for every claim in this file is `docs/business-plan.md` (Part 2 how it helps, Part 4 competitors, Part 5 line and prices, Part 6 claims, Part 8 selling) and `README.md` (parts and drills). Voice, standard lines and disclosure wording follow `marketing/01-brand-platform.md`. Creator and coach rules follow `marketing/05-creators-and-coaches.md`.
 
@@ -45,11 +45,11 @@ These are legal constraints from business-plan Part 6 and Part 9. They are resta
 
 **Disclosures, verbatim, first line of the post or description and spoken aloud on video:**
 
-- Seeded product: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge."
+- Seeded product: "RollRead sent me this trainer, printed from my own drill sheet, free of charge."
 - Affiliate code: "I earn a commission when you order with my code."
-- Paid post: "Paid partnership with FitSlice."
-- Pro shop: "This shop earns a margin on FitSlice orders entered here."
-- Our own repost of a creator's clip: "FitSlice sent [CREATOR NAME] this trainer, printed from their own drill sheet, free of charge. [CREATOR NAME] earns a commission on orders with their code." Then the clip. Drop the second sentence if the creator has no code.
+- Paid post: "Paid partnership with RollRead."
+- Pro shop: "This shop earns a margin on RollRead orders entered here."
+- Our own repost of a creator's clip: "RollRead sent [CREATOR NAME] this trainer, printed from their own drill sheet, free of charge. [CREATOR NAME] earns a commission on orders with their code." Then the clip. Drop the second sentence if the creator has no code.
 
 Where a platform has a branded-content or paid-partnership label, switch it on as well as writing the line. The label does not replace the line.
 
@@ -70,7 +70,7 @@ Where a platform has a branded-content or paid-partnership label, switch it on a
 
 ### 1.1 The launch narrative
 
-Serious one-handed bowlers pay a pro shop to measure their hand to a sixty-fourth of an inch and drill three holes into a ball at specific spans and pitches. That fit lives in one place, the ball, and a fifteen-pound ball drilled to be thrown is a poor thing to practice with at a desk. FitSlice prints the part of the ball the hand touches, with the bowler's own drill sheet in it, so the release can be practiced anywhere.
+Serious one-handed bowlers pay a pro shop to measure their hand to a sixty-fourth of an inch and drill three holes into a ball at specific spans and pitches. That fit lives in one place, the ball, and a fifteen-pound ball drilled to be thrown is a poor thing to practice with at a desk. RollRead prints the part of the ball the hand touches, with the bowler's own drill sheet in it, so the release can be practiced anywhere.
 
 The product needs one sentence of explanation before anyone wants it: "It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere." The launch exists to deliver that sentence, show the thing, and let the bowler type in their own numbers. Everything else supports those three steps.
 
@@ -154,7 +154,7 @@ Day 1 is the Monday of launch Week 1, so Days 1 to 28 are Weeks 1 to 4 and Days 
 | **Week 4: Lift it, spin it, count it** | | | | | |
 | 22 Mon | YouTube Shorts; cross-post | Reel, 30 s (Script 8) | "Lift it, spin it, count it." | The Rev Spinner is fingers only. Short pendulum swing, lift with the fingers at the bottom, release onto carpet. The engraved bars flicker as it spins; count the seconds until it stops. It gives you feedback. It does not measure. | $45 alone or $119 in the Pair. Link in description. |
 | 23 Tue | Instagram | Carousel, 7 slides | "Six drills. Ten to fifteen minutes." | One slide per drill: fingertip carries, thumb pops, swing sync, cupped-wrist holds, carpet spins, rotation-axis control. Slide 7: practice advice from us, with no measurement behind it: short daily sessions help keep the feel between league nights. | Save it. Link in bio for the full guide. |
-| 24 Wed | Instagram; cross-post | Reel, 30 s, a creator's clip reposted with written permission | First line, before anything else: "FitSlice sent [CREATOR NAME] this trainer, printed from their own drill sheet, free of charge. [CREATOR NAME] earns a commission on orders with their code." | `[QUOTE PLACEHOLDER — creator name]` Use only words the creator has already published, unedited for meaning. Delete this line if there is no quote. | Watch the full video on the creator's channel. |
+| 24 Wed | Instagram; cross-post | Reel, 30 s, a creator's clip reposted with written permission | First line, before anything else: "RollRead sent [CREATOR NAME] this trainer, printed from their own drill sheet, free of charge. [CREATOR NAME] earns a commission on orders with their code." | `[QUOTE PLACEHOLDER — creator name]` Use only words the creator has already published, unedited for meaning. Delete this line if there is no quote. | Watch the full video on the creator's channel. |
 | 25 Thu | TikTok; cross-post | Reel, 20 s | "Two-handed? Start here." | The Rev Spinner is a fingers-only disc with no thumb hole. Lift it onto carpet, it spins in place, count how long. The Rev Puck is for thumb-in bowlers. Swing-and-hold and carpet-release only. Never thrown. | $45. Link in bio. |
 | 26 Fri | Facebook group D, a two-handed or youth group (admin permission first) | Text post with one photo (spinner on carpet) | "For the two-handers and the parents here." | The fingers-only disc: lift it onto carpet, it spins in place, count how long. About 100 g. No thumb hole. Swing-and-hold and carpet-release only, never thrown, supervision under 12. Disclosure: I make it. | What do your bowlers practice off the lane? |
 | 27 Sat | YouTube Shorts; cross-post | Screen recording, 20 s | "The configurator just stopped a bad print." | Enter a span too short and the bores would break into each other. The preview warns you before anything prints. | Try it. Link in description. |
@@ -182,7 +182,7 @@ Purpose: the single clip that explains the product. Use it first, use it often.
 | 1 | Side angle, waist down. Hand at the side holding the puck in a fingertip grip. Paracord looped on the wrist. | Thumb pop. | "Thumb pop. Cord on the wrist." | 0 to 3 |
 | 2 | Slow motion, close on the hand. The thumb relaxes and slides out. The puck drops a few millimeters and the fingers catch it. | Thumb out. Fingers stay. | "Relax the thumb. Let it slide. The fingers catch the weight." | 3 to 8 |
 | 3 | Real time, three pops in a row. | If it falls, the fingers weren't carrying it. | "If it falls, the fingers weren't carrying it." | 8 to 12 |
-| 4 | Puck set down beside the drill sheet. Hold two seconds. | Your holes. Your sheet. FitSlice. | "A clean thumb exit, practiced in your own holes." | 12 to 15 |
+| 4 | Puck set down beside the drill sheet. Hold two seconds. | Your holes. Your sheet. RollRead. | "A clean thumb exit, practiced in your own holes." | 12 to 15 |
 
 ### Script 2. Sizer plate (30 s)
 
@@ -392,7 +392,7 @@ I am building a company that prints a bowler's drill sheet.
 
 Here is the idea. Serious one-handed bowlers pay a pro shop to measure their hand to a sixty-fourth of an inch and drill three holes into a ball at specific spans and pitches. That fit exists in one place: a fifteen-pound ball drilled to be thrown. You cannot hold it at your desk for thirty seconds, and you cannot drop-catch it in your living room to rehearse the thumb leaving first.
 
-FitSlice prints the patch of ball surface the hand actually touches, with the bowler's own drill sheet reproduced in it. Hole sizes in 1/64-inch steps, both spans, every pitch, right or left hand, on the curvature of a regulation 8.5-inch ball. About 300 grams in PETG at 20% infill. A free web configurator turns the sheet into the model in about 100 milliseconds and generates the print file. We print to order and ship, or sell the files. [PATENT STATUS]
+RollRead prints the patch of ball surface the hand actually touches, with the bowler's own drill sheet reproduced in it. Hole sizes in 1/64-inch steps, both spans, every pitch, right or left hand, on the curvature of a regulation 8.5-inch ball. About 300 grams in PETG at 20% infill. A free web configurator turns the sheet into the model in about 100 milliseconds and generates the print file. We print to order and ship, or sell the files. [PATENT STATUS]
 
 Three things I have learned building it:
 
@@ -416,19 +416,19 @@ The 450 words run from the headline through the last line of the boilerplate, wi
 
 FOR IMMEDIATE RELEASE
 
-**FitSlice introduces a 3D-printed bowling trainer built from the bowler's own drill sheet**
+**RollRead introduces a 3D-printed bowling trainer built from the bowler's own drill sheet**
 
 *Made-to-order trainer copies hole sizes, spans and pitches; free configurator builds the model in about 100 milliseconds*
 
-[CITY, STATE] ([DATE]) FitSlice introduced the Rev Puck, a made-to-order training aid that reproduces a bowler's drill sheet on a 3D-printed slice of regulation 8.5-inch ball surface, for practicing the grip and release away from the lane.
+[CITY, STATE] ([DATE]) RollRead introduced the Rev Puck, a made-to-order training aid that reproduces a bowler's drill sheet on a 3D-printed slice of regulation 8.5-inch ball surface, for practicing the grip and release away from the lane.
 
-One-handed bowlers have their hands measured to 1/64 of an inch and their balls drilled at specific spans and pitches. That fit has lived in one place: the ball. To the company's knowledge, FitSlice is the first trainer built from the bowler's actual drill sheet.
+One-handed bowlers have their hands measured to 1/64 of an inch and their balls drilled at specific spans and pitches. That fit has lived in one place: the ball. To the company's knowledge, RollRead is the first trainer built from the bowler's actual drill sheet.
 
 The Rev Puck reproduces thumb, middle and ring hole sizes in 1/64-inch steps, both spans, and the forward, reverse and lateral pitch of every hole, right or left hand. The holes aim at the ball's center the way a zero-pitch hole is drilled, so the thumb and fingers oppose each other as they do on the bowler's own ball.
 
 The part weighs about 300 grams in PETG at 20% infill, with a pocket in the base for coins or washers and a tunnel for a wrist cord. A companion Rev Spinner, a fingers-only disc, spins on carpet and carries engraved bars for counting. A $24 Fit Kit sizer plate, printed on the same printer and material as the order, helps the bowler find hole sizes before printing.
 
-"[QUOTE PLACEHOLDER — founder name]," said [FOUNDER NAME], founder of FitSlice.
+"[QUOTE PLACEHOLDER — founder name]," said [FOUNDER NAME], founder of RollRead.
 
 A free web configurator rebuilds the model from the drill sheet in about 100 milliseconds, shows a 3D preview, warns when holes would intersect and generates the print file. Bowlers can order a printed trainer or buy files for their own printer at https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p.
 
@@ -438,9 +438,9 @@ Coaches agree the release depends on the thumb leaving first and a relaxed hand.
 
 Prices: Fit Kit, $24, credited toward a trainer; Rev Puck, $89; Rev Spinner, $45; Pair, $119; digital files, $29 for the puck and $39 for the pair. Pro shops that enter a customer's drill sheet earn 25% of the order and stock no inventory. [PATENT STATUS]
 
-**About FitSlice**
+**About RollRead**
 
-FitSlice makes made-to-order training aids for one-handed, thumb-in bowlers, built from the bowler's own drill sheet. Its trainers are used off the lane. They are not bowling balls and are not used in competition.
+RollRead makes made-to-order training aids for one-handed, thumb-in bowlers, built from the bowler's own drill sheet. Its trainers are used off the lane. They are not bowling balls and are not used in competition.
 
 **Media contact:** [CONTACT]. Images, the drill-sheet-to-model video and a fact sheet are available on request.
 
@@ -467,18 +467,18 @@ This list is for internal use. Send the release with three images (the puck besi
 
 ## 8. Five-email welcome sequence
 
-Trigger: newsletter signup or a configurator session where the visitor leaves an address. Timing: Email 1 at once, Email 2 at day 2, Email 3 at day 4, Email 4 at day 7, Email 5 at day 10. Plain text with one image each. Sender: the founder's name, FitSlice. Reply-to is a monitored inbox. Each email ends with the standard footer.
+Trigger: newsletter signup or a configurator session where the visitor leaves an address. Timing: Email 1 at once, Email 2 at day 2, Email 3 at day 4, Email 4 at day 7, Email 5 at day 10. Plain text with one image each. Sender: the founder's name, RollRead. Reply-to is a monitored inbox. Each email ends with the standard footer.
 
-**Standard footer:** FitSlice trainers are training aids used off the lane. They are not bowling balls and are never thrown. You are receiving this because you signed up at https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p. [POSTAL ADDRESS]. Unsubscribe: [UNSUBSCRIBE LINK].
+**Standard footer:** RollRead trainers are training aids used off the lane. They are not bowling balls and are never thrown. You are receiving this because you signed up at https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p. [POSTAL ADDRESS]. Unsubscribe: [UNSUBSCRIBE LINK].
 
 ### Email 1 (immediately): the ten-second explanation
 
 **Subject:** Your drill sheet, off the ball
-**Preview text:** What FitSlice is in ten seconds, and the free configurator.
+**Preview text:** What RollRead is in ten seconds, and the free configurator.
 
 Hi,
 
-Thanks for signing up. Here is what FitSlice is in ten seconds: it's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.
+Thanks for signing up. Here is what RollRead is in ten seconds: it's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.
 
 Your pro shop measured your hand to a sixty-fourth of an inch and drilled your spans and pitches into your ball. We print that patch of ball surface, at the real curvature of an 8.5-inch ball, with your drill sheet reproduced in it: thumb, middle and ring sizes in 1/64-inch steps, both spans, forward/reverse and lateral pitch on every hole, right or left hand. The holes aim at the ball's center the way a zero-pitch hole is drilled, so your thumb and fingers oppose each other the way they do on your ball. It weighs about 300 g in PETG at 20% infill.
 
@@ -489,7 +489,7 @@ https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p
 Over the next ten days I will send four more short emails: what a fit is made of, the six drills, the honest answer on revs, and how to get your sheet from your shop if you do not have it. Reply to any of them. I read every one.
 
 [FOUNDER NAME]
-FitSlice
+RollRead
 
 ### Email 1, event variant (booth leads who ticked the email box)
 
@@ -507,7 +507,7 @@ In ten seconds: it's the part of your ball your hand touches, printed with your 
 Over the next ten days I will send four more short emails: what a fit is made of, the six drills, the honest answer on revs, and how to get your sheet from your shop if you do not have it. Reply to any of them. I read every one.
 
 [FOUNDER NAME]
-FitSlice
+RollRead
 
 ### Email 2 (day 2): what a fit is made of
 
@@ -600,7 +600,7 @@ Start here: https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p
 Thanks for reading all five. Reply with anything I did not answer.
 
 [FOUNDER NAME]
-FitSlice
+RollRead
 
 ---
 
@@ -610,7 +610,7 @@ FitSlice
 
 A booth with a sizer plate and a printer running is a demo that explains itself. Three kinds of event, in order of fit with the customer:
 
-- **The Open Championships vendor area.** About 150 days, more than 58,000 adult bowlers through one building, with a traveling population that skews male and 50 and over (business-plan Part 3). That is the one-handed, thumb-in customer in one room. The event name appears in our materials only as a location. Nothing we print or say may state or imply that the event's organizer backs FitSlice in any way.
+- **The Open Championships vendor area.** About 150 days, more than 58,000 adult bowlers through one building, with a traveling population that skews male and 50 and over (business-plan Part 3). That is the one-handed, thumb-in customer in one room. The event name appears in our materials only as a location. Nothing we print or say may state or imply that the event's organizer backs RollRead in any way.
 - **The Junior Gold trade show.** Youth and parents, reported at more than 9,000 attendees (a single unconfirmed source). The elite youth game is largely two-handed, so this is a Rev Spinner event, with the puck for thumb-in youth who have a fitted ball. Parent-facing tone: weight, safety, supervision, price.
 - **Regional events.** Regional professional-tour stops, state tournaments and large senior events. Small, frequent, local, cheap. These are where the demo script and the lead-capture flow get rehearsed before the big two.
 
@@ -639,7 +639,7 @@ Said in the booth's voice: plain, specific, candid. Adjust to the person.
 
 ### 9.4 Lead capture
 
-- **Drill-sheet card (paper):** name, email, phone (optional), pro shop name, hand, sizes from the plate, spans and pitches if known, "my shop has my sheet" checkbox, event code, and a separate checkbox: "Send me the five FitSlice emails." No box ticked means no emails. A line on the card: "Your fit sheet is stored with your order, kept for the period stated on our privacy page, and deleted on request." Photographed and keyed the same night.
+- **Drill-sheet card (paper):** name, email, phone (optional), pro shop name, hand, sizes from the plate, spans and pitches if known, "my shop has my sheet" checkbox, event code, and a separate checkbox: "Send me the five RollRead emails." No box ticked means no emails. A line on the card: "Your fit sheet is stored with your order, kept for the period stated on our privacy page, and deleted on request." Photographed and keyed the same night.
 - **Tablet (configurator in kiosk mode):** the visitor or staff types the sheet; the configurator stores the fit-sheet JSON with the email and event code; the visitor sees their model turn in 3D before they leave the table. That moment is the sale. The same opt-in box appears on the tablet.
 - **No sheet:** take the sizes from the plate, the shop's name and permission to contact the shop for the rest. Email 5 (how to ask your shop) goes first for this group.
 - **Follow-up:** for opted-in leads, the event variant of Email 1 (Section 8) then the rest of the sequence, with the event code good for 30 days. Shops named on the cards get the pro-shop outreach email (asset 03) the following week.
@@ -699,7 +699,7 @@ Title: **We print your drill sheet. Here is how, and what we still have to prove
 
 Thumbnail: the puck beside the drill sheet it came from, thumb and two fingers in, text "YOUR DRILL SHEET" in two words. No arrows, no faces with open mouths.
 
-Description, first line: It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere. Then the configurator link, chapters (0:00 Thumb pop; 0:15 The sentence; 0:45 The fit lives in the ball; 1:30 What a drill sheet contains; 2:30 The configurator; 3:45 Printing; 4:30 The Fit Kit; 5:15 The six drills; 6:45 What it does not do; 7:30 Prices), the price list, the safety line, `[PATENT STATUS]` and the footer: "FitSlice trainers are training aids used off the lane. They are not bowling balls."
+Description, first line: It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere. Then the configurator link, chapters (0:00 Thumb pop; 0:15 The sentence; 0:45 The fit lives in the ball; 1:30 What a drill sheet contains; 2:30 The configurator; 3:45 Printing; 4:30 The Fit Kit; 5:15 The six drills; 6:45 What it does not do; 7:30 Prices), the price list, the safety line, `[PATENT STATUS]` and the footer: "RollRead trainers are training aids used off the lane. They are not bowling balls."
 
 | Time | Segment | What is on screen | What is said | Notes |
 |---|---|---|---|---|

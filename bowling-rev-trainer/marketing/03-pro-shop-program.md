@@ -1,4 +1,4 @@
-# FitSlice Pro Shop Program
+# RollRead Pro Shop Program
 
 Working draft, October 2026. Everything a pro shop sees, signs or hears from us is in this file: the program design, the sell sheet, the wholesale terms, the outreach emails, the counter script, the counter card, the operator FAQ, the pitch to certified operators, the Bowl Expo booth plan, the onboarding checklist and the incentive math.
 
@@ -9,9 +9,9 @@ How to use this file:
 - `[QUOTE PLACEHOLDER — name]` marks where an operator quote goes once that operator has actually said it and agreed to its use. Ship the asset without the block until then. A quote from an operator who has a free unit, a code or a margin runs with the matching disclosure line beside it.
 - `{{field}}` is a merge field filled from the shop record.
 - The configurator lives at https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p until it is hosted on the site. Every link labeled "configurator" below points there.
-- Shops talk to us at shops@fitslice.com. Bowlers talk to us at support@fitslice.com.
+- Shops talk to us at shops@rollread.com. Bowlers talk to us at support@rollread.com.
 
-Claims discipline for everything a shop says on our behalf: product facts and attributed coaching views only. No number for revs, hook, pins or average. No ball-company names. No governing-body approval. Every shop mention carries the disclosure line: "This shop earns a margin on FitSlice orders entered here."
+Claims discipline for everything a shop says on our behalf: product facts and attributed coaching views only. No number for revs, hook, pins or average. No ball-company names. No governing-body approval. Every shop mention carries the disclosure line: "This shop earns a margin on RollRead orders entered here."
 
 ---
 
@@ -19,14 +19,14 @@ Claims discipline for everything a shop says on our behalf: product facts and at
 
 ### 1.1 The idea in one paragraph
 
-A pro shop already holds the two things FitSlice needs: the bowler's drill sheet and the bowler's trust. The program asks the shop to do one two-minute task at the counter, enter the sheet into the configurator and submit the order with its shop code. We print the part to that sheet, check it, and drop-ship it to the shop or to the bowler. The shop earns 25% of the order. The shop stocks nothing, sizes nothing and shelves no returns. It copies the fit the shop sold. It does not change it, and when the fit changes the bowler needs a new sheet from the shop before we print again.
+A pro shop already holds the two things RollRead needs: the bowler's drill sheet and the bowler's trust. The program asks the shop to do one two-minute task at the counter, enter the sheet into the configurator and submit the order with its shop code. We print the part to that sheet, check it, and drop-ship it to the shop or to the bowler. The shop earns 25% of the order. The shop stocks nothing, sizes nothing and shelves no returns. It copies the fit the shop sold. It does not change it, and when the fit changes the bowler needs a new sheet from the shop before we print again.
 
 ### 1.2 The counter flow
 
 1. **Pull the sheet.** The bowler asks, or the operator offers after a drilling or a re-fit. The operator pulls the bowler's drill sheet from the file or the fitting software.
 2. **Enter it.** The operator opens the configurator on the counter tablet or PC and enters: hand (right or left), thumb style (through or blind), thumb, middle and ring hole sizes, middle and ring spans, and forward/reverse and lateral pitch for each hole. Fractions go in as written on the sheet: 55/64, 1 1/32, 4-1/2. Inches or millimetres. The model rebuilds in about 100 ms and the 3D preview draws every hole axis, so the bowler sees their own grip and their pitches before anything is ordered. The configurator warns if two bores would break into each other.
 3. **Export the fit sheet.** The configurator saves the fit sheet with the model. That file is what we print from and what the fit guarantee is measured against.
-4. **Submit the order.** On the Pro Shops order form, the operator enters the shop code, the product (Rev Puck, Rev Spinner, Pair, Fit Kit or Digital Files), the bowler's name and email, the ship-to (shop pickup or bowler's address) and attaches the fit sheet. Under Counter Sale the shop rings the sale at the counter; under Referral the bowler pays FitSlice on the form. Section 3 explains both.
+4. **Submit the order.** On the Pro Shops order form, the operator enters the shop code, the product (Rev Puck, Rev Spinner, Pair, Fit Kit or Digital Files), the bowler's name and email, the ship-to (shop pickup or bowler's address) and attaches the fit sheet. Under Counter Sale the shop rings the sale at the counter; under Referral the bowler pays RollRead on the form. Section 3 explains both.
 5. **We confirm.** Within one business day we send the shop and the bowler an order confirmation with the ship date and a copy of the fit sheet as entered. Any correction is free before printing starts.
 6. **We print, check and ship.** PETG, four walls, 20% infill, flat side down. Bores are smoothed and measured against the sheet before packing. Tracking goes to the shop and the bowler.
 7. **The shop stays the fit authority.** Fit questions, re-fits and new sheets go back to the shop. By our estimate a reprint from a new sheet costs less than a re-drill, and it starts with a visit to the counter.
@@ -37,17 +37,17 @@ Time at the counter: about two minutes to enter and preview a sheet the operator
 
 | | Counter Sale (default) | Referral |
 |---|---|---|
-| Who the bowler pays | The shop, at the counter | FitSlice, on the order form |
+| Who the bowler pays | The shop, at the counter | RollRead, on the order form |
 | What the shop earns | Keeps the difference between its selling price and wholesale (75% of MAP). At MAP that is 25% | 25% of the order value, paid monthly |
 | When the shop is billed or paid | Card on file charged at wholesale when the order ships | Commission statement and ACH payout by the 10th of the following month |
-| Seller of record and sales tax | The shop | FitSlice |
+| Seller of record and sales tax | The shop | RollRead |
 | Best for | Shops that want the sale on their register and the bowler's receipt from them | Shops that do not want to handle money for a drop-shipped item |
 
 Either way the shop code is on the order and the shop is credited.
 
 ### 1.4 The shop code stays with the bowler
 
-The shop code is attached to the bowler's fit sheet on our side. For twelve months from the first order, every reorder or reprint from that fit sheet earns the shop its 25%, even when the bowler orders from home. The shop entered the fit; the shop earns on the fit. Because the shop is credited for orders placed with its code, the order form and the confirmation email tell the bowler: "This shop earns a margin on FitSlice orders entered here."
+The shop code is attached to the bowler's fit sheet on our side. For twelve months from the first order, every reorder or reprint from that fit sheet earns the shop its 25%, even when the bowler orders from home. The shop entered the fit; the shop earns on the fit. Because the shop is credited for orders placed with its code, the order form and the confirmation email tell the bowler: "This shop earns a margin on RollRead orders entered here."
 
 ### 1.5 The optional in-store sizer plate demo
 
@@ -80,7 +80,7 @@ Approved lines a shop may use in any medium:
 - "Designed for fingertip grip holds in the exact position you bowl in. Add weight on the cord for strength work."
 - "Practice a clean, early thumb exit."
 - "Unlike generic one-size trainers and S/M/L wrist braces, it is built from your fit."
-- "This shop earns a margin on FitSlice orders entered here."
+- "This shop earns a margin on RollRead orders entered here."
 
 Lines a shop may not use on our behalf: any number for revs, hook, pins or average; "improves", "increases", "fixes", "prevents", "adds"; any ball company's name in a comparison; "approved", "endorsed" or "recommended" by any governing body or association; "patented" or "patent pending"; "exact fit" about the printed part; "the first" or "the only" without "to our knowledge"; "builds strength".
 
@@ -90,13 +90,13 @@ Lines a shop may not use on our behalf: any number for revs, hook, pins or avera
 
 ```
 ================================================================================
-FITSLICE PRO SHOP PROGRAM
+ROLLREAD PRO SHOP PROGRAM
 Your drill sheet, off the ball.
 ================================================================================
 
 YOU ALREADY WROTE THE SHEET. ENTER IT ONCE, EARN 25%, STOCK NOTHING.
 
-FitSlice prints a bowler's training aid from the drill sheet in your drawer.
+RollRead prints a bowler's training aid from the drill sheet in your drawer.
 You enter it at the counter, we print and drop-ship, you earn 25% of the order.
 
 --------------------------------------------------------------------------------
@@ -170,11 +170,11 @@ Your shop code. A fifteen-minute setup call where we enter the first sheet
 with you.
 
 Configurator: https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p
-Shops: shops@fitslice.com
+Shops: shops@rollread.com
 
 [PATENT STATUS]
 Disclosure line for every shop display: "This shop earns a margin on
-FitSlice orders entered here."
+RollRead orders entered here."
 ================================================================================
 ```
 
@@ -182,7 +182,7 @@ FitSlice orders entered here."
 
 ## 3. Wholesale terms sheet
 
-Effective for shops onboarded from the date on the shop agreement. FitSlice may revise these terms with 30 days' written notice to active shops; orders already confirmed ship on the terms in force when they were confirmed.
+Effective for shops onboarded from the date on the shop agreement. RollRead may revise these terms with 30 days' written notice to active shops; orders already confirmed ship on the terms in force when they were confirmed.
 
 ### 3.1 Products and pricing
 
@@ -199,14 +199,14 @@ Effective for shops onboarded from the date on the shop agreement. FitSlice may 
 
 ### 3.2 Margin and payment
 
-- **Counter Sale.** The shop is the seller of record and sets its own in-store price. FitSlice invoices the shop at wholesale plus shipping when the order ships and charges the card on file. After 90 days and ten shipped orders with no failed payments, a shop may request Net 15 invoicing.
-- **Referral.** FitSlice is the seller of record. The bowler pays on the order form. FitSlice pays the shop 25% of the order value, less any refund, by ACH by the 10th of the following month for orders shipped in the prior month, with a statement listing each order by order number. There is no minimum payout.
+- **Counter Sale.** The shop is the seller of record and sets its own in-store price. RollRead invoices the shop at wholesale plus shipping when the order ships and charges the card on file. After 90 days and ten shipped orders with no failed payments, a shop may request Net 15 invoicing.
+- **Referral.** RollRead is the seller of record. The bowler pays on the order form. RollRead pays the shop 25% of the order value, less any refund, by ACH by the 10th of the following month for orders shipped in the prior month, with a statement listing each order by order number. There is no minimum payout.
 - **Volume bonus.** Counted per calendar quarter across both payment methods: 15 to 29 shipped units earn an additional 2.5% of that quarter's order value at retail; 30 or more earn an additional 5%. Paid as a credit on the next wholesale statement or added to the next commission payout. Fit Kits and Digital Files count as units.
 - **Reorder attribution.** The shop code attaches to the bowler's fit sheet for twelve months from the first order. Reprints and reorders from that fit sheet in that period are credited to the shop at the same rates.
 
 ### 3.3 Minimum advertised price (MAP)
 
-FitSlice sets this policy unilaterally. Any price a shop advertises for a FitSlice product, in any medium (website, marketplace listing, social post, email, print, in-store signage), must be at or above MAP, which is the retail list price above. The policy concerns advertised prices only; a shop sells at the counter at any price it chooses. Bundling a FitSlice product with a drilling or a fitting service is fine as long as no FitSlice price below MAP is shown. First violation: written notice. Second: shop code suspended for 30 days. Third: program ended.
+RollRead sets this policy unilaterally. Any price a shop advertises for a RollRead product, in any medium (website, marketplace listing, social post, email, print, in-store signage), must be at or above MAP, which is the retail list price above. The policy concerns advertised prices only; a shop sells at the counter at any price it chooses. Bundling a RollRead product with a drilling or a fitting service is fine as long as no RollRead price below MAP is shown. First violation: written notice. Second: shop code suspended for 30 days. Third: program ended.
 
 ### 3.4 Lead time and shipping
 
@@ -217,34 +217,34 @@ FitSlice sets this policy unilaterally. Any price a shop advertises for a FitSli
 
 ### 3.5 Guarantee, returns and reprints
 
-- **30-day fit guarantee.** Every part is checked against the fit sheet on the order before it ships. If the part does not match that sheet within the configurator's print allowance, FitSlice reprints it free, shipping included, when told within 30 days of delivery. The bowler keeps the first part.
-- **Sheet entered wrong.** If the part matches the fit sheet but the sheet does not match the ball, FitSlice reprints at the reduced reprint price: $25 for a Rev Puck, $15 for a Rev Spinner, $35 for a Pair, shipping included. Under Counter Sale the reprint is billed to the shop at those prices; the shop decides whether to pass it on. The confirmation step in 3.4 exists to make this rare.
+- **30-day fit guarantee.** Every part is checked against the fit sheet on the order before it ships. If the part does not match that sheet within the configurator's print allowance, RollRead reprints it free, shipping included, when told within 30 days of delivery. The bowler keeps the first part.
+- **Sheet entered wrong.** If the part matches the fit sheet but the sheet does not match the ball, RollRead reprints at the reduced reprint price: $25 for a Rev Puck, $15 for a Rev Spinner, $35 for a Pair, shipping included. Under Counter Sale the reprint is billed to the shop at those prices; the shop decides whether to pass it on. The confirmation step in 3.4 exists to make this rare.
 - **Returns.** Rev Puck, Rev Spinner and Pair are personalized goods made to the bowler's measurements and are not returnable for refund. The fit guarantee is how we make them right. Fit Kits are returnable unused within 30 days. Digital Files are not refundable; files that do not match the fit sheet or will not open are regenerated free.
 - **Damaged in transit.** Photograph the box and the part within 7 days of delivery. We reprint and reship free.
 - **Fit changes after the order.** Not covered. A reprint from the new sheet is available at the reduced reprint prices above and earns the shop its 25%.
 
 ### 3.6 Exclusivity
 
-None. FitSlice sells direct through its own site and the configurator, through online retailers, and through every participating shop. No shop receives a territory, and no shop is asked to carry FitSlice exclusively. What every active shop does receive is a listing on the Pro Shops page ("Where to get your sheet entered") with name, address, hours and a link, and the reorder attribution in 3.2.
+None. RollRead sells direct through its own site and the configurator, through online retailers, and through every participating shop. No shop receives a territory, and no shop is asked to carry RollRead exclusively. What every active shop does receive is a listing on the Pro Shops page ("Where to get your sheet entered") with name, address, hours and a link, and the reorder attribution in 3.2.
 
 ### 3.7 Co-op and support
 
 - **Counter kit**, free at onboarding: one sizer plate, 25 counter cards, one shelf talker, the shop code. Card refills free on request. A replacement sizer plate free once a year, or sooner if the shop reaches 15 units in a quarter.
-- **Co-op advertising.** FitSlice reimburses 50% of a shop's approved local advertising of FitSlice products, up to 5% of the shop's prior-quarter FitSlice order value at retail. Pre-approval by email is required and the copy must come from Section 1.7 or from `marketing/01-brand-platform.md` and must carry the disclosure line from 3.8. Proof of placement and the invoice are due within 30 days.
-- **Event support.** For a shop's open house, league night or clinic, FitSlice lends two additional sizer plates and sends 50 extra cards, and supplies approved social templates that carry the disclosure line.
+- **Co-op advertising.** RollRead reimburses 50% of a shop's approved local advertising of RollRead products, up to 5% of the shop's prior-quarter RollRead order value at retail. Pre-approval by email is required and the copy must come from Section 1.7 or from `marketing/01-brand-platform.md` and must carry the disclosure line from 3.8. Proof of placement and the invoice are due within 30 days.
+- **Event support.** For a shop's open house, league night or clinic, RollRead lends two additional sizer plates and sends 50 extra cards, and supplies approved social templates that carry the disclosure line.
 - **Onboarding call.** Fifteen minutes, by video. We enter the first sheet together.
 
 ### 3.8 Conduct
 
 - Claims: shops use the approved lines in Section 1.7 and make no rev-rate, hook, average or injury claims, name no ball company in a comparison, and claim no approval, endorsement or recommendation by any governing body or association.
-- Disclosure: every shop display, post or mention carries "This shop earns a margin on FitSlice orders entered here." In a post or video it is the first line, and in a video it is also spoken aloud. A shop that received a free unit also uses: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge."
+- Disclosure: every shop display, post or mention carries "This shop earns a margin on RollRead orders entered here." In a post or video it is the first line, and in a video it is also spoken aloud. A shop that received a free unit also uses: "RollRead sent me this trainer, printed from my own drill sheet, free of charge."
 - Safe use: shops tell bowlers to use the parts for swing-and-hold and carpet-release drills only, never to throw them, and to supervise children under 12.
-- Data: a drill sheet is personal data tied to a bowler's hand. The shop obtains the bowler's consent before entering it, and FitSlice stores it with the order, states its retention period, and deletes it on the bowler's request.
+- Data: a drill sheet is personal data tied to a bowler's hand. The shop obtains the bowler's consent before entering it, and RollRead stores it with the order, states its retention period, and deletes it on the bowler's request.
 - Not a ball: shops do not describe the product as a ball, a mini ball or regulation equipment, and do not suggest it is used in competition.
 
 ### 3.9 Term
 
-Either party may end the program with 30 days' written notice. Orders confirmed before the notice ship as confirmed, commissions owed are paid, and the shop code is deactivated at the end of the notice period. The shop returns or discards counter materials carrying the FitSlice name.
+Either party may end the program with 30 days' written notice. Orders confirmed before the notice ship as confirmed, commissions owed are paid, and the shop code is deactivated at the end of the notice period. The shop returns or discards counter materials carrying the RollRead name.
 
 ---
 
@@ -258,7 +258,7 @@ Subject: The drill sheet in your drawer
 
 Hi {{first_name}},
 
-I'm {{founder_name}} from FitSlice. We print a bowler's training aid from their drill sheet: a slice with the curvature of a regulation 8.5" ball, with their hole sizes in 1/64" steps, both spans and every pitch, so they can practice the grip and thumb exit off the lane.
+I'm {{founder_name}} from RollRead. We print a bowler's training aid from their drill sheet: a slice with the curvature of a regulation 8.5" ball, with their hole sizes in 1/64" steps, both spans and every pitch, so they can practice the grip and thumb exit off the lane.
 
 Here is the pro-shop part. You enter the sheet at the counter in our free configurator, we print and drop-ship, and you earn 25%. No stock, no sizes, no returns to shelve. It copies the fit you sold. It does not change it, and fit questions come back to you.
 
@@ -267,7 +267,7 @@ The configurator is at https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p. Type i
 Can I send you the one-page sell sheet and terms?
 
 {{founder_name}}
-FitSlice
+RollRead
 Reply "stop" and I will not write again. {{postal_address}}
 
 ### Email 2 (day 7, follow-up with the counter-demo offer)
@@ -276,7 +276,7 @@ Subject: A sizer plate for your counter
 
 Hi {{first_name}},
 
-Following up on FitSlice. I'd like to put a demo on your counter at no cost: one printed sizer plate with test bores in 1/64" steps, a stack of counter cards and your shop code.
+Following up on RollRead. I'd like to put a demo on your counter at no cost: one printed sizer plate with test bores in 1/64" steps, a stack of counter cards and your shop code.
 
 The plate does two things. Bowlers put their fingers in it and find their size in thirty seconds, which starts a fit conversation at your counter. And it is printed on the same printer and material as the trainer, so it shows how each bore size feels in the part we print.
 
@@ -285,7 +285,7 @@ I will enter the first sheet with you over a fifteen-minute call and you can wat
 Which afternoon this week or next works for a call?
 
 {{founder_name}}
-FitSlice
+RollRead
 Reply "stop" and I will not write again. {{postal_address}}
 
 ### Email 3 (day 21, break-up)
@@ -294,7 +294,7 @@ Subject: Closing the file on this
 
 Hi {{first_name}},
 
-I have written twice about FitSlice and have not heard back, so this is my last note. Either the timing is wrong or the program is not for your shop. Both are fine.
+I have written twice about RollRead and have not heard back, so this is my last note. Either the timing is wrong or the program is not for your shop. Both are fine.
 
 If it is timing, the offer stands: a free sizer plate and counter cards, 25% on every order you enter, no stock. Reply "later" and I will check in next quarter.
 
@@ -303,7 +303,7 @@ If you would rather see it first, the configurator is free at https://claude.ai/
 Thanks for reading, and good luck with league season.
 
 {{founder_name}}
-FitSlice
+RollRead
 Reply "stop" and I will not write again. {{postal_address}}
 
 ---
@@ -313,7 +313,7 @@ Reply "stop" and I will not write again. {{postal_address}}
 Use the same script on the phone and in person. On the phone, ask for the operator by name and ask for two minutes. In person, go when the counter is quiet, carry a Rev Puck printed from a real sheet and a sizer plate, and put the puck on the counter before you say anything.
 
 **Open (ten seconds).**
-"I'm {{founder_name}} with FitSlice. It's the part of a bowler's ball their hand touches, printed with their exact holes, so they can practice their release anywhere. We print it from the drill sheet you already wrote. I have two questions to see if it fits your shop."
+"I'm {{founder_name}} with RollRead. It's the part of a bowler's ball their hand touches, printed with their exact holes, so they can practice their release anywhere. We print it from the drill sheet you already wrote. I have two questions to see if it fits your shop."
 
 **Qualifying question 1.**
 "How many fingertip drillings for one-handed, thumb-in bowlers do you do in a typical month?"
@@ -354,9 +354,9 @@ Customers but no sheets on file: "Then start with the next bowler you fit. Enter
 
 **Your drill sheet, off the ball.**
 
-FitSlice prints the part of your ball your hand touches, with your exact holes, so you can practice your release anywhere. Ask us.
+RollRead prints the part of your ball your hand touches, with your exact holes, so you can practice your release anywhere. Ask us.
 
-This shop earns a margin on FitSlice orders entered here.
+This shop earns a margin on RollRead orders entered here.
 
 ### Counter card, back (40 words, plus the disclosure line beside the shop code)
 
@@ -364,7 +364,7 @@ We enter your sheet at the counter: hole sizes in 1/64" steps, both spans, every
 
 Rev Puck $89. Rev Spinner $45. Pair $119. Fit Kit $24, credited.
 
-Design notes for the card: 4" x 6", heavy stock. Front shows the Rev Puck from above, the ball-surface curve obvious, three holes visible. Back carries a QR code to the configurator and a blank line for the shop code so a bowler who orders from home is still credited to the shop. The disclosure line, "This shop earns a margin on FitSlice orders entered here.", sits on the front and again next to the shop-code line on the back, because the shop earns on home orders placed with its code. It is set in the same size as the body text, never smaller.
+Design notes for the card: 4" x 6", heavy stock. Front shows the Rev Puck from above, the ball-surface curve obvious, three holes visible. Back carries a QR code to the configurator and a blank line for the shop code so a bowler who orders from home is still credited to the shop. The disclosure line, "This shop earns a margin on RollRead orders entered here.", sits on the front and again next to the shop-code line on the back, because the shop earns on home orders placed with its code. It is set in the same size as the body text, never smaller.
 
 ### Shelf talker (sits beside the sizer plate)
 
@@ -372,7 +372,7 @@ Design notes for the card: 4" x 6", heavy stock. Front shows the Rev Puck from a
 
 Put a finger in the plate. The right bore is snug at the first joint with no squeeze needed to hang on. Note the label on that bore and tell us. Spans and pitches come from your drill sheet, which this shop keeps on file. Ask us to enter it.
 
-This shop earns a margin on FitSlice orders entered here.
+This shop earns a margin on RollRead orders entered here.
 
 Design notes: 3" x 7" tent card or clip strip. The plate it sits beside is labeled by bore, so the shelf talker carries no sizes of its own.
 
@@ -408,7 +408,7 @@ The file changes with it. Their fit sheet is stored with their order. You write 
 Say what it is: their drill sheet reproduced on a slice of ball surface, so they can practice their grip and release anywhere. Say what coaches say: the thumb must leave first, and a relaxed hand creates more revs. Say what it is designed for: fingertip grip holds in the exact position they bowl in, with weight added on the cord for strength work, and practice of a clean, early thumb exit. Say how to use it safely: swing-and-hold and carpet-release drills only, never thrown, and children under 12 only with supervision. Do not say it adds revs, hook or pins, and do not quote a number. Nobody has measured off-lane trainers, including us, and we would rather you say that plainly than promise something we cannot show.
 
 **10. Can I advertise it and sell it online?**
-Yes, at or above MAP (the retail prices on the terms sheet), using the approved lines, with the disclosure line on every post or page: "This shop earns a margin on FitSlice orders entered here." We reimburse half of approved local advertising up to 5% of your prior-quarter FitSlice order value. Send the copy first.
+Yes, at or above MAP (the retail prices on the terms sheet), using the approved lines, with the disclosure line on every post or page: "This shop earns a margin on RollRead orders entered here." We reimburse half of approved local advertising up to 5% of your prior-quarter RollRead order value. Send the copy first.
 
 **11. What about two-handed bowlers and interchangeable thumbs?**
 Two-handed and thumbless bowlers use the Rev Spinner, which is fingers only. For a bowler with an interchangeable thumb system, enter the size of the hole the thumb actually goes into, with its pitches, and choose through or blind as drilled. The puck is one piece and does not accept an insert.
@@ -420,7 +420,7 @@ It is a training aid used off the lane. It is not a ball, it is not used in sanc
 
 ## 8. Pitch to certified operators
 
-Written for operators who hold a pro-shop certification. Use as a letter, a talk track or the opening of a clinic session. It names the certification as a fact about the reader. It does not claim or imply that any association approves, endorses or recommends FitSlice.
+Written for operators who hold a pro-shop certification. Use as a letter, a talk track or the opening of a clinic session. It names the certification as a fact about the reader. It does not claim or imply that any association approves, endorses or recommends RollRead.
 
 ### 8.1 The pitch
 
@@ -428,7 +428,7 @@ You spent the time to get certified because fit is a discipline. You measure to 
 
 Then that fit goes into one place: a fifteen-pound ball the bowler throws a few nights a week. Everything they practice off the lane, they practice in somebody else's holes. The soft practice balls come with one set. The wrist supports come in small, medium and large.
 
-FitSlice puts your fit in their hand. We print the patch of ball surface the hand touches, at the real 8.5" radius, with your sheet in it: their sizes, both spans, every pitch, aimed at the ball's center the way a zero-pitch hole is drilled. About 300 g. It goes in a bag. They can hang it on their fingertips with a loose thumb, pop the thumb and catch the weight, and spin the fingers-only disc on the carpet. Coaches agree the thumb must leave first and a relaxed hand creates more revs. Those are hand skills. The puck is designed to let the hand practice them in its own geometry.
+RollRead puts your fit in their hand. We print the patch of ball surface the hand touches, at the real 8.5" radius, with your sheet in it: their sizes, both spans, every pitch, aimed at the ball's center the way a zero-pitch hole is drilled. About 300 g. It goes in a bag. They can hang it on their fingertips with a loose thumb, pop the thumb and catch the weight, and spin the fingers-only disc on the carpet. Coaches agree the thumb must leave first and a relaxed hand creates more revs. Those are hand skills. The puck is designed to let the hand practice them in its own geometry.
 
 We are asking certified operators first because you are the people who can tell whether the bore feels right. Put your hand in one printed from your own sheet. If it does not feel like your ball, tell us, and we will show you where the numbers went.
 
@@ -443,7 +443,7 @@ What we do not say, and ask you not to say: any number for revs, hook or average
 
 For the first ten certified operators who onboard:
 
-- A Rev Puck printed from the operator's own drill sheet, free. If the operator posts about it, the post opens with two lines: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge." and "This shop earns a margin on FitSlice orders entered here."
+- A Rev Puck printed from the operator's own drill sheet, free. If the operator posts about it, the post opens with two lines: "RollRead sent me this trainer, printed from my own drill sheet, free of charge." and "This shop earns a margin on RollRead orders entered here."
 - Two sizer plates instead of one, so one can travel to league nights.
 - A named listing at the top of "Where to get your sheet entered" on the Pro Shops page for the first year.
 - A standing invitation to the fit review: before any change to the configurator's hole geometry or print allowance ships, cohort operators see it first and their notes are answered in writing.
@@ -484,7 +484,7 @@ Two people at all times: one on the counter and the plates, one on the tablet an
 
 ### 9.5 Lead capture
 
-A printed lead card, filled in by us, not the attendee: shop name, operator name, email, phone, the two qualifying answers, Counter Sale or Referral preference, and a checkbox for "print my own sheet." The "print my own sheet" box is the show giveaway: we print a Rev Spinner from the operator's own drill sheet and ship it after the show at no cost. The lead card carries the disclosure in print: "If you post about it, start with: FitSlice sent me this trainer, printed from my own drill sheet, free of charge. If your shop is in the program, add: This shop earns a margin on FitSlice orders entered here."
+A printed lead card, filled in by us, not the attendee: shop name, operator name, email, phone, the two qualifying answers, Counter Sale or Referral preference, and a checkbox for "print my own sheet." The "print my own sheet" box is the show giveaway: we print a Rev Spinner from the operator's own drill sheet and ship it after the show at no cost. The lead card carries the disclosure in print: "If you post about it, start with: RollRead sent me this trainer, printed from my own drill sheet, free of charge. If your shop is in the program, add: This shop earns a margin on RollRead orders entered here."
 
 ### 9.6 Follow-up cadence
 
@@ -537,7 +537,7 @@ Copy this into the shop record and tick each line.
 
 What a shop earns at 2, 5 and 10 units a month, shown two ways: every unit a Rev Puck ($89), and every unit a Pair ($119). A shop's mix would land between them; Fit Kits and Spinners pull the average down, Pairs pull it up. Base margin is 25% of retail. The volume bonus is 2.5% of the quarter's retail value at 15 to 29 units and 5% at 30 or more.
 
-These are arithmetic examples at stated volumes. They are not a forecast or a typical result, and FitSlice does not promise any volume. What a shop earns depends on how many sheets it enters and which products its bowlers order.
+These are arithmetic examples at stated volumes. They are not a forecast or a typical result, and RollRead does not promise any volume. What a shop earns depends on how many sheets it enters and which products its bowlers order.
 
 ### 11.1 Per unit
 

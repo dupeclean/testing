@@ -1,4 +1,4 @@
-# FitSlice Brand Platform and Messaging
+# RollRead Brand Platform and Messaging
 
 Working draft, October 2026. Source of truth for every claim in this document is `docs/business-plan.md` (Part 6, claims) and `README.md` (parts, drills). Anything in square brackets is a placeholder that must be filled or removed before publication: `[PATENT STATUS]`, `[QUOTE PLACEHOLDER — name]`.
 
@@ -8,7 +8,7 @@ How to use this file: every other marketing asset (site copy, pro-shop pitch, re
 
 ## 1. Positioning statement
 
-For one-handed, thumb-in league bowlers who already have a pro-shop fit, FitSlice is the made-to-order training aid built from their own drill sheet on a slice with the curvature of a regulation 8.5-inch ball, so they can practice the grip, the thumb exit and the finger lift anywhere. Unlike generic one-size practice balls and S/M/L wrist braces, it is built from the bowler's fit. To our knowledge, it is the first trainer that uses the bowler's actual drill sheet.
+For one-handed, thumb-in league bowlers who already have a pro-shop fit, RollRead is the made-to-order training aid built from their own drill sheet on a slice with the curvature of a regulation 8.5-inch ball, so they can practice the grip, the thumb exit and the finger lift anywhere. Unlike generic one-size practice balls and S/M/L wrist braces, it is built from the bowler's fit. To our knowledge, it is the first trainer that uses the bowler's actual drill sheet.
 
 **Category name we use:** custom-fit release trainer.
 **What we never call it:** a ball, a mini ball, a regulation anything, a rev booster.
@@ -35,7 +35,7 @@ So I asked a simple question. What if you could take the drill sheet off the bal
 
 A bowling ball is 8.5 inches across. The part your hand touches is a small patch of that sphere. Print that patch at the real curvature, aim the holes at the ball's center the way a zero-pitch hole is drilled, apply your pitches, and your thumb and fingers oppose each other as they do on your ball. It weighs about 300 grams in PETG at 20% infill. It goes in a bag.
 
-That is FitSlice. It copies your drill sheet. It does not change your fit, and it does not promise you a number. It gives you your grip, anywhere, so you can practice what coaches say matters.
+That is RollRead. It copies your drill sheet. It does not change your fit, and it does not promise you a number. It gives you your grip, anywhere, so you can practice what coaches say matters.
 
 ---
 
@@ -72,10 +72,10 @@ We write like a good pro-shop operator talks: short sentences, real numbers, no 
 
 ### Standard disclosure lines (use verbatim, first line of the post or description, spoken aloud in video)
 
-- Seeded product: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge."
+- Seeded product: "RollRead sent me this trainer, printed from my own drill sheet, free of charge."
 - Affiliate code: "I earn a commission when you order with my code."
-- Paid post: "Paid partnership with FitSlice."
-- Pro shop: "This shop earns a margin on FitSlice orders entered here."
+- Paid post: "Paid partnership with RollRead."
+- Pro shop: "This shop earns a margin on RollRead orders entered here."
 
 A post with a free unit and a code carries both lines. The disclosure is part of the asset. An asset without it does not ship. The FTC Endorsement Guides call for clear disclosure of any material connection, and counsel confirms the final wording before launch.
 
@@ -121,7 +121,7 @@ Each audience gets one headline, one subhead, three proof points and one call to
 
 **Headline:** You already wrote the sheet. Enter it once, earn a 25% margin, stock nothing.
 
-**Subhead:** FitSlice prints a bowler's trainer from the drill sheet in your drawer. You enter it at the counter, we print and drop-ship, you earn a 25% margin on the order.
+**Subhead:** RollRead prints a bowler's trainer from the drill sheet in your drawer. You enter it at the counter, we print and drop-ship, you earn a 25% margin on the order.
 
 **Proof points**
 
@@ -181,7 +181,7 @@ It's the part of your ball your hand touches, printed with your exact holes, so 
 
 ### Thirty seconds
 
-Your pro shop measured your hand to a sixty-fourth of an inch and drilled your spans and pitches into your ball. FitSlice prints that same patch of ball surface, at the real 8.5-inch curvature, built from your drill sheet: your hole sizes, both spans, every pitch, right or left hand. It weighs about 300 grams in PETG at 20% infill, so you can hold it at your desk, dangle it on a wrist cord and practice the thumb exit, or carry it in a bag. Type your sheet into the free configurator and your grip appears in 3D. Then we print it and ship it.
+Your pro shop measured your hand to a sixty-fourth of an inch and drilled your spans and pitches into your ball. RollRead prints that same patch of ball surface, at the real 8.5-inch curvature, built from your drill sheet: your hole sizes, both spans, every pitch, right or left hand. It weighs about 300 grams in PETG at 20% infill, so you can hold it at your desk, dangle it on a wrist cord and practice the thumb exit, or carry it in a bag. Type your sheet into the free configurator and your grip appears in 3D. Then we print it and ship it.
 
 ### Two minutes
 
@@ -189,7 +189,7 @@ Here is the problem one-handed, thumb-in bowlers share. The most personal piece 
 
 Coaches agree on what the release depends on. The thumb leaves first and clean. The hand stays relaxed. The fingers lift through the ball. All three are hand skills, and we think all three are best practiced with the hand sitting in its own holes. A generic practice ball with one-size holes puts your hand in someone else's grip. A wrist brace holds your wrist for you during the shot.
 
-FitSlice takes a different approach. A bowling ball is 8.5 inches across, and the part your hand touches is a small slice of that sphere. We print that slice at the real curvature, in PETG, built from your drill sheet: hole sizes in 1/64-inch steps, both spans, forward, reverse and lateral pitch for every hole, right or left hand. The holes are aimed at the ball's center the way a zero-pitch hole is drilled, so your thumb and fingers oppose each other exactly as they do on your ball. The Rev Puck weighs about 300 grams at 20% infill, with a weight pocket for coins or washers and a tunnel for a wrist cord.
+RollRead takes a different approach. A bowling ball is 8.5 inches across, and the part your hand touches is a small slice of that sphere. We print that slice at the real curvature, in PETG, built from your drill sheet: hole sizes in 1/64-inch steps, both spans, forward, reverse and lateral pitch for every hole, right or left hand. The holes are aimed at the ball's center the way a zero-pitch hole is drilled, so your thumb and fingers oppose each other exactly as they do on your ball. The Rev Puck weighs about 300 grams at 20% infill, with a weight pocket for coins or washers and a tunnel for a wrist cord.
 
 You use it for six short drills. Fingertip carries, holding the puck at your side with the thumb loose so the fingers carry the weight. Thumb pops, where you relax the thumb and let it slide out while the fingers catch the puck. Slow shadow swings. Cupped-wrist holds. Two more use the Rev Spinner, a fingers-only disc: carpet spins, where you lift it onto carpet and count how long it spins, and a rotation-axis drill. Ten to fifteen minutes a day.
 
@@ -201,7 +201,7 @@ What it does not do: it does not change your fit, it does not teach footwork or 
 
 ## 7. FAQ
 
-**1. What is FitSlice?**
+**1. What is RollRead?**
 A made-to-order training aid for one-handed, thumb-in bowlers. The Rev Puck is a slice with the curvature of a regulation 8.5-inch ball, 3D printed in PETG and built from your drill sheet, so you can practice your grip and release off the lane. The Rev Spinner is a fingers-only disc for finger-lift practice. The Fit Kit is a sizer plate for confirming your hole sizes.
 
 **2. What do I need to order?**
@@ -288,7 +288,7 @@ Format: the objection as the customer says it, the answer in the words we use, t
 ### 4. "Why not a wrist brace?"
 
 **Answer:** A brace holds your wrist for you during the shot. This is designed to let you practice that work without one. They are different tools. A brace is sold in small, medium or large. This is built from your drill sheet.
-**Fact behind it:** Wrist supports are sold S/M/L; FitSlice is built from the fit.
+**Fact behind it:** Wrist supports are sold S/M/L; RollRead is built from the fit.
 **Next step:** "Keep the brace if you use one. Use this on the days you do not bowl."
 
 ### 5. "My fit changes every few months."
@@ -319,15 +319,15 @@ Format: the objection as the customer says it, the answer in the words we use, t
 
 ## 9. Press boilerplate
 
-FitSlice makes made-to-order training aids for one-handed, thumb-in bowlers. Its Rev Puck is a slice with the curvature of a regulation 8.5-inch bowling ball, 3D printed in PETG and built from the bowler's own pro-shop drill sheet: hole sizes in 1/64-inch steps, both spans, and forward, reverse and lateral pitch for every hole, right or left hand, with the holes aimed at the ball's center the way a zero-pitch hole is drilled. A free web configurator rebuilds the model from the drill sheet in about a tenth of a second, shows it in 3D and generates the print file. The line includes the Rev Spinner, a fingers-only release disc, and the Fit Kit sizer plate. To FitSlice's knowledge, it is the first bowling trainer built from a bowler's actual drill sheet. FitSlice sells direct through its configurator and offers a program for pro shops, which earn a margin on orders they enter. [PATENT STATUS]
+RollRead makes made-to-order training aids for one-handed, thumb-in bowlers. Its Rev Puck is a slice with the curvature of a regulation 8.5-inch bowling ball, 3D printed in PETG and built from the bowler's own pro-shop drill sheet: hole sizes in 1/64-inch steps, both spans, and forward, reverse and lateral pitch for every hole, right or left hand, with the holes aimed at the ball's center the way a zero-pitch hole is drilled. A free web configurator rebuilds the model from the drill sheet in about a tenth of a second, shows it in 3D and generates the print file. The line includes the Rev Spinner, a fingers-only release disc, and the Fit Kit sizer plate. To RollRead's knowledge, it is the first bowling trainer built from a bowler's actual drill sheet. RollRead sells direct through its configurator and offers a program for pro shops, which earn a margin on orders they enter. [PATENT STATUS]
 
-Short version (50 words): FitSlice makes made-to-order release trainers for one-handed, thumb-in bowlers. Each Rev Puck is a 3D-printed slice with the curvature of a regulation 8.5-inch ball, built from the bowler's own drill sheet, so grip and release can be practiced anywhere. A free configurator builds the model from the sheet. [PATENT STATUS]
+Short version (50 words): RollRead makes made-to-order release trainers for one-handed, thumb-in bowlers. Each Rev Puck is a 3D-printed slice with the curvature of a regulation 8.5-inch ball, built from the bowler's own drill sheet, so grip and release can be practiced anywhere. A free configurator builds the model from the sheet. [PATENT STATUS]
 
 ---
 
 ## 10. Glossary of fit terms, in customer language
 
-**Drill sheet.** The card your pro shop fills out when they fit you: hole sizes, spans and pitches. It is the recipe for your grip. FitSlice is built from it.
+**Drill sheet.** The card your pro shop fills out when they fit you: hole sizes, spans and pitches. It is the recipe for your grip. RollRead is built from it.
 
 **Hole size.** The diameter of each hole, written in sixty-fourths of an inch, for example 55/64 or 1 1/32. The configurator accepts fractions typed the way your shop writes them.
 
@@ -367,24 +367,24 @@ Short version (50 words): FitSlice makes made-to-order release trainers for one-
 
 **One-handed thumb-in / two-handed.** One-handed bowlers put the thumb in the ball and release with one hand. Two-handed bowlers keep the thumb out and support the ball with the other hand. The Rev Puck is for thumb-in bowlers; the Rev Spinner is for both.
 
-**Rev rate.** How many times the ball turns over on its way down the lane, measured in revolutions per minute by apps and sensors. FitSlice does not measure it and makes no claim about yours.
+**Rev rate.** How many times the ball turns over on its way down the lane, measured in revolutions per minute by apps and sensors. RollRead does not measure it and makes no claim about yours.
 
 ---
 
-## 11. Name clearance to-dos for "FitSlice"
+## 11. Name clearance to-dos for "RollRead"
 
 Nothing with the name on it (packaging, counter cards, domain-printed inserts) goes to print until the items below are done and the result is filed in `docs/`.
 
 **What to search**
 
-1. USPTO Trademark Search (the current register search tool): exact "FITSLICE" and "FIT SLICE", phonetic and spelling variants ("FITSLYCE", "PHITSLICE", "FIT-SLICE"), and "SLICE" and "FIT" formatives in the classes we would file in. Class 28 (sporting goods and bowling accessories), Class 9 (downloadable 3D model files and software), Class 42 (online configurator software), Class 35 (online retail). Record live and dead marks, owners and goods.
+1. USPTO Trademark Search (the current register search tool): exact "ROLLREAD" and "FIT SLICE", phonetic and spelling variants ("FITSLYCE", "PHITSLICE", "FIT-SLICE"), and "SLICE" and "FIT" formatives in the classes we would file in. Class 28 (sporting goods and bowling accessories), Class 9 (downloadable 3D model files and software), Class 42 (online configurator software), Class 35 (online retail). Record live and dead marks, owners and goods.
 2. The same search for the product names: "REV PUCK", "REV SPINNER", "FIT KIT", and "REV" formatives in Class 28. Treat "Fit Kit" as a descriptor, since it is likely unregistrable; the search is to make sure it does not collide with a registered mark.
-3. Common-law use: exact-phrase search on the major search engines; marketplace searches on Amazon, Etsy, eBay and Walmart; app stores; Shopify store directories; Instagram, TikTok, YouTube and X handles; domain availability for fitslice.com, .co, .shop and .store with WHOIS on any that are taken; the Secretary of State business-entity search in the founder's state and a general corporate registry search.
-4. Known confusion risks to check by name: fitness and nutrition brands (the name reads as "fitness" plus "slice" to anyone outside bowling), pizza and food brands using "slice", and golf training aids using "slice" in Class 28, since slice is a golf term.
-5. International, because digital files sell abroad: UK IPO, EUIPO, Japan's J-PlatPat and Korea's KIPRIS for "FITSLICE" in Classes 9 and 28.
+3. Common-law use: exact-phrase search on the major search engines; marketplace searches on Amazon, Etsy, eBay and Walmart; app stores; Shopify store directories; Instagram, TikTok, YouTube and X handles; domain availability for rollread.com, .co, .shop and .store with WHOIS on any that are taken; the Secretary of State business-entity search in the founder's state and a general corporate registry search.
+4. Known confusion risks to check by name: marks built on "roll" (a 26 October 2026 search found ROLLO, registered for shipping software, a pending ROLLED application, and Rollr, an apparel brand; none in bowling), bakery and food brands using "roll", reading and education brands using "read", and roller-type training aids in Class 28. The name was chosen on 26 October 2026 from the tagline "Roll it. Read it."; the same search found no RollRead brand and no ROLLREAD filing, which is a start and not clearance.
+5. International, because digital files sell abroad: UK IPO, EUIPO, Japan's J-PlatPat and Korea's KIPRIS for "ROLLREAD" in Classes 9 and 28.
 6. Have counsel run a knockout search on the results, then a full search if the knockout is clean. File an intent-to-use application in Class 28 and Class 9 the same week. Register the domains and handles the same day, including the backups.
 
-**Copy rule while the name clears:** first mention on any page pairs the name with the descriptor, "FitSlice custom-fit bowling release trainer", so the name reads as bowling and never as a diet product.
+**Copy rule while the name clears:** first mention on any page pairs the name with the descriptor, "RollRead custom-fit bowling release trainer", so the name reads as bowling and never as a diet product.
 
 **Three backup names to hold** (register the domains and handles now, they are cheap)
 

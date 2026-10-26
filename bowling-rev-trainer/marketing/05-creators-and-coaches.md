@@ -1,4 +1,4 @@
-# FitSlice Creators, Coaches and Affiliates
+# RollRead Creators, Coaches and Affiliates
 
 Working draft, October 2026. Everything we send to, ask of, or pay a creator, coach, podcast host or affiliate is in this file: the seeding program, the four outreach emails, the affiliate terms, the creator brief with its shot list, the coach program, the review-request email, the podcast pitch and the content-rights clause.
 
@@ -9,17 +9,17 @@ How to use this file:
 - `[QUOTE PLACEHOLDER — name]` marks where a coach or creator quote goes once that person has actually said it, on recording or in writing, and agreed to its use. Ship the asset without the block until then. We do not write quotes for people.
 - `{{field}}` is a merge field filled from the contact record.
 - The configurator lives at https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p until it is hosted on the site. Every link labeled "configurator" below points there.
-- Creators and podcast hosts write to creators@fitslice.com. Coaches write to coaches@fitslice.com. Bowlers write to support@fitslice.com.
+- Creators and podcast hosts write to creators@rollread.com. Coaches write to coaches@rollread.com. Bowlers write to support@rollread.com.
 - Business plan Part 8 names the instruction channels we approach first. The working list of twenty seed recipients lives in the founder's seed tracker, with each person's drill sheet, ship date and feedback. Names stay out of this file until a person has agreed to be named.
 
 Claims discipline for everything a creator, coach or affiliate says with our product in frame: product facts and attributed coaching views only. No number for revs, hook, pins or average, before or after. No ball-company names. No governing-body approval. No "patented" or "patent pending". Every mention carries the disclosure line that matches the relationship.
 
 **The four disclosure lines, verbatim, from the brand platform.** They go in the first line of a post or description, are spoken aloud in video, and are repeated when a code is given.
 
-- Seeded product: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge."
+- Seeded product: "RollRead sent me this trainer, printed from my own drill sheet, free of charge."
 - Affiliate code: "I earn a commission when you order with my code."
-- Paid post: "Paid partnership with FitSlice."
-- Pro shop: "This shop earns a margin on FitSlice orders entered here."
+- Paid post: "Paid partnership with RollRead."
+- Pro shop: "This shop earns a margin on RollRead orders entered here."
 
 A seeded creator who later takes a code says both the first and the second line. This follows the FTC Endorsement Guides. An asset without its disclosure does not ship, and a post without its disclosure gets a correction notice (Section 3.9).
 
@@ -108,7 +108,7 @@ Landed cost of a Rev Puck is about $27 to $30 before shipping (business plan Par
 
 ### 1.10 The disclosure that travels with every seeded unit
 
-Every seeded unit, in every context where we or the recipient mention it, carries: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge." When we repost a seeded creator's content we add our own version in the caption: "This creator received a FitSlice trainer printed from their own drill sheet at no charge." If they also hold a code, we add: "They earn a commission on orders placed with their code."
+Every seeded unit, in every context where we or the recipient mention it, carries: "RollRead sent me this trainer, printed from my own drill sheet, free of charge." When we repost a seeded creator's content we add our own version in the caption: "This creator received a RollRead trainer printed from their own drill sheet at no charge." If they also hold a code, we add: "They earn a commission on orders placed with their code."
 
 ---
 
@@ -122,16 +122,16 @@ Subject: Your drill sheet, printed. Free, and disclosed.
 
 Hi {{first_name}},
 
-I make FitSlice. It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.
+I make RollRead. It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.
 
 You teach the release to more one-handed bowlers than I can reach, and I would like to put your own fit in your hand. Send me your drill sheet: thumb, middle and ring sizes, both spans, pitches, right or left. I will print a Rev Puck and Rev Spinner to it and ship them free. You can see your grip in 3D first: {{configurator_link}}.
 
 I am asking for nothing back. No video, no post, no review, no script approval. If it falls short, tell me where.
 
-If you do show it, one thing is required, by the FTC Endorsement Guides and by your audience. Say this first, on camera and in the description: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge."
+If you do show it, one thing is required, by the FTC Endorsement Guides and by your audience. Say this first, on camera and in the description: "RollRead sent me this trainer, printed from my own drill sheet, free of charge."
 
 {{founder_name}}
-FitSlice
+RollRead
 
 ### 2.2 Email (b): mid-size coach-creator who reviews products
 
@@ -139,16 +139,16 @@ Subject: Printed from your drill sheet, for an honest verdict
 
 Hi {{first_name}},
 
-You judge bowling gear with your own hands, which is how this product has to be judged. FitSlice is the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.
+You judge bowling gear with your own hands, which is how this product has to be judged. RollRead is the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.
 
 Send your drill sheet and I will print a Rev Puck and Rev Spinner to it and ship them free, with a sizer plate so you can check the bores against your sheet yourself.
 
 I want your verdict, including what falls short. I will not ask to see a script or to cut anything. I quote no rev-rate numbers and ask that you do not either; nobody has measured one for an off-lane trainer, including me.
 
-If you publish, the first line, spoken and written, must be: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge."
+If you publish, the first line, spoken and written, must be: "RollRead sent me this trainer, printed from my own drill sheet, free of charge."
 
 {{founder_name}}
-FitSlice
+RollRead
 
 ### 2.3 Email (c): USBC-certified local coach
 
@@ -156,14 +156,14 @@ Subject: Your students' drill sheets, off the ball
 
 Hi {{first_name}},
 
-I make FitSlice. It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere. The drills are ones you already teach: relaxed fingertip hold, clean early thumb exit, finger lift.
+I make RollRead. It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere. The drills are ones you already teach: relaxed fingertip hold, clean early thumb exit, finger lift.
 
 Before I ask you to put it near a student, hold your own first. Send your drill sheet and I will print a Rev Puck and Rev Spinner to it, free. Tell me where it falls short. I am not asking for a post, a quote or a referral.
 
-If you later want it for students, the coach program adds a student roster (we keep it for you at launch, in the configurator later), team pricing at ten or more and a 15% code. Any mention then carries: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge. I earn a commission when you order with my code."
+If you later want it for students, the coach program adds a student roster (we keep it for you at launch, in the configurator later), team pricing at ten or more and a 15% code. Any mention then carries: "RollRead sent me this trainer, printed from my own drill sheet, free of charge. I earn a commission when you order with my code."
 
 {{founder_name}}
-FitSlice
+RollRead
 
 ### 2.4 Email (d): bowling podcast
 
@@ -171,16 +171,16 @@ Subject: A guest with a drill sheet and a 3D printer
 
 Hi {{first_name}},
 
-I listen to {{podcast_name}} on the drive to league. I make FitSlice: the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.
+I listen to {{podcast_name}} on the drive to league. I make RollRead: the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.
 
 I would like to send you and {{cohost_name}} one each, printed from your own drill sheets, free. Hold it, check the thumb, and talk about it on air or never mention it. Either is fine.
 
 If a segment interests you, I can talk about why a fit lives in exactly one place, what the pro-shop trade body says a fit is made of, why a slice of ball surface reproduces hole geometry, and the honest part: no study has measured any off-lane trainer, so I am running a pilot and will publish what it finds.
 
-If you do mention it, please say on air: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge."
+If you do mention it, please say on air: "RollRead sent me this trainer, printed from my own drill sheet, free of charge."
 
 {{founder_name}}
-FitSlice
+RollRead
 
 ### 2.5 The one follow-up (day 10, all four)
 
@@ -192,16 +192,16 @@ One follow-up and then I will leave you alone. The offer stands: a Rev Puck and 
 
 If it is a no, a one-word reply saves us both the next email.
 
-Same rule as before if you ever show it: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge."
+Same rule as before if you ever show it: "RollRead sent me this trainer, printed from my own drill sheet, free of charge."
 
 {{founder_name}}
-FitSlice
+RollRead
 
 ---
 
 ## 3. Affiliate terms
 
-These terms apply to creators, coaches and podcast hosts who hold a FitSlice code. Pro shops are paid under the pro-shop program, at 25%, and do not hold affiliate codes. FitSlice may revise these terms with 30 days' written notice; commissions already earned are paid on the terms in force when the order shipped.
+These terms apply to creators, coaches and podcast hosts who hold a RollRead code. Pro shops are paid under the pro-shop program, at 25%, and do not hold affiliate codes. RollRead may revise these terms with 30 days' written notice; commissions already earned are paid on the terms in force when the order shipped.
 
 ### 3.1 Who can join
 
@@ -214,7 +214,7 @@ A seeded creator may hold a code. A seeded creator is never required to.
 ### 3.2 Commission
 
 - **Rate:** 15% of the sale.
-- **"The sale" means** the product subtotal the buyer pays for FitSlice products on an attributed order, after any discount and after the Fit Kit credit, before shipping and tax.
+- **"The sale" means** the product subtotal the buyer pays for RollRead products on an attributed order, after any discount and after the Fit Kit credit, before shipping and tax.
 - **Fit Kit then trainer.** A buyer who orders a $24 Fit Kit and later a Rev Puck pays $24 and then $65. The affiliate earns $3.60 and then $9.75, which is $13.35, the same 15% of $89.
 - **Reversals.** A commission is reversed if the order is refunded, charged back or cancelled before printing. A free reprint under the fit guarantee does not reverse anything. A reduced-price reprint ($25 puck, $15 spinner, $35 pair) earns 15% of the reprint price if attributed.
 - **Self-purchase.** No commission on the affiliate's own orders or on orders shipped to the affiliate's address.
@@ -255,7 +255,7 @@ Earnings at list price:
 
 ### 3.6 Disclosure requirement
 
-Every post, video, livestream, newsletter, lesson handout or spoken mention that includes a FitSlice product, link or code carries a clear material-connection disclosure. The rules by medium:
+Every post, video, livestream, newsletter, lesson handout or spoken mention that includes a RollRead product, link or code carries a clear material-connection disclosure. The rules by medium:
 
 | Medium | Where the disclosure goes |
 |---|---|
@@ -264,22 +264,22 @@ Every post, video, livestream, newsletter, lesson handout or spoken mention that
 | Livestream | Spoken at the start, repeated at least every 30 minutes and every time the code is given, and pinned in chat where the platform allows. |
 | Written post | First sentence of the post. Hashtags such as #ad are not a substitute and may be added only after the sentence. |
 | Podcast | Spoken by the host at the start of the segment and again when the code is given. Also in the episode description, first line. |
-| Newsletter or handout | First line of the item that mentions FitSlice. |
+| Newsletter or handout | First line of the item that mentions RollRead. |
 | In-person lesson | Said to the student, and printed on any handout that carries the code. |
 
-The required words are the lines at the top of this file. A seeded affiliate uses both: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge. I earn a commission when you order with my code." An affiliate who bought their own unit uses the second line alone. Any paid placement uses "Paid partnership with FitSlice." as well.
+The required words are the lines at the top of this file. A seeded affiliate uses both: "RollRead sent me this trainer, printed from my own drill sheet, free of charge. I earn a commission when you order with my code." An affiliate who bought their own unit uses the second line alone. Any paid placement uses "Paid partnership with RollRead." as well.
 
 The disclosure must be in the same language as the content and readable on a phone without expanding the caption.
 
 ### 3.7 Prohibited claims
 
-An affiliate may not say, write, show on screen or imply any of the following with a FitSlice product, link or code present:
+An affiliate may not say, write, show on screen or imply any of the following with a RollRead product, link or code present:
 
 1. Any number for rev rate, RPM, hook, entry angle, pin count or average, before, after or as a comparison. This includes the affiliate's own measured numbers.
 2. That the product improves, increases, boosts, adds, fixes, cures, corrects or prevents anything, including rev rate, hook, scores, grip pressure, thumb hang or any injury or pain. The words we use are "designed to", "practice", "train" and "rehearse".
 3. That the product prevents or treats bowler's thumb, tendonitis or any medical condition, or is a medical device.
-4. The name, logo, product name, slogan or trade dress of any bowling ball company, in a comparison or otherwise, while FitSlice is in frame or in the text. Describing a ball by its color or its weight is fine. Comparisons are made by category only: "generic one-size practice balls", "S/M/L wrist braces", "roller trainers that need your ball".
-5. That FitSlice is approved, certified, endorsed, sanctioned or recommended by USBC, PBA, PWBA, IBPSIA or any association, governing body, team or federation, or that it is used in or legal for competition.
+4. The name, logo, product name, slogan or trade dress of any bowling ball company, in a comparison or otherwise, while RollRead is in frame or in the text. Describing a ball by its color or its weight is fine. Comparisons are made by category only: "generic one-size practice balls", "S/M/L wrist braces", "roller trainers that need your ball".
+5. That RollRead is approved, certified, endorsed, sanctioned or recommended by USBC, PBA, PWBA, IBPSIA or any association, governing body, team or federation, or that it is used in or legal for competition.
 6. "Patented", "patent pending", "proprietary technology" or any statement about patent status. The brand carries `[PATENT STATUS]` where such a line may one day go, and only we fill it.
 7. That the product is a bowling ball, a mini ball, a practice ball or regulation equipment. It is a trainer, a slice, a puck, a disc, a plate.
 8. "The only" or "the first" without the qualifier "to our knowledge".
@@ -292,16 +292,16 @@ The affiliate may say every green claim and every qualified yellow claim listed 
 
 ### 3.8 Prohibited practices
 
-- Paid search or paid social ads for FitSlice, or bidding on "FitSlice", its misspellings or "rev trainer" with our name, without written permission for that campaign.
-- Using "FitSlice" or a confusingly similar word in a domain, handle, channel name or display name.
+- Paid search or paid social ads for RollRead, or bidding on "RollRead", its misspellings or "rev trainer" with our name, without written permission for that campaign.
+- Using "RollRead" or a confusingly similar word in a domain, handle, channel name or display name.
 - Posting the code or link on coupon, cashback or deal sites, in marketplace listings, or in the comments of content the affiliate does not own.
-- Incentivizing reviews of FitSlice on any platform, or leaving a review of FitSlice without the disclosure line in the review text.
+- Incentivizing reviews of RollRead on any platform, or leaving a review of RollRead without the disclosure line in the review text.
 - Cookie stuffing, redirect chains, or any method of setting a cookie without a deliberate click.
 - Buying through the affiliate's own link or code, or through a household member, to earn commission.
 
 ### 3.9 Monitoring and correction
 
-We read every post, video and episode that uses a code or tags FitSlice, because the FTC expects an advertiser to monitor the people it pays. When something is wrong:
+We read every post, video and episode that uses a code or tags RollRead, because the FTC expects an advertiser to monitor the people it pays. When something is wrong:
 
 1. **First occurrence.** We send a notice naming the post and the problem (missing disclosure, prohibited claim, prohibited practice). The affiliate corrects the post within 48 hours. A video that cannot be re-edited gets a pinned comment and a corrected description, and the next video carries the disclosure properly.
 2. **Second occurrence** of the same kind within twelve months: the code is paused for 30 days. Orders placed during the pause are not attributed to it.
@@ -321,17 +321,17 @@ This brief goes in the seed box and by email to every creator who asks what we w
 
 ### 4.1 What this is
 
-FitSlice is a slice of regulation 8.5" ball surface with your drill sheet reproduced in it: thumb, middle and ring hole sizes in 1/64" steps, both spans, forward/reverse and lateral pitch on every hole, right or left hand. The holes are aimed at the ball's center the way a zero-pitch hole is drilled, so your thumb and fingers oppose each other exactly as on your ball. The Rev Puck weighs about 300 g in PETG at 20% infill and has a weight pocket in the base and a tunnel for the wrist cord. The Rev Spinner is a fingers-only disc from the same surface, about 100 g, with engraved bars on the base for counting a spin.
+RollRead is a slice of regulation 8.5" ball surface with your drill sheet reproduced in it: thumb, middle and ring hole sizes in 1/64" steps, both spans, forward/reverse and lateral pitch on every hole, right or left hand. The holes are aimed at the ball's center the way a zero-pitch hole is drilled, so your thumb and fingers oppose each other exactly as on your ball. The Rev Puck weighs about 300 g in PETG at 20% infill and has a weight pocket in the base and a tunnel for the wrist cord. The Rev Spinner is a fingers-only disc from the same surface, about 100 g, with engraved bars on the base for counting a spin.
 
 Your box also holds a sizer plate printed on the same printer, with labeled bores in 1/64" steps around your sizes, a roll of bowler's tape, a wrist cord, your fit sheet as printed, and the six-drill guide.
 
 ### 4.2 Your disclosure
 
-You received this free, printed from your own drill sheet. If you show it, say so first, on camera and in the first line of the description: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge." If you hold a code, add: "I earn a commission when you order with my code." Say both again when you give the code. This is required by the FTC Endorsement Guides and by us. It is the one thing in this brief that is not optional.
+You received this free, printed from your own drill sheet. If you show it, say so first, on camera and in the first line of the description: "RollRead sent me this trainer, printed from my own drill sheet, free of charge." If you hold a code, add: "I earn a commission when you order with my code." Say both again when you give the code. This is required by the FTC Endorsement Guides and by us. It is the one thing in this brief that is not optional.
 
 ### 4.3 Before you film
 
-- Read the fitting card. Compare the fit sheet on it to your pro shop's sheet. If a number differs, email creators@fitslice.com before you film and we will reprint.
+- Read the fitting card. Compare the fit sheet on it to your pro shop's sheet. If a number differs, email creators@rollread.com before you film and we will reprint.
 - Check the thumb first. That is what every bowler watching will want to see.
 - Tape up the way you would on a ball. A layer or two in the thumb is normal fit and is why tape is in the box. Tell the viewer how many layers you used.
 - Safety: this is a swing-and-hold and carpet-release tool. Never throw it. Keep the wrist cord on for every swing drill. Bowlers under 12 use it with an adult present.
@@ -341,7 +341,7 @@ You received this free, printed from your own drill sheet. If you show it, say s
 
 | # | Shot | What to show | What to say (in your own words) |
 |---|---|---|---|
-| 1 | Disclosure to camera | You, the box unopened, on-screen text with the disclosure line | "FitSlice sent me this trainer, printed from my own drill sheet, free of charge." Then what the product is, in the ten-second line: "It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere." |
+| 1 | Disclosure to camera | You, the box unopened, on-screen text with the disclosure line | "RollRead sent me this trainer, printed from my own drill sheet, free of charge." Then what the product is, in the ten-second line: "It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere." |
 | 2 | Your drill sheet | Close-up of your pro shop's sheet or your fitting card | Read off your thumb size, your two spans and one pitch. "This is my fit. This is what they printed." |
 | 3 | The configurator | Screen capture: type your sheet in, the grip appears in about a tenth of a second, rotate the preview, point at the drawn hole axes | "It rebuilds as you type. The lines are the hole axes, so you can see your pitch. It is free, and nothing prints until you order." |
 | 4 | Box open | Puck, spinner, sizer plate, tape, cord, card laid out | Weight in hand: "about 300 grams, roughly two percent of my ball." Name each item. |
@@ -373,7 +373,7 @@ Every talking point below is a green claim or a yellow claim with its qualifier 
 **Coaching ideas, attributed (green)**
 
 - Coaches agree the thumb must leave first, and a relaxed hand creates more revs.
-- The pro-shop trade body puts hole size at about 20% of a fit; span and pitch are 40% each. FitSlice copies all three.
+- The pro-shop trade body puts hole size at about 20% of a fit; span and pitch are 40% each. RollRead copies all three.
 - Oversized holes make you squeeze, and squeezing limits hook. That is a coaching view, and it is why the part is built from your sheet instead of a stock size.
 
 **Qualified claims (yellow, say them with the qualifier)**
@@ -385,7 +385,7 @@ Every talking point below is a green claim or a yellow claim with its qualifier 
 
 **The honest point (say it; viewers trust it)**
 
-- No study has measured whether any off-lane trainer changes rev rate or average, including this one. FitSlice is running a pilot and will publish what it finds. What the part does today is let you practice, with your real fit, the two things coaches agree the release depends on.
+- No study has measured whether any off-lane trainer changes rev rate or average, including this one. RollRead is running a pilot and will publish what it finds. What the part does today is let you practice, with your real fit, the two things coaches agree the release depends on.
 
 ### 4.6 Words and claims to leave out
 
@@ -401,7 +401,7 @@ Every talking point below is a green claim or a yellow claim with its qualifier 
 
 ### 4.7 Deliverables and what happens next
 
-None are required. If you publish, we would appreciate the link at creators@fitslice.com so we can watch it and so your code's traffic is tracked correctly. If we would like to repost an excerpt, the content-rights clause in Section 8 says exactly how, and you can decline. If something in the part fell short, the feedback form (Section 1.4) is where that does the most good, and your reprint is free.
+None are required. If you publish, we would appreciate the link at creators@rollread.com so we can watch it and so your code's traffic is tracked correctly. If we would like to repost an excerpt, the content-rights clause in Section 8 says exactly how, and you can decline. If something in the part fell short, the feedback form (Section 1.4) is where that does the most good, and your reprint is free.
 
 ---
 
@@ -421,7 +421,7 @@ For private instructors, center coaches, high-school and college coaches, and yo
 
 ### 5.2 The configurator seat
 
-At launch, the roster is kept by us. The coach exports each student's fit sheet from the configurator (the Export fit sheet button saves a small file) and emails it to coaches@fitslice.com. We store the sheets under the coach's name and send back a roster list monthly. The in-configurator roster, with login, student labels and one-click team export, follows and will be announced to every active coach by email. Nothing a coach does at launch needs redoing when it arrives; the fit-sheet files are the same.
+At launch, the roster is kept by us. The coach exports each student's fit sheet from the configurator (the Export fit sheet button saves a small file) and emails it to coaches@rollread.com. We store the sheets under the coach's name and send back a roster list monthly. The in-configurator roster, with login, student labels and one-click team export, follows and will be announced to every active coach by email. Nothing a coach does at launch needs redoing when it arrives; the fit-sheet files are the same.
 
 What the seat does once it is live:
 
@@ -433,7 +433,7 @@ What the seat does once it is live:
 
 ### 5.3 How a coach enters a student's sheet
 
-1. **Get consent.** Tell the student, or the parent or guardian of a student under 18, that their drill sheet will be entered into FitSlice's configurator and stored with an order to print their trainer, and that it is deleted on request. For a minor, the parent or guardian is the customer of record and the sheet carries the student's initials only.
+1. **Get consent.** Tell the student, or the parent or guardian of a student under 18, that their drill sheet will be entered into RollRead's configurator and stored with an order to print their trainer, and that it is deleted on request. For a minor, the parent or guardian is the customer of record and the sheet carries the student's initials only.
 2. **Open the configurator** and choose New fit sheet.
 3. **Hand and thumb style.** Right or left. Through thumb or blind.
 4. **Hole sizes.** Thumb, middle and ring, as written on the pro shop's sheet. Fractions go in as written: 55/64, 1 1/32, 4-1/2. Inches or millimetres.
@@ -461,17 +461,17 @@ Ten or more trainers on one order, printed from ten or more fit sheets, shipped 
 - Digital Files are not part of team pricing. They are per bowler at $29 and $39.
 - Shipping on a team order is free within the US.
 - Lead time: team orders ship together, and ten Rev Pucks is about ten printer-days. Expect two to three weeks from confirmed sheets to shipment, confirmed in writing before payment. The current lead time is published to active coaches every Monday.
-- Two ways to pay. One invoice to the coach, the center or the program, payable by card or ACH before printing starts. Or the team link, where each student or family pays FitSlice directly at team price; the team price locks once ten sheets are in the roster, and printing starts when the tenth payment lands.
+- Two ways to pay. One invoice to the coach, the center or the program, payable by card or ACH before printing starts. Or the team link, where each student or family pays RollRead directly at team price; the team price locks once ten sheets are in the roster, and printing starts when the tenth payment lands.
 - Team pricing and the coach's 15% code do not stack. A team order earns no commission. A student who orders alone at list with the coach's code earns the coach 15%.
 - The 30-day fit guarantee applies to every part on a team order, per sheet.
 
 ### 5.5 Consent and data
 
-A drill sheet is personal data tied to a hand. The coach obtains the bowler's consent, or a parent's or guardian's for a minor, before entering it. FitSlice stores the sheet with the order and the roster, states its retention period on the privacy page, and deletes a sheet on request from the bowler, the parent or the coach. For students under 18, the parent or guardian is the customer and receives the order emails. Bowlers under 12 use the trainer with an adult present, and that line is on every card.
+A drill sheet is personal data tied to a hand. The coach obtains the bowler's consent, or a parent's or guardian's for a minor, before entering it. RollRead stores the sheet with the order and the roster, states its retention period on the privacy page, and deletes a sheet on request from the bowler, the parent or the coach. For students under 18, the parent or guardian is the customer and receives the order emails. Bowlers under 12 use the trainer with an adult present, and that line is on every card.
 
 ### 5.6 What we ask coaches to say and not say
 
-A coach with a free trainer and a code has a material connection to FitSlice and says so. Every mention to students, parents or online carries: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge. I earn a commission when you order with my code." On a lesson handout that carries the code, the line is printed under the code.
+A coach with a free trainer and a code has a material connection to RollRead and says so. Every mention to students, parents or online carries: "RollRead sent me this trainer, printed from my own drill sheet, free of charge. I earn a commission when you order with my code." On a lesson handout that carries the code, the line is printed under the code.
 
 Coaches may use every talking point in Section 4.5 and may describe their own experience of the drills. Coaches may not say any of the things in Section 3.7, and in particular may not report a student's rev rate, hook or average as a result of the trainer, may not say it prevents bowler's thumb or any injury, and may not describe it as approved by any governing body, including the one that issued their coaching certification.
 
@@ -481,7 +481,7 @@ The coach page on the site carries the four-part program above, the entry steps,
 
 [QUOTE PLACEHOLDER — coach name, credential, program]
 
-Disclosure, shown directly under the quote in the same type size: The coach quoted here received a FitSlice trainer printed from their own drill sheet at no charge and earns a commission when students order with their code. Their words are their own.
+Disclosure, shown directly under the quote in the same type size: The coach quoted here received a RollRead trainer printed from their own drill sheet at no charge and earns a commission when students order with their code. Their words are their own.
 
 ---
 
@@ -493,7 +493,7 @@ Disclosure, shown directly under the quote in the same type size: The coach quot
 - **Everyone gets it.** The email goes to every customer whose order was delivered, in the same words, on the same schedule. Nobody is screened by sentiment, support history or how much they spent.
 - **No gating.** The review link and the support link are in the same email, in that order, for every customer. We never route unhappy customers to support and happy ones to the review page.
 - **Timing.** Fourteen days after delivery confirmation, so they have taped up and done the drills. One reminder fourteen days later if no review has been left. Then nothing.
-- **Material connections excluded.** Seeded recipients, affiliates, coaches with codes and pro-shop staff are not sent this email. If they review anyway, the review form asks "Did you receive this product free, or do you earn a commission on FitSlice sales?" and a yes labels the review as such on the page.
+- **Material connections excluded.** Seeded recipients, affiliates, coaches with codes and pro-shop staff are not sent this email. If they review anyway, the review form asks "Did you receive this product free, or do you earn a commission on RollRead sales?" and a yes labels the review as such on the page.
 - **Marketplace orders.** For orders placed on a marketplace, that marketplace sends its own review request. We add nothing to it and offer nothing for it.
 - **No numbers requested.** We ask how it fits and how they use it. We do not ask for a rating, a result or a before-and-after.
 
@@ -509,14 +509,14 @@ Would you write a short review for other bowlers? Say how the thumb and fingers 
 
 Write your review: {{review_link}}
 
-If the part does not match your fit sheet, that is a guarantee claim. Email support@fitslice.com with your order number and we reprint it free: {{guarantee_link}}
+If the part does not match your fit sheet, that is a guarantee claim. Email support@rollread.com with your order number and we reprint it free: {{guarantee_link}}
 
 There is no reward for reviewing, and we would not want one to color what you say.
 
 Thank you for trying it.
 
 {{founder_name}}
-FitSlice
+RollRead
 
 ### 6.3 The single reminder (fourteen days later)
 
@@ -526,10 +526,10 @@ Hi {{first_name}},
 
 One reminder, and then we will not ask again. If you have had a chance to use your {{product}}, a few honest sentences on how it fits and how you use it would help the next bowler decide: {{review_link}}
 
-If anything is wrong with the part, support@fitslice.com makes it right under the 30-day fit guarantee.
+If anything is wrong with the part, support@rollread.com makes it right under the 30-day fit guarantee.
 
 {{founder_name}}
-FitSlice
+RollRead
 
 ### 6.4 How reviews are handled on the site
 
@@ -551,20 +551,20 @@ Subject: A guest segment: taking the drill sheet off the ball
 
 Hi {{first_name}},
 
-I make FitSlice, a release trainer printed from a bowler's own drill sheet. It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.
+I make RollRead, a release trainer printed from a bowler's own drill sheet. It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere.
 
 I think it makes a good twenty-minute segment for {{podcast_name}}, for one reason. Your listeners already pay a pro shop to measure their hand to a sixty-fourth of an inch, and that fit exists in exactly one place, the ball. Pulling it off the ball raises questions your audience will argue about: what a 1/64" step feels like, why the pro-shop trade body weights pitch at 40% of a fit and hole size at 20%, and whether an off-lane tool can teach anything at all. I will say plainly what has not been measured.
 
-I can bring the part, a sizer plate and the configurator, or send you one ahead, printed from your drill sheet and free of charge, so you have held it. If you mention it on air, please say first: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge." Any date after {{available_from}} works.
+I can bring the part, a sizer plate and the configurator, or send you one ahead, printed from your drill sheet and free of charge, so you have held it. If you mention it on air, please say first: "RollRead sent me this trainer, printed from my own drill sheet, free of charge." Any date after {{available_from}} works.
 
 {{founder_name}}
-FitSlice
+RollRead
 
 ### 7.2 Five talking points
 
-1. **The fit lives in one place.** A pro shop measures the hand to 1/64", chooses two spans and six pitches, and drills them into a ball the bowler can only use on a lane. Bowlers already pay to clone one hole with thumb molds and interchangeable thumb systems. FitSlice prints the whole patch the hand touches, on the curvature of a regulation 8.5" ball, with the sheet reproduced in it. To our knowledge it is the first trainer that uses the bowler's actual drill sheet.
+1. **The fit lives in one place.** A pro shop measures the hand to 1/64", chooses two spans and six pitches, and drills them into a ball the bowler can only use on a lane. Bowlers already pay to clone one hole with thumb molds and interchangeable thumb systems. RollRead prints the whole patch the hand touches, on the curvature of a regulation 8.5" ball, with the sheet reproduced in it. To our knowledge it is the first trainer that uses the bowler's actual drill sheet.
 
-2. **What a fit is made of.** The pro-shop trade body puts hole size at about 20% of a fit; span and pitch are 40% each. Generic one-size practice balls use the same holes for every hand. S/M/L wrist braces are sized by hand length. FitSlice copies all three from the bowler's own sheet, and the configurator draws the hole axes so a bowler can see their pitch.
+2. **What a fit is made of.** The pro-shop trade body puts hole size at about 20% of a fit; span and pitch are 40% each. Generic one-size practice balls use the same holes for every hand. S/M/L wrist braces are sized by hand length. RollRead copies all three from the bowler's own sheet, and the configurator draws the hole axes so a bowler can see their pitch.
 
 3. **Why a slice works.** A zero-pitch hole is drilled toward the ball's center. On the slice, every hole is aimed at that same center with the bowler's pitches applied, so thumb and fingers oppose each other around the curvature exactly as on the ball. The puck weighs about 300 g, about two percent of a 15-pound ball, which is why, on its own, it is a feel-and-habit tool, and why it takes a weight on the cord for strength work.
 
@@ -574,9 +574,9 @@ FitSlice
 
 ### 7.3 On-air disclosure
 
-- If the host received a seeded pair, the host says at the top of the segment: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge." If the host holds a code: "I earn a commission when you order with my code." Both go in the episode description, first line.
-- The founder says on air that FitSlice is the founder's own company and that it sells the product. That is obvious and we say it anyway.
-- If the appearance is paid or the episode is sponsored, the host says "Paid partnership with FitSlice." at the top, and it appears in the description.
+- If the host received a seeded pair, the host says at the top of the segment: "RollRead sent me this trainer, printed from my own drill sheet, free of charge." If the host holds a code: "I earn a commission when you order with my code." Both go in the episode description, first line.
+- The founder says on air that RollRead is the founder's own company and that it sells the product. That is obvious and we say it anyway.
+- If the appearance is paid or the episode is sponsored, the host says "Paid partnership with RollRead." at the top, and it appears in the description.
 - No host is asked to quote a number, read our copy, or cut a question.
 
 ---
@@ -587,15 +587,15 @@ FitSlice
 
 This clause is included in the affiliate agreement and is offered, as a standalone one-page license, to any seeded creator whose content we would like to repost. A seeded creator who has not signed it has granted us nothing, and we ask before each repost.
 
-> **Content License.** If you publish video, photographs, audio or text featuring FitSlice products ("Content"), you grant {{legal_entity_name}} ("FitSlice") a non-exclusive, worldwide, royalty-free license, for twenty-four (24) months from the date the Content is first published, to reproduce, repost, excerpt, caption and display the Content on FitSlice's website, product pages, email and social channels, with credit to you by name and handle in every use.
+> **Content License.** If you publish video, photographs, audio or text featuring RollRead products ("Content"), you grant {{legal_entity_name}} ("RollRead") a non-exclusive, worldwide, royalty-free license, for twenty-four (24) months from the date the Content is first published, to reproduce, repost, excerpt, caption and display the Content on RollRead's website, product pages, email and social channels, with credit to you by name and handle in every use.
 >
 > You keep ownership of the Content and may use or license it to anyone else.
 >
-> FitSlice will not edit the Content in any way that changes its meaning, will not remove, trim or reorder critical statements so as to misrepresent your opinion, and will not add words to your mouth by caption or voice-over. Every repost will keep your disclosure visible or will carry FitSlice's own statement of your material connection to FitSlice. FitSlice will not use the Content to suggest that you approve of any claim you did not make.
+> RollRead will not edit the Content in any way that changes its meaning, will not remove, trim or reorder critical statements so as to misrepresent your opinion, and will not add words to your mouth by caption or voice-over. Every repost will keep your disclosure visible or will carry RollRead's own statement of your material connection to RollRead. RollRead will not use the Content to suggest that you approve of any claim you did not make.
 >
-> This license does not cover paid advertising. FitSlice will not use the Content, your name, your handle or your likeness in any paid placement without your separate written permission for that specific use, which you may refuse or price as you choose.
+> This license does not cover paid advertising. RollRead will not use the Content, your name, your handle or your likeness in any paid placement without your separate written permission for that specific use, which you may refuse or price as you choose.
 >
-> You may withdraw this license for future use at any time by written notice to creators@fitslice.com. FitSlice will stop new uses on receipt and will remove existing reposts within thirty (30) days where FitSlice controls the placement. Reposts that cannot be recalled, such as an email already sent, are not a breach.
+> You may withdraw this license for future use at any time by written notice to creators@rollread.com. RollRead will stop new uses on receipt and will remove existing reposts within thirty (30) days where RollRead controls the placement. Reposts that cannot be recalled, such as an email already sent, are not a breach.
 >
 > Nothing in this license obliges you to create any Content, to publish it, to say anything favorable, or to refrain from saying anything unfavorable.
 
@@ -613,8 +613,8 @@ This clause is included in the affiliate agreement and is offered, as a standalo
 
 Every repost of creator content carries, in the caption or on screen, the material-connection statement that matches the relationship:
 
-- Seeded: "This creator received a FitSlice trainer printed from their own drill sheet at no charge."
-- Seeded with a code: "This creator received a FitSlice trainer printed from their own drill sheet at no charge and earns a commission on orders placed with their code."
+- Seeded: "This creator received a RollRead trainer printed from their own drill sheet at no charge."
+- Seeded with a code: "This creator received a RollRead trainer printed from their own drill sheet at no charge and earns a commission on orders placed with their code."
 - Paid: "Paid partnership."
 
 If a clip contains the creator's criticism, the criticism stays in the clip. If a clip contains a claim from Section 3.7 that slipped past the creator, we do not repost that clip; we send the correction notice in 3.9 instead.

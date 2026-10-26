@@ -6,7 +6,7 @@
 |---|---|
 | `trainer.scad`, `stl/`, `generate.py` | Parametric CAD source, default STLs, fit-sheet → STL command-line generator |
 | `configurator/` | Browser configurator (drill sheet in, STL out); hosted copy: https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p |
-| `app/` | **FitSlice desktop app** (Electron): the configurator plus a local order book, fully offline; builds a Windows zip. See `app/README.md` and `app/docs/START-HERE.txt` |
+| `app/` | **RollRead desktop app** (Electron): the configurator plus a local order book, fully offline; builds a Windows zip. See `app/README.md` and `app/docs/START-HERE.txt` |
 | `docs/business-plan.md` | Business plan with evidence tables and claims guide; rendered page: https://claude.ai/artifact/PvBxUpQbEZaXPGcshtbyf2 |
 | `site/` | Deployable landing page with waitlist form; preview: https://claude.ai/artifact/Jj4K6pxdrvyJicbzsicqEj |
 | `marketing/` | Go-to-market kit: brand platform, website copy, pro-shop program, retailer and marketplace pitches, creator program, content and launch calendar, paid funnel, support runbook, 72-row target list; rendered page: https://claude.ai/artifact/6e7gbT4rCUBekwZ4mezmyV |
@@ -113,7 +113,7 @@ Inputs are validated against sane ranges before OpenSCAD runs, and output
 files are named after the order, so this slots straight into a
 made-to-order workflow (fit sheet at checkout → generate → print → ship).
 
-`generate.py` also reads the `fit_sheet.json` the FitSlice app exports (it adds
+`generate.py` also reads the `fit_sheet.json` the RollRead app exports (it adds
 the sheet's `print_allowance` to the three hole sizes for you; a hand-written
 sheet without that key needs the 0.4 mm added by hand). It does not support a
 blind thumb hole or a customer-centred sizer plate: `trainer.scad` always

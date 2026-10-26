@@ -168,7 +168,7 @@ def main():
         gr = T2.distance(stadium(ri["p"][0], ri["p"][1], p["ring_d"], exR, vF))
         check(f"{case}: cut-to-cut spans {gm:.2f} / {gr:.2f} mm (sheet {p['span_middle']:.2f} / {p['span_ring']:.2f})", abs(gm - p["span_middle"]) < 0.06 and abs(gr - p["span_ring"]) < 0.06)
 
-    # 4. the engraved number: FS-0001 cut 0.5 mm into the base, so a slice at 0.25 mm has glyph voids
+    # 4. the engraved number: RR-0001 cut 0.5 mm into the base, so a slice at 0.25 mm has glyph voids
     #    (seven characters, each at least one void) that the plain puck does not have
     def voids(mesh, z):
         sec = mesh.section(plane_origin=[0, 0, z], plane_normal=[0, 0, 1])
@@ -212,7 +212,7 @@ def main():
     check(f"spinner: a 12-character number gives {len(sp)} glyph voids, all within rho {rho:.1f} < 49 and {clear:.1f} mm clear of the spin bars", len(sp) >= 12 and rho < 49 and clear > 2.2)
     bg = glyphs(m["ball_serial"], 0.25)
     rho_b = max(np.hypot(g[:, 0], g[:, 1]).max() for g in bg)
-    check(f"ball: FS-0001 gives {len(bg)} glyph voids on the flat, all within rho {rho_b:.1f} < 15", len(bg) >= 7 and rho_b < 15)
+    check(f"ball: RR-0001 gives {len(bg)} glyph voids on the flat, all within rho {rho_b:.1f} < 15", len(bg) >= 7 and rho_b < 15)
 
     # 5. the no-thumb ball: two holes only, centred on the top, more plastic than the three-hole ball
     nt = [a for a in axes["nothumb_ball"]["axes"] if a["name"] in ("thumb", "middle", "ring")]   # the axis-target points are reported too

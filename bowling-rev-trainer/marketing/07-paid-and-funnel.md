@@ -1,4 +1,4 @@
-# FitSlice: Paid Media, Funnel and the Path to $1M
+# RollRead: Paid Media, Funnel and the Path to $1M
 
 Working draft, October 2026. Source of truth for every claim in this document is `docs/business-plan.md` (Part 2 how it helps, Part 4 competitors, Part 5 product line and prices, Part 6 claims, Part 8 selling) and `README.md` (parts, drills). Language follows `marketing/01-brand-platform.md`. Shipping and disclosure policy follow `marketing/03-pro-shop-program.md` and `marketing/05-creators-and-coaches.md`. Anything in square brackets is a placeholder that must be filled or removed before use: `[PATENT STATUS]`, `[QUOTE PLACEHOLDER — name]`.
 
@@ -14,10 +14,10 @@ Where paid media sits in the plan: business-plan Part 8 ranks channels by expect
 
 | Relationship | Disclosure line |
 |---|---|
-| Seeded product | "FitSlice sent me this trainer, printed from my own drill sheet, free of charge." |
+| Seeded product | "RollRead sent me this trainer, printed from my own drill sheet, free of charge." |
 | Affiliate code | "I earn a commission when you order with my code." |
-| Paid post | "Paid partnership with FitSlice." |
-| Pro shop | "This shop earns a margin on FitSlice orders entered here." |
+| Paid post | "Paid partnership with RollRead." |
+| Pro shop | "This shop earns a margin on RollRead orders entered here." |
 
 ---
 
@@ -29,7 +29,7 @@ Five stages. Each is an event we can count, with the definition that makes it co
 
 | # | Stage | Definition (counted once per session or person) | Event name |
 |---|---|---|---|
-| 1 | Visit | A session that lands on any page of the FitSlice site, including a direct link to the configurator | `session_start` |
+| 1 | Visit | A session that lands on any page of the RollRead site, including a direct link to the configurator | `session_start` |
 | 2 | Configurator session | A session in which at least one configurator field is changed from its default (a size, a span, a pitch, hand, units) | `configurator_session` |
 | 3 | Fit sheet completed | Thumb, middle and ring hole sizes, both spans and at least one pitch entered; the geometry check passes with no collision warning; the model renders. Also fires on a fit-sheet JSON import that passes the check | `fit_sheet_complete` |
 | 4 | Fit Kit | A paid Fit Kit order ($24, credited toward a trainer). The order carries the fit sheet ID | `purchase` with `product_type=fit_kit` |
@@ -37,7 +37,7 @@ Five stages. Each is an event we can count, with the definition that makes it co
 
 Two side paths are counted but kept out of the main funnel rates: a direct Pair order with no Fit Kit first (stage 3 to stage 5), and a Digital order ($29 puck files, $39 pair files) from stage 3. Puck-only ($89) and Spinner-only ($45) orders are counted as orders and tracked in the product mix. For planning they are folded into Pairs (Section 1.3).
 
-Attribution: paid channels get a 45-day click window because the Fit Kit to Pair step takes two to five weeks (print, ship, size, reorder). Creator traffic is attributed by the creator's link or code, and every creator video or post that sends traffic carries its disclosure line: "FitSlice sent me this trainer, printed from my own drill sheet, free of charge." for a seeded unit, and "I earn a commission when you order with my code." for an affiliate. Pro-shop orders are attributed to the shop that entered the sheet and carry the shop line at the counter: "This shop earns a margin on FitSlice orders entered here."
+Attribution: paid channels get a 45-day click window because the Fit Kit to Pair step takes two to five weeks (print, ship, size, reorder). Creator traffic is attributed by the creator's link or code, and every creator video or post that sends traffic carries its disclosure line: "RollRead sent me this trainer, printed from my own drill sheet, free of charge." for a seeded unit, and "I earn a commission when you order with my code." for an affiliate. Pro-shop orders are attributed to the shop that entered the sheet and carry the shop line at the counter: "This shop earns a margin on RollRead orders entered here."
 
 ### 1.2 Conversion assumptions
 
@@ -104,7 +104,7 @@ The funnel is an average across all traffic. Search and retargeting reach people
 
 ## 2. The path to $1M
 
-Revenue here means what FitSlice books. Pro-shop orders count at the net $89.25 FitSlice keeps after the shop's 25% on a $119 Pair. Digital counts at the $35 blend. Capacity uses the plan's figure of one puck per printer per day, 25 to 30 a month. A Pair uses one printer-day on the CoreXY profile (puck 11 h 20 m plus spinner 3 h 38 m is about 15 hours, with the balance of the day for removal, deburring and the next start). On a conventional bed-slinger a Pair takes 25 h 45 m, about 1.1 printer-days, so count a tenth more printers there. A Fit Kit sizer plate takes 3 h 24 m, counted as a quarter of a printer-day. Printer ranges below run from 30 a month (best case) to 25 a month (the planning figure, which already allows for failed prints and maintenance).
+Revenue here means what RollRead books. Pro-shop orders count at the net $89.25 RollRead keeps after the shop's 25% on a $119 Pair. Digital counts at the $35 blend. Capacity uses the plan's figure of one puck per printer per day, 25 to 30 a month. A Pair uses one printer-day on the CoreXY profile (puck 11 h 20 m plus spinner 3 h 38 m is about 15 hours, with the balance of the day for removal, deburring and the next start). On a conventional bed-slinger a Pair takes 25 h 45 m, about 1.1 printer-days, so count a tenth more printers there. A Fit Kit sizer plate takes 3 h 24 m, counted as a quarter of a printer-day. Printer ranges below run from 30 a month (best case) to 25 a month (the planning figure, which already allows for failed prints and maintenance).
 
 ### 2.1 Three mixes
 
@@ -162,7 +162,7 @@ Print-partner facts and constraints:
 
 ### 3.1 Assumptions
 
-- **Calendar.** Month 1 is November 2026: seeding (20 trainers to coaches and creators, each shipped with the disclosure terms in `marketing/05-creators-and-coaches.md`, so every recipient who shows the unit says "FitSlice sent me this trainer, printed from my own drill sheet, free of charge."), Study 1, waitlist and configurator live, shop closed. The shop opens in Month 2, December 2026, in line with the launch sequence in business-plan Part 8 and the calendar in `marketing/06-content-and-launch.md`, where launch week 1 is configurator-only and the shop opens in week 2. December orders are therefore modeled at three-quarters of a month. Month 12 is October 2027.
+- **Calendar.** Month 1 is November 2026: seeding (20 trainers to coaches and creators, each shipped with the disclosure terms in `marketing/05-creators-and-coaches.md`, so every recipient who shows the unit says "RollRead sent me this trainer, printed from my own drill sheet, free of charge."), Study 1, waitlist and configurator live, shop closed. The shop opens in Month 2, December 2026, in line with the launch sequence in business-plan Part 8 and the calendar in `marketing/06-content-and-launch.md`, where launch week 1 is configurator-only and the shop opens in week 2. December orders are therefore modeled at three-quarters of a month. Month 12 is October 2027.
 - **Funnel rates** as in Section 1.2. Every count is rounded to a whole unit at each step so the tables reconcile by hand. Fit Kits bought in one month convert to Pairs at 50% in the following month.
 - **Seasonality** multiplies the visit-to-sheet rate: 0.85 in May, 0.70 in June and July, 0.90 in August, 1.10 in September and October, 1.00 otherwise. League season runs roughly September to April and summer demand is unknown (business-plan Part 12), so this is a cautious guess.
 - **Paid traffic.** $1,500 a month in Months 2 to 12 at $1.07 per visit, which buys 1,404 visits a month (Section 4 builds this from four lines). The base case holds the budget flat. Section 11 sets the rules for stepping up, and Section 3.5 shows what each step is worth.
@@ -290,7 +290,7 @@ Platform interest categories are targeting inputs. They never appear in copy.
 |---|---|---|---|
 | A1. Bowling interest, prospecting | United States and Canada; age 25 to 65+; platform interest categories for bowling, ten-pin bowling, bowling equipment and league bowling as the platform lists them. Exclude purchasers and existing fit-sheet completers | Meta prospecting, YouTube in-feed | Broad by design. The configurator and the fit-sheet step qualify the traffic, so the ad does not have to |
 | A2. Lookalike of fit-sheet completers | 1% lookalike seeded from the `fit_sheet_complete` audience once it has 1,000 people; before that, seeded from all site visitors once that reaches 1,000 | Meta prospecting; replaces A1 as it proves out | Sheet completers are the people who have a drill sheet, which is the trait we want to find more of |
-| A3. Bowling instruction viewers | YouTube custom segments built from the Group 1 and Group 2 keywords in Section 6, plus placement targeting on bowling instruction channels. Any channel that holds a FitSlice unit, code or sponsorship is excluded from placement targeting | YouTube in-stream | Use the 15-second clip. Skippable; we pay for the watch |
+| A3. Bowling instruction viewers | YouTube custom segments built from the Group 1 and Group 2 keywords in Section 6, plus placement targeting on bowling instruction channels. Any channel that holds a RollRead unit, code or sponsorship is excluded from placement targeting | YouTube in-stream | Use the 15-second clip. Skippable; we pay for the watch |
 | A4. Configurator abandoners | Fired `configurator_session`, no `fit_sheet_complete`, last 7 days | Retargeting | Message: "Your grip is one drill sheet away. Don't have it? Your pro shop does." |
 | A5. Sheet completed, no order | Fired `fit_sheet_complete`, no `purchase`, last 30 days | Retargeting | Day 1: the Fit Kit at $24, credited. Day 14: the 30-day fit guarantee |
 | A6. Fit Kit, no Pair | `purchase` with `product_type=fit_kit`, no Pair, days 10 to 45 | Retargeting, plus email | Message: "Your $24 credit is waiting. Your sheet is on file." |
@@ -365,7 +365,7 @@ Brand terms are cheap and defend the name. Maker terms sell Digital.
 
 | # | Term | Match |
 |---|---|---|
-| 28 | FitSlice | exact |
+| 28 | RollRead | exact |
 | 29 | 3D printed bowling trainer | phrase |
 | 30 | bowling trainer STL | phrase |
 
@@ -400,11 +400,11 @@ Headline under 40 characters. The first sentence of the primary text sits under 
 |---|---|---|---|---|---|---|
 | 1 | Your drill sheet, off the ball. | 31 | It's the part of your ball your hand touches, printed with your exact holes, so you can practice your release anywhere. Enter your drill sheet and see your grip in 3D. Free. | 119 | Learn more | The ten-second explanation; the free configurator |
 | 2 | Same holes. Same pitch. No lane fee. | 36 | Your pro-shop drill sheet, built as a part you can hold. Hole sizes in 1/64" steps, both spans, every pitch, right or left hand, on a regulation 8.5-inch ball surface. About 300 g at 20% infill, so it fits in a bag. Practice fingertip holds and a clean thumb exit at your desk. | 56 | Learn more | Green: built from your drill sheet; weight with infill. Yellow: practice a clean thumb exit |
-| 3 | Train the hand that bowls. | 26 | Coaches agree the thumb must leave first, and a relaxed hand creates more revs. FitSlice gives you your own grip to practice both, away from the lane. Built from your drill sheet. Start with the $24 Fit Kit, credited toward your trainer. | 79 | Shop now | Green: attributed coaching consensus |
-| 4 | Fit you can practice. | 21 | Unlike generic one-size trainers and S/M/L wrist braces, FitSlice is built from your fit. Type in your drill sheet and the configurator rebuilds your grip in about a tenth of a second. Free to try. | 89 | Learn more | Green: category comparison |
+| 3 | Train the hand that bowls. | 26 | Coaches agree the thumb must leave first, and a relaxed hand creates more revs. RollRead gives you your own grip to practice both, away from the lane. Built from your drill sheet. Start with the $24 Fit Kit, credited toward your trainer. | 79 | Shop now | Green: attributed coaching consensus |
+| 4 | Fit you can practice. | 21 | Unlike generic one-size trainers and S/M/L wrist braces, RollRead is built from your fit. Type in your drill sheet and the configurator rebuilds your grip in about a tenth of a second. Free to try. | 89 | Learn more | Green: category comparison |
 | 5 | Relax the thumb. Let the fingers work. | 38 | Thumb pops, fingertip carries and carpet spins you can count. Six drills in your own hole geometry. Short daily sessions help keep the feel between league nights. Made to order, with a 30-day fit guarantee. | 61 | Shop now | Yellow: short daily sessions help keep the feel |
 
-Held variant, not to run until filled: headline "Train the hand that bowls." with primary text beginning with the coach's disclosure line as its first sentence ("FitSlice sent me this trainer, printed from my own drill sheet, free of charge." and, if the coach holds a code, "I earn a commission when you order with my code."), followed by `[QUOTE PLACEHOLDER — name]`. When the ad runs from the coach's handle, "Paid partnership with FitSlice." is set on the post itself.
+Held variant, not to run until filled: headline "Train the hand that bowls." with primary text beginning with the coach's disclosure line as its first sentence ("RollRead sent me this trainer, printed from my own drill sheet, free of charge." and, if the coach holds a code, "I earn a commission when you order with my code."), followed by `[QUOTE PLACEHOLDER — name]`. When the ad runs from the coach's handle, "Paid partnership with RollRead." is set on the post itself.
 
 ### 7.2 Google Search: responsive search ads
 
@@ -439,11 +439,11 @@ Five hook variants for the first three seconds, cut onto the same footage. The a
 
 | # | Seconds 0 to 3: on-screen text and voice | Seconds 3 to 12 | Seconds 12 to 15: end card |
 |---|---|---|---|
-| 1 | "This is your drill sheet, off the ball." | Hand dangles the puck on its wrist cord, thumb relaxes, the puck drops a few millimetres onto the fingers and holds. Cut to the configurator rendering a sheet. | "Enter your drill sheet. Free." FitSlice. |
-| 2 | "It's the part of your ball your hand touches." | Same footage. Voice: "printed with your exact holes, so you can practice your release anywhere." | "See your grip in 3D." FitSlice. |
-| 3 | "Thumb out first. Fingers stay." | Thumb pop in slow motion, three repetitions. Voice: "Coaches agree the thumb must leave first. Practice it with your own fit." | "Built from your drill sheet." FitSlice. |
-| 4 | "Same holes. Same pitch. No lane fee." | Drill sheet on the table, numbers typed into the configurator, the model rebuilds, a print comes off the bed, a hand goes in. | "Start with the $24 Fit Kit." FitSlice. |
-| 5 | "Lift it, spin it, count it." | Rev Spinner released onto carpet, the bars flicker, a hand counts seconds on its fingers. Voice: "Fingers-only release practice, on carpet." | "Rev Spinner, $45. Pair, $119." FitSlice. |
+| 1 | "This is your drill sheet, off the ball." | Hand dangles the puck on its wrist cord, thumb relaxes, the puck drops a few millimetres onto the fingers and holds. Cut to the configurator rendering a sheet. | "Enter your drill sheet. Free." RollRead. |
+| 2 | "It's the part of your ball your hand touches." | Same footage. Voice: "printed with your exact holes, so you can practice your release anywhere." | "See your grip in 3D." RollRead. |
+| 3 | "Thumb out first. Fingers stay." | Thumb pop in slow motion, three repetitions. Voice: "Coaches agree the thumb must leave first. Practice it with your own fit." | "Built from your drill sheet." RollRead. |
+| 4 | "Same holes. Same pitch. No lane fee." | Drill sheet on the table, numbers typed into the configurator, the model rebuilds, a print comes off the bed, a hand goes in. | "Start with the $24 Fit Kit." RollRead. |
+| 5 | "Lift it, spin it, count it." | Rev Spinner released onto carpet, the bars flicker, a hand counts seconds on its fingers. Voice: "Fingers-only release practice, on carpet." | "Rev Spinner, $45. Pair, $119." RollRead. |
 
 Companion text for each cut:
 
@@ -455,7 +455,7 @@ Companion text for each cut:
 | 4 | Start With the $24 Fit Kit | 26 | Find your hole sizes on the printer that makes your part. Credited to your trainer. | 83 |
 | 5 | Lift It, Spin It, Count It | 26 | Rev Spinner, $45: fingers-only release practice. Pair it with the Puck: $119 for both. | 86 |
 
-Every cut ends with "Never throw it. Swing-and-hold and carpet drills only." on screen for the last two seconds, under the end card. Companion banner and call-to-action button: "Enter your sheet" on the banner, "Learn more" on the button. If a creator's footage is ever used in a paid placement, the clip opens with the creator's spoken disclosure ("FitSlice sent me this trainer, printed from my own drill sheet, free of charge."), the placement is marked "Paid partnership with FitSlice.", and the creator has signed off on the cut in writing.
+Every cut ends with "Never throw it. Swing-and-hold and carpet drills only." on screen for the last two seconds, under the end card. Companion banner and call-to-action button: "Enter your sheet" on the banner, "Learn more" on the button. If a creator's footage is ever used in a paid placement, the clip opens with the creator's spoken disclosure ("RollRead sent me this trainer, printed from my own drill sheet, free of charge."), the placement is marked "Paid partnership with RollRead.", and the creator has signed off on the cut in writing.
 
 ---
 
@@ -463,7 +463,7 @@ Every cut ends with "Never throw it. Swing-and-hold and carpet drills only." on 
 
 One page carries the funnel: hero with the primary line and the ten-second explanation, the configurator embedded above the fold or one click away (tests 1 and 2 decide), the six drills, the product cards with prices, the fit guarantee, the no-sheet path, and the use warning ("Swing-and-hold and carpet drills only. Never throw it. Not for children under 12 without adult supervision.").
 
-Site copy is in `marketing/02-website-copy.md`. The configurator is at https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p until it is hosted on the FitSlice domain. Ads must land on the FitSlice domain so that events, pixels and the 45-day attribution window work. The footer carries one held line, `[PATENT STATUS]`, that stays empty until counsel says what may be said.
+Site copy is in `marketing/02-website-copy.md`. The configurator is at https://claude.ai/artifact/1fiDeAkPe9RPJSyBWruE2p until it is hosted on the RollRead domain. Ads must land on the RollRead domain so that events, pixels and the 45-day attribution window work. The footer carries one held line, `[PATENT STATUS]`, that stays empty until counsel says what may be said.
 
 Instrumentation that must exist before the first paid dollar:
 
@@ -489,7 +489,7 @@ Each test names its decision metric before it starts, and that metric alone deci
 
 Order: tests 1, 2 and 3 run one after another in the Launch phase, so each has the full traffic. Tests 4 and 5 start in week 14 and run together, because test 4 measures sheet completers and test 5 measures people who did not complete a sheet, and the two groups do not overlap. Test 2 is fast and sets the page shape the others run on. Test 5 answers the business plan's Risk 7 (can the customer produce a drill sheet) with observed behavior, and its result feeds the pro-shop program directly. Test 4 is the slowest and the first to drop if traffic runs below plan.
 
-Every variant uses only green and yellow claims, and a variant may not win by making a claim the control may not make. Test 3's variant B puts the word "exact" in a headline, which the business plan allows only after Study 1 has passed. Study 1 has already passed by then, since it gates all paid spend. The test 5 block names no shop. If it ever lists a shop from the program, that entry carries "This shop earns a margin on FitSlice orders entered here."
+Every variant uses only green and yellow claims, and a variant may not win by making a claim the control may not make. Test 3's variant B puts the word "exact" in a headline, which the business plan allows only after Study 1 has passed. Study 1 has already passed by then, since it gates all paid spend. The test 5 block names no shop. If it ever lists a shop from the program, that entry carries "This shop earns a margin on RollRead orders entered here."
 
 ---
 
@@ -499,7 +499,7 @@ Reviewed every Monday for the trailing seven days and the trailing four weeks. W
 
 | # | Metric | Formula | Launch | Build | Season 2 | Why it is on the board |
 |---|---|---|---|---|---|---|
-| 1 | Visits | Sessions on the FitSlice domain, all sources | 1,550 a week | 1,450 a week | 2,150 a week | Top of the funnel and the model's traffic line |
+| 1 | Visits | Sessions on the RollRead domain, all sources | 1,550 a week | 1,450 a week | 2,150 a week | Top of the funnel and the model's traffic line |
 | 2 | Configurator session rate | `configurator_session` ÷ visits | 30% or more | 30% or more | 32% or more | Whether the page gets people to type |
 | 3 | Fit-sheet completion rate | `fit_sheet_complete` ÷ `configurator_session`, also shown ÷ visits | 33% (10% of visits) or more | 33% or more | 35% (11% of visits) or more | The Risk 7 number. The whole business turns on it |
 | 4 | Sheet-to-order rate (30 days) | Orders of any product within 30 days ÷ `fit_sheet_complete` | 21% or more | 21% or more | 23% or more | Sum of the Fit Kit (15%), direct Pair (3%) and Digital (3%) assumptions |
@@ -602,8 +602,8 @@ Every assumption in this document, where it came from, and what replaces it.
 1. **Study 1 result.** Thirty pucks measured, standard deviation per bore, per-printer offset. No paid spend before this passes. Date it.
 2. **Shipping.** This document follows the policy in `marketing/03` and `marketing/05`: Pairs ship free, so $10 of shipping sits inside the $45 landed cost. The shipping page in `marketing/02-website-copy.md` says only that a flat rate is shown at checkout; align it with this policy before launch. If shipping moves to the buyer, landed cost falls to $35, gross profit per Pair rises to $84, and each line in Section 11 rises by $10 (ceiling $84, target $60, stop $120).
 3. **Launch date.** The model assumes launch week 1 starts on December 1, 2026 and the shop opens in week 2. A later date moves every row in Section 3.
-4. **Brand-name clearance.** FitSlice must clear the register and common-law use before it goes into an ad account, a domain or a package. Every asset here assumes the name holds.
-5. **Hosting.** The configurator and landing page on the FitSlice domain, with the five events firing, before the first ad. Ads cannot run to the claude.ai preview.
+4. **Brand-name clearance.** RollRead must clear the register and common-law use before it goes into an ad account, a domain or a package. Every asset here assumes the name holds.
+5. **Hosting.** The configurator and landing page on the RollRead domain, with the five events firing, before the first ad. Ads cannot run to the claude.ai preview.
 6. **Counsel review of this document's ad copy** against Part 6 and the FTC endorsement and substantiation rules listed in business-plan Part 9, before anything goes live.
 7. **Print-partner quotes** (three) and the decision on how Fit Kits are handled for outsourced orders (Section 2.3).
 8. **Pro-shop calls.** Twenty shops asked whether they will enter a customer's sheet into our tool. The 22-shop ramp in Section 3 is a guess until then.
@@ -630,5 +630,5 @@ Before an ad, a landing-page variant or a retargeting message goes live, someone
 - The product is called a trainer, slice, puck, disc or plate. It is never called a ball, a mini ball or regulation equipment.
 - The verbs are "designed to", "practice", "train" and "rehearse". Any verb that promises a result is out.
 - The use warning is on the landing page and in the last two seconds of every video: swing-and-hold and carpet drills only, never throw it, not for children under 12 without adult supervision.
-- The call to action lands on the FitSlice domain with events firing.
+- The call to action lands on the RollRead domain with events firing.
 - `[PATENT STATUS]` and `[QUOTE PLACEHOLDER — name]` are absent from anything live.
