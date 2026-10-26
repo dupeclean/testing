@@ -1,7 +1,7 @@
 # RollRead storefronts: the steps in order
 
-Three storefronts: Etsy (four listings), TikTok Shop (three listings, made to order), and rollread.com
-(the site in `site/`, checkout on Etsy and TikTok Shop). Written 2026-10-26, the day the first ball went on
+Three storefronts: Etsy (four listings), TikTok Shop (three listings, made to order), and the site in
+`site/` on a free Cloudflare Pages address (no domain yet; checkout on Etsy and TikTok Shop). Written 2026-10-26, the day the first ball went on
 the printer. Fees and seller rules were checked that day against seller guides, not the platforms' own
 pages: read each fee page once when you open the account.
 
@@ -30,11 +30,12 @@ bring. TikTok Shop about 6% referral. On a $129 ball with $12 shipping, Etsy's c
 
 ## Today, while the ball prints
 
-1. Domain. Register rollread.com (available on 2026-10-26). Cloudflare Registrar: create the account,
-   Domain Registration, Register Domains, rollread.com, pay (about $10 to $11 a year). Then Email Routing:
-   support@rollread.com to your Gmail.
-2. Handles. Claim rollread on TikTok, Instagram and YouTube. If taken, rollreadball. Put the site address
-   in each bio once the site is up.
+1. The site, first, because its address goes into everything else. `site/README.md`: a free Cloudflare
+   account, Workers & Pages, upload the `site/` folder, project name rollread. The address Cloudflare gives
+   you (rollread.pages.dev if the name is free) is [site address] in every file here. No domain: buy
+   rollread.com later if the shops sell, and attach it in one click then. Support runs through the shops'
+   messages, so there is no email address to set up.
+2. Handles. Claim rollread on TikTok, Instagram and YouTube. If taken, rollreadball.
 3. Colors. Decide the base and second colors you stock and replace the [EDIT] line in `etsy-rev-ball.txt`
    and `tiktok-rev-ball.txt`.
 4. Etsy. Sell on Etsy, Open your Etsy shop: country, USD, shop name RollRead. Etsy makes you create the
@@ -42,12 +43,12 @@ bring. TikTok Shop about 6% referral. On a $129 ball with $12 shipping, Etsy's c
    profile "Made to order": processing 5 to 10 business days, origin your ZIP, calculated shipping from the
    packed weight and box. Policies: Etsy exempts personalized items from returns; state your own 30-day
    reprint promise. About: a photo of you with the printer and three true sentences. Shop announcement:
-   "Build your part first at rollread.com: type in your drill sheet, see it on screen, export the fit sheet
+   "Build your part first at [site address]: type in your drill sheet, see it on screen, export the fit sheet
    and paste it into the order." Then draft the ball, puck and spinner listings and keep them as drafts.
 5. TikTok Shop. `tiktok-setup.md`, steps 1 to 5: the seller account, the shop name, shipping, returns.
    Verification can take a day or two, so start it today.
-6. The site. `site/README.md`: fill `about.html`, run the check, upload to Cloudflare Pages, attach
-   rollread.com. The Order buttons say "opens this week" until the shop addresses go into `links.js`.
+6. Handles and bios: put the site address in the TikTok, Instagram and YouTube bios. The site's Order
+   buttons say "opens this week" until the shop addresses go into `links.js` and you upload again.
 
 ## Tomorrow, when the ball is off the printer
 
@@ -65,7 +66,7 @@ bring. TikTok Shop about 6% referral. On a $129 ball with $12 shipping, Etsy's c
 
 12. TikTok, Instagram and Shorts: the roll clip, the yo-yo drill clip, the configurator clip. The first
     TikTok video tags the Rev Ball in the shop. Bio: "Practice ball printed from your drill sheet. Roll it.
-    Read it." and rollread.com. Cadence from `06-content-and-launch.md` section 1.4.
+    Read it." and the site address. Cadence from `06-content-and-launch.md` section 1.4.
 13. Orders go through the app as RR-0003 onward, the shop's order number in the notes.
 14. A one-line log per ball: print hours, failures, grams. It sets the processing time and the price later.
 
@@ -81,12 +82,16 @@ bring. TikTok Shop about 6% referral. On a $129 ball with $12 shipping, Etsy's c
 ## Brackets to fill before anything goes live
 
 - `etsy-rev-ball.txt` and `tiktok-rev-ball.txt`: the [EDIT] colors line.
-- `site/about.html`: every bracket, and the photo.
+- [site address] in `etsy-rev-ball.txt` (the shop announcement) and `league-post.md`, once Cloudflare gives it to you.
+- `site/about.html` is short and true for now; it grows when you send your own facts and a photo.
 - `league-post.md`: [admin's name], [pro shop], [price], [Name], [league night].
 - Etsy About and TikTok shop profile: your own words and photo.
 - Shipping: the packed weight and box size of each part.
 
 ## Decisions still open from the kit
+
+- The domain. rollread.com was free on 2026-10-26 (about $10 a year at Cloudflare). Buy it when the shops
+  sell; until then the free address does the job. The support mailbox comes with it.
 
 - $129 online and $99 local for the first ten (`10-ball-first-plan.md` section 12). The listings and the
   site say $129.

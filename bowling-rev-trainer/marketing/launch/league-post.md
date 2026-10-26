@@ -3,7 +3,7 @@
 Ball version of the post in `06-content-and-launch.md` section 5.2, in the maker's first person. Brackets
 are facts only you know: fill them, don't invent them. Post only after the printed ball passes the hand
 checks (`10-ball-first-plan.md` section 4.1) and after the group's admins say yes. The claude.ai link in
-the old post never goes public; the address is rollread.com.
+the old post never goes public; [site address] is the free Cloudflare Pages address of the site.
 
 ## The post (link allowed)
 
@@ -15,7 +15,7 @@ I built a practice ball that takes the fit off the ball. It's 3D printed from yo
 
 It's a feedback tool, not a magic ball. I won't tell you it adds revs. It shows you what your hand did.
 
-I'm doing the first ten for people in this league at [price], and I need your drill sheet to make one. [Pro shop] has it on file if you don't. Type it in at rollread.com and you'll see the ball on screen before I print anything. No account, no email.
+I'm doing the first ten for people in this league at [price], and I need your drill sheet to make one. [Pro shop] has it on file if you don't. Type it in at [site address] and you'll see the ball on screen before I print anything. No account, no email.
 
 Question for the group: do you have a copy of your drill sheet, or does the shop have the only one?
 
@@ -23,7 +23,7 @@ Photo: the ball on carpet next to a drill sheet, tape strip in the frame.
 
 ## The post (no link allowed)
 
-Same text, with the rollread.com paragraph replaced by:
+Same text, with the site-address paragraph replaced by:
 
 I'm doing the first ten for people in this league at [price], and I need your drill sheet to make one. [Pro shop] has it on file if you don't. Message me and I'll send you the page where you type it in and see the ball before I print anything.
 

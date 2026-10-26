@@ -32,7 +32,7 @@ Handling times to set: Rev Ball 10 business days, Rev Puck 5, Rev Spinner 3.
 1. Products, Manage products, Add new product.
 2. Product name, category and images from the file. The first image on a plain background.
 3. Description from the file. No addresses, no email, no "find me on Etsy": TikTok forbids pointing buyers
-   off the platform in a listing, and that includes rollread.com. The site address lives in the account bio.
+   off the platform in a listing, and that includes the site. The site address lives in the account bio.
 4. Variations from the file (hand, right or left, for the puck and spinner).
 5. Price, quantity, SKU from the file.
 6. Package weight and size from the file. They set the shipping charge, so weigh a packed one.

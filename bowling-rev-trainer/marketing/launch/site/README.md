@@ -1,7 +1,8 @@
-# rollread.com: the site in this folder
+# The site in this folder
 
-Hand-written static pages plus the configurator. Upload this whole folder to the host; nothing else is
-needed. Written 2026-10-26.
+Hand-written static pages plus the configurator, hosted on a free Cloudflare Pages address. No domain for
+now (rollread.com was free on 2026-10-26; buy it when the shops sell, and attach it in one click). Upload
+this whole folder; nothing else is needed. Written 2026-10-26.
 
 | File | What it is |
 |---|---|
@@ -9,50 +10,48 @@ needed. Written 2026-10-26.
 | `ball.html`, `puck.html`, `spinner.html`, `fit-kit.html` | One page per product, with Order buttons that go to Etsy and TikTok Shop |
 | `drills.html` | The card's drills, for people who want to read them before buying |
 | `guarantee.html` | The 30-day fit guarantee, returns, lead times, shipping |
-| `about.html` | You. Every square bracket on it is a fact only you know. |
+| `about.html` | Short and true for now. It grows when the owner sends his own facts and a photo (the HTML comment on the page lists them). Nothing invented. |
 | `configurator.html` | The configurator, written by `configurator/build.py` on every build, with a bar back to the site |
 | `links.js` | The shop and listing addresses. Empty until each shop exists; a button with no address says "opens this week" |
 | `site.js`, `style.css` | The buttons and the look. One accent color, system fonts, no web fonts, nothing loaded from elsewhere |
 | `img/` | Renders from the configurator's own preview of the real models. Replace with photos of the printed parts as you take them (same file names) |
 
-## Before the first upload
+Support runs through the shops' messages (Etsy and TikTok Shop), and every page says so. There is no email
+address on the site until the domain exists.
 
-1. `about.html`: replace every bracket with the truth, and put a photo of you at `img/about-photo.jpg`.
-   Nothing invented, nothing I wrote for you. The check below refuses the page while a bracket is left.
-2. `links.js`: paste the Etsy shop address and each listing's address as they go live. TikTok the same.
-3. Photos: when the printed ball is photographed, drop the photos over the renders in `img/` with the same
-   names (`ball-grip.png` is the one on the home page). Add the roll clip to the home page then: a
-   `<video>` tag in place of the first figure, file in `clips/`.
-4. Run the check from the repository root:
+## Before every upload
+
+1. Run the check from the repository root:
 
 ```bash
 py -3 marketing/launch/check_launch.py
 ```
 
 It checks the Etsy and TikTok files against the field limits, every public text for the old name, the
-internal link and machine-sounding phrases, and the site for leftover brackets, missing images and broken
-links.
+internal link, the domain that doesn't exist yet and machine-sounding phrases, and the site for leftover
+brackets, missing images and broken links.
 
-## Hosting on Cloudflare Pages (free)
+2. `links.js`: paste the Etsy shop address and each listing's address as they go live. TikTok the same.
+3. Photos: when the printed ball is photographed, drop the photos over the renders in `img/` with the same
+   names (`ball-grip.png` is the one on the home page).
 
-1. Register rollread.com. Cloudflare Registrar sells at cost (a .com is about $10 to $11 a year); any
-   registrar works, but then add the site to Cloudflare and move its nameservers there so step 3 is one
-   click. It was still available on 2026-10-26.
-2. Cloudflare dashboard: Workers & Pages, Create, Pages, Upload assets. Project name `rollread`. Drag this
-   folder in (index.html must be at the top). Deploy.
-3. In the project: Custom domains, Set up a custom domain, rollread.com. Cloudflare writes the DNS record
-   itself when the domain is on Cloudflare. Add www.rollread.com the same way.
-4. Open https://rollread.com on a phone. Every page, every button. On configurator.html type a sheet,
-   build, export the fit sheet.
+## Hosting on Cloudflare Pages (free, no domain)
+
+1. Create a free Cloudflare account (email and password; nothing to pay).
+2. Dashboard: Workers & Pages, Create, Pages, Upload assets. Project name `rollread`. Drag this folder in
+   (index.html must be at the top). Deploy.
+3. Cloudflare shows the address: `rollread.pages.dev` if the name was free, otherwise the name you chose.
+   That is [site address] everywhere in `marketing/launch/`: the Etsy shop announcement, the league post,
+   the TikTok, Instagram and YouTube bios.
+4. Open the address on a phone. Every page, every button. On configurator.html type a sheet, build, export
+   the fit sheet.
 5. Every later update: run the check, then on the same project Create deployment, Upload assets again.
 
-GitHub Pages works as a fallback: a separate public repository (not this one; its name shows in the default
-address and its history is the whole product), this folder as the root, Settings, Pages, Deploy from a
-branch, custom domain rollread.com, the four A records GitHub lists plus a CNAME for www.
+## When you buy the domain
 
-## Email
-
-Cloudflare, Email Routing: support@rollread.com to your Gmail. Free. Every page already uses that address.
+Cloudflare Registrar sells rollread.com at cost (about $10 a year). Then, in the Pages project: Custom
+domains, Set up a custom domain, rollread.com; Cloudflare writes the DNS itself. Email Routing gives you
+support@rollread.com forwarded to Gmail for free; put it on the pages then.
 
 ## Rules the pages follow
 

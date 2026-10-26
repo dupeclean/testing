@@ -588,6 +588,15 @@ tests never touch it (they set `FITSLICE_DATA_DIR` and `FITSLICE_ORDERS_DIR`).
    Reprint-when-the-sheet-was-wrong prices on the guarantee page: $25 puck, $15 spinner, half price ball
    (the ball figure is mine, flagged in setup-steps as a decision). The owner still has to: register the
    domain, open both seller accounts, fill About, take photos, paste the listings, fill `links.js`.
+   THEN (same evening, uncommitted): the owner objected that the site was built without his decision
+   ("you are just doing things rather than asking"; memory `ask-before-building`), asked whether he needs one,
+   and chose a FREE Cloudflare Pages address with NO domain for now. So: every `rollread.com` in the public
+   files became `[site address]` (Etsy shop announcement, league post) or "the site address" (TikTok setup,
+   steps); `support@rollread.com` left every site page (support runs through the shops' messages; the
+   guarantee page says so); `about.html` is a short true page with no brackets and no photo (grows when he
+   sends his facts); `site/README.md` and `setup-steps.md` put the free upload first (its address goes
+   into everything else) and the domain under open decisions; `check_launch.py` now treats `rollread.com`
+   as a never-word in public files. The checker passes clean.
 
 ## Windows session 2026-10-22 (local Claude Code on the owner's PC)
 

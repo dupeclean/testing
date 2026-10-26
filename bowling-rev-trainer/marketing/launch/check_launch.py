@@ -11,7 +11,7 @@ HERE = Path(__file__).parent
 SITE = HERE / 'site'
 TELLS = ['—', 'seamless', 'elevate', 'unlock', 'game-chang', "whether you're", "it's not just", 'journey', 'delve',
          'dive in', 'in today', 'look no further', 'take your game', 'next level', 'revolution', 'cutting-edge']
-NEVER = ['FitSlice', 'claude.ai']
+NEVER = ['FitSlice', 'claude.ai', 'rollread.com']   # no domain yet: the address is the free Pages one
 problems = []
 
 def block(lines, prefix):

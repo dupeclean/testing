@@ -91,15 +91,15 @@ What's it made of? PETG, 4 walls, 8% infill, with the bullseyes and the track ri
 What if the holes don't fit? Your sheet is stored with the order. If the ball doesn't match it, or doesn't roll true, I reprint it free within 30 days.
 ====
 
-SHOP ANNOUNCEMENT (shop level, not in the listing; the one place on Etsy that carries the address)
-Build your ball first at rollread.com: type in your drill sheet, see the grip and the bullseye, export the fit sheet and paste it into the order.
+SHOP ANNOUNCEMENT (shop level, not in the listing; the one place on Etsy that carries the address. [site address] is the free Cloudflare Pages address you get when you upload the site, something like rollread.pages.dev)
+Build your ball first at [site address]: type in your drill sheet, see the grip and the bullseye, export the fit sheet and paste it into the order.
 
 PHOTOS (your own, in this order; no stock images)
 1. The ball on carpet with the tape strip, bullseye toward the camera.
 2. The grip side, thumb at the bottom, your fingers in it.
 3. The ball beside your real ball, the printed ring next to the oil ring.
 4. The ball sitting on a drill sheet.
-5. The configurator on your screen with a sheet typed in. Caption: rollread.com.
+5. The configurator on your screen with a sheet typed in. Caption: the site address.
 6. The training card with the oval scale showing.
 7. Everything that goes in the box.
 8. The ball in your hand, for scale.
